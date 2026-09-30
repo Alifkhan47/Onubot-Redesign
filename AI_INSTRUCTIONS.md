@@ -145,6 +145,28 @@ c:\Alif\Onu App Prototype\
 
 ## 5. Screen-by-Screen User Journeys
 
+### Screen 0: Onu Clinical AI Copilot & Default Home (`#pageOnu`)
+* **Purpose**: The primary focal point and default landing screen for the doctor upon opening the app. Serves as an intelligent AI clinical copilot for rapid patient dossiers, lab investigation inquiries, drug safety verification, and shift preparation.
+* **Key Components**:
+  * **Brand Header**: Editorial title `Onu` with live status pill (`✨ AI Copilot` with pulsing mint dot) and New Chat action (`ph-note-pencil`).
+  * **Editorial Hero Greeting**: Confident greeting `Hello, Doctor Sifat` in `Urbanist 28px Bold`.
+  * **Live Clinic Context Banner**: Soft sage interactive banner displaying current shift schedule and queue count (`Shift 1 starts at 9:00 AM • 6 patients in queue`). Tapping navigates straight to My Desk.
+  * **Smart Clinical Prompts (2x2 Grid)**:
+    1. 🩺 **Patient Summary**: *"Summarize Tariqul's visits & current vitals"* -> instant clinical briefing on complaints, history, and medications.
+    2. 🧪 **Lab & Reports**: *"Show Farzana's CBC & endoscopy results"* -> breakdown of recent investigations and diagnostic findings.
+    3. 💊 **Drug Interaction**: *"Verify Telmisartan + Amlodipine safety"* -> pharmacology check with clinical recommendations.
+    4. 📋 **Shift Briefing**: *"Overview of today's Shift 1 patient queue"* -> patient order and chief complaints.
+  * **Interactive Conversation Stream**:
+    * Clean doctor query speech bubbles (`#052E28`).
+    * Structured Onu AI response cards with clinical bullet points, vitals, and actionable quick chips (`[View Profile]`, `[Start Shift Call]`, `[Full Queue List]`).
+    * Realistic typing indicator animation (`onu-typing-indicator`).
+  * **Floating Glassmorphic Input Dock**:
+    * `+` Attachment & Patient Tag button (`openOnuAttachMenu`).
+    * Smart text field with Enter key support.
+    * Voice Dictation mic button with pulsating listening state (`toggleOnuVoiceListening`).
+    * Primary Send / Waveform button (`sendOnuMessage`).
+    * Subtle AI disclaimer text at base.
+
 ### Screen 1: My Desk (`#pageDesk`)
 * **Purpose**: The primary operational dashboard for the doctor during their shift.
 * **Key Components**:
