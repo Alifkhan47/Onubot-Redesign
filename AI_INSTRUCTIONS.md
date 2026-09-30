@@ -268,7 +268,21 @@ c:\Alif\Onu App Prototype\
     * Each visit tile displays consultation type, date, time, and doctor notes.
     * **Interactive Tap Flow**: Tapping any visit tile opens the **Visit Details** view for that visit with completed call mode, duration, date, time, consultation notes, and issued prescription.
     * If a patient has >3 visits, a `.btn-see-all-visits` button (`See all [N] visits` with `ph-caret-down`) appears below the 3rd visit. Clicking it seamlessly expands the remaining visits inline without navigating away.
-  * **Files Section**: Completely removed per design direction; files and prescriptions are accessed directly via individual appointment details.
+### Screen 11: Onu Clinical AI Copilot (`#pageOnu`)
+* **Purpose**: Primary conversational intelligence assistant and default home landing page of the application.
+* **Key Components**:
+  * **Unified App Header**: Screen title `Onu` (`Urbanist 25px Bold`), subtitle `Your Clinical AI Assistant` (`DM Sans 13.5px #717171`), and right-handed chat thread history toggle (`ph-clock-counter-clockwise`).
+  * **Right-Hand Slide-in Drawer (`#onuHistoryDrawer`)**: Displays recent chat threads, search history CTA, and quick `+ New chat` trigger.
+  * **Gemini-Style Minimal Empty State (`#onuWelcomeView`)**:
+    * Clean 4-point gradient sparkle icon (`#0D7A5F` → `#2DD4BF` → `#38BDF8`).
+    * Centered greeting: `Ask away, Dr. Sifat !` (`Urbanist 26px Bold`) + `Your clinical AI copilot is ready.` (`DM Sans 14px Medium #64748B`).
+    * Pure negative space without cluttering cards or boxes.
+  * **Google Gemini Unified Floating Input Pill (`.onu-input-pill-box`)**:
+    * Single floating pill container above bottom navigation (`height: 52px`, `border-radius: 28px`, `border: 1.5px solid #E2ECEA`).
+    * Contains `+` Attach/Tag button, spacious input field, and Dictation Mic (`ph-microphone`).
+    * **Morphing Voice Bot / Send Action Button (`.btn-onu-action-morph`)**:
+      * In empty state: Soft sage waveform button (`.voice-mode` with `ph-waveform`) opening the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
+      * While typing: Morphs immediately into deep forest green Send button (`.send-mode` with `ph-bold ph-arrow-up`) sending the clinical prompt.
 
 ### Bottom Navigation Bar Master Standard
 * **Active Tab**: Displays inside a soft rounded pastel pill (`.active-nav-pill` on `#EFF7F5`), with the **filled icon** (`ph-fill`) in `#052E28`, a subtle horizontal accent indicator bar, and **NO title text**.

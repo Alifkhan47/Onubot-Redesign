@@ -768,28 +768,26 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Right**: Circular action button (`.btn-circle-icon` with `ph-clock-counter-clockwise` in `#052E28` on soft `#F0F6F5` background) positioned on the top right for natural right-handed mobile thumb access.
   * **Right-Hand History Drawer**: Tapping the top-right history icon slides out the full-height chat thread history drawer (`#onuHistoryDrawer`) from the right.
 
-### 22.2 Welcome State & 2x2 Squircle Suggestion Cards
-* **Hero Greeting**: Editorial header `Hello,` (`Urbanist 15px Medium #64748B`) + `Doctor Sifat !` (`Urbanist 28px Bold #000000`).
-* **2x2 Squircle Suggestion Cards (`.onu-square-card`)**:
-  * Positioned at the bottom of the welcome screen above the input dock.
-  * Modern card surface: `20px` radius, `background: #F8FAFB`, `1.5px solid #EDF2F1`, elevating to `#FFFFFF` with `0 8px 24px rgba(5,46,40,0.06)` and `#B0DDD4` border on hover.
-  * Internal Hierarchy: 38x38px soft tinted icon badge at top, and clean 2-line title in `Urbanist 14.5px Bold #0F172A` at bottom with zero cluttered paragraph text:
-    1. 👥 **Check My Patients** (`.sage` icon)
-    2. 💰 **Check My Earnings** (`.emerald` icon)
-    3. 📋 **Recap Last Visit** (`.blue` icon)
-    4. ⏱️ **Check Today's Queue** (`.amber` icon)
+### 22.2 Welcome State (Gemini Pure Clean Empty State)
+* **Design Philosophy**: Mirroring Google Gemini's minimalist mobile experience with generous negative space and zero cluttered cards or suggestion grids.
+* **Centered Sparkle & Greeting**:
+  * **Gradient Sparkle Icon**: Clean 4-point star SVG with emerald-teal-sky gradient (`#0D7A5F` → `#2DD4BF` → `#38BDF8`).
+  * **Greeting Heading**: `Ask away, Dr. Sifat !` in `Urbanist 26px Bold #000000` (`letter-spacing: -0.02em`).
+  * **Greeting Subtitle**: `Your clinical AI copilot is ready.` in `DM Sans 14px Medium #64748B`.
 
 ### 22.3 Conversational Feed & Clean AI Responses
 * **User Messages**: Rounded speech bubble (`#EEF2F4` surface, `#0F172A` text, `20px` radius, `14.5px` body) with micro-actions for Copy and Edit.
 * **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), clean high-contrast clinical text, and structured metric overview cards when relevant (without extra action chips).
 
-### 22.4 Standard Chatbot Input Dock with Soft Sage Voice Button
+### 22.4 Floating Input Dock (Google Gemini Unified Pill Model)
 * **Dock Position**: Floats above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).
-* **Dedicated Live Voice Bot CTA**:
-  * 48x48px circular button with soft sage background (`#E8F6F3`, `1.5px solid #C2E7DF`, `#0D7A5F` icon) placed separately to the left.
-  * Tapping opens the immersive full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)** featuring an animated glowing orb, doctor stethoscope avatar, live audio waveforms, mic mute toggle, and close button.
-* **Standard Chat Entry Pill Box**:
-  * Height `48px`, `background: #FFFFFF`, `border: 1.5px solid #E2ECEA`, `border-radius: 28px`.
-  * Contains `+` Attach/Tag button, spacious `14.5px` text field, Speech-to-Text dictation mic, and dedicated circular `#052E28` Send CTA with upward arrow (`↑`).
-  * **Dynamic Send Button UX**: Send button is hidden by default when input is empty and appears dynamically as soon as the user starts typing.
-  * Subtle AI Disclaimer: `Onubot can make mistakes. Check important info.` (DM Sans 10px `#94A3B8`).
+* **Single Unified Input Pill Container (`.onu-input-pill-box`)**:
+  * Height `52px`, `background: #FFFFFF`, `border: 1.5px solid #E2ECEA`, `border-radius: 28px`, `box-shadow: 0 4px 20px rgba(5, 46, 40, 0.08)`.
+  * **Left**: `+` Attach/Tag button (`.btn-onu-attach` with `ph-plus`).
+  * **Center**: Text input field (`Ask anything...` placeholder in `DM Sans 15px`).
+  * **Right**: Speech-to-Text dictation mic button (`.btn-onu-mic` with `ph-microphone`).
+  * **Far Right Action (Morphing Voice Bot / Send Button)**:
+    * **Empty Input State (Voice Mode)**: Displays a circular soft sage pill button (`.btn-onu-action-morph.voice-mode`: `#E8F6F3` background, `#0D7A5F` waveform icon `ph-waveform`). Tapping immediately opens the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
+    * **Active Typing State (Send Mode)**: Smoothly morphs into a dark circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
+* **Subtle AI Disclaimer**: `Onubot can make mistakes. Check important info.` (`DM Sans 10px #94A3B8`).
+
