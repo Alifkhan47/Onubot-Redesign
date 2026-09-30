@@ -760,34 +760,38 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ## 22. Onu Clinical AI Copilot & Unified Screen Standard
 
-### 22.1 Default Landing & Unified Header Standard
+### 22.1 Default Landing & Dynamic Background State
 * **Default Active View**: When the doctor opens the app, **Onu (`#pageOnu`)** is the default active view (`.active-page`), and the bottom navigation bar selects the center **Onu** tab.
+* **Subtle Gradient Background**:
+  * On the Welcome state, the background features a soft, elegant brand gradient (`background: linear-gradient(180deg, #F0F7F5 0%, #FFFFFF 55%)`).
+  * Once the doctor sends a message or engages in active conversation, the `.chat-active` state smoothly transitions the canvas to pure, crisp `#FFFFFF`.
 * **Unified Universal App Header**:
-  * Adheres to the exact same visual structure as `My Desk` and `Patients` for visual cohesion.
   * **Left**: Screen Title `Onu` in `Urbanist 25px Bold #000000` + Subtitle `Your Clinical AI Assistant` in `DM Sans 13.5px Regular #717171`.
   * **Right**: Circular action button (`.btn-circle-icon` with `ph-clock-counter-clockwise` in `#052E28` on soft `#F0F6F5` background) positioned on the top right for natural right-handed mobile thumb access.
-  * **Right-Hand History Drawer**: Tapping the top-right history icon slides out the full-height chat thread history drawer (`#onuHistoryDrawer`) from the right with search, `✕` close, `+ New chat`, and chronological recent conversation threads.
+  * **Right-Hand History Drawer**: Tapping the top-right history icon slides out the full-height chat thread history drawer (`#onuHistoryDrawer`) from the right.
 
-### 22.2 Welcome State & Doctor-Centric Suggestion Cards
+### 22.2 Welcome State & 2x2 Squircle Glassmorphic Suggestion Cards
 * **Hero Greeting**: Editorial header `Hello,` (`Urbanist 15px Medium #64748B`) + `Doctor Sifat !` (`Urbanist 28px Bold #000000`).
-* **Modern European Healthtech Suggestion Cards (`.onu-prompt-card`)**:
-  * Built using our signature card surface: `18px` radius, `#F6F8F9` background, `1.5px solid #EDF2F1`, elevating to `#FFFFFF` with `0 6px 18px rgba(5,46,40,0.06)` shadow on hover.
-  * Features a 40x40px rounded icon container with soft tinted background, bold `Urbanist 15px` title, `ph-arrow-up-right` corner arrow, and concise single-line `DM Sans 12px` subtext:
-    1. 👥 **Check my patients** (`.sage` icon): *24 active patient dossiers & medical records* (generates 4-box clinical metrics overview).
-    2. 💰 **Check my earnings** (`.emerald` icon): *Today's income ৳14,400 & payout breakdown* (generates financial breakdown card).
-    3. 📋 **Recap last visit** (`.blue` icon): *Alif Khan (28M) • Viral Pharyngitis (Sep 29)* (generates patient visit summary).
-    4. ⏱️ **Check today's queue** (`.amber` icon): *Shift 1 (9:00 AM) • 6 queued consultations* (generates shift briefing).
+* **2x2 Squircle Glassmorphic Cards (`.onu-square-card`)**:
+  * Positioned at the bottom of the welcome screen above the input dock (matching the AI Coach reference).
+  * Glassmorphic surface: `20px` radius, `background: rgba(246, 248, 249, 0.85)`, `backdrop-filter: blur(16px)`, `1.5px solid rgba(226, 236, 234, 0.9)`.
+  * Elevated hover: `#FFFFFF` surface with `0 8px 22px rgba(5,46,40,0.07)` shadow.
+  * Internal Hierarchy: 36x36px soft tinted icon badge at top, and clean 2-line title in `Urbanist 14.5px Bold #0F172A` at bottom with zero cluttered paragraph text:
+    1. 👥 **Check My Patients** (`.sage` icon)
+    2. 💰 **Check My Earnings** (`.emerald` icon)
+    3. 📋 **Recap Last Visit** (`.blue` icon)
+    4. ⏱️ **Check Today's Queue** (`.amber` icon)
 
 ### 22.3 Conversational Feed & Embedded Generative UI
-* **User Messages**: Right-aligned rounded chat bubbles (`#052E28` background, `#FFFFFF` text) with hover micro-actions for Copy and Edit.
-* **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), clear clinical explanations, and rich embedded widgets (Patient Overview 4-metric grid, Financial Breakdown cards) with interactive deep links to patient profiles and desk.
+* **User Messages**: Rounded speech bubble (`#EEF2F4` surface, `#0F172A` text, `20px` radius, `14.5px` body) with micro-actions for Copy and Edit.
+* **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), high-contrast clinical text, and rich embedded widgets (Patient Overview 4-metric grid, Financial Breakdown cards) with interactive deep links.
 
-### 22.4 Floating AI Input Dock
+### 22.4 Fatter Floating Input Dock & Dedicated Voice Bot Button
 * **Dock Position**: Floats above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).
-* **Pill Container**: Glassmorphic blur (`background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(20px); border: 1.5px solid #E2ECEA; border-radius: 26px;`).
-* **Interactive Elements**:
-  * `+` Attachment Button: Tags a patient or attaches clinical files.
-  * Search/Chat Input: DM Sans placeholder with automatic `Enter` key execution.
-  * Voice Dictation Button: Pulsating ring (`.is-listening`) for hands-free clinical transcription.
-  * Send / Waveform CTA: Circular deep forest green button (`#052E28`) with waveform icon.
+* **Dedicated Live Voice Bot CTA**:
+  * 50x50px circular deep forest green button (`#052E28`) placed separately to the left of the input box.
+  * Tapping opens the immersive full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)** featuring an animated glowing orb, doctor stethoscope avatar, live audio waveforms, mic mute toggle, and close button.
+* **Fatter Chat Entry Pill Box**:
+  * Height `50px`, `background: rgba(255, 255, 255, 0.98)`, `backdrop-filter: blur(20px)`, `1.5px solid #E2ECEA`, `border-radius: 28px`.
+  * Contains `+` Attach/Tag button, spacious `14.5px` text field, Speech-to-Text dictation mic, and dedicated circular `#052E28` Send CTA with upward arrow.
   * Subtle AI Disclaimer: `Onubot can make mistakes. Check important info.` (DM Sans 10px `#94A3B8`).

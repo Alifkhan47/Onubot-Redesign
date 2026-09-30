@@ -5018,13 +5018,13 @@
     }
 
     /* ============================================================
-       VIEW 11: ONU CLINICAL AI COPILOT & ASSISTANT (UNIFIED HEALTHTECH STANDARD)
+       VIEW 11: ONU CLINICAL AI COPILOT (SUBTLE GRADIENT & SQUIRCLE STANDARD)
        ============================================================ */
     .page-onu {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: var(--color-app-bg);
+      background: linear-gradient(180deg, #F0F7F5 0%, #FFFFFF 55%);
       position: absolute;
       top: 0;
       left: 0;
@@ -5036,6 +5036,11 @@
       overflow-y: auto;
       overflow-x: hidden;
       scrollbar-width: none;
+      transition: background 0.35s ease;
+    }
+
+    .page-onu.chat-active {
+      background: #FFFFFF !important;
     }
 
     .page-onu::-webkit-scrollbar {
@@ -5046,24 +5051,29 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      padding-bottom: 90px;
+      gap: 16px;
+      padding-bottom: 96px;
       box-sizing: border-box;
+      min-height: 0;
     }
 
-    /* Welcome / Hero State */
+    /* Welcome / Hero State (Inspired by Reference Squircle Layout) */
     .onu-welcome-container {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      justify-content: space-between;
       width: 100%;
+      height: 100%;
+      min-height: calc(100vh - 270px);
       padding-top: 4px;
+      box-sizing: border-box;
     }
 
     .onu-hero-greeting {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      padding-top: 2px;
     }
 
     .onu-greeting-sub {
@@ -5084,117 +5094,92 @@
       line-height: 1.15;
     }
 
-    /* Modern European Healthtech Suggestion Cards */
-    .onu-prompts-stack {
+    .onu-welcome-spacer {
+      flex: 1;
+      min-height: 20px;
+    }
+
+    /* 2x2 Squircle Glassmorphic Suggestion Cards (Clean, Punchy, No Paragraphs) */
+    .onu-square-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 4px;
+    }
+
+    .onu-square-card {
+      background: rgba(246, 248, 249, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.9);
+      border-radius: 20px;
+      padding: 16px 14px;
+      min-height: 112px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      width: 100%;
-    }
-
-    .onu-prompt-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #EDF2F1;
-      border-radius: 18px;
-      padding: 13px 15px;
-      display: flex;
-      align-items: center;
-      gap: 13px;
+      justify-content: space-between;
+      align-items: flex-start;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-sizing: border-box;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
     }
 
-    .onu-prompt-card:hover {
+    .onu-square-card:hover {
       background: #FFFFFF;
-      border-color: #CBE4DE;
+      border-color: rgba(126, 184, 174, 0.7);
       transform: translateY(-2px);
-      box-shadow: 0 6px 18px rgba(5, 46, 40, 0.06);
+      box-shadow: 0 8px 22px rgba(5, 46, 40, 0.07);
     }
 
-    .onu-prompt-card:active {
-      transform: scale(0.985);
+    .onu-square-card:active {
+      transform: scale(0.97);
     }
 
-    .onu-prompt-card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
+    .onu-square-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 19px;
       flex-shrink: 0;
     }
 
-    .onu-prompt-card-icon.sage {
+    .onu-square-icon.sage {
       background: #E8F6F3;
       color: #0D7A5F;
       border: 1px solid #C2E7DF;
     }
 
-    .onu-prompt-card-icon.emerald {
+    .onu-square-icon.emerald {
       background: #ECFDF5;
       color: #059669;
       border: 1px solid #A7F3D0;
     }
 
-    .onu-prompt-card-icon.blue {
+    .onu-square-icon.blue {
       background: #EFF6FF;
       color: #2563EB;
       border: 1px solid #BFDBFE;
     }
 
-    .onu-prompt-card-icon.amber {
+    .onu-square-icon.amber {
       background: #FEF3C7;
       color: #D97706;
       border: 1px solid #FDE68A;
     }
 
-    .onu-prompt-card-body {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      flex: 1;
-      min-width: 0;
-    }
-
-    .onu-prompt-card-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-    }
-
-    .onu-prompt-card-title {
+    .onu-square-title {
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       line-height: 1.25;
-    }
-
-    .onu-prompt-arrow {
-      color: #94A3B8;
-      font-size: 16px;
-      transition: transform 0.2s ease, color 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    .onu-prompt-card:hover .onu-prompt-arrow {
-      color: var(--color-primary-btn);
-      transform: translate(2px, -2px);
-    }
-
-    .onu-prompt-card-sub {
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      font-weight: 400;
-      line-height: 1.35;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
+      margin: 0;
     }
 
     /* ============================================================
@@ -5365,7 +5350,7 @@
     }
 
     /* ============================================================
-       ACTIVE CHAT STREAM (FAMILIAR CHATBOT PRESENTATION)
+       ACTIVE CHAT STREAM (FAMILIAR & CLEAN CHATBOT PRESENTATION)
        ============================================================ */
     .onu-messages-stream {
       display: flex;
@@ -5426,7 +5411,7 @@
       width: 100%;
     }
 
-    /* Thought Reasoning Pill (Gemini/ChatGPT Standard) */
+    /* Thought Reasoning Pill */
     .onu-thought-pill {
       display: inline-flex;
       align-items: center;
@@ -5590,13 +5575,15 @@
       40% { opacity: 1; transform: scale(1.1); }
     }
 
-    /* Floating Input Dock */
+    /* ============================================================
+       FATTER FLOATING INPUT DOCK WITH SEPARATE VOICE BOT BUTTON
+       ============================================================ */
     .onu-floating-input-dock {
       position: absolute;
       bottom: 64px;
       left: 0;
       right: 0;
-      padding: 0 16px 8px 16px;
+      padding: 0 16px 6px 16px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -5606,31 +5593,68 @@
       pointer-events: none;
     }
 
-    .onu-input-pill-box {
+    .onu-dock-row {
       pointer-events: auto;
       width: 100%;
-      background: rgba(255, 255, 255, 0.96);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Dedicated Live AI Voice Bot Button (Separated on Left) */
+    .btn-onu-voice-agent {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-primary-btn);
+      border: none;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      flex-shrink: 0;
+      box-shadow: 0 6px 20px rgba(5, 46, 40, 0.24);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .btn-onu-voice-agent:hover {
+      background: var(--color-primary-btn-hover);
+      transform: scale(1.05);
+    }
+
+    .btn-onu-voice-agent:active {
+      transform: scale(0.94);
+    }
+
+    /* Fatter / Taller Chat Entry Box */
+    .onu-input-pill-box {
+      flex: 1;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border: 1.5px solid #E2ECEA;
-      border-radius: 26px;
-      padding: 5px 6px 5px 12px;
+      border-radius: 28px;
+      padding: 4px 6px 4px 10px;
       display: flex;
       align-items: center;
       gap: 8px;
       box-sizing: border-box;
-      box-shadow: 0 8px 24px -4px rgba(5, 46, 40, 0.09);
+      box-shadow: 0 6px 20px -2px rgba(5, 46, 40, 0.08);
       transition: all 0.2s ease;
+      min-width: 0;
     }
 
     .onu-input-pill-box:focus-within {
       border-color: var(--color-primary-btn);
-      box-shadow: 0 8px 28px -2px rgba(5, 46, 40, 0.14);
+      box-shadow: 0 6px 24px -2px rgba(5, 46, 40, 0.14);
     }
 
     .btn-onu-attach {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: #F1F5F4;
       border: 1px solid #E2ECEA;
@@ -5654,10 +5678,10 @@
       border: none;
       background: transparent;
       font-family: var(--font-body);
-      font-size: 14px;
+      font-size: 14.5px;
       color: var(--color-text-primary);
       outline: none;
-      padding: 6px 0;
+      padding: 6px 2px;
       min-width: 0;
     }
 
@@ -5672,11 +5696,11 @@
       border-radius: 50%;
       background: transparent;
       border: none;
-      color: var(--color-text-secondary);
+      color: #64748B;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 19px;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.16s ease;
@@ -5698,8 +5722,8 @@
     }
 
     .btn-onu-send {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--color-primary-btn);
       border: none;
@@ -5707,7 +5731,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -5715,11 +5739,204 @@
 
     .btn-onu-send:hover {
       background: #0D7A5F;
-      transform: scale(1.04);
+      transform: scale(1.05);
     }
 
     .btn-onu-send:active {
       transform: scale(0.95);
+    }
+
+    .onu-disclaimer {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: #94A3B8;
+      margin: 0;
+      text-align: center;
+      pointer-events: auto;
+    }
+
+    /* ============================================================
+       LIVE AI VOICE BOT FULL-SCREEN MODAL (MATCHING REFERENCE)
+       ============================================================ */
+    .modal-voice-bot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #060E0D;
+      z-index: 120;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 20px 48px 20px;
+      box-sizing: border-box;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.96);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-voice-bot.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .voice-bot-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .voice-bot-close-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .voice-bot-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .voice-bot-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: #34D399;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .voice-bot-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+      animation: livePulse 1.4s infinite ease-in-out;
+    }
+
+    .voice-bot-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .voice-bot-orb-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .voice-bot-orb-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94, 234, 212, 0.45) 0%, rgba(5, 46, 40, 0) 70%);
+      animation: orbGlow 2.5s infinite ease-in-out;
+    }
+
+    @keyframes orbGlow {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.2); opacity: 0.9; }
+    }
+
+    .voice-bot-orb-circle {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #99C8D4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0F3B4E;
+      font-size: 64px;
+      box-shadow: 0 0 35px rgba(94, 234, 212, 0.5);
+      position: relative;
+      z-index: 2;
+      animation: orbFloat 3s infinite ease-in-out;
+    }
+
+    @keyframes orbFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .voice-bot-status-text {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 600;
+      color: #E2E8F0;
+      letter-spacing: -0.01em;
+    }
+
+    .voice-bot-controls-dock {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+    }
+
+    .voice-bot-mic-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .voice-bot-mic-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .voice-bot-end-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      border: none;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .voice-bot-end-btn:hover {
+      background: #F1F5F9;
+      transform: scale(1.05);
     }
 
     .onu-disclaimer {
@@ -5771,7 +5988,7 @@
             <!-- Scrollable Content Area -->
             <div class="onu-content-area" id="onuChatScrollArea">
               
-              <!-- Welcome State View with Clean Spacing -->
+              <!-- Welcome State View with 2x2 Squircle Cards at Bottom (Inspired by Reference) -->
               <div class="onu-welcome-container" id="onuWelcomeView">
                 
                 <!-- Hero Greeting -->
@@ -5780,59 +5997,38 @@
                   <h2 class="onu-greeting-name">Doctor Sifat !</h2>
                 </div>
 
-                <!-- Modern European Healthtech Suggestion Cards Stack -->
-                <div class="onu-prompts-stack">
+                <!-- Spacer to push cards to the bottom -->
+                <div class="onu-welcome-spacer"></div>
+
+                <!-- 2x2 Squircle Glassmorphic Cards (Clean, Punchy, No Paragraphs) -->
+                <div class="onu-square-grid">
                   
-                  <div class="onu-prompt-card" onclick="askOnuPreset('Check my patients')">
-                    <div class="onu-prompt-card-icon sage">
+                  <div class="onu-square-card" onclick="askOnuPreset('Check my patients')">
+                    <div class="onu-square-icon sage">
                       <i class="ph ph-users"></i>
                     </div>
-                    <div class="onu-prompt-card-body">
-                      <div class="onu-prompt-card-title-row">
-                        <span class="onu-prompt-card-title">Check my patients</span>
-                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
-                      </div>
-                      <span class="onu-prompt-card-sub">24 active patient dossiers & medical records</span>
-                    </div>
+                    <span class="onu-square-title">Check My<br>Patients</span>
                   </div>
 
-                  <div class="onu-prompt-card" onclick="askOnuPreset('How much money did I make today and this week?')">
-                    <div class="onu-prompt-card-icon emerald">
+                  <div class="onu-square-card" onclick="askOnuPreset('How much money did I make today and this week?')">
+                    <div class="onu-square-icon emerald">
                       <i class="ph ph-wallet"></i>
                     </div>
-                    <div class="onu-prompt-card-body">
-                      <div class="onu-prompt-card-title-row">
-                        <span class="onu-prompt-card-title">Check my earnings</span>
-                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
-                      </div>
-                      <span class="onu-prompt-card-sub">Today's income ৳14,400 & payout breakdown</span>
-                    </div>
+                    <span class="onu-square-title">Check My<br>Earnings</span>
                   </div>
 
-                  <div class="onu-prompt-card" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
-                    <div class="onu-prompt-card-icon blue">
+                  <div class="onu-square-card" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
+                    <div class="onu-square-icon blue">
                       <i class="ph ph-clipboard-text"></i>
                     </div>
-                    <div class="onu-prompt-card-body">
-                      <div class="onu-prompt-card-title-row">
-                        <span class="onu-prompt-card-title">Recap my last visit</span>
-                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
-                      </div>
-                      <span class="onu-prompt-card-sub">Alif Khan (28M) • Viral Pharyngitis (Sep 29)</span>
-                    </div>
+                    <span class="onu-square-title">Recap Last<br>Visit</span>
                   </div>
 
-                  <div class="onu-prompt-card" onclick="askOnuPreset('How many patients in my shift queue today?')">
-                    <div class="onu-prompt-card-icon amber">
+                  <div class="onu-square-card" onclick="askOnuPreset('How many patients in my shift queue today?')">
+                    <div class="onu-square-icon amber">
                       <i class="ph ph-calendar-check"></i>
                     </div>
-                    <div class="onu-prompt-card-body">
-                      <div class="onu-prompt-card-title-row">
-                        <span class="onu-prompt-card-title">Check today's queue</span>
-                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
-                      </div>
-                      <span class="onu-prompt-card-sub">Shift 1 (9:00 AM) • 6 queued consultations</span>
-                    </div>
+                    <span class="onu-square-title">Check Today's<br>Queue</span>
                   </div>
 
                 </div>
@@ -5846,19 +6042,27 @@
 
             </div>
 
-            <!-- Floating Input Dock -->
+            <!-- Fatter Floating Input Dock with Separate Voice Bot Button -->
             <div class="onu-floating-input-dock">
-              <div class="onu-input-pill-box">
-                <button type="button" class="btn-onu-attach" onclick="openOnuAttachMenu()" title="Attach patient file or tag patient" aria-label="Attach">
-                  <i class="ph ph-plus"></i>
+              <div class="onu-dock-row">
+                <!-- Dedicated Live Voice Bot Button (Separated on Left) -->
+                <button type="button" class="btn-onu-voice-agent" onclick="openLiveVoiceBotModal()" title="Open Onu Live AI Voice Assistant" aria-label="Live Voice Agent">
+                  <i class="ph ph-waveform"></i>
                 </button>
-                <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Ask Anything" onkeydown="handleOnuInputKey(event)" />
-                <button type="button" class="btn-onu-mic" id="btnOnuMic" onclick="toggleOnuVoiceListening()" title="Voice dictation" aria-label="Voice Mic">
-                  <i class="ph ph-microphone"></i>
-                </button>
-                <button type="button" class="btn-onu-send" id="btnOnuSend" onclick="sendOnuMessage()" title="Send message" aria-label="Send">
-                  <i class="ph-fill ph-waveform"></i>
-                </button>
+
+                <!-- Fatter / Taller Chat Entry Box -->
+                <div class="onu-input-pill-box">
+                  <button type="button" class="btn-onu-attach" onclick="openOnuAttachMenu()" title="Attach patient file or tag patient" aria-label="Attach">
+                    <i class="ph ph-plus"></i>
+                  </button>
+                  <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Ask anything about patients, shifts..." onkeydown="handleOnuInputKey(event)" />
+                  <button type="button" class="btn-onu-mic" id="btnOnuMic" onclick="toggleOnuVoiceListening()" title="Voice dictation (speech-to-text)" aria-label="Voice Mic">
+                    <i class="ph ph-microphone"></i>
+                  </button>
+                  <button type="button" class="btn-onu-send" id="btnOnuSend" onclick="sendOnuMessage()" title="Send message" aria-label="Send">
+                    <i class="ph-fill ph-arrow-up"></i>
+                  </button>
+                </div>
               </div>
               <p class="onu-disclaimer">Onubot can make mistakes. Check important info.</p>
             </div>
@@ -7454,6 +7658,43 @@
           </div>
         </div>
 
+        <!-- =======================================================
+             12. LIVE AI VOICE BOT FULL-SCREEN MODAL (Match Reference)
+             ======================================================= -->
+        <div class="modal-voice-bot" id="modalLiveVoiceBot">
+          <!-- Top Bar: Close Button + Pulsing Live Badge -->
+          <div class="voice-bot-top-bar">
+            <button type="button" class="voice-bot-close-btn" onclick="closeLiveVoiceBotModal()" aria-label="Close Live Voice">
+              <i class="ph ph-x"></i>
+            </button>
+            <span class="voice-bot-live-pill">
+              <span class="voice-bot-live-dot"></span>
+              Live
+            </span>
+          </div>
+
+          <!-- Center Visual: Glowing Orb with Doctor Icon & Listening Text -->
+          <div class="voice-bot-center">
+            <div class="voice-bot-orb-container">
+              <div class="voice-bot-orb-glow"></div>
+              <div class="voice-bot-orb-circle">
+                <i class="ph ph-stethoscope" style="font-size: 68px; color: #072B38;"></i>
+              </div>
+            </div>
+            <span class="voice-bot-status-text" id="voiceBotStatusText">Listening...</span>
+          </div>
+
+          <!-- Bottom Actions: Mic Mute + End Button -->
+          <div class="voice-bot-controls-dock">
+            <button type="button" class="voice-bot-mic-btn" id="btnVoiceBotMic" onclick="toggleVoiceBotMute()" aria-label="Mute Microphone">
+              <i class="ph ph-microphone"></i>
+            </button>
+            <button type="button" class="voice-bot-end-btn" onclick="closeLiveVoiceBotModal()" aria-label="End Voice Session">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -8522,6 +8763,9 @@
       const welcomeView = document.getElementById('onuWelcomeView');
       const streamView = document.getElementById('onuMessagesStream');
       const inputField = document.getElementById('inputOnuChat');
+      const pageOnu = document.getElementById('pageOnu');
+
+      if (pageOnu) pageOnu.classList.remove('chat-active');
       if (welcomeView) welcomeView.style.display = 'flex';
       if (streamView) {
         streamView.style.display = 'none';
@@ -8553,8 +8797,10 @@
       const welcomeView = document.getElementById('onuWelcomeView');
       const streamView = document.getElementById('onuMessagesStream');
       const scrollArea = document.getElementById('onuChatScrollArea');
+      const pageOnu = document.getElementById('pageOnu');
 
-      // Hide welcome view and show chat stream
+      // Make background pure white and transition to stream view
+      if (pageOnu) pageOnu.classList.add('chat-active');
       if (welcomeView) welcomeView.style.display = 'none';
       if (streamView) streamView.style.display = 'flex';
 
@@ -8602,6 +8848,46 @@
         streamView.insertAdjacentHTML('beforeend', aiResponse);
         if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
       }, 550);
+    }
+
+    // Live AI Voice Bot Modal Handlers
+    let isVoiceBotMuted = false;
+
+    function openLiveVoiceBotModal() {
+      const modal = document.getElementById('modalLiveVoiceBot');
+      if (modal) {
+        modal.classList.add('active');
+        const statusText = document.getElementById('voiceBotStatusText');
+        if (statusText) statusText.innerText = 'Listening...';
+        isVoiceBotMuted = false;
+        const micBtn = document.getElementById('btnVoiceBotMic');
+        if (micBtn) {
+          micBtn.innerHTML = '<i class="ph ph-microphone"></i>';
+          micBtn.style.background = 'rgba(255, 255, 255, 0.15)';
+        }
+      }
+    }
+
+    function closeLiveVoiceBotModal() {
+      const modal = document.getElementById('modalLiveVoiceBot');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function toggleVoiceBotMute() {
+      isVoiceBotMuted = !isVoiceBotMuted;
+      const micBtn = document.getElementById('btnVoiceBotMic');
+      const statusText = document.getElementById('voiceBotStatusText');
+      if (micBtn) {
+        if (isVoiceBotMuted) {
+          micBtn.innerHTML = '<i class="ph ph-microphone-slash"></i>';
+          micBtn.style.background = '#DC2626';
+          if (statusText) statusText.innerText = 'Microphone Muted';
+        } else {
+          micBtn.innerHTML = '<i class="ph ph-microphone"></i>';
+          micBtn.style.background = 'rgba(255, 255, 255, 0.15)';
+          if (statusText) statusText.innerText = 'Listening...';
+        }
+      }
     }
 
     function copyUserMessage(txt) {
