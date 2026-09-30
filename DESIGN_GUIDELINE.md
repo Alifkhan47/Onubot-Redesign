@@ -658,9 +658,9 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Card Surface**: Transforms into vibrant active Sage (`--color-card-sage`: `#D6EAE6`), creating an immediate, unmistakable visual cue that the shift is ready.
   * **Badge**: `Shift 1 Ready` + `6 in Queue`.
   * **Card Title**: `Start Shift 1`.
-  * **Subtext**: `9:00 AM – 11:00 AM • 6 Patients Waiting` (does NOT prematurely show individual patient demographics because full patient viewing starts on the next page).
-  * **Button**: `.btn-hero-action` with `<i class="ph-fill ph-play"></i> Start Shift 1` (`#052E28`).
-  * **Seamless Consultation Launch**: Tapping `Start Shift 1` immediately opens the full-screen Video Consultation view (`#pageVideoCall`), where the first queued patient's demographics, vitals, and live stream are presented.
+  * **Subtext**: `Video Consultation • Ready to begin` (non-redundant: avoids repeating the time window and patient count which are already shown in the section header and badge).
+  * **Button**: `.btn-hero-action` with `<i class="ph-fill ph-play"></i> Start Shift` (`#052E28`).
+  * **Seamless Consultation Launch**: Tapping `Start Shift` immediately opens the full-screen Video Consultation view (`#pageVideoCall`), where the first queued patient's demographics, vitals, and live stream are presented.
 * **Interactive Demo Capability**: Tapping the locked button immediately simulates fast-forwarding to 8:58 AM with a smooth micro-animation. Tapping the top clock time (`#statusClockTime`) toggles back and forth between Locked (`8:22 AM`) and Ready (`8:58 AM`) for seamless presentation.
 
 ### 19.8 Doctor Offline Subtle Red Alert Standard
