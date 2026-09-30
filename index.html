@@ -11158,13 +11158,13 @@
         <div class="patient-details">
           <h3 class="patient-name">Start Shift 1</h3>
           <div class="patient-info">
-            <span>Serial #1 Tariqul Islam • 34 Yrs • Male</span>
+            <span>9:00 AM – 11:00 AM • 6 Patients Waiting</span>
           </div>
         </div>
 
         <button class="btn-hero-action" onclick="startShiftAction()">
           <i class="ph-fill ph-play"></i>
-          <span>Start Shift • Call Serial #1</span>
+          <span>Start Shift 1</span>
         </button>
       `;
     }
@@ -11214,30 +11214,19 @@
       }
     }
 
-    // Shift Transition Logic on Desk: Ready (8:58 AM) -> Active In-Call
+    // Shift Transition Logic on Desk: Ready (8:58 AM) -> Directly Start Consultation with Patient
     function startShiftAction() {
-      showToast('Starting Shift 1 (9:00 AM)... Calling Serial #1');
-      
+      isShiftActive = true;
+      isShiftLocked = false;
+      const clock = document.getElementById('statusClockTime');
+      if (clock) clock.textContent = '9:00';
+      currentPatientIndex = 0;
+      const pat = queuePatients[currentPatientIndex];
       const heroCard = document.getElementById('heroCard');
-      const heroContainer = document.getElementById('heroCardInner');
-      
-      heroContainer.style.opacity = '0';
-      heroContainer.style.transform = 'translateY(6px)';
-      heroContainer.style.transition = 'all 0.25s ease';
-
-      setTimeout(() => {
-        isShiftActive = true;
-        isShiftLocked = false;
-        const clock = document.getElementById('statusClockTime');
-        if (clock) clock.textContent = '9:00';
-        currentPatientIndex = 0;
-        const pat = queuePatients[currentPatientIndex];
-        heroCard.className = 'patient-hero-card';
-        updateDeskHeroPatient(pat);
-        syncVideoCallScreenState(pat);
-        heroContainer.style.opacity = '1';
-        heroContainer.style.transform = 'translateY(0)';
-      }, 260);
+      if (heroCard) heroCard.className = 'patient-hero-card';
+      updateDeskHeroPatient(pat, true);
+      syncVideoCallScreenState(pat);
+      openVideoCall();
     }
 
     // Render Minimal Offline Empty State
