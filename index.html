@@ -124,6 +124,20 @@
       flex-direction: column;
       user-select: none;
       contain: paint layout;
+      transition: background 0.3s ease;
+    }
+
+    /* Seamless full-screen ambient gradient on phone-screen when Onu is active */
+    .phone-screen:has(#pageOnu.active-page:not(.chat-active)) {
+      background: 
+        radial-gradient(ellipse at 50% 36%, rgba(214, 234, 230, 0.8) 0%, rgba(232, 246, 243, 0.55) 35%, rgba(240, 253, 250, 0.28) 58%, rgba(255, 255, 255, 0) 80%),
+        radial-gradient(circle at 82% 16%, rgba(204, 251, 241, 0.55) 0%, rgba(255, 255, 255, 0) 50%),
+        radial-gradient(circle at 18% 58%, rgba(239, 247, 245, 0.75) 0%, rgba(255, 255, 255, 0) 55%),
+        #FFFFFF !important;
+    }
+
+    .phone-screen:has(#pageOnu.active-page:not(.chat-active)) .status-bar {
+      background: transparent !important;
     }
 
     /* Status Bar */
@@ -5025,11 +5039,7 @@
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: 
-        radial-gradient(ellipse at 50% 46%, rgba(214, 234, 230, 0.75) 0%, rgba(232, 246, 243, 0.5) 35%, rgba(240, 253, 250, 0.25) 58%, rgba(255, 255, 255, 0) 78%),
-        radial-gradient(circle at 82% 28%, rgba(204, 251, 241, 0.5) 0%, rgba(255, 255, 255, 0) 50%),
-        radial-gradient(circle at 18% 62%, rgba(239, 247, 245, 0.7) 0%, rgba(255, 255, 255, 0) 55%),
-        #FFFFFF !important;
+      background: transparent !important;
       position: absolute;
       top: 0;
       left: 0;
@@ -5039,11 +5049,22 @@
       z-index: 10;
       padding: 12px 20px 0 20px;
       overflow: hidden;
-      transition: background 0.3s ease;
     }
 
     .page-onu.chat-active {
       background: #FFFFFF !important;
+    }
+
+    .page-onu .app-header {
+      background: transparent !important;
+    }
+
+    .page-onu .btn-circle-icon {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(214, 234, 230, 0.7);
+      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.04);
     }
 
     .onu-content-area {
