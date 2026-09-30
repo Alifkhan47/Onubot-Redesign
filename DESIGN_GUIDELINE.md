@@ -760,9 +760,13 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ## 22. Onu Clinical AI Copilot & Unified Screen Standard
 
-### 22.1 Default Landing & Pure White Canvas
+### 22.1 Default Landing & Gemini Ambient Brand Gradient
 * **Default Active View**: When the doctor opens the app, **Onu (`#pageOnu`)** is the default active view (`.active-page`), and the bottom navigation bar selects the center **Onu** tab.
-* **Pure White Background**: Pure `#FFFFFF` canvas across the entire viewport and universal header with zero gradients or page break artifacts.
+* **Ambient Brand Gradient**: Luminous, subtle multi-point radial gradient inspired by Google Gemini, crafted with Onu's signature sage, mint, and aquamarine palette:
+  * Center aura: `rgba(214, 234, 230, 0.75)` (Soft Sage) fading gently to `rgba(232, 246, 243, 0.5)` and white.
+  * Top-right ambient highlight: `rgba(204, 251, 241, 0.5)` (Soft Aquamarine).
+  * Bottom-left ambient tint: `rgba(239, 247, 245, 0.7)`.
+  * **Dynamic Chat Transition**: Smoothly transitions to pure `#FFFFFF` as soon as the doctor starts a chat session (`.page-onu.chat-active`).
 * **Unified Universal App Header**:
   * **Left**: Screen Title `Onu` in `Urbanist 25px Bold #000000` + Subtitle `Your Clinical AI Assistant` in `DM Sans 13.5px Regular #717171`.
   * **Right**: Circular action button (`.btn-circle-icon` with `ph-clock-counter-clockwise` in `#052E28` on soft `#F0F6F5` background) positioned on the top right for natural right-handed mobile thumb access.
@@ -770,10 +774,10 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ### 22.2 Welcome State (Gemini Pure Clean Empty State)
 * **Design Philosophy**: Mirroring Google Gemini's minimalist mobile experience with generous negative space and zero cluttered cards or suggestion grids.
-* **Centered Sparkle & Greeting**:
-  * **Gradient Sparkle Icon**: Clean 4-point star SVG with emerald-teal-sky gradient (`#0D7A5F` → `#2DD4BF` → `#38BDF8`).
-  * **Greeting Heading**: `Ask away, Dr. Sifat !` in `Urbanist 26px Bold #000000` (`letter-spacing: -0.02em`).
-  * **Greeting Subtitle**: `Your clinical AI copilot is ready.` in `DM Sans 14px Medium #64748B`.
+* **Centered Sparkle & Refined Greeting**:
+  * **Gradient Sparkle Icon**: Clean 4-point star SVG with emerald-teal-sky gradient (`#0D7A5F` → `#2DD4BF` → `#38BDF8`) and soft ambient drop shadow (`0 4px 14px rgba(13, 122, 95, 0.25)`).
+  * **Refined Greeting Heading**: `Ask away, Dr. Sifat !` in `Urbanist 21px SemiBold #0F172A` (`letter-spacing: -0.015em`, lighter and more elegant than heavy bold).
+  * **Greeting Subtitle**: `Your clinical AI copilot is ready.` in `DM Sans 13.5px Regular #64748B`.
 
 ### 22.3 Conversational Feed & Clean AI Responses
 * **User Messages**: Rounded speech bubble (`#EEF2F4` surface, `#0F172A` text, `20px` radius, `14.5px` body) with micro-actions for Copy and Edit.
@@ -788,6 +792,6 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Right**: Speech-to-Text dictation mic button (`.btn-onu-mic` with `ph-microphone`).
   * **Far Right Action (Morphing Voice Bot / Send Button)**:
     * **Empty Input State (Voice Mode)**: Displays a circular soft sage pill button (`.btn-onu-action-morph.voice-mode`: `#E8F6F3` background, `#0D7A5F` waveform icon `ph-waveform`). Tapping immediately opens the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
-    * **Active Typing State (Send Mode)**: Smoothly morphs into a dark circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
+    * **Active Typing State (Send Mode)**: Smoothly morphs into a deep forest green circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` crisp arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
 * **Subtle AI Disclaimer**: `Onubot can make mistakes. Check important info.` (`DM Sans 10px #94A3B8`).
 
