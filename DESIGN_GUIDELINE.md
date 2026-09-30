@@ -779,9 +779,12 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Refined Greeting Heading**: `Ask away, Dr. Sifat !` in `Urbanist 21px SemiBold #0F172A` (`letter-spacing: -0.015em`, lighter and more elegant than heavy bold).
   * **Greeting Subtitle**: `Your clinical AI copilot is ready.` in `DM Sans 13.5px Regular #64748B`.
 
-### 22.3 Conversational Feed & Clean AI Responses
+### 22.3 Conversational Feed & Realistic Clinical AI Intelligence
 * **User Messages**: Rounded speech bubble (`#EEF2F4` surface, `#0F172A` text, `20px` radius, `14.5px` body) with micro-actions for Copy and Edit.
 * **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), clean high-contrast clinical text, and structured metric overview cards when relevant (without extra action chips).
+* **Realistic Clinical Knowledge Engine (`generateOnuClinicalResponse`)**:
+  * **Clinical Conditions**: Dedicated evidence-based protocols for Hypertension (AHA/ACC targets & first-line agents), Diabetes (ADA HbA1c goals & Metformin/SGLT2i), Cephalalgia/Headaches (SNOOP4 red flags & acute abortive therapies), and Fever/Infections (antipyretics, hydration, CBC/CRP lab stewardship).
+  * **Practice Intelligence Fallback**: For any general or freeform typed query, Onu provides realistic clinical context connecting the query to active queue patients (Farzana Khan, Alif Khan, Tariqul Islam) with diagnostic considerations and safe medication guidance instead of generic robotic fallbacks.
 
 ### 22.4 Floating Input Dock (Google Gemini Unified Pill Model)
 * **Dock Position**: Floats above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).

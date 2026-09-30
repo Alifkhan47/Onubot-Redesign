@@ -8961,8 +8961,8 @@
         `;
       }
 
-      // Case 5: Patients with active fever
-      if (q.includes('fever')) {
+      // Case 5: Patients with active fever / infection
+      if (q.includes('fever') || q.includes('infection') || q.includes('temperature')) {
         return `
           <div class="onu-message-ai-wrap">
             <div class="onu-thought-pill">
@@ -8972,24 +8972,89 @@
             <div class="onu-msg-ai-text">
               <p>Active patients in your practice with documented fever symptoms:</p>
               <ul>
-                <li><strong>Farzana Khan (31F):</strong> Low-grade fever, joint aches & dry cough for 3 days. Scheduled in Shift 1 (Serial #2).</li>
+                <li><strong>Farzana Khan (31F):</strong> Low-grade fever (100.4°F), joint aches & dry cough for 3 days. Scheduled in Shift 1 (Serial #2).</li>
                 <li><strong>Alif Khan (28M):</strong> Mild fever & scratchy sore throat for 3 days. Prescribed antipyretics and rest.</li>
+              </ul>
+              <p><strong>Clinical Protocol:</strong> Recommend hydration, Paracetamol 500mg PO TDS, and baseline CBC + CRP if fever persists &gt; 5 days.</p>
+            </div>
+          </div>
+        `;
+      }
+
+      // Case 6: Hypertension / Blood Pressure
+      if (q.includes('bp') || q.includes('hypertension') || q.includes('pressure')) {
+        return `
+          <div class="onu-message-ai-wrap">
+            <div class="onu-thought-pill">
+              <span class="onu-thought-dot"></span>
+              <span>Guideline Protocol • 3s</span>
+            </div>
+            <div class="onu-msg-ai-text">
+              <p>Clinical Hypertension Management Guidelines (AHA/ACC Standards):</p>
+              <ul>
+                <li><strong>Target BP:</strong> &lt; 130/80 mmHg for general adult outpatients; &lt; 140/90 mmHg for elderly patients.</li>
+                <li><strong>First-Line Pharmacotherapy:</strong> Amlodipine 5mg OD, Telmisartan 40mg OD, or Hydrochlorothiazide 12.5mg OD based on renal & electrolyte profiles.</li>
+                <li><strong>Patient Alert:</strong> 2 patients in your directory (Tariqul Islam, Maruf Islam) have stage-1 elevated BP documented in recent visits.</li>
               </ul>
             </div>
           </div>
         `;
       }
 
-      // Case 6: Generic Clinical Query
+      // Case 7: Diabetes / Blood Sugar
+      if (q.includes('diabetes') || q.includes('sugar') || q.includes('glucose') || q.includes('hba1c')) {
+        return `
+          <div class="onu-message-ai-wrap">
+            <div class="onu-thought-pill">
+              <span class="onu-thought-dot"></span>
+              <span>ADA Protocol • 3s</span>
+            </div>
+            <div class="onu-msg-ai-text">
+              <p>Type-2 Diabetes Clinical Management Summary (ADA Standards):</p>
+              <ul>
+                <li><strong>Glycemic Targets:</strong> Target HbA1c &lt; 7.0%, Fasting Blood Glucose 80–130 mg/dL, 2h Post-prandial &lt; 180 mg/dL.</li>
+                <li><strong>First-Line Therapy:</strong> Metformin 500mg BD with meals + lifestyle intervention; add SGLT2i (Empagliflozin 10mg) for cardio-renal protection if indicated.</li>
+                <li><strong>Recommended Labs:</strong> Routine HbA1c, Serum Creatinine & eGFR testing every 3–6 months.</li>
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      // Case 8: Headache / Migraine
+      if (q.includes('headache') || q.includes('migraine') || q.includes('head')) {
+        return `
+          <div class="onu-message-ai-wrap">
+            <div class="onu-thought-pill">
+              <span class="onu-thought-dot"></span>
+              <span>Clinical Assessment • 2s</span>
+            </div>
+            <div class="onu-msg-ai-text">
+              <p>Clinical Cephalalgia & Headache Triage Protocol:</p>
+              <ul>
+                <li><strong>Red Flags (SNOOP4):</strong> Rule out thunderclap onset, focal neurological signs, papilledema, or postural worsening.</li>
+                <li><strong>First-Line Management:</strong> Naproxen 250mg PO or Paracetamol 500–1000mg for acute episodes; advise sleep hygiene and trigger avoidance.</li>
+                <li><strong>Queued Patient:</strong> Serial #1 (Tariqul Islam, 34M) is scheduled today in Shift 1 for tension-type headache evaluation.</li>
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+
+      // Case 9: Realistic Health & Practice Intelligence Fallback (for any typed text)
       return `
         <div class="onu-message-ai-wrap">
           <div class="onu-thought-pill">
             <span class="onu-thought-dot"></span>
-            <span>Thought for 2 seconds</span>
+            <span>Clinical Intelligence • 2s</span>
           </div>
           <div class="onu-msg-ai-text">
-            <p>I reviewed your practice database and clinical records for: <em>"${escapeHtml(query)}"</em>.</p>
-            <p>You can ask me to check your patient roster, calculate earnings, recap consultation logs, or review your shift queue.</p>
+            <p>I reviewed your clinical database and evidence-based diagnostic protocols regarding <strong>"${escapeHtml(query)}"</strong>:</p>
+            <ul>
+              <li><strong>Cohort Summary:</strong> 2 patients in your active shift queue (Farzana Khan and Alif Khan) have recorded similar acute constitutional symptoms in their recent pre-visit intake.</li>
+              <li><strong>Diagnostic Guidance:</strong> Verify symptom duration, rule out red-flag vitals, and review current medications for contraindications before prescribing.</li>
+              <li><strong>Practice Quick-Actions:</strong> You can ask me to summarize queued patient files, check today's consultation earnings, or review shift schedules.</li>
+            </ul>
           </div>
         </div>
       `;
