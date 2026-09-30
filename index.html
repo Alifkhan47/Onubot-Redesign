@@ -1152,22 +1152,33 @@
     .time-input-tile {
       flex: 1;
       background: #ffffff;
-      border: 1px solid #e2ece9;
+      border: 1.5px solid #e2ece9;
       border-radius: 14px;
       padding: 10px 14px;
       display: flex;
       flex-direction: column;
       gap: 2px;
       cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .time-input-tile:hover {
+      border-color: #052E28;
+      background: #F6FBF9;
+      box-shadow: 0 4px 12px rgba(5, 46, 40, 0.06);
+    }
+
+    .time-input-tile:active {
+      transform: scale(0.98);
     }
 
     .time-tile-label {
       font-family: var(--font-body);
-      font-size: 11.5px;
-      font-weight: 500;
+      font-size: 11px;
+      font-weight: 600;
       color: var(--color-text-secondary);
       text-transform: uppercase;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     .time-tile-value {
@@ -1175,6 +1186,267 @@
       font-size: 17px;
       font-weight: 700;
       color: var(--color-text-primary);
+    }
+
+    /* Interactive Time Picker Modal Styles */
+    .time-readout-hero {
+      background: linear-gradient(135deg, #F5FAF8 0%, #EFF7F4 100%);
+      border: 1.5px solid #D2E7E1;
+      border-radius: 20px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.04);
+    }
+
+    .time-readout-digits {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .time-readout-segment {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border: 2px solid #DCEAE6;
+      border-radius: 14px;
+      width: 68px;
+      height: 64px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0;
+    }
+
+    .time-readout-segment:hover {
+      border-color: #052E28;
+      transform: translateY(-1px);
+    }
+
+    .time-readout-segment.active {
+      border-color: #052E28;
+      background: #EFF7F5;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.12);
+      transform: scale(1.04);
+    }
+
+    .time-readout-segment .segment-num {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      color: #052E28;
+      line-height: 1;
+    }
+
+    .time-readout-segment .segment-tag {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      color: #717171;
+      letter-spacing: 0.06em;
+      margin-top: 3px;
+    }
+
+    .time-readout-colon {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: #052E28;
+      line-height: 1;
+      margin: 0 2px;
+    }
+
+    .time-ampm-switch {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      background: #ffffff;
+      border: 1.5px solid #DCEAE6;
+      border-radius: 14px;
+      padding: 4px;
+    }
+
+    .ampm-btn {
+      height: 28px;
+      width: 48px;
+      border: none;
+      border-radius: 9px;
+      background: transparent;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #717171;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ampm-btn.active {
+      background: #052E28;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.2);
+    }
+
+    .time-grid-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .time-grid-btn {
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid #E2ECE9;
+      background: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #1D2322;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .time-grid-btn:hover {
+      border-color: #052E28;
+      background: #F6FBF9;
+    }
+
+    .time-grid-btn.active {
+      background: #052E28;
+      color: #ffffff;
+      border-color: #052E28;
+      box-shadow: 0 3px 10px rgba(5, 46, 40, 0.2);
+      transform: scale(1.03);
+    }
+
+    .minute-stepper-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 8px 14px;
+      background: #F6F8F9;
+      border-radius: 12px;
+      border: 1px solid #EAEFEF;
+    }
+
+    .btn-min-step {
+      background: #ffffff;
+      border: 1.5px solid #DCEAE6;
+      border-radius: 9px;
+      padding: 6px 14px;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #052E28;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-min-step:hover {
+      background: #EFF7F5;
+      border-color: #052E28;
+    }
+
+    .btn-min-step:active {
+      transform: scale(0.96);
+    }
+
+    .min-step-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #717171;
+    }
+
+    .quick-presets-section {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .time-presets-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 1px 4px 1px;
+    }
+
+    .time-presets-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .time-preset-chip {
+      flex-shrink: 0;
+      padding: 7px 12px;
+      background: #F2F7F5;
+      border: 1.5px solid #D2E7E1;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      color: #052E28;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .time-preset-chip:hover {
+      background: #052E28;
+      color: #ffffff;
+      border-color: #052E28;
+      transform: translateY(-1px);
+    }
+
+    .time-duration-helper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      background: #EFF7F5;
+      border-radius: 12px;
+      border-left: 3.5px solid #052E28;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #052E28;
+      margin-top: 4px;
+    }
+
+    .time-duration-helper i {
+      font-size: 15px;
+      color: #052E28;
+    }
+
+    .btn-sheet-close-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #F2F5F4;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #555555;
+      font-size: 16px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-sheet-close-icon:hover {
+      background: #E2ECE9;
+      color: #111111;
     }
 
     .form-field-group {
@@ -7098,14 +7370,20 @@
               </button>
             </div>
 
-            <!-- Start & End Time -->
+            <!-- Start & End Time (Interactive Time Picker Triggers) -->
             <div class="time-inputs-row">
-              <div class="time-input-tile">
-                <span class="time-tile-label">Start Time</span>
+              <div class="time-input-tile" onclick="openTimePickerModal('start')" role="button" tabindex="0" title="Click to select Start Time">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="time-tile-label">Start Time</span>
+                  <i class="ph ph-caret-down" style="font-size: 13px; color: #717171;"></i>
+                </div>
                 <span class="time-tile-value" id="formStartTime">02:00 PM</span>
               </div>
-              <div class="time-input-tile">
-                <span class="time-tile-label">End Time</span>
+              <div class="time-input-tile" onclick="openTimePickerModal('end')" role="button" tabindex="0" title="Click to select End Time">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="time-tile-label">End Time</span>
+                  <i class="ph ph-caret-down" style="font-size: 13px; color: #717171;"></i>
+                </div>
                 <span class="time-tile-value" id="formEndTime">06:00 PM</span>
               </div>
             </div>
@@ -7548,6 +7826,109 @@
               <i class="ph ph-fast-forward"></i>
               <span>Skip Patient</span>
             </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             12. INTERACTIVE CLINICAL TIME PICKER BOTTOM SHEET MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="timePickerModalSheet" style="z-index: 125; max-height: 92%; overflow-y: auto; scrollbar-width: none;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="sheet-badge-icon">
+              <i class="ph ph-clock"></i>
+            </div>
+            <button type="button" class="btn-sheet-close-icon" onclick="closeTimePickerModal()" aria-label="Close Time Picker">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" id="timePickerHeaderTitle">Select Start Time</h2>
+            <p class="sheet-minimal-subtitle" id="timePickerHeaderSubtitle">Set the shift start time</p>
+          </div>
+
+          <div class="modal-sheet-form">
+            <!-- Digital Time Readout Hero Box -->
+            <div class="time-readout-hero">
+              <div class="time-readout-digits">
+                <button type="button" class="time-readout-segment active" id="timeSegHour" onclick="switchTimePickerTab('hour')">
+                  <span class="segment-num" id="displayHour">02</span>
+                  <span class="segment-tag">HOUR</span>
+                </button>
+                <span class="time-readout-colon">:</span>
+                <button type="button" class="time-readout-segment" id="timeSegMinute" onclick="switchTimePickerTab('minute')">
+                  <span class="segment-num" id="displayMinute">00</span>
+                  <span class="segment-tag">MIN</span>
+                </button>
+              </div>
+
+              <div class="time-ampm-switch">
+                <button type="button" class="ampm-btn" id="btnAm" onclick="setTimePickerAmPm('AM')">AM</button>
+                <button type="button" class="ampm-btn active" id="btnPm" onclick="setTimePickerAmPm('PM')">PM</button>
+              </div>
+            </div>
+
+            <!-- Mode Selector Tabs: Hours vs Minutes -->
+            <div class="segmented-control" style="margin-top: 4px;">
+              <button type="button" class="segment-btn active" id="tabBtnHours" onclick="switchTimePickerTab('hour')">
+                <i class="ph ph-clock"></i>
+                <span>Hours (1-12)</span>
+              </button>
+              <button type="button" class="segment-btn" id="tabBtnMinutes" onclick="switchTimePickerTab('minute')">
+                <i class="ph ph-timer"></i>
+                <span>Minutes</span>
+              </button>
+            </div>
+
+            <!-- Hours Dial Grid (1 to 12) -->
+            <div class="time-grid-container" id="timeHoursGrid">
+              <div class="time-grid-numbers" id="timeHoursNumbers">
+                <!-- Dynamically populated 1 to 12 -->
+              </div>
+            </div>
+
+            <!-- Minutes Dial Grid (00 through 55 in 5m steps + Stepper) -->
+            <div class="time-grid-container" id="timeMinutesGrid" style="display: none;">
+              <div class="time-grid-numbers" id="timeMinutesNumbers">
+                <!-- Dynamically populated 00 to 55 -->
+              </div>
+              <!-- Granular Step Controls -->
+              <div class="minute-stepper-row">
+                <button type="button" class="btn-min-step" onclick="stepTimePickerMinute(-1)">-1 min</button>
+                <span class="min-step-label">Fine Adjust</span>
+                <button type="button" class="btn-min-step" onclick="stepTimePickerMinute(1)">+1 min</button>
+              </div>
+            </div>
+
+            <!-- Quick Clinical Presets -->
+            <div class="quick-presets-section">
+              <span class="form-field-label">Quick Clinical Presets</span>
+              <div class="time-presets-scroll">
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('08:00 AM')">08:00 AM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('09:00 AM')">09:00 AM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('10:00 AM')">10:00 AM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('02:00 PM')">02:00 PM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('05:00 PM')">05:00 PM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('06:00 PM')">06:00 PM</button>
+                <button type="button" class="time-preset-chip" onclick="applyTimePreset('08:00 PM')">08:00 PM</button>
+              </div>
+            </div>
+
+            <!-- Realtime Helper / Duration Banner -->
+            <div class="time-duration-helper" id="timeDurationHelper">
+              <i class="ph ph-info"></i>
+              <span id="timeDurationHelperText">Shift Window: 02:00 PM → 06:00 PM</span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="sheet-actions-group">
+              <button type="button" class="btn-sheet-cancel" onclick="closeTimePickerModal()">Cancel</button>
+              <button type="button" class="btn-sheet-confirm" onclick="confirmTimePicker()">
+                <i class="ph ph-check"></i>
+                <span id="btnConfirmTimeLabel">Set Start (02:00 PM)</span>
+              </button>
+            </div>
           </div>
         </div>
 
@@ -10950,6 +11331,214 @@
       showToast('Viewing schedule for ' + dateText);
     }
 
+    // Time Picker Bottom Sheet Management
+    let currentTimePickerTarget = 'start'; // 'start' or 'end'
+    let pickerHour = 2;
+    let pickerMinute = 0;
+    let pickerAmPm = 'PM';
+    let pickerTab = 'hour'; // 'hour' or 'minute'
+
+    function openTimePickerModal(target) {
+      currentTimePickerTarget = target || 'start';
+      const isStart = currentTimePickerTarget === 'start';
+      
+      const titleEl = document.getElementById('timePickerHeaderTitle');
+      const subEl = document.getElementById('timePickerHeaderSubtitle');
+      if (titleEl) titleEl.textContent = isStart ? 'Select Start Time' : 'Select End Time';
+      if (subEl) subEl.textContent = isStart ? 'Set the start time for this shift' : 'Set the end time for this shift';
+
+      // Read current value from the target tile
+      const currentValEl = document.getElementById(isStart ? 'formStartTime' : 'formEndTime');
+      const currentVal = currentValEl ? currentValEl.textContent.trim() : (isStart ? '02:00 PM' : '06:00 PM');
+      parseTimeToPicker(currentVal);
+
+      switchTimePickerTab('hour');
+      updateTimePickerDisplay();
+
+      document.getElementById('modalBackdrop').classList.add('active');
+      document.getElementById('timePickerModalSheet').classList.add('active');
+    }
+
+    function closeTimePickerModal() {
+      const timeSheet = document.getElementById('timePickerModalSheet');
+      if (timeSheet) timeSheet.classList.remove('active');
+      
+      // If shift modal is still open, keep backdrop active; otherwise remove backdrop
+      const shiftModal = document.getElementById('shiftModalSheet');
+      if (!shiftModal || !shiftModal.classList.contains('active')) {
+        document.getElementById('modalBackdrop').classList.remove('active');
+      }
+    }
+
+    function parseTimeToPicker(timeStr) {
+      try {
+        const parts = timeStr.split(' ');
+        if (parts.length === 2) {
+          pickerAmPm = parts[1].toUpperCase() === 'AM' ? 'AM' : 'PM';
+          const timeParts = parts[0].split(':');
+          if (timeParts.length === 2) {
+            pickerHour = parseInt(timeParts[0], 10) || 2;
+            pickerMinute = parseInt(timeParts[1], 10) || 0;
+            if (pickerHour > 12) pickerHour = 12;
+            if (pickerHour < 1) pickerHour = 1;
+            if (pickerMinute < 0) pickerMinute = 0;
+            if (pickerMinute > 59) pickerMinute = 59;
+          }
+        }
+      } catch (err) {
+        pickerHour = 2;
+        pickerMinute = 0;
+        pickerAmPm = 'PM';
+      }
+    }
+
+    function switchTimePickerTab(tab) {
+      pickerTab = tab;
+      const tabHours = document.getElementById('tabBtnHours');
+      const tabMinutes = document.getElementById('tabBtnMinutes');
+      const segHour = document.getElementById('timeSegHour');
+      const segMinute = document.getElementById('timeSegMinute');
+      const gridHours = document.getElementById('timeHoursGrid');
+      const gridMinutes = document.getElementById('timeMinutesGrid');
+
+      if (tab === 'hour') {
+        if (tabHours) tabHours.classList.add('active');
+        if (tabMinutes) tabMinutes.classList.remove('active');
+        if (segHour) segHour.classList.add('active');
+        if (segMinute) segMinute.classList.remove('active');
+        if (gridHours) gridHours.style.display = 'block';
+        if (gridMinutes) gridMinutes.style.display = 'none';
+      } else {
+        if (tabHours) tabHours.classList.remove('active');
+        if (tabMinutes) tabMinutes.classList.add('active');
+        if (segHour) segHour.classList.remove('active');
+        if (segMinute) segMinute.classList.add('active');
+        if (gridHours) gridHours.style.display = 'none';
+        if (gridMinutes) gridMinutes.style.display = 'block';
+      }
+      renderTimeGrids();
+    }
+
+    function renderTimeGrids() {
+      // Render Hours (1 - 12)
+      const hoursWrap = document.getElementById('timeHoursNumbers');
+      if (hoursWrap) {
+        hoursWrap.innerHTML = '';
+        for (let h = 1; h <= 12; h++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'time-grid-btn' + (pickerHour === h ? ' active' : '');
+          btn.textContent = h.toString().padStart(2, '0');
+          btn.onclick = () => selectPickerHour(h);
+          hoursWrap.appendChild(btn);
+        }
+      }
+
+      // Render Minutes (00 to 55 in 5-min intervals)
+      const minutesWrap = document.getElementById('timeMinutesNumbers');
+      if (minutesWrap) {
+        minutesWrap.innerHTML = '';
+        const minuteSteps = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+        minuteSteps.forEach(m => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'time-grid-btn' + (pickerMinute === m ? ' active' : '');
+          btn.textContent = m.toString().padStart(2, '0');
+          btn.onclick = () => selectPickerMinute(m);
+          minutesWrap.appendChild(btn);
+        });
+      }
+    }
+
+    function selectPickerHour(h) {
+      pickerHour = h;
+      updateTimePickerDisplay();
+      // Auto-switch to minutes tab with slight micro delay for delightful flow
+      setTimeout(() => {
+        switchTimePickerTab('minute');
+      }, 160);
+    }
+
+    function selectPickerMinute(m) {
+      pickerMinute = m;
+      updateTimePickerDisplay();
+    }
+
+    function stepTimePickerMinute(delta) {
+      pickerMinute = (pickerMinute + delta + 60) % 60;
+      updateTimePickerDisplay();
+    }
+
+    function setTimePickerAmPm(period) {
+      pickerAmPm = period;
+      updateTimePickerDisplay();
+    }
+
+    function applyTimePreset(timeStr) {
+      parseTimeToPicker(timeStr);
+      updateTimePickerDisplay();
+    }
+
+    function updateTimePickerDisplay() {
+      const strHour = pickerHour.toString().padStart(2, '0');
+      const strMinute = pickerMinute.toString().padStart(2, '0');
+      
+      const dispHour = document.getElementById('displayHour');
+      const dispMin = document.getElementById('displayMinute');
+      if (dispHour) dispHour.textContent = strHour;
+      if (dispMin) dispMin.textContent = strMinute;
+
+      const btnAm = document.getElementById('btnAm');
+      const btnPm = document.getElementById('btnPm');
+      if (btnAm && btnPm) {
+        if (pickerAmPm === 'AM') {
+          btnAm.classList.add('active');
+          btnPm.classList.remove('active');
+        } else {
+          btnPm.classList.add('active');
+          btnAm.classList.remove('active');
+        }
+      }
+
+      const formattedTime = `${strHour}:${strMinute} ${pickerAmPm}`;
+      const btnConfirmLabel = document.getElementById('btnConfirmTimeLabel');
+      if (btnConfirmLabel) {
+        btnConfirmLabel.textContent = `Set ${currentTimePickerTarget === 'start' ? 'Start' : 'End'} (${formattedTime})`;
+      }
+
+      // Update Realtime Duration Helper
+      updateShiftDurationHelper(formattedTime);
+      renderTimeGrids();
+    }
+
+    function updateShiftDurationHelper(currentTimeStr) {
+      const helperEl = document.getElementById('timeDurationHelperText');
+      if (!helperEl) return;
+
+      const isStart = currentTimePickerTarget === 'start';
+      const otherTimeStr = document.getElementById(isStart ? 'formEndTime' : 'formStartTime')?.textContent.trim() || (isStart ? '06:00 PM' : '02:00 PM');
+      
+      const startTimeStr = isStart ? currentTimeStr : otherTimeStr;
+      const endTimeStr = isStart ? otherTimeStr : currentTimeStr;
+
+      helperEl.textContent = `Shift Window: ${startTimeStr} → ${endTimeStr}`;
+    }
+
+    function confirmTimePicker() {
+      const formattedTime = `${pickerHour.toString().padStart(2, '0')}:${pickerMinute.toString().padStart(2, '0')} ${pickerAmPm}`;
+      
+      if (currentTimePickerTarget === 'start') {
+        const startEl = document.getElementById('formStartTime');
+        if (startEl) startEl.textContent = formattedTime;
+      } else {
+        const endEl = document.getElementById('formEndTime');
+        if (endEl) endEl.textContent = formattedTime;
+      }
+
+      closeTimePickerModal();
+      showToast(`Updated ${currentTimePickerTarget === 'start' ? 'Start' : 'End'} Time to ${formattedTime}`);
+    }
+
     // Shift Modal Bottom Sheet Management
     function openShiftModal() {
       currentEditingShiftId = null;
@@ -10967,11 +11556,13 @@
     function closeShiftModal() {
       document.getElementById('modalBackdrop').classList.remove('active');
       document.getElementById('shiftModalSheet').classList.remove('active');
+      closeTimePickerModal();
     }
 
     function closeAllModals() {
       closeGoingOfflineModal();
       closeShiftModal();
+      closeTimePickerModal();
       closeEndCallModal();
       closeMedicineModal();
       closeLabModal();

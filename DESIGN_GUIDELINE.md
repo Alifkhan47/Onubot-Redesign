@@ -679,7 +679,21 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * Red moon icon (`#D92D20`).
     * Title: `Doctor is Offline`.
     * Subtext: `"Today's appointments were cancelled because you are offline (Rest of Today). Patients were notified to rebook."`
-  * **Restoring Queue**: When the doctor toggles back online, the shifts resume and appointments list updates immediately.
+### 19.10 Interactive Clinical Time Picker Standard (`#timePickerModalSheet`)
+* **Purpose**: Provide doctors with a dedicated, tactile, error-free interface to configure shift Start Time and End Time without clunky native browser text inputs.
+* **Trigger Mechanism**: Clicking either the `Start Time` or `End Time` tile (`.time-input-tile`) inside the Add/Edit Shift Hours sheet (`#shiftModalSheet`) opens the dedicated Time Picker sheet (`#timePickerModalSheet`) with elevated `z-index: 125`.
+* **Hero Digital Time Readout (`.time-readout-hero`)**:
+  * Dual-segment digital display (`[ 02 ] : [ 00 ]`) with Urbanist 28px ExtraBold numbers and active teal glow indicator.
+  * AM / PM toggle switch (`.time-ampm-switch`) with smooth active pill state (`#052E28`).
+* **Dial Grids & Mode Switcher**:
+  * **Hours Tab (1–12)**: 4×3 grid of circular/pill buttons. Selecting an hour automatically transitions to the minutes tab with a 160ms micro-delay for rapid single-flow selection.
+  * **Minutes Tab (00–55)**: 5-minute interval grid (00, 05, 10, ... 55) plus fine-adjustment stepper controls (`-1 min`, `+1 min`).
+* **Clinical Shift Shortcuts (`.time-presets-scroll`)**:
+  * 1-tap presets for standard clinical hours (`08:00 AM`, `09:00 AM`, `10:00 AM`, `02:00 PM`, `05:00 PM`, `06:00 PM`, `08:00 PM`).
+* **Realtime Context Helper (`.time-duration-helper`)**:
+  * Live helper banner showing the calculated shift window (e.g. `Shift Window: 02:00 PM → 06:00 PM`).
+* **Action Buttons**:
+  * Paired `Cancel` and `Set Start/End (XX:XX PM)` CTA (`.btn-sheet-confirm`) that saves the formatted time back to the shift form with a toast notification.
 
 ---
 
