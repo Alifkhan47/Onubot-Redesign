@@ -5018,13 +5018,13 @@
     }
 
     /* ============================================================
-       VIEW 11: ONU CLINICAL AI COPILOT (SUBTLE GRADIENT & SQUIRCLE STANDARD)
+       VIEW 11: ONU CLINICAL AI COPILOT (PURE WHITE STANDARD)
        ============================================================ */
     .page-onu {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: linear-gradient(180deg, #F0F7F5 0%, #FFFFFF 55%);
+      background: #FFFFFF !important;
       position: absolute;
       top: 0;
       left: 0;
@@ -5034,11 +5034,6 @@
       z-index: 10;
       padding: 12px 20px 0 20px;
       overflow: hidden;
-      transition: background 0.35s ease;
-    }
-
-    .page-onu.chat-active {
-      background: #FFFFFF !important;
     }
 
     .onu-content-area {
@@ -5057,7 +5052,7 @@
       display: none;
     }
 
-    /* Welcome / Hero State (Inspired by Reference Squircle Layout) */
+    /* Welcome / Hero State (Clean Squircle Layout) */
     .onu-welcome-container {
       display: flex;
       flex-direction: column;
@@ -5096,7 +5091,7 @@
       flex-shrink: 0;
     }
 
-    /* 2x2 Squircle Glassmorphic Suggestion Cards (Clean, Punchy, No Paragraphs) */
+    /* 2x2 Squircle Suggestion Cards (Clean, Punchy, No Paragraphs) */
     .onu-square-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -5106,13 +5101,11 @@
     }
 
     .onu-square-card {
-      background: rgba(246, 248, 249, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(226, 236, 234, 0.9);
-      border-radius: 18px;
-      padding: 14px 13px;
-      min-height: 102px;
+      background: #F8FAFB;
+      border: 1.5px solid #EDF2F1;
+      border-radius: 20px;
+      padding: 16px 14px;
+      min-height: 106px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -5120,14 +5113,14 @@
       cursor: pointer;
       box-sizing: border-box;
       transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
     }
 
     .onu-square-card:hover {
       background: #FFFFFF;
-      border-color: rgba(126, 184, 174, 0.7);
+      border-color: #B0DDD4;
       transform: translateY(-2px);
-      box-shadow: 0 8px 22px rgba(5, 46, 40, 0.07);
+      box-shadow: 0 8px 24px rgba(5, 46, 40, 0.06);
     }
 
     .onu-square-card:active {
@@ -5135,13 +5128,13 @@
     }
 
     .onu-square-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 19px;
+      font-size: 20px;
       flex-shrink: 0;
     }
 
@@ -5171,7 +5164,7 @@
 
     .onu-square-title {
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #0F172A;
       line-height: 1.25;
@@ -5515,35 +5508,6 @@
       margin-top: 2px;
     }
 
-    .onu-ai-actions-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .onu-ai-action-chip {
-      background: #FFFFFF;
-      border: 1.5px solid #D1E5E1;
-      border-radius: 10px;
-      padding: 6px 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
-      cursor: pointer;
-      transition: all 0.16s ease;
-    }
-
-    .onu-ai-action-chip:hover {
-      background: #E8F6F3;
-      border-color: #B0DCD3;
-      transform: translateY(-1px);
-    }
-
     /* Typing Indicator */
     .onu-typing-indicator {
       display: inline-flex;
@@ -5595,29 +5559,30 @@
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    /* Dedicated Live AI Voice Bot Button (Separated on Left) */
+    /* Dedicated Live AI Voice Bot Button (Soft Mint/Sage Accent) */
     .btn-onu-voice-agent {
-      width: 50px;
-      height: 50px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
-      background: var(--color-primary-btn);
-      border: none;
-      color: #FFFFFF;
+      background: #E8F6F3;
+      border: 1.5px solid #C2E7DF;
+      color: #0D7A5F;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 22px;
       cursor: pointer;
       flex-shrink: 0;
-      box-shadow: 0 6px 20px rgba(5, 46, 40, 0.24);
+      box-shadow: 0 4px 14px rgba(13, 122, 95, 0.12);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .btn-onu-voice-agent:hover {
-      background: var(--color-primary-btn-hover);
+      background: #D5EFE9;
+      color: #052E28;
       transform: scale(1.05);
     }
 
@@ -5625,28 +5590,26 @@
       transform: scale(0.94);
     }
 
-    /* Fatter / Taller Chat Entry Box */
+    /* Standard Chat Entry Box */
     .onu-input-pill-box {
       flex: 1;
-      height: 50px;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      height: 48px;
+      background: #FFFFFF;
       border: 1.5px solid #E2ECEA;
       border-radius: 28px;
       padding: 4px 6px 4px 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       box-sizing: border-box;
-      box-shadow: 0 6px 20px -2px rgba(5, 46, 40, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       transition: all 0.2s ease;
       min-width: 0;
     }
 
     .onu-input-pill-box:focus-within {
       border-color: var(--color-primary-btn);
-      box-shadow: 0 6px 24px -2px rgba(5, 46, 40, 0.14);
+      box-shadow: 0 4px 20px rgba(5, 46, 40, 0.12);
     }
 
     .btn-onu-attach {
@@ -5719,16 +5682,16 @@
     }
 
     .btn-onu-send {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: var(--color-primary-btn);
       border: none;
       color: #FFFFFF;
-      display: flex;
+      display: none; /* Hidden by default, shown when typing */
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 17px;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -5741,6 +5704,15 @@
 
     .btn-onu-send:active {
       transform: scale(0.95);
+    }
+
+    .onu-disclaimer {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: #94A3B8;
+      margin: 0;
+      text-align: center;
+      pointer-events: auto;
     }
 
     .onu-disclaimer {
@@ -6052,12 +6024,12 @@
                   <button type="button" class="btn-onu-attach" onclick="openOnuAttachMenu()" title="Attach patient file or tag patient" aria-label="Attach">
                     <i class="ph ph-plus"></i>
                   </button>
-                  <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Ask anything about patients, shifts..." onkeydown="handleOnuInputKey(event)" />
+                  <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Ask anything about patients, shifts..." onkeydown="handleOnuInputKey(event)" oninput="handleOnuInputChange(this)" />
                   <button type="button" class="btn-onu-mic" id="btnOnuMic" onclick="toggleOnuVoiceListening()" title="Voice dictation (speech-to-text)" aria-label="Voice Mic">
                     <i class="ph ph-microphone"></i>
                   </button>
                   <button type="button" class="btn-onu-send" id="btnOnuSend" onclick="sendOnuMessage()" title="Send message" aria-label="Send">
-                    <i class="ph-fill ph-arrow-up"></i>
+                    <i class="ph-bold ph-arrow-up"></i>
                   </button>
                 </div>
               </div>
@@ -8785,6 +8757,38 @@
       }
     }
 
+    function handleOnuInputChange(inputEl) {
+      const text = inputEl ? inputEl.value.trim() : '';
+      const sendBtn = document.getElementById('btnOnuSend');
+      const micBtn = document.getElementById('btnOnuMic');
+      if (text.length > 0) {
+        if (sendBtn) sendBtn.style.display = 'flex';
+        if (micBtn) micBtn.style.display = 'none';
+      } else {
+        if (sendBtn) sendBtn.style.display = 'none';
+        if (micBtn) micBtn.style.display = 'flex';
+      }
+    }
+
+    function startNewOnuChat() {
+      const welcomeView = document.getElementById('onuWelcomeView');
+      const streamView = document.getElementById('onuMessagesStream');
+      const inputField = document.getElementById('inputOnuChat');
+      const pageOnu = document.getElementById('pageOnu');
+
+      if (pageOnu) pageOnu.classList.remove('chat-active');
+      if (welcomeView) welcomeView.style.display = 'flex';
+      if (streamView) {
+        streamView.style.display = 'none';
+        streamView.innerHTML = '';
+      }
+      if (inputField) {
+        inputField.value = '';
+        handleOnuInputChange(inputField);
+      }
+      onuChatHistory = [];
+    }
+
     function sendOnuMessage() {
       const inputField = document.getElementById('inputOnuChat');
       if (!inputField) return;
@@ -8817,6 +8821,7 @@
       `;
       streamView.insertAdjacentHTML('beforeend', userBubbleHtml);
       inputField.value = '';
+      handleOnuInputChange(inputField);
 
       // 2. Render Typing / Thought Indicator
       const typingId = 'onuTyping_' + Date.now();
@@ -8899,13 +8904,14 @@
       if (inputField) {
         inputField.value = txt;
         inputField.focus();
+        handleOnuInputChange(inputField);
       }
     }
 
     function generateOnuClinicalResponse(query) {
       const q = query.toLowerCase();
 
-      // Case 1: Check my patients / Patient Overview (Matching Image 3)
+      // Case 1: Check my patients / Patient Overview (Clean, No action chips)
       if (q.includes('patient') || q.includes('unique') || q.includes('directory')) {
         return `
           <div class="onu-message-ai-wrap">
@@ -8944,17 +8950,11 @@
                 </div>
               </div>
             </div>
-
-            <div class="onu-ai-actions-row">
-              <button class="onu-ai-action-chip" onclick="navigateToPatientsList()">
-                <i class="ph ph-users"></i> Open Patients Directory
-              </button>
-            </div>
           </div>
         `;
       }
 
-      // Case 2: Check my earnings / Money Made
+      // Case 2: Check my earnings / Money Made (Clean, No action chips)
       if (q.includes('money') || q.includes('earn') || q.includes('income') || q.includes('balance') || q.includes('wallet') || q.includes('taka')) {
         return `
           <div class="onu-message-ai-wrap">
@@ -8993,12 +8993,6 @@
                 </div>
               </div>
             </div>
-
-            <div class="onu-ai-actions-row">
-              <button class="onu-ai-action-chip" onclick="setActiveNavTab('wallet'); showToast('Opening Wallet');">
-                <i class="ph ph-wallet"></i> View Wallet & Payouts
-              </button>
-            </div>
           </div>
         `;
       }
@@ -9019,11 +9013,6 @@
                 <li><strong>Pre-visit Intake:</strong> Scratchy sore throat and low-grade fever for 3 days.</li>
                 <li><strong>Known Allergies:</strong> Seasonal Allergic Rhinitis (Fexofenadine 120mg PRN).</li>
               </ul>
-            </div>
-            <div class="onu-ai-actions-row">
-              <button class="onu-ai-action-chip" onclick="openPatientProfile('p-1042')">
-                <i class="ph ph-user"></i> Open Alif's Dossier
-              </button>
             </div>
           </div>
         `;
@@ -9046,14 +9035,6 @@
                 <li><strong>Serial #4:</strong> Farhan Hossain (28M) - Post-viral Cough (Initial)</li>
               </ul>
             </div>
-            <div class="onu-ai-actions-row">
-              <button class="onu-ai-action-chip" onclick="navigateToDesk()">
-                <i class="ph ph-play"></i> Start Shift on Desk
-              </button>
-              <button class="onu-ai-action-chip" onclick="openAllAppointmentsPage()">
-                <i class="ph ph-list-numbers"></i> Open Shift Queue
-              </button>
-            </div>
           </div>
         `;
       }
@@ -9073,11 +9054,6 @@
                 <li><strong>Alif Khan (28M):</strong> Mild fever & scratchy sore throat for 3 days. Prescribed antipyretics and rest.</li>
               </ul>
             </div>
-            <div class="onu-ai-actions-row">
-              <button class="onu-ai-action-chip" onclick="openPatientProfile('p-1043')">
-                <i class="ph ph-user"></i> View Farzana's Profile
-              </button>
-            </div>
           </div>
         `;
       }
@@ -9092,14 +9068,6 @@
           <div class="onu-msg-ai-text">
             <p>I reviewed your practice database and clinical records for: <em>"${escapeHtml(query)}"</em>.</p>
             <p>You can ask me to check your patient roster, calculate earnings, recap consultation logs, or review your shift queue.</p>
-          </div>
-          <div class="onu-ai-actions-row">
-            <button class="onu-ai-action-chip" onclick="navigateToPatientsList()">
-              <i class="ph ph-users"></i> Patient Directory
-            </button>
-            <button class="onu-ai-action-chip" onclick="navigateToDesk()">
-              <i class="ph ph-house"></i> Return to Desk
-            </button>
           </div>
         </div>
       `;
