@@ -5018,13 +5018,13 @@
     }
 
     /* ============================================================
-       VIEW 11: ONU CLINICAL AI COPILOT & ASSISTANT (FAMILIAR STANDARD)
+       VIEW 11: ONU CLINICAL AI COPILOT & ASSISTANT (UNIFIED HEALTHTECH STANDARD)
        ============================================================ */
     .page-onu {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: var(--color-bg-canvas);
+      background: var(--color-app-bg);
       position: absolute;
       top: 0;
       left: 0;
@@ -5032,69 +5032,43 @@
       bottom: 0;
       box-sizing: border-box;
       z-index: 10;
-      overflow: hidden;
+      padding: 12px 20px 90px 20px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
     }
 
-    .onu-top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid rgba(226, 236, 234, 0.6);
-      flex-shrink: 0;
-      z-index: 12;
-      height: 52px;
-      box-sizing: border-box;
-    }
-
-    .onu-top-bar-placeholder {
-      width: 38px;
-      height: 38px;
-    }
-
-    .onu-brand-title {
-      font-family: var(--font-heading);
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--color-text-primary);
-      letter-spacing: -0.02em;
-      margin: 0;
+    .page-onu::-webkit-scrollbar {
+      display: none;
     }
 
     .onu-content-area {
       flex: 1;
-      overflow-y: auto;
-      padding: 24px 20px 140px 20px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 20px;
+      padding-bottom: 90px;
       box-sizing: border-box;
-      scrollbar-width: none;
     }
 
-    .onu-content-area::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Welcome / Hero State with Generous Negative Space */
+    /* Welcome / Hero State */
     .onu-welcome-container {
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 20px;
       width: 100%;
-      padding-top: 12px;
+      padding-top: 4px;
     }
 
     .onu-hero-greeting {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
 
     .onu-greeting-sub {
       font-family: var(--font-heading);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       color: #64748B;
       letter-spacing: -0.01em;
@@ -5102,7 +5076,7 @@
 
     .onu-greeting-name {
       font-family: var(--font-heading);
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 800;
       color: #000000;
       letter-spacing: -0.03em;
@@ -5110,7 +5084,7 @@
       line-height: 1.15;
     }
 
-    /* Clean Punchy Suggestion Prompts (No Cluttered Subtexts) */
+    /* Modern European Healthtech Suggestion Cards */
     .onu-prompts-stack {
       display: flex;
       flex-direction: column;
@@ -5118,76 +5092,113 @@
       width: 100%;
     }
 
-    .onu-prompt-tile {
+    .onu-prompt-card {
       background: var(--color-card-neutral);
       border: 1.5px solid #EDF2F1;
-      border-radius: 16px;
-      padding: 13px 16px;
+      border-radius: 18px;
+      padding: 13px 15px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 13px;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-sizing: border-box;
     }
 
-    .onu-prompt-tile:hover {
-      background: var(--color-card-neutral-hover);
-      border-color: #D4EAE4;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+    .onu-prompt-card:hover {
+      background: #FFFFFF;
+      border-color: #CBE4DE;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(5, 46, 40, 0.06);
     }
 
-    .onu-prompt-tile:active {
+    .onu-prompt-card:active {
       transform: scale(0.985);
     }
 
-    .onu-prompt-tile-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+    .onu-prompt-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       flex-shrink: 0;
     }
 
-    .onu-prompt-tile-icon.sage {
+    .onu-prompt-card-icon.sage {
       background: #E8F6F3;
       color: #0D7A5F;
       border: 1px solid #C2E7DF;
     }
 
-    .onu-prompt-tile-icon.emerald {
+    .onu-prompt-card-icon.emerald {
       background: #ECFDF5;
       color: #059669;
       border: 1px solid #A7F3D0;
     }
 
-    .onu-prompt-tile-icon.blue {
+    .onu-prompt-card-icon.blue {
       background: #EFF6FF;
       color: #2563EB;
       border: 1px solid #BFDBFE;
     }
 
-    .onu-prompt-tile-icon.amber {
+    .onu-prompt-card-icon.amber {
       background: #FEF3C7;
       color: #D97706;
       border: 1px solid #FDE68A;
     }
 
-    .onu-prompt-tile-text {
+    .onu-prompt-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .onu-prompt-card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .onu-prompt-card-title {
       font-family: var(--font-heading);
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--color-text-primary);
-      line-height: 1.3;
-      flex: 1;
+      line-height: 1.25;
+    }
+
+    .onu-prompt-arrow {
+      color: #94A3B8;
+      font-size: 16px;
+      transition: transform 0.2s ease, color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .onu-prompt-card:hover .onu-prompt-arrow {
+      color: var(--color-primary-btn);
+      transform: translate(2px, -2px);
+    }
+
+    .onu-prompt-card-sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      font-weight: 400;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     /* ============================================================
-       SLIDE-OUT CHAT HISTORY DRAWER & BACKDROP
+       SLIDE-OUT CHAT HISTORY DRAWER & BACKDROP (RIGHT-HAND SLIDE)
        ============================================================ */
     .onu-drawer-backdrop {
       position: absolute;
@@ -5212,17 +5223,17 @@
     .onu-history-drawer {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       bottom: 0;
       width: 82%;
       max-width: 320px;
       background: #FFFFFF;
       z-index: 65;
-      transform: translateX(-100%);
+      transform: translateX(100%);
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -5746,19 +5757,21 @@
                ======================================================= -->
           <div class="app-page page-onu active-page" id="pageOnu">
             
-            <!-- Top App Bar: Hamburger Left, Brand Center, Clean Space Right -->
-            <div class="onu-top-bar">
+            <!-- Unified Universal App Header (Consistent with Desk & Patients, Right-Hand Reach) -->
+            <div class="app-header">
+              <div class="header-text">
+                <h1 class="header-title">Onu</h1>
+                <p class="header-subtitle">Your Clinical AI Assistant</p>
+              </div>
               <button class="btn-circle-icon" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
-                <i class="ph ph-list" style="font-size: 20px;"></i>
+                <i class="ph ph-clock-counter-clockwise"></i>
               </button>
-              <h1 class="onu-brand-title">Onu</h1>
-              <div class="onu-top-bar-placeholder"></div>
             </div>
 
             <!-- Scrollable Content Area -->
             <div class="onu-content-area" id="onuChatScrollArea">
               
-              <!-- Welcome State View with Generous Negative Space -->
+              <!-- Welcome State View with Clean Spacing -->
               <div class="onu-welcome-container" id="onuWelcomeView">
                 
                 <!-- Hero Greeting -->
@@ -5767,39 +5780,59 @@
                   <h2 class="onu-greeting-name">Doctor Sifat !</h2>
                 </div>
 
-                <!-- Doctor Clinical Prompts Stack (Clean, Single Line, No Clutter) -->
+                <!-- Modern European Healthtech Suggestion Cards Stack -->
                 <div class="onu-prompts-stack">
                   
-                  <div class="onu-prompt-tile" onclick="askOnuPreset('Check my patients')">
-                    <div class="onu-prompt-tile-icon sage">
+                  <div class="onu-prompt-card" onclick="askOnuPreset('Check my patients')">
+                    <div class="onu-prompt-card-icon sage">
                       <i class="ph ph-users"></i>
                     </div>
-                    <span class="onu-prompt-tile-text">Check my patients</span>
-                    <i class="ph ph-caret-right" style="color: #94A3B8; font-size: 16px;"></i>
+                    <div class="onu-prompt-card-body">
+                      <div class="onu-prompt-card-title-row">
+                        <span class="onu-prompt-card-title">Check my patients</span>
+                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
+                      </div>
+                      <span class="onu-prompt-card-sub">24 active patient dossiers & medical records</span>
+                    </div>
                   </div>
 
-                  <div class="onu-prompt-tile" onclick="askOnuPreset('How much money did I make today and this week?')">
-                    <div class="onu-prompt-tile-icon emerald">
+                  <div class="onu-prompt-card" onclick="askOnuPreset('How much money did I make today and this week?')">
+                    <div class="onu-prompt-card-icon emerald">
                       <i class="ph ph-wallet"></i>
                     </div>
-                    <span class="onu-prompt-tile-text">Check my earnings</span>
-                    <i class="ph ph-caret-right" style="color: #94A3B8; font-size: 16px;"></i>
+                    <div class="onu-prompt-card-body">
+                      <div class="onu-prompt-card-title-row">
+                        <span class="onu-prompt-card-title">Check my earnings</span>
+                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
+                      </div>
+                      <span class="onu-prompt-card-sub">Today's income ৳14,400 & payout breakdown</span>
+                    </div>
                   </div>
 
-                  <div class="onu-prompt-tile" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
-                    <div class="onu-prompt-tile-icon blue">
+                  <div class="onu-prompt-card" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
+                    <div class="onu-prompt-card-icon blue">
                       <i class="ph ph-clipboard-text"></i>
                     </div>
-                    <span class="onu-prompt-tile-text">Recap my last visit</span>
-                    <i class="ph ph-caret-right" style="color: #94A3B8; font-size: 16px;"></i>
+                    <div class="onu-prompt-card-body">
+                      <div class="onu-prompt-card-title-row">
+                        <span class="onu-prompt-card-title">Recap my last visit</span>
+                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
+                      </div>
+                      <span class="onu-prompt-card-sub">Alif Khan (28M) • Viral Pharyngitis (Sep 29)</span>
+                    </div>
                   </div>
 
-                  <div class="onu-prompt-tile" onclick="askOnuPreset('How many patients in my shift queue today?')">
-                    <div class="onu-prompt-tile-icon amber">
+                  <div class="onu-prompt-card" onclick="askOnuPreset('How many patients in my shift queue today?')">
+                    <div class="onu-prompt-card-icon amber">
                       <i class="ph ph-calendar-check"></i>
                     </div>
-                    <span class="onu-prompt-tile-text">Check today's queue</span>
-                    <i class="ph ph-caret-right" style="color: #94A3B8; font-size: 16px;"></i>
+                    <div class="onu-prompt-card-body">
+                      <div class="onu-prompt-card-title-row">
+                        <span class="onu-prompt-card-title">Check today's queue</span>
+                        <i class="ph ph-arrow-up-right onu-prompt-arrow"></i>
+                      </div>
+                      <span class="onu-prompt-card-sub">Shift 1 (9:00 AM) • 6 queued consultations</span>
+                    </div>
                   </div>
 
                 </div>

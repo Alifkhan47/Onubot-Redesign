@@ -758,40 +758,36 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ---
 
-## 22. Onu Clinical AI Copilot & Default Landing Standard
+## 22. Onu Clinical AI Copilot & Unified Screen Standard
 
-### 22.1 Default Landing & Core Product Mental Model
+### 22.1 Default Landing & Unified Header Standard
 * **Default Active View**: When the doctor opens the app, **Onu (`#pageOnu`)** is the default active view (`.active-page`), and the bottom navigation bar selects the center **Onu** tab.
-* **Top Bar**:
-  * Brand Title: `Onu` in `Urbanist 21px Bold`.
-  * AI Status Pill: `.onu-ai-live-pill` (`#E8F6F3` background, `#0D7A5F` text, `1px solid #C2E7DF`) with an animated pulsing status dot (`.onu-ai-live-dot`).
-  * Top Action: New Chat (`ph-note-pencil`) to reset conversation back to the Welcome state.
+* **Unified Universal App Header**:
+  * Adheres to the exact same visual structure as `My Desk` and `Patients` for visual cohesion.
+  * **Left**: Screen Title `Onu` in `Urbanist 25px Bold #000000` + Subtitle `Your Clinical AI Assistant` in `DM Sans 13.5px Regular #717171`.
+  * **Right**: Circular action button (`.btn-circle-icon` with `ph-clock-counter-clockwise` in `#052E28` on soft `#F0F6F5` background) positioned on the top right for natural right-handed mobile thumb access.
+  * **Right-Hand History Drawer**: Tapping the top-right history icon slides out the full-height chat thread history drawer (`#onuHistoryDrawer`) from the right with search, `✕` close, `+ New chat`, and chronological recent conversation threads.
 
-### 22.2 Welcome State & Clinical Intelligence Hub
-* **Hero Greeting**: Editorial header `Hello,` (`Urbanist 15px Medium #64748B`) + `Doctor Sifat` (`Urbanist 28px Bold #052E28`).
-* **Live Clinic Context Banner**: Soft sage card (`#EFF7F5`, `1.5px solid #D4EAE4`, `18px` radius) with circular clock icon displaying upcoming shift timings and patient count (`Shift 1 starts at 9:00 AM • 6 patients in queue`). Tapping navigates directly to My Desk.
-* **Smart Clinical Prompts (2x2 Grid)**:
-  * Replaces outdated generic vertical lists with modern high-contrast interactive cards (`.onu-prompt-card` with `16px` radius, `#F6F8F9` background, `1.5px solid #EDF2F1`):
-    1. 🩺 **Patient Summary** (`.sage` bubble): Summarizes patient history, vitals, and complaints.
-    2. 🧪 **Lab & Reports** (`.purple` bubble): Recent diagnostic tests and endoscopy findings.
-    3. 💊 **Drug Interaction** (`.blue` bubble): Pharmacology safety checks.
-    4. 📋 **Shift Briefing** (`.amber` bubble): Queue overview and scheduled order.
-* **Recent Queries**: Compact pill rows with clock icon and diagonal arrow for fast retrieval of previous inquiries.
+### 22.2 Welcome State & Doctor-Centric Suggestion Cards
+* **Hero Greeting**: Editorial header `Hello,` (`Urbanist 15px Medium #64748B`) + `Doctor Sifat !` (`Urbanist 28px Bold #000000`).
+* **Modern European Healthtech Suggestion Cards (`.onu-prompt-card`)**:
+  * Built using our signature card surface: `18px` radius, `#F6F8F9` background, `1.5px solid #EDF2F1`, elevating to `#FFFFFF` with `0 6px 18px rgba(5,46,40,0.06)` shadow on hover.
+  * Features a 40x40px rounded icon container with soft tinted background, bold `Urbanist 15px` title, `ph-arrow-up-right` corner arrow, and concise single-line `DM Sans 12px` subtext:
+    1. 👥 **Check my patients** (`.sage` icon): *24 active patient dossiers & medical records* (generates 4-box clinical metrics overview).
+    2. 💰 **Check my earnings** (`.emerald` icon): *Today's income ৳14,400 & payout breakdown* (generates financial breakdown card).
+    3. 📋 **Recap last visit** (`.blue` icon): *Alif Khan (28M) • Viral Pharyngitis (Sep 29)* (generates patient visit summary).
+    4. ⏱️ **Check today's queue** (`.amber` icon): *Shift 1 (9:00 AM) • 6 queued consultations* (generates shift briefing).
 
-### 22.3 Interactive Conversation Stream & Generative UI
-* **User Messages**: Elevated dark teal capsule (`.onu-msg-user-bubble` in `#052E28`, `#FFFFFF` text, `18px 18px 4px 18px` radius).
-* **Onu AI Responses**: Left-aligned card (`.onu-msg-ai-card`) with sparkle avatar (`✨`), structured clinical typography, clean bullet lists, and interactive action chips:
-  * `[View Profile]`: Opens that patient's dossier in `#pagePatientProfile`.
-  * `[Start Shift Call]`: Jumps to `#pageDesk` to initiate video call.
-  * `[Shift Queue]`: Opens `#pageAppointments`.
-* **Typing Indicator**: Smooth 3-dot pulse animation (`.onu-typing-indicator`) during AI processing.
+### 22.3 Conversational Feed & Embedded Generative UI
+* **User Messages**: Right-aligned rounded chat bubbles (`#052E28` background, `#FFFFFF` text) with hover micro-actions for Copy and Edit.
+* **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), clear clinical explanations, and rich embedded widgets (Patient Overview 4-metric grid, Financial Breakdown cards) with interactive deep links to patient profiles and desk.
 
-### 22.4 Floating Glassmorphic AI Input Dock
-* **Dock Position**: Floats gracefully above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).
+### 22.4 Floating AI Input Dock
+* **Dock Position**: Floats above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).
 * **Pill Container**: Glassmorphic blur (`background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(20px); border: 1.5px solid #E2ECEA; border-radius: 26px;`).
 * **Interactive Elements**:
   * `+` Attachment Button: Tags a patient or attaches clinical files.
   * Search/Chat Input: DM Sans placeholder with automatic `Enter` key execution.
-  * Voice Dictation Button: Pulsating red ring (`.is-listening`) for hands-free clinical transcription.
-  * Send / Waveform CTA: Circular deep forest green button (`#052E28`) with paper plane icon.
-  * Subtle AI Disclaimer: `Onu Clinical AI can make mistakes. Verify critical clinical decisions.` (DM Sans 10px `#94A3B8`).
+  * Voice Dictation Button: Pulsating ring (`.is-listening`) for hands-free clinical transcription.
+  * Send / Waveform CTA: Circular deep forest green button (`#052E28`) with waveform icon.
+  * Subtle AI Disclaimer: `Onubot can make mistakes. Check important info.` (DM Sans 10px `#94A3B8`).
