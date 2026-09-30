@@ -127,11 +127,22 @@ When the user uploads a legacy screen from the existing app, follow this **5-Ste
   * ✅ USE flat pastel fills (`#D6EAE6`), soft neutral surfaces (`#F6F8F9`), and crisp white badges (`#FFFFFF`).
 * **Chunking Information**:
   * Group related fields into unified single-level cards rather than deeply nested boxes.
-  * For split stats (e.g. Total Income vs. Available Balance), use **2-column split cards with a subtle 1px divider (`#E2ECEA`)** instead of 2 separate heavy cards.
-* **Master Spacing System (Strict Standard Everywhere)**:
-  * **Section-to-Section Distance**: Exactly **`24px`** (`--spacing-section: 24px`) between distinct section blocks (e.g. Quick Status to Queue Section, Queue Section to Financial Overview, Calendar Strip to Shifts Section).
-  * **Inside-a-Section Distance (Element-to-Element)**: Exactly **`10px`** (`--spacing-element: 10px`) between all elements inside a section (e.g. Section Header to Hero Card, Hero Card to View All Appointments, Financial Header to Financial Card, Date Header to Add Shift Button, Add Shift Button to Shifts List, and between saved shift cards).
-  * **Inner Card Padding**: `16px` to `20px`
+  * For split stats (e.g. Total Income vs. Available Balance), use **2-column or 3-column split cards with a subtle 1px divider (`#E2ECEA` / `#D0E5E0`)** instead of multiple separate clunky cards.
+* **Modern Healthtech Glassmorphism Standard**:
+  * **Hero & Primary Metric Cards** (`.patient-hero-card`, `.patient-metrics-card`, `.calendar-action-btn`):
+    * `background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);`
+    * `backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);`
+    * `border: 1.5px solid rgba(126, 184, 174, 0.4);`
+    * `box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);`
+  * **Neutral Frosted Cards** (`.financial-card`, `.accepting-patients-card`, `.profile-hero-card`, `.profile-vitals-card`, `.patient-hero-card.locked-card`):
+    * `background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);`
+    * `backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);`
+    * `border: 1.5px solid rgba(226, 236, 234, 0.85);`
+    * `box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);`
+* **Master Spacing System (Strict Semantic Wrapper Rule Everywhere)**:
+  * **Section-to-Section Distance**: Exactly **`24px`** (`--spacing-section: 24px`) between distinct `<section>` blocks (e.g. Quick Status to Queue Section, Queue Section to Financial Overview, Metrics Card to All Patients Section, Patient Info Section to Visits Log Section).
+  * **Inside-a-Section Distance (Title to Content)**: Exactly **`10px`** (`--spacing-element: 10px`) inside any `<section>` block (`.desk-section`, `.patients-section`, `.profile-section`, `.schedule-section`).
+  * **Inner Card Padding**: `14px` to `20px`
   * **Micro Gap (Icon to Text)**: `6px` to `8px`
   * **Element Shrinkage Prevention**: All primary action buttons, hero cards, shift cards, and metric tiles MUST specify `flex-shrink: 0; min-height: 48px;` to guarantee zero height distortion or shrinking when content overflows.
   * **Tap Target Minimum**: `44px` height (Buttons `48px` to `52px`)
@@ -612,14 +623,28 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * Paired actions: Neutral `Cancel` and bold red `Delete` CTA (`.btn-sheet-danger-confirm`).
 * **Feedback**: Smooth micro-exit animation (`opacity: 0, scale: 0.95`) followed by a concise toast confirmation (e.g. `Shift 1 deleted`).
 
-### 19.6 Pre-Visit Intake & Empty State Standards
-* **When Submitted**:
-  * Section Header displays: `Pre-visit Details` + `<span class="ai-sparkle-tag">✨ AI Summary</span>`.
-  * Surface Card displays: Chief symptom title, structured meta row (`Duration • Severity`), and direct complaint quote in clean single-box layout.
-* **When Not Submitted (Empty State)**:
-  * Section Header displays: `Pre-visit Details` + `<span class="shift-capacity-tag">Not Submitted</span>` (replaces the AI badge to prevent deceptive AI claims).
-  * Surface Body displays: Clean neutral card (`.details-empty-docs`) with clear muted copy: `"No pre-visit intake submitted by patient"`.
-  * Prevents UI layout collapse or missing sections while keeping doctor scan times instant.
+### 19.6 Consultation Notes vs. Pre-Visit Intake Card Hierarchy & Universal Information Chips
+* **Clinical Principle**: Once a consultation is concluded, the doctor's **Consultation Notes** represent the primary clinical outcome and must have highest visual priority, while the patient's **Pre-visit Intake** represents background history and should use a soft, warm neutral tone to avoid cognitive confusion.
+* **Universal Information Chip System (`.info-chip`)**:
+  - **Shared Geometry Rule**: Every information chip across all section headers shares the exact same height (`24px`), identical padding (`0 9px`), identical corner radius (`8px`), and typography (`Urbanist 11px Bold`, uppercase `letter-spacing: 0.02em`).
+  - **Variants**:
+    * `.info-chip-sage`: `background: #E8F6F3; color: #0D7A5F; border: 1px solid #C2E7DF;` (e.g. `✨ Live AI Notes`).
+    * `.info-chip-warm`: `background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A;` (e.g. `Patient Intake`).
+    * `.info-chip-neutral`: `background: #F1F5F9; color: #475569; border: 1px solid #E2E8F0;` (e.g. `[N] Files`, `Not Submitted`).
+* **Consultation Notes Card (`.details-notes-card`)**:
+  * Surface: Crisp, high-clarity mint/sage tint (`background: #F4F8F7`, `border: 1.5px solid #D1E5E1`, `16px` radius).
+  * Typography: Deep forest clinical copy (`#0F2F29`, `13.5px Medium`, `line-height: 1.55`).
+  * Header Chip: `<span class="info-chip info-chip-sage">✨ Live AI Notes</span>`.
+* **Pre-Visit Details Card (`.details-previsit-card`)**:
+  * Surface: Soft warm neutral (`background: #FAF8F5`, `border: 1.5px solid #EFE5D6`, `16px` radius).
+  * Symptom Title: Displays the specific chief complaint / issue discussed during patient AI triage (e.g. `Sore Throat & Mild Fever`, `Seasonal Allergies & Runny Nose`, `Acid Reflux & Heartburn`), never generic placeholders like `Video Consultation Follow-up`.
+  * Meta Row: Shows duration and severity (e.g. `Duration: 3 Days • Severity: Mild (3/10)`).
+  * Quote Container (`.details-previsit-quote`): White inner card with warm amber left indicator (`border-left: 3px solid #D97706`, `border: 1px solid #EFE4D4`) and warm brown quote text (`#4A3B2C`) displaying the conversational statement the patient provided to the Onu AI assistant.
+  * Header Chip: `<span class="info-chip info-chip-warm">Patient Intake</span>` or `<span class="info-chip info-chip-neutral">Not Submitted</span>` if intake was omitted.
+* **Prescription Header**:
+  * Clean section title `Issued Prescription` with **no `Signed` badge or tab** anywhere on the screen.
+* **No Redundant Bottom Dock for Completed Visits**:
+  * For completed/prescribed visit details, the bottom dock button is removed because the **Issued Prescription** card already contains a direct `View Rx` button on top of the page. Fixed bottom dock CTAs are reserved strictly for active actions (e.g. `Review & Finalize Rx` for Draft Rx, `Re-join Active Call` for In Call).
 
 ### 19.7 Pre-Shift Locked State & 2-Minute Unlock Protocol
 * **Clinical Principle**: Shift serial calls cannot be triggered prematurely before the scheduled time window. The calling room and live queue unlock strictly **2 minutes before shift start** (e.g., at 8:58 AM for a 9:00 AM shift).
@@ -655,6 +680,78 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * Subtext: `"Today's appointments were cancelled because you are offline (Rest of Today). Patients were notified to rebook."`
   * **Restoring Queue**: When the doctor toggles back online, the shifts resume and appointments list updates immediately.
 
+---
 
+## 20. My Patients Directory & Patient Profile Redesign Standard
 
+### 20.1 My Patients Directory Screen (`#pagePatientsList`)
+* **Purpose**: Provide the doctor with an instantaneous, searchable directory of every patient consulted once or multiple times across all historical and current shifts.
+* **Header & Top Brand**:
+  * Title: `My Patients` (`Urbanist 25px Bold #000000`, letter-spacing `-0.02em`).
+  * Subtitle: `Your patient directory & history` (`DM Sans 13.5px #717171`).
+  * *No notification bell* on the My Patients tab (clean, focused layout).
+* **Search & Filter Controls**:
+  * Unified search input (`#inputPatientsSearch`): Live real-time search matching patient names, ID numbers, or phone numbers (`DM Sans 13.5px Medium` in `#F6F8F9` container with `1.5px solid #EDF2F1`).
+  * Filter button: `48px × 48px` neutral square button (`1.5px solid #EDF2F1`) with `ph-sliders-horizontal`.
+* **Clinical Metrics Overview Box for Doctor (`.patient-metrics-card`)**:
+  * Modern, typography-first 3-column split card in soft sage tint (`#EFF7F5`, border `1.5px solid #D4EAE4`, `18px` radius):
+    * `Total Patients`: `8` (Value: `Urbanist 22px Bold #052E28`, Label: `DM Sans 11.5px SemiBold #4A6E67`)
+    * `Consultations`: `24`
+    * `Repeat Rate`: `62%`
+    * Dividers: Minimal `1px solid #D0E5E0` vertical dividers.
+  * Sleek, high-end European healthtech presentation without clunky icon circles, with values accurately matching the directory records.
+* **All Patients Section Header (`.section-text-group`)**:
+  * Title: `All Patients` (`Urbanist 20px Bold #000000`, letter-spacing `-0.02em`).
+  * Subtext: `8 Patients` (`DM Sans 13px #717171`).
+  * Follows the exact universal typography standard used by top headers (Urbanist Title + DM Sans Subtext in `#717171`), scaled contextually for secondary section headers.
+* **Patient Directory List Items**:
+  * Flat, clean neutral surface `#F6F8F9` with `1.5px solid #EDF2F1` border and `16px` radius.
+  * Initials Avatar: `44px × 44px` circular pastel sage badge (`#E8F4F1`, `1px solid #D1E5E1`) with bold initials in `#052E28`.
+  * Minimalist Subtext: Strictly formatted as `[X] Visits` (e.g. `4 Visits` or `1 Visit`) in `DM Sans 12px #717171`. Ultra-clean, zero visual clutter, no patient IDs or dates.
+  * Trailing Chevron: `<i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>`.
 
+### 20.2 Patient Profile Screen (`#pagePatientProfile`)
+* **Elevation & Top Navigation**:
+  * Full-screen subview with top sticky header (`.patient-profile-top-bar`) containing:
+    * Left cluster: Circular back button (`btn-circle-icon` with `ph-arrow-left`) + Page title `Patient Profile` (`Urbanist 22px Bold #000000`).
+    * Right cluster: Circular phone call button (`btn-circle-icon` with `ph-phone-call`).
+* **Patient Hero Card**:
+  * Neutral surface `#F6F8F9` with `1.5px solid #EDF2F1` border and `18px` radius.
+  * Circular Initials Avatar (`52px × 52px` in `#E8F4F1` with `1.5px solid #D1E5E1`).
+  * Name: `Urbanist 18px Bold #000000`.
+  * Demographics: `[Age] Yrs • [Gender]` (e.g. `28 Yrs • Male`). Clean, human-centered without patient ID.
+  * Phone Link: Interactive phone number with phone icon in `#052E28`.
+* **Patient Info & Vitals Card**:
+  * Header: `Patient Info` (`Urbanist 19px Bold #000000`).
+  * Vitals Container (`.profile-vitals-card`): Neutral card `#F6F8F9` with 2-column grid (`Age`, `Gender`, `Visits`, `Blood`, `Weight`, `Height`).
+  * Each vital item features a crisp white circular icon bubble (`36px × 36px`, `1px solid #E2ECEA`), uppercase 10px label (`DM Sans 10px Bold #717171`), and bold value (`Urbanist 14px Bold #000000`).
+* **Visits Log Section (Max 3 Default + Inline "See All" Expansion)**:
+  * Header: `Visits Log` + count subtitle (e.g. `4 visits`).
+  * Default View: Displays at most the 3 most recent visits.
+  * Visit Tiles: `#F6F8F9` surface with circular icon bubble (`38px × 38px`), Date (`Urbanist 14px Bold`), Subtitle (`DM Sans 12px #717171`), and chevron `>`.
+  * **Interactive Tap Flow**: Tapping any past visit tile opens the **Visit Details (`#pageAppointmentDetails`)** view for that visit with full consultation notes, issued prescription, and pre-visit details. The top back button returns cleanly to the Patient Profile.
+  * Inline Expansion Action: If a patient has >3 visits, a clean pill button `.btn-see-all-visits` (`See all [N] visits` with `ph-caret-down`) is rendered below the 3rd visit. Tapping expands all visits inline and turns into `Show less` with `ph-caret-up`.
+* **Completed & Prescribed Visit Meta Card Transformation**:
+  * For **Patient Visit Log Details** and **Completed / Prescribed Appointments**: The 3-box `Status / Serial / Type` strip is replaced by the unified `.visit-details-meta-card`:
+    * Top row: `● COMPLETED` green badge + consultation mode & duration pill (e.g. `[video camera icon] Video Call • 25 Mins`).
+    * Bottom row: Consultation date (`[calendar icon] Aug 20, 2026`) + call time (`[clock icon] 08:00 PM`).
+  * For **Upcoming / Queued / Draft Rx / Skipped Appointments**: Retains the 3-box `Status / Serial / Type` info strip.
+* **Files Section Removal**:
+  * The dedicated Files section has been completely removed from the Patient Profile. Consultation documents and prescriptions are attached to specific appointment records, maintaining a clean, scannable profile.
+
+---
+
+## 21. Universal Bottom Navigation Bar System
+
+### 21.1 Selected vs. Unselected Tab Rule (Strict Master Standard)
+* **Docked Container**: Floating pill docked at viewport bottom (`height: 58px`, `background: #FFFFFF`, `border: 1.5px solid #EDF4F2`, `border-radius: 28px`, `box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04)`).
+* **Selected Tab**:
+  * Rendered inside a soft rounded pastel pill (`.active-nav-pill`: `width: 44px`, `height: 38px`, `border-radius: 12px`, `background: #EFF7F5`).
+  * Features the **filled icon** (`ph-fill ph-[icon]`) in deep forest green (`#052E28`).
+  * Displays a subtle horizontal indicator line below the icon (`width: 18px`, `height: 2.5px`, `background: #A3D4C9`, `border-radius: 4px`).
+  * **NO text title/label** when selected (decluttered, hyper-focused).
+* **Unselected Tabs**:
+  * Features the **outline icon** (`ph ph-[icon]`) in `#717171` (`font-size: 21px`).
+  * Displays the text title/label beneath the icon in `DM Sans 11px Medium #717171` (`Desk`, `Patients`, `Onu`, `Wallet`, `Profile`).
+* **Interactive State Management**:
+  * Handled autonomously via `setActiveNavTab(tabName)` in JavaScript, ensuring seamless synchronization across all pages now and in the future.

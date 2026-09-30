@@ -218,11 +218,13 @@
     }
 
     .desk-section,
+    .patients-section,
+    .profile-section,
     .schedule-section,
     .shifts-manage-section {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-element); /* Strict 10px distance between items in a section */
+      gap: var(--spacing-element); /* Strict 10px distance between title and content inside section */
       width: 100%;
       flex-shrink: 0;
     }
@@ -305,19 +307,24 @@
 
     .accepting-patients-card {
       flex: 1;
-      background: var(--color-card-neutral);
+      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.85);
       border-radius: 16px;
       height: 64px;
       padding: 0 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background 0.2s ease;
+      box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
       cursor: pointer;
     }
 
     .accepting-patients-card:hover {
-      background: var(--color-card-neutral-hover);
+      background: linear-gradient(135deg, rgba(240, 244, 243, 0.98) 0%, rgba(230, 238, 236, 0.85) 100%);
+      border-color: rgba(126, 184, 174, 0.35);
     }
 
     .accepting-patients-label {
@@ -394,8 +401,10 @@
       width: 64px;
       height: 64px;
       border-radius: 18px;
-      background: var(--color-card-sage);
-      border: 1px solid var(--color-border-selected);
+      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(126, 184, 174, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -404,11 +413,12 @@
       font-size: 24px;
       transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
       flex-shrink: 0;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 4px 16px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
 
     .calendar-action-btn:hover {
-      background: #c9e4de;
+      background: linear-gradient(135deg, rgba(230, 242, 239, 0.98) 0%, rgba(205, 228, 223, 0.88) 100%);
+      border-color: rgba(126, 184, 174, 0.55);
     }
 
     .calendar-action-btn:active {
@@ -425,12 +435,28 @@
       flex-shrink: 0;
     }
 
+    .section-text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
     .section-title {
       font-family: var(--font-heading);
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--color-text-primary);
       letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.3;
     }
 
     .section-meta {
@@ -441,30 +467,40 @@
     }
 
     .patient-hero-card {
-      background: var(--color-card-sage);
+      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(126, 184, 174, 0.4);
       border-radius: 18px;
       padding: 16px;
       display: flex;
       flex-direction: column;
       position: relative;
       flex-shrink: 0;
+      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .patient-hero-card.offline-card {
-      background: #FEFAF9;
-      border: 1.5px solid #FECDCA;
+      background: linear-gradient(135deg, rgba(254, 250, 249, 0.96) 0%, rgba(254, 243, 242, 0.85) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(254, 205, 202, 0.75);
+      box-shadow: 0 4px 20px -2px rgba(217, 45, 32, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
       padding: 22px 18px;
     }
 
     .patient-hero-card.locked-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
+      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.85);
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
     }
 
     .patient-hero-card.locked-card .badge-pill-light,
     .patient-hero-card.locked-card .badge-pill-status {
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid #e2ecea;
       color: var(--color-text-secondary);
     }
@@ -715,18 +751,22 @@
     }
 
     .financial-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
+      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.85);
       border-radius: 18px;
       padding: 16px 20px;
       display: flex;
       align-items: center;
       flex-shrink: 0;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
       transition: all 0.18s ease;
     }
 
     .financial-card:hover {
-      background: var(--color-card-neutral-hover);
+      background: linear-gradient(135deg, rgba(240, 244, 243, 0.98) 0%, rgba(230, 238, 236, 0.85) 100%);
+      border-color: rgba(126, 184, 174, 0.35);
     }
 
     .financial-column {
@@ -1303,10 +1343,10 @@
       transform: scale(0.98);
     }
 
-    /* Bottom Navigation Bar */
+    /* Universal Bottom Navigation System */
     .bottom-nav-container {
       background: #ffffff;
-      padding: 8px 16px 10px;
+      padding: 6px 14px 8px;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -1318,6 +1358,8 @@
       border-radius: 28px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
       z-index: 10;
+      height: 58px;
+      box-sizing: border-box;
     }
 
     .nav-item {
@@ -1325,52 +1367,64 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 3px;
       color: var(--color-nav-inactive);
       cursor: pointer;
       text-decoration: none;
       min-width: 48px;
-      transition: all 0.2s ease;
+      height: 44px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .nav-item i {
-      font-size: 22px;
+      font-size: 21px;
+      color: #717171;
+      transition: all 0.2s ease;
     }
 
     .nav-label {
       font-family: var(--font-body);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 500;
+      color: #717171;
       letter-spacing: 0.01em;
+      line-height: 1;
+      transition: all 0.2s ease;
     }
 
     .nav-item.active {
       color: var(--color-primary-btn);
     }
 
-    .active-home-box {
+    .active-nav-pill {
       width: 44px;
       height: 38px;
       border-radius: 12px;
-      background: #f1f6f5;
+      background: #EFF7F5;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       position: relative;
       gap: 2px;
+      animation: navPillPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .active-home-box i {
-      font-size: 20px;
-      color: var(--color-primary-btn);
+    @keyframes navPillPop {
+      0% { transform: scale(0.92); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    .active-home-box::after {
+    .active-nav-pill i {
+      font-size: 20px !important;
+      color: var(--color-primary-btn) !important;
+    }
+
+    .active-nav-pill::after {
       content: '';
-      width: 20px;
+      width: 18px;
       height: 2.5px;
-      background: #bce0d8;
+      background: #A3D4C9;
       border-radius: 4px;
       margin-top: 1px;
     }
@@ -3953,6 +4007,99 @@
       color: #0d9488;
     }
 
+    .details-top-meta-wrap {
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    /* Completed & Visit Log Meta Card (European Healthtech Standard) */
+    .visit-details-meta-card {
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      border-radius: 18px;
+      padding: 13px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+    }
+
+    .visit-details-meta-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .visit-completed-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #E8F7F0;
+      color: #0D7A48;
+      border: 1px solid #B8EBD1;
+      padding: 3.5px 9.5px;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .visit-completed-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0D7A48;
+    }
+
+    .visit-mode-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid #e2ecea;
+      padding: 3.5px 9.5px;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .visit-mode-pill i {
+      font-size: 13.5px;
+      color: var(--color-primary-btn);
+    }
+
+    .visit-details-meta-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid #e8eeed;
+    }
+
+    .visit-meta-datetime-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    .visit-meta-datetime-item i {
+      font-size: 14.5px;
+      color: #64748b;
+    }
+
     /* Clean Decluttered Dynamic Sections Stack */
     .details-content-sections {
       display: flex;
@@ -3985,9 +4132,33 @@
       letter-spacing: -0.01em;
     }
 
-    .details-clean-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
+    /* Consultation Notes Card (High Importance Outcome Standard) */
+    .details-notes-card {
+      background: #F4F8F7;
+      border: 1.5px solid #D1E5E1;
+      border-radius: 16px;
+      padding: 15px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 1px 4px rgba(5, 46, 40, 0.02);
+    }
+
+    .details-notes-body {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #0F2F29;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    /* Pre-Visit Details Card (Soft Warm Neutral to Differentiate Patient Intake) */
+    .details-previsit-card {
+      background: #FAF8F5;
+      border: 1.5px solid #EFE5D6;
       border-radius: 16px;
       padding: 14px 16px;
       display: flex;
@@ -4001,39 +4172,73 @@
       font-family: var(--font-heading);
       font-size: 14.5px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #2D2013;
     }
 
     .details-symptom-meta-row {
       font-family: var(--font-body);
       font-size: 12px;
-      color: var(--color-text-secondary);
+      color: #786654;
       font-weight: 500;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
-    .details-clean-quote {
+    .details-previsit-quote {
       font-family: var(--font-body);
       font-size: 12.5px;
       line-height: 1.5;
-      color: #334155;
+      color: #4A3B2C;
       font-style: italic;
       background: #ffffff;
-      border: 1px solid #e8eeec;
-      border-left: 3px solid #0d9488;
+      border: 1px solid #EFE4D4;
+      border-left: 3px solid #D97706;
       border-radius: 8px;
       padding: 10px 12px;
       margin: 2px 0 0 0;
     }
 
-    .details-notes-body {
-      font-family: var(--font-body);
-      font-size: 13px;
-      line-height: 1.55;
-      color: #1e293b;
-      margin: 0;
+    /* Universal Information Chip Standard (Identical Geometry Everywhere) */
+    .info-chip,
+    .ai-sparkle-tag,
+    .previsit-tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4.5px;
+      height: 24px;
+      padding: 0 9px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      box-sizing: border-box;
+      line-height: 1;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .info-chip-sage,
+    .ai-sparkle-tag {
+      background: #E8F6F3;
+      color: #0D7A5F;
+      border: 1px solid #C2E7DF;
+    }
+
+    .info-chip-warm,
+    .previsit-tag {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FDE68A;
+    }
+
+    .info-chip-neutral {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #E2E8F0;
     }
 
     /* Clean Issued Prescription Tile */
@@ -4270,6 +4475,546 @@
 
     .btn-dock-primary:active {
       transform: scale(0.98);
+    }
+
+    /* ============================================================
+       PAGE 9 & 10: MY PATIENTS DIRECTORY & PATIENT PROFILE (PIXEL-PERFECT HEALTHTECH STANDARD)
+       ============================================================ */
+    .page-patients-list {
+      z-index: 20;
+    }
+
+    .page-patient-profile {
+      z-index: 21;
+    }
+
+    /* Top Sticky Navigation Bars */
+    .patients-top-bar,
+    .patient-profile-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: -12px;
+      z-index: 20;
+      background: #ffffff;
+      padding: 12px 0 8px 0;
+      margin-top: -12px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .patients-top-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .profile-top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    /* Patients Directory Search & Filter */
+    .patients-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .patients-search-box {
+      flex: 1;
+      height: 48px;
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .patients-search-box:focus-within {
+      background: #ffffff;
+      border-color: var(--color-primary-btn);
+      box-shadow: 0 0 0 3px rgba(5, 46, 40, 0.08);
+    }
+
+    .patients-search-box i {
+      font-size: 19px;
+      color: var(--color-text-secondary);
+      flex-shrink: 0;
+    }
+
+    .patients-search-box input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--color-text-primary);
+    }
+
+    .patients-search-box input::placeholder {
+      color: #94a3b8;
+    }
+
+    .patients-filter-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      color: var(--color-primary-btn);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .patients-filter-btn:hover {
+      background: var(--color-card-neutral-hover);
+      border-color: #cbd5e1;
+    }
+
+    /* 3-Column Practice Metrics Card (Modern European Healthtech Glassmorphism) */
+    .patient-metrics-card {
+      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(126, 184, 174, 0.4);
+      border-radius: 18px;
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+      transition: all 0.2s ease;
+    }
+
+    .patient-metrics-card:hover {
+      background: linear-gradient(135deg, rgba(232, 244, 241, 0.98) 0%, rgba(206, 230, 225, 0.88) 100%);
+      border-color: rgba(126, 184, 174, 0.55);
+    }
+
+    .patient-metric-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .patient-metric-val {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: #052E28;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .patient-metric-label {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #4A6E67;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    .patient-metric-divider {
+      width: 1px;
+      height: 38px;
+      background: #D0E5E0;
+      flex-shrink: 0;
+    }
+
+    /* Patients Directory List */
+    .patients-directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .patient-directory-tile {
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .patient-directory-tile:hover {
+      background: var(--color-card-neutral-hover);
+      transform: translateY(-1px);
+    }
+
+    .patient-tile-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .patient-avatar-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #E8F4F1;
+      border: 1px solid #D1E5E1;
+      color: var(--color-primary-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .patient-tile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .patient-tile-name {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+    }
+
+    .patient-tile-sub {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ============================================================
+       PATIENT PROFILE SCREEN COMPONENTS
+       ============================================================ */
+    .profile-hero-card {
+      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.85);
+      border-radius: 18px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .profile-hero-avatar-circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #E8F4F1;
+      border: 1.5px solid #D1E5E1;
+      color: var(--color-primary-btn);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .profile-hero-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .profile-hero-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .profile-hero-sub {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    .profile-hero-phone {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-primary-btn);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 1px;
+    }
+
+    /* Vitals Card in Patient Info */
+    .profile-vitals-card {
+      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px solid rgba(226, 236, 234, 0.85);
+      border-radius: 18px;
+      padding: 14px 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 16px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    }
+
+    .profile-vital-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .vital-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e2ecea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: var(--color-primary-btn);
+      flex-shrink: 0;
+    }
+
+    .vital-text-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .vital-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .vital-value {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Section Title */
+    .profile-section-title {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      margin: 4px 0 0 0;
+    }
+
+    /* Visits Log Tiles */
+    .profile-visits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .profile-visit-tile {
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .profile-visit-tile:hover {
+      background: var(--color-card-neutral-hover);
+      transform: translateY(-1px);
+    }
+
+    .profile-visit-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .profile-visit-icon-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e2ecea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      color: var(--color-primary-btn);
+      flex-shrink: 0;
+    }
+
+    .profile-visit-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .profile-visit-date {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .profile-visit-type {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    /* See All Visits Inline Action */
+    .btn-see-all-visits {
+      width: 100%;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--color-primary-btn);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: 2px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .btn-see-all-visits:hover {
+      background: #eef4f3;
+      border-color: #d1e2df;
+      transform: translateY(-1px);
+    }
+
+    .btn-see-all-visits:active {
+      transform: scale(0.98);
+    }
+
+    .btn-see-all-visits i {
+      font-size: 16px;
+      color: var(--color-primary-btn);
+      transition: transform 0.2s ease;
+    }
+
+    .patients-empty-state {
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      border-radius: 16px;
+      padding: 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .patients-empty-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid #e2ecea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--color-text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .patients-empty-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .patients-empty-desc {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: var(--color-text-secondary);
+      line-height: 1.4;
+      max-width: 240px;
     }
   </style>
 </head>
@@ -5048,19 +5793,21 @@
               </div>
             </div>
 
-            <!-- 3-Column Info Strip -->
-            <div class="details-info-grid">
-              <div class="details-info-item">
-                <span class="details-info-label">Status</span>
-                <span class="details-info-val" id="detStatusVal">In Queue</span>
-              </div>
-              <div class="details-info-item">
-                <span class="details-info-label">Serial</span>
-                <span class="details-info-val" id="detSerialVal">#2</span>
-              </div>
-              <div class="details-info-item">
-                <span class="details-info-label">Type</span>
-                <span class="details-info-val" id="detTypeVal">Initial</span>
+            <!-- Dynamic Top Meta Strip: Status/Serial/Type for upcoming/draft/skipped OR Completed Visit Card for prescribed/completed & visit log -->
+            <div id="detTopMetaContainer" class="details-top-meta-wrap">
+              <div class="details-info-grid">
+                <div class="details-info-item">
+                  <span class="details-info-label">Status</span>
+                  <span class="details-info-val" id="detStatusVal">In Queue</span>
+                </div>
+                <div class="details-info-item">
+                  <span class="details-info-label">Serial</span>
+                  <span class="details-info-val" id="detSerialVal">#2</span>
+                </div>
+                <div class="details-info-item">
+                  <span class="details-info-label">Type</span>
+                  <span class="details-info-val" id="detTypeVal">Initial</span>
+                </div>
               </div>
             </div>
 
@@ -5076,32 +5823,180 @@
 
           </div>
 
+          <!-- =======================================================
+               VIEW 9: MY PATIENTS (FULL PATIENT DIRECTORY)
+               ======================================================= -->
+          <div class="app-page page-patients-list page-right" id="pagePatientsList">
+            
+            <!-- Top App Header (Clean title & subtitle without notification bell) -->
+            <div class="app-header">
+              <div class="header-text">
+                <h1 class="header-title">My Patients</h1>
+                <p class="header-subtitle">Your patient directory & history</p>
+              </div>
+            </div>
+
+            <!-- Search & Filter Row -->
+            <div class="patients-search-row">
+              <div class="patients-search-box">
+                <i class="ph ph-magnifying-glass"></i>
+                <input type="text" id="inputPatientsSearch" placeholder="Search by name, ID or phone..." oninput="filterPatientsDirectory()" />
+              </div>
+              <button class="patients-filter-btn" onclick="showToast('Filter directory')" aria-label="Filter directory">
+                <i class="ph ph-sliders-horizontal"></i>
+              </button>
+            </div>
+
+            <!-- Practice Clinical Metrics Box for Doctor (Modern Minimalist Sage Tint) -->
+            <div class="patient-metrics-card" style="margin-top: 2px;">
+              <div class="patient-metric-col">
+                <span class="patient-metric-val" id="metricTotalPatients">8</span>
+                <span class="patient-metric-label">Total Patients</span>
+              </div>
+              <div class="patient-metric-divider"></div>
+              <div class="patient-metric-col">
+                <span class="patient-metric-val" id="metricConsultations">24</span>
+                <span class="patient-metric-label">Consultations</span>
+              </div>
+              <div class="patient-metric-divider"></div>
+              <div class="patient-metric-col">
+                <span class="patient-metric-val" id="metricRepeatRate">62%</span>
+                <span class="patient-metric-label">Repeat Rate</span>
+              </div>
+            </div>
+
+            <!-- Section: All Patients -->
+            <section class="patients-section">
+              <div class="section-text-group">
+                <h2 class="section-title">All Patients</h2>
+                <p class="section-subtitle" id="patientsCountSubtitle">8 Patients</p>
+              </div>
+
+              <!-- Patients Directory Cards List -->
+              <div class="patients-directory-list" id="patientsDirectoryList">
+                <!-- Rendered dynamically by renderPatientsDirectory() -->
+              </div>
+            </section>
+
+          </div>
+
+          <!-- =======================================================
+               VIEW 10: PATIENT PROFILE & MEDICAL HISTORY (PIXEL-PERFECT STANDARD)
+               ======================================================= -->
+          <div class="app-page page-patient-profile page-right" id="pagePatientProfile">
+            
+            <!-- Top Sticky Header -->
+            <div class="patient-profile-top-bar">
+              <div class="profile-top-left">
+                <button class="btn-circle-icon" onclick="returnFromPatientProfile()" aria-label="Back to Patients">
+                  <i class="ph ph-arrow-left"></i>
+                </button>
+                <h1 class="page-top-title">Patient Profile</h1>
+              </div>
+              <button class="btn-circle-icon" onclick="callPatientDirectly()" aria-label="Call Patient">
+                <i class="ph ph-phone-call"></i>
+              </button>
+            </div>
+
+            <!-- Patient Hero Card -->
+            <div class="profile-hero-card" id="profileHeroCard">
+              <div class="profile-hero-avatar-circle" id="profileAvatarBox">AK</div>
+              <div class="profile-hero-info">
+                <h2 class="profile-hero-name" id="profileName">Alif Khan</h2>
+                <span class="profile-hero-sub" id="profileDemographics">28 Yrs • Male</span>
+                <span class="profile-hero-phone" id="profilePhone"><i class="ph ph-phone"></i> +880 1712-345678</span>
+              </div>
+            </div>
+
+            <!-- Section 1: Patient Info -->
+            <section class="profile-section">
+              <h2 class="section-title">Patient Info</h2>
+              <div class="profile-vitals-card" id="profileVitalsGrid">
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-cake"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Age</span>
+                    <span class="vital-value" id="vitalAge">26 Yrs</span>
+                  </div>
+                </div>
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-gender-intersex"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Gender</span>
+                    <span class="vital-value" id="vitalGender">Male</span>
+                  </div>
+                </div>
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-user"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Visits</span>
+                    <span class="vital-value" id="vitalVisits">3 Consults</span>
+                  </div>
+                </div>
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-drop"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Blood</span>
+                    <span class="vital-value" id="vitalBlood">O- (Neg)</span>
+                  </div>
+                </div>
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-scales"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Weight</span>
+                    <span class="vital-value" id="vitalWeight">62 kg</span>
+                  </div>
+                </div>
+                <div class="profile-vital-item">
+                  <div class="vital-icon-circle"><i class="ph ph-arrows-out-line-vertical"></i></div>
+                  <div class="vital-text-cluster">
+                    <span class="vital-label">Height</span>
+                    <span class="vital-value" id="vitalHeight">5' 9"</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 2: Visits History Log (Max 3 by default + Inline Expansion) -->
+            <section class="profile-section">
+              <div class="section-text-group">
+                <h2 class="section-title">Visits Log</h2>
+                <p class="section-subtitle" id="profileVisitsCount">3 visits</p>
+              </div>
+              <div class="profile-visits-list" id="profileVisitsList">
+                <!-- Rendered dynamically -->
+              </div>
+              <div id="profileSeeAllVisitsContainer"></div>
+            </section>
+
+          </div>
+
         </div>
 
         <!-- 3. Docked Bottom Navigation Bar (Docked gracefully at bottom) -->
         <nav class="bottom-nav-container">
-          <div class="nav-item active" onclick="navigateToDesk()">
-            <div class="active-home-box">
+          <div class="nav-item active" id="navItemDesk" onclick="navigateToDesk()">
+            <div class="active-nav-pill">
               <i class="ph-fill ph-house"></i>
             </div>
           </div>
 
-          <div class="nav-item" onclick="showToast('Patients directory')">
+          <div class="nav-item" id="navItemPatients" onclick="navigateToPatientsList()">
             <i class="ph ph-users"></i>
             <span class="nav-label">Patients</span>
           </div>
 
-          <div class="nav-item" onclick="showToast('Onu Assistant')">
+          <div class="nav-item" id="navItemOnu" onclick="setActiveNavTab('onu'); showToast('Onu Assistant')">
             <i class="ph ph-chat-centered-text"></i>
             <span class="nav-label">Onu</span>
           </div>
 
-          <div class="nav-item" onclick="showToast('Wallet balance')">
+          <div class="nav-item" id="navItemWallet" onclick="setActiveNavTab('wallet'); showToast('Wallet balance')">
             <i class="ph ph-wallet"></i>
             <span class="nav-label">Wallet</span>
           </div>
 
-          <div class="nav-item" onclick="showToast('Doctor Profile')">
+          <div class="nav-item" id="navItemProfile" onclick="setActiveNavTab('profile'); showToast('Doctor Profile')">
             <i class="ph ph-user-circle"></i>
             <span class="nav-label">Profile</span>
           </div>
@@ -6131,6 +7026,526 @@
       // Toast popup removed per user design direction
     }
 
+    // ==========================================
+    // MY PATIENTS DIRECTORY & PATIENT PROFILE DATA
+    // ==========================================
+    const patientsDirectoryData = [
+      {
+        id: 'p-1042',
+        name: 'Alif Khan',
+        initials: 'AK',
+        age: 28,
+        gender: 'Male',
+        phone: '+880 1712-345678',
+        blood: 'O+ (Pos)',
+        weight: '72 kg',
+        height: "5' 9\"",
+        consultCount: 4,
+        type: 'video',
+        lastVisit: 'Today, 9:00 AM',
+        visits: [
+          {
+            id: 'v-101',
+            date: 'Today, Sep 29, 2026',
+            time: '9:00 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Viral Pharyngitis & Mild Cephalalgia. Advised Paracetamol & Warm Gargle.',
+            preVisit: {
+              symptoms: 'Sore Throat & Mild Fever',
+              duration: '3 Days',
+              severity: 'Mild (3/10)',
+              complaintQuote: 'I have had a scratchy sore throat and low-grade fever for 3 days with slight headache in the morning.'
+            }
+          },
+          {
+            id: 'v-102',
+            date: 'Aug 14, 2026',
+            time: '11:15 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Seasonal Allergic Rhinitis. Prescribed Fexofenadine 120mg once daily.',
+            preVisit: {
+              symptoms: 'Seasonal Allergies & Runny Nose',
+              duration: '1 Week',
+              severity: 'Mild (2/10)',
+              complaintQuote: 'Continuous sneezing, itchy watery eyes, and clear runny nose since last Friday.'
+            }
+          },
+          {
+            id: 'v-103',
+            date: 'May 02, 2026',
+            time: '4:30 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Annual Wellness & Routine Blood Work Review. All markers normal.',
+            preVisit: {
+              symptoms: 'Annual Health Checkup',
+              duration: 'Routine',
+              severity: 'Normal',
+              complaintQuote: 'Booking routine annual wellness visit and full blood work panel review.'
+            }
+          },
+          {
+            id: 'v-104',
+            date: 'Jan 15, 2026',
+            time: '10:00 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Initial health screening and general physician checkup.',
+            preVisit: {
+              symptoms: 'General Physician Consultation',
+              duration: '4 Days',
+              severity: 'Mild',
+              complaintQuote: 'Mild generalized fatigue and wanted a routine general consultation.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-101',
+            name: 'RX_Alif_Khan_Sep29.pdf',
+            type: 'rx',
+            sub: 'Issued Today • 9:42 AM',
+            date: '29 Sep 2026'
+          },
+          {
+            id: 'f-102',
+            name: 'Blood_Report_May02.pdf',
+            type: 'lab',
+            sub: 'Uploaded by Patient • 1.2 MB',
+            date: '02 May 2026'
+          },
+          {
+            id: 'f-103',
+            name: 'RX_Alif_Khan_Aug14.pdf',
+            type: 'rx',
+            sub: 'Issued on 14 Aug 2026',
+            date: '14 Aug 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1043',
+        name: 'Farzana Khan',
+        initials: 'FK',
+        age: 31,
+        gender: 'Female',
+        phone: '+880 1819-987654',
+        blood: 'B+ (Pos)',
+        weight: '58 kg',
+        height: "5' 4\"",
+        consultCount: 4,
+        type: 'video',
+        lastVisit: 'Today, 9:20 AM',
+        visits: [
+          {
+            id: 'v-201',
+            date: 'Today, Sep 29, 2026',
+            time: '9:20 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'In Queue',
+            notes: 'Acute Gastric Irritation with heartburn.',
+            preVisit: {
+              symptoms: 'Fever, Body Aches & Mild Cough',
+              duration: '3 Days',
+              severity: 'Moderate (5/10)',
+              complaintQuote: 'Experiencing continuous low-grade fever with joint pain and dry cough since Tuesday evening. Took OTC Paracetamol with temporary relief.'
+            }
+          },
+          {
+            id: 'v-202',
+            date: 'Jul 10, 2026',
+            time: '10:00 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Acid Peptic Disorder review. Prescribed Esomeprazole 20mg.',
+            preVisit: {
+              symptoms: 'Acid Reflux & Heartburn',
+              duration: '5 Days',
+              severity: 'Mild (3/10)',
+              complaintQuote: 'Upper abdominal burning sensation after dinner and mild acid reflux.'
+            }
+          },
+          {
+            id: 'v-203',
+            date: 'Mar 18, 2026',
+            time: '2:00 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Routine Migraine assessment. Recommended sleep hygiene.',
+            preVisit: {
+              symptoms: 'Throbbing Headache & Eye Strain',
+              duration: '4 Days',
+              severity: 'Moderate (4/10)',
+              complaintQuote: 'Throbbing headache across temples and light sensitivity after working long hours.'
+            }
+          },
+          {
+            id: 'v-204',
+            date: 'Jan 05, 2026',
+            time: '11:30 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Follow-up on gastrointestinal discomfort and diet modifications.',
+            preVisit: {
+              symptoms: 'Stomach Bloating & Discomfort',
+              duration: '1 Week',
+              severity: 'Mild (2/10)',
+              complaintQuote: 'Occasional bloating and indigestion following irregular meal timings.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-201',
+            name: 'Endoscopy_Summary.pdf',
+            type: 'lab',
+            sub: 'Uploaded by Patient • 2.4 MB',
+            date: '10 Jul 2026'
+          },
+          {
+            id: 'f-202',
+            name: 'RX_Farzana_Jul10.pdf',
+            type: 'rx',
+            sub: 'Issued on 10 Jul 2026',
+            date: '10 Jul 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1044',
+        name: 'Tariqul Islam',
+        initials: 'TI',
+        age: 34,
+        gender: 'Male',
+        phone: '+880 1911-223344',
+        blood: 'A+ (Pos)',
+        weight: '78 kg',
+        height: "5' 10\"",
+        consultCount: 2,
+        type: 'in-person',
+        lastVisit: 'Today, 9:40 AM',
+        visits: [
+          {
+            id: 'v-301',
+            date: 'Today, Sep 29, 2026',
+            time: '9:40 AM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'In Queue',
+            notes: 'Lumbar Strain & Lower back tightness.',
+            preVisit: {
+              symptoms: 'Tension Headache & Neck Stiffness',
+              duration: '7 Days',
+              severity: 'Mild (3/10)',
+              complaintQuote: 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.'
+            }
+          },
+          {
+            id: 'v-302',
+            date: 'Jun 19, 2026',
+            time: '3:00 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Initial ergonomic consultation for posture-related lower back pain.',
+            preVisit: {
+              symptoms: 'Lower Back Muscle Tightness',
+              duration: '2 Weeks',
+              severity: 'Moderate (4/10)',
+              complaintQuote: 'Dull ache in lower back after sitting on office chair for extended hours.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-301',
+            name: 'Lumbar_Spine_XRay.jpg',
+            type: 'lab',
+            sub: 'Uploaded by Patient • 3.1 MB',
+            date: '19 Jun 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1045',
+        name: 'Nusrat Jahan',
+        initials: 'NJ',
+        age: 24,
+        gender: 'Female',
+        phone: '+880 1622-445566',
+        blood: 'AB+ (Pos)',
+        weight: '52 kg',
+        height: "5' 2\"",
+        consultCount: 1,
+        type: 'video',
+        lastVisit: 'Today, 10:00 AM',
+        visits: [
+          {
+            id: 'v-401',
+            date: 'Today, Sep 29, 2026',
+            time: '10:00 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'In Queue',
+            notes: 'Initial consult for persistent dry cough.',
+            preVisit: {
+              symptoms: 'Skin Rash & Allergic Reaction',
+              duration: '2 Days',
+              severity: 'Mild (2/10)',
+              complaintQuote: 'Developed reddish itchy patches on forearms after gardening.'
+            }
+          }
+        ],
+        files: []
+      },
+      {
+        id: 'p-1046',
+        name: 'Farhan Hossain',
+        initials: 'FH',
+        age: 42,
+        gender: 'Male',
+        phone: '+880 1733-667788',
+        blood: 'O- (Neg)',
+        weight: '84 kg',
+        height: "5' 11\"",
+        consultCount: 5,
+        type: 'in-person',
+        lastVisit: 'Yesterday, 3:30 PM',
+        visits: [
+          {
+            id: 'v-501',
+            date: 'Yesterday, Sep 28, 2026',
+            time: '3:30 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Essential Hypertension follow up. BP stabilized at 122/80.',
+            preVisit: {
+              symptoms: 'Blood Pressure Routine Review',
+              duration: '1 Month',
+              severity: 'Routine',
+              complaintQuote: 'Regular BP checkup and prescription renewal. Feeling fine overall.'
+            }
+          },
+          {
+            id: 'v-502',
+            date: 'Jun 05, 2026',
+            time: '11:00 AM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Dose calibration for Telmisartan 40mg.',
+            preVisit: {
+              symptoms: 'Hypertension Medication Calibration',
+              duration: '2 Weeks',
+              severity: 'Mild',
+              complaintQuote: 'Follow-up on morning blood pressure readings and medicine dosage.'
+            }
+          },
+          {
+            id: 'v-503',
+            date: 'Apr 12, 2026',
+            time: '4:15 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Routine cardiovascular checkup and ECG review.',
+            preVisit: {
+              symptoms: 'Cardiovascular Health Check',
+              duration: 'Routine',
+              severity: 'Normal',
+              complaintQuote: 'Annual cardiovascular risk screening and ECG checkup.'
+            }
+          },
+          {
+            id: 'v-504',
+            date: 'Feb 19, 2026',
+            time: '10:30 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'BP reading log review. Advised low-sodium diet.',
+            preVisit: {
+              symptoms: 'BP Log & Dietary Review',
+              duration: '3 Weeks',
+              severity: 'Mild',
+              complaintQuote: 'Reviewing daily home blood pressure log readings with doctor.'
+            }
+          },
+          {
+            id: 'v-505',
+            date: 'Dec 02, 2025',
+            time: '2:00 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Initial hypertension diagnosis and lifestyle recommendations.',
+            preVisit: {
+              symptoms: 'Occasional Dizziness & High BP',
+              duration: '5 Days',
+              severity: 'Moderate',
+              complaintQuote: 'Felt slight lightheadedness after afternoon walks, home BP read 140/90.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-501',
+            name: 'RX_Farhan_Sep28.pdf',
+            type: 'rx',
+            sub: 'Issued Yesterday • 3:45 PM',
+            date: '28 Sep 2026'
+          },
+          {
+            id: 'f-502',
+            name: 'Lipid_Profile_Jun.pdf',
+            type: 'lab',
+            sub: 'Uploaded by Patient • 950 KB',
+            date: '05 Jun 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1047',
+        name: 'SK Papon',
+        initials: 'SP',
+        age: 29,
+        gender: 'Male',
+        phone: '+880 1855-112233',
+        blood: 'B+ (Pos)',
+        weight: '69 kg',
+        height: "5' 8\"",
+        consultCount: 2,
+        type: 'video',
+        lastVisit: 'Sep 27, 2026',
+        visits: [
+          {
+            id: 'v-601',
+            date: 'Sat, Sep 27, 2026',
+            time: '9:00 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Tension headache after prolonged screen work. Advised lifestyle breaks.',
+            preVisit: {
+              symptoms: 'Tension Headache & Eyestrain',
+              duration: '4 Days',
+              severity: 'Mild (3/10)',
+              complaintQuote: 'Pressure across forehead and behind eyes after prolonged coding shifts.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-601',
+            name: 'RX_SK_Papon_Sep27.pdf',
+            type: 'rx',
+            sub: 'Issued on 27 Sep 2026',
+            date: '27 Sep 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1048',
+        name: 'Sumaiya Begum',
+        initials: 'SB',
+        age: 52,
+        gender: 'Female',
+        phone: '+880 1977-889900',
+        blood: 'A- (Neg)',
+        weight: '64 kg',
+        height: "5' 3\"",
+        consultCount: 6,
+        type: 'video',
+        lastVisit: 'Sep 27, 2026',
+        visits: [
+          {
+            id: 'v-701',
+            date: 'Sat, Sep 27, 2026',
+            time: '9:30 AM',
+            type: 'Video Consultation',
+            icon: 'ph-video-camera',
+            status: 'Completed',
+            notes: 'Hypothyroidism management. TSH 2.1 mIU/L. Maintained on Levothyroxine 50mcg.',
+            preVisit: {
+              symptoms: 'Thyroid Lab Report Review',
+              duration: '1 Week',
+              severity: 'Routine',
+              complaintQuote: 'Uploaded recent serum TSH lab report for routine thyroid dosage review.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-701',
+            name: 'Thyroid_Panel_Sep.pdf',
+            type: 'lab',
+            sub: 'Uploaded by Patient • 890 KB',
+            date: '27 Sep 2026'
+          },
+          {
+            id: 'f-702',
+            name: 'RX_Sumaiya_Sep27.pdf',
+            type: 'rx',
+            sub: 'Issued on 27 Sep 2026',
+            date: '27 Sep 2026'
+          }
+        ]
+      },
+      {
+        id: 'p-1049',
+        name: 'Maruf Islam',
+        initials: 'MI',
+        age: 38,
+        gender: 'Male',
+        phone: '+880 1788-442211',
+        blood: 'O+ (Pos)',
+        weight: '76 kg',
+        height: "5' 9\"",
+        consultCount: 1,
+        type: 'in-person',
+        lastVisit: 'Sep 25, 2026',
+        visits: [
+          {
+            id: 'v-801',
+            date: 'Thu, Sep 25, 2026',
+            time: '4:00 PM',
+            type: 'In-Person Consultation',
+            icon: 'ph-users',
+            status: 'Completed',
+            notes: 'Ankle Sprain (Grade 1). Prescribed RICE protocol and elastic bandage.',
+            preVisit: {
+              symptoms: 'Right Ankle Pain & Swelling',
+              duration: '2 Days',
+              severity: 'Moderate (5/10)',
+              complaintQuote: 'Twisted right ankle while playing football on Tuesday, mild swelling and pain when walking.'
+            }
+          }
+        ],
+        files: [
+          {
+            id: 'f-801',
+            name: 'RX_Maruf_Sep25.pdf',
+            type: 'rx',
+            sub: 'Issued on 25 Sep 2026',
+            date: '25 Sep 2026'
+          }
+        ]
+      }
+    ];
+
+    let currentPatientDirectoryFilter = 'all';
+
     // Page Navigation Transitions
     function navigateToSchedule() {
       const pageSchedule = document.getElementById('pageSchedule');
@@ -6152,8 +7567,248 @@
       if (pageAppts) pageAppts.className = 'app-page page-appointments page-right';
       const pageDetails = document.getElementById('pageAppointmentDetails');
       if (pageDetails) pageDetails.className = 'app-page page-appointment-details page-right';
+      const pagePatients = document.getElementById('pagePatientsList');
+      if (pagePatients) pagePatients.className = 'app-page page-patients-list page-right';
+      const pageProfile = document.getElementById('pagePatientProfile');
+      if (pageProfile) pageProfile.className = 'app-page page-patient-profile page-right';
+
       pageDesk.className = 'app-page active-page';
       document.querySelector('.phone-screen').classList.remove('in-call-mode');
+
+      // Universal Bottom Navigation Sync
+      setActiveNavTab('desk');
+    }
+
+    function setActiveNavTab(tabName) {
+      const tabs = [
+        { id: 'navItemDesk', tab: 'desk', label: 'Desk', iconOutline: 'ph ph-house', iconFill: 'ph-fill ph-house', action: 'navigateToDesk()' },
+        { id: 'navItemPatients', tab: 'patients', label: 'Patients', iconOutline: 'ph ph-users', iconFill: 'ph-fill ph-users', action: 'navigateToPatientsList()' },
+        { id: 'navItemOnu', tab: 'onu', label: 'Onu', iconOutline: 'ph ph-chat-centered-text', iconFill: 'ph-fill ph-chat-centered-text', action: "setActiveNavTab('onu'); showToast('Onu Assistant')" },
+        { id: 'navItemWallet', tab: 'wallet', label: 'Wallet', iconOutline: 'ph ph-wallet', iconFill: 'ph-fill ph-wallet', action: "setActiveNavTab('wallet'); showToast('Wallet balance')" },
+        { id: 'navItemProfile', tab: 'profile', label: 'Profile', iconOutline: 'ph ph-user-circle', iconFill: 'ph-fill ph-user-circle', action: "setActiveNavTab('profile'); showToast('Doctor Profile')" }
+      ];
+
+      tabs.forEach(t => {
+        const el = document.getElementById(t.id);
+        if (!el) return;
+        if (t.tab === tabName) {
+          el.className = 'nav-item active';
+          el.innerHTML = `<div class="active-nav-pill"><i class="${t.iconFill}"></i></div>`;
+        } else {
+          el.className = 'nav-item';
+          el.innerHTML = `<i class="${t.iconOutline}"></i><span class="nav-label">${t.label}</span>`;
+        }
+      });
+    }
+
+    function navigateToPatientsList() {
+      const pagePatients = document.getElementById('pagePatientsList');
+      const pageDesk = document.getElementById('pageDesk');
+      if (pagePatients && pageDesk) {
+        pagePatients.scrollTop = 0;
+        pageDesk.className = 'app-page page-left';
+        
+        // Ensure other pages are reset to right
+        const pageSchedule = document.getElementById('pageSchedule');
+        if (pageSchedule) pageSchedule.className = 'app-page page-right';
+        const pageAppts = document.getElementById('pageAppointments');
+        if (pageAppts) pageAppts.className = 'app-page page-appointments page-right';
+        const pageProfile = document.getElementById('pagePatientProfile');
+        if (pageProfile) pageProfile.className = 'app-page page-patient-profile page-right';
+
+        pagePatients.className = 'app-page page-patients-list active-page';
+
+        // Universal Bottom Navigation Sync
+        setActiveNavTab('patients');
+
+        renderPatientsDirectory();
+      }
+    }
+
+    function renderPatientsDirectory() {
+      const container = document.getElementById('patientsDirectoryList');
+      if (!container) return;
+
+      const query = (document.getElementById('inputPatientsSearch')?.value || '').toLowerCase().trim();
+      let list = patientsDirectoryData.filter(pat => {
+        return query === '' || 
+          pat.name.toLowerCase().includes(query) || 
+          pat.phone.includes(query);
+      });
+
+      // Update subtitle count
+      const countEl = document.getElementById('patientsCountSubtitle');
+      if (countEl) {
+        countEl.textContent = `${list.length} Patients`;
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="patients-empty-state">
+            <div class="patients-empty-icon">
+              <i class="ph ph-user-minus"></i>
+            </div>
+            <div class="patients-empty-title">No patients found</div>
+            <div class="patients-empty-desc">No patients match your search criteria.</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(pat => {
+        const count = pat.consultCount || (pat.visits ? pat.visits.length : 1);
+        const visitLabel = count === 1 ? '1 Visit' : `${count} Visits`;
+        return `
+        <div class="patient-directory-tile" onclick="openPatientProfile('${pat.id}')">
+          <div class="patient-tile-left">
+            <div class="patient-avatar-circle">${pat.initials}</div>
+            <div class="patient-tile-meta">
+              <span class="patient-tile-name">${pat.name}</span>
+              <span class="patient-tile-sub">${visitLabel}</span>
+            </div>
+          </div>
+          <div class="patient-tile-right">
+            <i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>
+          </div>
+        </div>
+      `;
+      }).join('');
+    }
+
+    function filterPatientsDirectory() {
+      renderPatientsDirectory();
+    }
+
+    let currentActiveProfilePatientId = null;
+    let isProfileVisitsExpanded = false;
+
+    function openPatientProfile(patientId) {
+      const pat = patientsDirectoryData.find(p => p.id === patientId) || patientsDirectoryData[0];
+      const pageProfile = document.getElementById('pagePatientProfile');
+      const pagePatients = document.getElementById('pagePatientsList');
+
+      if (!pat || !pageProfile || !pagePatients) return;
+
+      currentActiveProfilePatientId = pat.id;
+      isProfileVisitsExpanded = false;
+
+      // Populate Hero Card
+      document.getElementById('profileName').textContent = pat.name;
+      document.getElementById('profileAvatarBox').textContent = pat.initials;
+      document.getElementById('profileDemographics').textContent = `${pat.age} Yrs • ${pat.gender}`;
+      document.getElementById('profilePhone').innerHTML = `<i class="ph ph-phone"></i> ${pat.phone}`;
+
+      // Populate Vitals Grid
+      document.getElementById('vitalAge').textContent = `${pat.age} Yrs`;
+      document.getElementById('vitalGender').textContent = pat.gender;
+      document.getElementById('vitalBlood').textContent = pat.blood;
+      document.getElementById('vitalWeight').textContent = pat.weight;
+      document.getElementById('vitalHeight').textContent = pat.height;
+      document.getElementById('vitalVisits').textContent = `${pat.consultCount || (pat.visits ? pat.visits.length : 0)} Consults`;
+
+      // Render Visits Log (max 3 by default + See All toggle)
+      renderProfileVisitsLog(pat);
+
+      // Transition to Profile View
+      pageProfile.scrollTop = 0;
+      pagePatients.className = 'app-page page-patients-list page-left';
+      pageProfile.className = 'app-page page-patient-profile active-page';
+    }
+
+    function renderProfileVisitsLog(pat) {
+      if (!pat) {
+        pat = patientsDirectoryData.find(p => p.id === currentActiveProfilePatientId) || patientsDirectoryData[0];
+      }
+      if (!pat) return;
+
+      const visitsList = document.getElementById('profileVisitsList');
+      const visitsCount = document.getElementById('profileVisitsCount');
+      const seeAllContainer = document.getElementById('profileSeeAllVisitsContainer');
+
+      const totalVisits = pat.visits ? pat.visits.length : 0;
+      if (visitsCount) {
+        visitsCount.textContent = `${totalVisits} ${totalVisits === 1 ? 'visit' : 'visits'}`;
+      }
+
+      if (visitsList) {
+        if (totalVisits > 0) {
+          const displayedVisits = isProfileVisitsExpanded ? pat.visits : pat.visits.slice(0, 3);
+          visitsList.innerHTML = displayedVisits.map(v => `
+            <div class="profile-visit-tile" onclick="openVisitDetailsFromProfile('${v.id}')">
+              <div class="profile-visit-left">
+                <div class="profile-visit-icon-circle">
+                  <i class="ph ${v.icon || 'ph-video-camera'}"></i>
+                </div>
+                <div class="profile-visit-meta">
+                  <span class="profile-visit-date">${v.date}</span>
+                  <span class="profile-visit-type">${v.type} • ${v.time}</span>
+                </div>
+              </div>
+              <i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>
+            </div>
+          `).join('');
+        } else {
+          visitsList.innerHTML = `<div class="details-empty-docs">No past consultations recorded</div>`;
+        }
+      }
+
+      if (seeAllContainer) {
+        if (totalVisits > 3) {
+          if (!isProfileVisitsExpanded) {
+            seeAllContainer.innerHTML = `
+              <button class="btn-see-all-visits" onclick="toggleAllVisits(true)">
+                <span>See all ${totalVisits} visits</span>
+                <i class="ph ph-caret-down"></i>
+              </button>
+            `;
+          } else {
+            seeAllContainer.innerHTML = `
+              <button class="btn-see-all-visits" onclick="toggleAllVisits(false)">
+                <span>Show less</span>
+                <i class="ph ph-caret-up"></i>
+              </button>
+            `;
+          }
+        } else {
+          seeAllContainer.innerHTML = '';
+        }
+      }
+    }
+
+    function toggleAllVisits(expand) {
+      isProfileVisitsExpanded = expand;
+      renderProfileVisitsLog();
+    }
+
+    function returnFromPatientProfile() {
+      const pageProfile = document.getElementById('pagePatientProfile');
+      const pagePatients = document.getElementById('pagePatientsList');
+      if (pageProfile && pagePatients) {
+        pagePatients.scrollTop = 0;
+        pageProfile.className = 'app-page page-patient-profile page-right';
+        pagePatients.className = 'app-page page-patients-list active-page';
+      }
+    }
+
+    function previewPrescriptionFromProfile(rxPdf, patName, patAgeSex) {
+      rxPreviewBackTarget = 'profile';
+      const nameEl = document.getElementById('rxPatientName');
+      const ageSexEl = document.getElementById('rxPatientAgeSex');
+      if (nameEl) nameEl.textContent = patName;
+      if (ageSexEl) ageSexEl.textContent = patAgeSex;
+
+      const pageProfile = document.getElementById('pagePatientProfile');
+      const pageRx = document.getElementById('pagePrescriptionPreview');
+      if (pageProfile && pageRx) {
+        pageRx.scrollTop = 0;
+        pageProfile.className = 'app-page page-patient-profile page-left';
+        pageRx.className = 'app-page page-prescription-preview active-page';
+      }
+    }
+
+    function callPatientDirectly() {
+      const patName = document.getElementById('profileName')?.textContent || 'Patient';
+      showToast(`Initiating direct call with ${patName}...`);
     }
 
     // All Appointments Screen Navigation & Dynamic Tab / Filter Controller
@@ -6521,8 +8176,87 @@
       });
     }
 
-    // Appointment Details View Controller & Dynamic Decluttered Sections
+    let appointmentDetailsBackTarget = 'appointments';
+
+    // Appointment / Visit Details Top Meta Renderer
+    function renderAppointmentTopMeta(appt, effectiveStatus) {
+      const container = document.getElementById('detTopMetaContainer');
+      if (!container) return;
+
+      if (effectiveStatus === 'prescribed') {
+        // COMPLETED / PRESCRIBED VISIT DETAILS: Clean 2-Row Card with Completed Status, Call Mode & Duration, Date, and Time
+        const isVideo = (appt.shiftType && appt.shiftType.toLowerCase().includes('video')) || 
+                        (appt.type && appt.type.toLowerCase().includes('video')) || 
+                        (appt.icon && appt.icon.includes('video')) || 
+                        true;
+        const modeLabel = isVideo ? 'Video Call' : 'In-Person';
+        const modeIcon = isVideo ? 'ph-video-camera' : 'ph-users';
+        const durationText = appt.callDuration || '25 Mins';
+        const dateText = appt.consultationDate || (appt.dateLabel ? `${appt.dateLabel}, 2026` : 'Today, Sep 29, 2026');
+        const timeText = appt.callTime || appt.time || '09:00 AM';
+
+        container.innerHTML = `
+          <div class="visit-details-meta-card">
+            <div class="visit-details-meta-top">
+              <span class="visit-completed-badge">Completed</span>
+              <span class="visit-mode-pill">
+                <i class="ph ${modeIcon}"></i>
+                <span>${modeLabel} • ${durationText}</span>
+              </span>
+            </div>
+            <div class="visit-details-meta-bottom">
+              <div class="visit-meta-datetime-item">
+                <i class="ph ph-calendar-blank"></i>
+                <span>${dateText}</span>
+              </div>
+              <div class="visit-meta-datetime-item">
+                <i class="ph ph-clock"></i>
+                <span>${timeText}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // UPCOMING / QUEUED / DRAFT RX / SKIPPED / IN CALL: 3-Column Info Strip
+        let statusLabel = 'In Queue';
+        let statusClass = 'details-info-val';
+
+        if (effectiveStatus === 'draft_rx') {
+          statusLabel = 'Draft Rx';
+          statusClass = 'details-info-val status-draft';
+        } else if (effectiveStatus === 'skipped') {
+          statusLabel = 'Skipped';
+          statusClass = 'details-info-val status-skipped';
+        } else if (effectiveStatus === 'in_call') {
+          statusLabel = 'In Call';
+          statusClass = 'details-info-val status-incall';
+        }
+
+        const serialVal = appt.serial || '#1';
+        const typeVal = (appt.type || 'Initial').replace(' Consultation', '');
+
+        container.innerHTML = `
+          <div class="details-info-grid">
+            <div class="details-info-item">
+              <span class="details-info-label">Status</span>
+              <span class="${statusClass}" id="detStatusVal">${statusLabel}</span>
+            </div>
+            <div class="details-info-item">
+              <span class="details-info-label">Serial</span>
+              <span class="details-info-val" id="detSerialVal">${serialVal}</span>
+            </div>
+            <div class="details-info-item">
+              <span class="details-info-label">Type</span>
+              <span class="details-info-val" id="detTypeVal">${typeVal}</span>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Appointment Details View Controller (Opened from All Appointments screen)
     function openAppointmentDetails(apptId) {
+      appointmentDetailsBackTarget = 'appointments';
       const appt = appointmentsData.find(a => a.id === apptId) || appointmentsData[0];
       currentDetailsAppt = appt;
 
@@ -6531,45 +8265,25 @@
         effectiveStatus = 'queued';
       }
 
+      // Dynamic Title
+      const pageTitleEl = document.querySelector('#pageAppointmentDetails .page-top-title');
+      if (pageTitleEl) {
+        pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : 'Appointment Details';
+      }
+
       // Patient Demographics
       document.getElementById('detPatientName').textContent = appt.name;
       document.getElementById('detPatientMeta').textContent = `${appt.age} Yrs • ${appt.gender}`;
-      document.getElementById('detSerialVal').textContent = appt.serial;
-      document.getElementById('detTypeVal').textContent = appt.type.replace(' Consultation', '');
 
-      // Status Styling
-      const statusEl = document.getElementById('detStatusVal');
-      if (effectiveStatus === 'prescribed') {
-        statusEl.textContent = 'Prescribed';
-        statusEl.className = 'details-info-val status-prescribed';
-      } else if (effectiveStatus === 'draft_rx') {
-        statusEl.textContent = 'Draft Rx';
-        statusEl.className = 'details-info-val status-draft';
-      } else if (effectiveStatus === 'skipped') {
-        statusEl.textContent = 'Skipped';
-        statusEl.className = 'details-info-val status-skipped';
-      } else if (effectiveStatus === 'in_call') {
-        statusEl.textContent = 'In Call';
-        statusEl.className = 'details-info-val status-incall';
-      } else {
-        statusEl.textContent = 'In Queue';
-        statusEl.className = 'details-info-val';
-      }
+      // Render Dynamic Top Meta: Completed Card for 'prescribed', 3-Info Strip for others
+      renderAppointmentTopMeta(appt, effectiveStatus);
 
       // Render Dynamic Decluttered Sections in Strict Relevance Order
       renderAppointmentDetailsSections(appt, effectiveStatus);
 
-      // Bottom Action Dock (Contextual Primary CTA: only for actionable statuses)
+      // Bottom Action Dock (Contextual Primary CTA: only for actionable in-progress statuses)
       const bottomDock = document.getElementById('detBottomDock');
-      if (effectiveStatus === 'prescribed') {
-        bottomDock.style.display = 'flex';
-        bottomDock.innerHTML = `
-          <button class="btn-dock-primary" onclick="previewPrescriptionFromDetails()">
-            <i class="ph ph-eye"></i>
-            <span>View Issued Prescription</span>
-          </button>
-        `;
-      } else if (effectiveStatus === 'draft_rx') {
+      if (effectiveStatus === 'draft_rx') {
         bottomDock.style.display = 'flex';
         bottomDock.innerHTML = `
           <button class="btn-dock-primary" onclick="openReviewFromDetails('${appt.id}')">
@@ -6586,7 +8300,7 @@
           </button>
         `;
       } else {
-        // No arbitrary calls or recalls from the details sheet
+        // No redundant bottom dock for prescribed/completed (View Rx already prominent in Issued Prescription card) or queued/skipped
         bottomDock.style.display = 'none';
         bottomDock.innerHTML = '';
       }
@@ -6601,6 +8315,83 @@
       }
     }
 
+    // Visit Details Controller (Opened directly from Patient Profile Visits Log)
+    function openVisitDetailsFromProfile(visitId) {
+      const pat = patientsDirectoryData.find(p => p.id === currentActiveProfilePatientId) || patientsDirectoryData[0];
+      if (!pat) return;
+
+      const visit = (pat.visits && pat.visits.find(v => v.id === visitId)) || (pat.visits && pat.visits[0]);
+      if (!visit) return;
+
+      appointmentDetailsBackTarget = 'profile';
+
+      // Find matching files or synthesize realistic clinical documents
+      const rxFile = (pat.files && pat.files.find(f => f.type === 'rx')) || { name: `RX_${pat.name.replace(/ /g, '_')}_Sep29.pdf` };
+      const labDocs = (pat.files && pat.files.filter(f => f.type === 'lab').map(f => ({ 
+        name: f.name, 
+        size: f.sub ? f.sub.split('•')[1]?.trim() || '1.2 MB' : '1.2 MB', 
+        type: 'Lab Report', 
+        icon: 'ph-file-text' 
+      }))) || [];
+
+      // Synthesize full visit record for details view with AI intake pre-visit data
+      const preVisitData = visit.preVisit ? { ...visit.preVisit } : {
+        symptoms: visit.notes ? (visit.notes.split('.')[0] || 'Clinical Consultation') : 'Clinical Consultation',
+        duration: '3 Days',
+        severity: 'Mild',
+        complaintQuote: 'Patient described symptoms during AI triage before consultation.'
+      };
+      preVisitData.uploadedDocs = labDocs;
+
+      const visitAppt = {
+        id: visit.id,
+        name: pat.name,
+        age: pat.age,
+        gender: pat.gender,
+        status: 'prescribed',
+        serial: '#1',
+        type: visit.type,
+        callTime: visit.time || '9:00 AM',
+        callDuration: '25 Mins',
+        consultationDate: visit.date,
+        consultationNotes: visit.notes || 'Consultation completed successfully with clinical advice issued.',
+        prescriptionPdf: rxFile.name,
+        preVisit: preVisitData
+      };
+
+      currentDetailsAppt = visitAppt;
+
+      // Update Page Header Title
+      const pageTitleEl = document.querySelector('#pageAppointmentDetails .page-top-title');
+      if (pageTitleEl) pageTitleEl.textContent = 'Visit Details';
+
+      // Patient Demographics
+      document.getElementById('detPatientName').textContent = pat.name;
+      document.getElementById('detPatientMeta').textContent = `${pat.age} Yrs • ${pat.gender}`;
+
+      // Render Top Meta: Completed Visit Meta Card
+      renderAppointmentTopMeta(visitAppt, 'prescribed');
+
+      // Render Dynamic Decluttered Sections
+      renderAppointmentDetailsSections(visitAppt, 'prescribed');
+
+      // Hide Bottom Action Dock (View Rx is already inside the Issued Prescription card)
+      const bottomDock = document.getElementById('detBottomDock');
+      if (bottomDock) {
+        bottomDock.style.display = 'none';
+        bottomDock.innerHTML = '';
+      }
+
+      // Transition from Patient Profile to Appointment / Visit Details
+      const pageProfile = document.getElementById('pagePatientProfile');
+      const pageDetails = document.getElementById('pageAppointmentDetails');
+      if (pageProfile && pageDetails) {
+        pageDetails.scrollTop = 0;
+        pageProfile.className = 'app-page page-patient-profile page-left';
+        pageDetails.className = 'app-page page-appointment-details active-page';
+      }
+    }
+
     function renderAppointmentDetailsSections(appt, effectiveStatus) {
       const container = document.getElementById('detDynamicSections');
       if (!container) return;
@@ -6608,12 +8399,11 @@
 
       const docs = (appt.preVisit && appt.preVisit.uploadedDocs) ? appt.preVisit.uploadedDocs : [];
 
-      // 1. Issued Prescription Component (Compact & Modern)
+      // 1. Issued Prescription Component (Clean Title without Signed badge)
       const rxSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Issued Prescription</span>
-            <span class="appt-status-badge prescribed" style="padding: 2px 8px; font-size: 11px;"><i class="ph-fill ph-check-circle"></i> Signed</span>
           </div>
           <div class="details-rx-tile">
             <div class="details-rx-tile-left">
@@ -6622,7 +8412,7 @@
               </div>
               <div class="details-rx-tile-meta">
                 <span class="details-rx-tile-name">${appt.prescriptionPdf || 'RX_Tariqul_Islam_Sep29.pdf'}</span>
-                <span class="details-rx-tile-sub">Official Digital Rx • Signed</span>
+                <span class="details-rx-tile-sub">Official Digital Rx</span>
               </div>
             </div>
             <button class="btn-clean-rx-view" onclick="previewPrescriptionFromDetails()">
@@ -6633,20 +8423,20 @@
         </div>
       `;
 
-      // 2. Consultation Notes Component (Clean Minimal Card)
+      // 2. Consultation Notes Component (Prominent High-Priority Outcome Card)
       const notesSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Consultation Notes</span>
-            <span class="ai-sparkle-tag">✨ Live AI Notes</span>
+            <span class="info-chip info-chip-sage">✨ Live AI Notes</span>
           </div>
-          <div class="details-clean-card">
+          <div class="details-notes-card">
             <p class="details-notes-body">${appt.consultationNotes || 'Consultation completed successfully with clinical advice issued.'}</p>
           </div>
         </div>
       `;
 
-      // 3. Pre-Visit Details Component (Decluttered & Clean with Empty State Support)
+      // 3. Pre-Visit Details Component (Soft Warm Neutral to Differentiate Patient Intake)
       let preVisitHtml = '';
       const hasPreVisit = appt.preVisit && (appt.preVisit.symptoms || appt.preVisit.complaintQuote);
       if (hasPreVisit) {
@@ -6654,9 +8444,9 @@
           <div class="details-clean-section">
             <div class="details-clean-header">
               <span class="details-clean-title">Pre-visit Details</span>
-              <span class="ai-sparkle-tag">✨ AI Summary</span>
+              <span class="info-chip info-chip-warm">Patient Intake</span>
             </div>
-            <div class="details-clean-card">
+            <div class="details-previsit-card">
               <span class="details-symptom-title">${appt.preVisit.symptoms || 'General Consultation'}</span>
               <div class="details-symptom-meta-row">
                 <span>Duration: ${appt.preVisit.duration || 'N/A'}</span>
@@ -6664,7 +8454,7 @@
                 <span>Severity: ${appt.preVisit.severity || 'Mild'}</span>
               </div>
               ${appt.preVisit.complaintQuote ? `
-                <p class="details-clean-quote">“${appt.preVisit.complaintQuote}”</p>
+                <p class="details-previsit-quote">“${appt.preVisit.complaintQuote}”</p>
               ` : ''}
             </div>
           </div>
@@ -6674,7 +8464,7 @@
           <div class="details-clean-section">
             <div class="details-clean-header">
               <span class="details-clean-title">Pre-visit Details</span>
-              <span class="shift-capacity-tag">Not Submitted</span>
+              <span class="info-chip info-chip-neutral">Not Submitted</span>
             </div>
             <div class="details-empty-docs">
               No pre-visit intake submitted by patient
@@ -6713,7 +8503,7 @@
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Patient Documents</span>
-            <span class="shift-capacity-tag">${docs.length} Files</span>
+            <span class="info-chip info-chip-neutral">${docs.length} Files</span>
           </div>
           <div class="details-files-list">
             ${docsListHtml}
@@ -6735,12 +8525,23 @@
     }
 
     function returnFromAppointmentDetails() {
-      const pageAppts = document.getElementById('pageAppointments');
       const pageDetails = document.getElementById('pageAppointmentDetails');
-      if (pageAppts && pageDetails) {
-        pageAppts.scrollTop = 0;
-        pageDetails.className = 'app-page page-appointment-details page-right';
-        pageAppts.className = 'app-page page-appointments active-page';
+      if (!pageDetails) return;
+
+      if (appointmentDetailsBackTarget === 'profile') {
+        const pageProfile = document.getElementById('pagePatientProfile');
+        if (pageProfile) {
+          pageProfile.scrollTop = 0;
+          pageDetails.className = 'app-page page-appointment-details page-right';
+          pageProfile.className = 'app-page page-patient-profile active-page';
+        }
+      } else {
+        const pageAppts = document.getElementById('pageAppointments');
+        if (pageAppts) {
+          pageAppts.scrollTop = 0;
+          pageDetails.className = 'app-page page-appointment-details page-right';
+          pageAppts.className = 'app-page page-appointments active-page';
+        }
       }
     }
 
@@ -7462,6 +9263,12 @@
         if (pageRx && pageDetails) {
           pageRx.className = 'app-page page-prescription-preview page-right';
           pageDetails.className = 'app-page page-appointment-details active-page';
+        }
+      } else if (rxPreviewBackTarget === 'profile') {
+        const pageProfile = document.getElementById('pagePatientProfile');
+        if (pageRx && pageProfile) {
+          pageRx.className = 'app-page page-prescription-preview page-right';
+          pageProfile.className = 'app-page page-patient-profile active-page';
         }
       } else {
         const pageReview = document.getElementById('pageConsultationReview');

@@ -205,13 +205,53 @@ c:\Alif\Onu App Prototype\
 * **Turn Now Highlight**: If a patient is currently active on Desk, their card in the list highlights with `.status-in-call` and `Turn Now` pulse badge.
 * **Offline Auto-Cancellation**: When the doctor goes offline, booked visits within the offline duration (e.g. `Today`) are automatically cancelled and hidden from the Upcoming queue. Viewing a cancelled date displays an informative offline empty state (`Doctor is Offline • Appointments cancelled & patients notified`). Returning online restores active queues.
 
-### Screen 8: Appointment Clinical Details (`#pageAppointmentDetails`)
-* **Purpose**: Detailed inspection of any individual appointment record.
+### Screen 8: Appointment & Visit Clinical Details (`#pageAppointmentDetails`)
+* **Purpose**: Detailed inspection of any individual appointment or historical visit record.
+* **Top Meta Strip Transformation**:
+  * **For Completed / Prescribed Appointments & Patient Visit Log Details**: Title displays `Visit Details`. The 3-box strip is replaced by `.visit-details-meta-card` containing:
+    * Top row: `● COMPLETED` green badge + consultation mode & duration pill (e.g. `Video Call • 25 Mins`).
+    * Bottom row: Consultation date (`Aug 20, 2026`) + call time (`08:00 PM`).
+  * **For Upcoming / Queued / Draft Rx / Skipped Appointments**: Title displays `Appointment Details`. Displays the 3-column info strip (`Status`, `Serial`, `Type`).
+* **Card Color & Visual Hierarchy**:
+  * **Consultation Notes (`.details-notes-card`)**: High-importance clinical outcome card styled in crisp mint/sage tint (`#F4F8F7`, `border: 1.5px solid #D1E5E1`) with deep forest text (`#0F2F29`).
+  * **Pre-visit Details (`.details-previsit-card`)**: Patient intake history styled in soft, warm neutral tone (`#FAF8F5`, `border: 1.5px solid #EFE5D6`) with warm amber quote bar (`#D97706`) and `.info-chip-warm` tag. Displays the patient's specific chief complaint from AI triage (e.g. `Sore Throat & Mild Fever`, `Seasonal Allergies & Runny Nose`), duration, severity, and conversational complaint quote given to the AI intake bot.
 * **Dynamic Section Ordering**:
   * **For Completed (`prescribed`)**: Issued Prescription -> Consultation Notes -> Pre-visit Details -> Patient Documents.
   * **For Draft Rx (`draft_rx`)**: Consultation Notes -> Pre-visit Details -> Patient Documents (with sticky bottom dock `Review & Finalize Rx`).
   * **For Queued / Upcoming**: Pre-visit Details -> Patient Documents.
+* **No Redundant Bottom Dock on Completed Visits**:
+  * The bottom dock button is removed for completed visits because the **Issued Prescription** card on top already contains the primary `View Rx` action. Bottom dock is active only for pending tasks (`Review & Finalize Rx`, `Re-join Active Call`).
 * **Empty State Handling**: If pre-visit intake is missing, displays `Not Submitted` tag and neutral empty card. If documents are missing, displays `0 Files` and `"No patient files uploaded for this visit"`.
+* **Contextual Back Navigation**: Back arrow returns to `#pagePatientProfile` if opened from a patient visit log, or to `#pageAppointments` if opened from the appointments list.
+
+### Screen 9: My Patients Directory (`#pagePatientsList`)
+* **Purpose**: Complete patient directory containing every patient ever consulted by the doctor once or multiple times.
+* **Key Components**:
+  * Top header: `.app-header` with Title `My Patients` (`Urbanist 25px Bold`), Subtitle `Your patient directory & history` (`DM Sans 13.5px #717171`), with *no notification bell* for a clean secondary tab layout.
+  * Real-time search bar (`#inputPatientsSearch`) matching patient name and phone number (`DM Sans 13.5px Medium`) + filter button (`ph-sliders-horizontal`).
+  * **Modern Clinical Metrics Box (`.patient-metrics-card`)**: 3-column split card in soft sage tint (`#EFF7F5`, border `1.5px solid #D4EAE4`) with vertical dividers displaying `Total Patients` (`8`), `Consultations` (`24`), and `Repeat Rate` (`62%`) in clean typography (`Urbanist 22px Bold #052E28` + `DM Sans 11.5px #4A6E67`) without clunky icon circles, matching the 8 directory records below.
+  * Section header (`.section-text-group`): Title `All Patients` (`Urbanist 20px Bold #000000`) + Subtitle `8 Patients` (`DM Sans 13px #717171`), consistent with the top header typography system.
+  * Patient Cards with circular pastel initials avatar (`#E8F4F1`), patient name, minimalist subtext (`[X] Visits`), and caret chevron. No patient ID or dates displayed on the tile.
+  * Clean empty state when search returns zero matching records.
+  * Tapping any patient card smoothly opens that patient's **Patient Profile (`#pagePatientProfile`)**.
+
+### Screen 10: Patient Profile & Medical History (`#pagePatientProfile`)
+* **Purpose**: Full clinical dossier for a single patient with comprehensive medical vitals and past visit history.
+* **Key Components**:
+  * Sticky top bar with return back arrow (`returnFromPatientProfile()`) and direct phone call trigger.
+  * **Patient Hero Card**: Circular initials badge (`52px × 52px`), patient name, demographics (`[Age] Yrs • [Gender]`), and tap-to-call phone pill (no patient ID).
+  * **Patient Info & Vitals Grid**: Dedicated `Patient Info` card with circular white icon bubbles for `Age`, `Gender`, `Visits`, `Blood`, `Weight`, and `Height`.
+  * **Visits Log (Max 3 Default + Inline "See All" Expansion)**:
+    * Chronological list of consultations showing up to 3 visits by default.
+    * Each visit tile displays consultation type, date, time, and doctor notes.
+    * **Interactive Tap Flow**: Tapping any visit tile opens the **Visit Details** view for that visit with completed call mode, duration, date, time, consultation notes, and issued prescription.
+    * If a patient has >3 visits, a `.btn-see-all-visits` button (`See all [N] visits` with `ph-caret-down`) appears below the 3rd visit. Clicking it seamlessly expands the remaining visits inline without navigating away.
+  * **Files Section**: Completely removed per design direction; files and prescriptions are accessed directly via individual appointment details.
+
+### Bottom Navigation Bar Master Standard
+* **Active Tab**: Displays inside a soft rounded pastel pill (`.active-nav-pill` on `#EFF7F5`), with the **filled icon** (`ph-fill`) in `#052E28`, a subtle horizontal accent indicator bar, and **NO title text**.
+* **Inactive Tabs**: Displays the **outline icon** (`ph`) in `#717171` + title text in `DM Sans 11px Medium #717171`.
+* **Synchronization**: Automatically managed via `setActiveNavTab(tabName)`.
 
 ---
 
@@ -220,12 +260,12 @@ c:\Alif\Onu App Prototype\
 | Element | Specification | Hex / Value |
 | :--- | :--- | :--- |
 | **App Canvas** | Pure White Background | `#FFFFFF` |
-| **Surface Cards** | Soft Neutral Background | `#F6F8F9` with `1.5px solid #EDF2F1` |
-| **Hero / Active State** | Soft Sage Tint | `#D6EAE6` with `1.5px solid #7EB8AE` |
+| **Hero & Metric Cards** | Sage Glassmorphism | `linear-gradient(135deg, rgba(239, 247, 245, 0.95), rgba(214, 234, 230, 0.8))` + `backdrop-filter: blur(16px)` + `border: 1.5px solid rgba(126, 184, 174, 0.4)` |
+| **Surface & Neutral Cards** | Frosted Glass Neutral | `linear-gradient(135deg, rgba(246, 248, 249, 0.95), rgba(238, 244, 243, 0.8))` + `backdrop-filter: blur(16px)` + `border: 1.5px solid rgba(226, 236, 234, 0.85)` |
 | **Primary Action CTA** | Deep Forest Green Fill | `#052E28` (Text: `#FFFFFF`, Weight: `700`) |
 | **Primary Text** | Urbanist Bold | `#000000` |
 | **Secondary / Meta Text** | DM Sans Regular / Medium | `#717171` |
-| **Section Spacing** | Strict Uniform Gap | `24px` between sections, `10px` between elements |
+| **Section Spacing** | Strict Section Wrapper Gap | `24px` between `<section>` blocks, `10px` between title and cards inside sections |
 | **Bottom Sheet Radii** | Fluid iOS Curve | `32px 32px 0 0` with drag grabber (`#CBD5E1`) |
 
 ---
@@ -239,7 +279,7 @@ When you are prompted by the user to add a feature, fix a bug, or redesign a scr
 2. Confirm you understand the user's intent within the Wise/Uber minimalist healthtech framework.
 
 ### Step 2: Enforce Inviolable Rules
-- **DO NOT** clutter patient subtext. Keep it strictly `[Age] Yrs • [Gender]`.
+- **DO NOT** show clinical patient ID numbers or redundant dates in patient directory tiles. Keep subtext minimal: `[X] Visits` or `[Age] Yrs • [Gender]`.
 - **DO NOT** create nested card boxes inside other card boxes.
 - **DO NOT** bypass delete confirmation modals.
 - **DO NOT** add start call or recall controls for skipped patients.
@@ -248,4 +288,5 @@ When you are prompted by the user to add a feature, fix a bug, or redesign a scr
 ### Step 3: Implement & Keep Context Synchronized
 - Modify `index.html` cleanly using single contiguous replacements.
 - Test and verify state changes, DOM IDs, and transition classes.
+- Always update [`DESIGN_GUIDELINE.md`](file:///c:/Alif/Onu%20App%20Prototype/DESIGN_GUIDELINE.md) and [`AI_INSTRUCTIONS.md`](file:///c:/Alif/Onu%20App%20Prototype/AI_INSTRUCTIONS.md) after modifying or expanding screens.
 - **MANDATORY**: After making any significant structural, behavioral, or feature changes, update both `DESIGN_GUIDELINE.md` and `AI_INSTRUCTIONS.md` to reflect the latest modifications.
