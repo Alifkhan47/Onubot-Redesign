@@ -3,6 +3,49 @@
 
 ---
 
+## ⚠️ ZERO-TOLERANCE DESIGN & ENGINEERING GUARDRAILS (NEVER VIOLATE)
+
+1. **PRIMARY BUTTON vs. SELECTION STATE COLOR RULE (ABSOLUTE LAW)**:
+   - **Solid Forest Green `#052E28` with `#FFFFFF` text is EXCLUSIVELY for Primary Action CTA Buttons** (`Start Shift`, `Save Shift`, `+ Add Shift`, `Confirm Break`, `Join Call`, `Withdraw Funds`, `Save Account`).
+   - **ALL Selection States** (Segmented control buttons, Active calendar date pills, Multi-select day pills, Filter chips, Duration selector cards) **MUST ALWAYS** use:
+     - `background: var(--color-card-sage)` (`#D6EAE6`)
+     - `border: 1px / 1.5px solid var(--color-border-selected)` (`#7EB8AE`)
+     - `color: var(--color-primary-btn)` (`#052E28`)
+     - `font-weight: 700`
+   - **NEVER** give selection states, segmented buttons, or date pills a solid `#052E28` dark green background.
+
+2. **BOTTOM SHEET & POPUP UNIFIED ARCHITECTURE**:
+   - **ALL Bottom Sheets** (Edit Shift, Withdraw Funds, Saved Accounts, Add Payout Method, Confirmations) **MUST ALWAYS** follow the standard editorial layout:
+     1. Drag handle (`.sheet-drag-handle`)
+     2. Top badge icon (`.sheet-badge-icon`, 40x40 rounded container)
+     3. Editorial header (`.sheet-hero-header` with `.sheet-editorial-title` Urbanist 32px Bold and `.sheet-minimal-subtitle` 14px)
+     4. Content container / Form fields
+     5. Standard action group (`.sheet-actions-group` with `.btn-sheet-cancel` and `.btn-sheet-confirm`) with generous bottom clearance.
+   - **NEVER** create custom unstyled inline headers with raw 'x' buttons that deviate from this system.
+
+3. **DESTRUCTIVE ACTIONS CONFIRMATION RULE**:
+   - Deleting a shift, deleting a saved payment/bank method, or skipping a patient **MUST ALWAYS** trigger a dedicated editorial confirmation bottom sheet (`#deleteConfirmModalSheet`, `#modalDeleteAccountConfirm`, `#modalSkipPatient`).
+   - Never delete or remove items silently on tap.
+
+4. **HERO CARD SPACING & VERTICAL RHYTHM**:
+   - Hero balance and patient cards must have generous vertical rhythm (`padding: 20px; gap: 16px;`):
+     - Top: `.badge-pill-light` frosted badge pill (`Available Balance`, `Next Patient`)
+     - Center: Bold large metric (`৳ 12,400`, `Farzana Khan`)
+     - Bottom: Full-width `#052E28` primary action CTA.
+   - No redundant multi-line explanatory subtext under amounts.
+
+5. **FORM INPUTS & NO UNNECESSARY CHIP CLUTTER**:
+   - Text inputs (e.g. Bank Name, Holder Name, Account Number) must be clean manual inputs. Do not clutter below inputs with preset suggestions unless explicitly requested.
+
+6. **GIT & VERSION CONTROL RULE**:
+   - **NEVER run `git commit` or `git push`** under any circumstance unless the user explicitly commands you to do so.
+
+7. **LESS TEXT & COGNITIVE DECLUTTERING**:
+   - Keep labels, metrics, and fraction counters ultra-minimal.
+   - Zero nested boxes ("No boxes inside boxes inside boxes").
+
+---
+
 ## 1. Executive Project Overview
 
 **Onu App** is a next-generation clinical telemedicine and desk management platform built specifically for doctors and healthcare specialists.

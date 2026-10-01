@@ -198,7 +198,7 @@ The schedule configuration screens transform clinical timetable settings into a 
 ### 6.2 Top-Anchored Prominent Action CTA (`+ Add Shift`)
 * **Placement**: The `+ Add Shift` CTA button MUST be positioned **on top** directly between the selected date header and the shifts list, eliminating any need for the user to scroll through existing shift cards to create a new shift.
 * **Styling**: High-visibility primary button (`background: #052E28; color: #FFFFFF; height: 48px; border-radius: 12px; font-weight: 700; box-shadow: 0 4px 14px rgba(5, 46, 40, 0.18)`).
-* **Modal Trigger**: Tapping `+ Add Shift` or `Edit Shift` smoothly launches the **Shift Hours Editor Bottom Sheet Modal (`#shiftModalSheet`)** over the blurred backdrop, keeping the main page 100% clean and free of inline form clutter.
+* **In-Page Trigger**: Tapping `+ Add Shift` or `Edit Shift` smoothly expands the **In-Page Shift Hours Card (`#inPageShiftCard`)** right inside the document flow, avoiding cramped bottom sheets and double-scrolling anti-patterns.
 
 ### 6.3 Configured Shift Cards (Saved State)
 * **Container**: Clean neutral surface `#F6F8F9` with `1.5px solid #EDF2F1`, `18px` border radius, padding `16px`.
@@ -210,17 +210,29 @@ The schedule configuration screens transform clinical timetable settings into a 
   * `Edit Shift`: Pill button (`#FFFFFF` background, border `1px solid #DCE5E3`, text `#052E28`, `Urbanist 14px Bold`).
   * `Delete`: Minimal square button (`#FFFFFF`, border `1px solid #FEE4E2`, icon `ph ph-trash` in `#D92D20`).
 
-### 6.4 Shift Hours Editor Bottom Sheet Modal (`#shiftModalSheet`)
-* **Editorial Modal Structure (Universal Big Text Standard)**:
-  * Top Badge: Clean rounded square pastel badge (`#D6EAE6`) with `<i class="ph ph-clock"></i>` in `#052E28`.
-  * Headline: `Urbanist 30px Bold #000000` (`Add Shift Hours` / `Edit Shift 1`).
-  * Subtitle: `DM Sans 13.5px #717171` (`Configure consultation hours and maximum patient limit.`).
-  * Consultation Segment: Dual segmented pills (`Video` vs `In Person`), active button in `#D6EAE6` (Card Sage) with soft `#7EB8AE` border and `#052E28` bold text.
-  * Start & End Time Tiles: Side-by-side `#FFFFFF` tiles (`14px` radius) with `11.5px` label and `Urbanist 17px Bold` time text.
-  * Repeat Day Selector: 7 modern rounded square day chips (`8px` radius, `S`, `M`, `T`, `W`, `T`, `F`, `S`). Selected days in `#D6EAE6` (Card Sage) with soft `#7EB8AE` border and `#052E28` bold text.
-  * Patient Limit Stepper: Integrated `[-] 15 [+]` counter in `#FFFFFF` container.
+### 6.4 In-Page Shift Hours Card Architecture (`#inPageShiftCard`)
+* **In-Page Card Structure (Non-Modal, No Bottom Sheet Overflow)**:
+  * Container: `#FFFFFF` card surface with `1.5px solid #D6EAE6`, `20px` border radius, padding `18px 16px`, shadow `0 8px 30px rgba(5, 46, 40, 0.07)`.
+  * Top Header: Clock icon badge (`#EFF7F5`, color `#052E28`) + `Urbanist 17px Bold` title (`Add Shift Hours` / `Edit Shift 1`) + sleek circular close button `✕` (`.btn-inpage-card-close`).
+  * Booked Patients Lock Banner: High-priority notice banner (`#EFF7F5`, border-left `3.5px solid #052E28`) displayed dynamically when `bookedPatients > 0`.
+  * Consultation Segment: Dual segmented switch (`Video` vs `In Person`) with icons.
+  * Start & End Time Tiles: Side-by-side tiles with clock icon and values (`02:00 PM` / `06:00 PM`), triggering the dedicated non-scrolling Time Picker modal (`#timePickerModalSheet`).
+  * Dynamic Duration Badge: Real-time badge (`#shiftModalDurationBadge`: `• 4 Hours Duration`).
+  * Repeat Day Selector: Circular day chips (`S`, `M`, `T`, `W`, `T`, `F`, `S`). Selected days in `#052E28` with white bold text.
+  * Patient Limit Stepper: Stepper with `[−] 15 [+]` counter and `Max 15 Patients` subtext.
   * Repeat Weekly Switch: Row with `Urbanist 15px Bold` title + toggle switch.
-  * Dual Action Row: `Cancel` (`#F6F8F9` background, `#052E28` text, height `52px`, `border-radius: 100px`) + `Save Shift` (`#052E28`, `#FFFFFF` text, height `52px`, `border-radius: 100px`, `box-shadow: 0 6px 20px rgba(5,46,40,0.22)`).
+  * Save Button: Full-width `#052E28` primary button (`Save Shift` / `Update Shift`, height `48px`, border-radius `100px`).
+
+### 6.5 Dedicated Time Picker Bottom Sheet Modal (`#timePickerModalSheet`)
+* **Compact, Non-Scrollable Single Bottom Sheet**:
+  * Dedicated exclusively to the 3-column scrollable wheel (`Hour | Min | AM/PM`).
+  * Top Header with Clock icon, editorial title (`Select Start Time` / `Select End Time`), and live preview chip (`Selected: 02:00 PM • 4 Hours Duration`).
+  * Calibrated 44px wheel lens with smooth momentum scrolling.
+  * **30-Minute Minimum Shift Gap Safeguard**:
+    * When selecting **End Time**, any time earlier than `Start Time + 30 minutes` is **strictly blocked / disabled** across both Hours and Minutes columns (`.time-wheel-item.disabled`).
+    * Tapping or scrolling past disabled slots auto-snaps to the minimum valid time (`Start Time + 30m`).
+  * **Auto-Advancing Start Time**: Setting a Start Time that leaves less than 30 minutes before current End Time automatically advances End Time by 1 hour.
+  * **Set Time Action**: Prominent `Set Time` CTA button confirms selection and updates the in-page form tiles with zero scroll clutter.
 
 ---
 
@@ -695,8 +707,12 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 * **Action Buttons**:
   * Paired `Cancel` and `Set Start/End (XX:XX PM)` CTA (`.btn-sheet-confirm`) that saves the formatted time back to the shift form with a toast notification.
 
-### 19.11 Shift-Specific Cancellation & Desk Auto-Promotion Protocol (`#cancelShiftModalSheet`)
-* **Clinical Context**: A doctor scheduled for multiple shifts on a single day (e.g., Shift 1 at 10 AM with 12 booked patients, and Shift 2 at 6 PM with 8 booked patients) can cancel Shift 1 without cancelling Shift 2.
+### 19.11 Shift-Specific Cancellation, Booked Capacity & Desk Auto-Promotion Protocol (`#cancelShiftModalSheet`)
+* **Clinical Context**: A doctor scheduled for multiple shifts on a single day (e.g., Shift 1 at 10 AM with 12 booked patients, and Shift 2 at 6 PM with 0 booked patients) can cancel Shift 1 without cancelling Shift 2.
+* **Booked Patient Count & Locked Edit State**:
+  * **Shift Card Display**: Each shift card displays live booking status (e.g., `<span class="shift-booked-count-badge"><i class="ph-fill ph-users"></i> 12 Patients Booked</span>` • `Max 15 Capacity`).
+  * **Locked Edit Rule**: Whenever `bookedPatients > 0`, the `Edit Shift` button is **disabled/locked** (`.btn-shift-edit.disabled`) with a lock icon (`<i class="ph ph-lock"></i> Edit (12 Booked)`) to prevent changing shift hours while patients hold active appointments.
+  * **Unlocked Edit & Clean Deletion**: When `bookedPatients === 0` (or after all patients are seen), the `Edit Shift` and `Delete Shift` buttons are enabled and allow immediate modification without patient notifications.
 * **Safety Bottom Sheet (`#cancelShiftModalSheet`)**:
   * High-visibility patient impact card: `⚠️ 12 Booked Patients Affected`.
   * Explicit confirmation: Explains that Shift 1 will be removed while Shift 2 (6:00 PM – 11:00 PM) remains running.
@@ -821,4 +837,55 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * **Empty Input State (Voice Mode)**: Displays a circular soft sage pill button (`.btn-onu-action-morph.voice-mode`: `#E8F6F3` background, `#0D7A5F` waveform icon `ph-waveform`). Tapping immediately opens the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
     * **Active Typing State (Send Mode)**: Smoothly morphs into a deep forest green circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` crisp arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
 * **Subtle AI Disclaimer**: `Onubot can make mistakes. Check important info.` (`DM Sans 10px #94A3B8`).
+
+---
+
+## 23. My Wallet & Payout System Standard (`#pageWallet`)
+
+### 23.1 Header & Top Synchronized Geometry
+* **Title & Subtitle**: `.header-title` `My Wallet` (`Urbanist 25px Bold #000000`, letter-spacing `-0.02em`) + `.header-subtitle` `Balance & payouts` (`DM Sans 13.5px Regular #717171`).
+* **Header Height Alignment**: Uses standard `.app-header` container identical in vertical height and padding across all primary tabs (`Desk`, `Patients`, `Onu`, `Wallet`, `Profile`).
+* **Settings Action Button**: Top-right circular button (`40px × 40px`, `#F0F6F5` background, `ph ph-gear` in `#052E28`) triggering the **Saved Accounts & Payout Settings Bottom Sheet (`#earningsSettingsModalSheet`)**.
+
+### 23.2 Hero Balance Card Architecture (`.wallet-hero-card`)
+* **Sage Glassmorphic Surface**: `linear-gradient(135deg, rgba(239, 247, 245, 0.95), rgba(214, 234, 230, 0.8))` with `backdrop-filter: blur(16px)` and `border: 1.5px solid rgba(126, 184, 174, 0.4)`.
+* **Vertical Rhythm & Generous Spacing (`padding: 20px; gap: 16px;`)**:
+  1. **Top Badge**: Frosted white pill `.badge-pill-light` with dark green wallet icon and `Available Balance` text.
+  2. **Metric Value**: Currency `৳ 12,400` in `Urbanist 34px Bold #052E28` with zero redundant subtext beneath it.
+  3. **Primary CTA**: Full-width `#052E28` dark forest green button `Withdraw Funds` (`Urbanist 15px Bold #FFFFFF`, `height: 48px`, `border-radius: 100px`).
+
+### 23.3 Financial Overview 2-Column Split Card (`.financial-card`)
+* **Neutral Surface**: Single unified `#F6F8F9` card with `1.5px solid #EDF2F1`, `18px` border radius, and `1px solid #D0E5E0` vertical divider.
+* **Column 1**: `Today's Earnings` (`DM Sans 12px #717171`) + `৳ 3,200` (`Urbanist 21px Bold #052E28`).
+* **Column 2**: `Total Earnings` (`DM Sans 12px #717171`) + `৳ 48,600` (`Urbanist 21px Bold #052E28`).
+* **Cognitive Decluttering Rule**: No noisy percentage chips (+15%), no "Lifetime" redundancies, no visit counters inside these metric tiles.
+
+### 23.4 Recent Transactions List (`.transaction-item-card`)
+* **Section Gap**: Strict `14px` between section header and cards, `10px` between transaction items.
+* **Item Card**: Pure white `#FFFFFF` surface with `1.5px solid #EEF3F2`, `14px` radius, padding `14px 16px`.
+* **Left Cluster**: Circular pastel icon container (`40px × 40px`, `#E8F4F1` with `#052E28` icon for income, `#FEE4E2` with `#D92D20` icon for payout), transaction title (`Urbanist 15px Bold #000000`), and timestamp subtitle (`DM Sans 12px #717171`).
+* **Right Cluster**: Clean amount (`+৳ 1,000` in `#0D7A48` bold / `-৳ 1,000` in `#000000` bold).
+
+### 23.5 Editorial Bottom Sheet Modals for Wallet Flow
+1. **Withdraw Funds Bottom Sheet (`#withdrawFundsModalSheet`)**:
+   - Editorial header: `Withdraw Funds` (`Urbanist 30px Bold`) + `Transfer your earnings directly to your bank account or bKash.` (`DM Sans 13.5px #717171`).
+   - Top balance pill: `.withdraw-avail-pill` (`৳ 12,400 Available` with green check circle).
+   - **Amount Input Card (ON TOP)**: Compact, sleek `#F6F8F9` card with `Enter Withdrawal Amount` label, `0% Fee` tag, currency prefix `৳` (`Urbanist 24px Bold #052E28`), and `Urbanist 26px` numeric input with subtle focus elevation (`#FFFFFF` background + `0 0 0 3px rgba(5, 46, 40, 0.08)` focus ring). Zero preset chip clutter.
+   - **Deposit to Dropup Selector (AT BOTTOM)**: Space-saving custom dropdown (`.withdraw-dropdown-trigger`) displaying active account icon, bold name, and masked number with animated chevron caret (`.withdraw-dropdown-caret`). Tapping opens a sleek floating menu upwards (`bottom: calc(100% + 6px)` dropup) with sage selection highlights (`#D6EAE6` / `#052E28`) and check indicator, preventing the modal from scrolling or pushing buttons off-screen.
+   - Dual actions: `Cancel` (neutral) + **`Withdraw`** primary `#052E28` CTA with `<i class="ph ph-arrow-up-right"></i>`.
+2. **Saved Accounts Bottom Sheet (`#earningsSettingsModalSheet`)**:
+   - Editorial header: `Saved Accounts` (`Urbanist 32px Bold`) + `Manage payout methods & bank accounts` (`DM Sans 14px #717171`).
+   - Dynamic list of saved accounts (Bank / Mobile MFS) with active badges and delete icons.
+   - Dashed action button `+ Add New Method` triggering the add sheet.
+   - Clean empty state when 0 accounts are configured.
+3. **Add Payout Method Bottom Sheet (`#addPayoutMethodModalSheet`)**:
+   - Editorial header: `Add Method` + `Link your bank or mobile financial service`.
+   - Segmented selector: `Bank Account` vs `Mobile MFS (bKash/Nagad)` using Sage selection states (`#D6EAE6` fill + `#7EB8AE` border).
+   - Clean manual text inputs for Bank Name, Account Holder Name, and Account Number.
+   - Dual action row (`Cancel` + `Save Account` primary `#052E28` CTA) with fixed bottom clearance preventing button clipping.
+4. **Delete Account Confirmation Modal (`#modalDeleteAccountConfirm`)**:
+   - Crimson badge icon (`#FEE4E2` with `#D92D20` trash icon).
+   - Headline: `Remove Account?` (`Urbanist 28px Bold`).
+   - Dual actions: `Keep Account` (neutral) + `Remove` (destructive crimson `#EA3B50`).
+
 
