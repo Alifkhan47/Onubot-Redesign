@@ -671,14 +671,14 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Status Tag**: Pill badge (`background: #FEF3F2; border: 1px solid #FECDCA; color: #B42318;`) with a subtle 6px pulsing red status dot.
   * **Top Toggle & Meta**: Label shows `"Doctor Offline"` with a 6px red status indicator dot, and section meta displays `"Shift Paused"` in `#D92D20`.
 
-### 19.9 Offline Auto-Cancellation & All Appointments Queue Handling
-* **Clinical Principle**: When a doctor confirms going offline (e.g. for Rest of Today, Next 3 Days, or 1 Week), all booked patient appointments falling within that duration are automatically cancelled and patients receive 1-tap rebooking links.
-* **All Appointments Behavior**:
-  * **Upcoming Tab**: Days within the offline duration (e.g., `Today`) do not show queued patients because their slots are cancelled.
-  * **Contextual Empty State**: If viewing a cancelled day (e.g. `Today`) in Upcoming while offline, the screen renders an informative empty state:
-    * Red moon icon (`#D92D20`).
-    * Title: `Doctor is Offline`.
-    * Subtext: `"Today's appointments were cancelled because you are offline (Rest of Today). Patients were notified to rebook."`
+### 19.9 3-Mode "Take a Break" / Go Offline Protocol (`#goingOfflineSheet`)
+* **Clinical Purpose**: Enable doctors to pause visits either immediately, for specific upcoming dates in the 7-day strip, or indefinitely until manual resumption.
+* **3 Break Modes**:
+  1. **Rest of Today**: Immediate emergency break for today's remaining appointments (`2 patients affected`).
+  2. **Specific Dates (7-Day Strip)**: Expandable interactive 7-day pill strip (`Sun 27`, `Mon 28`, `Tue 29`, `Wed 30`, `Thu 1`, `Fri 2`, `Sat 3`) where the doctor can multi-select dates (e.g. `Thu 1 & Fri 2`). Live counter recalculates affected patients (e.g. `14 patients affected on selected dates`).
+  3. **Until I turn it back on**: Indefinite pause for doctors taking time off or sickness until manually toggled back on from the Desk top bar.
+* **Automated Rebooking Notice**: Booked patients on paused dates receive automated SMS notices with 1-tap priority links to rebook into active shifts or future dates.
+
 ### 19.10 Interactive Clinical Time Picker Standard (`#timePickerModalSheet`)
 * **Purpose**: Provide doctors with a dedicated, tactile, error-free interface to configure shift Start Time and End Time without clunky native browser text inputs.
 * **Trigger Mechanism**: Clicking either the `Start Time` or `End Time` tile (`.time-input-tile`) inside the Add/Edit Shift Hours sheet (`#shiftModalSheet`) opens the dedicated Time Picker sheet (`#timePickerModalSheet`) with elevated `z-index: 125`.
@@ -694,6 +694,15 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * Live helper banner showing the calculated shift window (e.g. `Shift Window: 02:00 PM → 06:00 PM`).
 * **Action Buttons**:
   * Paired `Cancel` and `Set Start/End (XX:XX PM)` CTA (`.btn-sheet-confirm`) that saves the formatted time back to the shift form with a toast notification.
+
+### 19.11 Shift-Specific Cancellation & Desk Auto-Promotion Protocol (`#cancelShiftModalSheet`)
+* **Clinical Context**: A doctor scheduled for multiple shifts on a single day (e.g., Shift 1 at 10 AM with 12 booked patients, and Shift 2 at 6 PM with 8 booked patients) can cancel Shift 1 without cancelling Shift 2.
+* **Safety Bottom Sheet (`#cancelShiftModalSheet`)**:
+  * High-visibility patient impact card: `⚠️ 12 Booked Patients Affected`.
+  * Explicit confirmation: Explains that Shift 1 will be removed while Shift 2 (6:00 PM – 11:00 PM) remains running.
+  * Auto-notification guarantee: Explains that all 12 patients will receive immediate cancellation notices with 1-tap rebooking links for Shift 2 or upcoming days.
+* **Desk Hero Auto-Promotion**:
+  * Once Shift 1 is cancelled, the Desk Hero card automatically shifts focus and promotes **Shift 2 (6:00 PM)** as the active upcoming shift (`Shift 2 Starts at 6:00 PM`), preserving total flow continuity.
 
 ---
 

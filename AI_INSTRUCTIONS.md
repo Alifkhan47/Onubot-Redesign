@@ -86,7 +86,7 @@ c:\Alif\Onu App Prototype\
   6. `#pagePrescriptionPreview`: Official PDF-like digital prescription preview.
   7. `#pageAppointments`: All Appointments & Shift History with tab switching (`Upcoming` vs `History`) and Date/Shift filtering.
   8. `#pageAppointmentDetails`: Clinical record inspection with dynamic relevance sorting.
-  * **Modals / Bottom Sheets**: `#shiftModalSheet`, `#timePickerModalSheet`, `#goingOfflineModalSheet`, `#endCallModalSheet`, `#addMedicineModalSheet`, `#addLabModalSheet`, `#referDoctorModalSheet`, `#deleteConfirmModalSheet`, `#skipPatientModalSheet`, `#apptFilterModalSheet`.
+  * **Modals / Bottom Sheets**: `#shiftModalSheet`, `#timePickerModalSheet`, `#goingOfflineSheet`, `#cancelShiftModalSheet`, `#endCallModalSheet`, `#addMedicineModalSheet`, `#addLabModalSheet`, `#referDoctorModalSheet`, `#deleteConfirmModalSheet`, `#skipPatientModalSheet`, `#apptFilterModalSheet`.
 * **Lines 5600–7850**: Core JavaScript Application State & Controllers.
 
 ---

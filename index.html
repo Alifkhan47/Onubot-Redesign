@@ -1919,6 +1919,173 @@
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
     }
 
+    /* Offline Date Selector & Notice Styles */
+    .offline-custom-panel {
+      background: #ffffff;
+      border: 1.5px solid #D2E7E1;
+      border-radius: 16px;
+      padding: 12px 14px;
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .offline-panel-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .offline-days-grid {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 2px 1px 4px;
+    }
+
+    .offline-days-grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .offline-day-pill {
+      flex: 1;
+      min-width: 44px;
+      height: 52px;
+      border-radius: 12px;
+      background: #F6F8F9;
+      border: 1.5px solid #E2ECE9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 0;
+      color: var(--color-text-primary);
+    }
+
+    .offline-day-pill:hover {
+      border-color: #052E28;
+      background: #EFF7F5;
+    }
+
+    .offline-day-pill.active {
+      background: #052E28;
+      border-color: #052E28;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(5, 46, 40, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .offline-day-pill .off-day-name {
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: inherit;
+      opacity: 0.85;
+    }
+
+    .offline-day-pill .off-day-num {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: inherit;
+      line-height: 1;
+    }
+
+    .offline-selection-summary {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #052E28;
+      background: #EFF7F5;
+      padding: 7px 12px;
+      border-radius: 9px;
+      border-left: 3px solid #052E28;
+      line-height: 1.35;
+    }
+
+    .offline-impact-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #F6F8F9;
+      border: 1px solid #E2ECE9;
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #555555;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    .offline-impact-notice i {
+      font-size: 16px;
+      color: #052E28;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Shift Cancellation Specific Styles */
+    .cancel-shift-impact-box {
+      background: #FEF3F2;
+      border: 1.5px solid #FECDCA;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .cancel-impact-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #D92D20;
+    }
+
+    .cancel-impact-desc {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #4B5563;
+      line-height: 1.4;
+    }
+
+    .cancel-rebook-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      background: #EFF7F5;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border-left: 3.5px solid #052E28;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #052E28;
+      line-height: 1.4;
+    }
+
+    .cancel-rebook-notice i {
+      font-size: 16px;
+      color: #052E28;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
     .sheet-actions-group {
       display: flex;
       gap: 10px;
@@ -7304,7 +7471,7 @@
              ======================================================= -->
         <div class="modal-backdrop" id="modalBackdrop" onclick="closeAllModals()"></div>
         
-        <div class="bottom-sheet" id="goingOfflineSheet">
+        <div class="bottom-sheet" id="goingOfflineSheet" style="max-height: 92%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
             <div class="sheet-badge-icon">
@@ -7318,23 +7485,73 @@
           </div>
 
           <div class="duration-pills-group">
-            <div class="duration-pill-item active" onclick="selectDuration(this, 'Rest of Today', 2)">
+            <!-- Option 1: Rest of Today -->
+            <div class="duration-pill-item active" id="offlineOptToday" onclick="selectOfflineMode('today')">
               <span class="pill-left-text">Rest of Today</span>
               <span class="pill-right-meta">2 patients affected</span>
             </div>
 
-            <div class="duration-pill-item" onclick="selectDuration(this, 'Next 3 Days', 18)">
-              <span class="pill-left-text">Next 3 Days</span>
-              <span class="pill-right-meta">18 patients affected</span>
+            <!-- Option 2: Specific Dates (7-day schedule strip) -->
+            <div class="duration-pill-item" id="offlineOptDates" onclick="selectOfflineMode('dates')">
+              <span class="pill-left-text">Specific Dates</span>
+              <span class="pill-right-meta" id="offlineDatesMetaBadge">Choose days</span>
             </div>
 
-            <div class="duration-pill-item" onclick="selectDuration(this, '1 Week', 45)">
-              <span class="pill-left-text">1 Week</span>
-              <span class="pill-right-meta">45 patients affected</span>
+            <!-- Expandable 7-Day Date Selector Panel -->
+            <div class="offline-custom-panel" id="offlineCustomDatesPanel" style="display: none;">
+              <div class="offline-panel-label">
+                <span>Select dates to take off:</span>
+                <span style="font-weight: 700; color: #052E28;">Next 7 Days</span>
+              </div>
+              <div class="offline-days-grid" id="offlineDaysGrid">
+                <button type="button" class="offline-day-pill" data-date="Sun 27" data-name="Sunday, Sept 27" data-patients="2" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Sun</span>
+                  <span class="off-day-num">27</span>
+                </button>
+                <button type="button" class="offline-day-pill" data-date="Mon 28" data-name="Monday, Sept 28" data-patients="5" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Mon</span>
+                  <span class="off-day-num">28</span>
+                </button>
+                <button type="button" class="offline-day-pill" data-date="Tue 29" data-name="Tuesday, Sept 29" data-patients="4" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Tue</span>
+                  <span class="off-day-num">29</span>
+                </button>
+                <button type="button" class="offline-day-pill" data-date="Wed 30" data-name="Wednesday, Sept 30" data-patients="7" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Wed</span>
+                  <span class="off-day-num">30</span>
+                </button>
+                <button type="button" class="offline-day-pill active" data-date="Thu 1" data-name="Thursday, Oct 1" data-patients="6" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Thu</span>
+                  <span class="off-day-num">1</span>
+                </button>
+                <button type="button" class="offline-day-pill active" data-date="Fri 2" data-name="Friday, Oct 2" data-patients="8" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Fri</span>
+                  <span class="off-day-num">2</span>
+                </button>
+                <button type="button" class="offline-day-pill" data-date="Sat 3" data-name="Saturday, Oct 3" data-patients="6" onclick="toggleOfflineDate(this)">
+                  <span class="off-day-name">Sat</span>
+                  <span class="off-day-num">3</span>
+                </button>
+              </div>
+              <div class="offline-selection-summary" id="offlineDatesSummaryText">
+                Selected: Thu 1 &amp; Fri 2 • 14 patients affected
+              </div>
+            </div>
+
+            <!-- Option 3: Until I Turn It Back On (Indefinite) -->
+            <div class="duration-pill-item" id="offlineOptManual" onclick="selectOfflineMode('manual')">
+              <span class="pill-left-text">Until I turn it back on</span>
+              <span class="pill-right-meta">Indefinite</span>
             </div>
           </div>
 
-          <div class="sheet-actions-group">
+          <!-- Dynamic Impact & Rebook Notice -->
+          <div class="offline-impact-notice">
+            <i class="ph-fill ph-info"></i>
+            <span id="offlineImpactNoticeText">Remaining visits for today will be paused. Patients will receive automated priority rebooking links.</span>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 8px;">
             <button class="btn-sheet-cancel" onclick="closeGoingOfflineModal()">Cancel</button>
             <button class="btn-sheet-confirm" onclick="confirmGoingOffline()">
               <span>Go Offline</span>
@@ -7795,6 +8012,48 @@
             <button type="button" class="btn-sheet-danger-confirm" onclick="confirmDeleteItem()">
               <i class="ph ph-trash"></i>
               <span>Delete</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             10B. CANCEL SHIFT CONFIRMATION BOTTOM SHEET MODAL (Clinical Multi-Shift Protocol)
+             ======================================================= -->
+        <div class="bottom-sheet" id="cancelShiftModalSheet">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon danger-badge">
+              <i class="ph ph-calendar-x"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" id="cancelShiftModalTitle">Cancel Shift 1?</h2>
+            <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 27 • 10:00 AM – 12:00 PM</p>
+          </div>
+
+          <!-- Impact Box -->
+          <div class="cancel-shift-impact-box">
+            <div class="cancel-impact-top">
+              <i class="ph-fill ph-warning-circle"></i>
+              <span id="cancelShiftPatientCountText">12 Booked Patients Affected</span>
+            </div>
+            <p class="cancel-impact-desc" id="cancelShiftImpactDesc">
+              Shift 1 will be cancelled and removed from your schedule. Shift 2 (06:00 PM – 11:00 PM) will remain active and running.
+            </p>
+          </div>
+
+          <!-- Auto-Rebooking Notice -->
+          <div class="cancel-rebook-notice">
+            <i class="ph-fill ph-chat-circle-dots"></i>
+            <span>All booked patients will receive immediate SMS/push notices with 1-tap priority links to rebook into Shift 2 or upcoming days.</span>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 10px;">
+            <button type="button" class="btn-sheet-cancel" onclick="closeCancelShiftModal()">Keep Shift</button>
+            <button type="button" class="btn-sheet-danger-confirm" onclick="confirmCancelShiftAction()">
+              <i class="ph ph-x-circle"></i>
+              <span>Cancel Shift &amp; Notify</span>
             </button>
           </div>
         </div>
@@ -11563,6 +11822,7 @@
       closeGoingOfflineModal();
       closeShiftModal();
       closeTimePickerModal();
+      closeCancelShiftModal();
       closeEndCallModal();
       closeMedicineModal();
       closeLabModal();
@@ -11660,29 +11920,112 @@
       closeShiftModal();
     }
 
+    // Shift Cancellation State Management
+    let pendingCancelShiftCardId = null;
+    let pendingCancelShiftName = null;
+    let isShift1Cancelled = false;
+
     function requestDeleteShift(cardId, shiftName) {
-      pendingDeleteCallback = () => {
-        const card = document.getElementById(cardId);
-        if (card) {
-          card.style.opacity = '0';
-          card.style.transform = 'scale(0.95)';
-          setTimeout(() => {
-            card.remove();
-            showToast(`${shiftName} deleted`);
-          }, 200);
-        }
-      };
-      const titleEl = document.getElementById('deleteModalTitle');
-      const subEl = document.getElementById('deleteModalSubtitle');
-      if (titleEl) {
-        titleEl.textContent = `Delete ${shiftName}?`;
+      pendingCancelShiftCardId = cardId;
+      pendingCancelShiftName = shiftName;
+      
+      const titleEl = document.getElementById('cancelShiftModalTitle');
+      const subEl = document.getElementById('cancelShiftModalSubtitle');
+      const countEl = document.getElementById('cancelShiftPatientCountText');
+      const descEl = document.getElementById('cancelShiftImpactDesc');
+
+      if (shiftName === 'Shift 1' || cardId === 'shiftCard1') {
+        if (titleEl) titleEl.textContent = 'Cancel Shift 1 (10 AM – 12 PM)?';
+        if (subEl) subEl.textContent = 'Sunday, Sept 27 • 10:00 AM – 12:00 PM';
+        if (countEl) countEl.textContent = '12 Booked Patients Affected';
+        if (descEl) descEl.textContent = 'Shift 1 will be cancelled and removed from your schedule. Shift 2 (06:00 PM – 11:00 PM) will remain active and running.';
+      } else {
+        if (titleEl) titleEl.textContent = `Cancel ${shiftName}?`;
+        if (subEl) subEl.textContent = 'Sunday, Sept 27 • Scheduled Shift';
+        if (countEl) countEl.textContent = '8 Booked Patients Affected';
+        if (descEl) descEl.textContent = `${shiftName} will be cancelled and removed from your schedule. Other shifts will remain active.`;
       }
-      if (subEl) {
-        subEl.textContent = 'This shift will be removed from your scheduled hours.';
-        subEl.style.display = 'block';
-      }
+
       document.getElementById('modalBackdrop').classList.add('active');
-      document.getElementById('deleteConfirmModalSheet').classList.add('active');
+      document.getElementById('cancelShiftModalSheet').classList.add('active');
+    }
+
+    function closeCancelShiftModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+      const sheet = document.getElementById('cancelShiftModalSheet');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function confirmCancelShiftAction() {
+      const card = document.getElementById(pendingCancelShiftCardId);
+      if (card) {
+        card.style.opacity = '0';
+        card.style.transform = 'scale(0.95)';
+        card.style.transition = 'all 0.25s ease';
+        setTimeout(() => {
+          card.remove();
+        }, 240);
+      }
+
+      if (pendingCancelShiftName === 'Shift 1' || pendingCancelShiftCardId === 'shiftCard1') {
+        isShift1Cancelled = true;
+        // Promote Shift 2 onto the Desk Hero Card!
+        promoteShift2OnDesk();
+        // Update Shift 1 appointments to Cancelled status in appointments list
+        if (typeof appointmentsData !== 'undefined') {
+          appointmentsData.forEach(apt => {
+            if (apt.shift === 'Shift 1' || apt.shift === '1') {
+              apt.status = 'cancelled';
+              apt.statusText = 'Cancelled (Shift Cancelled)';
+            }
+          });
+          renderAppointmentsList();
+        }
+      }
+
+      closeCancelShiftModal();
+      showToast(`${pendingCancelShiftName || 'Shift'} cancelled • Patients notified to rebook`);
+    }
+
+    function promoteShift2OnDesk() {
+      const heroCard = document.getElementById('heroCard');
+      const heroContainer = document.getElementById('heroCardInner');
+      const headerMeta = document.getElementById('headerTimeMeta');
+      if (headerMeta) {
+        headerMeta.innerHTML = 'Next Shift: <span style="font-weight:700; color:#052E28;">06:00 PM</span>';
+      }
+
+      if (heroContainer && !isDoctorOffline) {
+        heroContainer.style.opacity = '0';
+        heroContainer.style.transform = 'translateY(6px)';
+        heroContainer.style.transition = 'all 0.25s ease';
+        setTimeout(() => {
+          if (heroCard) heroCard.className = 'patient-hero-card locked-card';
+          heroContainer.innerHTML = `
+            <div class="card-badge-row">
+              <span class="badge-pill-light">
+                <i class="ph ph-lock-key"></i>
+                Shift 2 (6:00 PM)
+              </span>
+              <span class="badge-pill-status">8 in Queue</span>
+            </div>
+
+            <div class="patient-details">
+              <h3 class="patient-name">Shift 2 Starts at 6:00 PM</h3>
+              <div class="patient-info">
+                <span>Shift 1 cancelled • Evening Shift active</span>
+              </div>
+            </div>
+
+            <button class="btn-hero-action btn-hero-locked" onclick="showToast('Shift 2 unlocks at 5:58 PM')">
+              <i class="ph ph-lock-key"></i>
+              <span>Shift 2 Locked Until 5:58 PM</span>
+            </button>
+          `;
+          heroContainer.style.opacity = '1';
+          heroContainer.style.transform = 'translateY(0)';
+        }, 260);
+      }
     }
 
     function deleteShift(cardId, shiftName) {
@@ -11907,6 +12250,12 @@
       }
     }
 
+    // Offline State Management
+    let selectedOfflineMode = 'today'; // 'today', 'dates', 'manual'
+    let selectedOfflineDates = ['Thu 1', 'Fri 2'];
+    let selectedOfflinePatientCount = 2;
+    let selectedDurationTitle = 'Rest of Today';
+
     function openGoingOfflineModal() {
       document.getElementById('modalBackdrop').classList.add('active');
       document.getElementById('goingOfflineSheet').classList.add('active');
@@ -11917,16 +12266,79 @@
       document.getElementById('goingOfflineSheet').classList.remove('active');
     }
 
-    function selectDuration(pillEl, title, patientCount) {
-      document.querySelectorAll('.duration-pill-item').forEach(pill => pill.classList.remove('active'));
-      pillEl.classList.add('active');
-      selectedDurationTitle = title;
-      selectedPatientCount = patientCount;
+    function selectOfflineMode(mode) {
+      selectedOfflineMode = mode;
+      
+      const optToday = document.getElementById('offlineOptToday');
+      const optDates = document.getElementById('offlineOptDates');
+      const optManual = document.getElementById('offlineOptManual');
+      const customPanel = document.getElementById('offlineCustomDatesPanel');
+      const noticeText = document.getElementById('offlineImpactNoticeText');
+
+      if (optToday) optToday.classList.toggle('active', mode === 'today');
+      if (optDates) optDates.classList.toggle('active', mode === 'dates');
+      if (optManual) optManual.classList.toggle('active', mode === 'manual');
+
+      if (mode === 'today') {
+        if (customPanel) customPanel.style.display = 'none';
+        selectedDurationTitle = 'Rest of Today';
+        selectedOfflinePatientCount = 2;
+        if (noticeText) noticeText.textContent = 'Remaining visits for today will be paused. Patients will receive automated priority rebooking links.';
+      } else if (mode === 'dates') {
+        if (customPanel) customPanel.style.display = 'flex';
+        updateOfflineDatesCalculation();
+      } else if (mode === 'manual') {
+        if (customPanel) customPanel.style.display = 'none';
+        selectedDurationTitle = 'Until Turn On';
+        selectedOfflinePatientCount = 'All';
+        if (noticeText) noticeText.textContent = 'All upcoming shifts will be paused until you manually turn accepting visits back on.';
+      }
+    }
+
+    function toggleOfflineDate(pillEl) {
+      pillEl.classList.toggle('active');
+      const dateKey = pillEl.getAttribute('data-date');
+      if (pillEl.classList.contains('active')) {
+        if (!selectedOfflineDates.includes(dateKey)) {
+          selectedOfflineDates.push(dateKey);
+        }
+      } else {
+        selectedOfflineDates = selectedOfflineDates.filter(d => d !== dateKey);
+      }
+      updateOfflineDatesCalculation();
+    }
+
+    function updateOfflineDatesCalculation() {
+      let totalPatients = 0;
+      const activePills = document.querySelectorAll('.offline-day-pill.active');
+      const selectedNames = [];
+      activePills.forEach(pill => {
+        const count = parseInt(pill.getAttribute('data-patients'), 10) || 0;
+        totalPatients += count;
+        selectedNames.push(pill.getAttribute('data-date'));
+      });
+
+      selectedOfflinePatientCount = totalPatients;
+      const metaBadge = document.getElementById('offlineDatesMetaBadge');
+      const summaryText = document.getElementById('offlineDatesSummaryText');
+      const noticeText = document.getElementById('offlineImpactNoticeText');
+
+      if (selectedNames.length === 0) {
+        selectedDurationTitle = 'No Dates Selected';
+        if (metaBadge) metaBadge.textContent = '0 days selected';
+        if (summaryText) summaryText.textContent = 'Please select at least 1 day to pause.';
+        if (noticeText) noticeText.textContent = 'Select 1 or more days from the schedule strip above.';
+      } else {
+        selectedDurationTitle = selectedNames.join(', ');
+        if (metaBadge) metaBadge.textContent = `${selectedNames.length} days • ${totalPatients} patients`;
+        if (summaryText) summaryText.textContent = `Selected: ${selectedNames.join(' & ')} • ${totalPatients} patients affected`;
+        if (noticeText) noticeText.textContent = `Appointments on ${selectedNames.join(' & ')} will be paused. ${totalPatients} patients will be notified to rebook.`;
+      }
     }
 
     function confirmGoingOffline() {
       const checkbox = document.getElementById('acceptingToggle');
-      checkbox.checked = false;
+      if (checkbox) checkbox.checked = false;
       closeGoingOfflineModal();
       renderOfflineState();
       renderAppointmentsList();
