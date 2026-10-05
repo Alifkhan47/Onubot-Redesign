@@ -860,66 +860,133 @@
 
     .month-label {
       font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--color-text-primary);
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
       letter-spacing: -0.01em;
     }
 
+    .btn-schedule-calendar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 38px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: #EFF7F5;
+      border: 1px solid #7EB8AE;
+      color: #052E28;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      box-shadow: 0 1px 2px rgba(5, 46, 40, 0.04);
+    }
+
+    .btn-schedule-calendar i {
+      font-size: 17px;
+      color: #0E8070;
+    }
+
+    .btn-schedule-calendar:hover {
+      background: #E2EFEA;
+      border-color: #052E28;
+      color: #031F1B;
+      transform: translateY(-1px);
+    }
+
+    .btn-schedule-calendar:active {
+      transform: translateY(0);
+    }
+
+    /* Date Carousel Horizontal Strip (Scrollable Full Month) */
     .date-carousel {
       display: flex;
-      gap: 6px;
-      justify-content: space-between;
+      gap: 8px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 4px 2px 8px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .date-carousel::-webkit-scrollbar {
+      display: none;
     }
 
     .date-pill {
-      flex: 1;
-      height: 60px;
-      background: var(--color-card-neutral);
-      border-radius: 10px;
+      flex: 0 0 54px;
+      height: 68px;
+      background: #FFFFFF;
+      border-radius: 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 3px;
+      gap: 4px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      border: 1.5px solid #edf2f1;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1.5px solid #E2E8F0;
+      scroll-snap-align: start;
+      user-select: none;
     }
 
-    .date-pill:hover {
-      background: var(--color-card-neutral-hover);
+    .date-pill:hover:not(.active) {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
     }
 
     .date-pill.active {
-      background: var(--color-card-sage);
-      border-color: var(--color-border-selected);
-      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.08);
+      background: #052E28 !important;
+      border-color: #052E28 !important;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.25);
     }
 
     .date-day-name {
       font-family: var(--font-body);
       font-size: 11px;
-      font-weight: 600;
-      color: var(--color-text-secondary);
+      font-weight: 700;
+      color: #64748B;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
     .date-day-num {
       font-family: var(--font-heading);
-      font-size: 17px;
-      font-weight: 700;
-      color: var(--color-text-primary);
+      font-size: 19px;
+      font-weight: 800;
+      color: #0F172A;
     }
 
     .date-pill.active .date-day-name {
-      color: var(--color-primary-btn);
+      color: #A7D7CD !important;
       font-weight: 700;
     }
 
     .date-pill.active .date-day-num {
-      color: var(--color-primary-btn);
+      color: #FFFFFF !important;
+    }
+
+    .btn-strip-scroll {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-strip-scroll:hover {
+      background: #E2E8F0;
+      color: #0F172A;
     }
 
     .schedule-day-header {
@@ -932,188 +999,779 @@
     }
 
     .today-badge-chip {
-      background: var(--color-card-sage);
-      color: var(--color-primary-btn);
+      background: #E6F5F2;
+      color: #0E8070;
       padding: 3px 10px;
       border-radius: 8px;
       font-family: var(--font-body);
       font-size: 12px;
       font-weight: 700;
+      border: 1px solid #C4E7DE;
     }
 
     .shifts-list-container {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-element); /* Strict 10px distance between shift cards */
+      gap: 12px;
       width: 100%;
       flex-shrink: 0;
     }
 
     .saved-shift-card {
-      background: var(--color-card-neutral);
+      background: #FFFFFF;
       border-radius: 18px;
-      padding: 16px;
+      padding: 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border: 1.5px solid #edf2f1;
+      border: 1px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
       flex-shrink: 0;
       transition: all 0.18s ease;
     }
 
     .saved-shift-card:hover {
-      background: var(--color-card-neutral-hover);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-color: #CBD5E1;
     }
 
     .saved-shift-top {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-start;
       align-items: center;
     }
 
     .shift-type-pill {
-      background: #f1f5f9;
-      padding: 4px 10px;
-      border-radius: 8px;
+      background: #E6F5F2;
+      border: 1px solid #A3D9CE;
+      padding: 4px 12px;
+      border-radius: 20px;
       font-family: var(--font-heading);
       font-size: 12px;
       font-weight: 700;
-      color: var(--color-primary-btn);
+      color: #0E8070;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-    }
-
-    .shift-index-pill {
-      background: var(--color-card-sage);
-      padding: 3px 9px;
-      border-radius: 6px;
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
+      gap: 6px;
     }
 
     .saved-shift-main {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
     }
 
     .saved-shift-time {
       font-family: var(--font-heading);
       font-size: 20px;
-      font-weight: 700;
-      color: var(--color-text-primary);
-      letter-spacing: -0.02em;
-    }
-
-    .shift-booking-status-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .shift-booked-count-badge {
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 700;
-      color: #052E28;
-      background: #EFF7F5;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      border: 1px solid #D2E7E1;
-    }
-
-    .shift-empty-count-badge {
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 600;
-      color: #717171;
-      background: #F2F5F4;
-      padding: 3px 8px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.01em;
     }
 
     .saved-shift-capacity {
       font-family: var(--font-body);
-      font-size: 12.5px;
-      color: var(--color-text-secondary);
+      font-size: 13px;
+      color: #64748B;
       font-weight: 500;
+    }
+
+    .saved-shift-capacity strong {
+      color: #1E293B;
+      font-weight: 700;
+    }
+
+    .shift-locked-notice-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    .shift-locked-notice-card i {
+      font-size: 16px;
+      color: #475569;
+      flex-shrink: 0;
     }
 
     .saved-shift-actions-row {
       display: flex;
       gap: 8px;
-      margin-top: 2px;
+      align-items: center;
     }
 
     .btn-shift-edit {
       flex: 1;
       height: 42px;
-      background: #ffffff;
-      border: 1px solid #EAEFEF;
+      background: #F1F5F9;
+      border: none;
       border-radius: 12px;
       font-family: var(--font-heading);
       font-size: 14px;
       font-weight: 700;
-      color: var(--color-primary-btn);
+      color: #1E293B;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
       transition: all 0.15s ease;
     }
 
     .btn-shift-edit:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-    }
-
-    .btn-shift-edit.disabled {
-      background: #F4F7F6;
-      color: #7A8B88;
-      border: 1px solid #E2ECE9;
-      cursor: not-allowed;
-      box-shadow: none;
-    }
-
-    .btn-shift-edit.disabled:hover {
-      background: #F4F7F6;
-      border-color: #E2ECE9;
-      transform: none;
+      background: #E2E8F0;
     }
 
     .btn-shift-delete {
       width: 42px;
       height: 42px;
-      background: #ffffff;
-      border: 1px solid #fee4e2;
+      background: #FEE2E2;
+      border: none;
       border-radius: 12px;
-      color: #d92d20;
+      color: #EF4444;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
       transition: all 0.15s ease;
     }
 
     .btn-shift-delete:hover {
-      background: #fef3f2;
-      border-color: #fecdca;
+      background: #FECACA;
+    }
+
+    /* Month Calendar Modal Bottom Sheet Styles */
+    .month-cal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .month-cal-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .month-cal-title,
+    .month-cal-big-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .btn-cal-nav-arrow {
+      width: 36px !important;
+      height: 36px !important;
+      min-width: 36px !important;
+      font-size: 16px !important;
+      background: var(--color-bell-bg, #F0F6F5) !important;
+      border: 1px solid rgba(14, 128, 112, 0.18) !important;
+      color: var(--color-primary-btn, #052E28) !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50% !important;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-cal-nav-arrow:hover:not(:disabled) {
+      background: #D6EAE6 !important;
+      transform: translateY(-1px);
+    }
+
+    .btn-cal-nav-arrow:disabled {
+      opacity: 0.35 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+    }
+
+    .month-cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .month-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 22px;
+    }
+
+    .month-cal-cell {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      border: 1.5px solid #E2ECEA;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 6px 7px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .month-cal-cell.empty {
+      border: none;
+      background: transparent;
+      cursor: default;
+      pointer-events: none;
+      visibility: hidden;
+    }
+
+    /* Distinct styling for Today in Calendar Modal when NOT active */
+    .month-cal-cell.is-today-cell:not(.active) {
+      background: #EFF7F5 !important;
+      border: 1.5px solid #0E8070 !important;
+    }
+
+    .month-cal-cell.is-today-cell:not(.active) .cal-cell-num {
+      color: #0E8070 !important;
+      font-weight: 800;
+    }
+
+    /* Distinct styling for Today on the horizontal date carousel strip */
+    .date-pill.is-today-pill:not(.active) {
+      background: #EFF7F5 !important;
+      border-color: #0E8070 !important;
+    }
+
+    .date-pill.is-today-pill:not(.active) .date-day-num,
+    .date-pill.is-today-pill:not(.active) .date-day-name {
+      color: #0E8070 !important;
+      font-weight: 700;
+    }
+
+    .month-cal-cell:hover:not(.empty):not(.active) {
+      background: var(--color-card-neutral);
+      border-color: var(--color-border-selected);
+      transform: translateY(-1px);
+    }
+
+    .month-cal-cell.active {
+      background: var(--color-primary-btn) !important;
+      border-color: var(--color-primary-btn) !important;
+      box-shadow: 0 4px 12px rgba(5, 46, 40, 0.25);
+    }
+
+    .month-cal-cell.active .cal-cell-num {
+      color: #FFFFFF !important;
+    }
+
+    .cal-cell-num {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      line-height: 1;
+    }
+
+    .cal-cell-dots {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+      margin-top: auto;
+      min-height: 6px;
+    }
+
+    .cal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      display: inline-block !important;
+      flex-shrink: 0;
+    }
+
+    .cal-dot.dot-shift {
+      background: #0E8070 !important;
+    }
+
+    .cal-dot.dot-booked {
+      background: #D97706 !important;
+    }
+
+    .month-cal-cell.active .cal-dot.dot-shift {
+      background: #2DD4BF !important;
+    }
+
+    .month-cal-cell.active .cal-dot.dot-booked {
+      background: #FBBF24 !important;
+    }
+
+    .month-cal-legend {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 24px;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-divider);
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .cal-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cal-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .cal-legend-dot.dot-shift {
+      background: #0E8070;
+    }
+
+    .cal-legend-dot.dot-booked {
+      background: #D97706;
+    }
+
+    /* ============================================================
+       REDESIGNED GO OFFLINE BOTTOM SHEET (Week / Month Multi-Select)
+       ============================================================ */
+    .offline-month-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .offline-month-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .offline-month-name {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .btn-offline-month-nav {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #475569;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-offline-month-nav:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .btn-offline-view-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 36px;
+      padding: 0 14px;
+      border-radius: 20px;
+      background: #EFF7F5;
+      border: 1px solid #7EB8AE;
+      color: #0E8070;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-offline-view-toggle i {
+      font-size: 16px;
+    }
+
+    .btn-offline-view-toggle:hover {
+      background: #E2EFEA;
+      border-color: #052E28;
+      color: #031F1B;
+      transform: translateY(-1px);
+    }
+
+    .offline-cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .offline-dates-container {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 18px;
+    }
+
+    .offline-date-card {
+      width: 100%;
+      aspect-ratio: 1 / 1.18;
+      border-radius: 12px;
+      border: 1px solid #E5EBEA;
+      background: #FAFCFB;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 7px 2px;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .offline-date-card.empty {
+      border: none !important;
+      background: transparent !important;
+      cursor: default !important;
+      pointer-events: none !important;
+      visibility: hidden !important;
+    }
+
+    .offline-date-card:hover:not(.selected) {
+      background: #F0F6F4;
+      border-color: #B2D7D0;
+      transform: translateY(-1px);
+    }
+
+    /* Soft, friendly muted text shades */
+    .off-card-day {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 600;
+      color: #8A9E9A;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .off-card-num {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #2D3E3A;
+      line-height: 1;
+    }
+
+    /* Soft Today indicator in offline grid when unselected */
+    .offline-date-card.is-today-card:not(.selected) {
+      background: #F0F7F5;
+      border-color: #9ECFC5;
+    }
+
+    .offline-date-card.is-today-card:not(.selected) .off-card-day {
+      color: #0E8070;
+      font-weight: 700;
+    }
+
+    .offline-date-card.is-today-card:not(.selected) .off-card-num {
+      color: #0E8070;
+      font-weight: 800;
+    }
+
+    /* Selected (Marked Off) State */
+    .offline-date-card.selected {
+      background: #FFF1F2 !important;
+      border: 1.5px solid #E11D48 !important;
+      box-shadow: 0 3px 10px rgba(225, 29, 72, 0.12);
+    }
+
+    .offline-date-card.selected .off-card-day {
+      color: #E11D48 !important;
+      font-weight: 700;
+    }
+
+    .offline-date-card.selected .off-card-num {
+      color: #BE123C !important;
+      font-weight: 800;
+    }
+
+    .offline-summary-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 2px;
+      margin-bottom: 18px;
+    }
+
+    .offline-days-marked-label {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .offline-bookings-affected-label {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #E11D48;
+    }
+
+    .offline-bookings-affected-label.zero-affected {
+      color: #64748B !important;
+      font-weight: 500 !important;
+    }
+
+    .offline-actions-row {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .btn-offline-cancel {
+      flex: 1;
+      height: 50px;
+      background: #F1F5F9;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-offline-cancel:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .btn-offline-confirm {
+      flex: 1.4;
+      height: 50px;
+      background: #E11D48;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(225, 29, 72, 0.28);
+    }
+
+    .btn-offline-confirm:hover:not(:disabled) {
+      background: #BE123C;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(225, 29, 72, 0.35);
+    }
+
+    .btn-offline-confirm:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-offline-confirm:disabled {
+      background: #FDA4AF !important;
+      opacity: 0.55 !important;
+      cursor: not-allowed !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+
+    /* ============================================================
+       OFFLINE CONFIRMED & PATIENTS RESCHEDULED SUCCESS MODAL
+       ============================================================ */
+    .offline-success-hero-badge {
+      position: relative;
+      width: 68px;
+      height: 68px;
+      margin: 2px auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .offline-hero-icon-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 22px;
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #DC2626;
+      font-size: 32px;
+    }
+
+    .offline-hero-sub-badge {
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #052E28;
+      border: 2px solid #FFFFFF;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .offline-minimal-summary-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .offline-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .offline-summary-row-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .offline-summary-row-left i {
+      font-size: 16px;
+      color: #64748B;
+    }
+
+    .offline-summary-row-left.text-rescheduled {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #166534;
+    }
+
+    .offline-summary-row-left.text-rescheduled i {
+      color: #16A34A;
+      font-size: 16px;
+    }
+
+    .offline-summary-divider {
+      height: 1px;
+      background: #E2E8F0;
+      width: 100%;
+    }
+
+    .offline-badge-pill {
+      background: #FEE2E2;
+      border: 1px solid #FECACA;
+      color: #DC2626;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .offline-badge-pill i {
+      font-size: 7px;
+    }
+
+    .btn-offline-success-desk {
+      width: 100%;
+      height: 52px;
+      background: var(--color-primary-btn, #052E28);
+      color: #FFFFFF;
+      border: none;
+      border-radius: 16px;
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.22);
+      transition: all 0.18s ease;
+    }
+
+    .btn-offline-success-desk:hover {
+      background: var(--color-primary-btn-hover, #031F1B);
+      transform: translateY(-1px);
+    }
+
+    .btn-offline-success-desk:active {
+      transform: translateY(0);
     }
 
     /* Redesigned Add/Edit Shift Form Card */
@@ -2292,6 +2950,23 @@
       color: var(--color-primary-btn);
       box-shadow: 0 2px 6px rgba(5, 46, 40, 0.08);
       transform: translateY(-1px);
+    }
+
+    .offline-day-pill.is-today-pill {
+      border-color: #7EB8AE;
+      position: relative;
+    }
+
+    .offline-day-pill.is-today-pill:not(.active) {
+      background: #F0F7F5;
+    }
+
+    .offline-day-pill.is-today-pill .off-day-name {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #052E28;
     }
 
     .offline-day-pill.active .off-day-name {
@@ -5825,6 +6500,310 @@
     }
 
     /* ============================================================
+    /* ============================================================
+       VIEW 0: AUTHENTICATION & LOGIN (ONUBOT REDESIGNED STANDARD)
+       ============================================================ */
+    .page-login {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #FFFFFF;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-sizing: border-box;
+      z-index: 20;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .page-login::-webkit-scrollbar {
+      display: none;
+    }
+
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      padding: 24px 20px 14px 20px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    /* Top Section with Collage & Brand */
+    .login-top-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Hero Healthcare Visual Collage */
+    .onubot-hero-collage {
+      width: 100%;
+      height: 195px;
+      display: flex;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+
+    .collage-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: #EFF7F5;
+      box-shadow: 0 8px 20px rgba(5, 46, 40, 0.06);
+      border: 1px solid #E2ECEA;
+    }
+
+    .collage-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-main {
+      flex: 1.15;
+      height: 100%;
+    }
+
+    .collage-side-stack {
+      flex: 0.95;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      height: 100%;
+    }
+
+    .card-secondary, .card-tertiary {
+      flex: 1;
+      height: 100%;
+    }
+
+    .collage-badge-tag {
+      position: absolute;
+      bottom: 7px;
+      left: 7px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 3px 8px;
+      font-family: var(--font-heading);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #052E28;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(214, 234, 230, 0.6);
+    }
+
+    .collage-badge-tag i {
+      font-size: 11px;
+      color: #0D7A5F;
+    }
+
+    /* Brand Header */
+    .onubot-brand-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-top: 4px;
+    }
+
+    .onubot-brand-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .onubot-logo-icon {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .onubot-sparkle-svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .onubot-brand-title {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #000000;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .onubot-brand-tagline {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #717171;
+      margin: 0;
+      max-width: 290px;
+    }
+
+    /* Bottom Actions Section (Pushed down & legal at very bottom) */
+    .login-bottom-section {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    /* Button 1: Google Button */
+    .btn-login-google {
+      width: 100%;
+      height: 50px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECEA;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04), 0 8px 18px rgba(5, 46, 40, 0.04);
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .btn-login-google:hover {
+      background: #F8FAF9;
+      border-color: #CAD8D5;
+      transform: translateY(-1px);
+    }
+
+    .btn-login-google:active {
+      transform: scale(0.985);
+    }
+
+    .google-icon-svg {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+
+    /* Button 2: Doctor Network Banner */
+    .login-doctor-card {
+      width: 100%;
+      background: #EFF7F5;
+      border: 1.5px solid #D6EAE6;
+      border-radius: 16px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .login-doctor-card:hover {
+      background: #E6F3F0;
+      border-color: #B2D8D1;
+      transform: translateY(-1px);
+    }
+
+    .login-doctor-card:active {
+      transform: scale(0.985);
+    }
+
+    .doctor-card-left {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .doctor-card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      color: #052E28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 2px 6px rgba(5, 46, 40, 0.06);
+      flex-shrink: 0;
+    }
+
+    .doctor-card-info {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 1px;
+    }
+
+    .doctor-card-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #052E28;
+    }
+
+    .doctor-card-sub {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: #0D7A5F;
+    }
+
+    .doctor-card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      color: #052E28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    /* Legal Footer at Very Bottom */
+    .login-legal-footer {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #8E9F9D;
+      line-height: 1.45;
+      margin: 8px 0 0 0;
+      text-align: center;
+    }
+
+    .login-legal-footer a {
+      color: #052E28;
+      text-decoration: underline;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ============================================================
        VIEW 11: ONU CLINICAL AI COPILOT (GEMINI AMBIENT BRAND GRADIENT)
        ============================================================ */
     .page-onu {
@@ -8368,6 +9347,204 @@
       color: #94A3B8;
       font-size: 15px;
     }
+
+    /* ============================================================
+       VIEW 14: NOTIFICATIONS SUB-PAGE (REDESIGNED MINIMAL HEALTHCARE)
+       ============================================================ */
+    .page-notifications {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: #FFFFFF;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      box-sizing: border-box;
+      z-index: 25;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 20px 32px 20px;
+    }
+
+    .page-notifications::-webkit-scrollbar {
+      display: none;
+    }
+
+    .notifications-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      position: sticky;
+      top: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 4px 0;
+      z-index: 10;
+    }
+
+    .notifications-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .notifications-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #000000;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+
+    .btn-mark-all-read {
+      background: transparent;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0D7A5F;
+      cursor: pointer;
+      padding: 6px 8px;
+      border-radius: 8px;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-mark-all-read:hover {
+      background: #EFF7F5;
+      color: #052E28;
+    }
+
+    .notifications-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .notifications-group-label {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #94A3B8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+      padding-left: 2px;
+    }
+
+    .notification-item-card {
+      background: #FFFFFF;
+      border: 1px solid #EDF2F1;
+      border-radius: 16px;
+      padding: 13px 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: all 0.15s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .notification-item-card:hover {
+      background: #FAFCFB;
+      border-color: #D6EAE6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(5, 46, 40, 0.04);
+    }
+
+    .notification-item-card.is-unread {
+      background: #F9FCFB;
+      border-color: #D6EAE6;
+    }
+
+    .notification-item-card.is-unread::before {
+      content: '';
+      position: absolute;
+      top: 15px;
+      right: 14px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    .notif-icon-box {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .notif-icon-box.booking {
+      background: #EFF7F5;
+      color: #052E28;
+    }
+
+    .notif-icon-box.payout {
+      background: #F0FDF4;
+      color: #16A34A;
+    }
+
+    .notif-icon-box.system {
+      background: #EFF6FF;
+      color: #2563EB;
+    }
+
+    .notif-icon-box.rx {
+      background: #FAF5FF;
+      color: #7E22CE;
+    }
+
+    .notif-content-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1;
+      padding-right: 14px;
+    }
+
+    .notif-top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .notif-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .notif-time {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 500;
+      color: #94A3B8;
+      white-space: nowrap;
+    }
+
+    .notif-body {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 400;
+      color: #475569;
+      line-height: 1.45;
+      margin: 0;
+    }
   </style>
 </head>
 <body>
@@ -8391,7 +9568,7 @@
         <div class="pages-slider">
 
           <!-- =======================================================
-               VIEW 0: ONU CLINICAL AI COPILOT (DEFAULT HOME SCREEN)
+               VIEW 0: ONU CLINICAL AI COPILOT (CHAT HOME SCREEN)
                ======================================================= -->
           <div class="app-page page-onu active-page" id="pageOnu">
             
@@ -8500,7 +9677,7 @@
                   <h1 class="header-title">My Desk</h1>
                   <p class="header-subtitle">Your day at a glance</p>
                 </div>
-                <button class="btn-circle-icon has-dot" onclick="showToast('No new notifications')" aria-label="Notifications">
+                <button class="btn-circle-icon has-dot" onclick="openNotificationsPage('desk')" aria-label="Notifications">
                   <i class="ph ph-bell"></i>
                 </button>
               </div>
@@ -8590,64 +9767,35 @@
                ======================================================= -->
           <div class="app-page page-right" id="pageSchedule">
             
-            <!-- Top Bar with Back Button -->
-            <div class="page-top-bar">
-              <button class="btn-circle-icon" onclick="navigateToDesk()" aria-label="Back to Desk">
-                <i class="ph ph-arrow-left"></i>
+            <!-- Top Bar with Back Button & Calendar CTA -->
+            <div class="page-top-bar" style="display: flex; align-items: center; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <button class="btn-circle-icon" onclick="navigateToDesk()" aria-label="Back to Desk">
+                  <i class="ph ph-arrow-left"></i>
+                </button>
+                <h1 class="page-top-title" style="margin: 0;">Edit Shift</h1>
+              </div>
+              <button class="btn-circle-icon" id="btnOpenMonthCalendar" onclick="openMonthCalendarModal()" aria-label="Open Calendar">
+                <i class="ph ph-calendar-blank"></i>
               </button>
-              <h1 class="page-top-title">Edit Shift</h1>
             </div>
 
-            <!-- 1-Week Horizontal Calendar Strip Section -->
-            <section class="schedule-section calendar-strip-section">
-              <div class="month-header-row">
-                <span class="month-label">September, 2026</span>
+            <!-- Scrollable Full Month Calendar Strip Section -->
+            <section class="schedule-section calendar-strip-section" style="margin-bottom: 20px;">
+              <div class="month-header-row" style="margin-bottom: 12px;">
+                <span class="month-label" id="scheduleMonthLabel">Sept 2026</span>
               </div>
 
-              <div class="date-carousel">
-                <!-- Day 1: Today (Sun 27) - First and Active -->
-                <div class="date-pill active" onclick="selectDate(this, 'Sunday, Sept 27', true)">
-                  <span class="date-day-name">Sun</span>
-                  <span class="date-day-num">27</span>
-                </div>
-                <!-- Day 2: Mon 28 -->
-                <div class="date-pill" onclick="selectDate(this, 'Monday, Sept 28', false)">
-                  <span class="date-day-name">Mon</span>
-                  <span class="date-day-num">28</span>
-                </div>
-                <!-- Day 3: Tue 29 -->
-                <div class="date-pill" onclick="selectDate(this, 'Tuesday, Sept 29', false)">
-                  <span class="date-day-name">Tue</span>
-                  <span class="date-day-num">29</span>
-                </div>
-                <!-- Day 4: Wed 30 -->
-                <div class="date-pill" onclick="selectDate(this, 'Wednesday, Sept 30', false)">
-                  <span class="date-day-name">Wed</span>
-                  <span class="date-day-num">30</span>
-                </div>
-                <!-- Day 5: Thu 1 -->
-                <div class="date-pill" onclick="selectDate(this, 'Thursday, Oct 1', false)">
-                  <span class="date-day-name">Thu</span>
-                  <span class="date-day-num">1</span>
-                </div>
-                <!-- Day 6: Fri 2 -->
-                <div class="date-pill" onclick="selectDate(this, 'Friday, Oct 2', false)">
-                  <span class="date-day-name">Fri</span>
-                  <span class="date-day-num">2</span>
-                </div>
-                <!-- Day 7: Sat 3 -->
-                <div class="date-pill" onclick="selectDate(this, 'Saturday, Oct 3', false)">
-                  <span class="date-day-name">Sat</span>
-                  <span class="date-day-num">3</span>
-                </div>
+              <div class="date-carousel" id="scheduleDateCarousel">
+                <!-- Dynamically populated starting from Today (Sept 15) to Sept 30 & future dates -->
               </div>
             </section>
 
-            <!-- Shift Configuration Section (24px below calendar, 10px internal gap) -->
+            <!-- Shift Configuration Section -->
             <section class="schedule-section shifts-manage-section">
               <!-- Selected Date Header -->
               <div class="schedule-day-header">
-                <h2 class="section-title" id="selectedDateTitle">Sunday, Sept 27</h2>
+                <h2 class="section-title" id="selectedDateTitle">Sunday, Sept 15</h2>
                 <span class="today-badge-chip" id="todayChipBadge">Today</span>
               </div>
 
@@ -8675,7 +9823,7 @@
                 <!-- Dynamic Lock Notice Banner for Shifts with Booked Patients -->
                 <div id="shiftBookedLockBanner" style="display: none;" class="shift-lock-banner">
                   <i class="ph-fill ph-lock-key" style="font-size: 16px; margin-top: 1px; flex-shrink: 0;"></i>
-                  <span id="shiftBookedLockText"><strong>12 Booked Patients</strong>: Start time and visit type are locked. You can extend end time or adjust patient limit.</span>
+                  <span id="shiftBookedLockText"><strong>4 Booked Patients</strong>: Start time and visit type are locked. You can extend end time or adjust patient limit.</span>
                 </div>
 
                 <!-- Consultation Type Segment -->
@@ -8694,12 +9842,12 @@
                 <div class="time-inputs-row">
                   <div class="time-input-tile" id="startTimeTileWrapper" onclick="openTimePickerModal('start')" role="button" tabindex="0" title="Click to select Start Time">
                     <span class="time-tile-label" id="startTimeTileLabel">START TIME</span>
-                    <span class="time-tile-value" id="formStartTime">02:00 PM</span>
+                    <span class="time-tile-value" id="formStartTime">10:00 AM</span>
                   </div>
 
                   <div class="time-input-tile" id="endTimeTileWrapper" onclick="openTimePickerModal('end')" role="button" tabindex="0" title="Click to select End Time">
                     <span class="time-tile-label" id="endTimeTileLabel">END TIME</span>
-                    <span class="time-tile-value" id="formEndTime">06:00 PM</span>
+                    <span class="time-tile-value" id="formEndTime">12:00 PM</span>
                   </div>
                 </div>
 
@@ -8750,69 +9898,7 @@
 
               <!-- Configured Shifts List Container -->
               <div class="shifts-list-container" id="shiftsListContainer">
-                
-                <!-- Shift 1 Card (12 Patients Booked - Edit Locked) -->
-                <div class="saved-shift-card" id="shiftCard1">
-                  <div class="saved-shift-top">
-                    <span class="shift-type-pill">
-                      <i class="ph ph-video-camera"></i>
-                      Video Consultation
-                    </span>
-                    <span class="shift-index-pill">Shift 1</span>
-                  </div>
-
-                  <div class="saved-shift-main">
-                    <span class="saved-shift-time">10:00 AM – 12:00 PM</span>
-                    <div class="shift-booking-status-row">
-                      <span class="shift-booked-count-badge">
-                        <i class="ph-fill ph-users"></i>
-                        12/15 Booked
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="saved-shift-actions-row">
-                    <button type="button" class="btn-shift-edit" onclick="editExistingShift('Shift 1', '10:00 AM', '12:00 PM', 15, 12)">
-                      <i class="ph ph-pencil-simple"></i>
-                      <span>Edit Shift</span>
-                    </button>
-                    <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('shiftCard1', 'Shift 1')" aria-label="Cancel Shift 1">
-                      <i class="ph ph-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Shift 2 Card (0 Patients Booked - Edit Enabled) -->
-                <div class="saved-shift-card" id="shiftCard2">
-                  <div class="saved-shift-top">
-                    <span class="shift-type-pill">
-                      <i class="ph ph-video-camera"></i>
-                      Video Consultation
-                    </span>
-                    <span class="shift-index-pill">Shift 2</span>
-                  </div>
-
-                  <div class="saved-shift-main">
-                    <span class="saved-shift-time">06:00 PM – 11:00 PM</span>
-                    <div class="shift-booking-status-row">
-                      <span class="shift-empty-count-badge">
-                        <i class="ph ph-user-check"></i>
-                        0/15 Booked
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="saved-shift-actions-row">
-                    <button type="button" class="btn-shift-edit" onclick="editExistingShift('Shift 2', '06:00 PM', '11:00 PM', 15, 0)">
-                      <i class="ph ph-pencil-simple"></i>
-                      <span>Edit Shift</span>
-                    </button>
-                    <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('shiftCard2', 'Shift 2')" aria-label="Delete Shift 2">
-                      <i class="ph ph-trash"></i>
-                    </button>
-                  </div>
-                </div>
-
+                <!-- Populated dynamically by renderDateSchedule() -->
               </div>
             </section>
 
@@ -9594,7 +10680,7 @@
                 <h1 class="header-title">Doctor Profile</h1>
                 <p class="header-subtitle">Manage your profile & settings</p>
               </div>
-              <button class="btn-circle-icon has-dot" onclick="showToast('No new notifications')" aria-label="Notifications">
+              <button class="btn-circle-icon has-dot" onclick="openNotificationsPage('profile')" aria-label="Notifications">
                 <i class="ph ph-bell"></i>
               </button>
             </div>
@@ -9907,6 +10993,128 @@
 
           </div>
 
+          <!-- =======================================================
+               VIEW 14: NOTIFICATIONS SUB-PAGE (REDESIGNED MINIMALIST)
+               ======================================================= -->
+          <div class="app-page page-notifications page-right" id="pageNotifications">
+            <!-- Header Bar -->
+            <div class="notifications-header-bar">
+              <div class="notifications-header-left">
+                <button type="button" class="btn-circle-icon" onclick="closeNotificationsPage()" title="Back" aria-label="Back">
+                  <i class="ph ph-arrow-left"></i>
+                </button>
+                <h1 class="notifications-title">Notifications</h1>
+              </div>
+              <button type="button" class="btn-mark-all-read" onclick="markAllNotificationsRead()">Mark Read</button>
+            </div>
+
+            <!-- Group: Today -->
+            <div class="notifications-group">
+              <span class="notifications-group-label">Today</span>
+
+              <div class="notification-item-card is-unread" onclick="handleNotificationClick('apt1')">
+                <div class="notif-icon-box booking">
+                  <i class="ph ph-video-camera"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">New Booking</span>
+                    <span class="notif-time">20m ago</span>
+                  </div>
+                  <p class="notif-body">King Black booked a video consultation on Oct 1, 2026 · 4:00 PM.</p>
+                </div>
+              </div>
+
+              <div class="notification-item-card is-unread" onclick="handleNotificationClick('pat1')">
+                <div class="notif-icon-box system">
+                  <i class="ph ph-user-check"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">Patient in Room</span>
+                    <span class="notif-time">45m ago</span>
+                  </div>
+                  <p class="notif-body">Tariqul Islam has joined the video room for Shift 1 and is ready.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group: Yesterday -->
+            <div class="notifications-group">
+              <span class="notifications-group-label">Yesterday</span>
+
+              <div class="notification-item-card" onclick="handleNotificationClick('apt2')">
+                <div class="notif-icon-box booking">
+                  <i class="ph ph-video-camera"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">New Booking</span>
+                    <span class="notif-time">21h ago</span>
+                  </div>
+                  <p class="notif-body">Mahim Sourav booked a video consultation on Sep 30, 2026 · 6:30 PM.</p>
+                </div>
+              </div>
+
+              <div class="notification-item-card" onclick="handleNotificationClick('wallet')">
+                <div class="notif-icon-box payout">
+                  <i class="ph ph-wallet"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">Payout Processed</span>
+                    <span class="notif-time">Yesterday</span>
+                  </div>
+                  <p class="notif-body">Daily payout of &#2547;2,400 has been transferred to your bKash wallet.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group: Earlier (Sep 20) -->
+            <div class="notifications-group">
+              <span class="notifications-group-label">Sep 20, 2026</span>
+
+              <div class="notification-item-card" onclick="handleNotificationClick('apt3')">
+                <div class="notif-icon-box booking">
+                  <i class="ph ph-video-camera"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">New Booking</span>
+                    <span class="notif-time">Sep 20</span>
+                  </div>
+                  <p class="notif-body">Alif Khan booked a video consultation on Sep 20, 2026 · 7:00 PM.</p>
+                </div>
+              </div>
+
+              <div class="notification-item-card" onclick="handleNotificationClick('apt4')">
+                <div class="notif-icon-box booking">
+                  <i class="ph ph-video-camera"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">New Booking</span>
+                    <span class="notif-time">Sep 20</span>
+                  </div>
+                  <p class="notif-body">Alif Khan booked a video consultation on Sep 20, 2026 · 3:30 PM.</p>
+                </div>
+              </div>
+
+              <div class="notification-item-card" onclick="handleNotificationClick('rx1')">
+                <div class="notif-icon-box rx">
+                  <i class="ph ph-file-text"></i>
+                </div>
+                <div class="notif-content-block">
+                  <div class="notif-top-meta">
+                    <span class="notif-title">Prescription Sent</span>
+                    <span class="notif-time">Sep 20</span>
+                  </div>
+                  <p class="notif-body">Digital Rx for Nusrat Jahan has been signed and shared with patient.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <!-- 3. Docked Bottom Navigation Bar (Docked gracefully at bottom) -->
@@ -9942,94 +11150,223 @@
         <div class="home-indicator"></div>
 
         <!-- =======================================================
-             4. GOING OFFLINE BOTTOM SHEET MODAL (Clean Full-Screen Overlay)
+             4. GOING OFFLINE BOTTOM SHEET MODAL (Week / Month View Multi-Select)
              ======================================================= -->
         <div class="modal-backdrop" id="modalBackdrop" onclick="closeAllModals()"></div>
         
-        <div class="bottom-sheet" id="goingOfflineSheet" style="max-height: 92%; overflow-y: auto; scrollbar-width: none;">
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-top-row">
-            <div class="sheet-badge-icon">
-              <i class="ph ph-moon"></i>
-            </div>
-          </div>
+        <div class="bottom-sheet" id="goingOfflineSheet" style="max-height: 92%; overflow-y: auto; scrollbar-width: none; border-radius: 32px 32px 0 0; padding: 22px 22px 30px; z-index: 140;">
+          <div class="sheet-drag-handle" style="margin-bottom: 4px;"></div>
           
-          <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title">Take a break</h2>
-            <p class="sheet-minimal-subtitle">Choose when to pause visits and notify booked patients.</p>
-          </div>
-
-          <!-- Mode Segmented Control Tabs (Clean, 2-Tab Standard) -->
-          <div class="segmented-control" style="margin-bottom: 8px;">
-            <button type="button" class="segment-btn active" id="segBtnDates" onclick="selectOfflineMode('dates')">
-              <i class="ph ph-calendar"></i>
-              <span>Specific Dates</span>
-            </button>
-            <button type="button" class="segment-btn" id="segBtnManual" onclick="selectOfflineMode('manual')">
-              <i class="ph ph-pause"></i>
-              <span>Until Resumed</span>
+          <!-- Top Row: Badge Icon + Circular Close Button -->
+          <div class="sheet-top-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
+            <div class="sheet-badge-icon" style="background: #FEF3C7; color: #D97706; border: 1.5px solid #FDE68A;">
+              <i class="ph ph-power"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeGoingOfflineModal()" aria-label="Close Offline Modal">
+              <i class="ph ph-x"></i>
             </button>
           </div>
 
-          <!-- Panel 1: Specific Dates (7-Day Schedule Strip) -->
-          <div id="panelOfflineDates" class="offline-mode-panel">
-            <div class="offline-custom-panel">
-              <div class="offline-panel-label">
-                <span>Tap dates to pause:</span>
-                <span style="font-weight: 700; color: #052E28;">Next 7 Days</span>
+          <!-- Hero Editorial Header with Big Texts -->
+          <div class="sheet-hero-header" style="margin-bottom: 8px;">
+            <h2 class="sheet-editorial-title">Go Offline</h2>
+            <p class="sheet-minimal-subtitle">Select the dates to pause visits and notify patients.</p>
+          </div>
+
+          <!-- Month & View Toggle Row -->
+          <div class="offline-month-row" style="margin-top: 4px; margin-bottom: 14px;">
+            <div class="offline-month-title-wrap">
+              <span class="offline-month-name" id="offlineMonthLabel">Sept 2026</span>
+              <button type="button" class="btn-offline-month-nav" id="btnOfflineMonthNav" onclick="toggleOfflineMonthNav()" title="Switch Month" aria-label="Switch Month">
+                <i class="ph ph-caret-right" id="offlineMonthNavIcon"></i>
+              </button>
+            </div>
+            <button type="button" class="btn-offline-view-toggle" id="btnOfflineViewToggle" onclick="toggleOfflineViewMode()">
+              <i class="ph ph-calendar-blank" id="offlineViewToggleIcon"></i>
+              <span id="offlineViewToggleLabel">Month View</span>
+            </button>
+          </div>
+
+          <!-- Weekday Columns: SUN MON TUE WED THU FRI SAT (Standard Sunday-First Calendar for Month View) -->
+          <div class="offline-cal-weekdays" id="offlineCalWeekdaysHeader" style="display: none;">
+            <span>SUN</span>
+            <span>MON</span>
+            <span>TUE</span>
+            <span>WED</span>
+            <span>THU</span>
+            <span>FRI</span>
+            <span>SAT</span>
+          </div>
+
+          <!-- Dynamic Date Selection Grid (Week / Month view) with Spacious Cards -->
+          <div class="offline-dates-container" id="offlineDatesContainer">
+            <!-- Dynamically populated by renderOfflineDaysGrid() -->
+          </div>
+
+          <!-- Impact Summary Bar -->
+          <div class="offline-summary-bar">
+            <span class="offline-days-marked-label" id="offlineDaysMarkedLabel">0 Days Marked Off</span>
+            <span class="offline-bookings-affected-label zero-affected" id="offlineBookingsAffectedLabel">0 Bookings Affected</span>
+          </div>
+
+          <!-- Actions Row: Cancel & Confirm Offline -->
+          <div class="offline-actions-row">
+            <button type="button" class="btn-offline-cancel" onclick="closeGoingOfflineModal()">Cancel</button>
+            <button type="button" class="btn-offline-confirm" id="btnConfirmOffline" onclick="confirmGoingOffline()" disabled>
+              <span>Confirm Offline</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             4B. OFFLINE CONFIRMED & PATIENTS RESCHEDULED BOTTOM SHEET MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="offlineConfirmedModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 32px; z-index: 150;">
+          <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
+          
+          <!-- Hero Icon with Dual Badge (Power / Offline + Success Check) -->
+          <div class="offline-success-hero-badge">
+            <div class="offline-hero-icon-circle">
+              <i class="ph-bold ph-power"></i>
+            </div>
+            <div class="offline-hero-sub-badge">
+              <i class="ph-bold ph-check"></i>
+            </div>
+          </div>
+
+          <!-- Hero Editorial Header with Big Texts -->
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 20px;">
+            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0;">You are now Offline</h2>
+          </div>
+
+          <!-- Minimal Unified Info Tile -->
+          <div class="offline-minimal-summary-card">
+            <div class="offline-summary-row">
+              <div class="offline-summary-row-left">
+                <i class="ph-bold ph-calendar-blank"></i>
+                <span id="offlineConfirmedDatesRange">Sept 15 – 16 (2 Days)</span>
               </div>
-              <div class="offline-days-grid" id="offlineDaysGrid">
-                <button type="button" class="offline-day-pill" data-date="Sun 27" data-name="Today (Sun 27)" data-patients="2" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Sun</span>
-                  <span class="off-day-num">27</span>
-                </button>
-                <button type="button" class="offline-day-pill" data-date="Mon 28" data-name="Mon 28" data-patients="5" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Mon</span>
-                  <span class="off-day-num">28</span>
-                </button>
-                <button type="button" class="offline-day-pill active" data-date="Tue 29" data-name="Tue 29" data-patients="4" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Tue</span>
-                  <span class="off-day-num">29</span>
-                </button>
-                <button type="button" class="offline-day-pill" data-date="Wed 30" data-name="Wed 30" data-patients="7" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Wed</span>
-                  <span class="off-day-num">30</span>
-                </button>
-                <button type="button" class="offline-day-pill" data-date="Thu 1" data-name="Thu 1" data-patients="6" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Thu</span>
-                  <span class="off-day-num">1</span>
-                </button>
-                <button type="button" class="offline-day-pill" data-date="Fri 2" data-name="Fri 2" data-patients="8" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Fri</span>
-                  <span class="off-day-num">2</span>
-                </button>
-                <button type="button" class="offline-day-pill" data-date="Sat 3" data-name="Sat 3" data-patients="6" onclick="toggleOfflineDate(this)">
-                  <span class="off-day-name">Sat</span>
-                  <span class="off-day-num">3</span>
-                </button>
-              </div>
-              <div class="offline-selection-summary" id="offlineDatesSummaryText">
-                Tue 29 • 4 patients affected
+              <span class="offline-badge-pill">
+                <i class="ph-fill ph-circle"></i> Offline
+              </span>
+            </div>
+            <div class="offline-summary-divider"></div>
+            <div class="offline-summary-row">
+              <div class="offline-summary-row-left text-rescheduled">
+                <i class="ph-bold ph-arrows-clockwise"></i>
+                <span id="offlineConfirmedRescheduleShort">11 patients auto-rescheduled</span>
               </div>
             </div>
           </div>
 
-          <!-- Panel 2: Until Turn On / Indefinite -->
-          <div id="panelOfflineManual" class="offline-mode-panel" style="display: none;">
-            <div class="offline-stat-card">
-              <div class="stat-card-left">
-                <span class="stat-card-title">Until I turn it back on</span>
-                <span class="stat-card-sub">Stays offline until manually resumed from Desk</span>
-              </div>
-              <span class="stat-card-badge">Indefinite</span>
+          <!-- Primary Full Width CTA: Back to Desk -->
+          <button type="button" class="btn-offline-success-desk" onclick="closeOfflineConfirmedModalAndReturn()">
+            <span>Back To Desk</span>
+            <i class="ph-bold ph-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- =======================================================
+             4C. CREATE SHIFT TO GO OFFLINE (NO OPEN SLOTS TRANSITION SHEET)
+             ======================================================= -->
+        <div class="bottom-sheet" id="createShiftToOfflineModalSheet" style="border-radius: 32px 32px 0 0; padding: 22px 22px 28px; z-index: 150;">
+          <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
+          
+          <!-- Hero Icon with Dual Badge (Calendar Plus + Arrow) -->
+          <div class="offline-success-hero-badge">
+            <div class="offline-hero-icon-circle" style="background: #FEF3C7; border-color: #FDE68A; color: #D97706;">
+              <i class="ph-bold ph-calendar-plus"></i>
+            </div>
+            <div class="offline-hero-sub-badge" style="background: #052E28; color: #FFFFFF;">
+              <i class="ph-bold ph-arrow-up-right"></i>
             </div>
           </div>
 
-          <div class="sheet-actions-group" style="margin-top: 10px;">
-            <button class="btn-sheet-cancel" onclick="closeGoingOfflineModal()">Cancel</button>
-            <button class="btn-sheet-confirm" id="btnConfirmOffline" onclick="confirmGoingOffline()">
-              <span>Confirm Break</span>
+          <!-- Hero Editorial Header with Big Texts -->
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 18px;">
+            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0;">Add Shift to Go Offline</h2>
+          </div>
+
+          <!-- Minimal Unified Info Tile -->
+          <div class="offline-minimal-summary-card">
+            <div class="offline-summary-row">
+              <div class="offline-summary-row-left">
+                <i class="ph-bold ph-calendar-blank"></i>
+                <span id="createShiftOfflineDatesRange">Sept 15 – 21 (7 Days)</span>
+              </div>
+              <span class="offline-badge-pill" style="background: #FEF3C7; border-color: #FDE68A; color: #D97706;">
+                <i class="ph-fill ph-circle"></i> Pending
+              </span>
+            </div>
+            <div class="offline-summary-divider"></div>
+            <div class="offline-summary-row">
+              <div class="offline-summary-row-left text-rescheduled" style="color: #B45309;">
+                <i class="ph-bold ph-arrows-clockwise" style="color: #D97706;"></i>
+                <span id="createShiftOfflinePatientsNote">18 patients need a future shift to transfer to</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons Group: Primary Dark Forest CTA + Neutral Cancel -->
+          <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+            <button type="button" class="btn-offline-success-desk" onclick="goToScheduleToAddShift()">
+              <span>Edit Schedule & Add Shift</span>
+              <i class="ph-bold ph-arrow-right"></i>
             </button>
+            <button type="button" class="btn-sheet-cancel" style="width: 100%; height: 48px; border-radius: 16px; margin: 0; font-family: var(--font-heading); font-size: 15px; font-weight: 700;" onclick="closeCreateShiftToOfflineModal()">
+              Cancel
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             MONTH CALENDAR BOTTOM SHEET MODAL (Full Month Planning)
+             ======================================================= -->
+        <div class="bottom-sheet" id="monthCalendarSheet" style="max-height: 92%; overflow-y: auto; scrollbar-width: none; border-radius: 32px 32px 0 0; padding: 20px 22px 28px; z-index: 140;">
+          <div class="sheet-drag-handle" style="margin-bottom: 14px;"></div>
+          
+          <!-- Month Title Header Row with Big Month Name & Standard Circle Close -->
+          <div class="month-cal-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+            <div class="month-cal-title-wrap" style="display: flex; align-items: center; gap: 10px;">
+              <button type="button" class="btn-circle-icon btn-cal-nav-arrow" id="btnCalPrevMonth" onclick="navigateCalendarMonth(-1)" title="Previous Month" aria-label="Previous Month">
+                <i class="ph ph-caret-left"></i>
+              </button>
+              <h2 class="month-cal-big-title" id="monthCalTitle">Sept 2026</h2>
+              <button type="button" class="btn-circle-icon btn-cal-nav-arrow" id="btnCalNextMonth" onclick="navigateCalendarMonth(1)" title="Next Month" aria-label="Next Month">
+                <i class="ph ph-caret-right"></i>
+              </button>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeMonthCalendarModal()" aria-label="Close Calendar">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+
+          <!-- Weekday Columns: SUN MON TUE WED THU FRI SAT -->
+          <div class="month-cal-weekdays">
+            <span>SUN</span>
+            <span>MON</span>
+            <span>TUE</span>
+            <span>WED</span>
+            <span>THU</span>
+            <span>FRI</span>
+            <span>SAT</span>
+          </div>
+
+          <!-- Calendar Grid Tiles -->
+          <div class="month-cal-grid" id="monthCalGrid">
+            <!-- Dynamically populated by renderMonthCalendarGrid() -->
+          </div>
+
+          <!-- Legend at Bottom -->
+          <div class="month-cal-legend">
+            <div class="cal-legend-item">
+              <span class="cal-legend-dot dot-shift"></span>
+              <span>Active Shifts</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-dot dot-booked"></span>
+              <span>Booked</span>
+            </div>
           </div>
         </div>
 
@@ -12084,16 +13421,73 @@
     let voiceRecognitionTimer = null;
     let onuChatHistory = [];
 
-    function navigateToOnu() {
+    // =======================================================
+    // AUTHENTICATION & LOGIN CONTROLLER
+    // =======================================================
+    function loginWithGoogle() {
+      const pageLogin = document.getElementById('pageLogin');
+      if (pageLogin) pageLogin.className = 'app-page page-login page-left';
+      
       const allPages = [
         'pageDesk', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
         'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile'
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings'
       ];
       allPages.forEach(pId => {
         const el = document.getElementById(pId);
         if (el) el.className = 'app-page page-right';
       });
+
+      const pageOnu = document.getElementById('pageOnu');
+      if (pageOnu) {
+        pageOnu.scrollTop = 0;
+        pageOnu.className = 'app-page page-onu active-page';
+      }
+      
+      setActiveNavTab('onu');
+      if (typeof updateBottomNavVisibility === 'function') updateBottomNavVisibility();
+      showToast('Signed in successfully • Welcome Dr. Sifat');
+    }
+
+    function loginAsDoctor() {
+      const pageLogin = document.getElementById('pageLogin');
+      if (pageLogin) pageLogin.className = 'app-page page-login page-left';
+      
+      navigateToDesk();
+      showToast('Welcome to Doctor Workspace');
+    }
+
+    function navigateToLogin() {
+      const allPages = [
+        'pageOnu', 'pageDesk', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
+        'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings'
+      ];
+      allPages.forEach(pId => {
+        const el = document.getElementById(pId);
+        if (el) el.className = 'app-page page-right';
+      });
+      const pageLogin = document.getElementById('pageLogin');
+      if (pageLogin) {
+        pageLogin.scrollTop = 0;
+        pageLogin.className = 'app-page page-login active-page';
+      }
+      if (typeof updateBottomNavVisibility === 'function') updateBottomNavVisibility();
+    }
+
+    function navigateToOnu() {
+      const allPages = [
+        'pageDesk', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
+        'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
+      ];
+      allPages.forEach(pId => {
+        const el = document.getElementById(pId);
+        if (el) el.className = 'app-page page-right';
+      });
+      const pageLogin = document.getElementById('pageLogin');
+      if (pageLogin) pageLogin.className = 'app-page page-login page-left';
+
       const pageOnu = document.getElementById('pageOnu');
       if (pageOnu) {
         pageOnu.scrollTop = 0;
@@ -12766,6 +14160,8 @@
       pageSchedule.scrollTop = 0;
       document.getElementById('pageDesk').className = 'app-page page-left';
       pageSchedule.className = 'app-page active-page';
+      renderDateCarouselStrip();
+      renderDateSchedule(currentSelectedDate);
       updateBottomNavVisibility();
     }
 
@@ -12773,9 +14169,9 @@
       const pageDesk = document.getElementById('pageDesk');
       pageDesk.scrollTop = 0;
       const allPages = [
-        'pageOnu', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
+        'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
         'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings'
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
       ];
       allPages.forEach(pId => {
         const el = document.getElementById(pId);
@@ -12827,7 +14223,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings'
+          'pageAppointmentDetails', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -12856,7 +14252,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageSettings'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageSettings', 'pageNotifications'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -12885,7 +14281,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageNotifications'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -13120,10 +14516,79 @@
 
     function confirmDoctorLogout() {
       closeLogoutModal();
-      showToast('Logged out of session. Redirecting...');
+      showToast('Logged out of session');
       setTimeout(() => {
         navigateToDesk();
-      }, 700);
+      }, 350);
+    }
+
+    // =======================================================
+    // NOTIFICATIONS CONTROLLER
+    // =======================================================
+    let notificationsBackTarget = 'desk';
+
+    function openNotificationsPage(fromTarget = 'desk') {
+      notificationsBackTarget = fromTarget;
+      const allPages = [
+        'pageOnu', 'pageDesk', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
+        'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings'
+      ];
+      allPages.forEach(pId => {
+        const el = document.getElementById(pId);
+        if (el) {
+          if (el.id === fromTarget) {
+            el.className = 'app-page page-left';
+          } else {
+            el.className = 'app-page page-right';
+          }
+        }
+      });
+      const pageNotif = document.getElementById('pageNotifications');
+      if (pageNotif) {
+        pageNotif.scrollTop = 0;
+        pageNotif.className = 'app-page page-notifications active-page';
+      }
+      updateBottomNavVisibility();
+    }
+
+    function closeNotificationsPage() {
+      const pageNotif = document.getElementById('pageNotifications');
+      if (pageNotif) pageNotif.className = 'app-page page-notifications page-right';
+
+      if (notificationsBackTarget === 'desk') {
+        navigateToDesk();
+      } else if (notificationsBackTarget === 'profile') {
+        navigateToDoctorProfile();
+      } else if (notificationsBackTarget === 'onu') {
+        navigateToOnu();
+      } else if (notificationsBackTarget === 'patients') {
+        navigateToPatientsList();
+      } else if (notificationsBackTarget === 'wallet') {
+        navigateToWallet();
+      } else {
+        navigateToDesk();
+      }
+    }
+
+    function markAllNotificationsRead() {
+      document.querySelectorAll('.notification-item-card.is-unread').forEach(el => {
+        el.classList.remove('is-unread');
+      });
+      document.querySelectorAll('.btn-circle-icon.has-dot').forEach(el => {
+        el.classList.remove('has-dot');
+      });
+      showToast('All notifications marked as read');
+    }
+
+    function handleNotificationClick(target) {
+      if (target === 'wallet') {
+        navigateToWallet();
+      } else if (target === 'apt1' || target === 'apt2' || target === 'apt3' || target === 'apt4') {
+        openAppointmentDetails('apt1');
+      } else {
+        showToast('Notification details opened');
+      }
     }
 
     // =======================================================
@@ -13221,7 +14686,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageDoctorProfile', 'pageSettings'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -15613,25 +17078,85 @@
       }, 360);
     }
 
-    // 7-Day Schedule Data Model & State
-    let currentSelectedDate = 'Sunday, Sept 27';
+    // Full Month Schedule Data Model & State
+    let currentSelectedDate = 'Sunday, Sept 15';
+    let currentCalendarMonth = 8; // 8 = September, 9 = October
+    let currentCalendarYear = 2026;
+
     const dateKeyToFullDate = {
+      'Sun 15': 'Sunday, Sept 15',
+      'Mon 16': 'Monday, Sept 16',
+      'Tue 17': 'Tuesday, Sept 17',
+      'Wed 18': 'Wednesday, Sept 18',
+      'Thu 19': 'Thursday, Sept 19',
+      'Fri 20': 'Friday, Sept 20',
+      'Sat 21': 'Saturday, Sept 21',
+      'Sun 22': 'Sunday, Sept 22',
+      'Mon 23': 'Monday, Sept 23',
+      'Tue 24': 'Tuesday, Sept 24',
+      'Wed 25': 'Wednesday, Sept 25',
+      'Thu 26': 'Thursday, Sept 26',
+      'Fri 27': 'Friday, Sept 27',
+      'Sat 28': 'Saturday, Sept 28',
+      'Sun 29': 'Sunday, Sept 29',
+      'Mon 30': 'Monday, Sept 30',
       'Sun 27': 'Sunday, Sept 27',
       'Mon 28': 'Monday, Sept 28',
       'Tue 29': 'Tuesday, Sept 29',
       'Wed 30': 'Wednesday, Sept 30',
       'Thu 1': 'Thursday, Oct 1',
       'Fri 2': 'Friday, Oct 2',
-      'Sat 3': 'Saturday, Oct 3'
+      'Sat 3': 'Saturday, Oct 3',
+      'Sun 4': 'Sunday, Oct 4',
+      'Mon 5': 'Monday, Oct 5'
     };
 
     let dateSchedules = {
-      'Sunday, Sept 27': [
-        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '12:00 PM', booked: 12, max: 15, locked: true },
+      'Sunday, Sept 15': [
+        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '12:00 PM', booked: 4, max: 15, locked: true },
         { id: 'shiftCard2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '06:00 PM', endTime: '11:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Monday, Sept 28': [
-        { id: 'shiftCardMon1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true }
+      'Monday, Sept 16': [
+        { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true },
+        { id: 'shiftCard16_2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '04:00 PM', endTime: '08:00 PM', booked: 2, max: 15, locked: true }
+      ],
+      'Tuesday, Sept 17': [
+        { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
+      ],
+      'Wednesday, Sept 18': [
+        { id: 'shiftCard18_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 6, max: 15, locked: true }
+      ],
+      'Thursday, Sept 19': [
+        { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true }
+      ],
+      'Friday, Sept 20': [
+        { id: 'shiftCard20_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Saturday, Sept 21': [],
+      'Sunday, Sept 22': [
+        { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Monday, Sept 23': [],
+      'Tuesday, Sept 24': [
+        { id: 'shiftCard24_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Wednesday, Sept 25': [
+        { id: 'shiftCard25_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Thursday, Sept 26': [
+        { id: 'shiftCard26_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Friday, Sept 27': [
+        { id: 'shiftCard27_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Saturday, Sept 28': [
+        { id: 'shiftCard28_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Sunday, Sept 29': [
+        { id: 'shiftCard29_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Monday, Sept 30': [
+        { id: 'shiftCard30_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Tuesday, Sept 29': [
         { id: 'shiftCardTue1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 4, max: 15, locked: true }
@@ -15647,17 +17172,106 @@
       ],
       'Saturday, Oct 3': [
         { id: 'shiftCardSat1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 6, max: 15, locked: true }
+      ],
+      'Sunday, Oct 4': [
+        { id: 'shiftCardSun4', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
+      ],
+      'Monday, Oct 5': [
+        { id: 'shiftCardMon5', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true }
       ]
     };
+
+    function getShiftsForDay(month, day) {
+      const monthPrefix = month === 8 ? 'Sept' : 'Oct';
+      const searchKey = `${monthPrefix} ${day}`;
+      for (const [key, shifts] of Object.entries(dateSchedules)) {
+        if (key.includes(searchKey)) {
+          return shifts;
+        }
+      }
+      return [];
+    }
+
+    function renderDateCarouselStrip() {
+      const carousel = document.getElementById('scheduleDateCarousel');
+      if (!carousel) return;
+
+      const dayAbbrs = ['WED', 'THU', 'FRI', 'SAT', 'SUN', 'MON', 'TUE'];
+      const fullDayNames = ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+
+      let html = '';
+      for (let day = 15; day <= 30; day++) {
+        const dayOfWeekIdx = (day - 15) % 7;
+        const dayAbbr = dayAbbrs[dayOfWeekIdx];
+        const fullDate = `${fullDayNames[dayOfWeekIdx]}, Sept ${day}`;
+        const isToday = (day === 15);
+        const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
+        const todayClass = isToday ? 'is-today-pill' : '';
+
+        html += `
+          <div class="date-pill ${todayClass} ${isActive ? 'active' : ''}" 
+               data-date="${fullDate}" 
+               id="datePill_Sept_${day}"
+               onclick="selectDate(this, '${fullDate}', ${isToday})">
+            <span class="date-day-name">${dayAbbr}</span>
+            <span class="date-day-num">${day}</span>
+          </div>
+        `;
+      }
+
+      // Forward-planning dates (Oct 1 - Oct 7)
+      const octDayAbbrs = ['THU', 'FRI', 'SAT', 'SUN', 'MON', 'TUE', 'WED'];
+      const octFullDayNames = ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday'];
+      for (let day = 1; day <= 7; day++) {
+        const dayOfWeekIdx = (day - 1) % 7;
+        const dayAbbr = octDayAbbrs[dayOfWeekIdx];
+        const fullDate = `${octFullDayNames[dayOfWeekIdx]}, Oct ${day}`;
+        const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
+
+        html += `
+          <div class="date-pill ${isActive ? 'active' : ''}" 
+               data-date="${fullDate}" 
+               id="datePill_Oct_${day}"
+               onclick="selectDate(this, '${fullDate}', false)">
+            <span class="date-day-name">${dayAbbr}</span>
+            <span class="date-day-num">${day}</span>
+          </div>
+        `;
+      }
+
+      carousel.innerHTML = html;
+    }
+
+    function scrollDateCarousel(direction) {
+      const carousel = document.getElementById('scheduleDateCarousel');
+      if (carousel) {
+        carousel.scrollBy({ left: direction * 180, behavior: 'smooth' });
+      }
+    }
 
     function renderDateSchedule(dateText) {
       const container = document.getElementById('shiftsListContainer');
       if (!container) return;
 
-      const shifts = dateSchedules[dateText] || [];
+      let shifts = dateSchedules[dateText];
+      if (!shifts) {
+        // Flexible fallback matching e.g. "Sept 15" or "Oct 2"
+        const dayMatch = dateText.match(/(Sept|Oct)\s+(\d+)/i);
+        if (dayMatch) {
+          const keySnippet = `${dayMatch[1]} ${dayMatch[2]}`;
+          for (const k of Object.keys(dateSchedules)) {
+            if (k.includes(keySnippet)) {
+              shifts = dateSchedules[k];
+              break;
+            }
+          }
+        }
+      }
+      shifts = shifts || [];
+
       if (shifts.length === 0) {
         container.innerHTML = `
-          <div class="schedule-empty-state" style="background: #F6F8F9; border: 1.5px dashed #CBD5E1; border-radius: 18px; padding: 32px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; width: 100%; box-sizing: border-box;">
+          <div class="schedule-empty-state" style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 18px; padding: 32px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; width: 100%; box-sizing: border-box;">
             <div style="width: 44px; height: 44px; border-radius: 50%; background: #EFF7F5; color: #052E28; display: flex; align-items: center; justify-content: center; font-size: 22px;">
               <i class="ph ph-calendar-blank"></i>
             </div>
@@ -15670,14 +17284,27 @@
 
       let html = '';
       shifts.forEach((shift) => {
-        const badgeHtml = shift.booked > 0 
-          ? `<span class="shift-booked-count-badge"><i class="ph-fill ph-users"></i> ${shift.booked}/${shift.max} Booked</span>`
-          : `<span class="shift-empty-count-badge"><i class="ph ph-user-check"></i> 0/${shift.max} Booked</span>`;
-        
-        const editBtnHtml = `<button type="button" class="btn-shift-edit" onclick="editExistingShift('${shift.name}', '${shift.startTime}', '${shift.endTime}', ${shift.max}, ${shift.booked})">
-               <i class="ph ph-pencil-simple"></i>
-               <span>Edit Shift</span>
-             </button>`;
+        let actionAreaHtml = '';
+        if (shift.booked > 0) {
+          actionAreaHtml = `
+            <div class="shift-locked-notice-card">
+              <i class="ph ph-lock-key"></i>
+              <span>Shift locked: ${shift.booked} patient${shift.booked > 1 ? 's' : ''} already booked (Cannot edit/delete)</span>
+            </div>
+          `;
+        } else {
+          actionAreaHtml = `
+            <div class="saved-shift-actions-row">
+              <button type="button" class="btn-shift-edit" onclick="editExistingShift('${shift.name}', '${shift.startTime}', '${shift.endTime}', ${shift.max}, 0)">
+                <i class="ph ph-pencil-simple"></i>
+                <span>Edit Shift</span>
+              </button>
+              <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('${shift.id}', '${shift.name}')" aria-label="Delete ${shift.name}">
+                <i class="ph ph-trash"></i>
+              </button>
+            </div>
+          `;
+        }
 
         html += `
           <div class="saved-shift-card" id="${shift.id}">
@@ -15686,44 +17313,189 @@
                 <i class="ph ${shift.typeIcon || 'ph-video-camera'}"></i>
                 ${shift.type || 'Video Consultation'}
               </span>
-              <span class="shift-index-pill">${shift.name}</span>
             </div>
 
             <div class="saved-shift-main">
               <span class="saved-shift-time">${shift.startTime} – ${shift.endTime}</span>
-              <div class="shift-booking-status-row">
-                ${badgeHtml}
+              <div class="saved-shift-capacity">
+                Capacity: <strong>Max ${shift.max || 15} Patients</strong>
               </div>
             </div>
 
-            <div class="saved-shift-actions-row">
-              ${editBtnHtml}
-              <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('${shift.id}', '${shift.name}')" aria-label="Cancel ${shift.name}">
-                <i class="ph ph-trash"></i>
-              </button>
-            </div>
+            ${actionAreaHtml}
           </div>
         `;
       });
       container.innerHTML = html;
     }
 
-    // Calendar Date Selection: 7-day strip starting from Today
     function selectDate(el, dateText, isToday) {
       currentSelectedDate = dateText;
       closeInPageShiftCard();
       document.querySelectorAll('.date-pill').forEach(pill => pill.classList.remove('active'));
-      el.classList.add('active');
-      document.getElementById('selectedDateTitle').textContent = dateText;
+      if (el) {
+        el.classList.add('active');
+        el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      
+      const titleEl = document.getElementById('selectedDateTitle');
+      if (titleEl) titleEl.textContent = dateText;
       
       const todayChip = document.getElementById('todayChipBadge');
-      if (isToday) {
-        todayChip.style.display = 'inline-block';
-      } else {
-        todayChip.style.display = 'none';
+      if (todayChip) {
+        todayChip.style.display = isToday ? 'inline-block' : 'none';
       }
+      
       renderDateSchedule(dateText);
       showToast('Viewing schedule for ' + dateText);
+    }
+
+    // -------------------------------------------------------
+    // Month Calendar Bottom Sheet Controller (Full Month Planning)
+    // -------------------------------------------------------
+    function openMonthCalendarModal() {
+      document.getElementById('modalBackdrop').classList.add('active');
+      const sheet = document.getElementById('monthCalendarSheet');
+      if (sheet) sheet.classList.add('active');
+      renderMonthCalendarGrid();
+    }
+
+    function closeMonthCalendarModal() {
+      const sheet = document.getElementById('monthCalendarSheet');
+      if (sheet) sheet.classList.remove('active');
+      const anyActive = document.querySelectorAll('.bottom-sheet.active');
+      if (anyActive.length <= 1) {
+        document.getElementById('modalBackdrop').classList.remove('active');
+      }
+    }
+
+    function navigateCalendarMonth(direction) {
+      currentCalendarMonth += direction;
+      if (currentCalendarMonth < 8) currentCalendarMonth = 8;
+      if (currentCalendarMonth > 9) currentCalendarMonth = 9;
+      renderMonthCalendarGrid();
+    }
+
+    function renderMonthCalendarGrid() {
+      const titleEl = document.getElementById('monthCalTitle');
+      const prevBtn = document.getElementById('btnCalPrevMonth');
+      const nextBtn = document.getElementById('btnCalNextMonth');
+      const gridEl = document.getElementById('monthCalGrid');
+      if (!gridEl) return;
+
+      const monthNames = [
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
+      ];
+      
+      if (titleEl) {
+        titleEl.textContent = `${monthNames[currentCalendarMonth]} ${currentCalendarYear}`;
+      }
+      if (prevBtn) {
+        prevBtn.disabled = (currentCalendarMonth <= 8);
+      }
+      if (nextBtn) {
+        nextBtn.disabled = (currentCalendarMonth >= 9);
+      }
+
+      let html = '';
+
+      if (currentCalendarMonth === 8) {
+        // September 2026:
+        // Day 15 is under WED -> 3 blank cells (SUN, MON, TUE)
+        for (let i = 0; i < 3; i++) {
+          html += `<div class="month-cal-cell empty"></div>`;
+        }
+
+        const fullDayNames = ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+        for (let day = 15; day <= 30; day++) {
+          const dayOfWeekIdx = (day - 15) % 7;
+          const fullDate = `${fullDayNames[dayOfWeekIdx]}, Sept ${day}`;
+          const isToday = (day === 15);
+          const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
+          const shifts = getShiftsForDay(8, day);
+          const hasShifts = shifts && shifts.length > 0;
+          const hasBooked = shifts && shifts.some(s => s.booked > 0);
+          const todayClass = isToday ? 'is-today-cell' : '';
+
+          let dotsHtml = '';
+          if (hasShifts || hasBooked) {
+            dotsHtml += `<div class="cal-cell-dots">`;
+            if (hasShifts) dotsHtml += `<span class="cal-dot dot-shift"></span>`;
+            if (hasBooked) dotsHtml += `<span class="cal-dot dot-booked"></span>`;
+            dotsHtml += `</div>`;
+          } else {
+            dotsHtml += `<div class="cal-cell-dots"></div>`;
+          }
+
+          html += `
+            <button type="button" class="month-cal-cell ${todayClass} ${isSelected ? 'active' : ''}" onclick="selectDateFromCalendarModal('${fullDate}', ${isToday}, ${day})">
+              <span class="cal-cell-num">${day}</span>
+              ${dotsHtml}
+            </button>
+          `;
+        }
+      } else {
+        // October 2026:
+        // Oct 1 is Thursday -> 4 empty cells (Sun, Mon, Tue, Wed)
+        for (let i = 0; i < 4; i++) {
+          html += `<div class="month-cal-cell empty"></div>`;
+        }
+        const fullDayNames = ['Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday'];
+        for (let day = 1; day <= 31; day++) {
+          const dayOfWeekIdx = (day - 1) % 7;
+          const fullDate = `${fullDayNames[dayOfWeekIdx]}, Oct ${day}`;
+          const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
+          const shifts = getShiftsForDay(9, day);
+          const hasShifts = shifts && shifts.length > 0;
+          const hasBooked = shifts && shifts.some(s => s.booked > 0);
+
+          let dotsHtml = '';
+          if (hasShifts || hasBooked) {
+            dotsHtml += `<div class="cal-cell-dots">`;
+            if (hasShifts) dotsHtml += `<span class="cal-dot dot-shift"></span>`;
+            if (hasBooked) dotsHtml += `<span class="cal-dot dot-booked"></span>`;
+            dotsHtml += `</div>`;
+          } else {
+            dotsHtml += `<div class="cal-cell-dots"></div>`;
+          }
+
+          html += `
+            <button type="button" class="month-cal-cell ${isSelected ? 'active' : ''}" onclick="selectDateFromCalendarModal('${fullDate}', false, ${day})">
+              <span class="cal-cell-num">${day}</span>
+              ${dotsHtml}
+            </button>
+          `;
+        }
+      }
+
+      gridEl.innerHTML = html;
+    }
+
+    function selectDateFromCalendarModal(dateText, isToday, dayNum) {
+      currentSelectedDate = dateText;
+      closeMonthCalendarModal();
+      
+      renderDateCarouselStrip();
+      
+      const targetPill = document.querySelector(`.date-pill[data-date="${dateText}"]`) || document.getElementById(`datePill_Sept_${dayNum}`) || document.getElementById(`datePill_Oct_${dayNum}`);
+      if (targetPill) {
+        document.querySelectorAll('.date-pill').forEach(p => p.classList.remove('active'));
+        targetPill.classList.add('active');
+        targetPill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      const titleEl = document.getElementById('selectedDateTitle');
+      if (titleEl) titleEl.textContent = dateText;
+      
+      const todayBadge = document.getElementById('todayChipBadge');
+      if (todayBadge) {
+        todayBadge.style.display = isToday ? 'inline-block' : 'none';
+      }
+
+      closeInPageShiftCard();
+      renderDateSchedule(dateText);
+      showToast(`Viewing schedule for ${dateText}`);
     }
 
     // =======================================================
@@ -16425,7 +18197,10 @@
 
     function closeAllModals() {
       closeGoingOfflineModal();
+      closeOfflineConfirmedModal();
+      closeCreateShiftToOfflineModal();
       closeTimePickerModal();
+      closeMonthCalendarModal();
       closeCancelShiftModal();
       closeEndCallModal();
       closeMedicineModal();
@@ -16827,145 +18602,341 @@
     let selectedOfflineDates = ['Tue 29'];
     let selectedOfflinePatientCount = 4;
 
+    // ==========================================
+    // GO OFFLINE MODAL CONTROLLER (Week & Month View Multi-Select)
+    // ==========================================
+    let offlineViewMode = 'week'; // 'week' (7 days) or 'month' (full month)
+    let selectedOfflineDays = []; // Default clean state (NO red cards initially)
+    let offlineCurrentMonth = 8; // 8 = September, 9 = October
+    let offlineCurrentYear = 2026;
+
     function openGoingOfflineModal() {
+      selectedOfflineDays = []; // Always start fresh with 0 selected days
       document.getElementById('modalBackdrop').classList.add('active');
-      document.getElementById('goingOfflineSheet').classList.add('active');
-      updateOfflineDatesCalculation();
+      const sheet = document.getElementById('goingOfflineSheet');
+      if (sheet) sheet.classList.add('active');
+      renderOfflineDaysGrid();
+      updateOfflineImpactSummary();
     }
 
     function closeGoingOfflineModal() {
       document.getElementById('modalBackdrop').classList.remove('active');
-      document.getElementById('goingOfflineSheet').classList.remove('active');
+      const sheet = document.getElementById('goingOfflineSheet');
+      if (sheet) sheet.classList.remove('active');
     }
 
-    function selectOfflineMode(mode) {
-      selectedOfflineMode = mode;
-      
-      const segBtnDates = document.getElementById('segBtnDates');
-      const segBtnManual = document.getElementById('segBtnManual');
+    function toggleOfflineViewMode() {
+      offlineViewMode = (offlineViewMode === 'week') ? 'month' : 'week';
+      renderOfflineDaysGrid();
+    }
 
-      const panelDates = document.getElementById('panelOfflineDates');
-      const panelManual = document.getElementById('panelOfflineManual');
-      const btnConfirm = document.getElementById('btnConfirmOffline');
+    function toggleOfflineMonthNav() {
+      offlineCurrentMonth = (offlineCurrentMonth === 8) ? 9 : 8;
+      renderOfflineDaysGrid();
+      updateOfflineImpactSummary();
+    }
 
-      if (segBtnDates) segBtnDates.classList.toggle('active', mode === 'dates');
-      if (segBtnManual) segBtnManual.classList.toggle('active', mode === 'manual');
+    function toggleOfflineDaySelection(dayNum) {
+      const idx = selectedOfflineDays.indexOf(dayNum);
+      if (idx > -1) {
+        selectedOfflineDays.splice(idx, 1);
+      } else {
+        selectedOfflineDays.push(dayNum);
+      }
+      renderOfflineDaysGrid();
+      updateOfflineImpactSummary();
+    }
 
-      if (panelDates) panelDates.style.display = mode === 'dates' ? 'block' : 'none';
-      if (panelManual) panelManual.style.display = mode === 'manual' ? 'block' : 'none';
+    function renderOfflineDaysGrid() {
+      const container = document.getElementById('offlineDatesContainer');
+      const toggleLabel = document.getElementById('offlineViewToggleLabel');
+      const monthLabel = document.getElementById('offlineMonthLabel');
+      const navIcon = document.getElementById('offlineMonthNavIcon');
 
-      if (mode === 'dates') {
-        updateOfflineDatesCalculation();
-      } else if (mode === 'manual') {
-        selectedDurationTitle = 'Until Resumed';
-        selectedOfflinePatientCount = 'All';
-        if (btnConfirm) {
-          btnConfirm.classList.remove('disabled');
-          btnConfirm.disabled = false;
+      if (!container) return;
+
+      if (monthLabel) {
+        monthLabel.textContent = (offlineCurrentMonth === 8 ? 'Sept' : 'Oct') + ' ' + offlineCurrentYear;
+      }
+      if (navIcon) {
+        navIcon.className = offlineCurrentMonth === 8 ? 'ph ph-caret-right' : 'ph ph-caret-left';
+      }
+
+      if (toggleLabel) {
+        toggleLabel.textContent = (offlineViewMode === 'week') ? 'Month View' : 'Week View';
+      }
+
+      const dayAbbrs = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      function getWeekdayName(day, month) {
+        if (month === 8) { // September 2026: Sept 1 is Tue (idx 2)
+          const wIdx = (2 + day - 1) % 7;
+          return dayAbbrs[wIdx];
+        } else { // October 2026: Oct 1 is Thu (idx 4)
+          const wIdx = (4 + day - 1) % 7;
+          return dayAbbrs[wIdx];
         }
       }
-    }
 
-    function toggleOfflineDate(pillEl) {
-      pillEl.classList.toggle('active');
-      const dateKey = pillEl.getAttribute('data-date');
-      if (pillEl.classList.contains('active')) {
-        if (!selectedOfflineDates.includes(dateKey)) {
-          selectedOfflineDates.push(dateKey);
+      const weekdaysHeader = document.getElementById('offlineCalWeekdaysHeader');
+      if (weekdaysHeader) {
+        weekdaysHeader.style.display = (offlineViewMode === 'month') ? 'grid' : 'none';
+      }
+
+      let html = '';
+
+      if (offlineViewMode === 'week') {
+        // Option 1: Clean single-row strip of exactly 7 consecutive days from Today
+        if (offlineCurrentMonth === 8) {
+          for (let day = 15; day <= 21; day++) {
+            const isToday = (day === 15);
+            const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
+            const isSelected = selectedOfflineDays.includes(day);
+            const isTodayClass = isToday ? 'is-today-card' : '';
+
+            html += `
+              <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
+                   onclick="toggleOfflineDaySelection(${day})"
+                   title="${isToday ? 'Today' : dayLabel} ${day}">
+                <span class="off-card-day">${dayLabel}</span>
+                <span class="off-card-num">${day}</span>
+              </div>
+            `;
+          }
+        } else {
+          for (let day = 1; day <= 7; day++) {
+            const dayLabel = getWeekdayName(day, 9);
+            const isSelected = selectedOfflineDays.includes(day);
+
+            html += `
+              <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
+                   onclick="toggleOfflineDaySelection(${day})"
+                   title="${dayLabel} ${day}">
+                <span class="off-card-day">${dayLabel}</span>
+                <span class="off-card-num">${day}</span>
+              </div>
+            `;
+          }
         }
       } else {
-        selectedOfflineDates = selectedOfflineDates.filter(d => d !== dateKey);
+        // Month View: Standard Sunday-to-Saturday Calendar Matrix with proper weekday alignment
+        if (offlineCurrentMonth === 8) {
+          // September 2026: Sept 15 is Tuesday -> 2 leading empty cells (Sun=col 0, Mon=col 1)
+          for (let i = 0; i < 2; i++) {
+            html += `<div class="offline-date-card empty"></div>`;
+          }
+
+          for (let day = 15; day <= 30; day++) {
+            const isToday = (day === 15);
+            const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
+            const isSelected = selectedOfflineDays.includes(day);
+            const isTodayClass = isToday ? 'is-today-card' : '';
+
+            html += `
+              <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
+                   onclick="toggleOfflineDaySelection(${day})"
+                   title="${isToday ? 'Today' : dayLabel} ${day}">
+                <span class="off-card-day">${dayLabel}</span>
+                <span class="off-card-num">${day}</span>
+              </div>
+            `;
+          }
+        } else {
+          // October 2026: Oct 1 is Thursday -> 4 leading empty cells (Sun=0, Mon=1, Tue=2, Wed=3)
+          for (let i = 0; i < 4; i++) {
+            html += `<div class="offline-date-card empty"></div>`;
+          }
+
+          for (let day = 1; day <= 31; day++) {
+            const dayLabel = getWeekdayName(day, 9);
+            const isSelected = selectedOfflineDays.includes(day);
+
+            html += `
+              <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
+                   onclick="toggleOfflineDaySelection(${day})"
+                   title="${dayLabel} ${day}">
+                <span class="off-card-day">${dayLabel}</span>
+                <span class="off-card-num">${day}</span>
+              </div>
+            `;
+          }
+        }
       }
-      updateOfflineDatesCalculation();
+
+      container.innerHTML = html;
     }
 
-    function updateOfflineDatesCalculation() {
-      let totalPatients = 0;
-      const activePills = document.querySelectorAll('#offlineDaysGrid .offline-day-pill.active');
-      const selectedKeys = [];
-      const selectedDisplayNames = [];
-      
-      activePills.forEach(pill => {
-        const count = parseInt(pill.getAttribute('data-patients'), 10) || 0;
-        totalPatients += count;
-        const dateKey = pill.getAttribute('data-date');
-        selectedKeys.push(dateKey);
-        if (dateKey === 'Sun 27') {
-          selectedDisplayNames.push('Today (Sun 27)');
-        } else {
-          selectedDisplayNames.push(dateKey);
-        }
+    function updateOfflineImpactSummary() {
+      const daysLabel = document.getElementById('offlineDaysMarkedLabel');
+      const bookingsLabel = document.getElementById('offlineBookingsAffectedLabel');
+      const confirmBtn = document.getElementById('btnConfirmOffline');
+
+      const count = selectedOfflineDays.length;
+      if (daysLabel) {
+        daysLabel.textContent = count === 1 ? '1 Day Marked Off' : `${count} Days Marked Off`;
+      }
+
+      // Dynamically calculate affected bookings across all selected days
+      let totalBookings = 0;
+      selectedOfflineDays.forEach(day => {
+        const shifts = getShiftsForDay(offlineCurrentMonth, day);
+        shifts.forEach(s => {
+          totalBookings += (s.booked || 0);
+        });
       });
 
-      selectedOfflinePatientCount = totalPatients;
-      const summaryText = document.getElementById('offlineDatesSummaryText');
-      const btnConfirm = document.getElementById('btnConfirmOffline');
-      const isDisabled = (selectedOfflineMode === 'dates' && selectedKeys.length === 0);
-
-      if (btnConfirm) {
-        btnConfirm.classList.toggle('disabled', isDisabled);
-        btnConfirm.disabled = isDisabled;
+      if (bookingsLabel) {
+        if (totalBookings > 0) {
+          bookingsLabel.textContent = `${totalBookings} Booking${totalBookings > 1 ? 's' : ''} Affected`;
+          bookingsLabel.className = 'offline-bookings-affected-label';
+        } else {
+          bookingsLabel.textContent = '0 Bookings Affected';
+          bookingsLabel.className = 'offline-bookings-affected-label zero-affected';
+        }
       }
 
-      if (selectedKeys.length === 0) {
-        selectedDurationTitle = 'No Dates';
-        if (summaryText) summaryText.textContent = 'Select at least 1 date';
-      } else if (selectedKeys.length === 1) {
-        selectedDurationTitle = selectedDisplayNames[0];
-        if (summaryText) summaryText.textContent = `${selectedDisplayNames[0]} • ${totalPatients} patients affected`;
-      } else if (selectedKeys.length === 2) {
-        selectedDurationTitle = selectedDisplayNames.join(' & ');
-        if (summaryText) summaryText.textContent = `${selectedDisplayNames.join(', ')} • ${totalPatients} patients affected`;
-      } else {
-        selectedDurationTitle = `${selectedKeys.length} Days (${selectedDisplayNames[0]} – ${selectedDisplayNames[selectedDisplayNames.length - 1]})`;
-        if (summaryText) summaryText.textContent = `${selectedKeys.length} Days Selected • ${totalPatients} patients affected`;
+      if (confirmBtn) {
+        confirmBtn.disabled = (count === 0);
       }
     }
 
     function confirmGoingOffline() {
+      if (selectedOfflineDays.length === 0) {
+        showToast('Please select at least 1 day to go offline.');
+        return;
+      }
+
       const checkbox = document.getElementById('acceptingToggle');
+      const isTodayIncluded = selectedOfflineDays.includes(15) && (offlineCurrentMonth === 8);
+      const count = selectedOfflineDays.length;
+
+      // Calculate total affected bookings
+      let totalBookings = 0;
+      selectedOfflineDays.forEach(day => {
+        const shifts = getShiftsForDay(offlineCurrentMonth, day);
+        shifts.forEach(s => {
+          totalBookings += (s.booked || 0);
+        });
+      });
+
+      // Format selected dates description
+      const monthPrefix = offlineCurrentMonth === 8 ? 'Sept' : 'Oct';
+      const sortedDays = [...selectedOfflineDays].sort((a, b) => a - b);
+      let dateRangeStr = '';
+      if (sortedDays.length === 1) {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} (1 Day)`;
+      } else if (sortedDays.length === 2 && sortedDays[1] === sortedDays[0] + 1) {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[1]} (2 Days)`;
+      } else {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[sortedDays.length - 1]} (${sortedDays.length} Days)`;
+      }
+
+      // Check if entire week (or >= 7 days) is selected -> Prompt to add future shift so patients can be rescheduled
+      if (selectedOfflineDays.length >= 7) {
+        closeGoingOfflineModal();
+        openCreateShiftToOfflineModal(dateRangeStr, totalBookings);
+        return;
+      }
+
+      // Mark shifts as cancelled/paused for the selected dates
+      selectedOfflineDays.forEach(day => {
+        const searchKey = `${monthPrefix} ${day}`;
+        for (const key of Object.keys(dateSchedules)) {
+          if (key.includes(searchKey)) {
+            dateSchedules[key] = [];
+          }
+        }
+      });
+
+      renderDateSchedule(currentSelectedDate);
+      renderDateCarouselStrip();
       closeGoingOfflineModal();
 
-      if (selectedOfflineMode === 'manual') {
-        // Doctor is offline until manually resumed
+      if (isTodayIncluded) {
         if (checkbox) checkbox.checked = false;
+        selectedDurationTitle = `${count} Day${count > 1 ? 's' : ''}`;
         renderOfflineState();
         renderAppointmentsList();
-        
-        Object.keys(dateSchedules).forEach(k => { dateSchedules[k] = []; });
-        renderDateSchedule(currentSelectedDate);
-        showToast(`Status: Offline (${selectedDurationTitle})`);
-      } else if (selectedOfflineMode === 'dates') {
-        // Auto-delete schedule for all selected specific dates
-        selectedOfflineDates.forEach(dateKey => {
-          const fullDate = dateKeyToFullDate[dateKey];
-          if (fullDate) {
-            dateSchedules[fullDate] = [];
-          }
-        });
+      } else {
+        // Today remains online
+        if (checkbox) checkbox.checked = true;
+        isDoctorOffline = false;
+        const toggleLabel = document.getElementById('toggleLabel');
+        if (toggleLabel) {
+          toggleLabel.textContent = 'Accepting Patients';
+          toggleLabel.classList.remove('offline');
+        }
+        renderAppointmentsList();
+      }
 
-        renderDateSchedule(currentSelectedDate);
+      // Open the dedicated Offline Confirmed & Rescheduled Success Modal
+      openOfflineConfirmedModal(dateRangeStr, totalBookings, isTodayIncluded);
+    }
 
-        // Check if Today (Sun 27) is in the selected dates
-        const isTodaySelected = selectedOfflineDates.includes('Sun 27');
-        if (isTodaySelected) {
-          if (checkbox) checkbox.checked = false;
-          renderOfflineState();
-          renderAppointmentsList();
-          showToast(`Status: Offline (${selectedDurationTitle})`);
+    function openOfflineConfirmedModal(dateRangeStr, totalBookings, isTodayIncluded) {
+      const datesRangeEl = document.getElementById('offlineConfirmedDatesRange');
+      const reschedEl = document.getElementById('offlineConfirmedRescheduleShort');
+
+      if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
+
+      if (reschedEl) {
+        if (totalBookings > 0) {
+          reschedEl.textContent = `${totalBookings} patients auto-rescheduled`;
         } else {
-          // Future date off: Today remains ONLINE and active!
-          if (checkbox) checkbox.checked = true;
-          isDoctorOffline = false;
-          const toggleLabel = document.getElementById('toggleLabel');
-          if (toggleLabel) {
-            toggleLabel.textContent = 'Accepting Patients';
-            toggleLabel.classList.remove('offline');
-          }
-          showToast(`Time off scheduled for ${selectedDurationTitle} (${selectedOfflinePatientCount} patients notified)`);
-          renderAppointmentsList();
+          reschedEl.textContent = '0 booking conflicts';
         }
       }
+
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.add('active');
+      const sheet = document.getElementById('offlineConfirmedModalSheet');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeOfflineConfirmedModal() {
+      const sheet = document.getElementById('offlineConfirmedModalSheet');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function closeOfflineConfirmedModalAndReturn() {
+      closeOfflineConfirmedModal();
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      navigateToDesk();
+    }
+
+    function openCreateShiftToOfflineModal(dateRangeStr, totalBookings) {
+      const datesRangeEl = document.getElementById('createShiftOfflineDatesRange');
+      const noteEl = document.getElementById('createShiftOfflinePatientsNote');
+
+      if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
+      if (noteEl) {
+        if (totalBookings > 0) {
+          noteEl.textContent = `${totalBookings} patients need a future shift to transfer to`;
+        } else {
+          noteEl.textContent = 'Add future shift slots to activate weekly time off';
+        }
+      }
+
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.add('active');
+      const sheet = document.getElementById('createShiftToOfflineModalSheet');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeCreateShiftToOfflineModal() {
+      const sheet = document.getElementById('createShiftToOfflineModalSheet');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function goToScheduleToAddShift() {
+      closeCreateShiftToOfflineModal();
+      closeGoingOfflineModal();
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      navigateToSchedule();
+      setTimeout(() => {
+        openInPageShiftForm();
+      }, 200);
     }
 
     // Ensure pristine viewport and prevent browser scroll restoration on refresh
@@ -17006,6 +18977,10 @@
           navObserver.observe(pagesSlider, { attributes: true, attributeFilter: ['class'], subtree: true });
         }
       }
+
+      // Initialize full month date carousel and schedule
+      renderDateCarouselStrip();
+      renderDateSchedule(currentSelectedDate);
 
       document.addEventListener('click', (e) => {
         if (isWithdrawDropdownOpen) {
