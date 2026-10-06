@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
   <title>Onu App — Doctor Desk & Shift Management</title>
   
   <!-- Google Fonts: Urbanist (Headings & Metrics) and DM Sans (Body & Meta) -->
@@ -1037,8 +1037,25 @@
 
     .saved-shift-top {
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .shift-name-chip {
+      background: #F1F5F9;
+      border: 1px solid #CBD5E1;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #334155;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .shift-type-pill {
@@ -1073,32 +1090,27 @@
       font-family: var(--font-body);
       font-size: 13px;
       color: #64748B;
-      font-weight: 500;
-    }
-
-    .saved-shift-capacity strong {
-      color: #1E293B;
-      font-weight: 700;
-    }
-
-    .shift-locked-notice-card {
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      border-radius: 12px;
-      padding: 11px 14px;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-family: var(--font-body);
-      font-size: 12.5px;
-      color: #64748B;
-      font-weight: 500;
+      gap: 6px;
     }
 
-    .shift-locked-notice-card i {
-      font-size: 16px;
-      color: #475569;
-      flex-shrink: 0;
+    .saved-shift-capacity i {
+      font-size: 14.5px;
+      color: #64748B;
+    }
+
+    .time-input-tile.locked {
+      opacity: 0.65;
+      cursor: not-allowed;
+      background: #F8FAF9 !important;
+      border-color: #E2ECE9 !important;
+    }
+
+    .time-input-tile.locked:hover {
+      border-color: #E2ECE9 !important;
+      background: #F8FAF9 !important;
     }
 
     .saved-shift-actions-row {
@@ -2073,18 +2085,75 @@
       color: #052E28;
     }
 
-    .shift-lock-banner {
-      background: #EFF7F5;
-      border-left: 3.5px solid #052E28;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: #052E28;
-      line-height: 1.4;
+    /* Android Compose / Material 3 Floating Snackbar */
+    .android-snackbar-container {
+      position: absolute;
+      bottom: 22px;
+      left: 16px;
+      right: 16px;
+      background: #2A2F2D;
+      color: #F1F3F2;
+      border-radius: 14px;
+      padding: 12px 16px;
       display: flex;
-      align-items: flex-start;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.28), 0 2px 6px rgba(0, 0, 0, 0.12);
+      z-index: 200;
+      opacity: 0;
+      transform: translateY(20px) scale(0.96);
+      pointer-events: none;
+      transition: opacity 0.22s cubic-bezier(0, 0, 0.2, 1), transform 0.22s cubic-bezier(0, 0, 0.2, 1);
+      box-sizing: border-box;
+    }
+
+    .android-snackbar-container.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .android-snackbar-content {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .android-snackbar-icon {
+      font-size: 18px;
+      color: #79D2BA;
+      flex-shrink: 0;
+    }
+
+    .android-snackbar-text {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.35;
+      color: #F1F3F2;
+    }
+
+    .android-snackbar-action {
+      background: transparent;
+      border: none;
+      color: #79D2BA;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 6px;
+      transition: background 0.15s ease;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .android-snackbar-action:hover {
+      background: rgba(121, 210, 186, 0.14);
     }
 
     /* Consultation Segment */
@@ -2746,6 +2815,11 @@
       left: 0;
       right: 0;
       bottom: 0;
+      max-height: 90%;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
       background: #ffffff;
       border-radius: 32px 32px 0 0;
       padding: 16px 22px 30px 22px;
@@ -2840,7 +2914,7 @@
       font-family: var(--font-heading);
       font-size: 32px;
       font-weight: 800;
-      color: var(--color-text-primary);
+      color: #1E293B;
       letter-spacing: -0.03em;
       line-height: 1.1;
     }
@@ -4609,7 +4683,7 @@
        PAGE 6: REAL-TIME PRESCRIPTION PREVIEW (A4 Dimension Standard)
        ============================================================ */
     .app-page.page-prescription-preview {
-      background: #EDF2F1; /* Soft clinical backdrop */
+      background: #FFFFFF;
       padding: 12px 14px 40px 14px;
       display: flex;
       flex-direction: column;
@@ -4624,7 +4698,7 @@
       position: sticky;
       top: -12px;
       z-index: 20;
-      background: #EDF2F1;
+      background: #FFFFFF;
       padding: 12px 0 6px 0;
       margin-top: -12px;
     }
@@ -4638,10 +4712,10 @@
     /* Standard A4 Aspect Ratio & Single-Page Layout */
     .rx-paper-container.a4-paper {
       background: #FFFFFF;
-      border: 1px solid #DCE6E4;
-      border-radius: 12px;
-      padding: 14px 12px;
-      box-shadow: 0 8px 24px -4px rgba(5, 46, 40, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px 14px;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.02);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -6983,7 +7057,7 @@
       background: rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      z-index: 60;
+      z-index: 150;
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -7002,7 +7076,7 @@
       width: 82%;
       max-width: 320px;
       background: #FFFFFF;
-      z-index: 65;
+      z-index: 155;
       transform: translateX(100%);
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
@@ -7017,12 +7091,13 @@
     }
 
     .onu-drawer-header {
-      padding: 16px 16px 12px 16px;
+      padding: 50px 16px 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #EDF2F1;
       flex-shrink: 0;
+      background: #FFFFFF;
     }
 
     .onu-drawer-brand {
@@ -8547,9 +8622,9 @@
     }
 
     .saved-account-icon.mfs {
-      background: #F4F6F6;
-      border: 1px solid #E2E8E7;
-      color: #052E28;
+      background: #FDF2F4;
+      border: 1px solid #FCE1E7;
+      color: #D82269;
     }
 
     .saved-account-info {
@@ -8984,14 +9059,14 @@
       padding: 2px 8px;
     }
 
-    /* Editable Contact Phone Tile */
+    /* Editable Contact Phone & Practice Tiles */
     .profile-phone-tile {
       background: #FFFFFF;
       border: 1.5px solid #EDF2F1;
       border-radius: 16px;
-      padding: 12px 14px;
+      padding: 13px 14px;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
       transition: border-color 0.15s ease;
@@ -9012,19 +9087,20 @@
       justify-content: center;
       font-size: 16px;
       flex-shrink: 0;
+      margin-top: 1px;
     }
 
     .profile-tile-body {
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 1px;
+      gap: 4px;
       min-width: 0;
     }
 
     .profile-tile-label {
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 10.5px;
       font-weight: 600;
       color: #64748B;
       text-transform: uppercase;
@@ -9033,9 +9109,11 @@
 
     .profile-tile-value {
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #052E28;
+      line-height: 1.38;
+      word-break: break-word;
     }
 
     .btn-edit-tile-action {
@@ -9052,6 +9130,7 @@
       cursor: pointer;
       transition: all 0.15s ease;
       flex-shrink: 0;
+      margin-top: 2px;
     }
 
     .btn-edit-tile-action:hover {
@@ -9070,6 +9149,11 @@
       flex-direction: column;
       gap: 10px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
+      transition: border-color 0.15s ease;
+    }
+
+    .profile-bio-box:hover {
+      border-color: #7EB8AE;
     }
 
     .profile-bio-header {
@@ -9081,34 +9165,16 @@
     .profile-bio-title-wrap {
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-family: var(--font-heading);
+      gap: 10px;
+    }
+
+    .profile-bio-display-text {
+      font-family: var(--font-body);
       font-size: 13.5px;
-      font-weight: 700;
-      color: #0F172A;
-    }
-
-    .btn-save-bio-pill {
-      background: #EFF7F5;
-      border: 1px solid #D6EAE6;
-      color: #0D7A5F;
-      font-family: var(--font-heading);
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 3px 10px;
-      border-radius: 100px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.15s ease;
-    }
-
-    .btn-save-bio-pill.unsaved {
-      background: #052E28;
-      border-color: #052E28;
-      color: #FFFFFF;
-      box-shadow: 0 2px 6px rgba(5, 46, 40, 0.18);
+      font-weight: 500;
+      color: #334155;
+      line-height: 1.55;
+      margin: 0;
     }
 
     .profile-bio-textarea {
@@ -9695,38 +9761,6 @@
           </div>
 
           <!-- =======================================================
-               ONU CHAT THREAD HISTORY DRAWER (Slide-in from Left)
-               ======================================================= -->
-          <div class="onu-drawer-backdrop" id="onuDrawerBackdrop" onclick="closeOnuHistoryDrawer()"></div>
-          
-          <div class="onu-history-drawer" id="onuHistoryDrawer">
-            <div class="onu-drawer-header">
-              <div class="onu-drawer-brand">
-                <i class="ph-fill ph-chat-centered-dots" style="color: var(--color-primary-btn); font-size: 22px;"></i>
-                <span>Onu</span>
-              </div>
-              <div class="onu-drawer-header-actions">
-                <button class="btn-circle-icon" onclick="showToast('Search chat history')" aria-label="Search History">
-                  <i class="ph ph-magnifying-glass"></i>
-                </button>
-                <button class="btn-circle-icon" onclick="closeOnuHistoryDrawer()" aria-label="Close Menu">
-                  <i class="ph ph-x"></i>
-                </button>
-              </div>
-            </div>
-
-            <button type="button" class="onu-drawer-new-chat-btn" onclick="startNewOnuChat(); closeOnuHistoryDrawer();">
-              <i class="ph ph-note-pencil" style="font-size: 18px; color: var(--color-primary-btn);"></i>
-              <span>New chat</span>
-            </button>
-
-            <div class="onu-drawer-recents-list" id="onuDrawerRecentsList">
-              <span class="onu-drawer-recents-title">Recents</span>
-              <!-- Dynamically populated clean single-line items -->
-            </div>
-          </div>
-
-          <!-- =======================================================
                VIEW 1: MY DESK (HOME)
                ======================================================= -->
           <div class="app-page page-right" id="pageDesk">
@@ -9809,7 +9843,7 @@
               <div class="financial-card" onclick="navigateToWallet()" style="cursor: pointer;">
                 <div class="financial-column left">
                   <span class="metric-label">Total Income</span>
-                  <span class="metric-value">&#2547;2,000</span>
+                  <span class="metric-value">&#2547;45,200</span>
                 </div>
                 
                 <div class="financial-divider"></div>
@@ -9882,12 +9916,6 @@
                   </button>
                 </div>
 
-                <!-- Dynamic Lock Notice Banner for Shifts with Booked Patients -->
-                <div id="shiftBookedLockBanner" style="display: none;" class="shift-lock-banner">
-                  <i class="ph-fill ph-lock-key" style="font-size: 16px; margin-top: 1px; flex-shrink: 0;"></i>
-                  <span id="shiftBookedLockText"><strong>4 Booked Patients</strong>: Start time and visit type are locked. You can extend end time or adjust patient limit.</span>
-                </div>
-
                 <!-- Consultation Type Segment -->
                 <div class="segmented-control inpage-segmented" id="consultTypeSegment">
                   <button type="button" class="segment-btn active" id="btnTypeVideo" onclick="setConsultType('video')">
@@ -9902,7 +9930,7 @@
 
                 <!-- Clean Two-Tile Time Inputs Row (No connector) -->
                 <div class="time-inputs-row">
-                  <div class="time-input-tile" id="startTimeTileWrapper" onclick="openTimePickerModal('start')" role="button" tabindex="0" title="Click to select Start Time">
+                  <div class="time-input-tile" id="startTimeTileWrapper" onclick="handleStartTimeTileClick()" role="button" tabindex="0" title="Start Time">
                     <span class="time-tile-label" id="startTimeTileLabel">START TIME</span>
                     <span class="time-tile-value" id="formStartTime">10:00 AM</span>
                   </div>
@@ -10265,20 +10293,20 @@
           </div>
 
           <!-- =======================================================
-               VIEW 6: REAL-TIME GENERATED PRESCRIPTION PREVIEW (Clinical Letterhead Standard)
+               VIEW 6: REAL-TIME GENERATED PRESCRIPTION (Clinical Letterhead Standard)
                ======================================================= -->
           <div class="app-page page-prescription-preview page-right" id="pagePrescriptionPreview">
             
             <!-- Sticky Top Bar -->
             <div class="rx-preview-top-bar">
               <div class="rx-preview-left-head">
-                <button class="btn-circle-icon" onclick="returnFromPrescriptionPreview()" aria-label="Back to Review">
+                <button class="btn-circle-icon" onclick="returnFromPrescriptionPreview()" aria-label="Back">
                   <i class="ph ph-arrow-left"></i>
                 </button>
-                <h1 class="page-top-title">Prescription Preview</h1>
+                <h1 class="page-top-title">Prescription</h1>
               </div>
-              <button class="btn-circle-icon" onclick="showToast('Prescription ready for sharing or download')" aria-label="Share">
-                <i class="ph ph-share-network"></i>
+              <button class="btn-circle-icon" onclick="showToast('Downloading Prescription PDF...')" aria-label="Download Prescription">
+                <i class="ph ph-download-simple"></i>
               </button>
             </div>
 
@@ -10718,8 +10746,9 @@
             <section class="wallet-transactions-section">
               <div class="wallet-transactions-header">
                 <h2 class="section-title">Recent Transactions</h2>
-                <button class="btn-circle-icon" style="width: 36px; height: 36px; font-size: 16px; background: #F6F8F9; border: 1.5px solid #EDF2F1;" onclick="openTransactionFilterModal()" aria-label="Filter transactions">
+                <button class="btn-circle-icon" id="btnTxFilterTrigger" style="width: 36px; height: 36px; font-size: 16px; background: #F6F8F9; border: 1.5px solid #EDF2F1; position: relative;" onclick="openTransactionFilterModal()" aria-label="Filter transactions">
                   <i class="ph ph-sliders-horizontal"></i>
+                  <span class="filter-active-dot" id="txFilterActiveDot" style="display: none; position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: #0E8070; border: 1.5px solid #FFFFFF;"></span>
                 </button>
               </div>
 
@@ -10785,10 +10814,10 @@
               </div>
             </div>
 
-            <!-- 2. Section: Contact & Bio (Editable by Doctor) -->
+            <!-- 2. Section: Contact & Practice (Editable by Doctor) -->
             <section class="profile-group-section">
               <div class="profile-section-header">
-                <h3 class="profile-section-title">Contact & Bio</h3>
+                <h3 class="profile-section-title">Contact & Practice</h3>
               </div>
 
               <!-- Editable Phone Number Tile -->
@@ -10805,22 +10834,36 @@
                 </button>
               </div>
 
+              <!-- Editable Chamber Address Tile -->
+              <div class="profile-phone-tile" onclick="openEditChamberModal()" style="cursor: pointer;">
+                <div class="profile-tile-icon">
+                  <i class="ph ph-map-pin"></i>
+                </div>
+                <div class="profile-tile-body">
+                  <span class="profile-tile-label">Chamber Address</span>
+                  <span class="profile-tile-value" id="doctorChamberDisplay">BSMMU (PG Hospital), Shahbag, Dhaka</span>
+                </div>
+                <button type="button" class="btn-edit-tile-action" onclick="event.stopPropagation(); openEditChamberModal()" aria-label="Edit Chamber Address">
+                  <i class="ph ph-pencil-simple"></i>
+                </button>
+              </div>
+
               <!-- Editable About You Bio Card -->
-              <div class="profile-bio-box">
+              <div class="profile-bio-box" onclick="openEditBioModal()" style="cursor: pointer;">
                 <div class="profile-bio-header">
                   <div class="profile-bio-title-wrap">
-                    <i class="ph ph-user-text"></i>
-                    <span>About You</span>
+                    <div class="profile-tile-icon" style="margin-top: 0;">
+                      <i class="ph ph-user"></i>
+                    </div>
+                    <span class="profile-tile-label">About You</span>
                   </div>
-                  <button type="button" class="btn-save-bio-pill" id="btnSaveBioPill" onclick="saveDoctorBio()">
-                    <i class="ph-fill ph-check-circle"></i>
-                    <span id="btnSaveBioLabel">Saved</span>
+                  <button type="button" class="btn-edit-tile-action" style="margin-top: 0;" onclick="event.stopPropagation(); openEditBioModal()" aria-label="Edit Bio">
+                    <i class="ph ph-pencil-simple"></i>
                   </button>
                 </div>
-                <textarea class="profile-bio-textarea" id="doctorBioTextarea" rows="3" maxlength="300" oninput="handleBioInput(this)" placeholder="Write a brief professional summary about yourself for patients...">Consultant Physician specializing in internal medicine, chronic disease management, and primary telehealth care with over 5 years of clinical practice.</textarea>
+                <p class="profile-bio-display-text" id="doctorBioDisplay">Consultant Physician specializing in internal medicine, chronic disease management, and primary telehealth care with over 5 years of clinical practice.</p>
                 <div class="profile-bio-footer">
-                  <span id="bioCharCount">136 / 300</span>
-                  <span><i class="ph ph-eye"></i> Visible to patients</span>
+                  <span style="font-size: 11px; color: #64748B;"><i class="ph ph-eye"></i> Visible to patients</span>
                 </div>
               </div>
             </section>
@@ -10842,13 +10885,6 @@
                 <div class="profile-info-row">
                   <span class="info-row-label">Consultation Fee</span>
                   <span class="info-row-value">&#2547; 1,200 BDT</span>
-                </div>
-
-                <div class="info-row-divider"></div>
-
-                <div class="profile-info-row">
-                  <span class="info-row-label">Primary Chamber</span>
-                  <span class="info-row-value">BSMMU (PG Hospital), Shahbag</span>
                 </div>
               </div>
             </section>
@@ -11208,8 +11244,49 @@
           </div>
         </nav>
 
+        <!-- Floating Android Compose / Material 3 Snackbar -->
+        <div class="android-snackbar-container" id="androidSnackbar" aria-live="polite">
+          <div class="android-snackbar-content">
+            <i class="ph ph-lock-key android-snackbar-icon"></i>
+            <span class="android-snackbar-text" id="androidSnackbarText">Start time is locked for 4 booked patients</span>
+          </div>
+          <button type="button" class="android-snackbar-action" onclick="hideAndroidSnackbar()" aria-label="Dismiss">OK</button>
+        </div>
+
         <!-- Home Indicator Bar -->
         <div class="home-indicator"></div>
+
+        <!-- =======================================================
+             ONU CHAT THREAD HISTORY DRAWER (Seamless Full-Screen Side Panel)
+             ======================================================= -->
+        <div class="onu-drawer-backdrop" id="onuDrawerBackdrop" onclick="closeOnuHistoryDrawer()"></div>
+        
+        <div class="onu-history-drawer" id="onuHistoryDrawer">
+          <div class="onu-drawer-header">
+            <div class="onu-drawer-brand">
+              <i class="ph-fill ph-chat-centered-dots" style="color: var(--color-primary-btn); font-size: 22px;"></i>
+              <span>Onu</span>
+            </div>
+            <div class="onu-drawer-header-actions">
+              <button class="btn-circle-icon" onclick="showToast('Search chat history')" aria-label="Search History">
+                <i class="ph ph-magnifying-glass"></i>
+              </button>
+              <button class="btn-circle-icon" onclick="closeOnuHistoryDrawer()" aria-label="Close Menu">
+                <i class="ph ph-x"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="button" class="onu-drawer-new-chat-btn" onclick="startNewOnuChat(); closeOnuHistoryDrawer();">
+            <i class="ph ph-note-pencil" style="font-size: 18px; color: var(--color-primary-btn);"></i>
+            <span>New chat</span>
+          </button>
+
+          <div class="onu-drawer-recents-list" id="onuDrawerRecentsList">
+            <span class="onu-drawer-recents-title">Recents</span>
+            <!-- Dynamically populated clean single-line items -->
+          </div>
+        </div>
 
         <!-- =======================================================
              4. GOING OFFLINE BOTTOM SHEET MODAL (Week / Month View Multi-Select)
@@ -11869,37 +11946,37 @@
         </div>
 
         <!-- =======================================================
-             10B. CANCEL SHIFT CONFIRMATION BOTTOM SHEET MODAL (Clinical Multi-Shift Protocol)
+             10B. CANCEL / DELETE SHIFT CONFIRMATION BOTTOM SHEET MODAL (Auto-Reschedule Protocol)
              ======================================================= -->
         <div class="bottom-sheet" id="cancelShiftModalSheet">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
             <div class="sheet-badge-icon danger-badge">
-              <i class="ph ph-calendar-x"></i>
+              <i class="ph ph-trash"></i>
             </div>
           </div>
           
           <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title" id="cancelShiftModalTitle">Cancel Shift 1?</h2>
-            <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 27 • 10:00 AM – 12:00 PM</p>
+            <h2 class="sheet-editorial-title" id="cancelShiftModalTitle">Delete Shift 1?</h2>
+            <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 15 • 10:00 AM – 12:00 PM</p>
           </div>
 
           <!-- Impact Box -->
           <div class="cancel-shift-impact-box">
             <div class="cancel-impact-top">
               <i class="ph-fill ph-warning-circle"></i>
-              <span id="cancelShiftPatientCountText">12 Booked Patients</span>
+              <span id="cancelShiftPatientCountText">4 Patients Already Booked</span>
             </div>
             <p class="cancel-impact-desc" id="cancelShiftImpactDesc">
-              Shift will be cancelled and patients notified to rebook.
+              Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.
             </p>
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 14px;">
             <button type="button" class="btn-sheet-cancel" onclick="closeCancelShiftModal()">Keep Shift</button>
             <button type="button" class="btn-sheet-danger-confirm" onclick="confirmCancelShiftAction()">
-              <i class="ph ph-x-circle"></i>
-              <span>Cancel Shift</span>
+              <i class="ph ph-trash"></i>
+              <span>Delete Shift</span>
             </button>
           </div>
         </div>
@@ -12080,9 +12157,9 @@
         </div>
 
         <!-- =======================================================
-             15. TRANSACTION FILTER BOTTOM SHEET MODAL
+             15. TRANSACTION FILTER BOTTOM SHEET MODAL (Universal Type & Date Filter Standard)
              ======================================================= -->
-        <div class="bottom-sheet" id="transactionFilterSheet" style="max-height: 75%; overflow-y: auto; scrollbar-width: none; z-index: 140;">
+        <div class="bottom-sheet" id="transactionFilterSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none; z-index: 140;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
             <div class="sheet-badge-icon">
@@ -12092,26 +12169,36 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Filter Transactions</h2>
-            <p class="sheet-minimal-subtitle">Show transactions by category</p>
+            <p class="sheet-minimal-subtitle">Filter transactions by category and date range.</p>
           </div>
 
-          <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
-            <div class="withdraw-account-card selected" id="filterTxAll" onclick="applyTxFilter('all')">
-              <span class="withdraw-account-name">All Transactions</span>
-              <i class="ph-fill ph-check-circle" id="checkFilterAll" style="color: #052E28; font-size: 20px;"></i>
+          <div class="modal-sheet-form">
+            <!-- Transaction Type Filter -->
+            <div class="form-input-group">
+              <label class="form-input-label">Transaction Type</label>
+              <div class="filter-pills-wrap" id="filterTxTypePillsWrap">
+                <button type="button" class="filter-chip-btn active" data-filter="type" data-val="all" onclick="selectTxFilterOption('type', 'all', this)">All Transactions</button>
+                <button type="button" class="filter-chip-btn" data-filter="type" data-val="inflow" onclick="selectTxFilterOption('type', 'inflow', this)">Payouts (+BDT)</button>
+                <button type="button" class="filter-chip-btn" data-filter="type" data-val="outflow" onclick="selectTxFilterOption('type', 'outflow', this)">Withdrawals (-BDT)</button>
+              </div>
             </div>
-            <div class="withdraw-account-card" id="filterTxInflow" onclick="applyTxFilter('inflow')">
-              <span class="withdraw-account-name">Consultation Payouts (+BDT)</span>
-              <i class="ph ph-circle" id="checkFilterInflow" style="color: #CAD8D5; font-size: 20px;"></i>
-            </div>
-            <div class="withdraw-account-card" id="filterTxOutflow" onclick="applyTxFilter('outflow')">
-              <span class="withdraw-account-name">Bank Withdrawals (-BDT)</span>
-              <i class="ph ph-circle" id="checkFilterOutflow" style="color: #CAD8D5; font-size: 20px;"></i>
+
+            <!-- Date Period Filter -->
+            <div class="form-input-group">
+              <label class="form-input-label">Date Period</label>
+              <div class="filter-pills-wrap" id="filterTxDatePillsWrap">
+                <button type="button" class="filter-chip-btn active" data-filter="date" data-val="all" onclick="selectTxFilterOption('date', 'all', this)">All Time</button>
+                <button type="button" class="filter-chip-btn" data-filter="date" data-val="today" onclick="selectTxFilterOption('date', 'today', this)">Today</button>
+                <button type="button" class="filter-chip-btn" data-filter="date" data-val="yesterday" onclick="selectTxFilterOption('date', 'yesterday', this)">Yesterday</button>
+                <button type="button" class="filter-chip-btn" data-filter="date" data-val="week" onclick="selectTxFilterOption('date', 'week', this)">This Week</button>
+                <button type="button" class="filter-chip-btn" data-filter="date" data-val="month" onclick="selectTxFilterOption('date', 'month', this)">This Month</button>
+              </div>
             </div>
           </div>
 
-          <div class="sheet-actions-group">
-            <button type="button" class="btn-sheet-cancel" style="width: 100%;" onclick="closeTransactionFilterModal()">Done</button>
+          <div class="sheet-actions-group" style="margin-top: 16px;">
+            <button type="button" class="btn-sheet-cancel" style="flex: 1;" onclick="resetTxFilters()">Reset</button>
+            <button type="button" class="btn-sheet-confirm" style="flex: 2;" onclick="applyTxFilters()">Apply Filter</button>
           </div>
         </div>
 
@@ -12327,6 +12414,64 @@
           <div class="sheet-actions-group" style="margin-top: 20px;">
             <button type="button" class="btn-sheet-cancel" onclick="closeEditPhoneModal()">Cancel</button>
             <button type="button" class="btn-sheet-confirm" onclick="confirmSavePhoneNumber()">Save Phone</button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             EDIT CHAMBER ADDRESS MODAL BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="editChamberModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+              <i class="ph ph-map-pin"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title">Chamber Address</h2>
+            <p class="sheet-editorial-sub">Update your primary clinic or hospital chamber address for patient reference.</p>
+          </div>
+
+          <div class="payout-input-group" style="margin-top: 14px;">
+            <label class="payout-form-label">Chamber / Hospital Address</label>
+            <input type="text" class="payout-form-input" id="inputEditChamberVal" value="BSMMU (PG Hospital), Shahbag, Dhaka" placeholder="e.g. BSMMU (PG Hospital), Shahbag, Dhaka">
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 20px;">
+            <button type="button" class="btn-sheet-cancel" onclick="closeEditChamberModal()">Cancel</button>
+            <button type="button" class="btn-sheet-confirm" onclick="confirmSaveChamberAddress()">Save Address</button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             EDIT BIO MODAL BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="editBioModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+              <i class="ph ph-user"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title">About You</h2>
+            <p class="sheet-editorial-sub">Write a brief professional summary about yourself for patients.</p>
+          </div>
+
+          <div class="payout-input-group" style="margin-top: 14px;">
+            <label class="payout-form-label">Professional Summary</label>
+            <textarea class="profile-bio-textarea" id="inputEditBioVal" rows="4" maxlength="300" oninput="handleModalBioInput(this)" placeholder="Write a brief professional summary about yourself for patients..."></textarea>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11.5px; color: #64748B; font-family: var(--font-body);">
+              <span id="modalBioCharCount">136 / 300</span>
+              <span><i class="ph ph-eye"></i> Visible to patients</span>
+            </div>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 20px;">
+            <button type="button" class="btn-sheet-cancel" onclick="closeEditBioModal()">Cancel</button>
+            <button type="button" class="btn-sheet-confirm" onclick="confirmSaveDoctorBio()">Save Bio</button>
           </div>
         </div>
 
@@ -12963,6 +13108,28 @@
         prescriptionPdf: null
       }
     ];
+
+    let androidSnackbarTimer = null;
+
+    function showAndroidSnackbar(message, actionLabel = 'OK') {
+      const snackbar = document.getElementById('androidSnackbar');
+      const textEl = document.getElementById('androidSnackbarText');
+      if (!snackbar || !textEl) return;
+
+      textEl.textContent = message;
+      snackbar.classList.add('show');
+
+      if (androidSnackbarTimer) clearTimeout(androidSnackbarTimer);
+      androidSnackbarTimer = setTimeout(() => {
+        hideAndroidSnackbar();
+      }, 3000);
+    }
+
+    function hideAndroidSnackbar() {
+      const snackbar = document.getElementById('androidSnackbar');
+      if (snackbar) snackbar.classList.remove('show');
+      if (androidSnackbarTimer) clearTimeout(androidSnackbarTimer);
+    }
 
     function showToast(message) {
       // Toast popup removed per user design direction
@@ -14014,7 +14181,7 @@
               <div class="onu-widget-grid">
                 <div class="onu-widget-metric-box">
                   <span class="onu-widget-metric-label">Total Income</span>
-                  <span class="onu-widget-metric-value">&#2547;14,400</span>
+                  <span class="onu-widget-metric-value">&#2547;45,200</span>
                 </div>
                 <div class="onu-widget-metric-box">
                   <span class="onu-widget-metric-label">Available Balance</span>
@@ -14418,28 +14585,74 @@
       showToast('Contact phone updated successfully');
     }
 
-    function handleBioInput(textarea) {
-      const charCount = document.getElementById('bioCharCount');
-      const btnSave = document.getElementById('btnSaveBioPill');
-      const len = textarea.value.length;
-      if (charCount) charCount.textContent = `${len} / 300`;
-      if (btnSave) {
-        btnSave.classList.add('unsaved');
-        btnSave.innerHTML = `<i class="ph ph-floppy-disk"></i><span id="btnSaveBioLabel">Save</span>`;
+    function openEditChamberModal() {
+      const input = document.getElementById('inputEditChamberVal');
+      if (input) input.value = doctorProfileData.chamber;
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('editChamberModalSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeEditChamberModal() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('editChamberModalSheet');
+      if (backdrop) backdrop.classList.remove('active');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function confirmSaveChamberAddress() {
+      const input = document.getElementById('inputEditChamberVal');
+      const newChamber = input ? input.value.trim() : '';
+      if (!newChamber) {
+        showToast('Please enter a valid chamber address');
+        return;
+      }
+      doctorProfileData.chamber = newChamber;
+      const displayEl = document.getElementById('doctorChamberDisplay');
+      if (displayEl) displayEl.textContent = newChamber;
+      closeEditChamberModal();
+      showToast('Chamber address updated successfully');
+    }
+
+    function openEditBioModal() {
+      const textarea = document.getElementById('inputEditBioVal');
+      if (textarea) {
+        textarea.value = doctorProfileData.bio;
+        handleModalBioInput(textarea);
+      }
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('editBioModalSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeEditBioModal() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('editBioModalSheet');
+      if (backdrop) backdrop.classList.remove('active');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function handleModalBioInput(textarea) {
+      const charCount = document.getElementById('modalBioCharCount');
+      if (charCount) {
+        charCount.textContent = `${textarea.value.length} / 300`;
       }
     }
 
-    function saveDoctorBio() {
-      const textarea = document.getElementById('doctorBioTextarea');
-      if (textarea) {
-        doctorProfileData.bio = textarea.value.trim();
+    function confirmSaveDoctorBio() {
+      const textarea = document.getElementById('inputEditBioVal');
+      const newBio = textarea ? textarea.value.trim() : '';
+      if (!newBio) {
+        showToast('Please enter a brief bio');
+        return;
       }
-      const btnSave = document.getElementById('btnSaveBioPill');
-      if (btnSave) {
-        btnSave.classList.remove('unsaved');
-        btnSave.innerHTML = `<i class="ph-fill ph-check-circle"></i><span id="btnSaveBioLabel">Saved</span>`;
-      }
-      showToast('Profile bio saved successfully');
+      doctorProfileData.bio = newBio;
+      const displayEl = document.getElementById('doctorBioDisplay');
+      if (displayEl) displayEl.textContent = newBio;
+      closeEditBioModal();
+      showToast('About You bio updated successfully');
     }
 
     function openAvatarPickerModal() {
@@ -14674,10 +14887,12 @@
       totalEarnings: 45200,
       selectedAccount: 'bank',
       activeFilter: 'all',
+      activeDateFilter: 'all',
       transactions: [
         {
           id: 'tx_1',
           type: 'inflow',
+          period: 'today',
           title: 'Alif Khan',
           subtitle: 'Video Consultation • bKash',
           method: 'bKash Mobile Wallet',
@@ -14692,6 +14907,7 @@
         {
           id: 'tx_2',
           type: 'inflow',
+          period: 'today',
           title: 'Sarah Connor',
           subtitle: 'Video Consultation • Bank',
           method: 'Prime Bank Transfer',
@@ -14706,6 +14922,7 @@
         {
           id: 'tx_3',
           type: 'outflow',
+          period: 'yesterday',
           title: 'Bank Withdrawal',
           subtitle: 'Prime Bank • ****4212',
           method: 'Prime Bank Ltd (•••• 4212)',
@@ -14720,6 +14937,7 @@
         {
           id: 'tx_4',
           type: 'inflow',
+          period: 'yesterday',
           title: 'Tariqul Islam',
           subtitle: 'Video Consultation • Nagad',
           method: 'Nagad Wallet',
@@ -14734,6 +14952,7 @@
         {
           id: 'tx_5',
           type: 'inflow',
+          period: 'yesterday',
           title: 'Farzana Khan',
           subtitle: 'Video Consultation • bKash',
           method: 'bKash Mobile Wallet',
@@ -14744,6 +14963,66 @@
           consultId: 'CONS-94817',
           fee: '0 BDT',
           reference: 'TRX-BK-9481799'
+        },
+        {
+          id: 'tx_6',
+          type: 'inflow',
+          period: 'week',
+          title: 'Nusrat Jahan',
+          subtitle: 'Video Consultation • bKash',
+          method: 'bKash Mobile Wallet',
+          amount: 1000,
+          time: '04:20 PM',
+          dateGroup: 'THIS WEEK, AUG 20',
+          status: 'Completed',
+          consultId: 'CONS-94812',
+          fee: '0 BDT',
+          reference: 'TRX-BK-9481201'
+        },
+        {
+          id: 'tx_7',
+          type: 'outflow',
+          period: 'week',
+          title: 'bKash Payout',
+          subtitle: 'bKash • ****3938',
+          method: 'bKash Personal (•••• 3938)',
+          amount: 2000,
+          time: '11:45 AM',
+          dateGroup: 'THIS WEEK, AUG 19',
+          status: 'Completed',
+          consultId: 'WD-482855',
+          fee: '0 BDT',
+          reference: 'BKASH-WD-482855'
+        },
+        {
+          id: 'tx_8',
+          type: 'inflow',
+          period: 'month',
+          title: 'Rafiqul Islam',
+          subtitle: 'Video Consultation • Bank',
+          method: 'Prime Bank Transfer',
+          amount: 1000,
+          time: '03:10 PM',
+          dateGroup: 'THIS MONTH, AUG 15',
+          status: 'Completed',
+          consultId: 'CONS-94788',
+          fee: '0 BDT',
+          reference: 'TRX-BNK-9478810'
+        },
+        {
+          id: 'tx_9',
+          type: 'outflow',
+          period: 'month',
+          title: 'Bank Withdrawal',
+          subtitle: 'Eastern Bank • ****2314',
+          method: 'Eastern Bank Ltd (•••• 2314)',
+          amount: 5000,
+          time: '05:00 PM',
+          dateGroup: 'THIS MONTH, AUG 10',
+          status: 'Completed',
+          consultId: 'WD-482700',
+          fee: '0 BDT',
+          reference: 'BEFTN-WD-482700'
         }
       ]
     };
@@ -14802,17 +15081,33 @@
       if (!container) return;
 
       let filtered = earningsData.transactions;
+
+      // 1. Filter by Category / Type
       if (earningsData.activeFilter === 'inflow') {
         filtered = filtered.filter(t => t.type === 'inflow');
       } else if (earningsData.activeFilter === 'outflow') {
         filtered = filtered.filter(t => t.type === 'outflow');
       }
 
+      // 2. Filter by Date Period
+      if (earningsData.activeDateFilter === 'today') {
+        filtered = filtered.filter(t => t.period === 'today');
+      } else if (earningsData.activeDateFilter === 'yesterday') {
+        filtered = filtered.filter(t => t.period === 'yesterday');
+      } else if (earningsData.activeDateFilter === 'week') {
+        filtered = filtered.filter(t => t.period === 'today' || t.period === 'yesterday' || t.period === 'week');
+      } else if (earningsData.activeDateFilter === 'month') {
+        filtered = filtered.filter(t => t.period === 'today' || t.period === 'yesterday' || t.period === 'week' || t.period === 'month');
+      }
+
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div style="padding: 30px 10px; text-align: center; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13.5px;">
-            <i class="ph ph-receipt" style="font-size: 32px; color: #CAD8D5; margin-bottom: 8px; display: block;"></i>
-            No transactions in this filter
+          <div style="padding: 36px 16px; text-align: center; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13.5px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: #EFF7F5; color: #052E28; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+              <i class="ph ph-receipt"></i>
+            </div>
+            <div style="font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: #1D2322;">No Transactions Found</div>
+            <div style="font-size: 12.5px; color: #64748B;">No transactions match the selected type and date filters.</div>
           </div>
         `;
         return;
@@ -15106,7 +15401,25 @@
       if (backdrop) backdrop.classList.remove('active');
     }
 
+    let tempTxFilters = {
+      type: 'all',
+      date: 'all'
+    };
+
     function openTransactionFilterModal() {
+      tempTxFilters = {
+        type: earningsData.activeFilter || 'all',
+        date: earningsData.activeDateFilter || 'all'
+      };
+
+      // Sync active state on pills
+      document.querySelectorAll('#filterTxTypePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-val') === tempTxFilters.type);
+      });
+      document.querySelectorAll('#filterTxDatePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-val') === tempTxFilters.date);
+      });
+
       const modal = document.getElementById('transactionFilterSheet');
       const backdrop = document.getElementById('modalBackdrop');
       if (modal) modal.classList.add('active');
@@ -15120,33 +15433,40 @@
       if (backdrop) backdrop.classList.remove('active');
     }
 
-    function applyTxFilter(filterType) {
-      earningsData.activeFilter = filterType;
-      ['filterTxAll', 'filterTxInflow', 'filterTxOutflow'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.classList.remove('selected');
-      });
-      ['checkFilterAll', 'checkFilterInflow', 'checkFilterOutflow'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.className = 'ph ph-circle';
-      });
+    function selectTxFilterOption(category, val, btn) {
+      tempTxFilters[category] = val;
+      const parent = btn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.filter-chip-btn').forEach(b => b.classList.remove('active'));
+      }
+      btn.classList.add('active');
+    }
 
-      if (filterType === 'all') {
-        document.getElementById('filterTxAll')?.classList.add('selected');
-        const c = document.getElementById('checkFilterAll');
-        if (c) c.className = 'ph-fill ph-check-circle';
-      } else if (filterType === 'inflow') {
-        document.getElementById('filterTxInflow')?.classList.add('selected');
-        const c = document.getElementById('checkFilterInflow');
-        if (c) c.className = 'ph-fill ph-check-circle';
-      } else if (filterType === 'outflow') {
-        document.getElementById('filterTxOutflow')?.classList.add('selected');
-        const c = document.getElementById('checkFilterOutflow');
-        if (c) c.className = 'ph-fill ph-check-circle';
+    function applyTxFilters() {
+      earningsData.activeFilter = tempTxFilters.type;
+      earningsData.activeDateFilter = tempTxFilters.date;
+
+      // Update active dot indicator on trigger button
+      const hasActive = (earningsData.activeFilter !== 'all' || earningsData.activeDateFilter !== 'all');
+      const dotEl = document.getElementById('txFilterActiveDot');
+      if (dotEl) {
+        dotEl.style.display = hasActive ? 'block' : 'none';
       }
 
       renderTransactionsList();
       closeTransactionFilterModal();
+      showToast('Filters applied');
+    }
+
+    function resetTxFilters() {
+      tempTxFilters = { type: 'all', date: 'all' };
+      document.querySelectorAll('#filterTxTypePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-val') === 'all');
+      });
+      document.querySelectorAll('#filterTxDatePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-val') === 'all');
+      });
+      applyTxFilters();
     }
 
     let payoutAccountsData = [
@@ -15207,7 +15527,6 @@
               <div class="saved-account-info">
                 <div class="saved-account-name-row">
                   <span class="saved-account-name">${acc.name}</span>
-                  ${acc.isDefault ? '<span class="saved-account-badge">Primary</span>' : ''}
                 </div>
                 <span class="saved-account-sub">${subtitleText}</span>
               </div>
@@ -17449,32 +17768,17 @@
       }
 
       let html = '';
-      shifts.forEach((shift) => {
-        let actionAreaHtml = '';
-        if (shift.booked > 0) {
-          actionAreaHtml = `
-            <div class="shift-locked-notice-card">
-              <i class="ph ph-lock-key"></i>
-              <span>Shift locked: ${shift.booked} patient${shift.booked > 1 ? 's' : ''} already booked (Cannot edit/delete)</span>
-            </div>
-          `;
-        } else {
-          actionAreaHtml = `
-            <div class="saved-shift-actions-row">
-              <button type="button" class="btn-shift-edit" onclick="editExistingShift('${shift.name}', '${shift.startTime}', '${shift.endTime}', ${shift.max}, 0)">
-                <i class="ph ph-pencil-simple"></i>
-                <span>Edit Shift</span>
-              </button>
-              <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('${shift.id}', '${shift.name}')" aria-label="Delete ${shift.name}">
-                <i class="ph ph-trash"></i>
-              </button>
-            </div>
-          `;
-        }
+      shifts.forEach((shift, index) => {
+        const shiftTitle = shift.name || `Shift ${index + 1}`;
+        const bookedCount = shift.booked || 0;
+        const maxCapacity = shift.max || 15;
+        const bookedFormatted = bookedCount > 0 ? String(bookedCount).padStart(2, '0') : '0';
+        const capacityText = `${bookedFormatted}/${maxCapacity} Patients`;
 
         html += `
           <div class="saved-shift-card" id="${shift.id}">
             <div class="saved-shift-top">
+              <span class="shift-name-chip">${shiftTitle.toUpperCase()}</span>
               <span class="shift-type-pill">
                 <i class="ph ${shift.typeIcon || 'ph-video-camera'}"></i>
                 ${shift.type || 'Video Consultation'}
@@ -17484,11 +17788,20 @@
             <div class="saved-shift-main">
               <span class="saved-shift-time">${shift.startTime} – ${shift.endTime}</span>
               <div class="saved-shift-capacity">
-                Capacity: <strong>Max ${shift.max || 15} Patients</strong>
+                <i class="ph ph-users"></i>
+                <span>${capacityText}</span>
               </div>
             </div>
 
-            ${actionAreaHtml}
+            <div class="saved-shift-actions-row">
+              <button type="button" class="btn-shift-edit" onclick="editExistingShift('${shiftTitle}', '${shift.startTime}', '${shift.endTime}', ${maxCapacity}, ${bookedCount})">
+                <i class="ph ph-pencil-simple"></i>
+                <span>Edit Shift</span>
+              </button>
+              <button type="button" class="btn-shift-delete" onclick="requestDeleteShift('${shift.id}', '${shiftTitle}')" aria-label="Delete ${shiftTitle}">
+                <i class="ph ph-trash"></i>
+              </button>
+            </div>
           </div>
         `;
       });
@@ -17758,15 +18071,22 @@
     }
 
     // ---------------------------------------------
-    // In-Page Shift Card Form Management
+    // In-Page Shift Card Form Management & Snackbar Integration
     // ---------------------------------------------
+    function handleStartTimeTileClick() {
+      if (currentEditingShiftBookedCount > 0) {
+        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change start time`);
+        return;
+      }
+      openTimePickerModal('start');
+    }
+
     function openInPageShiftForm() {
       currentEditingShiftId = null;
       currentEditingShiftBookedCount = 0;
 
       const card = document.getElementById('inPageShiftCard');
       const addBtn = document.getElementById('btnAddShiftTrigger');
-      const lockBanner = document.getElementById('shiftBookedLockBanner');
       const startTile = document.getElementById('startTimeTileWrapper');
       const startLabel = document.getElementById('startTimeTileLabel');
       const consultSeg = document.getElementById('consultTypeSegment');
@@ -17774,7 +18094,6 @@
       const repeatRow = document.getElementById('repeatWeeklyRow');
       const repeatToggle = document.getElementById('repeatWeeklyToggle');
 
-      if (lockBanner) lockBanner.style.display = 'none';
       if (startTile) {
         startTile.classList.remove('locked');
         startTile.title = 'Click to select Start Time';
@@ -17840,8 +18159,6 @@
       if (limitCount) limitCount.textContent = currentLimit;
       if (limitSub) limitSub.textContent = `Max ${currentLimit} Patients`;
 
-      const lockBanner = document.getElementById('shiftBookedLockBanner');
-      const lockText = document.getElementById('shiftBookedLockText');
       const startTile = document.getElementById('startTimeTileWrapper');
       const startLabel = document.getElementById('startTimeTileLabel');
       const consultSeg = document.getElementById('consultTypeSegment');
@@ -17850,11 +18167,9 @@
       const repeatToggle = document.getElementById('repeatWeeklyToggle');
 
       if (currentEditingShiftBookedCount > 0) {
-        if (lockBanner) lockBanner.style.display = 'flex';
-        if (lockText) lockText.innerHTML = `<strong>${currentEditingShiftBookedCount} Booked Patients</strong>: Start time, visit type, other days, and recurring options are locked. You can extend end time or adjust patient limit.`;
         if (startTile) {
           startTile.classList.add('locked');
-          startTile.title = 'Start time locked (patients already booked)';
+          startTile.title = 'Start time is locked';
         }
         if (startLabel) startLabel.innerHTML = 'Start Time <i class="ph-fill ph-lock" style="font-size:11px; margin-left:2px;"></i>';
         if (consultSeg) consultSeg.classList.add('locked');
@@ -17862,7 +18177,6 @@
         if (repeatRow) repeatRow.classList.add('locked');
         if (repeatToggle) repeatToggle.disabled = true;
       } else {
-        if (lockBanner) lockBanner.style.display = 'none';
         if (startTile) {
           startTile.classList.remove('locked');
           startTile.title = 'Click to select Start Time';
@@ -17887,7 +18201,7 @@
 
     function setConsultType(type) {
       if (currentEditingShiftBookedCount > 0) {
-        showToast(`Visit type is locked because ${currentEditingShiftBookedCount} patients have booked appointments.`);
+        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change visit type`);
         return;
       }
       if (type === 'video') {
@@ -17900,6 +18214,10 @@
     }
 
     function toggleDayPicker(btn) {
+      if (currentEditingShiftBookedCount > 0) {
+        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change repeat days`);
+        return;
+      }
       btn.classList.toggle('selected');
     }
 
@@ -17907,7 +18225,7 @@
       const minLimit = currentEditingShiftBookedCount > 0 ? currentEditingShiftBookedCount : 1;
       if (delta < 0 && currentLimit <= minLimit) {
         if (currentEditingShiftBookedCount > 0) {
-          showToast(`Cannot reduce capacity below ${currentEditingShiftBookedCount} already booked patients.`);
+          showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't lower capacity`);
         }
         return;
       }
@@ -17923,7 +18241,7 @@
     // ---------------------------------------------
     function openTimePickerModal(target) {
       if (target === 'start' && currentEditingShiftBookedCount > 0) {
-        showToast(`Start time cannot be changed while ${currentEditingShiftBookedCount} patients are booked.`);
+        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change start time`);
         return;
       }
 
@@ -18440,7 +18758,7 @@
       showToast(`Saved shift for ${currentSelectedDate}`);
     }
 
-    // Shift Cancellation State Management
+    // Shift Cancellation / Deletion State Management
     let pendingCancelShiftCardId = null;
     let pendingCancelShiftName = null;
     let isShift1Cancelled = false;
@@ -18455,17 +18773,17 @@
       const descEl = document.getElementById('cancelShiftImpactDesc');
 
       const shift = (dateSchedules[currentSelectedDate] || []).find(s => s.id === cardId || s.name === shiftName);
-      const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' ? 12 : 0);
+      const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' ? 4 : 0);
 
-      if (titleEl) titleEl.textContent = `Cancel ${shiftName}?`;
+      if (titleEl) titleEl.textContent = `Delete ${shiftName}?`;
       if (subEl) subEl.textContent = `${currentSelectedDate} • ${shift ? `${shift.startTime} – ${shift.endTime}` : '10:00 AM – 12:00 PM'}`;
 
       if (bookedCount > 0) {
-        if (countEl) countEl.textContent = `${bookedCount} Booked Patients`;
-        if (descEl) descEl.textContent = `Shift will be cancelled and patients notified to rebook.`;
+        if (countEl) countEl.textContent = `${bookedCount} Patients Already Booked`;
+        if (descEl) descEl.textContent = `Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.`;
       } else {
         if (countEl) countEl.textContent = 'No Booked Patients';
-        if (descEl) descEl.textContent = `Shift will be removed from your schedule.`;
+        if (descEl) descEl.textContent = `Shift has no bookings and will be removed from your schedule.`;
       }
 
       document.getElementById('modalBackdrop').classList.add('active');
@@ -18489,12 +18807,12 @@
         isShift1Cancelled = true;
         // Promote Shift 2 onto the Desk Hero Card!
         promoteShift2OnDesk();
-        // Update Shift 1 appointments to Cancelled status in appointments list
+        // Update Shift 1 appointments to Rescheduled status in appointments list
         if (typeof appointmentsData !== 'undefined') {
           appointmentsData.forEach(apt => {
             if (apt.shift === 'Shift 1' || apt.shift === '1') {
-              apt.status = 'cancelled';
-              apt.statusText = 'Cancelled (Shift Cancelled)';
+              apt.status = 'rescheduled';
+              apt.statusText = 'Auto-Rescheduled (Shift 2)';
             }
           });
           renderAppointmentsList();
@@ -18503,7 +18821,7 @@
 
       renderDateSchedule(currentSelectedDate);
       closeCancelShiftModal();
-      showToast(`${pendingCancelShiftName || 'Shift'} cancelled`);
+      showToast(`${pendingCancelShiftName || 'Shift'} deleted • Patients auto-rescheduled`);
     }
 
     function promoteShift2OnDesk() {
@@ -18603,15 +18921,15 @@
         <div class="card-badge-row">
           <span class="badge-pill-light">
             <i class="ph ph-video-camera"></i>
-            Shift 1 Ready
+            Video Consultation
           </span>
-          <span class="badge-pill-status">6 in Queue</span>
+          <span class="badge-pill-status">Shift 1</span>
         </div>
 
         <div class="patient-details">
-          <h3 class="patient-name">Start Shift 1</h3>
+          <h3 class="patient-name">Ready To Begin</h3>
           <div class="patient-info">
-            <span>Video Consultation • Ready to begin</span>
+            <span>Video Consultation • 6 in Queue</span>
           </div>
         </div>
 

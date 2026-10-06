@@ -99,10 +99,11 @@ When the user uploads a legacy screen from the existing app, follow this **5-Ste
 * **Section Header**: Left Title (`"Sept 29"` in `Urbanist 21px Bold`) + Right Meta (`"9:00 AM – 11:00 AM"` shift time window in `DM Sans 13.5px #717171`).
 * **Primary Anchor (Tier 1 - Immediate Attention)**:
   * The single most important task on the screen.
-  * **State 1: Pre-Shift Card (`#D6EAE6`)**:
-    * Badges: `Video Session` (with `ph ph-video-camera` icon) + `12 in Queue` in white pill badges (`#FFFFFF`).
-    * Title: `"Start Shift 1"` (`Urbanist 20px Bold #000000`) — mentions Shift 1 once in big text. No repeated subtitle.
-    * CTA: `<i class="ph-fill ph-play"></i>` + `"Start Shift • Call Serial #1"` (`#052E28` button).
+  * **State 1: Pre-Shift Ready Card (`#D6EAE6`)**:
+    * Badges: `Video Consultation` (with `ph ph-video-camera` icon on left) + `Shift 1` (top right corner badge).
+    * Title: `"Ready To Begin"` (`Urbanist 20px Bold #000000`).
+    * Subtitle: `"Video Consultation • 6 in Queue"` (`DM Sans 13px #717171`).
+    * CTA: `<i class="ph-fill ph-play"></i>` + `"Start Shift"` (`#052E28` button).
   * **State 2: Active Shift / Next in Queue Card (`#D6EAE6`)**:
     * Badges: `Serial #2` (with `ph ph-user` icon) + `Next in Queue` / `Patient In Call` in white pill badges (`#FFFFFF`). No "Shift 1" label once the shift is running.
     * Title: `"${nextPat.name}"` (`Urbanist 20px Bold #000000`).
@@ -165,7 +166,7 @@ When the user uploads a legacy screen from the existing app, follow this **5-Ste
 Rather than rendering standard administrative dialogs with dense text, modals and bottom drawers adopt **Hims/Western editorial minimalism**:
 
 ### 5.1 Editorial Typography & Copy Reduction
-* **Giant Editorial Headline**: `Urbanist 32px Bold / ExtraBold` (`#000000`), letter-spacing `-0.03em`. Use punchy, human phrasing (e.g., *"Take a break"* instead of verbose clinical titles).
+* **Giant Editorial Headline**: `Urbanist 32px Bold / ExtraBold` in refined deep slate charcoal (`#1E293B` Slate 900), letter-spacing `-0.03em`. Provides crisp, authoritative hierarchy over subtitles (`#717171`) while eliminating the stark optical glare of pure pitch black (`#000000`). Use punchy, human phrasing (e.g., *"Take a break"* instead of verbose clinical titles).
 * **Radical Text Reduction**: Maximum **1 concise sentence** of supporting copy (`DM Sans 14px #717171`). Eliminate redundant explanations.
 * **Top Accent Badge**: Clean `38px × 38px` rounded square pastel badge (`#D6EAE6`) with a Phosphor icon (e.g. `ph ph-moon`) + minimal top-right circular dismiss button (`ph ph-x`).
 
@@ -365,12 +366,12 @@ Following AI processing, the screen automatically transitions into the **Consult
 
 ## 10. Page 6: Real-Time Generated Digital Prescription Standard (`#pagePrescriptionPreview`)
 
-The Prescription Preview screen provides an ultra-clean, legible, digital clinical letterhead that is formatted in real time from the consultation wrap-up review screen.
+The Prescription screen provides an ultra-clean, legible, digital clinical letterhead rendered on a pure white canvas (`#FFFFFF`).
 
 ```
-[ Top Bar: Back Button + "Prescription Preview" Title + Share Action ]
+[ Top Bar: Back Button + "Prescription" Title + Download Action (ph-download-simple) ]
                                ↓
-[ Digital Paper Canvas (.rx-paper-container) ]
+[ Digital Paper Canvas (.rx-paper-container) - White Surface, 1px Border (#E2E8F0) & Mild Elevation Shadow ]
   ├── 1. Doctor Profile & Onubot Telehealth Branding Header
   ├── 2. Patient Demographics Strip (Name, Age/Sex, Date, Consult ID)
   ├── 3. Two-Column Clinical Body
@@ -668,9 +669,9 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Button**: `.btn-hero-locked` (white background, `#64748B` text, lock icon) `🔒 Shift Locked Until 8:58 AM`.
 * **Ready to Start State (2 mins before start, e.g. 8:58 AM)**:
   * **Card Surface**: Transforms into vibrant active Sage (`--color-card-sage`: `#D6EAE6`), creating an immediate, unmistakable visual cue that the shift is ready.
-  * **Badge**: `Shift 1 Ready` + `6 in Queue`.
-  * **Card Title**: `Start Shift 1`.
-  * **Subtext**: `Video Consultation • Ready to begin` (non-redundant: avoids repeating the time window and patient count which are already shown in the section header and badge).
+  * **Badges**: Left: `Video Consultation` (`ph ph-video-camera`), Top Right Corner: `Shift 1` (or `Shift 2`, with "Ready" removed).
+  * **Card Title**: `Ready To Begin`.
+  * **Subtext**: `Video Consultation • 6 in Queue` (clean subtitle with "Ready to begin" removed).
   * **Button**: `.btn-hero-action` with `<i class="ph-fill ph-play"></i> Start Shift` (`#052E28`).
   * **Seamless Consultation Launch**: Tapping `Start Shift` immediately opens the full-screen Video Consultation view (`#pageVideoCall`), where the first queued patient's demographics, vitals, and live stream are presented.
 * **Interactive Demo Capability**: Tapping the locked button immediately simulates fast-forwarding to 8:58 AM with a smooth micro-animation. Tapping the top clock time (`#statusClockTime`) toggles back and forth between Locked (`8:22 AM`) and Ready (`8:58 AM`) for seamless presentation.
@@ -707,18 +708,29 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 * **Action Buttons**:
   * Paired `Cancel` and `Set Start/End (XX:XX PM)` CTA (`.btn-sheet-confirm`) that saves the formatted time back to the shift form with a toast notification.
 
-### 19.11 Shift-Specific Cancellation, Booked Capacity & Desk Auto-Promotion Protocol (`#cancelShiftModalSheet`)
-* **Clinical Context**: A doctor scheduled for multiple shifts on a single day (e.g., Shift 1 at 10 AM with 12 booked patients, and Shift 2 at 6 PM with 0 booked patients) can cancel Shift 1 without cancelling Shift 2.
-* **Booked Patient Count & Locked Edit State**:
-  * **Shift Card Display**: Each shift card displays live booking status (e.g., `<span class="shift-booked-count-badge"><i class="ph-fill ph-users"></i> 12 Patients Booked</span>` • `Max 15 Capacity`).
-  * **Locked Edit Rule**: Whenever `bookedPatients > 0`, the `Edit Shift` button is **disabled/locked** (`.btn-shift-edit.disabled`) with a lock icon (`<i class="ph ph-lock"></i> Edit (12 Booked)`) to prevent changing shift hours while patients hold active appointments.
-  * **Unlocked Edit & Clean Deletion**: When `bookedPatients === 0` (or after all patients are seen), the `Edit Shift` and `Delete Shift` buttons are enabled and allow immediate modification without patient notifications.
+### 19.11 Shift-Specific Cancellation, Shift Numbering, Minimal Booked Capacity & Partial Edit Guard Protocol (`#cancelShiftModalSheet`)
+* **Shift Card Anatomy & Dual-Chip Top Row**:
+  * **Top Row (`.saved-shift-top`)**: Displays two cohesive pill containers side-by-side:
+    1. **Shift Number Chip (`.shift-name-chip`)**: Distinct neutral/slate pill (`background: #F1F5F9`, `border: 1px solid #CBD5E1`, `padding: 4px 10px`, `border-radius: 20px`, `color: #334155`, `font-size: 11.5px`, `font-weight: 800`, `letter-spacing: 0.04em`, **ALL CAPS** e.g. `SHIFT 1`, `SHIFT 2`) to clearly distinguish multiple shifts across the day.
+    2. **Consultation Type Pill (`.shift-type-pill`)**: Soft mint/sage pill (`background: #E6F5F2`, `border: 1px solid #A3D9CE`, `padding: 4px 12px`, `border-radius: 20px`, `color: #0E8070`, `font-size: 12px`, `font-weight: 700`, e.g. `[📹 Video Consultation]`).
+  * **Main Row (`.saved-shift-main`)**: Bold shift time window (`10:00 AM – 12:00 PM`) and minimal booking capacity (`[users icon] 04/15 Patients` or `0/15 Patients` for empty shifts).
+  * **Actions Row**: `[ ✏️ Edit Shift ]` button and `[ 🗑️ ]` delete trash button.
+* **Minimal Shift Card Capacity Representation**:
+  * Each shift card displays booking capacity in a minimalist, clear format: `[users icon] 04/15 Patients` (or `0/15 Patients` for empty/newly created shifts).
+  * Eliminates redundant label text and bulky lock warning boxes from the card surface.
+* **Partial Edit Mode for Booked Shifts**:
+  * Doctors can **always edit shifts**, even when patients are booked (`bookedPatients > 0`).
+  * **Start Time Guard**: The start time tile is locked (`.time-input-tile.locked` with lock indicator) because patients already have assigned consultation turn slots.
+  * **Editable Attributes**: Doctors can freely extend or adjust the **End Time** (min 30m duration) and adjust **Patient Capacity** (cannot be lowered below the number of already booked patients).
+  * **Unbooked Shifts (`booked === 0`)**: Full unrestricted editing of start time, end time, repeat days, and visit type.
 * **Safety Bottom Sheet (`#cancelShiftModalSheet`)**:
-  * High-visibility patient impact card: `⚠️ 12 Booked Patients Affected`.
-  * Explicit confirmation: Explains that Shift 1 will be removed while Shift 2 (6:00 PM – 11:00 PM) remains running.
-  * Auto-notification guarantee: Explains that all 12 patients will receive immediate cancellation notices with 1-tap rebooking links for Shift 2 or upcoming days.
-* **Desk Hero Auto-Promotion**:
-  * Once Shift 1 is cancelled, the Desk Hero card automatically shifts focus and promotes **Shift 2 (6:00 PM)** as the active upcoming shift (`Shift 2 Starts at 6:00 PM`), preserving total flow continuity.
+  * Triggered via the trash delete button.
+  * Title: `Delete Shift X?` with `ph-trash` danger badge icon.
+  * For booked shifts: Highlights `⚠️ X Patients Already Booked` with clear clinical explanation: *"Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift."*
+  * For empty shifts: Clean deletion confirmation (`"Shift has no bookings and will be removed from your schedule."`).
+  * Action buttons: `Keep Shift` (secondary neutral) and `Delete Shift` (primary danger).
+* **Desk Hero Auto-Promotion & Auto-Rescheduling**:
+  * When a shift with booked patients is deleted, all appointments are automatically reassigned to the next available shift, and if the active first shift of the day is deleted, the Desk Hero card automatically shifts focus and promotes **Shift 2 (6:00 PM)** as the active upcoming shift (`Shift 2 Starts at 6:00 PM`), preserving queue flow continuity.
 
 ---
 
@@ -838,6 +850,14 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * **Active Typing State (Send Mode)**: Smoothly morphs into a deep forest green circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` crisp arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
 * **Subtle AI Disclaimer**: `Onubot can make mistakes. Check important info.` (`DM Sans 10px #94A3B8`).
 
+### 22.5 Seamless Full-Screen Onu History Side Panel (`#onuHistoryDrawer`)
+* **Full-Height Geometry**: Attached directly to `.phone-screen` (`top: 0; bottom: 0; right: 0; z-index: 155; width: 82%; max-width: 320px;`) with high-blur full-screen backdrop (`#onuDrawerBackdrop`, `z-index: 150`).
+* **Seamless White Canvas & Top Clearance**:
+  * Pure white `#FFFFFF` surface extends all the way to the top edge of the phone frame.
+  * Header padding (`padding: 50px 16px 14px 16px`) comfortably accommodates the 44px status bar notch with 6px of breathing room, ensuring zero color splitting or background mismatch above the drawer.
+* **Header Components**: Onu brand glyph + title on left, Search and Close (`ph-x`) circular icon buttons on right.
+* **New Chat CTA**: Prominent soft sage button (`.onu-drawer-new-chat-btn`) + clean chronological Recents thread list with single-line titles and tap-to-load interactions.
+
 ---
 
 ## 23. My Wallet & Payout System Standard (`#pageWallet`)
@@ -875,7 +895,9 @@ Sections are dynamically rendered based on the patient's lifecycle state:
    - Dual actions: `Cancel` (neutral) + **`Withdraw`** primary `#052E28` CTA with `<i class="ph ph-arrow-up-right"></i>`.
 2. **Saved Accounts Bottom Sheet (`#earningsSettingsModalSheet`)**:
    - Editorial header: `Saved Accounts` (`Urbanist 32px Bold`) + `Manage payout methods & bank accounts` (`DM Sans 14px #717171`).
-   - Dynamic list of saved accounts (Bank / Mobile MFS) with active badges and delete icons.
+   - Dynamic list of saved accounts with clean titles (no redundant "Primary" tag):
+     - **Bank Accounts**: Soft eucalyptus icon container (`#E8F7F0` fill, `1px solid #D2EFE2`, `#0D7A48` bank icon).
+     - **bKash / MFS Accounts**: Soft pastel pink icon container (`#FDF2F4` fill, `1px solid #FCE1E7`, `#D82269` mobile icon).
    - Dashed action button `+ Add New Method` triggering the add sheet.
    - Clean empty state when 0 accounts are configured.
 3. **Add Payout Method Bottom Sheet (`#addPayoutMethodModalSheet`)**:
@@ -887,5 +909,136 @@ Sections are dynamically rendered based on the patient's lifecycle state:
    - Crimson badge icon (`#FEE4E2` with `#D92D20` trash icon).
    - Headline: `Remove Account?` (`Urbanist 28px Bold`).
    - Dual actions: `Keep Account` (neutral) + `Remove` (destructive crimson `#EA3B50`).
+5. **Transaction Filter Bottom Sheet (`#transactionFilterSheet`)**:
+   - Editorial header: `Filter Transactions` (`Urbanist 28px Bold`) + `Filter transactions by category and date range.` (`DM Sans 13.5px #717171`).
+   - **Transaction Type Section**: Filter pills for `All Transactions`, `Payouts (+BDT)`, `Withdrawals (-BDT)` using standard `.filter-chip-btn` with sage active states (`#D6EAE6` / `#052E28`).
+   - **Date Period Section**: Quick date filter pills for `All Time`, `Today`, `Yesterday`, `This Week`, `This Month`.
+   - **Trigger Indicator**: Top filter trigger button displays an active green dot indicator (`#txFilterActiveDot`) when non-default filters are active.
+   - Dual actions: `Reset` (secondary) + **`Apply Filter`** (primary `#052E28`).
 
+---
 
+## 24. Go Offline & Availability Management Architecture (`#goingOfflineSheet`)
+
+### 24.1 Header & Hero Styling
+* **Offline Status Badge**: Prominent circular amber badge (`#FEF3C7` background, `1.5px solid #FDE68A`, `#D97706` text) featuring the **`ph ph-power`** icon (universal power/availability symbol, NOT a notification mute bell).
+* **Editorial Header**:
+  * Title: `Go Offline` in `Urbanist 24px Bold #000000`.
+  * Subtitle: `Select the dates to pause visits and notify patients.` in `DM Sans 13.5px #717171`.
+* **Short Month Navigation**: Standard short month format (e.g. `Sept 2026`, `Oct 2026`) with single chevron toggle button (`#btnOfflineMonthNav`) to toggle between months.
+
+### 24.2 Dual-View Architecture (Week vs. Month View)
+* **Week View (Default 7-Day Rolling Strip)**:
+  * Shows exactly 7 consecutive days starting from today (e.g. `Today 15`, `WED 16`, `THU 17`, `FRI 18`, `SAT 19`, `SUN 20`, `MON 21`) in a single balanced horizontal row (`grid-template-columns: repeat(7, 1fr)`).
+  * **Header Rule**: The column table header (`SUN MON TUE...`) is **hidden** in Week View because each standalone card contains its own weekday label (`.off-card-day`) and date number (`.off-card-num`).
+  * **Zero Empty Gaps**: No leading placeholder cells in week view, preventing awkward broken second lines.
+* **Month View (Standard Sunday-First Calendar Matrix)**:
+  * Reveals the standard Sunday-first table header (`SUN  MON  TUE  WED  THU  FRI  SAT`).
+  * Aligns days into correct standard weekday columns (e.g. September 15th starts under `TUE` via 2 leading spacer divs).
+  * **Clean Number Rule**: Weekday labels are **omitted** inside month-view cards. Cards display only the clean, bold date number (`15`, `16`...) in a 1:1 square aspect ratio (`aspect-ratio: 1 / 1`), eliminating visual redundancy with the column headers.
+
+### 24.3 Soft, Calming Visual Palette & Initial State
+* **Date Card Palette**:
+  * Unselected cards: `#FAFCFB` background, `#E5EBEA` soft border, `#8A9E9A` weekday labels, `#2D3E3A` date numbers.
+  * Today highlight (unselected): Soft sage tint (`#F0F7F5` background, `#9ECFC5` border, `#0E8070` bold text).
+  * Selected cards (Marked Off): Light rose tint (`#FFF1F2` background, `1.5px solid #E11D48`, crimson `#BE123C` text, subtle crimson elevation).
+* **Clean Initial State**:
+  * Starts fresh with `0` selected days (`selectedOfflineDays = []`).
+  * Summary bar displays `0 Days Marked Off` and `0 Bookings Affected` (in muted `#64748B`).
+  * `Confirm Offline` button is disabled until at least 1 day is selected.
+
+---
+
+## 25. Unified Single-Dot Calendar Status Indicator Standard
+
+### 25.1 Single-Dot Cognitive Architecture (Macro Glanceability)
+Across all calendar views in the app, each date cell displays **at most one single status dot** centered beneath the date number:
+* **No Dot (None)**: Empty date (no shifts created for this day).
+* **Soft Light Eucalyptus Dot (`#48BB95`)**: **Empty Shift** (shift is active/open, but 0 patients are booked).
+* **Soft Light Apricot Dot (`#F6A84B`)**: **Booked Shift** (1 or more patients are booked in the shift).
+* **Active/Selected Card State**: Enhanced with harmonious pastel contrast accents (`#5EEAD4` for empty shifts, `#FDE047` for booked shifts).
+
+### 25.2 Universal Application Across All Calendars
+1. **Go Offline Calendar (`#goingOfflineSheet`)**: Displays single dots on both Week View and Month View cards, with an inline legend (`🟢 Empty Shift • 🟠 Booked Shift`).
+2. **Month Planning Calendar Modal (`#monthCalendarSheet`)**: Standard single dot beneath date number + bottom legend.
+3. **Schedule Carousel Strip (`#scheduleDateCarousel`)**: Displays matching single dots beneath each date pill.
+
+---
+
+## 26. Offline Confirmation & Schedule Transition Sheets
+
+### 26.1 Offline Confirmed Success Sheet (`#offlineConfirmedModalSheet`)
+* **Trigger**: Doctor selects 1 to 6 days in Go Offline modal and taps `Confirm Offline`.
+* **Hero Visual**: 68×68px crimson power badge (`#FEF2F2` background, `#FECACA` border, `ph-bold ph-power` in `#DC2626`) with overlaid dark forest checkmark sub-badge.
+* **Header**: Bold `You are now Offline` in `Urbanist 24px Bold #000000` (zero verbose paragraph clutter).
+* **Minimal Unified Info Tile (`.offline-minimal-summary-card`)**:
+  * Row 1: `[Calendar icon] Sept 15 – 16 (2 Days)` • `[Crimson Dot] Offline` badge.
+  * 1px subtle divider (`#E2E8F0`).
+  * Row 2: `[Green sync icon] X patients auto-rescheduled` (single concise line confirming automatic transfer).
+* **Primary CTA**: Full-width dark forest button `Back To Desk →` (`--color-primary-btn: #052E28`).
+
+### 26.2 Add Shift to Go Offline Transition Sheet (`#createShiftToOfflineModalSheet`)
+* **Trigger**: Doctor selects an entire week (>= 7 days) to go offline where no future open shifts remain to auto-reschedule affected patients.
+* **Hero Visual**: 68×68px warm amber calendar-plus badge (`#FEF3C7` background, `1.5px solid #FDE68A`, `ph-bold ph-calendar-plus` in `#D97706`) with directional arrow sub-badge. Replaces harsh warning/error triangles with an actionable, clinical guide.
+* **Header**: `Add Shift to Go Offline` in `Urbanist 24px Bold #000000`.
+* **Minimal Context Tile**:
+  * Row 1: `[Calendar icon] Sept 15 – 21 (7 Days)` • `Pending` amber badge.
+  * 1px subtle divider (`#E2E8F0`).
+  * Row 2: `[Amber arrows icon] X patients need a future shift to transfer to`.
+* **Action Group**:
+  * Primary CTA: **`Edit Schedule & Add Shift →`** (dark forest `#052E28`, navigates directly to Schedule screen and automatically opens the shift creation form).
+  * Secondary CTA: **`Cancel`** (neutral `#F1F5F9`, returns safely).
+
+---
+
+## 27. Android Compose Floating Snackbar & Booked Shift Editing Standard
+
+### 27.1 Zero-Clutter Booked Shift Editing
+* **Permissive Editing**: Shifts with existing patient bookings can be edited directly without full lockouts or bulky disruptive multi-line warning banners.
+* **Start Time Locking**: The `START TIME 🔒` tile is locked (`pointer-events: none` on the input, with active tap listener on the container) to prevent rescheduling booked appointments.
+* **Flexible Parameters**: End time and maximum patient capacity (up to 40, minimum capped at current booked count) remain freely adjustable.
+* **Minimal Shift Card Capacity Format**: Capacity is cleanly displayed in the format `04/15 Patients` (or `0/15 Patients` for empty/new shifts) without bulky descriptive sentences.
+
+### 27.2 Android Compose Floating Snackbar Standard (`#androidSnackbar`)
+* **Specification Compliance**: Follows official Android Compose / Material 3 Snackbar standards (`https://developer.android.com/develop/ui/compose/components/snackbar`).
+* **Visual Presentation**:
+  * **Surface**: High-contrast dark charcoal inverse surface (`#2A2F2D`).
+  * **Text**: Crisp legible white/silver text (`#F1F3F2`, `DM Sans 13px`).
+  * **Accent Icon**: Mint lock icon (`#79D2BA`, `ph-lock-key`).
+  * **Action Button**: Uppercase actionable `OK` button (`#79D2BA`, `Urbanist 12.5px Bold`).
+  * **Geometry & Elevation**: Floating pill shape (`border-radius: 14px`), inset margins (`16px`), and soft Material elevation shadow (`rgba(0,0,0,0.22) 0px 8px 24px`).
+  * **Positioning**: Inset above the bottom navigation / home indicator (`z-index: 200`).
+* **Behavior**:
+  * Slides up smoothly (`cubic-bezier(0.16, 1, 0.3, 1)`).
+  * Auto-dismisses after 3 seconds or immediately upon tapping `OK`.
+  * Triggers when the doctor taps a locked parameter with clear, natural phrasing (e.g. *"4 patients already booked, can't change start time"*).
+
+---
+
+## 28. Doctor Profile & Practice Information Redesign Standard (`#pageDoctorProfile`)
+
+### 28.1 Identity & Embedded Stats Header
+* **Hero Identity Card (`.doctor-hero-card`)**:
+  * Doctor Avatar (`.doctor-avatar-wrap`) with camera overlay button (`openAvatarPickerModal`).
+  * Doctor Name with BMDC Verified Practitioner seal (`ph-fill ph-seal-check` in `#0E8070`).
+  * Specialty subtitle (`General Medicine • MBBS, FCPS`) and official email badge.
+  * Embedded Hero Stats Row: Total Consulted Patients (`1,420+`) and Clinical Experience (`5+ Years`).
+
+### 28.2 Contact & Practice Section (Doctor-Editable Fields)
+* **Editable Contact Phone Tile (`.profile-phone-tile`, `openEditPhoneModal`)**:
+  * Icon container with `ph ph-phone`.
+  * Label: `CONTACT PHONE`, Value: dynamic phone number.
+  * Pencil edit action button opening bottom sheet `#editPhoneModalSheet`.
+* **Editable Chamber Address Tile (`.profile-phone-tile`, `openEditChamberModal`)**:
+  * Icon container with `ph ph-map-pin`.
+  * Label: `CHAMBER ADDRESS`, Value: dynamic chamber address (e.g. `BSMMU (PG Hospital), Shahbag, Dhaka`).
+  * Pencil edit action button opening bottom sheet `#editChamberModalSheet`.
+* **Editable Bio Card (`.profile-bio-box`, `openEditBioModal`)**:
+  * Icon container with `ph ph-user`, uppercase label `ABOUT YOU`, clean paragraph text preview, and pencil edit action button.
+  * Tapping the card or pencil button opens the bottom sheet modal editor (`#editBioModalSheet`) with 300-character textarea, character counter, `Cancel`, and `Save Bio` actions.
+
+* **Universal Bottom Popup Style Standard**:
+  * Editorial titles across all bottom popups feature a refined, deep slate charcoal tone (`#1E293B` Slate 900) that eliminates harsh optical glare on pure white while providing crisp, authoritative hierarchy over subtitles (`#717171`) and inputs.
+
+### 28.3 Professional Identity (Non-Editable / Verified)
+* Clean frosted card with verified BMDC Registration (`437193172`) and verified Consultation Fee (`৳ 1,200 BDT`).

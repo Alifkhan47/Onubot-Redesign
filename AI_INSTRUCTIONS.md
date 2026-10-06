@@ -18,7 +18,7 @@
    - **ALL Bottom Sheets** (Edit Shift, Withdraw Funds, Saved Accounts, Add Payout Method, Confirmations) **MUST ALWAYS** follow the standard editorial layout:
      1. Drag handle (`.sheet-drag-handle`)
      2. Top badge icon (`.sheet-badge-icon`, 40x40 rounded container)
-     3. Editorial header (`.sheet-hero-header` with `.sheet-editorial-title` Urbanist 32px Bold and `.sheet-minimal-subtitle` 14px)
+     3. Editorial header (`.sheet-hero-header` with `.sheet-editorial-title` in `Urbanist 32px Bold #1E293B` deep slate charcoal and `.sheet-minimal-subtitle` 14px)
      4. Content container / Form fields
      5. Standard action group (`.sheet-actions-group` with `.btn-sheet-cancel` and `.btn-sheet-confirm`) with generous bottom clearance.
    - **NEVER** create custom unstyled inline headers with raw 'x' buttons that deviate from this system.
@@ -209,6 +209,7 @@ c:\Alif\Onu App Prototype\
     * Voice Dictation mic button with pulsating listening state (`toggleOnuVoiceListening`).
     * Primary Send / Waveform button (`sendOnuMessage`).
     * Subtle AI disclaimer text at base.
+  * **Seamless Full-Screen History Side Panel (`#onuHistoryDrawer`)**: Full-height drawer attached to `.phone-screen` (`z-index: 155`) with full-screen backdrop (`#onuDrawerBackdrop`, `z-index: 150`) and top status bar clearance padding, providing seamless white coverage from the top notch down.
 
 ### Screen 1: My Desk (`#pageDesk`)
 * **Purpose**: The primary operational dashboard for the doctor during their shift.
@@ -217,21 +218,31 @@ c:\Alif\Onu App Prototype\
   * Today's Date & Shift Meta (`Sept 29 • 9:00 AM – 11:00 AM`).
   * **Hero Queue Card (`#heroCard`) Three-Stage State Machine**:
     1. **Stage 1 (Locked - e.g. 8:22 AM)**: Neutral card background (`#F6F8F9`) with quiet white badges. Displays `Shift Starts at 9:00 AM`, subtext `"Calling room unlocks at 8:58 AM (2 mins before shift)"`, and locked action button `🔒 Shift Locked Until 8:58 AM`. Tapping the locked button simulates fast-forwarding to 8:58 AM.
-    2. **Stage 2 (Ready to Start - 8:58 AM)**: Transforms into vibrant active Sage (`#D6EAE6`). Calling room unlocks 2 minutes before shift start. Displays `Start Shift 1`, `Serial #1 Tariqul Islam • 34 Yrs • Male`, and dark green primary CTA `▶ Start Shift • Call Serial #1` (`#052E28`).
+    2. **Stage 2 (Ready to Start - 8:58 AM)**: Transforms into vibrant active Sage (`#D6EAE6`). Calling room unlocks 2 minutes before shift start. Displays `Video Consultation` badge on the left, `Shift 1` badge on the top right corner, title `Ready To Begin`, subtext `Video Consultation • 6 in Queue`, and dark green primary CTA `▶ Start Shift` (`#052E28`).
     3. **Stage 3 (Active / In Call - 9:00 AM)**: Vibrant Sage card (`#D6EAE6`) displaying active live patient (`Serial #1 Tariqul Islam`, `34 Yrs • Male`) with CTA `Join Video Call • #1`.
   * **Doctor Offline State (Subtle Alert Standard)**:
     * When the doctor toggles offline, the Hero card transforms into a soft blush card (`#FEFAF9` with `1.5px solid #FECDCA`), soft rose icon pill (`#FEF3F2`, `#D92D20` moon icon), rose status pill with a subtle pulsing red dot, `"Doctor Offline"` toggle indicator, and `"Shift Paused"` meta header.
+  * **Go Offline Availability Sheet (`#goingOfflineSheet`)**:
+    * **Header**: Amber `ph-power` badge icon with short-month toggle (e.g. `Sept 2026`).
+    * **Week View (7-Day Rolling Strip)**: Shows 7 consecutive days starting today in a single row without column header text (day name + date inside card).
+    * **Month View**: Standard Sunday-to-Saturday grid with weekday headers and **numbers only** inside cards (zero redundant day names).
+    * **Unified Single-Dot Indicator**: At most 1 dot per date (No dot = empty; Soft Light Eucalyptus `#48BB95` = empty shift; Soft Light Apricot `#F6A84B` = booked shift).
+    * **Confirmation Flows**:
+      * Selecting 1–6 days opens `#offlineConfirmedModalSheet` with clean summary tile (`Sept 15 – 16 • Offline` + auto-reschedule confirmation).
+      * Selecting an entire week (>= 7 days) with no remaining open shifts opens `#createShiftToOfflineModalSheet` with an amber calendar badge guiding the doctor to open a new shift.
   * **Interactive Demo Mechanism**: Tapping the clock time in the status bar (`#statusClockTime`) toggles between Locked (`8:22 AM`) and Ready (`8:58 AM`) anytime for effortless presentations.
   * **Action Cards**: Quick access to `View All Appointments` and `Edit Schedule`.
 
 ### Screen 2: Edit Shift / Schedule (`#pageSchedule`)
 * **Purpose**: View and manage consultation shift hours across a 7-day calendar strip.
 * **Key Components**:
-  * 7-day horizontal scrollable date strip (starting from Today).
-  * Prominent `+ Add Shift` action button triggering `#shiftModalSheet`.
-  * List of configured shifts (Shift 1: 10 AM–12 PM, Shift 2: 6 PM–11 PM).
+  * 7-day horizontal scrollable date strip with single-dot status indicators beneath each date pill.
+  * Prominent `+ Add Shift` action button triggering in-page shift creation.
+  * List of configured shifts displaying all-caps shift chip container (`.shift-name-chip` e.g. `SHIFT 1`, `SHIFT 2`), consultation type pill (`[📹 Video Consultation]`), time window, and minimal capacity metric (e.g. `04/15 Patients` or `0/15 Patients` for new/empty shifts).
   * Edit button (`editExistingShift`) and Delete trash button (`requestDeleteShift`).
-  * **Shift Deletion**: Always prompts `#deleteConfirmModalSheet` before removing the shift.
+  * **Booked Shift Editing & Start Time Lock**: Shifts with active booked patients can be edited freely (start time is locked to preserve booked appointments; end time and max patient capacity can be adjusted).
+  * **Android Compose Floating Snackbar (`#androidSnackbar`)**: Tapping the locked start time tile (or other locked properties) displays an Android Compose-styled floating snackbar (`#2A2F2D` dark surface, mint accent icon, clear natural message e.g. *"4 patients already booked, can't change start time"*, `OK` action, auto-dismiss in 3s) without intrusive persistent banner clutter.
+  * **Shift Deletion & Auto-Rescheduling Protocol**: Always prompts `#cancelShiftModalSheet` before removing the shift. If patients are already booked, warns with `⚠️ X Patients Already Booked` and informs the doctor that deleting will automatically reschedule them to the next available shift, matching the offline auto-rescheduling protocol.
 
 ### Screen 3: Video Consultation Call (`#pageVideoCall`)
 * **Purpose**: Telemedicine video interface between doctor and patient.
@@ -256,9 +267,9 @@ c:\Alif\Onu App Prototype\
   * **Follow-up Chips**: `None`, `3 Days`, `7 Days`, `14 Days`, `1 Month`.
   * **Sticky Bottom Action Dock**: Full-width primary CTA `Preview & Issue Prescription`.
 
-### Screen 6: Official Prescription Preview (`#pagePrescriptionPreview`)
-* **Purpose**: Digital representation of the generated prescription with official doctor header, patient info, Rx symbol, medications, investigations, advice, and digital signature.
-* **Primary CTA**: `Issue & Send to Patient` (marks visit as prescribed and returns to Desk).
+### Screen 6: Official Prescription (`#pagePrescriptionPreview`)
+* **Purpose**: Digital representation of the generated prescription rendered on a pure white canvas (`#FFFFFF`) with a subtle 1px border (`#E2E8F0`) and mild elevation shadow. Includes official doctor header, patient demographics strip, Rx symbol, medications, investigations, advice, digital certification stamp, and doctor signature.
+* **Top Bar Controls**: Back button, `Prescription` title, and Download button (`ph-download-simple`).
 
 ### Screen 7: All Appointments & Shift History (`#pageAppointments`)
 * **Purpose**: Comprehensive list of all past, present, and future patient bookings.
@@ -326,6 +337,26 @@ c:\Alif\Onu App Prototype\
     * **Morphing Voice Bot / Send Action Button (`.btn-onu-action-morph`)**:
       * In empty state: Soft sage waveform button (`.voice-mode` with `ph-waveform`) opening the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
       * While typing: Morphs immediately into deep forest green Send button (`.send-mode` with `ph-bold ph-arrow-up`) sending the clinical prompt.
+
+### Screen 12: My Wallet & Payout System (`#pageWallet`)
+* **Purpose**: Doctor earnings tracking, transaction history, withdrawal requests, and payment method management.
+* **Key Components**:
+  * **Header**: `My Wallet` with Settings gear button opening Saved Accounts & Payout Settings.
+  * **Hero Balance Card**: Sage glassmorphic card with available balance (`৳ 12,400`) and full-width `Withdraw Funds` CTA.
+  * **Financial Overview**: Split metrics for `Today's Earnings` and `Total Earnings`.
+  * **Recent Transactions List**: Grouped transactions with income/payout icons, amounts, and dates.
+  * **Transaction Filter Bottom Sheet (`#transactionFilterSheet`)**: Dual-filter modal supporting **Transaction Type** (`All`, `Payouts`, `Withdrawals`) and **Date Period** (`All Time`, `Today`, `Yesterday`, `This Week`, `This Month`) with paired Reset and Apply Filter actions. Trigger button features an active filter dot indicator.
+
+### Screen 13: Doctor Profile & Practice Details (`#pageDoctorProfile`)
+* **Purpose**: Manage physician clinical identity, contact details, chamber address, bio, and settings.
+* **Key Components**:
+  * **Hero Card**: Avatar with camera photo picker, BMDC Verified seal, specialty subtitle, and embedded stats row (`Total Patients: 1,420+`, `Experience: 5+ Years`).
+  * **Contact & Practice Section (Editable)**:
+    * **Contact Phone Tile**: Dynamic phone display with bottom sheet editor (`#editPhoneModalSheet`).
+    * **Chamber Address Tile**: Dynamic chamber location (e.g. `BSMMU (PG Hospital), Shahbag, Dhaka`) with bottom sheet editor (`#editChamberModalSheet`).
+    * **About You Bio Card**: Formatted bio preview with bottom sheet popup editor (`#editBioModalSheet`), supporting real-time character count and instant saving.
+  * **Professional Identity (Verified)**: BMDC Registration (`437193172`) and verified Consultation Fee (`৳ 1,200 BDT`).
+  * **More Navigation**: Settings, Help & Support, and Log Out modal triggers.
 
 ### Bottom Navigation Bar Master Standard
 * **Active Tab**: Displays inside a soft rounded pastel pill (`.active-nav-pill` on `#EFF7F5`), with the **filled icon** (`ph-fill`) in `#052E28`, a subtle horizontal accent indicator bar, and **NO title text**.
