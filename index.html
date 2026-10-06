@@ -1480,14 +1480,58 @@
 
     .offline-dates-container.month-grid .offline-date-card {
       aspect-ratio: 1 / 1;
-      padding: 0;
+      padding: 4px 1px 3px;
       min-height: 42px;
       border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
     }
 
     .offline-dates-container.month-grid .off-card-num {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
+      line-height: 1;
+    }
+
+    .off-card-dot-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 6px;
+      min-height: 6px;
+      margin-top: 1px;
+    }
+
+    .offline-cal-legend {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
+      padding: 0 2px 14px;
+      margin-top: -6px;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--color-text-secondary);
+    }
+
+    .date-pill-dots {
+      height: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 3px;
+    }
+
+    .date-pill.active .cal-dot.dot-shift {
+      background: #2DD4BF !important;
+    }
+
+    .date-pill.active .cal-dot.dot-booked {
+      background: #FBBF24 !important;
     }
 
     .offline-date-card.empty {
@@ -11221,6 +11265,18 @@
             <!-- Dynamically populated by renderOfflineDaysGrid() -->
           </div>
 
+          <!-- Dot Status Legend for Offline Month View -->
+          <div class="offline-cal-legend" id="offlineCalLegend" style="display: none;">
+            <div class="cal-legend-item">
+              <span class="cal-legend-dot dot-shift"></span>
+              <span>Empty Shift</span>
+            </div>
+            <div class="cal-legend-item">
+              <span class="cal-legend-dot dot-booked"></span>
+              <span>Booked Shift</span>
+            </div>
+          </div>
+
           <!-- Impact Summary Bar -->
           <div class="offline-summary-bar">
             <span class="offline-days-marked-label" id="offlineDaysMarkedLabel">0 Days Marked Off</span>
@@ -11379,11 +11435,11 @@
           <div class="month-cal-legend">
             <div class="cal-legend-item">
               <span class="cal-legend-dot dot-shift"></span>
-              <span>Active Shifts</span>
+              <span>Empty Shift</span>
             </div>
             <div class="cal-legend-item">
               <span class="cal-legend-dot dot-booked"></span>
-              <span>Booked</span>
+              <span>Booked Shift</span>
             </div>
           </div>
         </div>
@@ -17196,14 +17252,78 @@
       ],
       'Monday, Oct 5': [
         { id: 'shiftCardMon5', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true }
-      ]
+      ],
+      'Tuesday, Oct 6': [
+        { id: 'shiftCardOct6', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Wednesday, Oct 7': [
+        { id: 'shiftCardOct7', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 4, max: 15, locked: true }
+      ],
+      'Thursday, Oct 8': [
+        { id: 'shiftCardOct8', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Friday, Oct 9': [
+        { id: 'shiftCardOct9', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Saturday, Oct 10': [],
+      'Sunday, Oct 11': [],
+      'Monday, Oct 12': [
+        { id: 'shiftCardOct12', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 3, max: 15, locked: true }
+      ],
+      'Tuesday, Oct 13': [
+        { id: 'shiftCardOct13', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Wednesday, Oct 14': [
+        { id: 'shiftCardOct14', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 5, max: 15, locked: true }
+      ],
+      'Thursday, Oct 15': [
+        { id: 'shiftCardOct15', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true }
+      ],
+      'Friday, Oct 16': [
+        { id: 'shiftCardOct16', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Saturday, Oct 17': [],
+      'Sunday, Oct 18': [],
+      'Monday, Oct 19': [
+        { id: 'shiftCardOct19', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Tuesday, Oct 20': [
+        { id: 'shiftCardOct20', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 6, max: 15, locked: true }
+      ],
+      'Wednesday, Oct 21': [
+        { id: 'shiftCardOct21', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Thursday, Oct 22': [
+        { id: 'shiftCardOct22', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Friday, Oct 23': [
+        { id: 'shiftCardOct23', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 4, max: 15, locked: true }
+      ],
+      'Saturday, Oct 24': [],
+      'Sunday, Oct 25': [],
+      'Monday, Oct 26': [
+        { id: 'shiftCardOct26', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Tuesday, Oct 27': [
+        { id: 'shiftCardOct27', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
+      ],
+      'Wednesday, Oct 28': [
+        { id: 'shiftCardOct28', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Thursday, Oct 29': [
+        { id: 'shiftCardOct29', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 5, max: 15, locked: true }
+      ],
+      'Friday, Oct 30': [
+        { id: 'shiftCardOct30', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
+      ],
+      'Saturday, Oct 31': []
     };
 
     function getShiftsForDay(month, day) {
       const monthPrefix = month === 8 ? 'Sept' : 'Oct';
-      const searchKey = `${monthPrefix} ${day}`;
+      const regex = new RegExp(`\\b${monthPrefix}\\s+${day}\\b`);
       for (const [key, shifts] of Object.entries(dateSchedules)) {
-        if (key.includes(searchKey)) {
+        if (regex.test(key)) {
           return shifts;
         }
       }
@@ -17225,6 +17345,19 @@
         const isToday = (day === 15);
         const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
         const todayClass = isToday ? 'is-today-pill' : '';
+        const shifts = getShiftsForDay(8, day);
+        const hasShifts = shifts && shifts.length > 0;
+        let totalBooked = 0;
+        if (hasShifts) {
+          shifts.forEach(s => { totalBooked += (s.booked || 0); });
+        }
+        const hasBooked = totalBooked > 0;
+        let dotHtml = '';
+        if (hasBooked) {
+          dotHtml = `<span class="cal-dot dot-booked"></span>`;
+        } else if (hasShifts) {
+          dotHtml = `<span class="cal-dot dot-shift"></span>`;
+        }
 
         html += `
           <div class="date-pill ${todayClass} ${isActive ? 'active' : ''}" 
@@ -17233,6 +17366,7 @@
                onclick="selectDate(this, '${fullDate}', ${isToday})">
             <span class="date-day-name">${dayAbbr}</span>
             <span class="date-day-num">${day}</span>
+            <div class="date-pill-dots">${dotHtml}</div>
           </div>
         `;
       }
@@ -17245,6 +17379,19 @@
         const dayAbbr = octDayAbbrs[dayOfWeekIdx];
         const fullDate = `${octFullDayNames[dayOfWeekIdx]}, Oct ${day}`;
         const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
+        const shifts = getShiftsForDay(9, day);
+        const hasShifts = shifts && shifts.length > 0;
+        let totalBooked = 0;
+        if (hasShifts) {
+          shifts.forEach(s => { totalBooked += (s.booked || 0); });
+        }
+        const hasBooked = totalBooked > 0;
+        let dotHtml = '';
+        if (hasBooked) {
+          dotHtml = `<span class="cal-dot dot-booked"></span>`;
+        } else if (hasShifts) {
+          dotHtml = `<span class="cal-dot dot-shift"></span>`;
+        }
 
         html += `
           <div class="date-pill ${isActive ? 'active' : ''}" 
@@ -17253,6 +17400,7 @@
                onclick="selectDate(this, '${fullDate}', false)">
             <span class="date-day-name">${dayAbbr}</span>
             <span class="date-day-num">${day}</span>
+            <div class="date-pill-dots">${dotHtml}</div>
           </div>
         `;
       }
@@ -17433,17 +17581,20 @@
           const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
           const shifts = getShiftsForDay(8, day);
           const hasShifts = shifts && shifts.length > 0;
-          const hasBooked = shifts && shifts.some(s => s.booked > 0);
+          let totalBooked = 0;
+          if (hasShifts) {
+            shifts.forEach(s => { totalBooked += (s.booked || 0); });
+          }
+          const hasBooked = totalBooked > 0;
           const todayClass = isToday ? 'is-today-cell' : '';
 
           let dotsHtml = '';
-          if (hasShifts || hasBooked) {
-            dotsHtml += `<div class="cal-cell-dots">`;
-            if (hasShifts) dotsHtml += `<span class="cal-dot dot-shift"></span>`;
-            if (hasBooked) dotsHtml += `<span class="cal-dot dot-booked"></span>`;
-            dotsHtml += `</div>`;
+          if (hasBooked) {
+            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-booked"></span></div>`;
+          } else if (hasShifts) {
+            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-shift"></span></div>`;
           } else {
-            dotsHtml += `<div class="cal-cell-dots"></div>`;
+            dotsHtml = `<div class="cal-cell-dots"></div>`;
           }
 
           html += `
@@ -17466,16 +17617,19 @@
           const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
           const shifts = getShiftsForDay(9, day);
           const hasShifts = shifts && shifts.length > 0;
-          const hasBooked = shifts && shifts.some(s => s.booked > 0);
+          let totalBooked = 0;
+          if (hasShifts) {
+            shifts.forEach(s => { totalBooked += (s.booked || 0); });
+          }
+          const hasBooked = totalBooked > 0;
 
           let dotsHtml = '';
-          if (hasShifts || hasBooked) {
-            dotsHtml += `<div class="cal-cell-dots">`;
-            if (hasShifts) dotsHtml += `<span class="cal-dot dot-shift"></span>`;
-            if (hasBooked) dotsHtml += `<span class="cal-dot dot-booked"></span>`;
-            dotsHtml += `</div>`;
+          if (hasBooked) {
+            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-booked"></span></div>`;
+          } else if (hasShifts) {
+            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-shift"></span></div>`;
           } else {
-            dotsHtml += `<div class="cal-cell-dots"></div>`;
+            dotsHtml = `<div class="cal-cell-dots"></div>`;
           }
 
           html += `
@@ -18700,6 +18854,11 @@
         weekdaysHeader.style.display = (offlineViewMode === 'month') ? 'grid' : 'none';
       }
 
+      const legendEl = document.getElementById('offlineCalLegend');
+      if (legendEl) {
+        legendEl.style.display = (offlineViewMode === 'month') ? 'flex' : 'none';
+      }
+
       container.className = (offlineViewMode === 'week') ? 'offline-dates-container week-grid' : 'offline-dates-container month-grid';
 
       let html = '';
@@ -18712,6 +18871,19 @@
             const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
             const isSelected = selectedOfflineDays.includes(day);
             const isTodayClass = isToday ? 'is-today-card' : '';
+            const shifts = getShiftsForDay(8, day);
+            const hasShifts = shifts && shifts.length > 0;
+            let totalBooked = 0;
+            if (hasShifts) {
+              shifts.forEach(s => { totalBooked += (s.booked || 0); });
+            }
+            const hasBooked = totalBooked > 0;
+            let dotHtml = '';
+            if (hasBooked) {
+              dotHtml = `<span class="cal-dot dot-booked"></span>`;
+            } else if (hasShifts) {
+              dotHtml = `<span class="cal-dot dot-shift"></span>`;
+            }
 
             html += `
               <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
@@ -18719,6 +18891,7 @@
                    title="${isToday ? 'Today' : dayLabel} ${day}">
                 <span class="off-card-day">${dayLabel}</span>
                 <span class="off-card-num">${day}</span>
+                <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
             `;
           }
@@ -18726,6 +18899,19 @@
           for (let day = 1; day <= 7; day++) {
             const dayLabel = getWeekdayName(day, 9);
             const isSelected = selectedOfflineDays.includes(day);
+            const shifts = getShiftsForDay(9, day);
+            const hasShifts = shifts && shifts.length > 0;
+            let totalBooked = 0;
+            if (hasShifts) {
+              shifts.forEach(s => { totalBooked += (s.booked || 0); });
+            }
+            const hasBooked = totalBooked > 0;
+            let dotHtml = '';
+            if (hasBooked) {
+              dotHtml = `<span class="cal-dot dot-booked"></span>`;
+            } else if (hasShifts) {
+              dotHtml = `<span class="cal-dot dot-shift"></span>`;
+            }
 
             html += `
               <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
@@ -18733,12 +18919,13 @@
                    title="${dayLabel} ${day}">
                 <span class="off-card-day">${dayLabel}</span>
                 <span class="off-card-num">${day}</span>
+                <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
             `;
           }
         }
       } else {
-        // Month View: Standard Sunday-to-Saturday Calendar Matrix with clean centered date numbers
+        // Month View: Standard Sunday-to-Saturday Calendar Matrix with clean centered date numbers and single-dot indicator
         if (offlineCurrentMonth === 8) {
           // September 2026: Sept 15 is Tuesday -> 2 leading empty cells (Sun=col 0, Mon=col 1)
           for (let i = 0; i < 2; i++) {
@@ -18750,12 +18937,26 @@
             const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
             const isSelected = selectedOfflineDays.includes(day);
             const isTodayClass = isToday ? 'is-today-card' : '';
+            const shifts = getShiftsForDay(8, day);
+            const hasShifts = shifts && shifts.length > 0;
+            let totalBooked = 0;
+            if (hasShifts) {
+              shifts.forEach(s => { totalBooked += (s.booked || 0); });
+            }
+            const hasBooked = totalBooked > 0;
+            let dotHtml = '';
+            if (hasBooked) {
+              dotHtml = `<span class="cal-dot dot-booked"></span>`;
+            } else if (hasShifts) {
+              dotHtml = `<span class="cal-dot dot-shift"></span>`;
+            }
 
             html += `
               <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
                    onclick="toggleOfflineDaySelection(${day})"
                    title="${isToday ? 'Today' : dayLabel} ${day}">
                 <span class="off-card-num">${day}</span>
+                <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
             `;
           }
@@ -18768,12 +18969,26 @@
           for (let day = 1; day <= 31; day++) {
             const dayLabel = getWeekdayName(day, 9);
             const isSelected = selectedOfflineDays.includes(day);
+            const shifts = getShiftsForDay(9, day);
+            const hasShifts = shifts && shifts.length > 0;
+            let totalBooked = 0;
+            if (hasShifts) {
+              shifts.forEach(s => { totalBooked += (s.booked || 0); });
+            }
+            const hasBooked = totalBooked > 0;
+            let dotHtml = '';
+            if (hasBooked) {
+              dotHtml = `<span class="cal-dot dot-booked"></span>`;
+            } else if (hasShifts) {
+              dotHtml = `<span class="cal-dot dot-shift"></span>`;
+            }
 
             html += `
               <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
                    onclick="toggleOfflineDaySelection(${day})"
                    title="${dayLabel} ${day}">
                 <span class="off-card-num">${day}</span>
+                <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
             `;
           }
