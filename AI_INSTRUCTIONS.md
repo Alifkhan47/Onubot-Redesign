@@ -276,8 +276,7 @@ c:\Alif\Onu App Prototype\
 * **Tabs**:
   * **Upcoming Tab**: Starts from Today (queued, in-call, draft Rx visits) through future dates (`Tomorrow`, `1 Oct`).
   * **History Tab**: Starts from Today (strictly `prescribed` or `skipped` visits) backwards through past dates (`Yesterday`, `27 Sep`). Never shows future dates.
-* **Date Filters**: Concise pills (`All`, `Today`, `Tomorrow`, `1 Oct` for Upcoming; `All`, `Today`, `Yesterday`, `27 Sep` for History).
-* **Modal Filter**: Tap top filter icon to open `#apptFilterModalSheet` for Status, Type, and Shift filtering.
+* **Modal Filter**: Tap top filter icon to open `#apptFilterModalSheet` for Date Selection (quick pills + minimal custom date picker allowing selection of any future or past date) and Consultation Type filtering (`All Types`, `Initial`, `Follow Up`). Fully synchronized with top horizontal date pills.
 * **Turn Now Highlight**: If a patient is currently active on Desk, their card in the list highlights with `.status-in-call` and `Turn Now` pulse badge.
 * **Offline Auto-Cancellation**: When the doctor goes offline, booked visits within the offline duration (e.g. `Today`) are automatically cancelled and hidden from the Upcoming queue. Viewing a cancelled date displays an informative offline empty state (`Doctor is Offline • Appointments cancelled & patients notified`). Returning online restores active queues.
 
@@ -288,6 +287,7 @@ c:\Alif\Onu App Prototype\
     * Top row: `● COMPLETED` green badge + consultation mode & duration pill (e.g. `Video Call • 25 Mins`).
     * Bottom row: Consultation date (`Aug 20, 2026`) + call time (`08:00 PM`).
   * **For Upcoming / Queued / Draft Rx / Skipped Appointments**: Title displays `Appointment Details`. Displays the 3-column info strip (`Status`, `Serial`, `Type`).
+  * **Top Right Action**: Headset support button (`.btn-circle-icon` with `ph-headset`) opening the **Help & Support Bottom Sheet (`#helpSupportModalSheet`)** with 4 contact channels (WhatsApp, Messenger, Email, Direct Call) and issue submission form.
 * **Card Color & Visual Hierarchy**:
   * **Consultation Notes (`.details-notes-card`)**: High-importance clinical outcome card styled in crisp mint/sage tint (`#F4F8F7`, `border: 1.5px solid #D1E5E1`) with deep forest text (`#0F2F29`).
   * **Pre-visit Details (`.details-previsit-card`)**: Patient intake history styled in soft, warm neutral tone (`#FAF8F5`, `border: 1.5px solid #EFE5D6`) with warm amber quote bar (`#D97706`) and `.info-chip-warm` tag. Displays the patient's specific chief complaint from AI triage (e.g. `Sore Throat & Mild Fever`, `Seasonal Allergies & Runny Nose`), duration, severity, and conversational complaint quote given to the AI intake bot.

@@ -5244,6 +5244,81 @@
       font-weight: 700;
     }
 
+    .filter-custom-date-field {
+      width: 100%;
+      height: 42px;
+      padding: 0 14px;
+      border-radius: 12px;
+      background: var(--color-card-neutral);
+      border: 1.5px solid #edf2f1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    .filter-custom-date-field:hover {
+      background: #eef2f3;
+      border-color: #d1d5db;
+    }
+
+    .filter-custom-date-field.active {
+      background: var(--color-card-sage);
+      border-color: var(--color-border-selected);
+    }
+
+    .filter-custom-date-field.active #customDateLabelText {
+      color: var(--color-primary-btn);
+      font-weight: 700;
+    }
+
+    .filter-custom-date-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-custom-date-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-hidden-date-picker {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .btn-clear-filter-date {
+      background: transparent;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #64748b;
+      position: relative;
+      z-index: 3;
+      transition: all 0.2s ease;
+    }
+
+    .btn-clear-filter-date:hover {
+      background: rgba(0,0,0,0.06);
+      color: #0f172a;
+    }
+
     /* Wise & Uber Activity List Architecture */
     .appointments-list {
       display: flex;
@@ -9319,6 +9394,73 @@
       color: #DC2626;
     }
 
+    /* 4-Item Support Quick Channel Grid */
+    .support-channels-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .support-channel-card {
+      background: #F8FAF9;
+      border: 1.5px solid #E2ECE9;
+      border-radius: 14px;
+      padding: 12px 6px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .support-channel-card:hover {
+      background: #EFF7F5;
+      border-color: #7EB8AE;
+      transform: translateY(-1px);
+    }
+
+    .support-channel-card:active {
+      transform: scale(0.97);
+    }
+
+    .support-channel-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .support-channel-name {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: #334155;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    /* Clean Support Success Hero Badge */
+    .support-success-hero-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      background: #EFF7F5;
+      border: 1.5px solid #D6EAE6;
+      color: #0E8070;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 4px auto 16px;
+    }
+
     .profile-menu-row.logout-row .menu-row-title {
       color: #DC2626;
     }
@@ -10503,8 +10645,8 @@
                 </button>
                 <h1 class="page-top-title">Appointment Details</h1>
               </div>
-              <button class="btn-circle-icon" onclick="showToast('Appointment options')" aria-label="Info & Options">
-                <i class="ph ph-info"></i>
+              <button class="btn-circle-icon" onclick="openHelpSupportModal()" aria-label="Help & Support">
+                <i class="ph ph-headset"></i>
               </button>
             </div>
 
@@ -11878,35 +12020,42 @@
 
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title" id="filterModalTitle">Filter Appointments</h2>
-            <p class="sheet-minimal-subtitle" id="filterModalSubtitle">Filter appointments by status, type, and shift.</p>
+            <p class="sheet-minimal-subtitle" id="filterModalSubtitle">Filter appointments by date and consultation type.</p>
           </div>
 
           <div class="modal-sheet-form">
-            <!-- Status Filter -->
+            <!-- Date Filter -->
             <div class="form-input-group">
-              <label class="form-input-label">Status</label>
-              <div class="filter-pills-wrap" id="filterStatusPillsWrap">
-                <!-- Populated dynamically based on tab -->
+              <label class="form-input-label">Select Date</label>
+              <div class="filter-pills-wrap" id="filterApptDatePillsWrap">
+                <!-- Populated dynamically based on tab (All Dates, Today, Tomorrow, etc.) -->
+              </div>
+              
+              <!-- Minimal Custom Date Row -->
+              <div class="filter-custom-date-container" style="margin-top: 6px;">
+                <div class="filter-custom-date-field" id="filterCustomDateField">
+                  <div class="filter-custom-date-left">
+                    <i class="ph ph-calendar-blank" style="font-size: 16px; color: var(--color-primary-btn);"></i>
+                    <span id="customDateLabelText" style="font-size: 13px; font-weight: 500; color: var(--color-text-secondary);">Pick a specific future date</span>
+                  </div>
+                  <div class="filter-custom-date-right">
+                    <input type="date" id="apptFilterCustomDateInput" class="filter-hidden-date-picker" onchange="handleApptCustomDateChange(this.value)">
+                    <button type="button" class="btn-clear-filter-date" id="btnClearFilterCustomDate" onclick="clearFilterCustomDate(event)" style="display: none;" aria-label="Clear custom date" title="Clear custom date">
+                      <i class="ph ph-x"></i>
+                    </button>
+                    <i class="ph ph-caret-down" id="customDateCaretIcon" style="font-size: 13px; color: var(--color-text-secondary);"></i>
+                  </div>
+                </div>
               </div>
             </div>
 
             <!-- Consultation Type Filter -->
             <div class="form-input-group">
               <label class="form-input-label">Consultation Type</label>
-              <div class="filter-pills-wrap" id="filterTypePillsWrap">
+              <div class="filter-pills-wrap" id="filterApptTypePillsWrap">
                 <button type="button" class="filter-chip-btn active" data-filter="type" data-val="all" onclick="selectFilterOption('type', 'all', this)">All Types</button>
                 <button type="button" class="filter-chip-btn" data-filter="type" data-val="Initial" onclick="selectFilterOption('type', 'Initial', this)">Initial</button>
                 <button type="button" class="filter-chip-btn" data-filter="type" data-val="Follow Up" onclick="selectFilterOption('type', 'Follow Up', this)">Follow Up</button>
-              </div>
-            </div>
-
-            <!-- Shift Filter -->
-            <div class="form-input-group">
-              <label class="form-input-label">Shift</label>
-              <div class="filter-pills-wrap" id="filterShiftPillsWrap">
-                <button type="button" class="filter-chip-btn active" data-filter="shift" data-val="all" onclick="selectFilterOption('shift', 'all', this)">All Shifts</button>
-                <button type="button" class="filter-chip-btn" data-filter="shift" data-val="1" onclick="selectFilterOption('shift', '1', this)">Shift 1 (9-11 AM)</button>
-                <button type="button" class="filter-chip-btn" data-filter="shift" data-val="2" onclick="selectFilterOption('shift', '2', this)">Shift 2 (4-6 PM)</button>
               </div>
             </div>
 
@@ -12616,6 +12765,89 @@
           </div>
         </div>
 
+        <!-- =======================================================
+             HELP & SUPPORT MODAL BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="helpSupportModalSheet" style="max-height: 88%; overflow-y: auto; scrollbar-width: none;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+              <i class="ph ph-headset"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title">Help & Support</h2>
+            <p class="sheet-editorial-sub">Reach out directly to our 24/7 doctor care team or submit your issue.</p>
+          </div>
+
+          <!-- 4 Quick Contact Channels -->
+          <div class="support-channels-grid">
+            <div class="support-channel-card" onclick="contactSupportChannel('WhatsApp')">
+              <div class="support-channel-icon" style="background: #E8F8EE; color: #25D366;">
+                <i class="ph-fill ph-whatsapp-logo"></i>
+              </div>
+              <span class="support-channel-name">WhatsApp</span>
+            </div>
+
+            <div class="support-channel-card" onclick="contactSupportChannel('Messenger')">
+              <div class="support-channel-icon" style="background: #EFF6FF; color: #0084FF;">
+                <i class="ph-fill ph-messenger-logo"></i>
+              </div>
+              <span class="support-channel-name">Messenger</span>
+            </div>
+
+            <div class="support-channel-card" onclick="contactSupportChannel('Email')">
+              <div class="support-channel-icon" style="background: #EFF7F5; color: #0E8070;">
+                <i class="ph-fill ph-envelope-simple"></i>
+              </div>
+              <span class="support-channel-name">Email</span>
+            </div>
+
+            <div class="support-channel-card" onclick="contactSupportChannel('Call')">
+              <div class="support-channel-icon" style="background: #EFF7F5; color: #052E28;">
+                <i class="ph-fill ph-phone-call"></i>
+              </div>
+              <span class="support-channel-name">Call Us</span>
+            </div>
+          </div>
+
+          <!-- Describe Issue Input Group -->
+          <div class="payout-input-group" style="margin-top: 10px;">
+            <label class="payout-form-label">Describe Your Issue</label>
+            <textarea class="profile-bio-textarea" id="inputSupportIssueText" rows="3" maxlength="500" placeholder="Type your issue, clinical query, or feedback here..."></textarea>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 16px;">
+            <button type="button" class="btn-sheet-cancel" onclick="closeHelpSupportModal()">Cancel</button>
+            <button type="button" class="btn-sheet-confirm" onclick="submitSupportIssue()">Submit Issue</button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             SUPPORT ISSUE SUBMITTED CONFIRMATION MODAL BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="supportConfirmedModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 32px; z-index: 150;">
+          <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
+          
+          <!-- Clean Success Hero Badge -->
+          <div class="support-success-hero-badge">
+            <i class="ph-bold ph-check"></i>
+          </div>
+
+          <!-- Editorial Header -->
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 20px;">
+            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 6px;">Issue Submitted</h2>
+            <p class="sheet-editorial-sub" style="font-size: 13.5px; color: #64748B; margin: 0 auto; max-width: 290px; line-height: 1.45;">Issue submitted to support. They will reach back to you shortly.</p>
+          </div>
+
+          <!-- Primary Full Width CTA: Done with tick mark in front -->
+          <button type="button" class="btn-offline-success-desk" onclick="closeSupportConfirmedModal()" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <i class="ph-bold ph-check"></i>
+            <span>Done</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
@@ -12640,8 +12872,8 @@
     let aiAutoTransitionTimer = null;
     let currentApptTab = 'upcoming';
     let currentApptDateKey = 'today';
-    let apptFilters = { status: 'all', type: 'all', shift: 'all' };
-    let tempApptFilters = { status: 'all', type: 'all', shift: 'all' };
+    let apptFilters = { date: 'today', customDate: null, type: 'all' };
+    let tempApptFilters = { date: 'today', customDate: null, type: 'all' };
 
     const queuePatients = [
       { serial: '#1', name: 'Tariqul Islam', age: 34, gender: 'Male', subtitle: '34 Yrs • Male', phone: '+880 1712-345678', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80' },
@@ -13102,6 +13334,64 @@
           severity: 'Mild (2/10)',
           severityLevel: 'mild',
           complaintQuote: 'Energy levels returning to baseline after viral illness.',
+          uploadedDocs: []
+        },
+        consultationNotes: null,
+        prescriptionPdf: null
+      },
+
+      // ==========================================
+      // UPCOMING: FUTURE - OCT 05 & OCT 12
+      // ==========================================
+      {
+        id: 'up4',
+        dateKey: '2026-10-05',
+        isoDate: '2026-10-05',
+        dateLabel: 'Mon, Oct 05',
+        shiftId: 1,
+        shiftName: 'Shift 1 • 9:00–11:00 AM',
+        shiftType: 'Video Consultation',
+        serial: '#1',
+        name: 'Rumana Haque',
+        age: 33,
+        gender: 'Female',
+        phone: '+880 1819-334455',
+        status: 'queued',
+        time: '9:00 AM',
+        type: 'Initial Consultation',
+        preVisit: {
+          symptoms: 'Seasonal Sinusitis & Congestion',
+          duration: '4 Days',
+          severity: 'Moderate (5/10)',
+          severityLevel: 'mod',
+          complaintQuote: 'Facial pain around cheeks and nasal blockage, worse in morning.',
+          uploadedDocs: []
+        },
+        consultationNotes: null,
+        prescriptionPdf: null
+      },
+      {
+        id: 'up5',
+        dateKey: '2026-10-12',
+        isoDate: '2026-10-12',
+        dateLabel: 'Mon, Oct 12',
+        shiftId: 1,
+        shiftName: 'Shift 1 • 9:00–11:00 AM',
+        shiftType: 'Video Consultation',
+        serial: '#1',
+        name: 'Saiful Islam',
+        age: 46,
+        gender: 'Male',
+        phone: '+880 1711-224466',
+        status: 'queued',
+        time: '9:00 AM',
+        type: 'Follow Up',
+        preVisit: {
+          symptoms: 'Hypertension Monthly Calibration',
+          duration: '1 Month',
+          severity: 'Mild (2/10)',
+          severityLevel: 'mild',
+          complaintQuote: 'Monthly BP log ready for review.',
           uploadedDocs: []
         },
         consultationNotes: null,
@@ -14784,7 +15074,57 @@
     }
 
     function openHelpSupportModal() {
-      showToast('Connecting to Onu Doctor Support...');
+      const textarea = document.getElementById('inputSupportIssueText');
+      if (textarea) textarea.value = '';
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('helpSupportModalSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeHelpSupportModal() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('helpSupportModalSheet');
+      if (backdrop) backdrop.classList.remove('active');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function contactSupportChannel(channel) {
+      if (channel === 'WhatsApp') {
+        showToast('Opening WhatsApp Support (+880 1700-000000)...');
+      } else if (channel === 'Messenger') {
+        showToast('Opening Messenger Doctor Desk Support...');
+      } else if (channel === 'Email') {
+        showToast('Opening Email: support@onu.health...');
+      } else if (channel === 'Call') {
+        showToast('Dialing 24/7 Doctor Helpline: 16247...');
+      }
+    }
+
+    function submitSupportIssue() {
+      const textarea = document.getElementById('inputSupportIssueText');
+      const issueText = textarea ? textarea.value.trim() : '';
+      if (!issueText) {
+        showToast('Please type a brief description of your issue');
+        return;
+      }
+      closeHelpSupportModal();
+      
+      // Open confirmation modal
+      setTimeout(() => {
+        const backdrop = document.getElementById('modalBackdrop');
+        const sheet = document.getElementById('supportConfirmedModalSheet');
+        if (backdrop) backdrop.classList.add('active');
+        if (sheet) sheet.classList.add('active');
+        showToast('Issue submitted to support • They will reach back to you');
+      }, 220);
+    }
+
+    function closeSupportConfirmedModal() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('supportConfirmedModalSheet');
+      if (backdrop) backdrop.classList.remove('active');
+      if (sheet) sheet.classList.remove('active');
     }
 
     function openLogoutModal() {
@@ -15923,6 +16263,38 @@
       }
     }
 
+    // Helper date utilities for appointment filtering
+    function getIsoDateForAppointment(item) {
+      if (item.isoDate) return item.isoDate;
+      if (item.dateKey === 'today') return '2026-09-29';
+      if (item.dateKey === 'sept30') return '2026-09-30';
+      if (item.dateKey === 'oct01') return '2026-10-01';
+      if (item.dateKey === 'yesterday') return '2026-09-28';
+      if (item.dateKey === 'sept27') return '2026-09-27';
+      return item.dateKey;
+    }
+
+    function formatCustomDateDisplay(isoStr) {
+      if (!isoStr) return '';
+      const parts = isoStr.split('-');
+      if (parts.length !== 3) return isoStr;
+      const year = parts[0];
+      const monthIdx = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${day} ${months[monthIdx]} ${year}`;
+    }
+
+    function formatCustomDateShort(isoStr) {
+      if (!isoStr) return '';
+      const parts = isoStr.split('-');
+      if (parts.length !== 3) return isoStr;
+      const monthIdx = parseInt(parts[1], 10) - 1;
+      const day = parseInt(parts[2], 10);
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${day} ${months[monthIdx]}`;
+    }
+
     function switchApptTab(tabName) {
       currentApptTab = tabName;
       document.querySelectorAll('.appts-segment-btn').forEach(btn => btn.classList.remove('active'));
@@ -15932,8 +16304,19 @@
       // Set default date for selected tab
       if (tabName === 'upcoming') {
         currentApptDateKey = 'today';
+        apptFilters.date = 'today';
+        apptFilters.customDate = null;
       } else {
         currentApptDateKey = 'all';
+        apptFilters.date = 'all';
+        apptFilters.customDate = null;
+      }
+
+      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
+      const dotEl = document.getElementById('filterActiveDot');
+      if (dotEl) {
+        dotEl.classList.toggle('active', hasActiveFilter);
       }
 
       renderApptDateChips();
@@ -15947,18 +16330,24 @@
       let chips = [];
       if (currentApptTab === 'upcoming') {
         chips = [
-          { key: 'all', label: 'All' },
+          { key: 'all', label: 'All Dates' },
           { key: 'today', label: 'Today' },
           { key: 'sept30', label: 'Tomorrow' },
           { key: 'oct01', label: '1 Oct' }
         ];
       } else {
         chips = [
-          { key: 'all', label: 'All' },
+          { key: 'all', label: 'All Dates' },
           { key: 'today', label: 'Today' },
           { key: 'yesterday', label: 'Yesterday' },
           { key: 'sept27', label: '27 Sep' }
         ];
+      }
+
+      // If a custom date filter is active, inject a custom date chip into the horizontal bar
+      if (apptFilters.date === 'custom' && apptFilters.customDate) {
+        const shortDateLabel = formatCustomDateShort(apptFilters.customDate);
+        chips.push({ key: 'custom', label: `${shortDateLabel}` });
       }
 
       scrollEl.innerHTML = chips.map(c => `
@@ -15970,40 +16359,89 @@
 
     function selectApptDate(btn, key) {
       currentApptDateKey = key;
+      apptFilters.date = key;
+      if (key !== 'custom') {
+        apptFilters.customDate = null;
+      }
       document.querySelectorAll('.appts-filter-chip').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
+
+      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
+      const dotEl = document.getElementById('filterActiveDot');
+      if (dotEl) {
+        dotEl.classList.toggle('active', hasActiveFilter);
+      }
+
       renderAppointmentsList();
     }
 
-    // Appointments Interactive Filter Bottom Sheet Modal Logic
+    // Appointments Interactive Filter Bottom Sheet Modal Logic (Date & Consultation Type Only)
     function openApptFilterModal() {
       tempApptFilters = { ...apptFilters };
+      if (!tempApptFilters.date) {
+        tempApptFilters.date = currentApptDateKey || (currentApptTab === 'upcoming' ? 'today' : 'all');
+      }
 
-      // Render contextual status filter chips depending on tab
-      const statusWrap = document.getElementById('filterStatusPillsWrap');
-      if (statusWrap) {
+      // Configure date picker min/max constraints based on tab
+      const dateInput = document.getElementById('apptFilterCustomDateInput');
+      const customDateField = document.getElementById('filterCustomDateField');
+      const customLabelText = document.getElementById('customDateLabelText');
+      const clearBtn = document.getElementById('btnClearFilterCustomDate');
+
+      if (dateInput) {
         if (currentApptTab === 'upcoming') {
-          statusWrap.innerHTML = `
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'all' ? 'active' : ''}" data-filter="status" data-val="all" onclick="selectFilterOption('status', 'all', this)">All Statuses</button>
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'queued' ? 'active' : ''}" data-filter="status" data-val="queued" onclick="selectFilterOption('status', 'queued', this)">In Queue</button>
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'in_call' ? 'active' : ''}" data-filter="status" data-val="in_call" onclick="selectFilterOption('status', 'in_call', this)">In Call / Next</button>
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'draft_rx' ? 'active' : ''}" data-filter="status" data-val="draft_rx" onclick="selectFilterOption('status', 'draft_rx', this)">Draft Rx</button>
-          `;
+          dateInput.min = '2026-09-29';
+          dateInput.removeAttribute('max');
         } else {
-          statusWrap.innerHTML = `
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'all' ? 'active' : ''}" data-filter="status" data-val="all" onclick="selectFilterOption('status', 'all', this)">All Statuses</button>
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'prescribed' ? 'active' : ''}" data-filter="status" data-val="prescribed" onclick="selectFilterOption('status', 'prescribed', this)">Prescribed</button>
-            <button type="button" class="filter-chip-btn ${tempApptFilters.status === 'skipped' ? 'active' : ''}" data-filter="status" data-val="skipped" onclick="selectFilterOption('status', 'skipped', this)">Skipped</button>
-          `;
+          dateInput.max = '2026-09-29';
+          dateInput.removeAttribute('min');
         }
       }
 
-      // Sync active state for Type and Shift
-      document.querySelectorAll('#filterTypePillsWrap .filter-chip-btn').forEach(btn => {
+      // Populate Date selection quick pills dynamically based on active tab
+      const dateWrap = document.getElementById('filterApptDatePillsWrap');
+      if (dateWrap) {
+        let dateOptions = [];
+        if (currentApptTab === 'upcoming') {
+          dateOptions = [
+            { key: 'all', label: 'All Dates' },
+            { key: 'today', label: 'Today (Sept 29)' },
+            { key: 'sept30', label: 'Tomorrow (Sept 30)' },
+            { key: 'oct01', label: '1 Oct' }
+          ];
+        } else {
+          dateOptions = [
+            { key: 'all', label: 'All Dates' },
+            { key: 'today', label: 'Today (Sept 29)' },
+            { key: 'yesterday', label: 'Yesterday (Sept 28)' },
+            { key: 'sept27', label: '27 Sep' }
+          ];
+        }
+
+        dateWrap.innerHTML = dateOptions.map(opt => `
+          <button type="button" class="filter-chip-btn ${tempApptFilters.date === opt.key ? 'active' : ''}" data-filter="date" data-val="${opt.key}" onclick="selectFilterOption('date', '${opt.key}', this)">${opt.label}</button>
+        `).join('');
+      }
+
+      // Sync custom date picker field
+      if (customDateField && customLabelText) {
+        if (tempApptFilters.date === 'custom' && tempApptFilters.customDate) {
+          customDateField.classList.add('active');
+          customLabelText.textContent = formatCustomDateDisplay(tempApptFilters.customDate);
+          if (dateInput) dateInput.value = tempApptFilters.customDate;
+          if (clearBtn) clearBtn.style.display = 'flex';
+        } else {
+          customDateField.classList.remove('active');
+          customLabelText.textContent = currentApptTab === 'upcoming' ? 'Pick a specific future date' : 'Pick a specific past date';
+          if (dateInput) dateInput.value = '';
+          if (clearBtn) clearBtn.style.display = 'none';
+        }
+      }
+
+      // Sync active state for Consultation Type
+      document.querySelectorAll('#filterApptTypePillsWrap .filter-chip-btn').forEach(btn => {
         btn.classList.toggle('active', btn.getAttribute('data-val') === tempApptFilters.type);
-      });
-      document.querySelectorAll('#filterShiftPillsWrap .filter-chip-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-val') === tempApptFilters.shift);
       });
 
       const modalSheet = document.getElementById('apptFilterModalSheet');
@@ -16021,8 +16459,62 @@
       if (backdrop) backdrop.classList.remove('active');
     }
 
+    function handleApptCustomDateChange(val) {
+      if (!val) return;
+      tempApptFilters.date = 'custom';
+      tempApptFilters.customDate = val;
+
+      const customDateField = document.getElementById('filterCustomDateField');
+      const customLabelText = document.getElementById('customDateLabelText');
+      const clearBtn = document.getElementById('btnClearFilterCustomDate');
+
+      if (customDateField) customDateField.classList.add('active');
+      if (customLabelText) customLabelText.textContent = formatCustomDateDisplay(val);
+      if (clearBtn) clearBtn.style.display = 'flex';
+
+      // Unselect all quick date pills
+      document.querySelectorAll('#filterApptDatePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+    }
+
+    function clearFilterCustomDate(e) {
+      if (e) e.stopPropagation();
+      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      tempApptFilters.date = defaultDate;
+      tempApptFilters.customDate = null;
+
+      const dateInput = document.getElementById('apptFilterCustomDateInput');
+      const customDateField = document.getElementById('filterCustomDateField');
+      const customLabelText = document.getElementById('customDateLabelText');
+      const clearBtn = document.getElementById('btnClearFilterCustomDate');
+
+      if (dateInput) dateInput.value = '';
+      if (customDateField) customDateField.classList.remove('active');
+      if (customLabelText) customLabelText.textContent = currentApptTab === 'upcoming' ? 'Pick a specific future date' : 'Pick a specific past date';
+      if (clearBtn) clearBtn.style.display = 'none';
+
+      // Re-activate default quick pill
+      document.querySelectorAll('#filterApptDatePillsWrap .filter-chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-val') === defaultDate);
+      });
+    }
+
     function selectFilterOption(category, val, btn) {
       tempApptFilters[category] = val;
+      if (category === 'date') {
+        tempApptFilters.customDate = null;
+        const dateInput = document.getElementById('apptFilterCustomDateInput');
+        const customDateField = document.getElementById('filterCustomDateField');
+        const customLabelText = document.getElementById('customDateLabelText');
+        const clearBtn = document.getElementById('btnClearFilterCustomDate');
+
+        if (dateInput) dateInput.value = '';
+        if (customDateField) customDateField.classList.remove('active');
+        if (customLabelText) customLabelText.textContent = currentApptTab === 'upcoming' ? 'Pick a specific future date' : 'Pick a specific past date';
+        if (clearBtn) clearBtn.style.display = 'none';
+      }
+
       const parent = btn.parentElement;
       if (parent) {
         parent.querySelectorAll('.filter-chip-btn').forEach(b => b.classList.remove('active'));
@@ -16032,9 +16524,13 @@
 
     function applyApptFilters() {
       apptFilters = { ...tempApptFilters };
+      currentApptDateKey = apptFilters.date;
       
+      renderApptDateChips();
+
       // Update filter active dot on trigger icon
-      const hasActiveFilter = (apptFilters.status !== 'all' || apptFilters.type !== 'all' || apptFilters.shift !== 'all');
+      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
       const dotEl = document.getElementById('filterActiveDot');
       if (dotEl) {
         dotEl.classList.toggle('active', hasActiveFilter);
@@ -16045,9 +16541,13 @@
     }
 
     function resetApptFilters() {
-      apptFilters = { status: 'all', type: 'all', shift: 'all' };
-      tempApptFilters = { status: 'all', type: 'all', shift: 'all' };
-      
+      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      apptFilters = { date: defaultDate, customDate: null, type: 'all' };
+      tempApptFilters = { date: defaultDate, customDate: null, type: 'all' };
+      currentApptDateKey = defaultDate;
+
+      renderApptDateChips();
+
       const dotEl = document.getElementById('filterActiveDot');
       if (dotEl) dotEl.classList.remove('active');
 
@@ -16072,19 +16572,16 @@
             if (!isShiftActive) return true;
             return item.status !== 'prescribed';
           }
-          if (item.dateKey === 'sept30') {
+          if (item.dateKey === 'yesterday' || item.dateKey === 'sept27') {
+            return false;
+          }
+          if (item.dateKey === 'sept30' || item.dateKey === 'oct01' || item.dateKey === '2026-10-05' || item.dateKey === '2026-10-12') {
             if (isDoctorOffline && (selectedDurationTitle === 'Next 3 Days' || selectedDurationTitle === '1 Week')) {
               return false;
             }
             return true;
           }
-          if (item.dateKey === 'oct01') {
-            if (isDoctorOffline && (selectedDurationTitle === 'Next 3 Days' || selectedDurationTitle === '1 Week')) {
-              return false;
-            }
-            return true;
-          }
-          return false;
+          return true;
         });
       } else {
         // History starts from Today (completed/prescribed or skipped visits for today) + past dates
@@ -16096,30 +16593,17 @@
         });
       }
 
-      // Apply Date Filter
-      if (currentApptDateKey !== 'all') {
-        list = list.filter(item => item.dateKey === currentApptDateKey);
+      // Apply Date Filter (Exact match or Custom future/past ISO date match)
+      const activeDate = apptFilters.date || currentApptDateKey || 'all';
+      if (activeDate === 'custom' && apptFilters.customDate) {
+        list = list.filter(item => getIsoDateForAppointment(item) === apptFilters.customDate);
+      } else if (activeDate !== 'all') {
+        list = list.filter(item => item.dateKey === activeDate || getIsoDateForAppointment(item) === activeDate);
       }
 
-      // Apply Type Filter
-      if (apptFilters.type !== 'all') {
-        list = list.filter(item => item.type && item.type.includes(apptFilters.type));
-      }
-
-      // Apply Shift Filter
-      if (apptFilters.shift !== 'all') {
-        list = list.filter(item => String(item.shiftId) === apptFilters.shift);
-      }
-
-      // Apply Status Filter
-      if (apptFilters.status !== 'all') {
-        list = list.filter(item => {
-          let effStatus = item.status;
-          if (!isShiftActive && item.shiftId === 1 && currentApptTab === 'upcoming') {
-            effStatus = 'queued';
-          }
-          return effStatus === apptFilters.status;
-        });
+      // Apply Consultation Type Filter
+      if (apptFilters.type && apptFilters.type !== 'all') {
+        list = list.filter(item => item.type && item.type.toLowerCase().includes(apptFilters.type.toLowerCase()));
       }
 
       // Empty State
@@ -16129,7 +16613,11 @@
         let emptyTitle = '';
         let emptyMsg = 'No appointments found matching your criteria.';
 
-        if (isDoctorOffline && currentApptTab === 'upcoming') {
+        if (activeDate === 'custom' && apptFilters.customDate) {
+          const displayDate = formatCustomDateDisplay(apptFilters.customDate);
+          emptyTitle = `<p style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 700; color: #1E293B; margin-bottom: 4px;">No Appointments Scheduled</p>`;
+          emptyMsg = `No patient appointments are booked for ${displayDate}. Future bookings will appear here once scheduled.`;
+        } else if (isDoctorOffline && currentApptTab === 'upcoming') {
           emptyIcon = 'ph-moon';
           emptyIconColor = '#D92D20';
           emptyTitle = `<p style="font-family: var(--font-heading); font-size: 15.5px; font-weight: 700; color: #1E293B; margin-bottom: 4px;">Doctor is Offline</p>`;

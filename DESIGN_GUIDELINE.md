@@ -597,10 +597,15 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Patient Cards**: `flex: 1` text container allowing full patient names to render cleanly without premature ellipsis.
 
 ### 18.3 Interactive Filter Bottom Sheet Modal (`#apptFilterModalSheet`)
-* **Contextual Options**:
-  * **Upcoming**: Status (`All`, `In Queue`, `In Call / Next`, `Draft Rx`), Consultation Type (`All`, `Initial`, `Follow Up`), Shift (`All`, `Shift 1`, `Shift 2`).
-  * **History**: Status (`All`, `Prescribed`, `Skipped`), Consultation Type (`All`, `Initial`, `Follow Up`), Shift (`All`, `Shift 1`, `Shift 2`).
-* **Active Indicator Dot**: Displays a subtle teal active dot (`.filter-active-dot`) on the top filter icon button whenever any non-default filter is applied.
+* **Streamlined Dual-Filter Architecture**:
+  * **Select Date**: Dual-layer selection combining quick contextual pills with an integrated minimal custom date picker:
+    * **Quick Contextual Pills**:
+      * **Upcoming Tab**: `All Dates`, `Today (Sept 29)`, `Tomorrow (Sept 30)`, `1 Oct`.
+      * **History Tab**: `All Dates`, `Today (Sept 29)`, `Yesterday (Sept 28)`, `27 Sep`.
+    * **Minimal Custom Date Picker (`.filter-custom-date-field`)**: Sleek row with calendar icon and integrated native date picker supporting any future date (`min="2026-09-29"` in Upcoming) or past date in History. Shows formatted date string with clear button (`#btnClearFilterCustomDate`) and active sage background.
+  * **Consultation Type**: Quick toggle pills: `All Types`, `Initial`, `Follow Up`.
+* **State Synchronization**: Selecting or resetting filters in the modal instantly syncs both the dynamic date pills in the top horizontal scroll bar (`#apptsDateChipsScroll`) and the appointment list.
+* **Active Indicator Dot**: Displays a subtle teal active dot (`.filter-active-dot`) on the top filter icon button whenever any non-default filter or custom date is active.
 
 ### 18.4 Sub-View Elevation (Clean Screen Bottom)
 * **Bottom Nav Isolation**: Sub-views with top back navigation (e.g. `All Appointments`, `Appointment Details`) elevate with `z-index: 21` and `padding-bottom: 36px`, giving the appointment list complete visual breathing room without being crowded by the 5-tab bottom navigation bar.
@@ -1042,3 +1047,23 @@ Across all calendar views in the app, each date cell displays **at most one sing
 
 ### 28.3 Professional Identity (Non-Editable / Verified)
 * Clean frosted card with verified BMDC Registration (`437193172`) and verified Consultation Fee (`৳ 1,200 BDT`).
+
+---
+
+## 29. Universal Help & Support Bottom Popup Standard (`#helpSupportModalSheet`)
+
+### 29.1 Support Entry Points & Headset Icon
+* **Top Header Support Icon**: Top navigation bars (e.g. Appointment Details) feature the universal support icon (`.btn-circle-icon` with `ph ph-headset` in `#052E28`), replacing ambiguous generic info icons.
+* **Menu Entry Points**: Profile and Settings rows (`Help & Support`) trigger the unified support modal (`openHelpSupportModal()`).
+
+### 29.2 Multi-Channel Support & Issue Submission
+* **4-Channel Quick Contact Strip (`.support-channels-grid`)**:
+  * **WhatsApp**: `ph-fill ph-whatsapp-logo` with soft green background (`#E8F8EE`, `#25D366`).
+  * **Messenger**: `ph-fill ph-messenger-logo` with soft blue background (`#EFF6FF`, `#0084FF`).
+  * **Email**: `ph-fill ph-envelope-simple` with soft eucalyptus background (`#EFF7F5`, `#0E8070`).
+  * **Direct Call**: `ph-fill ph-phone-call` with deep forest background (`#EFF7F5`, `#052E28`).
+* **Issue Submission Form**:
+  * Clean multiline textarea (`#inputSupportIssueText`) for clinical inquiries or technical bug reports.
+  * Primary Action CTA: `Submit Issue` (`#052E28`).
+* **Confirmation Protocol (`#supportConfirmedModalSheet`)**:
+  * Submitting an issue displays a clean confirmation bottom sheet with a unified soft mint success badge (`.support-success-hero-badge` with `ph-bold ph-check` in `#0E8070`), clear reassurance (*"Issue submitted to support. They will reach back to you shortly."*), and a full-width primary CTA `[✓ Done]` with the tick mark placed in front of the text.
