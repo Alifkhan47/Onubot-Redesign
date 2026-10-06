@@ -18702,6 +18702,8 @@
 
       container.className = (offlineViewMode === 'week') ? 'offline-dates-container week-grid' : 'offline-dates-container month-grid';
 
+      let html = '';
+
       if (offlineViewMode === 'week') {
         // Option 1: Clean single-row strip of exactly 7 consecutive days from Today
         if (offlineCurrentMonth === 8) {
