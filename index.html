@@ -1478,6 +1478,18 @@
       user-select: none;
     }
 
+    .offline-dates-container.month-grid .offline-date-card {
+      aspect-ratio: 1 / 1;
+      padding: 0;
+      min-height: 42px;
+      border-radius: 12px;
+    }
+
+    .offline-dates-container.month-grid .off-card-num {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
     .offline-date-card.empty {
       border: none !important;
       background: transparent !important;
@@ -18688,7 +18700,7 @@
         weekdaysHeader.style.display = (offlineViewMode === 'month') ? 'grid' : 'none';
       }
 
-      let html = '';
+      container.className = (offlineViewMode === 'week') ? 'offline-dates-container week-grid' : 'offline-dates-container month-grid';
 
       if (offlineViewMode === 'week') {
         // Option 1: Clean single-row strip of exactly 7 consecutive days from Today
@@ -18724,7 +18736,7 @@
           }
         }
       } else {
-        // Month View: Standard Sunday-to-Saturday Calendar Matrix with proper weekday alignment
+        // Month View: Standard Sunday-to-Saturday Calendar Matrix with clean centered date numbers
         if (offlineCurrentMonth === 8) {
           // September 2026: Sept 15 is Tuesday -> 2 leading empty cells (Sun=col 0, Mon=col 1)
           for (let i = 0; i < 2; i++) {
@@ -18741,7 +18753,6 @@
               <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
                    onclick="toggleOfflineDaySelection(${day})"
                    title="${isToday ? 'Today' : dayLabel} ${day}">
-                <span class="off-card-day">${dayLabel}</span>
                 <span class="off-card-num">${day}</span>
               </div>
             `;
@@ -18760,7 +18771,6 @@
               <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
                    onclick="toggleOfflineDaySelection(${day})"
                    title="${dayLabel} ${day}">
-                <span class="off-card-day">${dayLabel}</span>
                 <span class="off-card-num">${day}</span>
               </div>
             `;
