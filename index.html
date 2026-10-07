@@ -11968,53 +11968,36 @@
         </div>
 
         <!-- =======================================================
-             4C. CREATE SHIFT TO GO OFFLINE (NO OPEN SLOTS TRANSITION SHEET)
+             4C. CREATE SHIFT TO CLEAR SCHEDULE (SMART TRANSFER DIAGNOSIS MODAL)
              ======================================================= -->
-        <div class="bottom-sheet" id="createShiftToOfflineModalSheet" style="border-radius: 32px 32px 0 0; padding: 22px 22px 28px; z-index: 150;">
+        <div class="bottom-sheet" id="createShiftToOfflineModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 30px; z-index: 150;">
           <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
           
-          <!-- Hero Icon with Dual Badge (Calendar Plus + Arrow) -->
-          <div class="offline-success-hero-badge">
-            <div class="offline-hero-icon-circle" style="background: #FEF3C7; border-color: #FDE68A; color: #D97706;">
+          <!-- Hero Icon Badge -->
+          <div class="offline-success-hero-badge" style="display: flex; justify-content: center; margin-bottom: 12px;">
+            <div class="sheet-badge-icon" style="background: #FFFBEB; color: #D97706; border: 1.5px solid #FDE68A; width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px;">
               <i class="ph-bold ph-calendar-plus"></i>
             </div>
-            <div class="offline-hero-sub-badge" style="background: #052E28; color: #FFFFFF;">
-              <i class="ph-bold ph-arrow-up-right"></i>
+          </div>
+
+          <!-- Hero Editorial Header with Clear Headline -->
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 16px;">
+            <h2 class="sheet-editorial-title" id="createShiftModalTitle" style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px;">Future Shifts Needed</h2>
+            <p id="createShiftModalSubtitle" style="font-size: 13px; color: #64748B; margin: 0 0 14px; line-height: 1.4;">Add upcoming shift slots so booked patients can be automatically transferred.</p>
+
+            <!-- Dynamic Breakdown Card of Video & In-Person Status -->
+            <div id="createShiftDiagnosisCard" style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; gap: 10px;">
+              <!-- Populated dynamically by openMissingShiftTransferModal() -->
             </div>
           </div>
 
-          <!-- Hero Editorial Header with Big Texts -->
-          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 18px;">
-            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0;">Add Shift to Go Offline</h2>
-          </div>
-
-          <!-- Minimal Unified Info Tile -->
-          <div class="offline-minimal-summary-card">
-            <div class="offline-summary-row">
-              <div class="offline-summary-row-left">
-                <i class="ph-bold ph-calendar-blank"></i>
-                <span id="createShiftOfflineDatesRange">Sept 15 – 21 (7 Days)</span>
-              </div>
-              <span class="offline-badge-pill" style="background: #FEF3C7; border-color: #FDE68A; color: #D97706;">
-                <i class="ph-fill ph-circle"></i> Pending
-              </span>
-            </div>
-            <div class="offline-summary-divider"></div>
-            <div class="offline-summary-row">
-              <div class="offline-summary-row-left text-rescheduled" style="color: #B45309;">
-                <i class="ph-bold ph-arrows-clockwise" style="color: #D97706;"></i>
-                <span id="createShiftOfflinePatientsNote">18 patients need a future shift to transfer to</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Buttons Group: Primary Dark Forest CTA + Neutral Cancel -->
+          <!-- Action Buttons Group -->
           <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-            <button type="button" class="btn-offline-success-desk" onclick="goToScheduleToAddShift()">
-              <span>Edit Schedule & Add Shift</span>
-              <i class="ph-bold ph-arrow-right"></i>
+            <button type="button" id="btnCreateMissingShiftAction" class="btn-sheet-confirm" style="width: 100%; height: 50px; border-radius: 100px; background: var(--color-primary-btn, #02241F); color: #ffffff; border: none; font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="goToScheduleToAddShift('inperson')">
+              <i class="ph-bold ph-plus-circle"></i>
+              <span id="btnCreateMissingShiftLabel">+ Create In-Person Shift</span>
             </button>
-            <button type="button" class="btn-sheet-cancel" style="width: 100%; height: 48px; border-radius: 16px; margin: 0; font-family: var(--font-heading); font-size: 15px; font-weight: 700;" onclick="closeCreateShiftToOfflineModal()">
+            <button type="button" class="btn-sheet-cancel" style="width: 100%; height: 46px; border-radius: 100px; margin: 0; font-family: var(--font-heading); font-size: 14px; font-weight: 700;" onclick="closeCreateShiftToOfflineModal()">
               Cancel
             </button>
           </div>
@@ -19602,7 +19585,7 @@
       openTimePickerModal('start');
     }
 
-    function openInPageShiftForm() {
+    function openInPageShiftForm(presetType = 'video') {
       currentEditingShiftId = null;
       currentEditingShiftBookedCount = 0;
 
@@ -19641,7 +19624,7 @@
       if (limitCount) limitCount.textContent = currentLimit;
       if (limitSub) limitSub.textContent = 'Max 15 Patients';
 
-      setConsultType('video');
+      setConsultType(presetType || 'video');
       
       // Reset repeat days and weekly toggle so they are never auto-selected
       document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach(btn => btn.classList.remove('selected'));
@@ -20959,17 +20942,70 @@
         dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[count - 1]} (${count} Days)`;
       }
 
+      let clearedVideoPatients = 0;
+      let clearedInPersonPatients = 0;
       let totalBookings = 0;
       let totalShifts = 0;
+
       selectedClearDays.forEach(day => {
         const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
         totalShifts += shifts.length;
         shifts.forEach(s => {
-          totalBookings += (s.booked || 0);
+          const booked = s.booked || 0;
+          totalBookings += booked;
+          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
+          if (isVideo) {
+            clearedVideoPatients += booked;
+          } else {
+            clearedInPersonPatients += booked;
+          }
         });
       });
 
-      // Update Confirmation Sheet
+      // Check future available shifts in other non-cleared dates
+      let futureVideoShiftsCount = 0;
+      let futureInPersonShiftsCount = 0;
+
+      // Check remaining September dates (day 15 to 30)
+      for (let day = 15; day <= 30; day++) {
+        if (clearScheduleCurrentMonth === 8 && selectedClearDays.includes(day)) continue;
+        const shifts = getShiftsForDay(8, day);
+        shifts.forEach(s => {
+          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
+          if (isVideo) futureVideoShiftsCount++;
+          else futureInPersonShiftsCount++;
+        });
+      }
+
+      // Check remaining October dates (day 1 to 31)
+      for (let day = 1; day <= 31; day++) {
+        if (clearScheduleCurrentMonth === 9 && selectedClearDays.includes(day)) continue;
+        const shifts = getShiftsForDay(9, day);
+        shifts.forEach(s => {
+          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
+          if (isVideo) futureVideoShiftsCount++;
+          else futureInPersonShiftsCount++;
+        });
+      }
+
+      const videoNeedsShift = (clearedVideoPatients > 0 && futureVideoShiftsCount === 0);
+      const inPersonNeedsShift = (clearedInPersonPatients > 0 && futureInPersonShiftsCount === 0);
+
+      // If missing any upcoming shift types for booked patients, trigger the Smart Transfer Diagnosis Sheet
+      if (videoNeedsShift || inPersonNeedsShift) {
+        openMissingShiftTransferModal({
+          dateRangeStr,
+          clearedVideoPatients,
+          clearedInPersonPatients,
+          futureVideoShiftsCount,
+          futureInPersonShiftsCount,
+          videoNeedsShift,
+          inPersonNeedsShift
+        });
+        return;
+      }
+
+      // All types have future shifts -> Proceed to standard clear confirmation
       const datesRangeEl = document.getElementById('clearConfirmedDatesRange') || document.getElementById('offlineConfirmedDatesRange');
       const patientsCountEl = document.getElementById('clearConfirmedPatientsCount');
       const rescheduleBadgeEl = document.getElementById('clearConfirmedRescheduleBadge');
@@ -21005,6 +21041,86 @@
         const sheet2 = document.getElementById('clearScheduleConfirmedModalSheet') || document.getElementById('offlineConfirmedModalSheet');
         if (sheet2) sheet2.classList.add('active');
       }, 150);
+    }
+
+    function openMissingShiftTransferModal(info) {
+      const sheet1 = document.getElementById('clearScheduleModalSheet') || document.getElementById('goingOfflineSheet');
+      if (sheet1) sheet1.classList.remove('active');
+
+      const cardEl = document.getElementById('createShiftDiagnosisCard');
+      const btnEl = document.getElementById('btnCreateMissingShiftAction');
+      const btnLabel = document.getElementById('btnCreateMissingShiftLabel');
+
+      let rowsHtml = '';
+      if (info.clearedVideoPatients > 0) {
+        const isReady = (info.futureVideoShiftsCount > 0);
+        rowsHtml += `
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 0;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #0F172A;">
+              <i class="ph-fill ph-video-camera" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 16px;"></i>
+              <span>Video (${info.clearedVideoPatients} Patient${info.clearedVideoPatients > 1 ? 's' : ''})</span>
+            </div>
+            ${isReady 
+              ? `<span style="background: #EFF7F5; color: #0E8070; border: 1px solid rgba(126, 184, 174, 0.4); font-size: 11px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;"><i class="ph-bold ph-check"></i> Ready</span>`
+              : `<span style="background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; font-size: 11px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;"><i class="ph-bold ph-warning"></i> Needs Shift</span>`
+            }
+          </div>
+        `;
+      }
+
+      if (info.clearedInPersonPatients > 0) {
+        const isReady = (info.futureInPersonShiftsCount > 0);
+        const divider = rowsHtml ? `<div style="height: 1px; background: #E2E8F0; width: 100%;"></div>` : '';
+        rowsHtml += `
+          ${divider}
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 0;">
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #0F172A;">
+              <i class="ph-fill ph-buildings" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 16px;"></i>
+              <span>In-Person (${info.clearedInPersonPatients} Patient${info.clearedInPersonPatients > 1 ? 's' : ''})</span>
+            </div>
+            ${isReady 
+              ? `<span style="background: #EFF7F5; color: #0E8070; border: 1px solid rgba(126, 184, 174, 0.4); font-size: 11px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;"><i class="ph-bold ph-check"></i> Ready</span>`
+              : `<span style="background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A; font-size: 11px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px;"><i class="ph-bold ph-warning"></i> Needs Shift</span>`
+            }
+          </div>
+        `;
+      }
+
+      if (cardEl) cardEl.innerHTML = rowsHtml;
+
+      // Determine which shift creation to preset
+      let targetPreset = 'inperson';
+      let buttonText = '+ Create In-Person Shift';
+
+      if (info.inPersonNeedsShift && !info.videoNeedsShift) {
+        targetPreset = 'inperson';
+        buttonText = '+ Create In-Person Shift';
+      } else if (info.videoNeedsShift && !info.inPersonNeedsShift) {
+        targetPreset = 'video';
+        buttonText = '+ Create Video Shift';
+      } else {
+        targetPreset = 'video';
+        buttonText = '+ Add Upcoming Shift';
+      }
+
+      if (btnLabel) btnLabel.textContent = buttonText;
+      if (btnEl) btnEl.onclick = () => goToScheduleToAddShift(targetPreset);
+
+      setTimeout(() => {
+        const sheet2 = document.getElementById('createShiftToOfflineModalSheet');
+        if (sheet2) sheet2.classList.add('active');
+      }, 150);
+    }
+
+    function goToScheduleToAddShift(presetType = 'inperson') {
+      closeCreateShiftToOfflineModal();
+      closeClearScheduleModal();
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      navigateToSchedule();
+      setTimeout(() => {
+        openInPageShiftForm(presetType);
+      }, 250);
     }
 
     function finishClearScheduleConfirmation() {
