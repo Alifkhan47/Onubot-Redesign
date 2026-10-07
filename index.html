@@ -11995,7 +11995,7 @@
           <div style="display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px;">
             <button type="button" id="btnCreateMissingShiftAction" class="btn-sheet-confirm" style="width: 100%; height: 48px; min-height: 48px; border-radius: 100px; background: var(--color-primary-btn, #02241F); color: #ffffff; border: none; font-family: var(--font-heading); font-size: 14px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; box-shadow: 0 4px 14px rgba(2, 36, 31, 0.2);" onclick="goToScheduleToAddShift('inperson')">
               <i class="ph-bold ph-plus-circle" style="font-size: 17px;"></i>
-              <span id="btnCreateMissingShiftLabel">+ Create In-Person Shift</span>
+              <span id="btnCreateMissingShiftLabel">Create In-Person Shift</span>
             </button>
             <button type="button" class="btn-sheet-cancel" style="width: 100%; height: 44px; min-height: 44px; border-radius: 100px; margin: 0; font-family: var(--font-heading); font-size: 14px; font-weight: 700; flex-shrink: 0; background: var(--color-card-neutral, #f4f7f6); color: #475569; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;" onclick="closeCreateShiftModalAndReturnHome()">
               Cancel
@@ -21055,13 +21055,26 @@
       const btnEl = document.getElementById('btnCreateMissingShiftAction');
       const btnLabel = document.getElementById('btnCreateMissingShiftLabel');
 
-      let rowsHtml = '';
+      const totalBooked = (info.clearedVideoPatients || 0) + (info.clearedInPersonPatients || 0);
+
+      let cardHtml = `
+        <!-- Selected Dates Header Strip -->
+        <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 2px;">
+          <div style="display: flex; align-items: center; gap: 7px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #0F172A;">
+            <i class="ph-bold ph-calendar-blank" style="color: #0E8070; font-size: 16px;"></i>
+            <span>${info.dateRangeStr}</span>
+          </div>
+          <span style="background: #FEE2E2; color: #DC2626; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 6px; letter-spacing: 0.02em;">${totalBooked} BOOKED</span>
+        </div>
+        <div style="height: 1px; background: #E2E8F0; width: 100%;"></div>
+      `;
+
       if (info.clearedVideoPatients > 0) {
         const isReady = (info.futureVideoShiftsCount > 0);
-        rowsHtml += `
+        cardHtml += `
           <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 0;">
-            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #0F172A;">
-              <i class="ph-fill ph-video-camera" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 16px;"></i>
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #0F172A;">
+              <i class="ph-fill ph-video-camera" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 15px;"></i>
               <span>Video (${info.clearedVideoPatients} Patient${info.clearedVideoPatients > 1 ? 's' : ''})</span>
             </div>
             ${isReady 
@@ -21074,12 +21087,10 @@
 
       if (info.clearedInPersonPatients > 0) {
         const isReady = (info.futureInPersonShiftsCount > 0);
-        const divider = rowsHtml ? `<div style="height: 1px; background: #E2E8F0; width: 100%;"></div>` : '';
-        rowsHtml += `
-          ${divider}
+        cardHtml += `
           <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 0;">
-            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #0F172A;">
-              <i class="ph-fill ph-buildings" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 16px;"></i>
+            <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #0F172A;">
+              <i class="ph-fill ph-buildings" style="color: ${isReady ? '#0E8070' : '#D97706'}; font-size: 15px;"></i>
               <span>In-Person (${info.clearedInPersonPatients} Patient${info.clearedInPersonPatients > 1 ? 's' : ''})</span>
             </div>
             ${isReady 
@@ -21090,21 +21101,21 @@
         `;
       }
 
-      if (cardEl) cardEl.innerHTML = rowsHtml;
+      if (cardEl) cardEl.innerHTML = cardHtml;
 
       // Determine which shift creation to preset
       let targetPreset = 'inperson';
-      let buttonText = '+ Create In-Person Shift';
+      let buttonText = 'Create In-Person Shift';
 
       if (info.inPersonNeedsShift && !info.videoNeedsShift) {
         targetPreset = 'inperson';
-        buttonText = '+ Create In-Person Shift';
+        buttonText = 'Create In-Person Shift';
       } else if (info.videoNeedsShift && !info.inPersonNeedsShift) {
         targetPreset = 'video';
-        buttonText = '+ Create Video Shift';
+        buttonText = 'Create Video Shift';
       } else {
-        targetPreset = 'video';
-        buttonText = '+ Add Upcoming Shift';
+        targetPreset = 'inperson';
+        buttonText = 'Add Upcoming Shift';
       }
 
       if (btnLabel) btnLabel.textContent = buttonText;
@@ -21122,6 +21133,19 @@
       const backdrop = document.getElementById('modalBackdrop');
       if (backdrop) backdrop.classList.remove('active');
       navigateToSchedule();
+
+      // Automatically select the next upcoming date (e.g. Sept 16) in Schedule so doctor is ready to add shift
+      const maxClearedDay = Math.max(...(selectedClearDays.length > 0 ? selectedClearDays : [15]));
+      const targetDay = Math.min(30, maxClearedDay + 1);
+      const targetPill = document.getElementById(`datePill_Sept_${targetDay}`);
+      const dayNames = ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+      const dayIdx = (targetDay - 15) % 7;
+      const targetDateText = `${dayNames[dayIdx]}, Sept ${targetDay}`;
+      
+      if (targetPill) {
+        selectDate(targetPill, targetDateText, false);
+      }
+
       setTimeout(() => {
         openInPageShiftForm(presetType);
       }, 250);
