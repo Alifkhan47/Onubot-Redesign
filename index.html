@@ -17,9 +17,9 @@
 
   <style>
     :root {
-      /* Brand Color Tokens (Strict Master Spec) */
-      --color-primary-btn: #052E28;          /* Main button & dark primary CTA */
-      --color-primary-btn-hover: #031F1B;
+      /* Brand Color Tokens (Strict Master Spec - Darker Rich Primary) */
+      --color-primary-btn: #02241F;          /* Main button & dark primary CTA */
+      --color-primary-btn-hover: #011714;
       --color-card-sage: #D6EAE6;            /* Hero card, calendar tile, pastel accents */
       --color-border-selected: #7EB8AE;      /* Soft, calming, noticeable selection border */
       --color-text-primary: #000000;         /* Primary headings, titles & key metrics */
@@ -321,6 +321,67 @@
       gap: 10px;
     }
 
+    /* Schedule Action Card + Clear Schedule Button */
+    .schedule-action-card {
+      flex: 1;
+      height: 60px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      box-sizing: border-box;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .schedule-action-card:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+
+    .schedule-action-title {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .schedule-action-caret {
+      font-size: 16px;
+      color: #64748B;
+    }
+
+    .btn-clear-schedule-action {
+      width: 60px;
+      height: 60px;
+      min-width: 60px;
+      max-width: 60px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #0F172A;
+      font-size: 22px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      box-sizing: border-box;
+      padding: 0;
+    }
+
+    .btn-clear-schedule-action:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      transform: translateY(-1px);
+    }
+
     .accepting-patients-card {
       flex: 1;
       background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
@@ -461,7 +522,7 @@
     .section-title {
       font-family: var(--font-heading);
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--color-text-primary);
       letter-spacing: -0.02em;
       line-height: 1.2;
@@ -487,8 +548,8 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1.5px solid rgba(126, 184, 174, 0.4);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 20px;
+      padding: 18px 18px 18px;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -521,16 +582,78 @@
       color: var(--color-text-secondary);
     }
 
+    .patient-hero-card.no-shift-card {
+      background: #FFFFFF;
+      border: 1.5px solid rgba(2, 36, 31, 0.22);
+      box-shadow: 0 4px 20px -2px rgba(2, 36, 31, 0.04);
+      padding: 20px 18px 18px;
+    }
+
     .card-badge-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
+    }
+
+    .patient-hero-card.inperson-card {
+      background: linear-gradient(135deg, rgba(240, 246, 255, 0.95) 0%, rgba(224, 238, 254, 0.82) 100%);
+      border-color: rgba(147, 197, 253, 0.65);
+      box-shadow: 0 4px 20px -2px rgba(29, 78, 216, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+    }
+
+    .patient-hero-card.inperson-card .badge-pill-light {
+      background: rgba(219, 234, 254, 0.9);
+      color: #1D4ED8;
+    }
+
+    .patient-hero-card.inperson-card .badge-pill-status {
+      background: rgba(219, 234, 254, 0.9);
+      color: #1D4ED8;
+    }
+
+    .patient-hero-card.inperson-card .patient-info {
+      color: #3B5B84;
+    }
+
+    .patient-hero-card.inperson-card .btn-hero-action {
+      background: #0B2238;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(11, 34, 56, 0.3);
+    }
+
+    .patient-hero-card.inperson-card .btn-hero-action:hover {
+      background: #071930;
+    }
+
+    .shift-type-indicator {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      display: inline-flex;
+      align-items: center;
+      margin-left: 2px;
+    }
+
+    .shift-type-indicator.shift-badge-video {
+      background: #EFF7F5;
+      color: #0E8070;
+      border: 1px solid rgba(126, 184, 174, 0.4);
+    }
+
+    .shift-type-indicator.shift-badge-inperson {
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #BFDBFE;
     }
 
     .badge-pill-light {
       background: var(--color-badge-bg);
-      padding: 4px 12px;
+      padding: 5px 12px;
       border-radius: 8px;
       font-family: var(--font-heading);
       font-size: 12.5px;
@@ -545,7 +668,7 @@
 
     .badge-pill-status {
       background: var(--color-badge-bg);
-      padding: 4px 12px;
+      padding: 5px 12px;
       border-radius: 8px;
       font-family: var(--font-body);
       font-size: 12.5px;
@@ -559,7 +682,7 @@
     }
 
     .patient-details {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .patient-name {
@@ -568,13 +691,13 @@
       font-weight: 700;
       color: var(--color-text-primary);
       letter-spacing: -0.02em;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     .patient-info {
       font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--color-text-secondary);
+      font-size: 13.5px;
+      color: #4A635E;
       font-weight: 400;
       display: flex;
       align-items: center;
@@ -590,16 +713,16 @@
       background: var(--color-primary-btn);
       color: #ffffff;
       border: none;
-      border-radius: 12px;
-      height: 48px;
+      border-radius: 14px;
+      height: 46px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
       font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 14.5px;
+      font-weight: 700;
       letter-spacing: -0.01em;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.15s ease;
@@ -716,7 +839,7 @@
       padding: 0 16px;
       font-family: var(--font-heading);
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--color-primary-btn);
       cursor: pointer;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
@@ -939,9 +1062,9 @@
     }
 
     .date-pill.active {
-      background: #052E28 !important;
-      border-color: #052E28 !important;
-      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.25);
+      background: var(--color-primary-btn, #02241F) !important;
+      border-color: var(--color-primary-btn, #02241F) !important;
+      box-shadow: none !important;
     }
 
     .date-day-name {
@@ -1019,13 +1142,13 @@
 
     .saved-shift-card {
       background: #FFFFFF;
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      border: 1px solid #E2E8F0;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      border: 1.5px solid #E2E8F0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
       flex-shrink: 0;
       transition: all 0.18s ease;
     }
@@ -1038,15 +1161,15 @@
     .saved-shift-top {
       display: flex;
       align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
     }
 
     .shift-name-chip {
       background: #F1F5F9;
-      border: 1px solid #CBD5E1;
+      border: 1px solid #E2E8F0;
       padding: 4px 10px;
-      border-radius: 20px;
+      border-radius: 8px;
       font-family: var(--font-heading);
       font-size: 11.5px;
       font-weight: 800;
@@ -1059,28 +1182,37 @@
     }
 
     .shift-type-pill {
-      background: #E6F5F2;
-      border: 1px solid #A3D9CE;
-      padding: 4px 12px;
-      border-radius: 20px;
+      padding: 4px 10px;
+      border-radius: 8px;
       font-family: var(--font-heading);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: #0E8070;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
+    }
+
+    .shift-type-pill.tag-video {
+      background: #EFF7F5;
+      border: 1px solid #B8E2DC;
+      color: #0E8070;
+    }
+
+    .shift-type-pill.tag-inperson {
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      color: #4F46E5;
     }
 
     .saved-shift-main {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
     }
 
     .saved-shift-time {
       font-family: var(--font-heading);
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       color: #0F172A;
       letter-spacing: -0.01em;
@@ -1117,16 +1249,17 @@
       display: flex;
       gap: 8px;
       align-items: center;
+      margin-top: 2px;
     }
 
     .btn-shift-edit {
       flex: 1;
-      height: 42px;
-      background: #F1F5F9;
-      border: none;
-      border-radius: 12px;
+      height: 40px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #1E293B;
       display: flex;
@@ -1138,26 +1271,28 @@
     }
 
     .btn-shift-edit:hover {
-      background: #E2E8F0;
+      background: #F1F5F9;
+      border-color: #CBD5E1;
     }
 
     .btn-shift-delete {
-      width: 42px;
-      height: 42px;
-      background: #FEE2E2;
-      border: none;
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      background: #FEF2F2;
+      border: 1px solid #FEE2E2;
+      border-radius: 10px;
       color: #EF4444;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 16px;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .btn-shift-delete:hover {
-      background: #FECACA;
+      background: #FEE2E2;
+      border-color: #FECACA;
     }
 
     /* Month Calendar Modal Bottom Sheet Styles */
@@ -1292,9 +1427,9 @@
     }
 
     .month-cal-cell.active {
-      background: var(--color-primary-btn) !important;
-      border-color: var(--color-primary-btn) !important;
-      box-shadow: 0 4px 12px rgba(5, 46, 40, 0.25);
+      background: var(--color-primary-btn, #02241F) !important;
+      border-color: var(--color-primary-btn, #02241F) !important;
+      box-shadow: none !important;
     }
 
     .month-cal-cell.active .cal-cell-num {
@@ -1313,32 +1448,29 @@
       display: flex;
       gap: 4px;
       align-items: center;
+      justify-content: center;
       margin-top: auto;
       min-height: 6px;
     }
 
     .cal-dot {
-      width: 6px;
-      height: 6px;
+      width: 5.5px;
+      height: 5.5px;
       border-radius: 50%;
+      background: #4F86E8 !important;
       display: inline-block !important;
       flex-shrink: 0;
     }
 
-    .cal-dot.dot-shift {
-      background: #48BB95 !important;
-    }
-
+    .cal-dot.dot-shift,
     .cal-dot.dot-booked {
-      background: #F6A84B !important;
+      background: #4F86E8 !important;
     }
 
-    .month-cal-cell.active .cal-dot.dot-shift {
-      background: #5EEAD4 !important;
-    }
-
+    .month-cal-cell.active .cal-dot,
+    .month-cal-cell.active .cal-dot.dot-shift,
     .month-cal-cell.active .cal-dot.dot-booked {
-      background: #FDE047 !important;
+      background: #93C5FD !important;
     }
 
     .month-cal-legend {
@@ -1364,6 +1496,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
+      background: #4F86E8;
       display: inline-block;
     }
 
@@ -1538,12 +1671,10 @@
       margin-top: 3px;
     }
 
-    .date-pill.active .cal-dot.dot-shift {
-      background: #5EEAD4 !important;
-    }
-
+    .date-pill.active .cal-dot,
+    .date-pill.active .cal-dot.dot-shift,
     .date-pill.active .cal-dot.dot-booked {
-      background: #FDE047 !important;
+      background: #93C5FD !important;
     }
 
     .offline-date-card.empty {
@@ -1554,7 +1685,15 @@
       visibility: hidden !important;
     }
 
-    .offline-date-card:hover:not(.selected) {
+    .offline-date-card.no-shift-disabled {
+      opacity: 0.35 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+      background: #F8FAFC !important;
+      border-color: #E2E8F0 !important;
+    }
+
+    .offline-date-card:hover:not(.selected):not(.no-shift-disabled) {
       background: #F0F6F4;
       border-color: #B2D7D0;
       transform: translateY(-1px);
@@ -1610,6 +1749,10 @@
     .offline-date-card.selected .off-card-num {
       color: #BE123C !important;
       font-weight: 800;
+    }
+
+    .offline-date-card.selected .cal-dot {
+      background: #FB7185 !important;
     }
 
     .offline-summary-bar {
@@ -3245,7 +3388,7 @@
     .sheet-actions-group {
       display: flex;
       gap: 10px;
-      margin-top: 2px;
+      margin-top: 24px;
     }
 
     .btn-sheet-cancel {
@@ -4068,6 +4211,141 @@
       text-transform: uppercase;
     }
 
+    /* Scan Written Prescription Banner (Top of In-Person Consultation Wrap Up) */
+    .scan-rx-banner {
+      background: #EFF7F5;
+      border: 1px solid rgba(126, 184, 174, 0.45);
+      border-radius: 18px;
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-sizing: border-box;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .scan-rx-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-scan-main {
+      flex: 1;
+      height: 48px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(14, 128, 112, 0.25);
+      border-radius: 12px;
+      color: #0E8070;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: all 0.18s ease;
+    }
+
+    .btn-scan-main:hover {
+      background: #F8FCFB;
+      border-color: #0E8070;
+      transform: translateY(-1px);
+    }
+
+    .btn-scan-main:active {
+      transform: scale(0.98);
+    }
+
+    .btn-scan-gallery {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: #FFFFFF;
+      border: 1.5px solid rgba(14, 128, 112, 0.25);
+      border-radius: 12px;
+      color: #64748B;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: all 0.18s ease;
+    }
+
+    .btn-scan-gallery:hover {
+      color: #0E8070;
+      border-color: #0E8070;
+    }
+
+    .btn-scan-gallery:active {
+      transform: scale(0.95);
+    }
+
+    .scan-rx-hint {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #64748B;
+      margin: 0;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .scan-processing-box {
+      width: 100%;
+      height: 48px;
+      background: #FFFFFF;
+      border: 1.5px solid #0E8070;
+      border-radius: 12px;
+      color: #0E8070;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .scan-spin-icon {
+      animation: scanSpin 1s infinite linear;
+      font-size: 18px;
+    }
+
+    @keyframes scanSpin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Review Empty Tiles (No Medicines / No Tests Given) */
+    .review-empty-tile {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      text-align: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .review-empty-text {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
     .chief-complaint-card {
       background: var(--color-card-neutral);
       border-radius: 16px;
@@ -4079,7 +4357,15 @@
       color: #334155;
       position: relative;
       outline: none;
+      min-height: 72px;
       transition: all 0.2s ease;
+    }
+
+    .chief-complaint-card:empty::before {
+      content: attr(data-placeholder);
+      color: #94A3B8;
+      font-weight: 400;
+      pointer-events: none;
     }
 
     .chief-complaint-card:focus,
@@ -5464,6 +5750,18 @@
       color: #D97706;
     }
 
+    .appt-serial-box.status-requeued {
+      background: #FFFBEB;
+      border-color: #FDE68A;
+      color: #D97706;
+    }
+
+    .appt-serial-box.status-absent {
+      background: #FEF2F2;
+      border-color: #FECACA;
+      color: #DC2626;
+    }
+
     .appt-serial-box.status-in-call {
       background: var(--color-card-sage);
       border-color: var(--color-border-selected);
@@ -5536,6 +5834,18 @@
       border: 1px solid #FECACA;
     }
 
+    .appt-status-badge.absent {
+      background: #FEF2F2;
+      color: #DC2626;
+      border: 1px solid #FECACA;
+    }
+
+    .appt-status-badge.current-turn {
+      background: #EFF7F5;
+      color: #0E8070;
+      border: 1px solid rgba(126, 184, 174, 0.5);
+    }
+
     .appt-status-badge.in-call {
       background: var(--color-card-sage);
       color: var(--color-primary-btn);
@@ -5565,9 +5875,11 @@
        ============================================================ */
     .app-page.page-appointment-details {
       background: var(--color-app-bg);
-      padding: 12px 20px 30px 20px;
+      padding: 12px 20px 0 20px;
       display: flex;
       flex-direction: column;
+      min-height: 100%;
+      box-sizing: border-box;
       gap: var(--spacing-section); /* Strict 24px between major sections */
       z-index: 21;
     }
@@ -5799,7 +6111,7 @@
       flex-direction: column;
       gap: var(--spacing-section); /* Strict 24px between different sections */
       width: 100%;
-      flex-shrink: 0;
+      flex: 1;
     }
 
     .details-clean-section {
@@ -6125,9 +6437,10 @@
     /* Fixed Sticky Bottom Action Dock for Details */
     .details-bottom-dock {
       position: sticky;
-      bottom: -30px;
-      margin: 16px -20px -30px -20px;
-      background: rgba(255, 255, 255, 0.96);
+      bottom: 0;
+      margin: 16px -20px 0 -20px;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.98);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       padding: 14px 20px 24px 20px;
@@ -6168,6 +6481,95 @@
 
     .btn-dock-primary:active {
       transform: scale(0.98);
+    }
+
+    /* In-Person Chamber Shift Bottom Dock (Absent, Skip, End Consultation) */
+    .in-person-action-dock {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-inperson-absent {
+      flex: 1;
+      height: 48px;
+      border-radius: 14px;
+      background: #FEF2F2;
+      border: 1.5px solid #FECACA;
+      color: #DC2626;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-inperson-absent:hover {
+      background: #FEE2E2;
+      border-color: #FCA5A5;
+    }
+
+    .btn-inperson-absent:active {
+      transform: scale(0.97);
+    }
+
+    .btn-inperson-skip {
+      flex: 1;
+      height: 48px;
+      border-radius: 14px;
+      background: #FFFBEB;
+      border: 1.5px solid #FDE68A;
+      color: #B45309;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .btn-inperson-skip:hover {
+      background: #FEF3C7;
+      border-color: #FCD34D;
+    }
+
+    .btn-inperson-skip:active {
+      transform: scale(0.97);
+    }
+
+    .btn-inperson-end {
+      flex: 1.7;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--color-primary-btn, #02241F);
+      border: none;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(2, 36, 31, 0.18);
+      transition: all 0.18s ease;
+    }
+
+    .btn-inperson-end:hover {
+      background: var(--color-primary-btn-hover);
+    }
+
+    .btn-inperson-end:active {
+      transform: scale(0.97);
     }
 
     /* ============================================================
@@ -9827,7 +10229,7 @@
         <!-- 1. Top Status Bar -->
         <div class="status-bar">
           <div class="status-time" id="statusClockTime" onclick="toggleDemoShiftLockState()" title="Tap to toggle between 8:22 AM (Locked) and 8:58 AM (Unlocked)">8:22</div>
-          <div class="status-icons">
+          <div class="status-icons" onclick="toggleDemoShiftType()" style="cursor: pointer;" title="Tap to switch between Video and In-Person shift">
             <i class="ph ph-cell-signal-full"></i>
             <i class="ph ph-wifi-high"></i>
             <i class="ph ph-battery-full"></i>
@@ -9920,17 +10322,14 @@
                 </button>
               </div>
 
-              <!-- Accepting Patients & Calendar Row -->
+              <!-- Top Desk Action Row: Schedule Action Card + Clear Schedule Button -->
               <div class="quick-status-row">
-                <div class="accepting-patients-card" onclick="triggerToggleClick()">
-                  <span class="accepting-patients-label" id="toggleLabel">Accepting Patients</span>
-                  <label class="toggle-container" onclick="event.stopPropagation()">
-                    <input type="checkbox" checked class="toggle-checkbox" id="acceptingToggle" onchange="onToggleChange(this)">
-                    <span class="toggle-slider"></span>
-                  </label>
+                <div class="schedule-action-card" onclick="navigateToSchedule()" role="button" tabindex="0" aria-label="Schedule">
+                  <span class="schedule-action-title">Schedule</span>
+                  <i class="ph ph-caret-right schedule-action-caret"></i>
                 </div>
-                <button class="calendar-action-btn" onclick="navigateToSchedule()" aria-label="Edit Shift & Schedule">
-                  <i class="ph ph-calendar-blank"></i>
+                <button type="button" class="btn-clear-schedule-action" id="btnClearScheduleAction" onclick="openClearScheduleModal()" aria-label="Clear Schedule">
+                  <i class="ph ph-calendar-x"></i>
                 </button>
               </div>
             </div>
@@ -10087,13 +10486,13 @@
                 <div class="form-field-group inpage-field-group" id="applyOtherDaysGroup" style="margin-bottom: 0;">
                   <div class="field-label-subtle">Repeat on other days</div>
                   <div class="days-picker-row inpage-days-row">
-                    <button type="button" class="day-chip-btn selected" onclick="toggleDayPicker(this)">S</button>
+                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">S</button>
                     <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">M</button>
                     <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">T</button>
-                    <button type="button" class="day-chip-btn selected" onclick="toggleDayPicker(this)">W</button>
-                    <button type="button" class="day-chip-btn selected" onclick="toggleDayPicker(this)">T</button>
+                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">W</button>
+                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">T</button>
                     <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">F</button>
-                    <button type="button" class="day-chip-btn selected" onclick="toggleDayPicker(this)">S</button>
+                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">S</button>
                   </div>
                 </div>
 
@@ -10116,7 +10515,7 @@
                     <span class="repeat-subtitle">Every week on selected days</span>
                   </div>
                   <label class="toggle-container">
-                    <input type="checkbox" checked class="toggle-checkbox" id="repeatWeeklyToggle">
+                    <input type="checkbox" class="toggle-checkbox" id="repeatWeeklyToggle">
                     <span class="toggle-slider"></span>
                   </label>
                 </div>
@@ -10289,16 +10688,30 @@
               <h1 class="page-top-title">Consultation Wrap Up</h1>
             </div>
 
-            <!-- Section 1: Chief Complaint (AI Summarized) -->
+            <!-- Top Scan Written Prescription Banner (In-Person Chamber Consultations) -->
+            <div class="scan-rx-banner" id="scanRxBanner">
+              <div class="scan-rx-actions-row">
+                <button type="button" class="btn-scan-main" onclick="triggerScanWrittenPrescription()">
+                  <i class="ph-bold ph-camera"></i>
+                  <span>Scan Written Prescription</span>
+                </button>
+                <button type="button" class="btn-scan-gallery" onclick="triggerScanWrittenPrescription()" aria-label="Upload Rx Image">
+                  <i class="ph ph-image"></i>
+                </button>
+              </div>
+              <p class="scan-rx-hint">Take a photo or upload your handwritten pad to digitize it instantly.</p>
+            </div>
+
+            <!-- Section 1: Chief Complaint -->
             <section class="review-section">
               <div class="review-section-header">
                 <h2 class="review-section-title">Chief Complaint</h2>
-                <span class="ai-sparkle-tag">
+                <span class="ai-sparkle-tag" id="chiefComplaintSparkle">
                   <i class="ph ph-sparkle"></i>
                   AI Generated
                 </span>
               </div>
-              <div class="chief-complaint-card" id="chiefComplaintText" contenteditable="true" spellcheck="false">
+              <div class="chief-complaint-card" id="chiefComplaintText" contenteditable="true" spellcheck="false" data-placeholder="Write consultation summary...">
                 A moderate headache that has been present for about 1 week, located at the back of my head. It affects my daily life moderately, especially during screen usage.
               </div>
             </section>
@@ -11440,36 +11853,36 @@
           
           <!-- Top Row: Badge Icon + Circular Close Button -->
           <div class="sheet-top-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-            <div class="sheet-badge-icon" style="background: #FEF3C7; color: #D97706; border: 1.5px solid #FDE68A;">
-              <i class="ph ph-power"></i>
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #02241F; border: 1.5px solid rgba(126, 184, 174, 0.4); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+              <i class="ph ph-calendar-x"></i>
             </div>
-            <button type="button" class="btn-circle-icon" onclick="closeGoingOfflineModal()" aria-label="Close Offline Modal">
+            <button type="button" class="btn-circle-icon" onclick="closeClearScheduleModal()" aria-label="Close Clear Schedule">
               <i class="ph ph-x"></i>
             </button>
           </div>
 
-          <!-- Hero Editorial Header with Big Texts -->
+          <!-- Hero Editorial Header -->
           <div class="sheet-hero-header" style="margin-bottom: 8px;">
-            <h2 class="sheet-editorial-title">Go Offline</h2>
-            <p class="sheet-minimal-subtitle">Select the dates to pause visits and notify patients.</p>
+            <h2 class="sheet-editorial-title">Clear Schedule</h2>
+            <p class="sheet-minimal-subtitle" style="font-size: 13px; color: #64748B; margin-top: 2px;">Select dates to clear. Booked patients will auto-reschedule.</p>
           </div>
 
           <!-- Month & View Toggle Row -->
           <div class="offline-month-row" style="margin-top: 4px; margin-bottom: 14px;">
             <div class="offline-month-title-wrap">
-              <span class="offline-month-name" id="offlineMonthLabel">Sept 2026</span>
-              <button type="button" class="btn-offline-month-nav" id="btnOfflineMonthNav" onclick="toggleOfflineMonthNav()" title="Switch Month" aria-label="Switch Month">
-                <i class="ph ph-caret-right" id="offlineMonthNavIcon"></i>
+              <span class="offline-month-name" id="clearScheduleMonthLabel">Sept 2026</span>
+              <button type="button" class="btn-offline-month-nav" id="btnClearScheduleMonthNav" onclick="toggleClearScheduleMonthNav()" title="Switch Month" aria-label="Switch Month">
+                <i class="ph ph-caret-right" id="clearScheduleMonthNavIcon"></i>
               </button>
             </div>
-            <button type="button" class="btn-offline-view-toggle" id="btnOfflineViewToggle" onclick="toggleOfflineViewMode()">
-              <i class="ph ph-calendar-blank" id="offlineViewToggleIcon"></i>
-              <span id="offlineViewToggleLabel">Month View</span>
+            <button type="button" class="btn-offline-view-toggle" id="btnClearScheduleViewToggle" onclick="toggleClearScheduleViewMode()">
+              <i class="ph ph-calendar-blank" id="clearScheduleViewToggleIcon"></i>
+              <span id="clearScheduleViewToggleLabel">Month View</span>
             </button>
           </div>
 
-          <!-- Weekday Columns: SUN MON TUE WED THU FRI SAT (Standard Sunday-First Calendar for Month View) -->
-          <div class="offline-cal-weekdays" id="offlineCalWeekdaysHeader" style="display: none;">
+          <!-- Weekday Columns (Month View) -->
+          <div class="offline-cal-weekdays" id="clearScheduleCalWeekdaysHeader" style="display: none;">
             <span>SUN</span>
             <span>MON</span>
             <span>TUE</span>
@@ -11479,84 +11892,79 @@
             <span>SAT</span>
           </div>
 
-          <!-- Dynamic Date Selection Grid (Week / Month view) with Spacious Cards -->
-          <div class="offline-dates-container" id="offlineDatesContainer">
-            <!-- Dynamically populated by renderOfflineDaysGrid() -->
+          <!-- Dynamic Date Selection Grid -->
+          <div class="offline-dates-container" id="clearScheduleDatesContainer">
+            <!-- Dynamically populated by renderClearScheduleDaysGrid() -->
           </div>
 
-          <!-- Dot Status Legend for Offline Month View -->
-          <div class="offline-cal-legend" id="offlineCalLegend" style="display: none;">
+          <!-- Dot Status Legend -->
+          <div class="offline-cal-legend" id="clearScheduleCalLegend" style="display: none;">
             <div class="cal-legend-item">
-              <span class="cal-legend-dot dot-shift"></span>
-              <span>Empty Shift</span>
-            </div>
-            <div class="cal-legend-item">
-              <span class="cal-legend-dot dot-booked"></span>
-              <span>Booked Shift</span>
+              <span class="cal-legend-dot" style="background: #4F86E8;"></span>
+              <span>Shift Scheduled</span>
             </div>
           </div>
 
           <!-- Impact Summary Bar -->
           <div class="offline-summary-bar">
-            <span class="offline-days-marked-label" id="offlineDaysMarkedLabel">0 Days Marked Off</span>
-            <span class="offline-bookings-affected-label zero-affected" id="offlineBookingsAffectedLabel">0 Bookings Affected</span>
+            <span class="offline-days-marked-label" id="clearDaysMarkedLabel">0 Days Selected</span>
+            <span class="offline-bookings-affected-label zero-affected" id="clearBookingsAffectedLabel">0 Bookings Affected</span>
           </div>
 
-          <!-- Actions Row: Cancel & Confirm Offline -->
+          <!-- Actions Row -->
           <div class="offline-actions-row">
-            <button type="button" class="btn-offline-cancel" onclick="closeGoingOfflineModal()">Cancel</button>
-            <button type="button" class="btn-offline-confirm" id="btnConfirmOffline" onclick="confirmGoingOffline()" disabled>
-              <span>Confirm Offline</span>
+            <button type="button" class="btn-offline-cancel" onclick="closeClearScheduleModal()">Cancel</button>
+            <button type="button" class="btn-offline-confirm" id="btnConfirmClearSchedule" onclick="confirmClearScheduleAction()" disabled>
+              <span>Clear Schedule</span>
             </button>
           </div>
         </div>
 
         <!-- =======================================================
-             4B. OFFLINE CONFIRMED & PATIENTS RESCHEDULED BOTTOM SHEET MODAL
+             4B. CLEAR SCHEDULE CONFIRMED & AUTO-RESCHEDULE BOTTOM SHEET MODAL
              ======================================================= -->
-        <div class="bottom-sheet" id="offlineConfirmedModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 32px; z-index: 150;">
+        <div class="bottom-sheet" id="clearScheduleConfirmedModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 32px; z-index: 150;">
           <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
           
-          <!-- Hero Icon with Dual Badge (Power / Offline + Success Check) -->
-          <div class="offline-success-hero-badge">
-            <div class="offline-hero-icon-circle">
-              <i class="ph-bold ph-power"></i>
-            </div>
-            <div class="offline-hero-sub-badge">
+          <!-- Hero Icon Badge -->
+          <div class="offline-success-hero-badge" style="display: flex; justify-content: center; margin-bottom: 12px;">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #0E8070; border: 1.5px solid rgba(126, 184, 174, 0.4); width: 50px; height: 50px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 24px;">
               <i class="ph-bold ph-check"></i>
             </div>
           </div>
 
-          <!-- Hero Editorial Header with Big Texts -->
-          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 20px;">
-            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0;">You are now Offline</h2>
+          <!-- Hero Editorial Header -->
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 14px;">
+            <h2 class="sheet-editorial-title" style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px;">Schedule Cleared</h2>
+            <p style="font-size: 13px; color: #64748B; margin: 0 0 14px;">All shifts removed & patients auto-rescheduled.</p>
+
+            <!-- Structured Status Summary Card -->
+            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #0F172A;">
+                  <i class="ph-fill ph-calendar" style="color: #0E8070; font-size: 16px;"></i>
+                  <span id="clearConfirmedDatesRange">Sept 15 (1 Day)</span>
+                </div>
+                <span style="background: #FEE2E2; color: #DC2626; font-size: 10.5px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; letter-spacing: 0.02em;">CLEARED</span>
+              </div>
+              <div style="height: 1px; background: #E2E8F0; width: 100%;"></div>
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 600; color: #334155;">
+                  <i class="ph-fill ph-users" style="color: #0E8070; font-size: 15px;"></i>
+                  <span id="clearConfirmedPatientsCount">4 Patients</span>
+                </div>
+                <span id="clearConfirmedRescheduleBadge" style="background: #EFF7F5; color: #0E8070; border: 1px solid rgba(126, 184, 174, 0.4); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.01em;">Rescheduled</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Minimal Unified Info Tile -->
-          <div class="offline-minimal-summary-card">
-            <div class="offline-summary-row">
-              <div class="offline-summary-row-left">
-                <i class="ph-bold ph-calendar-blank"></i>
-                <span id="offlineConfirmedDatesRange">Sept 15 – 16 (2 Days)</span>
-              </div>
-              <span class="offline-badge-pill">
-                <i class="ph-fill ph-circle"></i> Offline
-              </span>
-            </div>
-            <div class="offline-summary-divider"></div>
-            <div class="offline-summary-row">
-              <div class="offline-summary-row-left text-rescheduled">
-                <i class="ph-bold ph-arrows-clockwise"></i>
-                <span id="offlineConfirmedRescheduleShort">11 patients auto-rescheduled</span>
-              </div>
-            </div>
+          <!-- Primary Full Width CTA: Done -->
+          <div class="sheet-actions-group" style="margin-top: 16px;">
+            <button type="button" class="btn-sheet-confirm" style="width: 100%; flex: 1; height: 48px; border-radius: 100px; background: var(--color-primary-btn, #02241F); border: none; font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #ffffff; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;" onclick="finishClearScheduleConfirmation()">
+              <i class="ph-bold ph-check"></i>
+              <span>Done</span>
+            </button>
           </div>
-
-          <!-- Primary Full Width CTA: Back to Desk -->
-          <button type="button" class="btn-offline-success-desk" onclick="closeOfflineConfirmedModalAndReturn()">
-            <span>Back To Desk</span>
-            <i class="ph-bold ph-arrow-right"></i>
-          </button>
         </div>
 
         <!-- =======================================================
@@ -11653,12 +12061,8 @@
           <!-- Legend at Bottom -->
           <div class="month-cal-legend">
             <div class="cal-legend-item">
-              <span class="cal-legend-dot dot-shift"></span>
-              <span>Empty Shift</span>
-            </div>
-            <div class="cal-legend-item">
-              <span class="cal-legend-dot dot-booked"></span>
-              <span>Booked Shift</span>
+              <span class="cal-legend-dot" style="background: #4F86E8;"></span>
+              <span>Shift Scheduled</span>
             </div>
           </div>
         </div>
@@ -12156,6 +12560,81 @@
             <button type="button" class="btn-sheet-warning-confirm" onclick="confirmSkipPatientAction()">
               <i class="ph ph-fast-forward"></i>
               <span>Skip Patient</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             11B. IN-PERSON PATIENT ABSENT CONFIRMATION MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="inPersonAbsentModalSheet" style="z-index: 150;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon danger-badge" style="background: #FEF2F2; color: #DC2626; border-color: #FECACA;">
+              <i class="ph-bold ph-user-minus"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" id="inPersonAbsentTitle">Mark Absent?</h2>
+            <p class="sheet-minimal-subtitle" id="inPersonAbsentSubtitle">Record patient as absent for today's queue.</p>
+          </div>
+
+          <div class="sheet-actions-group">
+            <button type="button" class="btn-sheet-cancel" onclick="closeInPersonAbsentModal()">Cancel</button>
+            <button type="button" class="btn-sheet-danger-confirm" onclick="confirmInPersonAbsentAction()">
+              <i class="ph-bold ph-user-minus"></i>
+              <span>Confirm Absent</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             11C. IN-PERSON PATIENT SKIP & RE-QUEUE CONFIRMATION MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="inPersonSkipModalSheet" style="z-index: 150;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon warning-badge" style="background: #FFFBEB; color: #D97706; border-color: #FDE68A;">
+              <i class="ph-bold ph-arrow-u-down-right"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" id="inPersonSkipTitle">Skip Patient?</h2>
+            <p class="sheet-minimal-subtitle" id="inPersonSkipSubtitle">Move patient to the end of today's queue.</p>
+          </div>
+
+          <div class="sheet-actions-group">
+            <button type="button" class="btn-sheet-cancel" onclick="closeInPersonSkipModal()">Cancel</button>
+            <button type="button" class="btn-sheet-warning-confirm" onclick="confirmInPersonSkipAction()">
+              <i class="ph-bold ph-arrow-u-down-right"></i>
+              <span>Skip & Re-queue</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             11D. IN-PERSON END CONSULTATION & WRAP UP CONFIRMATION MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="inPersonEndConsultModalSheet" style="z-index: 150;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #0E8070; border-color: rgba(126, 184, 174, 0.4);">
+              <i class="ph-bold ph-stethoscope"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" id="inPersonEndConsultTitle">End Consultation?</h2>
+            <p class="sheet-minimal-subtitle" id="inPersonEndConsultSubtitle">Finish chamber visit and proceed to prescription.</p>
+          </div>
+
+          <div class="sheet-actions-group">
+            <button type="button" class="btn-sheet-cancel" onclick="closeInPersonEndConsultModal()">Cancel</button>
+            <button type="button" class="btn-sheet-confirm" style="background: var(--color-primary-btn, #02241F); color: #FFFFFF;" onclick="confirmInPersonEndConsultAction()">
+              <i class="ph-bold ph-check"></i>
+              <span>End Session</span>
             </button>
           </div>
         </div>
@@ -12875,13 +13354,20 @@
     let apptFilters = { date: 'today', customDate: null, type: 'all' };
     let tempApptFilters = { date: 'today', customDate: null, type: 'all' };
 
+    let currentActiveShiftId = 1; // 1 = Shift 1 (Video), 2 = Shift 2 (In-Person)
+    let inPersonPatientIndex = 0;
+    let pendingInPersonActionApptId = null;
+    let isInPersonReviewMode = false;
+
     const queuePatients = [
-      { serial: '#1', name: 'Tariqul Islam', age: 34, gender: 'Male', subtitle: '34 Yrs • Male', phone: '+880 1712-345678', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80' },
-      { serial: '#2', name: 'Farzana Khan', age: 31, gender: 'Female', subtitle: '31 Yrs • Female', phone: '+880 1879-948271', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80' },
-      { serial: '#3', name: 'Nusrat Jahan', age: 26, gender: 'Female', subtitle: '26 Yrs • Female', phone: '+880 1911-223344', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80' },
-      { serial: '#4', name: 'Farhan Hossain', age: 28, gender: 'Male', subtitle: '28 Yrs • Male', phone: '+880 1622-556677', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80' },
-      { serial: '#5', name: 'Moushumi Akter', age: 29, gender: 'Female', subtitle: '29 Yrs • Female', phone: '+880 1788-990011', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80' },
-      { serial: '#6', name: 'Tanvir Alam', age: 42, gender: 'Male', subtitle: '42 Yrs • Male', phone: '+880 1733-445566', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80' }
+      { serial: '#1', name: 'Tariqul Islam', age: 34, gender: 'Male', subtitle: '34 Yrs • Male', phone: '+880 1712-345678', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80', shiftType: 'Video Consultation' },
+      { serial: '#2', name: 'Farzana Khan', age: 31, gender: 'Female', subtitle: '31 Yrs • Female', phone: '+880 1879-948271', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', shiftType: 'Video Consultation' }
+    ];
+
+    let inPersonQueuePatients = [
+      { serial: '#1', name: 'Nusrat Jahan', age: 26, gender: 'Female', subtitle: '26 Yrs • Female', phone: '+880 1911-223344', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80', shiftType: 'In-Person Consultation' },
+      { serial: '#2', name: 'Farhan Hossain', age: 28, gender: 'Male', subtitle: '28 Yrs • Male', phone: '+880 1622-556677', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80', shiftType: 'In-Person Consultation' },
+      { serial: '#3', name: 'Moushumi Akter', age: 29, gender: 'Female', subtitle: '29 Yrs • Female', phone: '+880 1788-990011', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80', shiftType: 'In-Person Consultation' }
     ];
 
     let currentDetailsAppt = null;
@@ -12889,7 +13375,7 @@
 
     let appointmentsData = [
       // ==========================================
-      // TODAY: SEPT 29 (Live Shift 1 - 9:00–11:00 AM)
+      // TODAY: SEPT 29 (Live Shift 1 - Video Consultation 9:00–11:00 AM)
       // ==========================================
       { 
         id: 'apt1', 
@@ -12948,20 +13434,24 @@
         consultationNotes: 'Suspected viral flu syndrome. Vitals stable. Advised adequate hydration, rest, antipyretics and warm saline gargling.',
         prescriptionPdf: 'RX_Farzana_Khan_Sep29.pdf'
       },
+
+      // ==========================================
+      // TODAY: SEPT 29 (Live Shift 2 - In-Person Consultation 6:00–9:00 PM)
+      // ==========================================
       { 
         id: 'apt3', 
         dateKey: 'today',
         dateLabel: 'Today, Sept 29',
-        shiftId: 1, 
-        shiftName: 'Shift 1 • 9:00–11:00 AM', 
-        shiftType: 'Video Consultation',
-        serial: '#3', 
+        shiftId: 2, 
+        shiftName: 'Shift 2 • 6:00–9:00 PM', 
+        shiftType: 'In-Person Consultation',
+        serial: '#1', 
         name: 'Nusrat Jahan', 
         age: 26, 
         gender: 'Female', 
         phone: '+880 1911-223344', 
         status: 'queued', 
-        time: '9:40 AM', 
+        time: '6:00 PM', 
         type: 'Initial Consultation',
         preVisit: {
           symptoms: 'Skin Rash & Allergic Reaction',
@@ -12980,16 +13470,16 @@
         id: 'apt4', 
         dateKey: 'today',
         dateLabel: 'Today, Sept 29',
-        shiftId: 1, 
-        shiftName: 'Shift 1 • 9:00–11:00 AM', 
-        shiftType: 'Video Consultation',
-        serial: '#4', 
+        shiftId: 2, 
+        shiftName: 'Shift 2 • 6:00–9:00 PM', 
+        shiftType: 'In-Person Consultation',
+        serial: '#2', 
         name: 'Farhan Hossain', 
         age: 28, 
         gender: 'Male', 
         phone: '+880 1622-556677', 
         status: 'queued', 
-        time: '10:00 AM', 
+        time: '6:20 PM', 
         type: 'Follow Up',
         preVisit: {
           symptoms: 'Acid Reflux & Heartburn',
@@ -13001,23 +13491,23 @@
             { name: 'Endoscopy_Report_2025.pdf', size: '2.8 MB', type: 'Investigation', icon: 'ph-file-pdf' }
           ]
         },
-        consultationNotes: 'Video consultation in active session...',
+        consultationNotes: null,
         prescriptionPdf: null
       },
       { 
         id: 'apt5', 
         dateKey: 'today',
         dateLabel: 'Today, Sept 29',
-        shiftId: 1, 
-        shiftName: 'Shift 1 • 9:00–11:00 AM', 
-        shiftType: 'Video Consultation',
-        serial: '#5', 
+        shiftId: 2, 
+        shiftName: 'Shift 2 • 6:00–9:00 PM', 
+        shiftType: 'In-Person Consultation',
+        serial: '#3', 
         name: 'Moushumi Akter', 
         age: 29, 
         gender: 'Female', 
         phone: '+880 1788-990011', 
         status: 'queued', 
-        time: '10:20 AM', 
+        time: '6:40 PM', 
         type: 'Initial Consultation',
         preVisit: {
           symptoms: 'Migraine & Light Sensitivity',
@@ -16565,10 +17055,12 @@
       let list = [];
 
       if (currentApptTab === 'upcoming') {
-        // Upcoming starts from Today (all non-prescribed visits for today's active shift) + future dates
+        // Upcoming starts from Today (all non-prescribed visits for active shift) + future dates
         list = appointmentsData.filter(item => {
           if (item.dateKey === 'today') {
             if (isDoctorOffline) return false;
+            // If in In-Person mode, Shift 1 (video) is ended and won't show in upcoming
+            if (currentActiveShiftId === 2 && item.shiftId === 1) return false;
             if (!isShiftActive) return true;
             return item.status !== 'prescribed';
           }
@@ -16587,6 +17079,7 @@
         // History starts from Today (completed/prescribed or skipped visits for today) + past dates
         list = appointmentsData.filter(item => {
           if (item.dateKey === 'today') {
+            if (currentActiveShiftId === 2 && item.shiftId === 1) return true;
             return isShiftActive && (item.status === 'prescribed' || item.status === 'skipped');
           }
           return item.dateKey === 'yesterday' || item.dateKey === 'sept27';
@@ -16694,12 +17187,26 @@
             let serialClass = '';
             let badgeHtml = '';
 
-            const isCurrentTurn = isShiftActive && currentApptTab !== 'history' && queuePatients[currentPatientIndex] && (item.serial === queuePatients[currentPatientIndex].serial);
+            const isCurrentTurn = (currentApptTab !== 'history') && (
+              (currentActiveShiftId === 2 && item.shiftId === 2 && inPersonQueuePatients[inPersonPatientIndex] && 
+               (item.serial === inPersonQueuePatients[inPersonPatientIndex].serial || item.name === inPersonQueuePatients[inPersonPatientIndex].name) &&
+               item.status === 'queued') ||
+              (currentActiveShiftId === 1 && item.shiftId === 1 && queuePatients[currentPatientIndex] && 
+               (item.serial === queuePatients[currentPatientIndex].serial || item.name === queuePatients[currentPatientIndex].name) && 
+               (item.dateKey === 'today' || !item.dateKey || item.dateKey === 'sept29') &&
+               item.status !== 'prescribed')
+            );
 
             if (item.effectiveStatus === 'prescribed') {
               badgeHtml = `<span class="appt-status-badge prescribed"><i class="ph-fill ph-check-circle"></i> Prescribed</span>`;
             } else if (item.effectiveStatus === 'draft_rx') {
               badgeHtml = `<span class="appt-status-badge draft-rx"><i class="ph ph-pencil-simple"></i> Draft Rx</span>`;
+            } else if (item.effectiveStatus === 'absent') {
+              serialClass = 'status-absent';
+              badgeHtml = `<span class="appt-status-badge absent" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA;"><i class="ph-bold ph-user-minus"></i> Absent</span>`;
+            } else if (item.effectiveStatus === 'requeued') {
+              serialClass = 'status-requeued';
+              badgeHtml = `<span class="appt-status-badge requeued" style="background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A;"><i class="ph-bold ph-arrow-u-down-right"></i> Re-queued</span>`;
             } else if (item.effectiveStatus === 'skipped') {
               serialClass = 'status-skipped';
               badgeHtml = `<span class="appt-status-badge skipped">Skipped</span>`;
@@ -16708,13 +17215,13 @@
               badgeHtml = `<span class="appt-status-badge in-call"><span class="status-dot-pulse" style="width:6px;height:6px;"></span> In Call</span>`;
             } else if (isCurrentTurn) {
               serialClass = 'status-in-call';
-              badgeHtml = `<span class="appt-status-badge in-call"><span class="status-dot-pulse" style="width:6px;height:6px;"></span> Current Turn</span>`;
+              badgeHtml = `<span class="appt-status-badge current-turn"><span class="status-dot-pulse" style="width:6px;height:6px;background:#0E8070;"></span> Current Turn</span>`;
             } else {
               badgeHtml = `<span class="appt-status-badge" style="background:var(--color-card-neutral);color:var(--color-text-secondary);border:1px solid #edf2f1;">In Queue</span>`;
             }
 
             cardsHtml += `
-              <div class="appointment-item-card ${isCurrentTurn ? 'is-current-turn' : ''}" onclick="openAppointmentDetails('${item.id}')">
+              <div class="appointment-item-card ${isCurrentTurn ? 'is-current-turn' : ''}" onclick="openAppointmentDetails('${item.id}', 'appointments')">
                 <div class="appt-card-left">
                   <div class="appt-serial-box ${serialClass}">
                     ${item.serial}
@@ -16732,12 +17239,22 @@
             `;
           });
 
+          const isShiftInPerson = shiftItems.some(it => 
+            (it.shiftType && it.shiftType.toLowerCase().includes('in-person')) ||
+            (it.type && it.type.toLowerCase().includes('in-person')) ||
+            (it.shiftId === 2 && it.dateKey === 'today')
+          );
+          const shiftIcon = isShiftInPerson ? 'ph-buildings' : 'ph-video-camera';
+          const shiftTypeLabel = isShiftInPerson ? 'In-Person' : 'Video';
+          const shiftTypeBadgeClass = isShiftInPerson ? 'shift-badge-inperson' : 'shift-badge-video';
+
           shiftsHtml += `
             <div class="appts-shift-block">
               <div class="appts-shift-header">
                 <div class="shift-title-cluster">
-                  <i class="ph ph-video-camera"></i>
+                  <i class="ph ${shiftIcon}"></i>
                   <span class="shift-title-text">${sKey}</span>
+                  <span class="shift-type-indicator ${shiftTypeBadgeClass}">${shiftTypeLabel}</span>
                 </div>
                 <span class="shift-capacity-tag">${shiftItems.length} ${shiftItems.length === 1 ? 'Patient' : 'Patients'}</span>
               </div>
@@ -16794,12 +17311,18 @@
           </div>
         `;
       } else {
-        // UPCOMING / QUEUED / DRAFT RX / SKIPPED / IN CALL: 3-Column Info Strip
+        // UPCOMING / QUEUED / DRAFT RX / SKIPPED / ABSENT / REQUEUED / IN CALL: 3-Column Info Strip
         let statusLabel = 'In Queue';
         let statusClass = 'details-info-val';
 
         if (effectiveStatus === 'draft_rx') {
           statusLabel = 'Draft Rx';
+          statusClass = 'details-info-val status-draft';
+        } else if (effectiveStatus === 'absent') {
+          statusLabel = 'Absent';
+          statusClass = 'details-info-val status-skipped';
+        } else if (effectiveStatus === 'requeued') {
+          statusLabel = 'Re-queued';
           statusClass = 'details-info-val status-draft';
         } else if (effectiveStatus === 'skipped') {
           statusLabel = 'Skipped';
@@ -16831,9 +17354,9 @@
       }
     }
 
-    // Appointment Details View Controller (Opened from All Appointments screen)
-    function openAppointmentDetails(apptId) {
-      appointmentDetailsBackTarget = 'appointments';
+    // Appointment Details View Controller (Opened from All Appointments screen or Desk)
+    function openAppointmentDetails(apptId, backTarget = 'appointments') {
+      appointmentDetailsBackTarget = backTarget;
       const appt = appointmentsData.find(a => a.id === apptId) || appointmentsData[0];
       currentDetailsAppt = appt;
 
@@ -16860,7 +17383,33 @@
 
       // Bottom Action Dock (Contextual Primary CTA: only for actionable in-progress statuses)
       const bottomDock = document.getElementById('detBottomDock');
-      if (effectiveStatus === 'draft_rx') {
+      
+      const isInPersonShift = (currentActiveShiftId === 2) || (appt.shiftId === 2) || (appt.shiftType && appt.shiftType.includes('In-Person'));
+      const activeInPersonPat = inPersonQueuePatients[inPersonPatientIndex];
+      const isCurrentInPersonTurn = isInPersonShift && activeInPersonPat && 
+                                   (appt.name === activeInPersonPat.name || appt.serial === activeInPersonPat.serial) && 
+                                   (appt.status === 'queued');
+
+      if (isCurrentInPersonTurn) {
+        // Current In-Person Patient: 3-Button Dock (Absent, Skip, End Consultation)
+        bottomDock.style.display = 'flex';
+        bottomDock.innerHTML = `
+          <div class="in-person-action-dock">
+            <button type="button" class="btn-inperson-absent" onclick="openInPersonAbsentModal('${appt.id}')">
+              <i class="ph-bold ph-user-minus"></i>
+              <span>Absent</span>
+            </button>
+            <button type="button" class="btn-inperson-skip" onclick="openInPersonSkipModal('${appt.id}')">
+              <i class="ph-bold ph-arrow-u-down-right"></i>
+              <span>Skip</span>
+            </button>
+            <button type="button" class="btn-inperson-end" onclick="openInPersonEndConsultModal('${appt.id}')">
+              <i class="ph-bold ph-check-circle"></i>
+              <span>End Consultation</span>
+            </button>
+          </div>
+        `;
+      } else if (effectiveStatus === 'draft_rx') {
         bottomDock.style.display = 'flex';
         bottomDock.innerHTML = `
           <button class="btn-dock-primary" onclick="openReviewFromDetails('${appt.id}')">
@@ -16877,7 +17426,7 @@
           </button>
         `;
       } else {
-        // No redundant bottom dock for prescribed/completed (View Rx already prominent in Issued Prescription card) or queued/skipped
+        // No redundant bottom dock for prescribed/completed or other queued patients
         bottomDock.style.display = 'none';
         bottomDock.innerHTML = '';
       }
@@ -17112,6 +17661,8 @@
           pageDetails.className = 'app-page page-appointment-details page-right';
           pageProfile.className = 'app-page page-patient-profile active-page';
         }
+      } else if (appointmentDetailsBackTarget === 'desk') {
+        navigateToDesk();
       } else {
         const pageAppts = document.getElementById('pageAppointments');
         if (pageAppts) {
@@ -17187,31 +17738,67 @@
       const heroContainer = document.getElementById('heroCardInner');
       if (!heroContainer || !pat) return;
       
-      const isPatientInCall = isLobby || pat.inCall || pat.status === 'in_call';
-      const badgeText = isPatientInCall ? '<span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;margin-right:2px;"></span>In Call' : 'Current Turn';
-      const btnText = isPatientInCall ? 'Join Call' : 'Join Call';
-      
-      heroContainer.innerHTML = `
-        <div class="card-badge-row">
-          <span class="badge-pill-light">
-            <i class="ph ph-user"></i>
-            Serial ${pat.serial}
-          </span>
-          <span class="badge-pill-status">${badgeText}</span>
-        </div>
+      const isInPerson = (currentActiveShiftId === 2) || (pat.shiftType && pat.shiftType.includes('In-Person'));
 
-        <div class="patient-details">
-          <h3 class="patient-name">${pat.name}</h3>
-          <div class="patient-info">
-            <span>${pat.subtitle}</span>
+      const heroEl = document.getElementById('heroCard');
+      if (heroEl) {
+        heroEl.classList.remove('locked-card', 'no-shift-card', 'offline-card');
+        if (isInPerson) {
+          heroEl.classList.add('inperson-card');
+        } else {
+          heroEl.classList.remove('inperson-card');
+        }
+      }
+
+      if (isInPerson) {
+        heroContainer.innerHTML = `
+          <div class="card-badge-row">
+            <span class="badge-pill-light">
+              <i class="ph ph-user"></i>
+              ${pat.serial}
+            </span>
+            <span class="badge-pill-status">Current Turn</span>
           </div>
-        </div>
 
-        <button class="btn-hero-action" onclick="openVideoCall()">
-          <i class="ph ph-video-camera"></i>
-          <span>${btnText}</span>
-        </button>
-      `;
+          <div class="patient-details">
+            <h3 class="patient-name">${pat.name}</h3>
+            <div class="patient-info">
+              <span>${pat.subtitle || `${pat.age} Yrs • ${pat.gender}`}</span>
+            </div>
+          </div>
+
+          <button class="btn-hero-action" onclick="openCurrentInPersonAppointmentInfo()">
+            <i class="ph-bold ph-identification-card"></i>
+            <span>Appointment Info</span>
+          </button>
+        `;
+      } else {
+        const isPatientInCall = isLobby || pat.inCall || pat.status === 'in_call';
+        const badgeText = isPatientInCall ? '<span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;margin-right:2px;"></span>In Call' : 'Current Turn';
+        const btnText = isPatientInCall ? 'Join Call' : 'Join Call';
+        
+        heroContainer.innerHTML = `
+          <div class="card-badge-row">
+            <span class="badge-pill-light">
+              <i class="ph ph-user"></i>
+              ${pat.serial}
+            </span>
+            <span class="badge-pill-status">${badgeText}</span>
+          </div>
+
+          <div class="patient-details">
+            <h3 class="patient-name">${pat.name}</h3>
+            <div class="patient-info">
+              <span>${pat.subtitle}</span>
+            </div>
+          </div>
+
+          <button class="btn-hero-action" onclick="openVideoCall()">
+            <i class="ph ph-video-camera"></i>
+            <span>${btnText}</span>
+          </button>
+        `;
+      }
     }
 
     // Video Call Navigation & Interactivity
@@ -17694,11 +18281,15 @@
     }
 
     function previewPrescriptionAction() {
-      // 1. Patient Demographics from Current Patient
-      const pat = queuePatients[currentPatientIndex] || {
+      // 1. Patient Demographics from Current Patient (Video or In-Person)
+      const activePat = (isInPersonReviewMode || currentActiveShiftId === 2)
+        ? (inPersonQueuePatients[inPersonPatientIndex] || inPersonQueuePatients[0])
+        : (queuePatients[currentPatientIndex] || queuePatients[0]);
+      
+      const pat = currentDetailsAppt || activePat || {
         serial: '#1',
-        name: 'Alif Khan',
-        subtitle: '28 Years • Male'
+        name: 'Nusrat Jahan',
+        subtitle: '26 Years • Female'
       };
       
       const patNameEl = document.getElementById('rxPatientName');
@@ -17706,19 +18297,19 @@
       const dateValEl = document.getElementById('rxDateVal');
       const timeValEl = document.getElementById('rxTimestampVal');
 
-      if (patNameEl) patNameEl.textContent = pat.name || 'Alif Khan';
+      if (patNameEl) patNameEl.textContent = pat.name || 'Nusrat Jahan';
       if (patAgeSexEl) {
-        const parts = (pat.subtitle || '').split('•');
+        const parts = (pat.subtitle || `${pat.age || 26} Yrs • ${pat.gender || 'Female'}`).split('•');
         if (parts.length >= 2) {
           patAgeSexEl.textContent = `${parts[0].trim()} / ${parts[1].trim()}`;
         } else {
-          patAgeSexEl.textContent = '28 Yrs / Male';
+          patAgeSexEl.textContent = `${pat.age || 26} Yrs / ${pat.gender || 'Female'}`;
         }
       }
       
       const dateStr = '29 Sep 2026';
       if (dateValEl) dateValEl.textContent = dateStr;
-      if (timeValEl) timeValEl.textContent = `${dateStr} • 09:42 AM`;
+      if (timeValEl) timeValEl.textContent = `${dateStr} • ${(currentActiveShiftId === 2 || isInPersonReviewMode) ? '06:15 PM' : '09:42 AM'}`;
 
       // 2. Chief Complaints List (Real-Time Read from Editable Area)
       const rawComplaint = (document.getElementById('chiefComplaintText')?.innerText || '').trim();
@@ -17862,21 +18453,498 @@
       document.getElementById('pageConsultationReview').className = 'app-page page-consultation-review page-right';
       document.getElementById('pageDesk').className = 'app-page active-page';
 
-      // Update appointment status to prescribed
+      if (isInPersonReviewMode || currentActiveShiftId === 2) {
+        const finishedPat = inPersonQueuePatients[inPersonPatientIndex];
+        if (finishedPat) {
+          const match = appointmentsData.find(a => (a.shiftId === 2 || a.shiftType === 'In-Person Consultation') && (a.serial === finishedPat.serial || a.name === finishedPat.name));
+          if (match) {
+            match.status = 'prescribed';
+            match.prescriptionPdf = `RX_${finishedPat.name.replace(/ /g, '_')}_Sep29.pdf`;
+          }
+        }
+
+        inPersonPatientIndex++;
+        if (inPersonPatientIndex < inPersonQueuePatients.length) {
+          const nextPat = inPersonQueuePatients[inPersonPatientIndex];
+          updateDeskHeroPatient(nextPat);
+          showToast(`Consultation completed • Next: ${nextPat.name}`);
+        } else {
+          showToast(`In-Person Shift Complete • All 3 patients attended`);
+          renderInPersonShiftDoneOnDesk();
+        }
+        isInPersonReviewMode = false;
+        return;
+      }
+
+      // Video Shift Completion
       const finishedPat = queuePatients[currentPatientIndex];
       const match = appointmentsData.find(a => a.serial === finishedPat.serial || a.name === finishedPat.name);
       if (match) {
         match.status = 'prescribed';
       }
 
-      // Advance patient queue on Desk Hero Card
-      currentPatientIndex = (currentPatientIndex + 1) % queuePatients.length;
-      const nextPat = queuePatients[currentPatientIndex];
+      currentPatientIndex++;
+      if (currentPatientIndex < queuePatients.length) {
+        const nextPat = queuePatients[currentPatientIndex];
+        updateDeskHeroPatient(nextPat);
+        syncVideoCallScreenState(nextPat);
+        callTimerSeconds = 0;
+        document.getElementById('callDurationTimer').textContent = '00:00';
+        showToast(`Consultation finished • Next: ${nextPat.name}`);
+      } else {
+        // Shift 1 Video complete -> Auto transition to Shift 2 (In-Person)!
+        startInPersonShiftFromShift1Completion();
+      }
+    }
 
-      updateDeskHeroPatient(nextPat);
-      syncVideoCallScreenState(nextPat);
-      callTimerSeconds = 0;
-      document.getElementById('callDurationTimer').textContent = '00:00';
+    // In-Person Shift Controllers & Modal Actions
+    function openCurrentInPersonAppointmentInfo() {
+      const pat = inPersonQueuePatients[inPersonPatientIndex] || inPersonQueuePatients[0];
+      if (!pat) return;
+      const match = appointmentsData.find(a => (a.shiftId === 2 || a.shiftType === 'In-Person Consultation') && (a.name === pat.name || a.serial === pat.serial));
+      if (match) {
+        openAppointmentDetails(match.id, 'desk');
+      } else {
+        openAppointmentDetails('apt3', 'desk');
+      }
+    }
+
+    function openInPersonAbsentModal(apptId) {
+      pendingInPersonActionApptId = apptId;
+      const titleEl = document.getElementById('inPersonAbsentTitle');
+      const subEl = document.getElementById('inPersonAbsentSubtitle');
+      if (titleEl) {
+        titleEl.textContent = 'Mark Patient Absent?';
+      }
+      if (subEl) {
+        subEl.textContent = "Record patient as absent for today's queue.";
+      }
+      document.getElementById('modalBackdrop').classList.add('active');
+      document.getElementById('inPersonAbsentModalSheet').classList.add('active');
+    }
+
+    function closeInPersonAbsentModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+      document.getElementById('inPersonAbsentModalSheet').classList.remove('active');
+      pendingInPersonActionApptId = null;
+    }
+
+    function confirmInPersonAbsentAction() {
+      const currentPat = inPersonQueuePatients[inPersonPatientIndex];
+      const appt = appointmentsData.find(a => (a.shiftId === 2 || a.shiftType === 'In-Person Consultation') && currentPat && (a.id === pendingInPersonActionApptId || a.name === currentPat.name || a.serial === currentPat.serial)) || currentDetailsAppt;
+      closeInPersonAbsentModal();
+
+      if (appt) {
+        appt.status = 'absent';
+        appt.statusText = 'Absent';
+      }
+
+      const absentPat = inPersonQueuePatients[inPersonPatientIndex];
+      inPersonPatientIndex++;
+
+      if (inPersonPatientIndex < inPersonQueuePatients.length) {
+        const nextPat = inPersonQueuePatients[inPersonPatientIndex];
+        updateDeskHeroPatient(nextPat);
+        showToast(`${absentPat ? absentPat.name : 'Patient'} marked Absent • Next: ${nextPat.name}`);
+      } else {
+        showToast(`${absentPat ? absentPat.name : 'Patient'} marked Absent • Shift Complete`);
+        renderInPersonShiftDoneOnDesk();
+      }
+
+      navigateToDesk();
+      renderAppointmentsList();
+    }
+
+    function openInPersonSkipModal(apptId) {
+      pendingInPersonActionApptId = apptId;
+      const titleEl = document.getElementById('inPersonSkipTitle');
+      const subEl = document.getElementById('inPersonSkipSubtitle');
+      if (titleEl) {
+        titleEl.textContent = 'Skip Patient?';
+      }
+      if (subEl) {
+        subEl.textContent = "Move patient to the end of today's queue.";
+      }
+      document.getElementById('modalBackdrop').classList.add('active');
+      document.getElementById('inPersonSkipModalSheet').classList.add('active');
+    }
+
+    function closeInPersonSkipModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+      document.getElementById('inPersonSkipModalSheet').classList.remove('active');
+      pendingInPersonActionApptId = null;
+    }
+
+    function confirmInPersonSkipAction() {
+      const skippedPat = inPersonQueuePatients[inPersonPatientIndex];
+      closeInPersonSkipModal();
+
+      if (!skippedPat) return;
+
+      // Calculate new serial (highest number + 1)
+      const maxSerialNum = inPersonQueuePatients.reduce((max, p) => {
+        const num = parseInt(p.serial.replace('#', '')) || 0;
+        return Math.max(max, num);
+      }, inPersonQueuePatients.length);
+      const newSerial = `#${maxSerialNum + 1}`;
+
+      // Find and update appt in appointmentsData
+      const apptIdx = appointmentsData.findIndex(a => (a.shiftId === 2 || a.shiftType === 'In-Person Consultation') && (a.name === skippedPat.name || a.id === pendingInPersonActionApptId));
+      if (apptIdx !== -1) {
+        const appt = appointmentsData[apptIdx];
+        appt.serial = newSerial;
+        appt.status = 'requeued';
+        appt.statusText = 'Re-queued';
+        
+        // Move to the end of Shift 2 in appointmentsData
+        appointmentsData.splice(apptIdx, 1);
+        let lastShift2Idx = -1;
+        for (let i = appointmentsData.length - 1; i >= 0; i--) {
+          if (appointmentsData[i].shiftId === 2 || appointmentsData[i].shiftType === 'In-Person Consultation') {
+            lastShift2Idx = i;
+            break;
+          }
+        }
+        if (lastShift2Idx !== -1) {
+          appointmentsData.splice(lastShift2Idx + 1, 0, appt);
+        } else {
+          appointmentsData.push(appt);
+        }
+      }
+
+      // Append re-queued entry to inPersonQueuePatients
+      inPersonQueuePatients.push({
+        ...skippedPat,
+        serial: newSerial,
+        statusText: 'Re-queued'
+      });
+
+      inPersonPatientIndex++;
+      const nextPat = inPersonQueuePatients[inPersonPatientIndex];
+      if (nextPat) {
+        updateDeskHeroPatient(nextPat);
+        showToast(`${skippedPat.name} skipped • Re-queued to end as ${newSerial}`);
+      }
+
+      navigateToDesk();
+      renderAppointmentsList();
+    }
+
+    function openInPersonEndConsultModal(apptId) {
+      pendingInPersonActionApptId = apptId;
+      const titleEl = document.getElementById('inPersonEndConsultTitle');
+      const subEl = document.getElementById('inPersonEndConsultSubtitle');
+      if (titleEl) {
+        titleEl.textContent = 'End Consultation?';
+      }
+      if (subEl) {
+        subEl.textContent = 'Finish chamber visit and proceed to prescription.';
+      }
+      document.getElementById('modalBackdrop').classList.add('active');
+      document.getElementById('inPersonEndConsultModalSheet').classList.add('active');
+    }
+
+    function closeInPersonEndConsultModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+      document.getElementById('inPersonEndConsultModalSheet').classList.remove('active');
+      pendingInPersonActionApptId = null;
+    }
+
+    function toggleDemoShiftType() {
+      if (currentActiveShiftId === 1) {
+        // Switch to In-Person Shift (Shift 2)
+        currentActiveShiftId = 2;
+        isInPersonReviewMode = true;
+        inPersonPatientIndex = 0;
+        isShiftLocked = false;
+        isShiftActive = true;
+        
+        const pat = inPersonQueuePatients[inPersonPatientIndex];
+        updateDeskHeroPatient(pat);
+        
+        const headerTimeMeta = document.getElementById('headerTimeMeta');
+        if (headerTimeMeta) {
+          headerTimeMeta.textContent = 'Shift 2 (In-Person)';
+        }
+
+        renderAppointmentsList();
+        showToast('Switched to Shift 2 (In-Person Chamber)');
+      } else {
+        // Switch back to Video Shift (Shift 1)
+        currentActiveShiftId = 1;
+        isInPersonReviewMode = false;
+        currentPatientIndex = 0;
+        isShiftLocked = false;
+        isShiftActive = true;
+        
+        const pat = queuePatients[currentPatientIndex];
+        updateDeskHeroPatient(pat);
+
+        const headerTimeMeta = document.getElementById('headerTimeMeta');
+        if (headerTimeMeta) {
+          headerTimeMeta.textContent = '';
+        }
+
+        renderAppointmentsList();
+        showToast('Switched to Shift 1 (Video Consultation)');
+      }
+    }
+
+    function confirmInPersonEndConsultAction() {
+      const apptId = pendingInPersonActionApptId;
+      closeInPersonEndConsultModal();
+      openInPersonConsultationReview(apptId);
+    }
+
+    function openInPersonConsultationReview(apptId) {
+      isInPersonReviewMode = true;
+      const appt = appointmentsData.find(a => a.id === apptId) || currentDetailsAppt || inPersonQueuePatients[inPersonPatientIndex];
+      currentDetailsAppt = appt;
+
+      // Ensure Scan Banner is visible and ready
+      const banner = document.getElementById('scanRxBanner');
+      if (banner) {
+        banner.style.display = 'flex';
+        banner.innerHTML = `
+          <div class="scan-rx-actions-row">
+            <button type="button" class="btn-scan-main" onclick="triggerScanWrittenPrescription()">
+              <i class="ph-bold ph-camera"></i>
+              <span>Scan Written Prescription</span>
+            </button>
+            <button type="button" class="btn-scan-gallery" onclick="triggerScanWrittenPrescription()" aria-label="Upload Rx Image">
+              <i class="ph ph-image"></i>
+            </button>
+          </div>
+          <p class="scan-rx-hint">Take a photo or upload your handwritten pad to digitize it instantly.</p>
+        `;
+      }
+
+      // Hide AI Tag for In-Person
+      const aiTag = document.getElementById('chiefComplaintSparkle');
+      if (aiTag) aiTag.style.display = 'none';
+
+      // Clear Chief Complaint and set placeholder
+      const ccEl = document.getElementById('chiefComplaintText');
+      if (ccEl) {
+        ccEl.textContent = '';
+      }
+
+      // Set Draft Prescription to Empty Tile
+      const rxContainer = document.getElementById('prescriptionListContainer');
+      if (rxContainer) {
+        rxContainer.innerHTML = `
+          <div class="review-empty-tile" id="medEmptyTile">
+            <span class="review-empty-text">No Medicines Given</span>
+            <button type="button" class="btn-dashed-add-action" onclick="openAddMedicineModal()">
+              <i class="ph ph-plus"></i>
+              <span>Add Medicine</span>
+            </button>
+          </div>
+        `;
+      }
+
+      // Set Lab Tests to Empty Tile
+      const labContainer = document.getElementById('labListContainer');
+      if (labContainer) {
+        labContainer.innerHTML = `
+          <div class="review-empty-tile" id="labEmptyTile">
+            <span class="review-empty-text">No Tests Given</span>
+            <button type="button" class="btn-dashed-add-action" onclick="openAddLabModal()">
+              <i class="ph ph-plus"></i>
+              <span>Add Tests</span>
+            </button>
+          </div>
+        `;
+      }
+
+      // Set Referral to Empty Tile
+      const refContainer = document.getElementById('referralTileContainer');
+      if (refContainer) {
+        refContainer.innerHTML = `
+          <span class="referral-empty-text" id="referralEmptyText">No Referral Added</span>
+          <button type="button" class="btn-dashed-add-action" onclick="openReferDoctorModal()">
+            <i class="ph ph-plus"></i>
+            <span>Add Referral</span>
+          </button>
+        `;
+      }
+
+      // Reset Follow Up chips to None
+      document.querySelectorAll('.followup-chip-btn').forEach((btn, idx) => {
+        if (idx === 0) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      // Transition to pageConsultationReview
+      const pageDetails = document.getElementById('pageAppointmentDetails');
+      const pageReview = document.getElementById('pageConsultationReview');
+      if (pageReview) {
+        pageReview.scrollTop = 0;
+        if (pageDetails) pageDetails.className = 'app-page page-appointment-details page-left';
+        pageReview.className = 'app-page page-consultation-review active-page';
+      }
+    }
+
+    function triggerScanWrittenPrescription() {
+      const banner = document.getElementById('scanRxBanner');
+      if (banner) {
+        banner.innerHTML = `
+          <div class="scan-processing-box">
+            <i class="ph-bold ph-scan scan-spin-icon"></i>
+            <span>Digitizing prescription handwriting...</span>
+          </div>
+        `;
+      }
+
+      setTimeout(() => {
+        // Restore Banner
+        if (banner) {
+          banner.innerHTML = `
+            <div class="scan-rx-actions-row">
+              <button type="button" class="btn-scan-main" style="background: #EFF7F5; border-color: #0E8070; color: #0E8070;" onclick="triggerScanWrittenPrescription()">
+                <i class="ph-bold ph-check"></i>
+                <span>Prescription Digitized</span>
+              </button>
+              <button type="button" class="btn-scan-gallery" onclick="triggerScanWrittenPrescription()" aria-label="Re-scan Rx">
+                <i class="ph ph-camera-rotate"></i>
+              </button>
+            </div>
+            <p class="scan-rx-hint" style="color: #0E8070; font-weight: 600;">Handwriting digitized • 2 Medicines & 1 Test detected</p>
+          `;
+        }
+
+        // Fill Chief Complaint
+        const ccEl = document.getElementById('chiefComplaintText');
+        if (ccEl) {
+          ccEl.textContent = 'Patient presents with erythematous allergic rash over both forearms following cosmetic moisturizer exposure. Mild itching, no systemic anaphylaxis.';
+        }
+
+        // Fill Scanned Medicines
+        const rxContainer = document.getElementById('prescriptionListContainer');
+        if (rxContainer) {
+          rxContainer.innerHTML = `
+            <div class="medicine-item-card" id="medCard1">
+              <div class="item-left-cluster">
+                <div class="item-icon-bubble">
+                  <i class="ph ph-pill"></i>
+                </div>
+                <div class="item-text-block">
+                  <span class="item-main-name">Fexofenadine 120mg</span>
+                  <span class="item-sub-meta">1-0-1 • After Meal • 7 Days</span>
+                </div>
+              </div>
+              <div class="item-actions-cluster">
+                <button class="btn-item-action-edit" onclick="openEditMedicineModal('medCard1', 'Fexofenadine 120mg', '1-0-1', 'After Meal', '7 Days')" aria-label="Edit Medicine">
+                  <i class="ph ph-pencil-simple"></i>
+                </button>
+                <button class="btn-item-action-delete" onclick="requestDeleteReviewItem('medCard1', 'Medicine', 'Fexofenadine 120mg')" aria-label="Delete Medicine">
+                  <i class="ph ph-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="medicine-item-card" id="medCard2">
+              <div class="item-left-cluster">
+                <div class="item-icon-bubble">
+                  <i class="ph ph-pill"></i>
+                </div>
+                <div class="item-text-block">
+                  <span class="item-main-name">Hydrocortisone 1% Cream</span>
+                  <span class="item-sub-meta">1-0-1 • Apply Locally • 5 Days</span>
+                </div>
+              </div>
+              <div class="item-actions-cluster">
+                <button class="btn-item-action-edit" onclick="openEditMedicineModal('medCard2', 'Hydrocortisone 1% Cream', '1-0-1', 'Apply Locally', '5 Days')" aria-label="Edit Medicine">
+                  <i class="ph ph-pencil-simple"></i>
+                </button>
+                <button class="btn-item-action-delete" onclick="requestDeleteReviewItem('medCard2', 'Medicine', 'Hydrocortisone 1% Cream')" aria-label="Delete Medicine">
+                  <i class="ph ph-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-dashed-add-action" onclick="openAddMedicineModal()">
+              <i class="ph ph-plus"></i>
+              <span>Add Medicine</span>
+            </button>
+          `;
+        }
+
+        // Fill Scanned Lab Tests
+        const labContainer = document.getElementById('labListContainer');
+        if (labContainer) {
+          labContainer.innerHTML = `
+            <div class="lab-item-card" id="labCard1">
+              <div class="item-left-cluster">
+                <div class="item-icon-bubble">
+                  <i class="ph ph-flask"></i>
+                </div>
+                <div class="item-text-block">
+                  <span class="item-main-name">Serum IgE Level</span>
+                  <span class="item-sub-meta">Allergy & Immunology Profile</span>
+                </div>
+              </div>
+              <div class="item-actions-cluster">
+                <button class="btn-item-action-delete" onclick="requestDeleteReviewItem('labCard1', 'Lab Test', 'Serum IgE Level')" aria-label="Delete Lab Test">
+                  <i class="ph ph-trash"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="btn-dashed-add-action" onclick="openAddLabModal()">
+              <i class="ph ph-plus"></i>
+              <span>Add Tests</span>
+            </button>
+          `;
+        }
+
+        // Select 7 Days Follow-Up
+        const followUpBtns = document.querySelectorAll('.followup-chip-btn');
+        followUpBtns.forEach((btn, idx) => {
+          if (idx === 1) btn.classList.add('active'); // 7 Days
+          else btn.classList.remove('active');
+        });
+
+        showToast('Prescription scanned & digitized successfully! ✨');
+      }, 1000);
+    }
+
+    function startInPersonShiftFromShift1Completion() {
+      currentActiveShiftId = 2;
+      inPersonPatientIndex = 0;
+      isShiftActive = true;
+      isShiftLocked = false;
+      const pat = inPersonQueuePatients[inPersonPatientIndex];
+      const heroCard = document.getElementById('heroCard');
+      if (heroCard) heroCard.className = 'patient-hero-card';
+      updateDeskHeroPatient(pat);
+      showToast('Shift 1 (Video) complete • Shift 2 (In-Person) is now active! 🩺');
+    }
+
+    function renderInPersonShiftDoneOnDesk() {
+      const heroContainer = document.getElementById('heroCardInner');
+      if (!heroContainer) return;
+      heroContainer.innerHTML = `
+        <div class="card-badge-row">
+          <span class="badge-pill-light">
+            <i class="ph ph-check-circle"></i>
+            Shift 2
+          </span>
+          <span class="badge-pill-status">Completed</span>
+        </div>
+
+        <div class="patient-details">
+          <h3 class="patient-name">All Consultations Done</h3>
+          <div class="patient-info">
+            <span>3 Patients attended • In-Person Shift completed</span>
+          </div>
+        </div>
+
+        <button class="btn-hero-action" style="background: #FFFFFF; border: 1.5px solid #CBD5E1; color: #1E293B; font-weight: 700;" onclick="navigateToSchedule()">
+          <i class="ph-bold ph-calendar"></i>
+          <span>View Schedule</span>
+        </button>
+      `;
     }
 
     // Skip Patient Modal Handlers & Desk Redirection
@@ -17994,8 +19062,8 @@
 
     let dateSchedules = {
       'Sunday, Sept 15': [
-        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '12:00 PM', booked: 4, max: 15, locked: true },
-        { id: 'shiftCard2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '06:00 PM', endTime: '11:00 PM', booked: 0, max: 15, locked: false }
+        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true },
+        { id: 'shiftCard2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false }
       ],
       'Monday, Sept 16': [
         { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true },
@@ -18040,7 +19108,8 @@
         { id: 'shiftCard30_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Tuesday, Sept 29': [
-        { id: 'shiftCardTue1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 4, max: 15, locked: true }
+        { id: 'shiftCardTue1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true },
+        { id: 'shiftCardTue2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false }
       ],
       'Wednesday, Sept 30': [
         { id: 'shiftCardWed1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 7, max: 15, locked: true }
@@ -18154,17 +19223,7 @@
         const todayClass = isToday ? 'is-today-pill' : '';
         const shifts = getShiftsForDay(8, day);
         const hasShifts = shifts && shifts.length > 0;
-        let totalBooked = 0;
-        if (hasShifts) {
-          shifts.forEach(s => { totalBooked += (s.booked || 0); });
-        }
-        const hasBooked = totalBooked > 0;
-        let dotHtml = '';
-        if (hasBooked) {
-          dotHtml = `<span class="cal-dot dot-booked"></span>`;
-        } else if (hasShifts) {
-          dotHtml = `<span class="cal-dot dot-shift"></span>`;
-        }
+        const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
         html += `
           <div class="date-pill ${todayClass} ${isActive ? 'active' : ''}" 
@@ -18188,17 +19247,7 @@
         const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
         const shifts = getShiftsForDay(9, day);
         const hasShifts = shifts && shifts.length > 0;
-        let totalBooked = 0;
-        if (hasShifts) {
-          shifts.forEach(s => { totalBooked += (s.booked || 0); });
-        }
-        const hasBooked = totalBooked > 0;
-        let dotHtml = '';
-        if (hasBooked) {
-          dotHtml = `<span class="cal-dot dot-booked"></span>`;
-        } else if (hasShifts) {
-          dotHtml = `<span class="cal-dot dot-shift"></span>`;
-        }
+        const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
         html += `
           <div class="date-pill ${isActive ? 'active' : ''}" 
@@ -18245,7 +19294,7 @@
       if (shifts.length === 0) {
         container.innerHTML = `
           <div class="schedule-empty-state" style="background: #F8FAFC; border: 1.5px dashed #CBD5E1; border-radius: 18px; padding: 32px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; width: 100%; box-sizing: border-box;">
-            <div style="width: 44px; height: 44px; border-radius: 50%; background: #EFF7F5; color: #052E28; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: #EFF7F5; color: var(--color-primary-btn, #02241F); display: flex; align-items: center; justify-content: center; font-size: 22px;">
               <i class="ph ph-calendar-blank"></i>
             </div>
             <div style="font-family: var(--font-heading); font-size: 16px; font-weight: 700; color: #1D2322;">No Shifts Scheduled</div>
@@ -18262,14 +19311,18 @@
         const maxCapacity = shift.max || 15;
         const bookedFormatted = bookedCount > 0 ? String(bookedCount).padStart(2, '0') : '0';
         const capacityText = `${bookedFormatted}/${maxCapacity} Patients`;
+        const isInPerson = Boolean(shift.type && (shift.type.toLowerCase().includes('in-person') || shift.type.toLowerCase().includes('in person')));
+        const typeLabel = isInPerson ? 'In-Person' : 'Video';
+        const typeIcon = isInPerson ? 'ph-buildings' : 'ph-video-camera';
+        const typeTagClass = isInPerson ? 'tag-inperson' : 'tag-video';
 
         html += `
           <div class="saved-shift-card" id="${shift.id}">
             <div class="saved-shift-top">
               <span class="shift-name-chip">${shiftTitle.toUpperCase()}</span>
-              <span class="shift-type-pill">
-                <i class="ph ${shift.typeIcon || 'ph-video-camera'}"></i>
-                ${shift.type || 'Video Consultation'}
+              <span class="shift-type-pill ${typeTagClass}">
+                <i class="ph ${typeIcon}"></i>
+                <span>${typeLabel}</span>
               </span>
             </div>
 
@@ -18382,21 +19435,11 @@
           const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
           const shifts = getShiftsForDay(8, day);
           const hasShifts = shifts && shifts.length > 0;
-          let totalBooked = 0;
-          if (hasShifts) {
-            shifts.forEach(s => { totalBooked += (s.booked || 0); });
-          }
-          const hasBooked = totalBooked > 0;
           const todayClass = isToday ? 'is-today-cell' : '';
 
-          let dotsHtml = '';
-          if (hasBooked) {
-            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-booked"></span></div>`;
-          } else if (hasShifts) {
-            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-shift"></span></div>`;
-          } else {
-            dotsHtml = `<div class="cal-cell-dots"></div>`;
-          }
+          const dotsHtml = hasShifts 
+            ? `<div class="cal-cell-dots"><span class="cal-dot"></span></div>` 
+            : `<div class="cal-cell-dots"></div>`;
 
           html += `
             <button type="button" class="month-cal-cell ${todayClass} ${isSelected ? 'active' : ''}" onclick="selectDateFromCalendarModal('${fullDate}', ${isToday}, ${day})">
@@ -18418,20 +19461,10 @@
           const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Oct ${day}`));
           const shifts = getShiftsForDay(9, day);
           const hasShifts = shifts && shifts.length > 0;
-          let totalBooked = 0;
-          if (hasShifts) {
-            shifts.forEach(s => { totalBooked += (s.booked || 0); });
-          }
-          const hasBooked = totalBooked > 0;
 
-          let dotsHtml = '';
-          if (hasBooked) {
-            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-booked"></span></div>`;
-          } else if (hasShifts) {
-            dotsHtml = `<div class="cal-cell-dots"><span class="cal-dot dot-shift"></span></div>`;
-          } else {
-            dotsHtml = `<div class="cal-cell-dots"></div>`;
-          }
+          const dotsHtml = hasShifts 
+            ? `<div class="cal-cell-dots"><span class="cal-dot"></span></div>` 
+            : `<div class="cal-cell-dots"></div>`;
 
           html += `
             <button type="button" class="month-cal-cell ${isSelected ? 'active' : ''}" onclick="selectDateFromCalendarModal('${fullDate}', false, ${day})">
@@ -18609,6 +19642,11 @@
       if (limitSub) limitSub.textContent = 'Max 15 Patients';
 
       setConsultType('video');
+      
+      // Reset repeat days and weekly toggle so they are never auto-selected
+      document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach(btn => btn.classList.remove('selected'));
+      if (repeatToggle) repeatToggle.checked = false;
+
       updateShiftModalDurationSummary();
 
       if (addBtn) addBtn.style.display = 'none';
@@ -19174,28 +20212,14 @@
     }
 
     function closeAllModals() {
-      closeGoingOfflineModal();
-      closeOfflineConfirmedModal();
-      closeCreateShiftToOfflineModal();
-      closeTimePickerModal();
-      closeMonthCalendarModal();
-      closeCancelShiftModal();
-      closeEndCallModal();
-      closeMedicineModal();
-      closeLabModal();
-      closeReferDoctorModal();
-      closeDeleteConfirmModal();
-      closeSkipPatientModal();
-      closeApptFilterModal();
-      closeThreadContextMenu();
-      closeRenameThreadModal();
-      closeWithdrawFundsModal();
-      closeTransactionDetails();
-      closeTransactionFilterModal();
-      closeEarningsSettingsModal();
-      closeAddPayoutMethodModal();
+      document.querySelectorAll('.bottom-sheet.active').forEach(s => s.classList.remove('active'));
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
       const delAccModal = document.getElementById('modalDeleteAccountConfirm');
       if (delAccModal) delAccModal.classList.remove('active');
+      if (typeof closeThreadContextMenu === 'function') closeThreadContextMenu();
+      if (typeof closeApptFilterModal === 'function') closeApptFilterModal();
+      if (typeof closeTransactionFilterModal === 'function') closeTransactionFilterModal();
     }
 
     function saveShiftAction() {
@@ -19241,9 +20265,109 @@
         dateSchedules[currentSelectedDate].push(newShift);
       }
 
+      // Check if this saved shift applies to Today
+      const isToday = currentSelectedDate.includes('Sept 15') || currentSelectedDate.includes('Sept 29') || currentSelectedDate.includes('Today');
+
+      if (isToday) {
+        for (const k of Object.keys(dateSchedules)) {
+          if ((k.includes('Sept 15') || k.includes('Sept 29')) && k !== currentSelectedDate) {
+            dateSchedules[k] = [...dateSchedules[currentSelectedDate]];
+          }
+        }
+        isShiftActive = false;
+        isShiftLocked = false;
+        isDoctorOffline = false;
+        renderDeskHeroStateForToday();
+      }
+
       renderDateSchedule(currentSelectedDate);
+      if (typeof renderDateCarouselStrip === 'function') {
+        renderDateCarouselStrip();
+      }
+      if (typeof renderMonthCalendarGrid === 'function') {
+        renderMonthCalendarGrid();
+      }
+      if (typeof renderClearScheduleDaysGrid === 'function') {
+        renderClearScheduleDaysGrid();
+      }
+      if (typeof renderAppointmentsList === 'function') {
+        renderAppointmentsList();
+      }
       closeInPageShiftCard();
       showToast(`Saved shift for ${currentSelectedDate}`);
+    }
+
+    function renderDeskHeroStateForToday() {
+      const todayShifts = getShiftsForDay(8, 15);
+      const altTodayShifts = (typeof dateSchedules !== 'undefined' && (dateSchedules['Sunday, Sept 15'] || dateSchedules['Wednesday, Sept 15'] || dateSchedules['Tuesday, Sept 29'] || dateSchedules[currentSelectedDate])) || [];
+      const activeShifts = (todayShifts && todayShifts.length > 0) ? todayShifts : altTodayShifts;
+
+      if (!activeShifts || activeShifts.length === 0) {
+        renderDeskHeroNoShiftState();
+        return;
+      }
+
+      const firstShift = activeShifts[0];
+      const heroCard = document.getElementById('heroCard');
+      const heroContainer = document.getElementById('heroCardInner');
+      const headerMeta = document.getElementById('headerTimeMeta');
+      if (headerMeta) headerMeta.textContent = '';
+      if (!heroContainer) return;
+
+      if (heroCard) heroCard.className = 'patient-hero-card';
+
+      const isVideo = (firstShift.type && firstShift.type.toLowerCase().includes('video')) || firstShift.typeIcon === 'ph-video-camera' || true;
+      const typeBadge = isVideo ? 'Video' : 'In-Person';
+      const typeIcon = isVideo ? 'ph-video-camera' : 'ph-user';
+      const bookedCount = firstShift.booked || 0;
+
+      if (bookedCount === 0) {
+        // 0 Bookings Yet: clean tags (Video on left, Shift 1 on right), spaced out, uncluttered
+        heroContainer.innerHTML = `
+          <div class="card-badge-row">
+            <span class="badge-pill-light">
+              <i class="ph ${typeIcon}"></i>
+              ${typeBadge}
+            </span>
+            <span class="badge-pill-status">${firstShift.name || 'Shift 1'}</span>
+          </div>
+
+          <div class="patient-details">
+            <h3 class="patient-name">No Bookings Yet</h3>
+            <div class="patient-info">
+              <span>${firstShift.startTime || '02:00 PM'} • 0 in Queue</span>
+            </div>
+          </div>
+
+          <button class="btn-hero-action" style="background: #FFFFFF; border: 1.5px solid #CBD5E1; color: #1E293B; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,0.04);" onclick="navigateToSchedule()">
+            <i class="ph-bold ph-calendar"></i>
+            <span>Manage Shift</span>
+          </button>
+        `;
+      } else {
+        // Booked patients exist: Ready To Begin with primary action button
+        heroContainer.innerHTML = `
+          <div class="card-badge-row">
+            <span class="badge-pill-light">
+              <i class="ph ${typeIcon}"></i>
+              ${typeBadge}
+            </span>
+            <span class="badge-pill-status">${firstShift.name || 'Shift 1'}</span>
+          </div>
+
+          <div class="patient-details">
+            <h3 class="patient-name">Ready To Begin</h3>
+            <div class="patient-info">
+              <span>${typeBadge} • ${bookedCount} in Queue</span>
+            </div>
+          </div>
+
+          <button class="btn-hero-action" onclick="startShiftAction()">
+            <i class="ph-fill ph-play"></i>
+            <span>Start Shift</span>
+          </button>
+        `;
+      }
     }
 
     // Shift Cancellation / Deletion State Management
@@ -19409,7 +20533,7 @@
         <div class="card-badge-row">
           <span class="badge-pill-light">
             <i class="ph ph-video-camera"></i>
-            Video Consultation
+            Video
           </span>
           <span class="badge-pill-status">Shift 1</span>
         </div>
@@ -19417,7 +20541,7 @@
         <div class="patient-details">
           <h3 class="patient-name">Ready To Begin</h3>
           <div class="patient-info">
-            <span>Video Consultation • 6 in Queue</span>
+            <span>Video • 6 in Queue</span>
           </div>
         </div>
 
@@ -19496,9 +20620,15 @@
       const toggleLabel = document.getElementById('toggleLabel');
       const headerMeta = document.getElementById('headerTimeMeta');
 
-      toggleLabel.textContent = 'Doctor Offline';
-      toggleLabel.classList.add('offline');
-      headerMeta.innerHTML = '<span style="color: #D92D20; font-weight: 600;">Shift Paused</span>';
+      if (toggleLabel) {
+        toggleLabel.textContent = 'Doctor Offline';
+        toggleLabel.classList.add('offline');
+      }
+      if (headerMeta) {
+        headerMeta.innerHTML = '<span style="color: #D92D20; font-weight: 600;">Shift Paused</span>';
+      }
+
+      if (!heroContainer || !heroCard) return;
 
       heroContainer.style.opacity = '0';
       heroContainer.style.transform = 'translateY(6px)';
@@ -19534,13 +20664,15 @@
     // Turn back Online
     function goBackOnline() {
       const checkbox = document.getElementById('acceptingToggle');
-      checkbox.checked = true;
+      if (checkbox) checkbox.checked = true;
       isDoctorOffline = false;
       
       const toggleLabel = document.getElementById('toggleLabel');
       const headerMeta = document.getElementById('headerTimeMeta');
-      toggleLabel.textContent = 'Accepting Patients';
-      toggleLabel.classList.remove('offline');
+      if (toggleLabel) {
+        toggleLabel.textContent = 'Accepting Patients';
+        toggleLabel.classList.remove('offline');
+      }
       if (headerMeta) headerMeta.textContent = '';
 
       showToast('Online: Accepting new patients');
@@ -19583,216 +20715,187 @@
     // ==========================================
     // GO OFFLINE MODAL CONTROLLER (Week & Month View Multi-Select)
     // ==========================================
-    let offlineViewMode = 'week'; // 'week' (7 days) or 'month' (full month)
-    let selectedOfflineDays = []; // Default clean state (NO red cards initially)
-    let offlineCurrentMonth = 8; // 8 = September, 9 = October
-    let offlineCurrentYear = 2026;
+    // ==========================================
+    // CLEAR SCHEDULE CONTROLLER & NO-SHIFT STATE
+    // ==========================================
+    let clearScheduleViewMode = 'week'; // 'week' (7 days) or 'month' (full month)
+    let selectedClearDays = []; // Selected day numbers to clear
+    let clearScheduleCurrentMonth = 8; // 8 = September, 9 = October
+    let clearScheduleCurrentYear = 2026;
 
-    function openGoingOfflineModal() {
-      selectedOfflineDays = []; // Always start fresh with 0 selected days
-      document.getElementById('modalBackdrop').classList.add('active');
-      const sheet = document.getElementById('goingOfflineSheet');
+    function openClearScheduleModal() {
+      selectedClearDays = []; // Always start fresh with 0 selected days
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.add('active');
+      const sheet = document.getElementById('clearScheduleModalSheet') || document.getElementById('goingOfflineSheet');
       if (sheet) sheet.classList.add('active');
-      renderOfflineDaysGrid();
-      updateOfflineImpactSummary();
+      renderClearScheduleDaysGrid();
+      updateClearScheduleImpactSummary();
     }
 
-    function closeGoingOfflineModal() {
-      document.getElementById('modalBackdrop').classList.remove('active');
-      const sheet = document.getElementById('goingOfflineSheet');
+    function closeClearScheduleModal() {
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      const sheet = document.getElementById('clearScheduleModalSheet') || document.getElementById('goingOfflineSheet');
       if (sheet) sheet.classList.remove('active');
     }
 
-    function toggleOfflineViewMode() {
-      offlineViewMode = (offlineViewMode === 'week') ? 'month' : 'week';
-      renderOfflineDaysGrid();
+    // Compatibility aliases
+    function openGoingOfflineModal() { openClearScheduleModal(); }
+    function closeGoingOfflineModal() { closeClearScheduleModal(); }
+    function closeClearScheduleConfirmedModal() {
+      const sheet = document.getElementById('clearScheduleConfirmedModalSheet') || document.getElementById('offlineConfirmedModalSheet');
+      if (sheet) sheet.classList.remove('active');
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+    function closeOfflineConfirmedModal() { closeClearScheduleConfirmedModal(); }
+    function closeCreateShiftToOfflineModal() {
+      const sheet = document.getElementById('createShiftToOfflineModalSheet');
+      if (sheet) sheet.classList.remove('active');
     }
 
-    function toggleOfflineMonthNav() {
-      offlineCurrentMonth = (offlineCurrentMonth === 8) ? 9 : 8;
-      renderOfflineDaysGrid();
-      updateOfflineImpactSummary();
+    function toggleClearScheduleViewMode() {
+      clearScheduleViewMode = (clearScheduleViewMode === 'week') ? 'month' : 'week';
+      renderClearScheduleDaysGrid();
     }
 
-    function toggleOfflineDaySelection(dayNum) {
-      const idx = selectedOfflineDays.indexOf(dayNum);
+    function toggleClearScheduleMonthNav() {
+      clearScheduleCurrentMonth = (clearScheduleCurrentMonth === 8) ? 9 : 8;
+      renderClearScheduleDaysGrid();
+      updateClearScheduleImpactSummary();
+    }
+
+    function toggleClearScheduleDaySelection(dayNum) {
+      // User can only select dates that have shifts
+      const shifts = getShiftsForDay(clearScheduleCurrentMonth, dayNum);
+      if (!shifts || shifts.length === 0) return;
+
+      const idx = selectedClearDays.indexOf(dayNum);
       if (idx > -1) {
-        selectedOfflineDays.splice(idx, 1);
+        selectedClearDays.splice(idx, 1);
       } else {
-        selectedOfflineDays.push(dayNum);
+        selectedClearDays.push(dayNum);
       }
-      renderOfflineDaysGrid();
-      updateOfflineImpactSummary();
+      renderClearScheduleDaysGrid();
+      updateClearScheduleImpactSummary();
     }
 
-    function renderOfflineDaysGrid() {
-      const container = document.getElementById('offlineDatesContainer');
-      const toggleLabel = document.getElementById('offlineViewToggleLabel');
-      const monthLabel = document.getElementById('offlineMonthLabel');
-      const navIcon = document.getElementById('offlineMonthNavIcon');
+    function renderClearScheduleDaysGrid() {
+      const container = document.getElementById('clearScheduleDatesContainer') || document.getElementById('offlineDatesContainer');
+      const toggleLabel = document.getElementById('clearScheduleViewToggleLabel') || document.getElementById('offlineViewToggleLabel');
+      const monthLabel = document.getElementById('clearScheduleMonthLabel') || document.getElementById('offlineMonthLabel');
+      const navIcon = document.getElementById('clearScheduleMonthNavIcon') || document.getElementById('offlineMonthNavIcon');
 
       if (!container) return;
 
       if (monthLabel) {
-        monthLabel.textContent = (offlineCurrentMonth === 8 ? 'Sept' : 'Oct') + ' ' + offlineCurrentYear;
+        monthLabel.textContent = (clearScheduleCurrentMonth === 8 ? 'Sept' : 'Oct') + ' ' + clearScheduleCurrentYear;
       }
       if (navIcon) {
-        navIcon.className = offlineCurrentMonth === 8 ? 'ph ph-caret-right' : 'ph ph-caret-left';
+        navIcon.className = clearScheduleCurrentMonth === 8 ? 'ph ph-caret-right' : 'ph ph-caret-left';
       }
 
       if (toggleLabel) {
-        toggleLabel.textContent = (offlineViewMode === 'week') ? 'Month View' : 'Week View';
+        toggleLabel.textContent = (clearScheduleViewMode === 'week') ? 'Month View' : 'Week View';
       }
 
       const dayAbbrs = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
       function getWeekdayName(day, month) {
-        if (month === 8) { // September 2026: Sept 1 is Tue (idx 2)
+        if (month === 8) { // Sept 2026 starts on Tue (idx 2)
           const wIdx = (2 + day - 1) % 7;
           return dayAbbrs[wIdx];
-        } else { // October 2026: Oct 1 is Thu (idx 4)
+        } else { // Oct 2026 starts on Thu (idx 4)
           const wIdx = (4 + day - 1) % 7;
           return dayAbbrs[wIdx];
         }
       }
 
-      const weekdaysHeader = document.getElementById('offlineCalWeekdaysHeader');
+      const weekdaysHeader = document.getElementById('clearScheduleCalWeekdaysHeader') || document.getElementById('offlineCalWeekdaysHeader');
       if (weekdaysHeader) {
-        weekdaysHeader.style.display = (offlineViewMode === 'month') ? 'grid' : 'none';
+        weekdaysHeader.style.display = (clearScheduleViewMode === 'month') ? 'grid' : 'none';
       }
 
-      const legendEl = document.getElementById('offlineCalLegend');
+      const legendEl = document.getElementById('clearScheduleCalLegend') || document.getElementById('offlineCalLegend');
       if (legendEl) {
-        legendEl.style.display = (offlineViewMode === 'month') ? 'flex' : 'none';
+        legendEl.style.display = (clearScheduleViewMode === 'month') ? 'flex' : 'none';
       }
 
-      container.className = (offlineViewMode === 'week') ? 'offline-dates-container week-grid' : 'offline-dates-container month-grid';
+      container.className = (clearScheduleViewMode === 'week') ? 'offline-dates-container week-grid' : 'offline-dates-container month-grid';
 
       let html = '';
 
-      if (offlineViewMode === 'week') {
-        // Option 1: Clean single-row strip of exactly 7 consecutive days from Today
-        if (offlineCurrentMonth === 8) {
-          for (let day = 15; day <= 21; day++) {
-            const isToday = (day === 15);
-            const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
-            const isSelected = selectedOfflineDays.includes(day);
-            const isTodayClass = isToday ? 'is-today-card' : '';
-            const shifts = getShiftsForDay(8, day);
-            const hasShifts = shifts && shifts.length > 0;
-            let totalBooked = 0;
-            if (hasShifts) {
-              shifts.forEach(s => { totalBooked += (s.booked || 0); });
-            }
-            const hasBooked = totalBooked > 0;
-            let dotHtml = '';
-            if (hasBooked) {
-              dotHtml = `<span class="cal-dot dot-booked"></span>`;
-            } else if (hasShifts) {
-              dotHtml = `<span class="cal-dot dot-shift"></span>`;
-            }
+      if (clearScheduleViewMode === 'week') {
+        // Week View: 7 consecutive days starting from Sept 15 or Oct 1
+        const startDay = (clearScheduleCurrentMonth === 8) ? 15 : 1;
+        const endDay = startDay + 6;
 
-            html += `
-              <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
-                   onclick="toggleOfflineDaySelection(${day})"
-                   title="${isToday ? 'Today' : dayLabel} ${day}">
-                <span class="off-card-day">${dayLabel}</span>
-                <span class="off-card-num">${day}</span>
-                <div class="off-card-dot-wrap">${dotHtml}</div>
-              </div>
-            `;
-          }
-        } else {
-          for (let day = 1; day <= 7; day++) {
-            const dayLabel = getWeekdayName(day, 9);
-            const isSelected = selectedOfflineDays.includes(day);
-            const shifts = getShiftsForDay(9, day);
-            const hasShifts = shifts && shifts.length > 0;
-            let totalBooked = 0;
-            if (hasShifts) {
-              shifts.forEach(s => { totalBooked += (s.booked || 0); });
-            }
-            const hasBooked = totalBooked > 0;
-            let dotHtml = '';
-            if (hasBooked) {
-              dotHtml = `<span class="cal-dot dot-booked"></span>`;
-            } else if (hasShifts) {
-              dotHtml = `<span class="cal-dot dot-shift"></span>`;
-            }
+        for (let day = startDay; day <= endDay; day++) {
+          const isToday = (clearScheduleCurrentMonth === 8 && day === 15);
+          const dayLabel = isToday ? 'Today' : getWeekdayName(day, clearScheduleCurrentMonth);
+          const isSelected = selectedClearDays.includes(day);
+          const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
+          const hasShifts = shifts && shifts.length > 0;
+          const isTodayClass = isToday ? 'is-today-card' : '';
+          const disabledClass = !hasShifts ? 'no-shift-disabled' : '';
+          const clickAttr = hasShifts ? `onclick="toggleClearScheduleDaySelection(${day})"` : '';
+          const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
-            html += `
-              <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
-                   onclick="toggleOfflineDaySelection(${day})"
-                   title="${dayLabel} ${day}">
-                <span class="off-card-day">${dayLabel}</span>
-                <span class="off-card-num">${day}</span>
-                <div class="off-card-dot-wrap">${dotHtml}</div>
-              </div>
-            `;
-          }
+          html += `
+            <div class="offline-date-card ${isTodayClass} ${disabledClass} ${isSelected ? 'selected' : ''}" 
+                 ${clickAttr}
+                 title="${isToday ? 'Today' : dayLabel} ${day}${!hasShifts ? ' (No shifts)' : ''}">
+              <span class="off-card-day">${dayLabel}</span>
+              <span class="off-card-num">${day}</span>
+              <div class="off-card-dot-wrap">${dotHtml}</div>
+            </div>
+          `;
         }
       } else {
-        // Month View: Standard Sunday-to-Saturday Calendar Matrix with clean centered date numbers and single-dot indicator
-        if (offlineCurrentMonth === 8) {
-          // September 2026: Sept 15 is Tuesday -> 2 leading empty cells (Sun=col 0, Mon=col 1)
-          for (let i = 0; i < 2; i++) {
+        // Month View: Full month grid starting from Today (omit past dates)
+        if (clearScheduleCurrentMonth === 8) {
+          // Sept 2026: Today is Sept 15 (Wednesday) -> 3 empty cells (Sun, Mon, Tue)
+          for (let i = 0; i < 3; i++) {
             html += `<div class="offline-date-card empty"></div>`;
           }
 
           for (let day = 15; day <= 30; day++) {
             const isToday = (day === 15);
-            const dayLabel = isToday ? 'Today' : getWeekdayName(day, 8);
-            const isSelected = selectedOfflineDays.includes(day);
-            const isTodayClass = isToday ? 'is-today-card' : '';
+            const isSelected = selectedClearDays.includes(day);
             const shifts = getShiftsForDay(8, day);
             const hasShifts = shifts && shifts.length > 0;
-            let totalBooked = 0;
-            if (hasShifts) {
-              shifts.forEach(s => { totalBooked += (s.booked || 0); });
-            }
-            const hasBooked = totalBooked > 0;
-            let dotHtml = '';
-            if (hasBooked) {
-              dotHtml = `<span class="cal-dot dot-booked"></span>`;
-            } else if (hasShifts) {
-              dotHtml = `<span class="cal-dot dot-shift"></span>`;
-            }
+            const isTodayClass = isToday ? 'is-today-card' : '';
+            const disabledClass = !hasShifts ? 'no-shift-disabled' : '';
+            const clickAttr = hasShifts ? `onclick="toggleClearScheduleDaySelection(${day})"` : '';
+            const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
             html += `
-              <div class="offline-date-card ${isTodayClass} ${isSelected ? 'selected' : ''}" 
-                   onclick="toggleOfflineDaySelection(${day})"
-                   title="${isToday ? 'Today' : dayLabel} ${day}">
+              <div class="offline-date-card ${isTodayClass} ${disabledClass} ${isSelected ? 'selected' : ''}" 
+                   ${clickAttr}
+                   title="${isToday ? 'Today' : 'Sept ' + day}${!hasShifts ? ' (No shifts)' : ''}">
                 <span class="off-card-num">${day}</span>
                 <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
             `;
           }
         } else {
-          // October 2026: Oct 1 is Thursday -> 4 leading empty cells (Sun=0, Mon=1, Tue=2, Wed=3)
+          // Oct 2026: 4 leading empty cells
           for (let i = 0; i < 4; i++) {
             html += `<div class="offline-date-card empty"></div>`;
           }
 
           for (let day = 1; day <= 31; day++) {
-            const dayLabel = getWeekdayName(day, 9);
-            const isSelected = selectedOfflineDays.includes(day);
+            const isSelected = selectedClearDays.includes(day);
             const shifts = getShiftsForDay(9, day);
             const hasShifts = shifts && shifts.length > 0;
-            let totalBooked = 0;
-            if (hasShifts) {
-              shifts.forEach(s => { totalBooked += (s.booked || 0); });
-            }
-            const hasBooked = totalBooked > 0;
-            let dotHtml = '';
-            if (hasBooked) {
-              dotHtml = `<span class="cal-dot dot-booked"></span>`;
-            } else if (hasShifts) {
-              dotHtml = `<span class="cal-dot dot-shift"></span>`;
-            }
+            const disabledClass = !hasShifts ? 'no-shift-disabled' : '';
+            const clickAttr = hasShifts ? `onclick="toggleClearScheduleDaySelection(${day})"` : '';
+            const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
             html += `
-              <div class="offline-date-card ${isSelected ? 'selected' : ''}" 
-                   onclick="toggleOfflineDaySelection(${day})"
-                   title="${dayLabel} ${day}">
+              <div class="offline-date-card ${disabledClass} ${isSelected ? 'selected' : ''}" 
+                   ${clickAttr}
+                   title="Oct ${day}${!hasShifts ? ' (No shifts)' : ''}">
                 <span class="off-card-num">${day}</span>
                 <div class="off-card-dot-wrap">${dotHtml}</div>
               </div>
@@ -19804,20 +20907,19 @@
       container.innerHTML = html;
     }
 
-    function updateOfflineImpactSummary() {
-      const daysLabel = document.getElementById('offlineDaysMarkedLabel');
-      const bookingsLabel = document.getElementById('offlineBookingsAffectedLabel');
-      const confirmBtn = document.getElementById('btnConfirmOffline');
+    function updateClearScheduleImpactSummary() {
+      const daysLabel = document.getElementById('clearDaysMarkedLabel') || document.getElementById('offlineDaysMarkedLabel');
+      const bookingsLabel = document.getElementById('clearBookingsAffectedLabel') || document.getElementById('offlineBookingsAffectedLabel');
+      const confirmBtn = document.getElementById('btnConfirmClearSchedule') || document.getElementById('btnConfirmOffline');
 
-      const count = selectedOfflineDays.length;
+      const count = selectedClearDays.length;
       if (daysLabel) {
-        daysLabel.textContent = count === 1 ? '1 Day Marked Off' : `${count} Days Marked Off`;
+        daysLabel.textContent = count === 1 ? '1 Day Selected' : `${count} Days Selected`;
       }
 
-      // Dynamically calculate affected bookings across all selected days
       let totalBookings = 0;
-      selectedOfflineDays.forEach(day => {
-        const shifts = getShiftsForDay(offlineCurrentMonth, day);
+      selectedClearDays.forEach(day => {
+        const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
         shifts.forEach(s => {
           totalBookings += (s.booked || 0);
         });
@@ -19825,10 +20927,10 @@
 
       if (bookingsLabel) {
         if (totalBookings > 0) {
-          bookingsLabel.textContent = `${totalBookings} Booking${totalBookings > 1 ? 's' : ''} Affected`;
+          bookingsLabel.textContent = `${totalBookings} Patient${totalBookings > 1 ? 's' : ''} Affected`;
           bookingsLabel.className = 'offline-bookings-affected-label';
         } else {
-          bookingsLabel.textContent = '0 Bookings Affected';
+          bookingsLabel.textContent = '0 Patients Affected';
           bookingsLabel.className = 'offline-bookings-affected-label zero-affected';
         }
       }
@@ -19838,144 +20940,149 @@
       }
     }
 
-    function confirmGoingOffline() {
-      if (selectedOfflineDays.length === 0) {
-        showToast('Please select at least 1 day to go offline.');
+    function confirmClearScheduleAction() {
+      if (selectedClearDays.length === 0) {
+        showToast('Please select at least 1 day with shifts to clear.');
         return;
       }
 
-      const checkbox = document.getElementById('acceptingToggle');
-      const isTodayIncluded = selectedOfflineDays.includes(15) && (offlineCurrentMonth === 8);
-      const count = selectedOfflineDays.length;
+      const monthPrefix = clearScheduleCurrentMonth === 8 ? 'Sept' : 'Oct';
+      const sortedDays = [...selectedClearDays].sort((a, b) => a - b);
+      const count = sortedDays.length;
 
-      // Calculate total affected bookings
+      let dateRangeStr = '';
+      if (count === 1) {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} (1 Day)`;
+      } else if (count === 2 && sortedDays[1] === sortedDays[0] + 1) {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[1]} (2 Days)`;
+      } else {
+        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[count - 1]} (${count} Days)`;
+      }
+
       let totalBookings = 0;
-      selectedOfflineDays.forEach(day => {
-        const shifts = getShiftsForDay(offlineCurrentMonth, day);
+      let totalShifts = 0;
+      selectedClearDays.forEach(day => {
+        const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
+        totalShifts += shifts.length;
         shifts.forEach(s => {
           totalBookings += (s.booked || 0);
         });
       });
 
-      // Format selected dates description
-      const monthPrefix = offlineCurrentMonth === 8 ? 'Sept' : 'Oct';
-      const sortedDays = [...selectedOfflineDays].sort((a, b) => a - b);
-      let dateRangeStr = '';
-      if (sortedDays.length === 1) {
-        dateRangeStr = `${monthPrefix} ${sortedDays[0]} (1 Day)`;
-      } else if (sortedDays.length === 2 && sortedDays[1] === sortedDays[0] + 1) {
-        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[1]} (2 Days)`;
-      } else {
-        dateRangeStr = `${monthPrefix} ${sortedDays[0]} – ${sortedDays[sortedDays.length - 1]} (${sortedDays.length} Days)`;
+      // Update Confirmation Sheet
+      const datesRangeEl = document.getElementById('clearConfirmedDatesRange') || document.getElementById('offlineConfirmedDatesRange');
+      const patientsCountEl = document.getElementById('clearConfirmedPatientsCount');
+      const rescheduleBadgeEl = document.getElementById('clearConfirmedRescheduleBadge');
+      const descEl = document.getElementById('clearConfirmedRescheduleDesc');
+
+      if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
+
+      if (patientsCountEl) {
+        patientsCountEl.textContent = `${totalBookings} Patient${totalBookings !== 1 ? 's' : ''}`;
+      }
+      if (rescheduleBadgeEl) {
+        if (totalBookings > 0) {
+          rescheduleBadgeEl.textContent = 'Rescheduled';
+          rescheduleBadgeEl.style.background = '#EFF7F5';
+          rescheduleBadgeEl.style.color = '#0E8070';
+          rescheduleBadgeEl.style.borderColor = 'rgba(126, 184, 174, 0.4)';
+        } else {
+          rescheduleBadgeEl.textContent = 'No Conflicts';
+          rescheduleBadgeEl.style.background = '#F8FAFC';
+          rescheduleBadgeEl.style.color = '#64748B';
+          rescheduleBadgeEl.style.borderColor = '#E2E8F0';
+        }
+      }
+      if (descEl) {
+        descEl.textContent = `${totalShifts} shift${totalShifts > 1 ? 's' : ''} • ${totalBookings} patient${totalBookings !== 1 ? 's' : ''} rescheduled`;
       }
 
-      // Check if entire week (or >= 7 days) is selected -> Prompt to add future shift so patients can be rescheduled
-      if (selectedOfflineDays.length >= 7) {
-        closeGoingOfflineModal();
-        openCreateShiftToOfflineModal(dateRangeStr, totalBookings);
-        return;
-      }
+      // Close Picker Sheet & Open Confirmation Sheet
+      const sheet1 = document.getElementById('clearScheduleModalSheet') || document.getElementById('goingOfflineSheet');
+      if (sheet1) sheet1.classList.remove('active');
 
-      // Mark shifts as cancelled/paused for the selected dates
-      selectedOfflineDays.forEach(day => {
-        const searchKey = `${monthPrefix} ${day}`;
+      setTimeout(() => {
+        const sheet2 = document.getElementById('clearScheduleConfirmedModalSheet') || document.getElementById('offlineConfirmedModalSheet');
+        if (sheet2) sheet2.classList.add('active');
+      }, 150);
+    }
+
+    function finishClearScheduleConfirmation() {
+      closeAllModals();
+
+      const monthPrefix = clearScheduleCurrentMonth === 8 ? 'Sept' : 'Oct';
+
+      // Clear the schedules for the selected days in dateSchedules
+      selectedClearDays.forEach(day => {
+        const regex = new RegExp(`\\b${monthPrefix}\\s+${day}\\b`, 'i');
         for (const key of Object.keys(dateSchedules)) {
-          if (key.includes(searchKey)) {
+          if (regex.test(key)) {
             dateSchedules[key] = [];
           }
         }
       });
 
-      renderDateSchedule(currentSelectedDate);
-      renderDateCarouselStrip();
-      closeGoingOfflineModal();
+      // Check if Today's shifts (Sept 15 / Sept 29) are cleared
+      const isTodayCleared = (clearScheduleCurrentMonth === 8 && (selectedClearDays.includes(15) || selectedClearDays.includes(29)));
 
-      if (isTodayIncluded) {
-        if (checkbox) checkbox.checked = false;
-        selectedDurationTitle = `${count} Day${count > 1 ? 's' : ''}`;
-        renderOfflineState();
-        renderAppointmentsList();
-      } else {
-        // Today remains online
-        if (checkbox) checkbox.checked = true;
+      if (isTodayCleared) {
+        for (const key of Object.keys(dateSchedules)) {
+          if (key.includes('Sept 15') || key.includes('Sept 29')) {
+            dateSchedules[key] = [];
+          }
+        }
+        isShiftActive = false;
+        isShiftLocked = false;
         isDoctorOffline = false;
-        const toggleLabel = document.getElementById('toggleLabel');
-        if (toggleLabel) {
-          toggleLabel.textContent = 'Accepting Patients';
-          toggleLabel.classList.remove('offline');
-        }
+        renderDeskHeroNoShiftState();
+      }
+
+      // Re-render schedule view for currently selected date (removes shifts from edit shift pages)
+      if (typeof renderDateSchedule === 'function') {
+        renderDateSchedule(currentSelectedDate);
+      }
+      // Re-render carousel strip (updates dots and dates)
+      if (typeof renderDateCarouselStrip === 'function') {
+        renderDateCarouselStrip();
+      }
+      // Re-render month calendar modal
+      if (typeof renderMonthCalendarGrid === 'function') {
+        renderMonthCalendarGrid();
+      }
+      // Re-render clear schedule grid
+      if (typeof renderClearScheduleDaysGrid === 'function') {
+        renderClearScheduleDaysGrid();
+      }
+      // Re-render appointments list
+      if (typeof renderAppointmentsList === 'function') {
         renderAppointmentsList();
       }
 
-      // Open the dedicated Offline Confirmed & Rescheduled Success Modal
-      openOfflineConfirmedModal(dateRangeStr, totalBookings, isTodayIncluded);
+      showToast('Schedule Cleared • Patients Rescheduled');
     }
 
-    function openOfflineConfirmedModal(dateRangeStr, totalBookings, isTodayIncluded) {
-      const datesRangeEl = document.getElementById('offlineConfirmedDatesRange');
-      const reschedEl = document.getElementById('offlineConfirmedRescheduleShort');
+    // Clean Minimal No-Shift State on Desk Hero Card
+    function renderDeskHeroNoShiftState() {
+      const heroCard = document.getElementById('heroCard');
+      const heroContainer = document.getElementById('heroCardInner');
+      const headerMeta = document.getElementById('headerTimeMeta');
+      if (headerMeta) headerMeta.textContent = '';
+      if (!heroContainer) return;
+      if (heroCard) heroCard.className = 'patient-hero-card no-shift-card';
 
-      if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
+      heroContainer.innerHTML = `
+        <div class="patient-details" style="margin-bottom: 16px;">
+          <h3 class="patient-name" style="font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 4px;">No Shift Today</h3>
+          <div class="patient-info" style="font-size: 13.5px; color: #64748B;">
+            <span>Create a shift to start accepting appointments.</span>
+          </div>
+        </div>
 
-      if (reschedEl) {
-        if (totalBookings > 0) {
-          reschedEl.textContent = `${totalBookings} patients auto-rescheduled`;
-        } else {
-          reschedEl.textContent = '0 booking conflicts';
-        }
-      }
-
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.add('active');
-      const sheet = document.getElementById('offlineConfirmedModalSheet');
-      if (sheet) sheet.classList.add('active');
-    }
-
-    function closeOfflineConfirmedModal() {
-      const sheet = document.getElementById('offlineConfirmedModalSheet');
-      if (sheet) sheet.classList.remove('active');
-    }
-
-    function closeOfflineConfirmedModalAndReturn() {
-      closeOfflineConfirmedModal();
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.remove('active');
-      navigateToDesk();
-    }
-
-    function openCreateShiftToOfflineModal(dateRangeStr, totalBookings) {
-      const datesRangeEl = document.getElementById('createShiftOfflineDatesRange');
-      const noteEl = document.getElementById('createShiftOfflinePatientsNote');
-
-      if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
-      if (noteEl) {
-        if (totalBookings > 0) {
-          noteEl.textContent = `${totalBookings} patients need a future shift to transfer to`;
-        } else {
-          noteEl.textContent = 'Add future shift slots to activate weekly time off';
-        }
-      }
-
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.add('active');
-      const sheet = document.getElementById('createShiftToOfflineModalSheet');
-      if (sheet) sheet.classList.add('active');
-    }
-
-    function closeCreateShiftToOfflineModal() {
-      const sheet = document.getElementById('createShiftToOfflineModalSheet');
-      if (sheet) sheet.classList.remove('active');
-    }
-
-    function goToScheduleToAddShift() {
-      closeCreateShiftToOfflineModal();
-      closeGoingOfflineModal();
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.remove('active');
-      navigateToSchedule();
-      setTimeout(() => {
-        openInPageShiftForm();
-      }, 200);
+        <button class="btn-hero-action" style="background: var(--color-primary-btn, #02241F); color: #ffffff;" onclick="navigateToSchedule()">
+          <i class="ph-bold ph-plus"></i>
+          <span>Add Shift</span>
+        </button>
+      `;
     }
 
     // Ensure pristine viewport and prevent browser scroll restoration on refresh
