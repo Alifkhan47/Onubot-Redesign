@@ -9298,66 +9298,72 @@
       overflow-y: auto;
     }
 
-    /* 1. Main Hero Balance Card (Card Sage Glassmorphism - Retained for legacy/compatibility) */
+    /* 1. Main Hero Balance Card (Sage Glassmorphism - Matches Desk Patient Card Exactly) */
     .wallet-hero-card {
-      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
+      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(126, 184, 174, 0.4);
-      border-radius: 20px;
-      padding: 20px 20px 20px 20px;
-      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+      border: 1.5px solid rgba(126, 184, 174, 0.4) !important;
+      border-radius: 20px !important;
+      padding: 18px 20px 18px 20px;
+      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
       flex-shrink: 0;
       transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
     .wallet-hero-card:hover {
-      background: linear-gradient(135deg, rgba(232, 244, 241, 0.98) 0%, rgba(206, 230, 225, 0.88) 100%);
-      border-color: rgba(126, 184, 174, 0.55);
+      background: linear-gradient(135deg, rgba(232, 244, 241, 0.98) 0%, rgba(206, 230, 225, 0.88) 100%) !important;
+      border-color: rgba(126, 184, 174, 0.55) !important;
     }
 
-    .wallet-hero-badges-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .wallet-hero-num-row {
+    .wallet-hero-top {
       display: flex;
       flex-direction: column;
+      gap: 4px;
+    }
+
+    .wallet-hero-label {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #556B67;
+      letter-spacing: 0.01em;
     }
 
     .wallet-hero-val {
       font-family: var(--font-heading);
-      font-size: 34px;
+      font-size: 27px; /* Refined smaller, uncluttered typography */
       font-weight: 800;
       color: var(--color-primary-btn);
       letter-spacing: -0.02em;
       line-height: 1.1;
-      margin: 0 0 16px 0;
+      margin: 0;
     }
 
     .btn-wallet-hero-action {
       width: 100%;
-      height: 48px;
-      min-height: 48px;
-      max-height: 48px;
+      height: 44px;
+      min-height: 44px;
+      max-height: 44px;
       flex-shrink: 0;
       background: var(--color-primary-btn);
       color: #ffffff;
       border: none;
       border-radius: 12px;
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
       transition: background 0.2s ease, transform 0.15s ease;
-      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.2);
-      margin-top: 0;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.18);
+      margin-top: 2px;
     }
 
     .btn-wallet-hero-action:hover {
@@ -12325,15 +12331,15 @@
               </button>
             </div>
 
-            <!-- 1. Cardless Available Balance Section (Minimalist Typography Standard) -->
-            <div class="wallet-balance-section">
-              <div class="wallet-balance-meta">
-                <span class="wallet-balance-label">Available Balance</span>
-                <h2 class="wallet-balance-amount" id="walletAvailableBalanceText">&#2547; 12,400</h2>
+            <!-- 1. Main Available Balance Card (Sage Glassmorphism Card - Matches Desk Patient Card) -->
+            <div class="wallet-hero-card" id="walletBalanceHeroCard">
+              <div class="wallet-hero-top">
+                <span class="wallet-hero-label">Available Balance</span>
+                <h2 class="wallet-hero-val" id="walletAvailableBalanceText">&#2547; 12,400</h2>
               </div>
-              <button class="btn-wallet-withdraw-cta" onclick="openWithdrawFundsModal()" aria-label="Withdraw Funds">
+              <button type="button" class="btn-wallet-hero-action" onclick="openWithdrawFundsModal()" aria-label="Withdraw Funds">
                 <i class="ph ph-arrow-up-right"></i>
-                <span>Withdraw</span>
+                <span>Withdraw Funds</span>
               </button>
             </div>
 
