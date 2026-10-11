@@ -330,12 +330,12 @@
       gap: 10px;
     }
 
-    /* Schedule Action Card + Clear Schedule Button (Standard Card Color #F4F6F8 Without Stroke) */
+    /* Schedule Action Card + Clear Schedule Button (White Background & Stroke) */
     .schedule-action-card {
       flex: 1;
       height: 44px;
-      background: #F4F6F8 !important;
-      border: none !important;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
       border-radius: 14px !important;
       padding: 0 16px;
       display: flex;
@@ -347,7 +347,8 @@
     }
 
     .schedule-action-card:hover {
-      background: #EDF1F4 !important;
+      background: #FAFAFA !important;
+      border-color: #CBD5E1 !important;
       transform: translateY(-1px);
     }
 
@@ -369,8 +370,8 @@
       height: 44px;
       min-width: 44px;
       max-width: 44px;
-      background: #F4F6F8 !important;
-      border: none !important;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
       border-radius: 14px !important;
       display: flex;
       align-items: center;
@@ -383,7 +384,8 @@
     }
 
     .btn-clear-schedule-action:hover {
-      background: #EDF1F4 !important;
+      background: #FAFAFA !important;
+      border-color: #CBD5E1 !important;
       color: #0F172A;
       transform: translateY(-1px);
     }
@@ -1018,10 +1020,7 @@
     }
 
     .desk-previsit-files-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 20px;
+      display: none !important; /* Kept minimal on Desk; full docs viewed in Appointment Details */
     }
 
     .desk-previsit-file-chip {
@@ -9359,6 +9358,18 @@
       color: #0E8070;
     }
 
+    .tx-icon-box.audio {
+      background: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #2563EB;
+    }
+
+    .tx-icon-box.inperson {
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      color: #4F46E5;
+    }
+
     .tx-icon-box.outflow {
       background: #F1F5F9;
       border: 1px solid #E2E8F0;
@@ -11340,16 +11351,7 @@
                       “I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.”
                     </div>
 
-                    <div class="desk-previsit-files-row" id="deskPreVisitFilesRow">
-                      <div class="desk-previsit-file-chip">
-                        <i class="ph ph-file-pdf"></i>
-                        <span>Previous_Rx_Aug2026.pdf</span>
-                      </div>
-                      <div class="desk-previsit-file-chip">
-                        <i class="ph ph-image"></i>
-                        <span>Neck_XRay_Report.jpg</span>
-                      </div>
-                    </div>
+                    <div class="desk-previsit-files-row" id="deskPreVisitFilesRow" style="display: none;"></div>
                   </div>
 
                   <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
@@ -16871,7 +16873,8 @@
           type: 'inflow',
           period: 'yesterday',
           title: 'Farzana Khan',
-          subtitle: 'Video Consultation • bKash',
+          consultType: 'audio',
+          subtitle: 'Audio Consultation • bKash',
           method: 'bKash Mobile Wallet',
           amount: 1000,
           time: '09:00 AM',
@@ -17044,11 +17047,39 @@
         let itemsHtml = '';
         groups[grpKey].forEach(tx => {
           const isInflow = tx.type === 'inflow';
-          const iconClass = isInflow ? 'ph ph-video-camera' : 'ph ph-arrow-up-right';
-          const boxClass = isInflow ? 'inflow' : 'outflow';
           const amountClass = isInflow ? 'inflow' : 'outflow';
           const formattedAmount = isInflow ? `+৳ ${tx.amount.toLocaleString()}` : `-৳ ${tx.amount.toLocaleString()}`;
-          const cleanMeta = isInflow ? `Video Consultation • ${tx.time}` : `Bank Transfer • ${tx.time}`;
+
+          // 1. Icon displays modality (Video camera / Audio phone / Withdrawal arrow)
+          let iconClass = 'ph ph-arrow-up-right';
+          let boxClass = 'outflow';
+          if (isInflow) {
+            const mode = (tx.consultType || tx.subtitle || '').toLowerCase();
+            if (mode.includes('audio') || mode.includes('phone') || mode.includes('voice')) {
+              iconClass = 'ph ph-phone-call';
+              boxClass = 'audio';
+            } else if (mode.includes('in-person') || mode.includes('inperson')) {
+              iconClass = 'ph ph-users';
+              boxClass = 'inperson';
+            } else {
+              iconClass = 'ph ph-video-camera';
+              boxClass = 'inflow';
+            }
+          }
+
+          // 2. Subtitle displays transfer method (bKash, Nagad, Prime Bank, etc.) and time
+          const rawMethod = (tx.method || tx.subtitle || '').toLowerCase();
+          let methodLabel = 'Bank Transfer';
+          if (rawMethod.includes('bkash')) methodLabel = 'bKash';
+          else if (rawMethod.includes('nagad')) methodLabel = 'Nagad';
+          else if (rawMethod.includes('prime bank')) methodLabel = 'Prime Bank';
+          else if (rawMethod.includes('city bank')) methodLabel = 'City Bank';
+          else if (rawMethod.includes('brac')) methodLabel = 'BRAC Bank';
+          else if (rawMethod.includes('ebl')) methodLabel = 'EBL';
+          else if (rawMethod.includes('bank')) methodLabel = 'Bank Account';
+          else if (!isInflow) methodLabel = 'Bank Withdrawal';
+
+          const cleanMeta = `${methodLabel} • ${tx.time}`;
 
           itemsHtml += `
             <div class="transaction-item-card" onclick="openTransactionDetails('${tx.id}')">
@@ -19085,18 +19116,9 @@
           quoteEl.textContent = `“${preVisit.complaintQuote || 'No specific complaint notes recorded.'}”`;
         }
         if (filesRow) {
-          if (preVisit.uploadedDocs && preVisit.uploadedDocs.length > 0) {
-            filesRow.style.display = 'flex';
-            filesRow.innerHTML = preVisit.uploadedDocs.map(doc => `
-              <div class="desk-previsit-file-chip">
-                <i class="ph ${doc.icon || 'ph-file-text'}"></i>
-                <span>${doc.name}</span>
-              </div>
-            `).join('');
-          } else {
-            filesRow.style.display = 'none';
-            filesRow.innerHTML = '';
-          }
+          // Docs kept hidden on Desk page to keep it minimal; viewed via Appointment Details
+          filesRow.style.display = 'none';
+          filesRow.innerHTML = '';
         }
       } else {
         if (symptomNameEl) symptomNameEl.textContent = 'General Follow-up';
@@ -19175,16 +19197,7 @@
                 “I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.”
               </div>
 
-              <div class="desk-previsit-files-row" id="deskPreVisitFilesRow">
-                <div class="desk-previsit-file-chip">
-                  <i class="ph ph-file-pdf"></i>
-                  <span>Previous_Rx_Aug2026.pdf</span>
-                </div>
-                <div class="desk-previsit-file-chip">
-                  <i class="ph ph-image"></i>
-                  <span>Neck_XRay_Report.jpg</span>
-                </div>
-              </div>
+              <div class="desk-previsit-files-row" id="deskPreVisitFilesRow" style="display: none;"></div>
             </div>
 
             <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
