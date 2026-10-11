@@ -4906,12 +4906,13 @@
     }
 
     .ai-sparkle-tag {
-      background: var(--color-card-sage);
-      color: var(--color-primary-btn);
-      padding: 3px 9px;
-      border-radius: 6px;
-      font-family: var(--font-body);
-      font-size: 11px;
+      background: transparent !important;
+      border: none !important;
+      color: #0D7A5F !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
@@ -4920,24 +4921,25 @@
       text-transform: uppercase;
     }
 
-    /* Scan Written Prescription Banner (Top of In-Person Consultation Wrap Up) */
+    /* Scan Written Prescription Actions (Top of In-Person Consultation Wrap Up - Cardless) */
     .scan-rx-banner {
-      background: #EFF7F5;
-      border: 1px solid rgba(126, 184, 174, 0.45);
-      border-radius: 18px;
-      padding: 14px 14px 12px;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 0;
       box-sizing: border-box;
       width: 100%;
       flex-shrink: 0;
+      margin-bottom: 2px;
     }
 
     .scan-rx-actions-row {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       width: 100%;
     }
 
@@ -6974,7 +6976,6 @@
 
     /* Universal Information Chip Standard (Identical Geometry Everywhere) */
     .info-chip,
-    .ai-sparkle-tag,
     .previsit-tag {
       display: inline-flex;
       align-items: center;
@@ -6994,8 +6995,7 @@
       flex-shrink: 0;
     }
 
-    .info-chip-sage,
-    .ai-sparkle-tag {
+    .info-chip-sage {
       background: #E8F6F3;
       color: #0D7A5F;
       border: 1px solid #C2E7DF;
@@ -11770,7 +11770,7 @@
               <h1 class="page-top-title">Consultation Wrap Up</h1>
             </div>
 
-            <!-- Top Scan Written Prescription Banner (In-Person Chamber Consultations) -->
+            <!-- Top Scan Written Prescription Actions (In-Person Chamber Consultations) -->
             <div class="scan-rx-banner" id="scanRxBanner">
               <div class="scan-rx-actions-row">
                 <button type="button" class="btn-scan-main" onclick="triggerScanWrittenPrescription()">
@@ -11781,7 +11781,6 @@
                   <i class="ph ph-image"></i>
                 </button>
               </div>
-              <p class="scan-rx-hint">Take a photo or upload your handwritten pad to digitize it instantly.</p>
             </div>
 
             <!-- Section 1: Chief Complaint -->
@@ -13553,13 +13552,13 @@
           </div>
           
           <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title" id="deleteModalTitle">Delete Item?</h2>
+            <h2 class="sheet-editorial-title" id="deleteModalTitle" style="font-weight: 700; font-size: 28px; line-height: 1.2;">Delete Item?</h2>
             <p class="sheet-minimal-subtitle" id="deleteModalSubtitle" style="display: none;"></p>
           </div>
 
           <div class="sheet-actions-group">
-            <button type="button" class="btn-sheet-cancel" onclick="closeDeleteConfirmModal()">Cancel</button>
-            <button type="button" class="btn-sheet-danger-confirm" onclick="confirmDeleteItem()">
+            <button type="button" class="btn-sheet-cancel" style="font-weight: 600;" onclick="closeDeleteConfirmModal()">Cancel</button>
+            <button type="button" class="btn-sheet-danger-confirm" style="font-weight: 600;" onclick="confirmDeleteItem()">
               <i class="ph ph-trash"></i>
               <span>Delete</span>
             </button>
@@ -18732,10 +18731,10 @@
         effectiveStatus = 'queued';
       }
 
-      // Dynamic Title
+      // Dynamic Title: Prescribed shows 'Visit Details', all others show 'Appointment Details'
       const pageTitleEl = document.querySelector('#pageAppointmentDetails .page-top-title');
       if (pageTitleEl) {
-        pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : ((effectiveStatus === 'cancelled' || effectiveStatus === 'declined') ? 'Cancelled Appointment' : 'Appointment Details');
+        pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : 'Appointment Details';
       }
 
       // Patient Demographics
@@ -19015,17 +19014,13 @@
         // TOP: Consultation Notes -> Pre-visit Details -> Patient Documents
         container.innerHTML = notesSectionHtml + preVisitHtml + docsSectionHtml;
       } else if (effectiveStatus === 'cancelled' || effectiveStatus === 'declined') {
-        const reasonText = appt.cancellationReason || 'Patient declined call and rebooked for tomorrow.';
-        const cancelledBannerHtml = `
-          <div class="cancelled-notice-banner" style="background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px;">
-            <i class="ph-bold ph-calendar-x" style="font-size: 20px; color: #EF4444; margin-top: 1px; flex-shrink: 0;"></i>
-            <div>
-              <div style="font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #991B1B; margin-bottom: 2px;">Consultation Cancelled</div>
-              <div style="font-family: var(--font-body); font-size: 12.5px; color: #7F1D1D; line-height: 1.45;">${reasonText}</div>
-            </div>
+        const cancelledNoticeHtml = `
+          <div class="cancelled-notice-text" style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 2px 0;">
+            <i class="ph-bold ph-calendar-x" style="font-size: 18px; color: #DC2626; flex-shrink: 0;"></i>
+            <span style="font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #DC2626; letter-spacing: -0.01em;">Consultation Cancelled</span>
           </div>
         `;
-        container.innerHTML = cancelledBannerHtml + preVisitHtml + docsSectionHtml;
+        container.innerHTML = cancelledNoticeHtml + preVisitHtml + docsSectionHtml;
       } else {
         // TOP: Pre-visit Details -> Patient Documents
         container.innerHTML = preVisitHtml + docsSectionHtml;
@@ -19882,7 +19877,11 @@
       const titleEl = document.getElementById('deleteModalTitle');
       const subEl = document.getElementById('deleteModalSubtitle');
       if (titleEl) {
-        titleEl.textContent = `Delete ${itemType}?`;
+        if (itemName) {
+          titleEl.textContent = `Delete "${itemName}"?`;
+        } else {
+          titleEl.textContent = `Delete ${itemType}?`;
+        }
       }
       if (subEl) {
         subEl.style.display = 'none';
@@ -20678,7 +20677,6 @@
               <i class="ph ph-image"></i>
             </button>
           </div>
-          <p class="scan-rx-hint">Take a photo or upload your handwritten pad to digitize it instantly.</p>
         `;
       }
 
