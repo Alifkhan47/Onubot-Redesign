@@ -30,7 +30,7 @@
       --color-card-neutral-hover: #EEF2F4;
       --color-app-bg: #FFFFFF;               /* App screen canvas (Pure White) */
       --color-badge-bg: #FFFFFF;             /* White pill badges inside sage card */
-      --color-bell-bg: #F0F6F5;              /* Bell circular container */
+      --color-bell-bg: #F1F5F9;              /* Bell circular container (Neutral Gray) */
       --color-dashed-border: #CAD8D5;        /* Secondary action border */
       --color-divider: #E2ECEA;              /* Clean metric divider */
       --color-toggle-active: #12242B;        /* Active toggle pill */
@@ -62,8 +62,11 @@
         radial-gradient(circle at 50% 50%, #11181d 0%, #080a0c 100%);
       font-family: var(--font-body);
       display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       align-items: center;
       justify-content: center;
+      gap: 32px;
       padding: 24px 16px;
     }
 
@@ -293,15 +296,15 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: var(--color-primary-btn);
-      font-size: 22px;
+      color: #0F172A;
+      font-size: 20px;
       transition: transform 0.15s ease, background 0.2s ease;
       position: relative;
     }
 
     .btn-circle-icon:active {
       transform: scale(0.92);
-      background: #e2ece9;
+      background: #E2E8F0;
     }
 
     .btn-circle-icon.has-dot::after {
@@ -309,10 +312,16 @@
       position: absolute;
       top: 11px;
       right: 12px;
-      width: 5px;
-      height: 5px;
-      background: var(--color-primary-btn);
+      width: 6px;
+      height: 6px;
+      background: #0F172A;
       border-radius: 50%;
+    }
+
+    .desk-top-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .quick-status-row {
@@ -321,14 +330,14 @@
       gap: 10px;
     }
 
-    /* Schedule Action Card + Clear Schedule Button */
+    /* Schedule Action Card + Clear Schedule Button (Compact & Subtle - No Background) */
     .schedule-action-card {
       flex: 1;
-      height: 60px;
-      background: #FFFFFF;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 18px;
-      padding: 0 18px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -338,47 +347,46 @@
     }
 
     .schedule-action-card:hover {
-      background: #F8FAFC;
+      background: transparent;
       border-color: #CBD5E1;
       transform: translateY(-1px);
     }
 
     .schedule-action-title {
       font-family: var(--font-heading);
-      font-size: 15.5px;
+      font-size: 14.5px;
       font-weight: 600;
-      color: #0F172A;
+      color: #1E293B;
       letter-spacing: -0.01em;
     }
 
     .schedule-action-caret {
-      font-size: 16px;
-      color: #64748B;
+      font-size: 14px;
+      color: #94A3B8;
     }
 
     .btn-clear-schedule-action {
-      width: 60px;
-      height: 60px;
-      min-width: 60px;
-      max-width: 60px;
-      background: #FFFFFF;
-      border: 1.5px solid #E2E8F0;
-      border-radius: 18px;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      background: transparent;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      color: #0F172A;
-      font-size: 22px;
+      color: #64748B;
+      font-size: 18px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      flex-shrink: 0;
       box-sizing: border-box;
-      padding: 0;
     }
 
     .btn-clear-schedule-action:hover {
-      background: #F8FAFC;
-      border-color: #CBD5E1;
+      background: #FEF2F2;
+      border-color: #FECACA;
+      color: #DC2626;
       transform: translateY(-1px);
     }
 
@@ -543,72 +551,88 @@
       color: var(--color-text-secondary);
     }
 
+    .btn-desk-view-all {
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #64748B;
+      cursor: pointer;
+      transition: color 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-desk-view-all:hover {
+      color: #0F172A;
+      transform: translateX(1px);
+    }
+
+    .btn-desk-view-all i {
+      font-size: 14px;
+      color: #94A3B8;
+    }
+
     .patient-hero-card {
-      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(126, 184, 174, 0.4);
-      border-radius: 20px;
-      padding: 18px 18px 18px;
+      background: #F4F6F8;
+      border: none;
+      border-radius: 18px;
+      padding: 16px 16px 14px;
       display: flex;
       flex-direction: column;
       position: relative;
       flex-shrink: 0;
-      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .patient-hero-card.offline-card {
-      background: linear-gradient(135deg, rgba(254, 250, 249, 0.96) 0%, rgba(254, 243, 242, 0.85) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(254, 205, 202, 0.75);
-      box-shadow: 0 4px 20px -2px rgba(217, 45, 32, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-      padding: 22px 18px;
+      background: #FEF3F2;
+      border: none;
+      box-shadow: none;
+      padding: 16px;
     }
 
     .patient-hero-card.locked-card {
-      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(226, 236, 234, 0.85);
-      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-    }
-
-    .patient-hero-card.locked-card .badge-pill-light,
-    .patient-hero-card.locked-card .badge-pill-status {
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid #e2ecea;
-      color: var(--color-text-secondary);
+      background: #F4F6F8;
+      border: none;
+      box-shadow: none;
     }
 
     .patient-hero-card.no-shift-card {
-      background: #FFFFFF;
-      border: 1.5px solid rgba(2, 36, 31, 0.22);
-      box-shadow: 0 4px 20px -2px rgba(2, 36, 31, 0.04);
-      padding: 20px 18px 18px;
+      background: #F4F6F8;
+      border: none;
+      box-shadow: none;
+      padding: 16px;
     }
 
-    .card-badge-row {
+    .card-meta-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 10px;
+    }
+
+    .hero-meta-text {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748B;
+      letter-spacing: -0.01em;
+      display: inline-flex;
+      align-items: center;
     }
 
     .patient-hero-card.inperson-card {
-      background: linear-gradient(135deg, rgba(240, 246, 255, 0.95) 0%, rgba(224, 238, 254, 0.82) 100%);
-      border-color: rgba(147, 197, 253, 0.65);
-      box-shadow: 0 4px 20px -2px rgba(29, 78, 216, 0.07), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+      background: #EFF6FF;
+      border: none;
+      box-shadow: none;
     }
 
-    .patient-hero-card.inperson-card .badge-pill-light {
-      background: rgba(219, 234, 254, 0.9);
-      color: #1D4ED8;
-    }
-
-    .patient-hero-card.inperson-card .badge-pill-status {
-      background: rgba(219, 234, 254, 0.9);
+    .patient-hero-card.inperson-card .hero-meta-text {
       color: #1D4ED8;
     }
 
@@ -619,85 +643,30 @@
     .patient-hero-card.inperson-card .btn-hero-action {
       background: #0B2238;
       color: #ffffff;
-      box-shadow: 0 4px 14px rgba(11, 34, 56, 0.3);
+      box-shadow: none;
     }
 
     .patient-hero-card.inperson-card .btn-hero-action:hover {
       background: #071930;
     }
 
-    .shift-type-indicator {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 6px;
-      letter-spacing: -0.01em;
-      line-height: 1.2;
-      display: inline-flex;
-      align-items: center;
-      margin-left: 2px;
-    }
-
-    .shift-type-indicator.shift-badge-video {
-      background: #EFF7F5;
-      color: #0E8070;
-      border: 1px solid rgba(126, 184, 174, 0.4);
-    }
-
-    .shift-type-indicator.shift-badge-inperson {
-      background: #EFF6FF;
-      color: #1D4ED8;
-      border: 1px solid #BFDBFE;
-    }
-
-    .badge-pill-light {
-      background: var(--color-badge-bg);
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-family: var(--font-heading);
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
-      letter-spacing: -0.01em;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .badge-pill-status {
-      background: var(--color-badge-bg);
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-family: var(--font-body);
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--color-primary-btn);
-      letter-spacing: -0.01em;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
     .patient-details {
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .patient-name {
       font-family: var(--font-heading);
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       letter-spacing: -0.02em;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .patient-info {
       font-family: var(--font-body);
-      font-size: 13.5px;
-      color: #4A635E;
+      font-size: 13px;
+      color: #64748B;
       font-weight: 400;
       display: flex;
       align-items: center;
@@ -706,15 +675,15 @@
 
     .dot-separator {
       font-size: 10px;
-      color: var(--color-text-secondary);
+      color: #94A3B8;
     }
 
     .btn-hero-action {
-      background: var(--color-primary-btn);
+      background: var(--color-primary-btn, #052E28);
       color: #ffffff;
       border: none;
-      border-radius: 14px;
-      height: 46px;
+      border-radius: 12px;
+      height: 44px;
       width: 100%;
       display: flex;
       align-items: center;
@@ -725,44 +694,784 @@
       font-weight: 700;
       letter-spacing: -0.01em;
       cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease;
+      box-shadow: none;
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
     .btn-hero-action i {
-      font-size: 19px;
+      font-size: 18px;
     }
 
     .btn-hero-action:hover {
-      background: var(--color-primary-btn-hover);
+      background: var(--color-primary-btn-hover, #02241F);
     }
 
     .btn-hero-action:active {
       transform: scale(0.98);
     }
 
-    .btn-hero-action.btn-hero-locked {
-      background: #EAEFEF;
-      color: #4A635E;
-      border: 1px solid #D1DFDC;
+    /* Swipeable Patient Card & Wise Minimal Desk Styles */
+    .patient-carousel-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+    }
+
+    .patient-swipe-card {
+      background: #F4F6F8;
+      border: none;
+      border-radius: 20px;
+      padding: 20px 20px;
+      min-height: 108px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, background 0.15s ease;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .patient-swipe-card:hover {
+      background: #EDF1F4;
+    }
+
+    .patient-swipe-card:active {
+      cursor: grabbing;
+    }
+
+    .patient-card-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0;
+    }
+
+    .patient-card-name-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .patient-card-name {
+      font-family: var(--font-heading);
+      font-size: 21px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .patient-card-subtitle {
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: #64748B;
+      font-weight: 500;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    .patient-card-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      flex-shrink: 0;
+      color: #059669;
+    }
+
+    .patient-card-status-badge.in-call {
+      background: transparent;
+      color: #059669;
+      border: none;
+      padding: 0;
+    }
+
+    .patient-card-status-badge.draft-rx {
+      background: transparent;
+      color: #64748B;
+      border: none;
+      padding: 0;
+    }
+
+    .patient-card-status-badge.calling {
+      display: none;
+      background: transparent;
+      color: #2563EB;
+      border: none;
+      padding: 0;
+    }
+
+    .patient-card-status-badge.queued {
+      display: none;
+      background: transparent;
+      color: #64748B;
+      border: none;
+      padding: 0;
+    }
+
+    .patient-card-actions-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .btn-card-join {
+      width: 100%;
+      height: 46px;
+      border-radius: 14px;
+      background: #0F172A;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-card-join:hover {
+      background: #000000;
+    }
+
+    .btn-card-join:active {
+      transform: scale(0.98);
+    }
+
+    .btn-card-join.pulsing-join {
+      background: #0F172A;
+      box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.15);
+      animation: joinPulse 2s infinite;
+    }
+
+    @keyframes joinPulse {
+      0% { box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.3); }
+      70% { box-shadow: 0 0 0 10px rgba(15, 23, 42, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(15, 23, 42, 0); }
+    }
+
+    .btn-card-finish-rx {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      background: #F1F5F9;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
+      font-family: var(--font-heading);
+      font-size: 14px;
       font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
     }
 
-    .btn-hero-action.btn-hero-locked:hover {
-      background: #DFE8E6;
-      color: var(--color-primary-btn);
-      border-color: #BCCFCB;
+    .btn-card-finish-rx i {
+      font-size: 16px;
+      color: #475569;
     }
 
-    .btn-hero-action.btn-hero-locked i {
-      font-size: 17px;
-      color: #5C7672;
+    .btn-card-finish-rx:hover {
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+      color: #000000;
+    }
+
+    .btn-card-finish-rx:active {
+      transform: scale(0.98);
+    }
+
+    .carousel-pagination-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      margin-bottom: 2px;
+      padding: 0 4px;
+    }
+
+    .carousel-dots-cluster {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #CBD5E1;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .carousel-dot.active {
+      width: 18px;
+      border-radius: 4px;
+      background: #0F172A;
+    }
+
+    .carousel-dot.in-call-dot {
+      background: #10B981 !important;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.35);
+      animation: dotPulse 1.8s infinite;
+    }
+
+    @keyframes dotPulse {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+
+    /* Desk Plain-Text Pre-Visit Section (Wise Minimal Aesthetic - Flat White Surface) */
+    .desk-previsit-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 26px;
+      padding-top: 20px;
+      border-top: 1px solid #F1F5F9;
+      font-family: var(--font-body);
+    }
+
+    .desk-previsit-stream-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .desk-previsit-stream-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .desk-previsit-stream-tag {
+      display: none !important;
+    }
+
+    .desk-previsit-content-body {
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.18s ease, transform 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .desk-previsit-content-body.fade-out {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+
+    .desk-previsit-symptom-name {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+
+    .desk-previsit-meta-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #64748B;
+      margin-top: 4px;
+      margin-bottom: 14px;
+    }
+
+    .desk-previsit-quote-block {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #334155;
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin-bottom: 16px;
+      font-style: normal;
+    }
+
+    .desk-previsit-files-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .desk-previsit-file-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      background: transparent;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #334155;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .desk-previsit-file-chip:hover {
+      background: #E2E8F0;
+      border-color: #CBD5E1;
+    }
+
+    .desk-previsit-file-chip i {
+      color: #64748B;
+      font-size: 14px;
+    }
+
+    .btn-see-full-details {
+      background: none;
+      border: none;
+      padding: 4px 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      cursor: pointer;
+      align-self: flex-start;
+      margin-top: 6px;
+      transition: color 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-see-full-details:hover {
+      color: #475569;
+      transform: translateX(2px);
+    }
+
+    /* Native-Style Floating App Push Notification Banner (Dropdown & Auto-Dismiss) */
+    .app-push-notification {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      right: 12px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 18px;
+      padding: 12px 14px;
+      color: #FFFFFF;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.2);
+      z-index: 250;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      transform: translateY(-140%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    }
+
+    .app-push-notification.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .push-notif-app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .push-notif-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .push-notif-icon-box {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: #10B981;
+      color: #02241F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .push-notif-app-name {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      color: #94A3B8;
+      letter-spacing: 0.06em;
+    }
+
+    .push-notif-dot {
+      color: #64748B;
+      font-size: 10px;
+    }
+
+    .push-notif-time {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #94A3B8;
+    }
+
+    .btn-push-notif-close {
+      background: none;
+      border: none;
+      color: #94A3B8;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.15s ease;
+    }
+
+    .btn-push-notif-close:hover {
+      color: #FFFFFF;
+    }
+
+    .push-notif-content-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .push-notif-text-block {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .push-notif-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .push-notif-subtitle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #CBD5E1;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .btn-push-notif-join {
+      background: #10B981;
+      color: #02241F;
+      border: none;
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    .btn-push-notif-join:hover {
+      background: #34D399;
+    }
+
+    /* Full Screen Doctor Shift Readiness Call Modal */
+    .doctor-shift-call-modal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #011915;
+      background-image: 
+        radial-gradient(ellipse at 50% 25%, rgba(16, 185, 129, 0.18) 0%, transparent 60%),
+        radial-gradient(circle at 50% 80%, rgba(5, 46, 40, 0.4) 0%, transparent 50%);
+      color: #FFFFFF;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 56px 24px 44px 24px;
+      box-sizing: border-box;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .doctor-shift-call-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .shift-call-center-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .shift-call-avatar-wrap {
+      position: relative;
+      width: 96px;
+      height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .shift-call-pulse-ring {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1.5px solid rgba(16, 185, 129, 0.45);
+      animation: callRingPulse 2.4s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .shift-call-pulse-ring.ring-2 {
+      animation-delay: 0.8s;
+    }
+
+    @keyframes callRingPulse {
+      0% { transform: scale(0.9); opacity: 0.8; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+
+    .shift-call-icon-box {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #052E28 0%, #0D7A5F 100%);
+      border: 2px solid rgba(255, 255, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: #34D399;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      z-index: 2;
+    }
+
+    .shift-call-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .shift-call-title {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .shift-call-subtitle {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: #94A3B8;
+      margin: 0;
+    }
+
+    .shift-call-desc {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #CBD5E1;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    .shift-call-bottom-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .btn-shift-call-accept {
+      width: 100%;
+      height: 52px;
+      background: #10B981;
+      color: #02241F;
+      border: none;
+      border-radius: 16px;
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.35);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-shift-call-accept:hover {
+      background: #34D399;
+      transform: translateY(-1px);
+    }
+
+    .btn-shift-call-accept:active {
+      transform: scale(0.98);
+    }
+
+    .shift-call-delay-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .shift-delay-label {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .shift-delay-pills-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .btn-delay-pill {
+      flex: 1;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      color: #E2E8F0;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .btn-delay-pill:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.25);
+      color: #FFFFFF;
+    }
+
+    /* Simulation Controls Column List (Outside Phone Frame) */
+    .sim-controls-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      width: 220px;
+      margin: 0;
+      flex-shrink: 0;
+    }
+
+    .btn-sim-trigger {
+      background: rgba(18, 36, 43, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(126, 184, 174, 0.25);
+      color: #E2ECE9;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      transition: all 0.15s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-sim-trigger:hover {
+      background: #052E28;
+      border-color: #34D399;
+      color: #34D399;
+      transform: translateY(-1px);
+    }
+
+    .btn-sim-trigger:active {
+      transform: scale(0.98);
+    }
+
+    .btn-sim-trigger i {
+      font-size: 16px;
+    }
+
+    .btn-sim-trigger.accent {
+      background: #0D7A5F;
+      border-color: #34D399;
+      color: #FFFFFF;
     }
 
     .offline-empty-state {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .offline-icon-row {
@@ -776,21 +1485,21 @@
       width: 38px;
       height: 38px;
       border-radius: 12px;
-      background: #FEF3F2;
-      border: 1px solid #FECDCA;
+      background: rgba(217, 45, 32, 0.1);
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #D92D20;
       font-size: 20px;
-      box-shadow: 0 1px 3px rgba(217, 45, 32, 0.05);
+      box-shadow: none;
     }
 
     .offline-status-tag {
-      background: #FEF3F2;
-      border: 1px solid #FECDCA;
+      background: rgba(217, 45, 32, 0.1);
+      border: none;
       padding: 4px 12px;
-      border-radius: 8px;
+      border-radius: 50px;
       font-family: var(--font-body);
       font-size: 12px;
       font-weight: 700;
@@ -798,7 +1507,7 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      box-shadow: 0 1px 2px rgba(217, 45, 32, 0.04);
+      box-shadow: none;
     }
 
     .offline-text-group {
@@ -809,17 +1518,17 @@
 
     .offline-title {
       font-family: var(--font-heading);
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       letter-spacing: -0.02em;
     }
 
     .offline-description {
       font-family: var(--font-body);
       font-size: 13.5px;
-      color: var(--color-text-secondary);
-      line-height: 1.4;
+      color: #64748B;
+      line-height: 1.45;
       font-weight: 400;
     }
 
@@ -829,44 +1538,45 @@
       min-height: 48px;
       max-height: 48px;
       flex-shrink: 0;
-      background: #ffffff;
-      border: 1px solid #EAEFEF;
-      border-radius: 14px;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      background: #F4F6F8;
+      border: none;
+      border-radius: 16px;
+      box-shadow: none;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 18px;
       font-family: var(--font-heading);
       font-size: 14px;
       font-weight: 600;
-      color: var(--color-primary-btn);
+      color: #0F172A;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background 0.15s ease, transform 0.1s ease;
     }
 
     .btn-view-appointments i {
-      font-size: 15px;
+      font-size: 16px;
       color: #94A3B8;
-      transition: transform 0.18s ease, color 0.18s ease;
+      transition: transform 0.15s ease, color 0.15s ease;
     }
 
     .btn-view-appointments:hover {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-      transform: translateY(-1px);
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+      background: #ECEFF2;
     }
 
     .btn-view-appointments:hover i {
       transform: translateX(3px);
-      color: var(--color-primary-btn);
+      color: #0F172A;
+    }
+
+    .btn-view-appointments:active {
+      transform: scale(0.98);
     }
 
     .financial-section {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-element);
+      gap: 12px;
       flex-shrink: 0;
     }
 
@@ -886,26 +1596,23 @@
 
     .financial-header:hover .arrow-icon {
       transform: translateX(3px);
-      color: var(--color-primary-btn);
+      color: #0F172A;
     }
 
     .financial-card {
-      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(226, 236, 234, 0.85);
-      border-radius: 18px;
-      padding: 16px 20px;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      border-radius: 18px !important;
+      padding: 18px 20px !important;
       display: flex;
       align-items: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-      transition: all 0.18s ease;
+      box-shadow: none !important;
+      transition: background 0.15s ease;
     }
 
     .financial-card:hover {
-      background: linear-gradient(135deg, rgba(240, 244, 243, 0.98) 0%, rgba(230, 238, 236, 0.85) 100%);
-      border-color: rgba(126, 184, 174, 0.35);
+      background: #FAFAFA !important;
     }
 
     .financial-column {
@@ -916,33 +1623,31 @@
     }
 
     .financial-column.right {
-      padding-left: 20px;
+      padding-left: 10px;
     }
 
     .financial-column.left {
-      padding-right: 20px;
+      padding-right: 10px;
     }
 
     .financial-divider {
-      width: 1px;
-      height: 46px;
-      background: var(--color-divider);
+      display: none !important;
     }
 
     .metric-label {
       font-family: var(--font-body);
-      font-size: 13px;
-      color: var(--color-text-secondary);
-      font-weight: 400;
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 500;
     }
 
     .metric-value {
       font-family: var(--font-heading);
       font-size: 24px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
+      font-weight: 800;
+      color: #0F172A;
       letter-spacing: -0.02em;
-      line-height: 1.1;
+      line-height: 1.15;
     }
 
     /* ============================================================
@@ -1325,9 +2030,9 @@
       height: 36px !important;
       min-width: 36px !important;
       font-size: 16px !important;
-      background: var(--color-bell-bg, #F0F6F5) !important;
-      border: 1px solid rgba(14, 128, 112, 0.18) !important;
-      color: var(--color-primary-btn, #052E28) !important;
+      background: #F1F5F9 !important;
+      border: 1px solid #E2E8F0 !important;
+      color: #0F172A !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1337,7 +2042,8 @@
     }
 
     .btn-cal-nav-arrow:hover:not(:disabled) {
-      background: #D6EAE6 !important;
+      background: #E2E8F0 !important;
+      border-color: #CBD5E1 !important;
       transform: translateY(-1px);
     }
 
@@ -3039,12 +3745,12 @@
       width: 40px;
       height: 40px;
       border-radius: 14px;
-      background: var(--color-card-sage);
+      background: #F1F5F9;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--color-primary-btn);
-      font-size: 22px;
+      color: #0F172A;
+      font-size: 20px;
     }
 
     .sheet-hero-header {
@@ -5612,6 +6318,7 @@
       gap: 16px;
       width: 100%;
       flex-shrink: 0;
+      margin-top: 10px;
     }
 
     .appts-date-group {
@@ -5648,7 +6355,6 @@
     .appts-shift-block {
       display: flex;
       flex-direction: column;
-      gap: 8px;
       width: 100%;
       flex-shrink: 0;
     }
@@ -5657,63 +6363,69 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 4px 2px 2px 2px;
+      padding: 6px 2px 14px 2px;
+      margin-top: 6px;
+      margin-bottom: 4px;
       flex-shrink: 0;
     }
 
     .shift-title-cluster {
       display: flex;
       align-items: center;
-      gap: 5px;
-      color: #0d9488;
+      gap: 8px;
+      color: #0F172A;
       font-family: var(--font-heading);
-      font-size: 12.5px;
+      font-size: 13.5px;
       font-weight: 700;
       letter-spacing: -0.01em;
     }
 
     .shift-title-cluster i {
-      font-size: 13px;
+      font-size: 14px;
+      color: #64748B;
     }
 
     .shift-capacity-tag {
       font-family: var(--font-body);
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 500;
-      color: #94A3B8;
+      color: #64748B;
     }
 
     .appts-shift-cards-group {
       display: flex;
       flex-direction: column;
-      gap: 8px;
       width: 100%;
     }
 
     .appointment-item-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 16px;
-      padding: 12px 14px;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #F1F5F9 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 15px 4px !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background 0.15s ease;
       flex-shrink: 0;
     }
 
     .appointment-item-card:hover {
-      background: var(--color-card-neutral-hover);
-      border-color: #cbd5e1;
-      transform: translateY(-1px);
+      background: #F8FAFC !important;
+    }
+
+    .appointment-item-card:last-child {
+      border-bottom: none !important;
     }
 
     .appointment-item-card.is-current-turn {
-      background: #f4f9f8;
-      border-color: var(--color-border-selected);
-      box-shadow: 0 3px 12px rgba(126, 184, 174, 0.16);
+      background: transparent !important;
+      border-bottom: 1px solid #F1F5F9 !important;
+      box-shadow: none !important;
     }
 
     .appointment-item-card:active {
@@ -5729,43 +6441,39 @@
     }
 
     .appt-serial-box {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: #F4F7F6;
-      border: 1px solid #E2ECE9;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-heading);
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--color-primary-btn);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
       flex-shrink: 0;
     }
 
     .appt-serial-box.status-skipped {
-      background: #FFF5EB;
-      border-color: #FDE68A;
-      color: #D97706;
+      background: #FEF2F2;
+      color: #DC2626;
     }
 
     .appt-serial-box.status-requeued {
-      background: #FFFBEB;
-      border-color: #FDE68A;
-      color: #D97706;
+      background: #F1F5F9;
+      color: #475569;
     }
 
     .appt-serial-box.status-absent {
       background: #FEF2F2;
-      border-color: #FECACA;
       color: #DC2626;
     }
 
     .appt-serial-box.status-in-call {
-      background: var(--color-card-sage);
-      border-color: var(--color-border-selected);
-      color: var(--color-primary-btn);
+      background: #ECFDF5;
+      color: #059669;
     }
 
     .appt-meta-block {
@@ -5778,9 +6486,10 @@
 
     .appt-patient-name {
       font-family: var(--font-heading);
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
+      line-height: 1.25;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -5788,9 +6497,10 @@
 
     .appt-patient-subtitle {
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 12.5px;
       color: #64748B;
       font-weight: 400;
+      line-height: 1.25;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -5799,63 +6509,79 @@
     .appt-card-right {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-shrink: 0;
     }
 
     .appt-status-badge {
-      padding: 3px 9px;
-      border-radius: 100px;
+      padding: 4px 10px;
+      border-radius: 20px;
       font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
+      font-size: 11.5px;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       white-space: nowrap;
+      border: none;
     }
 
     .appt-status-badge.prescribed {
-      background: #E8F7F0;
-      color: #0D7A48;
-      border: 1px solid #B8EBD1;
+      background: transparent;
+      color: #64748B;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .appt-status-badge.cancelled {
+      background: transparent;
+      color: #64748B;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     .appt-status-badge.draft-rx {
-      background: #FFFBEB;
-      color: #92400E;
-      border: 1px solid #FDE68A;
+      background: #F1F5F9;
+      color: #475569;
     }
 
     .appt-status-badge.skipped {
       background: #FEF2F2;
-      color: #991B1B;
-      border: 1px solid #FECACA;
+      color: #DC2626;
     }
 
     .appt-status-badge.absent {
       background: #FEF2F2;
       color: #DC2626;
-      border: 1px solid #FECACA;
     }
 
     .appt-status-badge.current-turn {
-      background: #EFF7F5;
-      color: #0E8070;
-      border: 1px solid rgba(126, 184, 174, 0.5);
+      background: #ECFDF5;
+      color: #059669;
     }
 
     .appt-status-badge.in-call {
-      background: var(--color-card-sage);
-      color: var(--color-primary-btn);
-      border: 1px solid var(--color-border-selected);
+      background: #ECFDF5;
+      color: #059669;
     }
 
     .appt-status-badge.requeued {
-      background: #FAF5FF;
-      color: #6B21A8;
-      border: 1px solid #E9D5FF;
+      background: #F1F5F9;
+      color: #475569;
+    }
+
+    .appt-status-badge.queued {
+      background: transparent;
+      color: #94A3B8;
+      padding: 0;
     }
 
     .appt-arrow-icon {
@@ -5875,7 +6601,7 @@
        ============================================================ */
     .app-page.page-appointment-details {
       background: var(--color-app-bg);
-      padding: 12px 20px 0 20px;
+      padding: 12px 20px 96px 20px !important;
       display: flex;
       flex-direction: column;
       min-height: 100%;
@@ -5897,29 +6623,32 @@
       flex-shrink: 0;
     }
 
-    /* Patient Profile Card */
+    /* Patient Profile Card (White background with stroke) */
     .details-patient-profile-card {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 20px;
-      padding: 14px 16px;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      border-radius: 16px !important;
+      padding: 14px 16px !important;
       display: flex;
       align-items: center;
       gap: 14px;
       flex-shrink: 0;
+      box-shadow: none !important;
     }
 
     .details-avatar-box {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: #ffffff;
-      border: 1.5px solid #e2ecea;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #E8F4F1 !important;
+      border: 1px solid #D1E5E1 !important;
+      color: var(--color-primary-btn, #02241F) !important;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      color: var(--color-primary-btn);
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
       flex-shrink: 0;
       overflow: hidden;
     }
@@ -5939,9 +6668,9 @@
 
     .details-patient-name {
       font-family: var(--font-heading);
-      font-size: 17.5px;
+      font-size: 17px;
       font-weight: 800;
-      color: var(--color-text-primary);
+      color: #0F172A;
       letter-spacing: -0.01em;
       white-space: nowrap;
       overflow: hidden;
@@ -5951,65 +6680,75 @@
     .details-patient-meta {
       font-family: var(--font-body);
       font-size: 12px;
-      color: var(--color-text-secondary);
+      color: #64748B;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    /* 3-Column Info Strip */
+    /* 3-Column Info Strip (Plain Text, Middle / Center Aligned) */
     .details-info-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 12px;
       width: 100%;
+      padding: 6px 2px 18px 2px;
+      border-bottom: 1px solid #F1F5F9;
       flex-shrink: 0;
+      align-items: center;
+      justify-items: center;
     }
 
     .details-info-item {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 14px;
-      padding: 10px 12px;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      text-align: left;
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      gap: 4px;
+      width: 100%;
     }
 
     .details-info-label {
       font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--color-text-secondary);
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
+      text-align: center !important;
     }
 
     .details-info-val {
       font-family: var(--font-heading);
-      font-size: 13.5px;
+      font-size: 14.5px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: center !important;
     }
 
     .details-info-val.status-prescribed {
-      color: #0D7A48;
+      color: #059669;
     }
 
     .details-info-val.status-draft {
-      color: #92400E;
+      color: #D97706;
     }
 
     .details-info-val.status-skipped {
-      color: #991B1B;
+      color: #DC2626;
     }
 
     .details-info-val.status-incall {
-      color: #0d9488;
+      color: #10B981;
     }
 
     .details-top-meta-wrap {
@@ -6105,11 +6844,11 @@
       color: #64748b;
     }
 
-    /* Clean Decluttered Dynamic Sections Stack */
+    /* Clean Decluttered Dynamic Sections Stack (Wise-Style Dividers) */
     .details-content-sections {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-section); /* Strict 24px between different sections */
+      gap: 20px;
       width: 100%;
       flex: 1;
     }
@@ -6117,9 +6856,16 @@
     .details-clean-section {
       display: flex;
       flex-direction: column;
-      gap: var(--spacing-element); /* Strict 10px inside section */
+      gap: 12px;
       width: 100%;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #F1F5F9;
       flex-shrink: 0;
+    }
+
+    .details-clean-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
     }
 
     .details-clean-header {
@@ -6131,58 +6877,78 @@
 
     .details-clean-title {
       font-family: var(--font-heading);
-      font-size: 15.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       letter-spacing: -0.01em;
     }
 
-    /* Consultation Notes Card (High Importance Outcome Standard) */
+    /* Plain Text Tag / Chips (No card boxes, no backgrounds) */
+    .details-plain-tag {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+      text-transform: none;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .details-plain-tag.tag-intake,
+    .desk-previsit-stream-tag {
+      color: #B45309 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Consultation Notes Card (Standard Neutral Card Surface #F4F6F8) */
     .details-notes-card {
-      background: #F4F8F7;
-      border: 1.5px solid #D1E5E1;
-      border-radius: 16px;
-      padding: 15px 16px;
+      background: #F4F6F8 !important;
+      border: none !important;
+      border-radius: 16px !important;
+      padding: 16px 18px !important;
       display: flex;
       flex-direction: column;
       gap: 8px;
       width: 100%;
       box-sizing: border-box;
-      box-shadow: 0 1px 4px rgba(5, 46, 40, 0.02);
+      box-shadow: none !important;
     }
 
     .details-notes-body {
       font-family: var(--font-body);
       font-size: 13.5px;
-      line-height: 1.55;
-      color: #0F2F29;
-      font-weight: 500;
+      line-height: 1.6;
+      color: #1E293B;
+      font-weight: 400;
       margin: 0;
     }
 
-    /* Pre-Visit Details Card (Soft Warm Neutral to Differentiate Patient Intake) */
+    /* Pre-Visit Details: Single Card (Soft Warm Neutral Tint for Visual Hierarchy) */
     .details-previsit-card {
-      background: #FAF8F5;
-      border: 1.5px solid #EFE5D6;
-      border-radius: 16px;
-      padding: 14px 16px;
+      background: #FAF8F5 !important;
+      border: 1px solid #EFE5D6 !important;
+      border-radius: 16px !important;
+      padding: 16px 18px !important;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
       width: 100%;
       box-sizing: border-box;
+      box-shadow: none !important;
     }
 
     .details-symptom-title {
       font-family: var(--font-heading);
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 700;
-      color: #2D2013;
+      color: #1E293B;
     }
 
     .details-symptom-meta-row {
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 12.5px;
       color: #786654;
       font-weight: 500;
       display: flex;
@@ -6192,16 +6958,15 @@
 
     .details-previsit-quote {
       font-family: var(--font-body);
-      font-size: 12.5px;
-      line-height: 1.5;
-      color: #4A3B2C;
-      font-style: italic;
-      background: #ffffff;
-      border: 1px solid #EFE4D4;
-      border-left: 3px solid #D97706;
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin: 2px 0 0 0;
+      font-size: 13px;
+      line-height: 1.55;
+      color: #334155;
+      font-style: normal;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 6px 0 0 0 !important;
+      margin: 4px 0 0 0 !important;
     }
 
     /* Universal Information Chip Standard (Identical Geometry Everywhere) */
@@ -6246,7 +7011,13 @@
       border: 1px solid #E2E8F0;
     }
 
-    /* Clean Issued Prescription Tile */
+    /* Plain Tag AI Note (Dark Green) */
+    .details-plain-tag.tag-ai-note {
+      color: #065F46 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Clean Issued Prescription Tile - Entire Card Clickable */
     .details-rx-tile {
       background: var(--color-card-sage);
       border: 1.5px solid var(--color-border-selected);
@@ -6256,6 +7027,34 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .details-rx-tile:hover {
+      border-color: #0F5E54;
+      background: #DFECE8;
+    }
+
+    .details-rx-tile:active {
+      transform: scale(0.99);
+      background: #D5E6E1;
+    }
+
+    .details-rx-tile-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary-btn);
+      font-size: 20px;
+      flex-shrink: 0;
+      padding: 4px;
+      transition: transform 0.15s ease;
+    }
+
+    .details-rx-tile:hover .details-rx-tile-action {
+      transform: scale(1.08);
     }
 
     .details-rx-tile-left {
@@ -6324,104 +7123,93 @@
       background: var(--color-primary-btn-hover);
     }
 
-    /* Clean Patient Uploaded Files List */
+    /* Wise-Style Clean List View for Patient Documents */
     .details-files-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
       width: 100%;
     }
 
-    .details-file-tile {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 12px;
-      padding: 10px 12px;
+    .details-files-list .details-file-row:first-child {
+      padding-top: 2px !important;
+    }
+
+    .details-file-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      padding: 12px 2px;
+      border-bottom: 1px solid #F1F5F9;
+      background: transparent;
+      transition: background 0.15s ease;
     }
 
-    .details-file-tile:hover {
-      background: var(--color-card-neutral-hover);
+    .details-file-row:last-child {
+      border-bottom: none;
     }
 
-    .details-file-left {
+    .details-file-row-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       min-width: 0;
     }
 
-    .details-file-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #e2ecea;
+    .details-file-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F1F5F9;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 16px;
-      color: var(--color-primary-btn);
+      color: #475569;
       flex-shrink: 0;
     }
 
-    .details-file-text {
+    .details-file-row-meta {
       display: flex;
       flex-direction: column;
       gap: 2px;
       min-width: 0;
     }
 
-    .details-file-name {
+    .details-file-row-name {
       font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--color-text-primary);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .details-file-meta {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .details-file-row-sub {
       font-family: var(--font-body);
-      font-size: 11px;
-      color: var(--color-text-secondary);
+      font-size: 11.5px;
+      color: #64748B;
     }
 
-    .details-file-type-pill {
-      background: #ffffff;
-      border: 1px solid #dce5e3;
-      border-radius: 4px;
-      padding: 1px 5px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--color-primary-btn);
-    }
-
-    .details-file-view-btn {
+    .details-file-row-action {
       width: 32px;
       height: 32px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #dce5e3;
-      color: var(--color-primary-btn);
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #64748B;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 17px;
       cursor: pointer;
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
 
-    .details-file-view-btn:hover {
-      background: #f0f6f5;
+    .details-file-row-action:hover {
+      background: #F1F5F9;
+      color: #0F172A;
     }
 
     .details-empty-docs {
@@ -6624,26 +7412,26 @@
 
     .patients-search-box {
       flex: 1;
-      height: 48px;
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 14px;
+      height: 46px;
+      background: transparent !important;
+      border: 1px solid #E2E8F0 !important;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       padding: 0 14px;
       gap: 10px;
-      transition: all 0.2s ease;
+      transition: border-color 0.15s ease;
     }
 
     .patients-search-box:focus-within {
-      background: #ffffff;
-      border-color: var(--color-primary-btn);
-      box-shadow: 0 0 0 3px rgba(5, 46, 40, 0.08);
+      background: transparent !important;
+      border-color: #0F172A !important;
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.04);
     }
 
     .patients-search-box i {
-      font-size: 19px;
-      color: var(--color-text-secondary);
+      font-size: 18px;
+      color: #94A3B8;
       flex-shrink: 0;
     }
 
@@ -6653,34 +7441,35 @@
       background: transparent;
       outline: none;
       font-family: var(--font-body);
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--color-text-primary);
+      font-size: 14px;
+      font-weight: 400;
+      color: #0F172A;
     }
 
     .patients-search-box input::placeholder {
-      color: #94a3b8;
+      color: #94A3B8;
     }
 
     .patients-filter-btn {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: transparent !important;
+      border: 1px solid #E2E8F0 !important;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 19px;
-      color: var(--color-primary-btn);
+      font-size: 18px;
+      color: #0F172A;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       flex-shrink: 0;
     }
 
-    .patients-filter-btn:hover {
-      background: var(--color-card-neutral-hover);
-      border-color: #cbd5e1;
+    .patients-filter-btn:hover,
+    .patients-filter-btn:active {
+      background: #F8FAFC !important;
+      border-color: #CBD5E1 !important;
     }
 
     /* 3-Column Practice Metrics Card (Modern European Healthtech Glassmorphism) */
@@ -6742,32 +7531,41 @@
     }
 
     /* Patients Directory List */
+    #pagePatientsList {
+      gap: 16px !important;
+    }
+
     .patients-directory-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
       width: 100%;
       flex-shrink: 0;
+      margin-top: 0 !important;
     }
 
     .patient-directory-tile {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 16px;
-      padding: 12px 14px;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #F1F5F9 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 14px 2px !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: background 0.15s ease;
       width: 100%;
       box-sizing: border-box;
     }
 
     .patient-directory-tile:hover {
-      background: var(--color-card-neutral-hover);
-      transform: translateY(-1px);
+      background: #F8FAFC !important;
+    }
+
+    .patient-directory-tile:last-child {
+      border-bottom: none !important;
     }
 
     .patient-tile-left {
@@ -6783,12 +7581,12 @@
       border-radius: 50%;
       background: #E8F4F1;
       border: 1px solid #D1E5E1;
-      color: var(--color-primary-btn);
+      color: var(--color-primary-btn, #02241F);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 800;
       flex-shrink: 0;
     }
@@ -6796,15 +7594,16 @@
     .patient-tile-meta {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       min-width: 0;
     }
 
     .patient-tile-name {
       font-family: var(--font-heading);
-      font-size: 15.5px;
+      font-size: 16px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
+      letter-spacing: -0.01em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -6813,45 +7612,65 @@
 
     .patient-tile-sub {
       font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      font-weight: 500;
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     /* ============================================================
-       PATIENT PROFILE SCREEN COMPONENTS
+       PATIENT PROFILE SCREEN COMPONENTS (Card-less & Standard Desk Neutral Surface)
        ============================================================ */
     .profile-hero-card {
-      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(226, 236, 234, 0.85);
-      border-radius: 18px;
-      padding: 16px;
+      background: #F4F6F8 !important;
+      border: none !important;
+      border-radius: 20px !important;
+      padding: 16px 18px !important;
       display: flex;
-      align-items: center;
-      gap: 14px;
+      flex-direction: column;
       width: 100%;
       box-sizing: border-box;
       flex-shrink: 0;
-      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      box-shadow: none !important;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      user-select: none;
+    }
+
+    .profile-hero-card:hover {
+      background: #EDF1F4 !important;
+    }
+
+    .profile-hero-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .profile-hero-main-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      flex: 1;
     }
 
     .profile-hero-avatar-circle {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: #E8F4F1;
       border: 1.5px solid #D1E5E1;
-      color: var(--color-primary-btn);
+      color: var(--color-primary-btn, #02241F);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 800;
       flex-shrink: 0;
     }
@@ -6867,7 +7686,7 @@
       font-family: var(--font-heading);
       font-size: 18px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       letter-spacing: -0.01em;
       margin: 0;
       line-height: 1.2;
@@ -6875,36 +7694,65 @@
 
     .profile-hero-sub {
       font-family: var(--font-body);
-      font-size: 12.5px;
-      color: var(--color-text-secondary);
-      font-weight: 500;
+      font-size: 13px;
+      color: #64748B;
+      font-weight: 400;
     }
 
     .profile-hero-phone {
       font-family: var(--font-body);
       font-size: 12px;
-      color: var(--color-primary-btn);
-      font-weight: 600;
+      color: #0F172A;
+      font-weight: 500;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       margin-top: 1px;
     }
 
-    /* Vitals Card in Patient Info */
-    .profile-vitals-card {
-      background: linear-gradient(135deg, rgba(246, 248, 249, 0.95) 0%, rgba(238, 244, 243, 0.8) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(226, 236, 234, 0.85);
-      border-radius: 18px;
-      padding: 14px 16px;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px 16px;
+    .profile-hero-toggle-btn {
+      width: auto;
+      height: auto;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #475569;
+      flex-shrink: 0;
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    #profileToggleIcon {
+      font-size: 20px;
+      color: #475569;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Collapsible Info Section Inside Hero Card */
+    .profile-collapsible-info {
       width: 100%;
       box-sizing: border-box;
-      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      transition: all 0.2s ease;
+    }
+
+    .profile-info-divider {
+      width: 100%;
+      height: 1px;
+      background: #E2E8F0;
+      margin: 14px 0 12px 0;
+    }
+
+    .profile-vitals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 14px;
+      width: 100%;
+      box-sizing: border-box;
+      padding-bottom: 2px;
     }
 
     .profile-vital-item {
@@ -6915,16 +7763,16 @@
     }
 
     .vital-icon-circle {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e2ecea;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 17px;
-      color: var(--color-primary-btn);
+      font-size: 15px;
+      color: #0F172A;
       flex-shrink: 0;
     }
 
@@ -6937,78 +7785,99 @@
 
     .vital-label {
       font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--color-text-secondary);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #64748B;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
     .vital-value {
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    /* Section Title */
-    .profile-section-title {
-      font-family: var(--font-heading);
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--color-text-primary);
-      letter-spacing: -0.01em;
-      margin: 4px 0 0 0;
-    }
-
-    /* Visits Log Tiles */
+    /* Visits Log: Card-less Flat List View */
     .profile-visits-list {
       display: flex;
       flex-direction: column;
-      gap: 8px;
       width: 100%;
+      flex-shrink: 0;
     }
 
     .profile-visit-tile {
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 16px;
-      padding: 12px 14px;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #F1F5F9 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 14px 2px !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: background 0.15s ease;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .profile-visit-tile:hover {
-      background: var(--color-card-neutral-hover);
-      transform: translateY(-1px);
+      background: #F8FAFC !important;
+    }
+
+    .profile-visit-tile:last-child {
+      border-bottom: none !important;
     }
 
     .profile-visit-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       min-width: 0;
     }
 
     .profile-visit-icon-circle {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid #e2ecea;
+      background: #EFF7F5;
+      border: 1px solid #B8E2DC;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 17px;
-      color: var(--color-primary-btn);
+      font-size: 18px;
+      color: #0E8070;
       flex-shrink: 0;
+    }
+
+    .profile-visit-icon-circle.type-video {
+      background: #EFF7F5;
+      border: 1px solid #B8E2DC;
+      color: #0E8070;
+    }
+
+    .profile-visit-icon-circle.type-inperson {
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      color: #4F46E5;
+    }
+
+    .shift-badge-video {
+      background: #EFF7F5;
+      border: 1px solid #B8E2DC;
+      color: #0E8070;
+    }
+
+    .shift-badge-inperson {
+      background: #EEF2FF;
+      border: 1px solid #C7D2FE;
+      color: #4F46E5;
     }
 
     .profile-visit-meta {
@@ -7020,53 +7889,52 @@
 
     .profile-visit-date {
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 15.5px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #0F172A;
+      letter-spacing: -0.01em;
     }
 
     .profile-visit-type {
       font-family: var(--font-body);
-      font-size: 12px;
-      color: var(--color-text-secondary);
-      font-weight: 500;
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 400;
     }
 
-    /* See All Visits Inline Action */
+    /* See All Visits Action (Flat button) */
     .btn-see-all-visits {
       width: 100%;
-      height: 44px;
-      border-radius: 14px;
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
+      height: 42px;
+      border-radius: 12px;
+      background: transparent !important;
+      border: 1px solid #E2E8F0 !important;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       font-family: var(--font-heading);
       font-size: 13.5px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
+      font-weight: 600;
+      color: #0F172A;
       cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      margin-top: 2px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: all 0.15s ease;
+      margin-top: 8px;
+      box-shadow: none !important;
     }
 
     .btn-see-all-visits:hover {
-      background: #eef4f3;
-      border-color: #d1e2df;
-      transform: translateY(-1px);
+      background: #F8FAFC !important;
+      border-color: #CBD5E1 !important;
     }
 
     .btn-see-all-visits:active {
-      transform: scale(0.98);
+      transform: scale(0.99);
     }
 
     .btn-see-all-visits i {
-      font-size: 16px;
-      color: var(--color-primary-btn);
-      transition: transform 0.2s ease;
+      font-size: 15px;
+      color: #64748B;
     }
 
     .patients-empty-state {
@@ -8388,12 +9256,12 @@
       transform: scale(0.98);
     }
 
-    /* 3. Recent Transactions Section & Minimal High-Visibility List */
+    /* 3. Recent Transactions Section (Unified Plain Text List with Line Dividers & Generous Spacing) */
     .wallet-transactions-section {
-      margin-top: 14px;
+      margin-top: 12px;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 12px;
     }
 
     .wallet-transactions-header {
@@ -8401,51 +9269,64 @@
       align-items: center;
       justify-content: space-between;
       flex-shrink: 0;
+      margin-bottom: 2px;
+    }
+
+    .wallet-transactions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 28px; /* Generous breathing room between each date section */
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .wallet-date-group {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
     }
 
     .wallet-date-group-header {
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #7EB8AE;
+      letter-spacing: 0.05em;
+      color: #64748B;
       text-transform: uppercase;
-      margin: 4px 0 4px 0;
+      margin-bottom: 6px;
       padding-left: 2px;
     }
 
-    .wallet-transactions-list {
+    .wallet-date-group-items {
       display: flex;
       flex-direction: column;
-      gap: 10px;
       width: 100%;
-      flex-shrink: 0;
     }
 
+    /* Plain text row, 1px bottom divider, matching Patients and Profile Visit Logs */
     .transaction-item-card {
-      background: #FFFFFF;
-      border: 1.5px solid #EEF3F2;
-      border-radius: 16px;
-      padding: 14px 16px;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #F1F5F9 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 13px 2px !important;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      gap: 12px;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      flex-shrink: 0;
-      box-shadow: 0 2px 8px -2px rgba(5, 46, 40, 0.04);
+      transition: background 0.15s ease;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .transaction-item-card:hover {
-      border-color: rgba(126, 184, 174, 0.5);
-      background: #FAFCFB;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px -2px rgba(5, 46, 40, 0.07);
+      background: #F8FAFC !important;
     }
 
-    .transaction-item-card:active {
-      transform: scale(0.99);
+    .transaction-item-card:last-child {
+      border-bottom: none !important;
     }
 
     .tx-item-left {
@@ -8459,7 +9340,7 @@
     .tx-icon-box {
       width: 40px;
       height: 40px;
-      border-radius: 12px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -8469,15 +9350,15 @@
     }
 
     .tx-icon-box.inflow {
-      background: #E8F7F0;
-      border: 1px solid #D2EFE2;
-      color: #0D7A48;
+      background: #EFF7F5;
+      border: 1px solid #B8E2DC;
+      color: #0E8070;
     }
 
     .tx-icon-box.outflow {
-      background: #F4F6F6;
-      border: 1px solid #E2E8E7;
-      color: #052E28;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      color: #475569;
     }
 
     .tx-item-meta {
@@ -8489,23 +9370,26 @@
 
     .tx-item-name {
       font-family: var(--font-heading);
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 700;
-      color: #052E28;
+      color: #0F172A;
+      letter-spacing: -0.01em;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.2;
+      line-height: 1.25;
+      margin: 0;
     }
 
     .tx-item-sub {
       font-family: var(--font-body);
-      font-size: 12px;
-      color: #62827A;
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 400;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      line-height: 1.2;
+      line-height: 1.25;
     }
 
     .tx-item-right {
@@ -8524,29 +9408,29 @@
 
     .tx-amount-val {
       font-family: var(--font-heading);
-      font-size: 15.5px;
+      font-size: 15px;
       font-weight: 700;
       line-height: 1.2;
     }
 
     .tx-amount-val.inflow {
-      color: #0D7A48;
+      color: #0E8070;
     }
 
     .tx-amount-val.outflow {
-      color: #052E28;
+      color: #0F172A;
     }
 
     .tx-time-val {
       font-family: var(--font-body);
       font-size: 11.5px;
-      color: #8E9F9D;
+      color: #94A3B8;
       line-height: 1.2;
     }
 
     .tx-arrow-icon {
-      font-size: 14px;
-      color: #CAD8D5;
+      font-size: 16px;
+      color: #94A3B8;
       transition: transform 0.15s ease;
     }
 
@@ -10221,14 +11105,97 @@
 </head>
 <body>
 
+  <!-- Simulation Controls Outside Mockup -->
+  <div class="sim-controls-bar">
+    <button type="button" class="btn-sim-trigger accent" onclick="simulateDoctorShiftCall()" title="Simulate shift readiness call to doctor">
+      <i class="ph-bold ph-phone-call"></i> Start Shift Call
+    </button>
+    <button type="button" class="btn-sim-trigger" onclick="simulatePatientJoined()" title="Simulate current patient answering call">
+      <i class="ph-bold ph-user-check"></i> Patient Joined (In Call)
+    </button>
+    <button type="button" class="btn-sim-trigger" onclick="simulateNextPatient()" title="Swipe/switch to next patient">
+      <i class="ph-bold ph-caret-right"></i> Next Patient
+    </button>
+    <button type="button" class="btn-sim-trigger" onclick="resetDemoQueue()" title="Reset patient queue to initial">
+      <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset
+    </button>
+  </div>
+
   <!-- Mockup Phone Container -->
   <div class="mockup-container">
     <div class="phone-frame">
       <div class="phone-screen">
 
+        <!-- Native-Style Floating App Push Notification Banner -->
+        <div class="app-push-notification" id="appPushNotification" onclick="handlePushNotificationClick(event)">
+          <div class="push-notif-app-header">
+            <div class="push-notif-brand">
+              <div class="push-notif-icon-box">
+                <i class="ph-bold ph-video-camera"></i>
+              </div>
+              <span class="push-notif-app-name">ONU CLINIC</span>
+              <span class="push-notif-dot">•</span>
+              <span class="push-notif-time">now</span>
+            </div>
+            <button type="button" class="btn-push-notif-close" onclick="hidePushNotification(event)" aria-label="Dismiss Notification">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+          <div class="push-notif-content-row">
+            <div class="push-notif-text-block">
+              <h4 class="push-notif-title" id="pushNotifTitle">Tariqul Islam joined the call</h4>
+              <p class="push-notif-subtitle" id="pushNotifSubtitle">Serial #1 is in room • Tap to start consultation</p>
+            </div>
+            <button type="button" class="btn-push-notif-join" onclick="handleJoinPatientCallClick(event)">
+              <span>Join</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Full-Screen Shift Readiness Call Modal to Doctor -->
+        <div class="doctor-shift-call-modal" id="modalDoctorShiftCall">
+          <div class="shift-call-center-group">
+            <div class="shift-call-avatar-wrap">
+              <div class="shift-call-pulse-ring"></div>
+              <div class="shift-call-pulse-ring ring-2"></div>
+              <div class="shift-call-icon-box">
+                <i class="ph-bold ph-stethoscope"></i>
+              </div>
+            </div>
+            
+            <div class="shift-call-badge">
+              <i class="ph-fill ph-broadcast"></i>
+              <span>Shift Ready</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <h2 class="shift-call-title">Ready for Shift 1?</h2>
+              <p class="shift-call-subtitle">09:00 AM – 11:00 AM • 6 Patients Waiting</p>
+            </div>
+
+            <p class="shift-call-desc">Onu will start automatically calling queued patients one by one. Are you ready to begin consultations?</p>
+          </div>
+
+          <div class="shift-call-bottom-group">
+            <button type="button" class="btn-shift-call-accept" onclick="acceptDoctorShiftCall()">
+              <i class="ph-bold ph-phone-call"></i>
+              <span>Start Calling Patients</span>
+            </button>
+
+            <div class="shift-call-delay-section">
+              <span class="shift-delay-label">Delay Shift</span>
+              <div class="shift-delay-pills-row">
+                <button type="button" class="btn-delay-pill" onclick="delayDoctorShiftCall(5)">5 mins</button>
+                <button type="button" class="btn-delay-pill" onclick="delayDoctorShiftCall(10)">10 mins</button>
+                <button type="button" class="btn-delay-pill" onclick="delayDoctorShiftCall(15)">15 mins</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- 1. Top Status Bar -->
         <div class="status-bar">
-          <div class="status-time" id="statusClockTime" onclick="toggleDemoShiftLockState()" title="Tap to toggle between 8:22 AM (Locked) and 8:58 AM (Unlocked)">8:22</div>
+          <div class="status-time" id="statusClockTime" onclick="toggleDemoShiftLockState()" title="Tap to toggle shift demo status">9:00</div>
           <div class="status-icons" onclick="toggleDemoShiftType()" style="cursor: pointer;" title="Tap to switch between Video and In-Person shift">
             <i class="ph ph-cell-signal-full"></i>
             <i class="ph ph-wifi-high"></i>
@@ -10334,66 +11301,89 @@
               </div>
             </div>
 
-            <!-- Active Queue Section (24px below top group, 10px internal gap) -->
-            <section class="desk-section" id="queueSection">
-              <div class="section-header">
-                <h2 class="section-title">Sept 29</h2>
-                <span class="section-meta" id="headerTimeMeta"></span>
+            <!-- Active Queue Section (Clean Elevation Directly Under Date Header) -->
+            <section class="desk-section" id="queueSection" style="gap: 10px !important;">
+              
+              <div class="section-header" style="margin-top: 4px; margin-bottom: 0 !important; display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; align-items: baseline; gap: 8px;">
+                  <h2 class="desk-queue-label" id="deskQueueDateHeading" style="font-family: var(--font-heading); font-size: 19px; font-weight: 700; color: #0F172A; letter-spacing: -0.02em; margin: 0;">Sept 29</h2>
+                  <span class="section-meta" id="headerTimeMeta" style="display: none;"></span>
+                </div>
+                <button type="button" class="btn-desk-view-all" onclick="openAllAppointmentsPage()" aria-label="All Appointments">
+                  <span>All Appointments</span>
+                  <i class="ph ph-caret-right"></i>
+                </button>
               </div>
 
-              <!-- Dynamic Shift Hero Card -->
-              <div class="patient-hero-card locked-card" id="heroCard">
-                <div id="heroCardInner">
-                  <!-- Initial Locked State (8:22 AM - Shift starts at 9:00 AM) -->
-                  <div class="card-badge-row">
-                    <span class="badge-pill-light">
-                      <i class="ph ph-lock-key"></i>
-                      Shift 1
-                    </span>
-                    <span class="badge-pill-status">6 in Queue</span>
-                  </div>
+              <!-- Dynamic Shift Hero Card Container -->
+              <div id="heroCardOuter">
+                <!-- Dynamic Swipeable Patient Card Carousel -->
+                <div class="patient-carousel-wrapper" id="patientCarouselWrapper">
+                  <div class="patient-swipe-card" id="patientSwipeCard" onclick="handlePatientCardClick(event)">
+                    <div class="patient-card-top-row">
+                      <div class="patient-card-name-group">
+                        <h3 class="patient-card-name" id="cardPatientName">Tariqul Islam</h3>
+                        <span class="patient-card-subtitle" id="cardPatientSubtitle">34 Yrs • Male</span>
+                      </div>
+                      <div class="patient-card-status-badge in-call" id="cardPatientStatusBadge" style="display: none;">
+                        <span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;"></span>
+                        <span>In Call</span>
+                      </div>
+                    </div>
 
-                  <div class="patient-details">
-                    <h3 class="patient-name">Shift Starts at 9:00 AM</h3>
-                    <div class="patient-info">
-                      <span>Calling room unlocks 2 mins before shift start time</span>
+                    <div class="patient-card-actions-row" id="patientCardActionsRow" style="display: none;">
+                      <button type="button" class="btn-card-join pulsing-join" id="btnCardJoin" onclick="handleJoinPatientCallClick(event)">
+                        <i class="ph-bold ph-video-camera"></i>
+                        <span id="btnCardJoinText">Join Call</span>
+                      </button>
                     </div>
                   </div>
 
-                  <button class="btn-hero-action btn-hero-locked" onclick="unlockShiftDemo()">
-                    <i class="ph ph-lock-key"></i>
-                    <span>Shift Locked Until 8:58 AM</span>
+                  <!-- Carousel Dots -->
+                  <div class="carousel-pagination-row">
+                    <div class="carousel-dots-cluster" id="carouselDotsCluster">
+                      <!-- Populated by JS -->
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Plain-Text Pre-Visit Details Stream (Wise Flat Surface - NO Card Box) -->
+                <div class="desk-previsit-stream" id="deskPreVisitStream">
+                  <div class="desk-previsit-stream-header">
+                    <span class="desk-previsit-stream-title">Pre-visit Details</span>
+                  </div>
+
+                  <div class="desk-previsit-content-body" id="deskPreVisitContentBody">
+                    <span class="desk-previsit-symptom-name" id="deskSymptomName">Tension Headache & Neck Stiffness</span>
+                    <div class="desk-previsit-meta-pills" id="deskSymptomMeta">
+                      <span id="deskDurationText">Duration: 7 Days</span>
+                      <span>•</span>
+                      <span id="deskSeverityText">Severity: Mild (3/10)</span>
+                    </div>
+
+                    <div class="desk-previsit-quote-block" id="deskComplaintQuote">
+                      “I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.”
+                    </div>
+
+                    <div class="desk-previsit-files-row" id="deskPreVisitFilesRow">
+                      <div class="desk-previsit-file-chip">
+                        <i class="ph ph-file-pdf"></i>
+                        <span>Previous_Rx_Aug2026.pdf</span>
+                      </div>
+                      <div class="desk-previsit-file-chip">
+                        <i class="ph ph-image"></i>
+                        <span>Neck_XRay_Report.jpg</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
+                    <span>Appointment Details</span>
+                    <i class="ph ph-arrow-right"></i>
                   </button>
                 </div>
               </div>
 
-              <!-- View All Appointments Pill -->
-              <button class="btn-view-appointments" onclick="openAllAppointmentsPage()">
-                <span>View All Appointments</span>
-                <i class="ph ph-arrow-right"></i>
-              </button>
-            </section>
-
-            <!-- Financial Overview Section (24px below queue section, 10px internal gap) -->
-            <section class="desk-section financial-section">
-              <div class="financial-header" onclick="navigateToWallet()">
-                <h2 class="section-title">Financial Overview</h2>
-                <i class="ph ph-arrow-right arrow-icon"></i>
-              </div>
-
-              <div class="financial-card" onclick="navigateToWallet()" style="cursor: pointer;">
-                <div class="financial-column left">
-                  <span class="metric-label">Total Income</span>
-                  <span class="metric-value">&#2547;45,200</span>
-                </div>
-                
-                <div class="financial-divider"></div>
-
-                <div class="financial-column right">
-                  <span class="metric-label">Available Balance</span>
-                  <span class="metric-value">&#2547;12,400</span>
-                </div>
-              </div>
             </section>
 
           </div>
@@ -10603,12 +11593,6 @@
               <!-- Video Camera Button -->
               <button class="btn-call-circle" id="btnCamToggle" onclick="toggleCam()" aria-label="Toggle Camera">
                 <i class="ph ph-video-camera"></i>
-              </button>
-
-              <!-- Skip Patient Button -->
-              <button class="btn-call-skip" onclick="openSkipPatientModal()" aria-label="Skip to Next Patient">
-                <i class="ph ph-fast-forward"></i>
-                <span>Skip</span>
               </button>
 
               <!-- Back to Desk Button -->
@@ -11109,15 +12093,15 @@
                ======================================================= -->
           <div class="app-page page-patients-list page-right" id="pagePatientsList">
             
-            <!-- Top App Header (Clean title & subtitle without notification bell) -->
+            <!-- Top App Header (Total patients subtitle) -->
             <div class="app-header">
               <div class="header-text">
                 <h1 class="header-title">My Patients</h1>
-                <p class="header-subtitle">Your patient directory & history</p>
+                <p class="header-subtitle" id="patientsHeaderSubtitle">Total 8 patients</p>
               </div>
             </div>
 
-            <!-- Search & Filter Row -->
+            <!-- Search & Filter Row (Background-less with clean subtle border) -->
             <div class="patients-search-row">
               <div class="patients-search-box">
                 <i class="ph ph-magnifying-glass"></i>
@@ -11128,36 +12112,10 @@
               </button>
             </div>
 
-            <!-- Practice Clinical Metrics Box for Doctor (Modern Minimalist Sage Tint) -->
-            <div class="patient-metrics-card" style="margin-top: 2px;">
-              <div class="patient-metric-col">
-                <span class="patient-metric-val" id="metricTotalPatients">8</span>
-                <span class="patient-metric-label">Total Patients</span>
-              </div>
-              <div class="patient-metric-divider"></div>
-              <div class="patient-metric-col">
-                <span class="patient-metric-val" id="metricConsultations">24</span>
-                <span class="patient-metric-label">Consultations</span>
-              </div>
-              <div class="patient-metric-divider"></div>
-              <div class="patient-metric-col">
-                <span class="patient-metric-val" id="metricRepeatRate">62%</span>
-                <span class="patient-metric-label">Repeat Rate</span>
-              </div>
+            <!-- Patients Directory List (Flat list without card boxes, separated by subtle divider lines) -->
+            <div class="patients-directory-list" id="patientsDirectoryList">
+              <!-- Rendered dynamically by renderPatientsDirectory() -->
             </div>
-
-            <!-- Section: All Patients -->
-            <section class="patients-section">
-              <div class="section-text-group">
-                <h2 class="section-title">All Patients</h2>
-                <p class="section-subtitle" id="patientsCountSubtitle">8 Patients</p>
-              </div>
-
-              <!-- Patients Directory Cards List -->
-              <div class="patients-directory-list" id="patientsDirectoryList">
-                <!-- Rendered dynamically by renderPatientsDirectory() -->
-              </div>
-            </section>
 
           </div>
 
@@ -11179,70 +12137,77 @@
               </button>
             </div>
 
-            <!-- Patient Hero Card -->
-            <div class="profile-hero-card" id="profileHeroCard">
-              <div class="profile-hero-avatar-circle" id="profileAvatarBox">AK</div>
-              <div class="profile-hero-info">
-                <h2 class="profile-hero-name" id="profileName">Alif Khan</h2>
-                <span class="profile-hero-sub" id="profileDemographics">28 Yrs • Male</span>
-                <span class="profile-hero-phone" id="profilePhone"><i class="ph ph-phone"></i> +880 1712-345678</span>
+            <!-- Patient Name Card (Collapsible Patient Info Embedded Inside) -->
+            <div class="profile-hero-card" id="profileHeroCard" onclick="togglePatientInfoCollapse()">
+              <div class="profile-hero-main-row">
+                <div class="profile-hero-main-left">
+                  <div class="profile-hero-avatar-circle" id="profileAvatarBox">AK</div>
+                  <div class="profile-hero-info">
+                    <h2 class="profile-hero-name" id="profileName">Alif Khan</h2>
+                    <span class="profile-hero-sub" id="profileDemographics">28 Yrs • Male</span>
+                    <span class="profile-hero-phone" id="profilePhone"><i class="ph ph-phone"></i> +880 1712-345678</span>
+                  </div>
+                </div>
+                <div class="profile-hero-toggle-btn" id="profileHeroToggleBtn">
+                  <i class="ph ph-caret-down" id="profileToggleIcon"></i>
+                </div>
+              </div>
+
+              <!-- Collapsible Patient Info Cluster (Hidden by default, uncollapses on click) -->
+              <div class="profile-collapsible-info" id="profileCollapsibleInfo" style="display: none;">
+                <div class="profile-info-divider"></div>
+                <div class="profile-vitals-grid" id="profileVitalsGrid">
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-cake"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Age</span>
+                      <span class="vital-value" id="vitalAge">28 Yrs</span>
+                    </div>
+                  </div>
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-gender-intersex"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Gender</span>
+                      <span class="vital-value" id="vitalGender">Male</span>
+                    </div>
+                  </div>
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-user"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Visits</span>
+                      <span class="vital-value" id="vitalVisits">4 Consults</span>
+                    </div>
+                  </div>
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-drop"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Blood</span>
+                      <span class="vital-value" id="vitalBlood">O+ (Pos)</span>
+                    </div>
+                  </div>
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-scales"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Weight</span>
+                      <span class="vital-value" id="vitalWeight">72 kg</span>
+                    </div>
+                  </div>
+                  <div class="profile-vital-item">
+                    <div class="vital-icon-circle"><i class="ph ph-arrows-out-line-vertical"></i></div>
+                    <div class="vital-text-cluster">
+                      <span class="vital-label">Height</span>
+                      <span class="vital-value" id="vitalHeight">5' 9"</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <!-- Section 1: Patient Info -->
-            <section class="profile-section">
-              <h2 class="section-title">Patient Info</h2>
-              <div class="profile-vitals-card" id="profileVitalsGrid">
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-cake"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Age</span>
-                    <span class="vital-value" id="vitalAge">26 Yrs</span>
-                  </div>
-                </div>
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-gender-intersex"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Gender</span>
-                    <span class="vital-value" id="vitalGender">Male</span>
-                  </div>
-                </div>
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-user"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Visits</span>
-                    <span class="vital-value" id="vitalVisits">3 Consults</span>
-                  </div>
-                </div>
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-drop"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Blood</span>
-                    <span class="vital-value" id="vitalBlood">O- (Neg)</span>
-                  </div>
-                </div>
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-scales"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Weight</span>
-                    <span class="vital-value" id="vitalWeight">62 kg</span>
-                  </div>
-                </div>
-                <div class="profile-vital-item">
-                  <div class="vital-icon-circle"><i class="ph ph-arrows-out-line-vertical"></i></div>
-                  <div class="vital-text-cluster">
-                    <span class="vital-label">Height</span>
-                    <span class="vital-value" id="vitalHeight">5' 9"</span>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <!-- Section 2: Visits History Log (Max 3 by default + Inline Expansion) -->
-            <section class="profile-section">
-              <div class="section-text-group">
+            <!-- Visits Log (Card-less Flat List with Clear View) -->
+            <section class="profile-section" style="margin-top: 4px;">
+              <div class="section-text-group" style="margin-bottom: 4px;">
                 <h2 class="section-title">Visits Log</h2>
-                <p class="section-subtitle" id="profileVisitsCount">3 visits</p>
+                <p class="section-subtitle" id="profileVisitsCount">4 visits</p>
               </div>
               <div class="profile-visits-list" id="profileVisitsList">
                 <!-- Rendered dynamically -->
@@ -11288,8 +12253,6 @@
                 <span class="metric-label">Today’s Earnings</span>
                 <span class="metric-value" id="walletTodayStatVal">&#2547; 2,400</span>
               </div>
-              
-              <div class="financial-divider"></div>
 
               <div class="financial-column right">
                 <span class="metric-label">Total Earnings</span>
@@ -11853,7 +12816,7 @@
           
           <!-- Top Row: Badge Icon + Circular Close Button -->
           <div class="sheet-top-row" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #02241F; border: 1.5px solid rgba(126, 184, 174, 0.4); width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+            <div class="sheet-badge-icon" style="background: #F1F5F9; color: #0F172A; border: 1.5px solid #E2E8F0; width: 44px; height: 44px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
               <i class="ph ph-calendar-x"></i>
             </div>
             <button type="button" class="btn-circle-icon" onclick="closeClearScheduleModal()" aria-label="Close Clear Schedule">
@@ -13007,7 +13970,7 @@
         <div class="bottom-sheet" id="editPhoneModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-phone"></i>
             </div>
           </div>
@@ -13034,7 +13997,7 @@
         <div class="bottom-sheet" id="editChamberModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-map-pin"></i>
             </div>
           </div>
@@ -13061,7 +14024,7 @@
         <div class="bottom-sheet" id="editBioModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-user"></i>
             </div>
           </div>
@@ -13092,7 +14055,7 @@
         <div class="bottom-sheet" id="avatarPickerModalSheet" style="max-height: 85%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-camera"></i>
             </div>
           </div>
@@ -13142,7 +14105,7 @@
         <div class="bottom-sheet" id="clearCacheConfirmSheet" style="max-height: 80%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-file-arrow-down"></i>
             </div>
           </div>
@@ -13164,7 +14127,7 @@
         <div class="bottom-sheet" id="languagePickerSheet" style="max-height: 80%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-globe"></i>
             </div>
           </div>
@@ -13183,7 +14146,7 @@
                   <span class="menu-row-sub">Default (US)</span>
                 </div>
               </div>
-              <i class="ph-fill ph-check-circle" style="color: #0D7A5F; font-size: 20px;" id="langCheckEnglish"></i>
+              <i class="ph-fill ph-check-circle" style="color: #0F172A; font-size: 20px;" id="langCheckEnglish"></i>
             </div>
 
             <div class="dossier-divider"></div>
@@ -13196,7 +14159,7 @@
                   <span class="menu-row-sub">Bengali</span>
                 </div>
               </div>
-              <i class="ph-fill ph-check-circle" style="color: #0D7A5F; font-size: 20px; display: none;" id="langCheckBengali"></i>
+              <i class="ph-fill ph-check-circle" style="color: #0F172A; font-size: 20px; display: none;" id="langCheckBengali"></i>
             </div>
           </div>
 
@@ -13233,7 +14196,7 @@
         <div class="bottom-sheet" id="helpSupportModalSheet" style="max-height: 88%; overflow-y: auto; scrollbar-width: none;">
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
-            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #052E28;">
+            <div class="sheet-badge-icon">
               <i class="ph ph-headset"></i>
             </div>
           </div>
@@ -13260,14 +14223,14 @@
             </div>
 
             <div class="support-channel-card" onclick="contactSupportChannel('Email')">
-              <div class="support-channel-icon" style="background: #EFF7F5; color: #0E8070;">
+              <div class="support-channel-icon" style="background: #F1F5F9; color: #0F172A;">
                 <i class="ph-fill ph-envelope-simple"></i>
               </div>
               <span class="support-channel-name">Email</span>
             </div>
 
             <div class="support-channel-card" onclick="contactSupportChannel('Call')">
-              <div class="support-channel-icon" style="background: #EFF7F5; color: #052E28;">
+              <div class="support-channel-icon" style="background: #F1F5F9; color: #0F172A;">
                 <i class="ph-fill ph-phone-call"></i>
               </div>
               <span class="support-channel-name">Call Us</span>
@@ -13342,10 +14305,138 @@
     let pendingInPersonActionApptId = null;
     let isInPersonReviewMode = false;
 
-    const queuePatients = [
-      { serial: '#1', name: 'Tariqul Islam', age: 34, gender: 'Male', subtitle: '34 Yrs • Male', phone: '+880 1712-345678', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80', shiftType: 'Video Consultation' },
-      { serial: '#2', name: 'Farzana Khan', age: 31, gender: 'Female', subtitle: '31 Yrs • Female', phone: '+880 1879-948271', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80', shiftType: 'Video Consultation' }
+    const initialShift1Patients = [
+      {
+        id: 'apt1',
+        serial: '#1',
+        name: 'Tariqul Islam',
+        age: 34,
+        gender: 'Male',
+        subtitle: '34 Yrs • Male',
+        phone: '+880 1712-345678',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        status: 'queued',
+        preVisit: {
+          symptoms: 'Tension Headache & Neck Stiffness',
+          duration: '7 Days',
+          severity: 'Mild (3/10)',
+          complaintQuote: 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.',
+          uploadedDocs: [
+            { name: 'Previous_Rx_Aug2026.pdf', size: '1.2 MB', type: 'Prescription', icon: 'ph-file-pdf' },
+            { name: 'Neck_XRay_Report.jpg', size: '3.4 MB', type: 'Investigation', icon: 'ph-image' }
+          ]
+        }
+      },
+      {
+        id: 'apt2',
+        serial: '#2',
+        name: 'Farzana Khan',
+        age: 31,
+        gender: 'Female',
+        subtitle: '31 Yrs • Female',
+        phone: '+880 1879-948271',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        preVisit: {
+          symptoms: 'Fever, Body Aches & Mild Cough',
+          duration: '3 Days',
+          severity: 'Moderate (5/10)',
+          complaintQuote: 'Experiencing continuous low-grade fever with joint pain and dry cough since Tuesday evening. Took OTC Paracetamol with temporary relief.',
+          uploadedDocs: [
+            { name: 'CBC_Report_Sep28.pdf', size: '850 KB', type: 'Lab Report', icon: 'ph-file-text' }
+          ]
+        }
+      },
+      {
+        id: 'apt6',
+        serial: '#3',
+        name: 'Tanvir Alam',
+        age: 42,
+        gender: 'Male',
+        subtitle: '42 Yrs • Male',
+        phone: '+880 1733-445566',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        preVisit: {
+          symptoms: 'Hypertension Follow-up & Dizziness',
+          duration: '5 Days',
+          severity: 'Mild (2/10)',
+          complaintQuote: 'Mild lightheadedness during afternoon hours, home blood pressure reading 135/85 mmHg.',
+          uploadedDocs: [
+            { name: 'BP_Log_Sep2026.pdf', size: '640 KB', type: 'Log Sheet', icon: 'ph-file-text' }
+          ]
+        }
+      },
+      {
+        id: 'apt4',
+        serial: '#4',
+        name: 'Nusrat Jahan',
+        age: 26,
+        gender: 'Female',
+        subtitle: '26 Yrs • Female',
+        phone: '+880 1911-223344',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        preVisit: {
+          symptoms: 'Migraine & Light Sensitivity',
+          duration: '4 Days',
+          severity: 'Moderate (6/10)',
+          complaintQuote: 'Severe throbbing pain on the left temple with nausea and blurred vision when exposed to bright light.',
+          uploadedDocs: [
+            { name: 'MRI_Brain_Scan.pdf', size: '4.2 MB', type: 'MRI Report', icon: 'ph-file-pdf' }
+          ]
+        }
+      },
+      {
+        id: 'apt5',
+        serial: '#5',
+        name: 'Rafiqul Hasan',
+        age: 52,
+        gender: 'Male',
+        subtitle: '52 Yrs • Male',
+        phone: '+880 1755-667788',
+        avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        preVisit: {
+          symptoms: 'Type 2 Diabetes Routine Review',
+          duration: '2 Weeks',
+          severity: 'Routine',
+          complaintQuote: 'Fasting glucose was 7.2 mmol/L yesterday morning. Taking Metformin regularly. Need routine review.',
+          uploadedDocs: [
+            { name: 'HbA1c_Report_Sep.pdf', size: '920 KB', type: 'Lab Report', icon: 'ph-file-text' }
+          ]
+        }
+      },
+      {
+        id: 'apt7',
+        serial: '#6',
+        name: 'Sadia Chowdhury',
+        age: 29,
+        gender: 'Female',
+        subtitle: '29 Yrs • Female',
+        phone: '+880 1688-334455',
+        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=400&q=80',
+        shiftType: 'Video Consultation',
+        inCall: false,
+        preVisit: {
+          symptoms: 'Skin Allergy & Rash',
+          duration: '2 Days',
+          severity: 'Mild (3/10)',
+          complaintQuote: 'Red itchy rash developed across forearms after using a new moisturizing lotion.',
+          uploadedDocs: [
+            { name: 'Skin_Rash_Photo.jpg', size: '1.8 MB', type: 'Image', icon: 'ph-image' }
+          ]
+        }
+      }
     ];
+
+    let queuePatients = JSON.parse(JSON.stringify(initialShift1Patients));
 
     let inPersonQueuePatients = [
       { serial: '#1', name: 'Nusrat Jahan', age: 26, gender: 'Female', subtitle: '26 Yrs • Female', phone: '+880 1911-223344', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80', shiftType: 'In-Person Consultation' },
@@ -13373,6 +14464,7 @@
         gender: 'Male', 
         phone: '+880 1712-345678', 
         status: 'queued', 
+        statusText: 'In Queue', 
         time: '9:00 AM', 
         type: 'Follow Up',
         preVisit: {
@@ -13417,94 +14509,6 @@
         consultationNotes: 'Suspected viral flu syndrome. Vitals stable. Advised adequate hydration, rest, antipyretics and warm saline gargling.',
         prescriptionPdf: 'RX_Farzana_Khan_Sep29.pdf'
       },
-
-      // ==========================================
-      // TODAY: SEPT 29 (Live Shift 2 - In-Person Consultation 6:00–9:00 PM)
-      // ==========================================
-      { 
-        id: 'apt3', 
-        dateKey: 'today',
-        dateLabel: 'Today, Sept 29',
-        shiftId: 2, 
-        shiftName: 'Shift 2 • 6:00–9:00 PM', 
-        shiftType: 'In-Person Consultation',
-        serial: '#1', 
-        name: 'Nusrat Jahan', 
-        age: 26, 
-        gender: 'Female', 
-        phone: '+880 1911-223344', 
-        status: 'queued', 
-        time: '6:00 PM', 
-        type: 'Initial Consultation',
-        preVisit: {
-          symptoms: 'Skin Rash & Allergic Reaction',
-          duration: '2 Days',
-          severity: 'Mild (2/10)',
-          severityLevel: 'mild',
-          complaintQuote: 'Red itchy patches on both forearms after trying a new cosmetic moisturizer. No swelling on face or difficulty breathing.',
-          uploadedDocs: [
-            { name: 'Allergy_Photo_Forearm.jpg', size: '2.1 MB', type: 'Image', icon: 'ph-image' }
-          ]
-        },
-        consultationNotes: null,
-        prescriptionPdf: null
-      },
-      { 
-        id: 'apt4', 
-        dateKey: 'today',
-        dateLabel: 'Today, Sept 29',
-        shiftId: 2, 
-        shiftName: 'Shift 2 • 6:00–9:00 PM', 
-        shiftType: 'In-Person Consultation',
-        serial: '#2', 
-        name: 'Farhan Hossain', 
-        age: 28, 
-        gender: 'Male', 
-        phone: '+880 1622-556677', 
-        status: 'queued', 
-        time: '6:20 PM', 
-        type: 'Follow Up',
-        preVisit: {
-          symptoms: 'Acid Reflux & Heartburn',
-          duration: '2 Weeks',
-          severity: 'Moderate (4/10)',
-          severityLevel: 'mod',
-          complaintQuote: 'Burning sensation in chest after dinner, especially when lying down immediately. Occasional sour taste in mouth.',
-          uploadedDocs: [
-            { name: 'Endoscopy_Report_2025.pdf', size: '2.8 MB', type: 'Investigation', icon: 'ph-file-pdf' }
-          ]
-        },
-        consultationNotes: null,
-        prescriptionPdf: null
-      },
-      { 
-        id: 'apt5', 
-        dateKey: 'today',
-        dateLabel: 'Today, Sept 29',
-        shiftId: 2, 
-        shiftName: 'Shift 2 • 6:00–9:00 PM', 
-        shiftType: 'In-Person Consultation',
-        serial: '#3', 
-        name: 'Moushumi Akter', 
-        age: 29, 
-        gender: 'Female', 
-        phone: '+880 1788-990011', 
-        status: 'queued', 
-        time: '6:40 PM', 
-        type: 'Initial Consultation',
-        preVisit: {
-          symptoms: 'Migraine & Light Sensitivity',
-          duration: '4 Days',
-          severity: 'Severe (7/10)',
-          severityLevel: 'severe',
-          complaintQuote: 'Throbbing headache on left side with nausea and extreme sensitivity to bright screen light.',
-          uploadedDocs: [
-            { name: 'Previous_Prescription.pdf', size: '1.5 MB', type: 'Prescription', icon: 'ph-file-pdf' }
-          ]
-        },
-        consultationNotes: null,
-        prescriptionPdf: null
-      },
       { 
         id: 'apt6', 
         dateKey: 'today',
@@ -13512,21 +14516,114 @@
         shiftId: 1, 
         shiftName: 'Shift 1 • 9:00–11:00 AM', 
         shiftType: 'Video Consultation',
-        serial: '#6', 
+        serial: '#3', 
         name: 'Tanvir Alam', 
         age: 42, 
         gender: 'Male', 
         phone: '+880 1733-445566', 
         status: 'queued', 
-        time: '10:40 AM', 
+        time: '9:40 AM', 
         type: 'Follow Up',
-        preVisit: null,
+        preVisit: {
+          symptoms: 'Hypertension Follow-up & Dizziness',
+          duration: '5 Days',
+          severity: 'Mild (2/10)',
+          severityLevel: 'mild',
+          complaintQuote: 'Mild lightheadedness during afternoon hours, home blood pressure reading 135/85 mmHg.',
+          uploadedDocs: [
+            { name: 'BP_Log_Sep2026.pdf', size: '640 KB', type: 'Log Sheet', icon: 'ph-file-text' }
+          ]
+        },
+        consultationNotes: null,
+        prescriptionPdf: null
+      },
+      { 
+        id: 'apt4_v', 
+        dateKey: 'today',
+        dateLabel: 'Today, Sept 29',
+        shiftId: 1, 
+        shiftName: 'Shift 1 • 9:00–11:00 AM', 
+        shiftType: 'Video Consultation',
+        serial: '#4', 
+        name: 'Nusrat Jahan', 
+        age: 26, 
+        gender: 'Female', 
+        phone: '+880 1911-223344', 
+        status: 'queued', 
+        time: '10:00 AM', 
+        type: 'Initial Consultation',
+        preVisit: {
+          symptoms: 'Migraine & Light Sensitivity',
+          duration: '4 Days',
+          severity: 'Moderate (6/10)',
+          severityLevel: 'mod',
+          complaintQuote: 'Severe throbbing pain on the left temple with nausea and blurred vision when exposed to bright light.',
+          uploadedDocs: [
+            { name: 'MRI_Brain_Scan.pdf', size: '4.2 MB', type: 'MRI Report', icon: 'ph-file-pdf' }
+          ]
+        },
+        consultationNotes: null,
+        prescriptionPdf: null
+      },
+      { 
+        id: 'apt5_v', 
+        dateKey: 'today',
+        dateLabel: 'Today, Sept 29',
+        shiftId: 1, 
+        shiftName: 'Shift 1 • 9:00–11:00 AM', 
+        shiftType: 'Video Consultation',
+        serial: '#5', 
+        name: 'Rafiqul Hasan', 
+        age: 52, 
+        gender: 'Male', 
+        phone: '+880 1755-667788', 
+        status: 'queued', 
+        time: '10:20 AM', 
+        type: 'Follow Up',
+        preVisit: {
+          symptoms: 'Type 2 Diabetes Routine Review',
+          duration: '2 Weeks',
+          severity: 'Routine',
+          severityLevel: 'mild',
+          complaintQuote: 'Fasting glucose was 7.2 mmol/L yesterday morning. Taking Metformin regularly. Need routine review.',
+          uploadedDocs: [
+            { name: 'HbA1c_Report_Sep.pdf', size: '920 KB', type: 'Lab Report', icon: 'ph-file-text' }
+          ]
+        },
+        consultationNotes: null,
+        prescriptionPdf: null
+      },
+      { 
+        id: 'apt7_v', 
+        dateKey: 'today',
+        dateLabel: 'Today, Sept 29',
+        shiftId: 1, 
+        shiftName: 'Shift 1 • 9:00–11:00 AM', 
+        shiftType: 'Video Consultation',
+        serial: '#6', 
+        name: 'Sadia Chowdhury', 
+        age: 29, 
+        gender: 'Female', 
+        phone: '+880 1688-334455', 
+        status: 'queued', 
+        time: '10:40 AM', 
+        type: 'Initial Consultation',
+        preVisit: {
+          symptoms: 'Skin Allergy & Rash',
+          duration: '2 Days',
+          severity: 'Mild (3/10)',
+          severityLevel: 'mild',
+          complaintQuote: 'Red itchy rash developed across forearms after using a new moisturizing lotion.',
+          uploadedDocs: [
+            { name: 'Skin_Rash_Photo.jpg', size: '1.8 MB', type: 'Image', icon: 'ph-image' }
+          ]
+        },
         consultationNotes: null,
         prescriptionPdf: null
       },
 
       // ==========================================
-      // HISTORY: YESTERDAY - SEPT 28 (Shift 1 & Shift 2)
+      // HISTORY: YESTERDAY - SEPT 28 (Shift 1)
       // ==========================================
       {
         id: 'hist1',
@@ -13923,7 +15020,7 @@
             type: 'Video Consultation',
             icon: 'ph-video-camera',
             status: 'Completed',
-            notes: 'Viral Pharyngitis & Mild Cephalalgia. Advised Paracetamol & Warm Gargle.',
+            notes: 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay hydrated and follow up if symptoms persist beyond 5 days.',
             preVisit: {
               symptoms: 'Sore Throat & Mild Fever',
               duration: '3 Days',
@@ -15627,6 +16724,38 @@
     // =======================================================
     let notificationsBackTarget = 'desk';
 
+    function addNotificationToFeed(notif) {
+      const groupEl = document.querySelector('#pageNotifications .notifications-group');
+      if (groupEl) {
+        const card = document.createElement('div');
+        card.className = 'notification-item-card is-unread';
+        card.onclick = () => handleNotificationClick(notif.target || 'apt2');
+        card.innerHTML = `
+          <div class="notif-icon-box system" style="background:#FEF2F2; color:#EF4444;">
+            <i class="ph ph-calendar-x"></i>
+          </div>
+          <div class="notif-content-block">
+            <div class="notif-top-meta">
+              <span class="notif-title">${notif.title}</span>
+              <span class="notif-time">Just now</span>
+            </div>
+            <p class="notif-body">${notif.body}</p>
+          </div>
+        `;
+        const label = groupEl.querySelector('.notifications-group-label');
+        if (label && label.nextSibling) {
+          groupEl.insertBefore(card, label.nextSibling);
+        } else {
+          groupEl.appendChild(card);
+        }
+      }
+      document.querySelectorAll('.btn-circle-icon').forEach(btn => {
+        if (btn.getAttribute('onclick')?.includes('openNotificationsPage')) {
+          btn.classList.add('has-dot');
+        }
+      });
+    }
+
     function openNotificationsPage(fromTarget = 'desk') {
       notificationsBackTarget = fromTarget;
       const allPages = [
@@ -15937,7 +17066,7 @@
 
       let html = '';
       Object.keys(groups).forEach(grpKey => {
-        html += `<div class="wallet-date-group-header">${grpKey}</div>`;
+        let itemsHtml = '';
         groups[grpKey].forEach(tx => {
           const isInflow = tx.type === 'inflow';
           const iconClass = isInflow ? 'ph ph-video-camera' : 'ph ph-arrow-up-right';
@@ -15945,7 +17074,7 @@
           const amountClass = isInflow ? 'inflow' : 'outflow';
           const formattedAmount = isInflow ? `+৳ ${tx.amount.toLocaleString()}` : `-৳ ${tx.amount.toLocaleString()}`;
 
-          html += `
+          itemsHtml += `
             <div class="transaction-item-card" onclick="openTransactionDetails('${tx.id}')">
               <div class="tx-item-left">
                 <div class="tx-icon-box ${boxClass}">
@@ -15966,6 +17095,15 @@
             </div>
           `;
         });
+
+        html += `
+          <div class="wallet-date-group">
+            <div class="wallet-date-group-header">${grpKey}</div>
+            <div class="wallet-date-group-items">
+              ${itemsHtml}
+            </div>
+          </div>
+        `;
       });
 
       container.innerHTML = html;
@@ -16543,6 +17681,10 @@
       if (countEl) {
         countEl.textContent = `${list.length} Patients`;
       }
+      const headerSubtitleEl = document.getElementById('patientsHeaderSubtitle');
+      if (headerSubtitleEl) {
+        headerSubtitleEl.textContent = query ? `${list.length} patients found` : `Total ${patientsDirectoryData.length} patients`;
+      }
 
       if (list.length === 0) {
         container.innerHTML = `
@@ -16584,6 +17726,21 @@
     let currentActiveProfilePatientId = null;
     let isProfileVisitsExpanded = false;
 
+    let isPatientInfoExpanded = false;
+
+    function togglePatientInfoCollapse(e) {
+      if (e) e.stopPropagation();
+      isPatientInfoExpanded = !isPatientInfoExpanded;
+      const infoEl = document.getElementById('profileCollapsibleInfo');
+      const iconEl = document.getElementById('profileToggleIcon');
+      if (infoEl) {
+        infoEl.style.display = isPatientInfoExpanded ? 'block' : 'none';
+      }
+      if (iconEl) {
+        iconEl.style.transform = isPatientInfoExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
+      }
+    }
+
     function openPatientProfile(patientId) {
       const pat = patientsDirectoryData.find(p => p.id === patientId) || patientsDirectoryData[0];
       const pageProfile = document.getElementById('pagePatientProfile');
@@ -16593,6 +17750,13 @@
 
       currentActiveProfilePatientId = pat.id;
       isProfileVisitsExpanded = false;
+      isPatientInfoExpanded = false;
+
+      // Ensure collapsible patient info starts hidden
+      const infoEl = document.getElementById('profileCollapsibleInfo');
+      const iconEl = document.getElementById('profileToggleIcon');
+      if (infoEl) infoEl.style.display = 'none';
+      if (iconEl) iconEl.style.transform = 'rotate(0deg)';
 
       // Populate Hero Card
       document.getElementById('profileName').textContent = pat.name;
@@ -16600,7 +17764,7 @@
       document.getElementById('profileDemographics').textContent = `${pat.age} Yrs • ${pat.gender}`;
       document.getElementById('profilePhone').innerHTML = `<i class="ph ph-phone"></i> ${pat.phone}`;
 
-      // Populate Vitals Grid
+      // Populate Vitals Grid inside the card
       document.getElementById('vitalAge').textContent = `${pat.age} Yrs`;
       document.getElementById('vitalGender').textContent = pat.gender;
       document.getElementById('vitalBlood').textContent = pat.blood;
@@ -16634,28 +17798,34 @@
 
       if (visitsList) {
         if (totalVisits > 0) {
-          const displayedVisits = isProfileVisitsExpanded ? pat.visits : pat.visits.slice(0, 3);
-          visitsList.innerHTML = displayedVisits.map(v => `
-            <div class="profile-visit-tile" onclick="openVisitDetailsFromProfile('${v.id}')">
-              <div class="profile-visit-left">
-                <div class="profile-visit-icon-circle">
-                  <i class="ph ${v.icon || 'ph-video-camera'}"></i>
+          // Do not show less/more unless list exceeds 6 visits; otherwise show all directly
+          const displayedVisits = (totalVisits <= 6 || isProfileVisitsExpanded) ? pat.visits : pat.visits.slice(0, 6);
+          visitsList.innerHTML = displayedVisits.map(v => {
+            const isInPerson = Boolean((v.type && v.type.toLowerCase().includes('in-person')) || (v.icon && (v.icon.includes('users') || v.icon.includes('user'))));
+            const iconClass = isInPerson ? (v.icon || 'ph-users') : (v.icon || 'ph-video-camera');
+            const typeClass = isInPerson ? 'type-inperson' : 'type-video';
+            return `
+              <div class="profile-visit-tile" onclick="openVisitDetailsFromProfile('${v.id}')">
+                <div class="profile-visit-left">
+                  <div class="profile-visit-icon-circle ${typeClass}">
+                    <i class="ph ${iconClass}"></i>
+                  </div>
+                  <div class="profile-visit-meta">
+                    <span class="profile-visit-date">${v.date}</span>
+                    <span class="profile-visit-type">${v.type} • ${v.time}</span>
+                  </div>
                 </div>
-                <div class="profile-visit-meta">
-                  <span class="profile-visit-date">${v.date}</span>
-                  <span class="profile-visit-type">${v.type} • ${v.time}</span>
-                </div>
+                <i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>
               </div>
-              <i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>
-            </div>
-          `).join('');
+            `;
+          }).join('');
         } else {
           visitsList.innerHTML = `<div class="details-empty-docs">No past consultations recorded</div>`;
         }
       }
 
       if (seeAllContainer) {
-        if (totalVisits > 3) {
+        if (totalVisits > 6) {
           if (!isProfileVisitsExpanded) {
             seeAllContainer.innerHTML = `
               <button class="btn-see-all-visits" onclick="toggleAllVisits(true)">
@@ -16774,18 +17944,12 @@
       const activeBtn = tabName === 'upcoming' ? document.getElementById('tabUpcoming') : document.getElementById('tabHistory');
       if (activeBtn) activeBtn.classList.add('active');
       
-      // Set default date for selected tab
-      if (tabName === 'upcoming') {
-        currentApptDateKey = 'today';
-        apptFilters.date = 'today';
-        apptFilters.customDate = null;
-      } else {
-        currentApptDateKey = 'all';
-        apptFilters.date = 'all';
-        apptFilters.customDate = null;
-      }
+      // Set default date for selected tab (both default to 'today')
+      currentApptDateKey = 'today';
+      apptFilters.date = 'today';
+      apptFilters.customDate = null;
 
-      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const defaultDate = 'today';
       const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
       const dotEl = document.getElementById('filterActiveDot');
       if (dotEl) {
@@ -16803,17 +17967,17 @@
       let chips = [];
       if (currentApptTab === 'upcoming') {
         chips = [
-          { key: 'all', label: 'All Dates' },
           { key: 'today', label: 'Today' },
           { key: 'sept30', label: 'Tomorrow' },
-          { key: 'oct01', label: '1 Oct' }
+          { key: 'oct01', label: '1 Oct' },
+          { key: 'all', label: 'All Dates' }
         ];
       } else {
         chips = [
-          { key: 'all', label: 'All Dates' },
           { key: 'today', label: 'Today' },
           { key: 'yesterday', label: 'Yesterday' },
-          { key: 'sept27', label: '27 Sep' }
+          { key: 'sept27', label: '27 Sep' },
+          { key: 'all', label: 'All Dates' }
         ];
       }
 
@@ -16839,7 +18003,7 @@
       document.querySelectorAll('.appts-filter-chip').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
 
-      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const defaultDate = 'today';
       const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
       const dotEl = document.getElementById('filterActiveDot');
       if (dotEl) {
@@ -16853,7 +18017,7 @@
     function openApptFilterModal() {
       tempApptFilters = { ...apptFilters };
       if (!tempApptFilters.date) {
-        tempApptFilters.date = currentApptDateKey || (currentApptTab === 'upcoming' ? 'today' : 'all');
+        tempApptFilters.date = currentApptDateKey || ('today');
       }
 
       // Configure date picker min/max constraints based on tab
@@ -16953,7 +18117,7 @@
 
     function clearFilterCustomDate(e) {
       if (e) e.stopPropagation();
-      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const defaultDate = 'today';
       tempApptFilters.date = defaultDate;
       tempApptFilters.customDate = null;
 
@@ -17002,7 +18166,7 @@
       renderApptDateChips();
 
       // Update filter active dot on trigger icon
-      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const defaultDate = 'today';
       const hasActiveFilter = (apptFilters.type !== 'all' || apptFilters.date !== defaultDate);
       const dotEl = document.getElementById('filterActiveDot');
       if (dotEl) {
@@ -17014,7 +18178,7 @@
     }
 
     function resetApptFilters() {
-      const defaultDate = currentApptTab === 'upcoming' ? 'today' : 'all';
+      const defaultDate = 'today';
       apptFilters = { date: defaultDate, customDate: null, type: 'all' };
       tempApptFilters = { date: defaultDate, customDate: null, type: 'all' };
       currentApptDateKey = defaultDate;
@@ -17028,24 +18192,51 @@
       renderAppointmentsList();
     }
 
-    // Unified Decluttered Appointments Renderer
+    function syncPatientQueueToAppointments() {
+      if (!queuePatients) return;
+      queuePatients.forEach(p => {
+        const match = appointmentsData.find(a => (a.shiftId === 1 || !a.shiftId) && (a.serial === p.serial || a.name === p.name));
+        if (match) {
+          if (p.status === 'prescribed') {
+            match.status = 'prescribed';
+            match.statusText = 'Prescribed';
+          } else if (p.status === 'draft_rx') {
+            match.status = 'draft_rx';
+            match.statusText = 'Draft Rx';
+          } else if (p.inCall || p.status === 'in_call') {
+            match.status = 'in_call';
+            match.statusText = 'In Call';
+          } else {
+            if (match.status !== 'cancelled' && match.status !== 'declined' && match.status !== 'prescribed') {
+              match.status = 'queued';
+              match.statusText = 'In Queue';
+            }
+          }
+        }
+      });
+    }
+
+    // Unified Decluttered Appointments Renderer (Wise / Uber Standard - Flat Minimalist)
     function renderAppointmentsList() {
       const container = document.getElementById('appointmentsListContainer');
       if (!container) return;
 
+      syncPatientQueueToAppointments();
       container.innerHTML = '';
 
       let list = [];
 
       if (currentApptTab === 'upcoming') {
-        // Upcoming starts from Today (all non-prescribed visits for active shift) + future dates
+        // Upcoming starts from Today (all active visits: draft rx, in call, queued; EXCLUDES prescribed and cancelled) + future dates
         list = appointmentsData.filter(item => {
+          if (item.shiftId && item.shiftId !== 1) return false;
           if (item.dateKey === 'today') {
             if (isDoctorOffline) return false;
-            // If in In-Person mode, Shift 1 (video) is ended and won't show in upcoming
-            if (currentActiveShiftId === 2 && item.shiftId === 1) return false;
-            if (!isShiftActive) return true;
-            return item.status !== 'prescribed';
+            // Prescribed and cancelled appointments auto go to History
+            if (item.status === 'prescribed' || item.status === 'cancelled' || item.status === 'declined') {
+              return false;
+            }
+            return true;
           }
           if (item.dateKey === 'yesterday' || item.dateKey === 'sept27') {
             return false;
@@ -17059,11 +18250,11 @@
           return true;
         });
       } else {
-        // History starts from Today (completed/prescribed or skipped visits for today) + past dates
+        // History starts from Today (completed/prescribed, cancelled/declined, or skipped visits for today) + past dates
         list = appointmentsData.filter(item => {
+          if (item.shiftId && item.shiftId !== 1) return false;
           if (item.dateKey === 'today') {
-            if (currentActiveShiftId === 2 && item.shiftId === 1) return true;
-            return isShiftActive && (item.status === 'prescribed' || item.status === 'skipped');
+            return item.status === 'prescribed' || item.status === 'cancelled' || item.status === 'declined' || item.status === 'skipped';
           }
           return item.dateKey === 'yesterday' || item.dateKey === 'sept27';
         });
@@ -17119,11 +18310,6 @@
       // Group by Date first, then by Shift inside Date
       const dateGroups = {};
       list.forEach(item => {
-        let effectiveStatus = item.status;
-        if (!isShiftActive && item.shiftId === 1 && currentApptTab === 'upcoming') {
-          effectiveStatus = 'queued';
-        }
-
         const dateKey = item.dateKey || 'today';
         const dateLabel = item.dateLabel || 'Today, Sept 29';
         const shiftKey = item.shiftName || 'Shift 1 • 9:00–11:00 AM';
@@ -17140,7 +18326,7 @@
           dateGroups[dateKey].shifts[shiftKey] = [];
         }
 
-        dateGroups[dateKey].shifts[shiftKey].push({ ...item, effectiveStatus });
+        dateGroups[dateKey].shifts[shiftKey].push(item);
         dateGroups[dateKey].total++;
       });
 
@@ -17150,7 +18336,6 @@
         const dateBlock = document.createElement('div');
         dateBlock.className = 'appts-date-group';
 
-        // Only show date header if "All" is active (when a single date is selected, the date is already highlighted in the date pill)
         let dateHeaderHtml = '';
         if (currentApptDateKey === 'all') {
           dateHeaderHtml = `
@@ -17167,46 +18352,32 @@
           
           let cardsHtml = '';
           shiftItems.forEach(item => {
-            let serialClass = '';
             let badgeHtml = '';
 
-            const isCurrentTurn = (currentApptTab !== 'history') && (
-              (currentActiveShiftId === 2 && item.shiftId === 2 && inPersonQueuePatients[inPersonPatientIndex] && 
-               (item.serial === inPersonQueuePatients[inPersonPatientIndex].serial || item.name === inPersonQueuePatients[inPersonPatientIndex].name) &&
-               item.status === 'queued') ||
-              (currentActiveShiftId === 1 && item.shiftId === 1 && queuePatients[currentPatientIndex] && 
-               (item.serial === queuePatients[currentPatientIndex].serial || item.name === queuePatients[currentPatientIndex].name) && 
-               (item.dateKey === 'today' || !item.dateKey || item.dateKey === 'sept29') &&
-               item.status !== 'prescribed')
-            );
+            const qMatch = queuePatients && queuePatients.find(p => p.serial === item.serial || p.name === item.name);
+            const isItemInCall = qMatch ? (qMatch.inCall || qMatch.status === 'in_call') : (item.status === 'in_call');
+            const isItemDraftRx = qMatch ? (qMatch.status === 'draft_rx') : (item.status === 'draft_rx');
+            const isItemCancelled = item.status === 'cancelled' || item.status === 'declined';
+            const isItemPrescribed = item.status === 'prescribed' || (!qMatch && currentApptTab === 'history' && !isItemCancelled);
 
-            if (item.effectiveStatus === 'prescribed') {
-              badgeHtml = `<span class="appt-status-badge prescribed"><i class="ph-fill ph-check-circle"></i> Prescribed</span>`;
-            } else if (item.effectiveStatus === 'draft_rx') {
-              badgeHtml = `<span class="appt-status-badge draft-rx"><i class="ph ph-pencil-simple"></i> Draft Rx</span>`;
-            } else if (item.effectiveStatus === 'absent') {
-              serialClass = 'status-absent';
-              badgeHtml = `<span class="appt-status-badge absent" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FECACA;"><i class="ph-bold ph-user-minus"></i> Absent</span>`;
-            } else if (item.effectiveStatus === 'requeued') {
-              serialClass = 'status-requeued';
-              badgeHtml = `<span class="appt-status-badge requeued" style="background: #FFFBEB; color: #D97706; border: 1px solid #FDE68A;"><i class="ph-bold ph-arrow-u-down-right"></i> Re-queued</span>`;
-            } else if (item.effectiveStatus === 'skipped') {
-              serialClass = 'status-skipped';
-              badgeHtml = `<span class="appt-status-badge skipped">Skipped</span>`;
-            } else if (item.effectiveStatus === 'in_call') {
-              serialClass = 'status-in-call';
-              badgeHtml = `<span class="appt-status-badge in-call"><span class="status-dot-pulse" style="width:6px;height:6px;"></span> In Call</span>`;
-            } else if (isCurrentTurn) {
-              serialClass = 'status-in-call';
-              badgeHtml = `<span class="appt-status-badge current-turn"><span class="status-dot-pulse" style="width:6px;height:6px;background:#0E8070;"></span> Current Turn</span>`;
+            if (isItemCancelled) {
+              badgeHtml = `<span class="appt-status-badge cancelled"><i class="ph-bold ph-x-circle" style="color: #EF4444; font-size: 13px;"></i> Cancelled</span>`;
+            } else if (isItemPrescribed) {
+              badgeHtml = `<span class="appt-status-badge prescribed"><i class="ph-fill ph-check-circle" style="color: #059669; font-size: 14px;"></i> Prescribed</span>`;
+            } else if (isItemDraftRx) {
+              badgeHtml = `<span class="appt-status-badge draft-rx"><i class="ph-bold ph-note-pencil" style="font-size: 12px;"></i> Draft Rx</span>`;
+            } else if (isItemInCall) {
+              badgeHtml = `<span class="appt-status-badge in-call"><span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;"></span> In Call</span>`;
             } else {
-              badgeHtml = `<span class="appt-status-badge" style="background:var(--color-card-neutral);color:var(--color-text-secondary);border:1px solid #edf2f1;">In Queue</span>`;
+              badgeHtml = `<span class="appt-status-badge queued">In Queue</span>`;
             }
 
+            const inCallBoxClass = isItemInCall ? 'status-in-call' : '';
+
             cardsHtml += `
-              <div class="appointment-item-card ${isCurrentTurn ? 'is-current-turn' : ''}" onclick="openAppointmentDetails('${item.id}', 'appointments')">
+              <div class="appointment-item-card" onclick="openAppointmentDetails('${item.id}', 'appointments')">
                 <div class="appt-card-left">
-                  <div class="appt-serial-box ${serialClass}">
+                  <div class="appt-serial-box ${inCallBoxClass}">
                     ${item.serial}
                   </div>
                   <div class="appt-meta-block">
@@ -17222,22 +18393,14 @@
             `;
           });
 
-          const isShiftInPerson = shiftItems.some(it => 
-            (it.shiftType && it.shiftType.toLowerCase().includes('in-person')) ||
-            (it.type && it.type.toLowerCase().includes('in-person')) ||
-            (it.shiftId === 2 && it.dateKey === 'today')
-          );
-          const shiftIcon = isShiftInPerson ? 'ph-buildings' : 'ph-video-camera';
-          const shiftTypeLabel = isShiftInPerson ? 'In-Person' : 'Video';
-          const shiftTypeBadgeClass = isShiftInPerson ? 'shift-badge-inperson' : 'shift-badge-video';
-
+          const isShiftInPerson = shiftItems.some(i => (i.shiftType && i.shiftType.toLowerCase().includes('in-person')) || (i.type && i.type.toLowerCase().includes('in-person')));
           shiftsHtml += `
             <div class="appts-shift-block">
               <div class="appts-shift-header">
                 <div class="shift-title-cluster">
-                  <i class="ph ${shiftIcon}"></i>
+                  <i class="ph ${isShiftInPerson ? 'ph-users' : 'ph-video-camera'}" style="color: ${isShiftInPerson ? '#4F46E5' : '#0E8070'};"></i>
                   <span class="shift-title-text">${sKey}</span>
-                  <span class="shift-type-indicator ${shiftTypeBadgeClass}">${shiftTypeLabel}</span>
+                  <span class="shift-type-indicator ${isShiftInPerson ? 'shift-badge-inperson' : 'shift-badge-video'}">${isShiftInPerson ? 'In-Person' : 'Video'}</span>
                 </div>
                 <span class="shift-capacity-tag">${shiftItems.length} ${shiftItems.length === 1 ? 'Patient' : 'Patients'}</span>
               </div>
@@ -17261,35 +18424,34 @@
       if (!container) return;
 
       if (effectiveStatus === 'prescribed') {
-        // COMPLETED / PRESCRIBED VISIT DETAILS: Clean 2-Row Card with Completed Status, Call Mode & Duration, Date, and Time
-        const isVideo = (appt.shiftType && appt.shiftType.toLowerCase().includes('video')) || 
-                        (appt.type && appt.type.toLowerCase().includes('video')) || 
-                        (appt.icon && appt.icon.includes('video')) || 
-                        true;
-        const modeLabel = isVideo ? 'Video Call' : 'In-Person';
-        const modeIcon = isVideo ? 'ph-video-camera' : 'ph-users';
-        const durationText = appt.callDuration || '25 Mins';
-        const dateText = appt.consultationDate || (appt.dateLabel ? `${appt.dateLabel}, 2026` : 'Today, Sep 29, 2026');
-        const timeText = appt.callTime || appt.time || '09:00 AM';
+        // COMPLETED VISIT: Clean 3-Column Info Strip (Status | Date | Type) matching Image 3, middle-aligned, plain text, no box/border
+        let dateVal = 'Sep 29';
+        if (appt.consultationDate) {
+          dateVal = appt.consultationDate.replace('Today, ', '').replace(/,\s*\d{4}/, '').trim();
+        } else if (appt.date) {
+          dateVal = appt.date.replace('Today, ', '').replace(/,\s*\d{4}/, '').trim();
+        } else if (appt.dateLabel) {
+          dateVal = appt.dateLabel.replace(/,\s*\d{4}/, '').trim();
+        }
+
+        const isInPerson = (appt.shiftType && appt.shiftType.toLowerCase().includes('in-person')) || 
+                           (appt.type && appt.type.toLowerCase().includes('in-person')) || 
+                           (appt.icon && (appt.icon.includes('users') || appt.icon.includes('user')));
+        const typeVal = isInPerson ? 'In-Person' : 'Video Call';
 
         container.innerHTML = `
-          <div class="visit-details-meta-card">
-            <div class="visit-details-meta-top">
-              <span class="visit-completed-badge">Completed</span>
-              <span class="visit-mode-pill">
-                <i class="ph ${modeIcon}"></i>
-                <span>${modeLabel} • ${durationText}</span>
-              </span>
+          <div class="details-info-grid">
+            <div class="details-info-item">
+              <span class="details-info-label">Status</span>
+              <span class="details-info-val status-prescribed" id="detStatusVal">Completed</span>
             </div>
-            <div class="visit-details-meta-bottom">
-              <div class="visit-meta-datetime-item">
-                <i class="ph ph-calendar-blank"></i>
-                <span>${dateText}</span>
-              </div>
-              <div class="visit-meta-datetime-item">
-                <i class="ph ph-clock"></i>
-                <span>${timeText}</span>
-              </div>
+            <div class="details-info-item">
+              <span class="details-info-label">Date</span>
+              <span class="details-info-val" id="detDateVal">${dateVal}</span>
+            </div>
+            <div class="details-info-item">
+              <span class="details-info-label">Type</span>
+              <span class="details-info-val" id="detTypeVal">${typeVal}</span>
             </div>
           </div>
         `;
@@ -17301,6 +18463,9 @@
         if (effectiveStatus === 'draft_rx') {
           statusLabel = 'Draft Rx';
           statusClass = 'details-info-val status-draft';
+        } else if (effectiveStatus === 'cancelled' || effectiveStatus === 'declined') {
+          statusLabel = 'Cancelled';
+          statusClass = 'details-info-val status-skipped';
         } else if (effectiveStatus === 'absent') {
           statusLabel = 'Absent';
           statusClass = 'details-info-val status-skipped';
@@ -17351,12 +18516,15 @@
       // Dynamic Title
       const pageTitleEl = document.querySelector('#pageAppointmentDetails .page-top-title');
       if (pageTitleEl) {
-        pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : 'Appointment Details';
+        pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : ((effectiveStatus === 'cancelled' || effectiveStatus === 'declined') ? 'Cancelled Appointment' : 'Appointment Details');
       }
 
       // Patient Demographics
       document.getElementById('detPatientName').textContent = appt.name;
       document.getElementById('detPatientMeta').textContent = `${appt.age} Yrs • ${appt.gender}`;
+      const initials = appt.initials || (appt.name ? appt.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'PT');
+      const detAvatarBox = document.getElementById('detAvatarBox');
+      if (detAvatarBox) detAvatarBox.textContent = initials;
 
       // Render Dynamic Top Meta: Completed Card for 'prescribed', 3-Info Strip for others
       renderAppointmentTopMeta(appt, effectiveStatus);
@@ -17508,13 +18676,13 @@
 
       const docs = (appt.preVisit && appt.preVisit.uploadedDocs) ? appt.preVisit.uploadedDocs : [];
 
-      // 1. Issued Prescription Component (Clean Title without Signed badge)
+      // 1. Issued Prescription Component (Entire card clickable with eye icon)
       const rxSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Issued Prescription</span>
           </div>
-          <div class="details-rx-tile">
+          <div class="details-rx-tile" onclick="previewPrescriptionFromDetails()" role="button" tabindex="0" aria-label="View Issued Prescription">
             <div class="details-rx-tile-left">
               <div class="details-rx-tile-icon">
                 <i class="ph ph-file-pdf"></i>
@@ -17524,28 +18692,27 @@
                 <span class="details-rx-tile-sub">Official Digital Rx</span>
               </div>
             </div>
-            <button class="btn-clean-rx-view" onclick="previewPrescriptionFromDetails()">
+            <div class="details-rx-tile-action">
               <i class="ph ph-eye"></i>
-              <span>View Rx</span>
-            </button>
+            </div>
           </div>
         </div>
       `;
 
-      // 2. Consultation Notes Component (Prominent High-Priority Outcome Card)
+      // 2. Consultation Notes Component (AI Note in dark green)
       const notesSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Consultation Notes</span>
-            <span class="info-chip info-chip-sage">✨ Live AI Notes</span>
+            <span class="details-plain-tag tag-ai-note">AI Note</span>
           </div>
           <div class="details-notes-card">
-            <p class="details-notes-body">${appt.consultationNotes || 'Consultation completed successfully with clinical advice issued.'}</p>
+            <p class="details-notes-body">${appt.consultationNotes || 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay hydrated and follow up if symptoms persist beyond 5 days.'}</p>
           </div>
         </div>
       `;
 
-      // 3. Pre-Visit Details Component (Soft Warm Neutral to Differentiate Patient Intake)
+      // 3. Pre-Visit Details: Single Card (No card inside a card, plain text tags)
       let preVisitHtml = '';
       const hasPreVisit = appt.preVisit && (appt.preVisit.symptoms || appt.preVisit.complaintQuote);
       if (hasPreVisit) {
@@ -17553,7 +18720,7 @@
           <div class="details-clean-section">
             <div class="details-clean-header">
               <span class="details-clean-title">Pre-visit Details</span>
-              <span class="info-chip info-chip-warm">Patient Intake</span>
+              <span class="details-plain-tag tag-intake">Patient Intake</span>
             </div>
             <div class="details-previsit-card">
               <span class="details-symptom-title">${appt.preVisit.symptoms || 'General Consultation'}</span>
@@ -17563,7 +18730,7 @@
                 <span>Severity: ${appt.preVisit.severity || 'Mild'}</span>
               </div>
               ${appt.preVisit.complaintQuote ? `
-                <p class="details-previsit-quote">“${appt.preVisit.complaintQuote}”</p>
+                <div class="details-previsit-quote">“${appt.preVisit.complaintQuote}”</div>
               ` : ''}
             </div>
           </div>
@@ -17573,7 +18740,7 @@
           <div class="details-clean-section">
             <div class="details-clean-header">
               <span class="details-clean-title">Pre-visit Details</span>
-              <span class="info-chip info-chip-neutral">Not Submitted</span>
+              <span class="details-plain-tag">Not Submitted</span>
             </div>
             <div class="details-empty-docs">
               No pre-visit intake submitted by patient
@@ -17582,37 +18749,38 @@
         `;
       }
 
-      // 4. Patient Uploaded Documents Component
+      // 4. Patient Uploaded Documents: List View with Subtle Dividers
       let docsListHtml = '';
       if (docs.length > 0) {
         docsListHtml = docs.map(doc => `
-          <div class="details-file-tile">
-            <div class="details-file-left">
-              <div class="details-file-icon">
+          <div class="details-file-row">
+            <div class="details-file-row-left">
+              <div class="details-file-row-icon">
                 <i class="ph ${doc.icon || 'ph-file-text'}"></i>
               </div>
-              <div class="details-file-text">
-                <span class="details-file-name">${doc.name}</span>
-                <div class="details-file-meta">
-                  <span>${doc.size}</span>
-                  <span class="details-file-type-pill">${doc.type}</span>
-                </div>
+              <div class="details-file-row-meta">
+                <span class="details-file-row-name">${doc.name}</span>
+                <span class="details-file-row-sub">${doc.size} • ${doc.type}</span>
               </div>
             </div>
-            <button class="details-file-view-btn" onclick="showToast('Viewing ${doc.name}')" aria-label="View Document">
+            <button class="details-file-row-action" onclick="showToast('Viewing ${doc.name}')" aria-label="View Document">
               <i class="ph ph-eye"></i>
             </button>
           </div>
         `).join('');
       } else {
-        docsListHtml = `<div class="details-empty-docs">No patient files uploaded for this visit</div>`;
+        docsListHtml = `
+          <div class="details-empty-docs" style="padding: 12px 2px; color: #94A3B8; font-size: 13px;">
+            No documents uploaded
+          </div>
+        `;
       }
 
       const docsSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Patient Documents</span>
-            <span class="info-chip info-chip-neutral">${docs.length} Files</span>
+            <span class="details-plain-tag">${docs.length} ${docs.length === 1 ? 'File' : 'Files'}</span>
           </div>
           <div class="details-files-list">
             ${docsListHtml}
@@ -17627,6 +18795,18 @@
       } else if (effectiveStatus === 'draft_rx') {
         // TOP: Consultation Notes -> Pre-visit Details -> Patient Documents
         container.innerHTML = notesSectionHtml + preVisitHtml + docsSectionHtml;
+      } else if (effectiveStatus === 'cancelled' || effectiveStatus === 'declined') {
+        const reasonText = appt.cancellationReason || 'Patient declined call and rebooked for tomorrow.';
+        const cancelledBannerHtml = `
+          <div class="cancelled-notice-banner" style="background: #FEF2F2; border: 1px solid #FEE2E2; border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 12px;">
+            <i class="ph-bold ph-calendar-x" style="font-size: 20px; color: #EF4444; margin-top: 1px; flex-shrink: 0;"></i>
+            <div>
+              <div style="font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: #991B1B; margin-bottom: 2px;">Consultation Cancelled</div>
+              <div style="font-family: var(--font-body); font-size: 12.5px; color: #7F1D1D; line-height: 1.45;">${reasonText}</div>
+            </div>
+          </div>
+        `;
+        container.innerHTML = cancelledBannerHtml + preVisitHtml + docsSectionHtml;
       } else {
         // TOP: Pre-visit Details -> Patient Documents
         container.innerHTML = preVisitHtml + docsSectionHtml;
@@ -17643,6 +18823,12 @@
           pageProfile.scrollTop = 0;
           pageDetails.className = 'app-page page-appointment-details page-right';
           pageProfile.className = 'app-page page-patient-profile active-page';
+        }
+      } else if (appointmentDetailsBackTarget === 'notifications') {
+        const pageNotif = document.getElementById('pageNotifications');
+        if (pageNotif) {
+          pageDetails.className = 'app-page page-appointment-details page-right';
+          pageNotif.className = 'app-page page-notifications active-page';
         }
       } else if (appointmentDetailsBackTarget === 'desk') {
         navigateToDesk();
@@ -17717,71 +18903,539 @@
       if (endSubEl) endSubEl.textContent = `This will end your call with ${pat.name} (Serial ${pat.serial}) and start AI Consultation wrap-up.`;
     }
 
-    function updateDeskHeroPatient(pat, isLobby = false) {
-      const heroContainer = document.getElementById('heroCardInner');
-      if (!heroContainer || !pat) return;
-      
-      const isInPerson = (currentActiveShiftId === 2) || (pat.shiftType && pat.shiftType.includes('In-Person'));
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchCurrentX = 0;
+    let isDraggingCard = false;
+    let dragMoved = false;
 
-      const heroEl = document.getElementById('heroCard');
-      if (heroEl) {
-        heroEl.classList.remove('locked-card', 'no-shift-card', 'offline-card');
-        if (isInPerson) {
-          heroEl.classList.add('inperson-card');
+    function initPatientCarouselGestures() {
+      const card = document.getElementById('patientSwipeCard');
+      const wrapper = document.getElementById('patientCarouselWrapper');
+      const target = card || wrapper;
+      if (!target) return;
+
+      // Clean existing listeners to prevent duplicates
+      target.ontouchstart = (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchCurrentX = touchStartX;
+        isDraggingCard = true;
+        dragMoved = false;
+      };
+
+      target.ontouchmove = (e) => {
+        if (!isDraggingCard) return;
+        touchCurrentX = e.touches[0].clientX;
+        const deltaX = touchCurrentX - touchStartX;
+        const deltaY = e.touches[0].clientY - touchStartY;
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 6) {
+          dragMoved = true;
+          const el = document.getElementById('patientSwipeCard');
+          if (el) {
+            el.style.transform = `translateX(${deltaX * 0.75}px)`;
+            el.style.transition = 'none';
+          }
+        }
+      };
+
+      target.ontouchend = () => {
+        if (!isDraggingCard) return;
+        isDraggingCard = false;
+        finishCardGesture();
+      };
+
+      // Mouse Drag & Swipe Handlers
+      target.onmousedown = (e) => {
+        if (e.target.closest('button')) return;
+        touchStartX = e.clientX;
+        touchStartY = e.clientY;
+        touchCurrentX = touchStartX;
+        isDraggingCard = true;
+        dragMoved = false;
+        target.style.cursor = 'grabbing';
+      };
+
+      window.onmousemove = (e) => {
+        if (!isDraggingCard) return;
+        touchCurrentX = e.clientX;
+        const deltaX = touchCurrentX - touchStartX;
+        if (Math.abs(deltaX) > 6) {
+          dragMoved = true;
+          const el = document.getElementById('patientSwipeCard');
+          if (el) {
+            el.style.transform = `translateX(${deltaX * 0.75}px)`;
+            el.style.transition = 'none';
+          }
+        }
+      };
+
+      window.onmouseup = () => {
+        if (!isDraggingCard) return;
+        isDraggingCard = false;
+        const el = document.getElementById('patientSwipeCard');
+        if (el) el.style.cursor = 'grab';
+        finishCardGesture();
+      };
+    }
+
+    function finishCardGesture() {
+      const card = document.getElementById('patientSwipeCard');
+      const deltaX = touchCurrentX - touchStartX;
+      if (card) card.style.transition = 'transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease';
+
+      if (dragMoved && Math.abs(deltaX) > 28) {
+        if (deltaX < 0) {
+          // Dragged left -> advance to next patient
+          if (currentPatientIndex < queuePatients.length - 1) {
+            animateCardSwipe('left', () => {
+              currentPatientIndex++;
+              renderDeskPatientCard(currentPatientIndex);
+            });
+            return;
+          }
         } else {
-          heroEl.classList.remove('inperson-card');
+          // Dragged right -> back to previous patient
+          if (currentPatientIndex > 0) {
+            animateCardSwipe('right', () => {
+              currentPatientIndex--;
+              renderDeskPatientCard(currentPatientIndex);
+            });
+            return;
+          }
         }
       }
 
-      if (isInPerson) {
-        heroContainer.innerHTML = `
-          <div class="card-badge-row">
-            <span class="badge-pill-light">
-              <i class="ph ph-user"></i>
-              ${pat.serial}
-            </span>
-            <span class="badge-pill-status">Current Turn</span>
-          </div>
+      // Reset card position if under threshold
+      if (card) {
+        card.style.transform = 'translateX(0)';
+      }
+    }
 
-          <div class="patient-details">
-            <h3 class="patient-name">${pat.name}</h3>
-            <div class="patient-info">
-              <span>${pat.subtitle || `${pat.age} Yrs • ${pat.gender}`}</span>
-            </div>
-          </div>
+    function animateCardSwipe(dir, callback) {
+      const card = document.getElementById('patientSwipeCard');
+      if (!card) {
+        if (callback) callback();
+        return;
+      }
+      const outOffset = dir === 'left' ? '-40px' : '40px';
+      const inOffset = dir === 'left' ? '40px' : '-40px';
+      card.style.transform = `translateX(${outOffset})`;
+      card.style.opacity = '0.3';
+      setTimeout(() => {
+        if (callback) callback();
+        card.style.transform = `translateX(${inOffset})`;
+        requestAnimationFrame(() => {
+          card.style.transform = 'translateX(0)';
+          card.style.opacity = '1';
+        });
+      }, 140);
+    }
 
-          <button class="btn-hero-action" onclick="openCurrentInPersonAppointmentInfo()">
-            <i class="ph-bold ph-identification-card"></i>
-            <span>Appointment Info</span>
-          </button>
-        `;
+    // App Push Notification Handlers (Drop down from top & auto-dismiss)
+    let pushNotifTimeout = null;
+
+    function showPatientJoinedPushNotification(pat) {
+      if (!pat) return;
+      const notif = document.getElementById('appPushNotification');
+      const titleEl = document.getElementById('pushNotifTitle');
+      const subEl = document.getElementById('pushNotifSubtitle');
+
+      if (titleEl) titleEl.textContent = `${pat.name} joined the call`;
+      if (subEl) subEl.textContent = `Serial ${pat.serial} is in room • Tap to start consultation`;
+
+      if (notif) {
+        notif.classList.add('show');
+        if (pushNotifTimeout) clearTimeout(pushNotifTimeout);
+        pushNotifTimeout = setTimeout(() => {
+          notif.classList.remove('show');
+        }, 4500);
+      }
+    }
+
+    function hidePushNotification(e) {
+      if (e) e.stopPropagation();
+      const notif = document.getElementById('appPushNotification');
+      if (notif) notif.classList.remove('show');
+      if (pushNotifTimeout) clearTimeout(pushNotifTimeout);
+    }
+
+    function handlePushNotificationClick(e) {
+      if (e && e.target.closest('.btn-push-notif-close')) return;
+      if (e && e.target.closest('.btn-push-notif-join')) {
+        hidePushNotification();
+        handleJoinPatientCallClick(e);
+        return;
+      }
+      hidePushNotification();
+      navigateToDesk();
+      const inCallIdx = queuePatients.findIndex(p => p.inCall || p.status === 'in_call');
+      if (inCallIdx !== -1) {
+        selectPatientByIndex(inCallIdx);
+      }
+    }
+
+    let activeFinishingPatientSerial = null;
+
+    function openReviewForCurrentPatient(e) {
+      if (e) e.stopPropagation();
+      const pat = queuePatients.find(p => p.status === 'draft_rx') || queuePatients[currentPatientIndex] || queuePatients[0];
+      if (!pat) return;
+      activeFinishingPatientSerial = pat.serial;
+
+      const wrapSubtitle = document.getElementById('aiWrapUpSubtitle');
+      if (wrapSubtitle) {
+        wrapSubtitle.textContent = `Compiling clinical notes for Serial ${pat.serial} (${pat.name})`;
+      }
+
+      const complaintText = document.getElementById('chiefComplaintText');
+      if (complaintText && pat.preVisit && pat.preVisit.complaintQuote) {
+        complaintText.innerText = pat.preVisit.complaintQuote;
+      }
+
+      document.getElementById('pageDesk').className = 'app-page page-desk page-left';
+      document.getElementById('pageConsultationReview').className = 'app-page page-consultation-review active-page';
+    }
+
+    function updateDeskPreVisitStreamContent(pat) {
+      if (!pat) return;
+      const preVisit = pat.preVisit;
+      const symptomNameEl = document.getElementById('deskSymptomName');
+      const durationEl = document.getElementById('deskDurationText');
+      const severityEl = document.getElementById('deskSeverityText');
+      const quoteEl = document.getElementById('deskComplaintQuote');
+      const filesRow = document.getElementById('deskPreVisitFilesRow');
+
+      if (preVisit) {
+        if (symptomNameEl) symptomNameEl.textContent = preVisit.symptoms || 'General Consultation';
+        if (durationEl) durationEl.textContent = `Duration: ${preVisit.duration || 'N/A'}`;
+        if (severityEl) severityEl.textContent = `Severity: ${preVisit.severity || 'Mild'}`;
+        if (quoteEl) {
+          quoteEl.style.display = 'block';
+          quoteEl.textContent = `“${preVisit.complaintQuote || 'No specific complaint notes recorded.'}”`;
+        }
+        if (filesRow) {
+          if (preVisit.uploadedDocs && preVisit.uploadedDocs.length > 0) {
+            filesRow.style.display = 'flex';
+            filesRow.innerHTML = preVisit.uploadedDocs.map(doc => `
+              <div class="desk-previsit-file-chip">
+                <i class="ph ${doc.icon || 'ph-file-text'}"></i>
+                <span>${doc.name}</span>
+              </div>
+            `).join('');
+          } else {
+            filesRow.style.display = 'none';
+            filesRow.innerHTML = '';
+          }
+        }
       } else {
-        const isPatientInCall = isLobby || pat.inCall || pat.status === 'in_call';
-        const badgeText = isPatientInCall ? '<span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;margin-right:2px;"></span>In Call' : 'Current Turn';
-        const btnText = isPatientInCall ? 'Join Call' : 'Join Call';
-        
-        heroContainer.innerHTML = `
-          <div class="card-badge-row">
-            <span class="badge-pill-light">
-              <i class="ph ph-user"></i>
-              ${pat.serial}
-            </span>
-            <span class="badge-pill-status">${badgeText}</span>
-          </div>
+        if (symptomNameEl) symptomNameEl.textContent = 'General Follow-up';
+        if (durationEl) durationEl.textContent = 'Duration: N/A';
+        if (severityEl) severityEl.textContent = 'Severity: Routine';
+        if (quoteEl) quoteEl.style.display = 'none';
+        if (filesRow) {
+          filesRow.style.display = 'none';
+          filesRow.innerHTML = '';
+        }
+      }
+    }
 
-          <div class="patient-details">
-            <h3 class="patient-name">${pat.name}</h3>
-            <div class="patient-info">
-              <span>${pat.subtitle}</span>
+    function renderDeskPatientCard(index = 0) {
+      const outer = document.getElementById('heroCardOuter');
+      if (!queuePatients || queuePatients.length === 0) {
+        if (outer) {
+          outer.innerHTML = `
+            <div style="background: #F8FAFC; border-radius: 20px; padding: 36px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; border: 1.5px dashed #E2E8F0;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #ECFDF5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                <i class="ph-bold ph-check"></i>
+              </div>
+              <h3 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #0F172A; margin: 0;">Shift 1 Complete</h3>
+              <p style="font-family: var(--font-body); font-size: 13.5px; color: #64748B; margin: 0;">All 6 scheduled appointments have been attended.</p>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      // Restore carousel wrapper if empty state was previously rendered
+      if (!document.getElementById('patientSwipeCard') && outer) {
+        outer.innerHTML = `
+          <div class="patient-carousel-wrapper" id="patientCarouselWrapper">
+            <div class="patient-swipe-card" id="patientSwipeCard" onclick="handlePatientCardClick(event)">
+              <div class="patient-card-top-row">
+                <div class="patient-card-name-group">
+                  <h3 class="patient-card-name" id="cardPatientName">Tariqul Islam</h3>
+                  <span class="patient-card-subtitle" id="cardPatientSubtitle">34 Yrs • Male</span>
+                </div>
+                <div class="patient-card-status-badge in-call" id="cardPatientStatusBadge" style="display: none;">
+                  <span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;"></span>
+                  <span>In Call</span>
+                </div>
+              </div>
+
+              <div class="patient-card-actions-row" id="patientCardActionsRow" style="display: none;">
+                <button type="button" class="btn-card-join" id="btnCardJoin" onclick="handleJoinPatientCallClick(event)">
+                  <i class="ph-bold ph-video-camera"></i>
+                  <span id="btnCardJoinText">Join Call</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Carousel Dots (Clean Minimal - No Counter Text) -->
+            <div class="carousel-pagination-row" style="justify-content: center;">
+              <div class="carousel-dots-cluster" id="carouselDotsCluster"></div>
             </div>
           </div>
 
-          <button class="btn-hero-action" onclick="openVideoCall()">
-            <i class="ph ph-video-camera"></i>
-            <span>${btnText}</span>
-          </button>
+          <!-- Plain-Text Pre-Visit Details Stream (Wise Flat Surface - NO Card Box) -->
+          <div class="desk-previsit-stream" id="deskPreVisitStream">
+            <div class="desk-previsit-stream-header">
+              <span class="desk-previsit-stream-title">Pre-visit Details</span>
+            </div>
+
+            <div class="desk-previsit-content-body" id="deskPreVisitContentBody">
+              <span class="desk-previsit-symptom-name" id="deskSymptomName">Tension Headache & Neck Stiffness</span>
+              <div class="desk-previsit-meta-pills" id="deskSymptomMeta">
+                <span id="deskDurationText">Duration: 7 Days</span>
+                <span>•</span>
+                <span id="deskSeverityText">Severity: Mild (3/10)</span>
+              </div>
+
+              <div class="desk-previsit-quote-block" id="deskComplaintQuote">
+                “I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.”
+              </div>
+
+              <div class="desk-previsit-files-row" id="deskPreVisitFilesRow">
+                <div class="desk-previsit-file-chip">
+                  <i class="ph ph-file-pdf"></i>
+                  <span>Previous_Rx_Aug2026.pdf</span>
+                </div>
+                <div class="desk-previsit-file-chip">
+                  <i class="ph ph-image"></i>
+                  <span>Neck_XRay_Report.jpg</span>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
+              <span>Appointment Details</span>
+              <i class="ph ph-arrow-right"></i>
+            </button>
+          </div>
         `;
       }
+
+      if (index < 0 || index >= queuePatients.length) index = 0;
+      currentPatientIndex = index;
+      const pat = queuePatients[currentPatientIndex];
+      if (!pat) return;
+
+      // Update Patient Card Name & Subtitle
+      const nameEl = document.getElementById('cardPatientName');
+      const subEl = document.getElementById('cardPatientSubtitle');
+      const badgeEl = document.getElementById('cardPatientStatusBadge');
+      const actionsRowEl = document.getElementById('patientCardActionsRow');
+
+      if (nameEl) nameEl.textContent = pat.name;
+      if (subEl) subEl.textContent = pat.subtitle || `${pat.age} Yrs • ${pat.gender}`;
+
+      const inCall = !!(pat.inCall || pat.status === 'in_call');
+      const isDraftRx = pat.status === 'draft_rx';
+
+      if (badgeEl) {
+        if (inCall) {
+          badgeEl.className = 'patient-card-status-badge in-call';
+          badgeEl.innerHTML = `<span class="status-dot-pulse" style="width:6px;height:6px;background:#10B981;"></span><span>In Call</span>`;
+          badgeEl.style.display = 'inline-flex';
+        } else if (isDraftRx) {
+          badgeEl.className = 'patient-card-status-badge draft-rx';
+          badgeEl.innerHTML = `<span>Draft Rx</span>`;
+          badgeEl.style.display = 'inline-flex';
+        } else {
+          badgeEl.style.display = 'none';
+        }
+      }
+
+      if (actionsRowEl) {
+        if (inCall) {
+          const joinText = (pat.hasJoinedCall || pat.isCallActive) ? 'Rejoin Call' : 'Join Call';
+          actionsRowEl.style.display = 'flex';
+          actionsRowEl.innerHTML = `
+            <button type="button" class="btn-card-join pulsing-join" id="btnCardJoin" onclick="handleJoinPatientCallClick(event)">
+              <i class="ph-bold ph-video-camera"></i>
+              <span id="btnCardJoinText">${joinText}</span>
+            </button>
+          `;
+        } else if (isDraftRx) {
+          actionsRowEl.style.display = 'flex';
+          actionsRowEl.innerHTML = `
+            <button type="button" class="btn-card-finish-rx" onclick="openReviewForCurrentPatient(event)">
+              <i class="ph-bold ph-note-pencil"></i>
+              <span>Finish Rx</span>
+            </button>
+          `;
+        } else {
+          actionsRowEl.style.display = 'none';
+          actionsRowEl.innerHTML = '';
+        }
+      }
+
+      // Render Carousel Dots (With active highlight and live in-call pulsing dot)
+      const dotsCluster = document.getElementById('carouselDotsCluster');
+      if (dotsCluster) {
+        dotsCluster.innerHTML = queuePatients.map((p, idx) => {
+          const isCurrent = idx === currentPatientIndex ? 'active' : '';
+          const isInCall = (p.inCall || p.status === 'in_call') ? 'in-call-dot' : '';
+          return `<div class="carousel-dot ${isCurrent} ${isInCall}" onclick="selectPatientByIndex(${idx})" title="${p.name}"></div>`;
+        }).join('');
+      }
+
+      // Update Desk Pre-Visit Stream Content with Smooth Crossfade Animation
+      const preVisitBody = document.getElementById('deskPreVisitContentBody');
+      if (preVisitBody) {
+        preVisitBody.classList.add('fade-out');
+        setTimeout(() => {
+          updateDeskPreVisitStreamContent(pat);
+          preVisitBody.classList.remove('fade-out');
+        }, 90);
+      } else {
+        updateDeskPreVisitStreamContent(pat);
+      }
+
+      syncVideoCallScreenState(pat);
+      initPatientCarouselGestures();
+    }
+
+    function selectPatientByIndex(idx) {
+      if (idx === currentPatientIndex) return;
+      const dir = idx > currentPatientIndex ? 'left' : 'right';
+      animateCardSwipe(dir, () => {
+        renderDeskPatientCard(idx);
+      });
+    }
+
+    function updateDeskHeroPatient(pat) {
+      const idx = queuePatients.findIndex(p => p.name === pat?.name || p.serial === pat?.serial);
+      if (idx !== -1) {
+        renderDeskPatientCard(idx);
+      } else {
+        renderDeskPatientCard(currentPatientIndex);
+      }
+    }
+
+    function simulateDoctorShiftCall() {
+      const modal = document.getElementById('modalDoctorShiftCall');
+      if (modal) modal.classList.add('active');
+    }
+
+    function acceptDoctorShiftCall() {
+      const modal = document.getElementById('modalDoctorShiftCall');
+      if (modal) modal.classList.remove('active');
+
+      if (!queuePatients || queuePatients.length === 0) return;
+      currentPatientIndex = 0;
+      const pat = queuePatients[0];
+
+      showToast('Calling first patient...');
+      setTimeout(() => {
+        pat.inCall = true;
+        pat.status = 'in_call';
+        const apt1 = appointmentsData.find(a => a.id === 'apt1' || (a.shiftId === 1 && a.serial === '#1'));
+        if (apt1) {
+          apt1.status = 'in_call';
+          apt1.statusText = 'In Call';
+        }
+        renderDeskPatientCard(0);
+        showPatientJoinedPushNotification(pat);
+      }, 1200);
+    }
+
+    function delayDoctorShiftCall(mins) {
+      const modal = document.getElementById('modalDoctorShiftCall');
+      if (modal) modal.classList.remove('active');
+      showToast(`Shift delayed by ${mins} mins`);
+    }
+
+    function simulatePatientJoined() {
+      if (!queuePatients || queuePatients.length === 0) return;
+      // Always start call for the first patient in the queue
+      const pat = queuePatients[0];
+      if (!pat) return;
+      pat.inCall = true;
+      if (currentPatientIndex !== 0) {
+        animateCardSwipe('right', () => {
+          currentPatientIndex = 0;
+          renderDeskPatientCard(0);
+        });
+      } else {
+        renderDeskPatientCard(0);
+      }
+      showPatientJoinedPushNotification(pat);
+    }
+
+    function simulateNextPatient() {
+      if (queuePatients.length <= 1) return;
+      const nextIdx = (currentPatientIndex + 1) % queuePatients.length;
+      animateCardSwipe('left', () => {
+        renderDeskPatientCard(nextIdx);
+      });
+    }
+
+    function resetDemoQueue() {
+      queuePatients = JSON.parse(JSON.stringify(initialShift1Patients));
+      currentPatientIndex = 0;
+      appointmentsData.forEach(a => {
+        if (a.shiftId === 1 && a.dateKey === 'today') {
+          a.status = 'queued';
+          a.statusText = 'In Queue';
+          a.cancellationReason = null;
+          a.prescriptionPdf = null;
+        }
+      });
+      renderDeskPatientCard(0);
+      renderAppointmentsList();
+      const notif = document.getElementById('appPushNotification');
+      if (notif) notif.classList.remove('show');
+      showToast('Shift 1 Queue reset with 6 patients');
+    }
+
+    function handlePatientCardClick(e) {
+      if (dragMoved) return; // Ignore clicks if user was dragging
+      if (e && (e.target.closest('.btn-card-join') || e.target.closest('.btn-card-finish-rx'))) {
+        return;
+      }
+      openCurrentPatientDetails();
+    }
+
+    function handleJoinPatientCallClick(e) {
+      if (e) e.stopPropagation();
+      const inCallIdx = queuePatients.findIndex(p => p.inCall || p.status === 'in_call');
+      const targetIdx = inCallIdx !== -1 ? inCallIdx : currentPatientIndex;
+      currentPatientIndex = targetIdx;
+      const pat = queuePatients[currentPatientIndex] || queuePatients[0];
+      if (pat) {
+        pat.inCall = true;
+        pat.hasJoinedCall = true;
+        syncVideoCallScreenState(pat);
+      }
+      openVideoCall();
+    }
+
+    function openCurrentPatientDetails() {
+      const pat = queuePatients[currentPatientIndex] || queuePatients[0];
+      const match = appointmentsData.find(a => a.name === pat?.name || a.id === pat?.id || a.serial === pat?.serial);
+      if (match) {
+        openAppointmentDetails(match.id, 'desk');
+      } else {
+        openAppointmentDetails('apt1', 'desk');
+      }
+    }
+
+    function openCancelPatientApptModal(e) {
+      if (e) e.stopPropagation();
+      const pat = queuePatients[currentPatientIndex] || queuePatients[0];
+      const shiftName = pat ? pat.name : 'Patient';
+      requestDeleteShift(pat?.id || 'apt1', shiftName);
     }
 
     // Video Call Navigation & Interactivity
@@ -17791,6 +19445,7 @@
 
       const pat = queuePatients[currentPatientIndex];
       if (pat) {
+        pat.hasJoinedCall = true;
         syncVideoCallScreenState(pat);
         const match = appointmentsData.find(a => a.serial === pat.serial);
         if (match && match.status !== 'prescribed') {
@@ -17828,7 +19483,15 @@
       screen.classList.remove('in-call-mode');
 
       const pat = queuePatients[currentPatientIndex];
+      if (pat) {
+        pat.hasJoinedCall = true;
+      }
       updateDeskHeroPatient(pat, true);
+
+      const joinTextEl = document.getElementById('btnCardJoinText');
+      if (joinTextEl) {
+        joinTextEl.textContent = 'Rejoin Call';
+      }
 
       document.getElementById('pageVideoCall').className = 'app-page page-video-call page-right';
       document.getElementById('pageDesk').className = 'app-page active-page';
@@ -17858,6 +19521,9 @@
       if (callTimerInterval) clearInterval(callTimerInterval);
 
       const pat = queuePatients[currentPatientIndex];
+      if (pat) {
+        pat.hasJoinedCall = false;
+      }
       document.getElementById('aiWrapUpSubtitle').textContent = 
         `Compiling clinical notes for Serial ${pat.serial} (${pat.name})`;
 
@@ -17896,6 +19562,74 @@
       }, 2600);
     }
 
+    let patient2DeclineSimulated = false;
+
+    // Auto-Connect Next Patient Engine with Seamless Patient 2 Decline Simulation
+    function autoConnectNextQueuedPatient() {
+      if (!queuePatients || queuePatients.length === 0) return;
+
+      const nextQueuedPat = queuePatients.find(p => p.status !== 'draft_rx' && p.status !== 'prescribed' && !p.inCall);
+      if (!nextQueuedPat) return;
+
+      // Simulate decline & rebooking for Patient 2 (Farzana Khan)
+      // Invisible to doctor: moves to history as cancelled, calls Patient 3 (Tanvir Alam), who joins the call
+      if (!patient2DeclineSimulated && (nextQueuedPat.serial === '#2' || nextQueuedPat.name === 'Farzana Khan' || nextQueuedPat.id === 'apt2')) {
+        patient2DeclineSimulated = true;
+        setTimeout(() => {
+          // Patient 2 declines and rebooks right there
+          const match2 = appointmentsData.find(a => (a.shiftId === 1 || !a.shiftId) && (a.serial === '#2' || a.name === 'Farzana Khan' || a.id === 'apt2'));
+          if (match2) {
+            match2.status = 'cancelled';
+            match2.statusText = 'Cancelled';
+            match2.cancellationReason = 'Declined by patient • Rebooked for tomorrow';
+          }
+
+          // Add notification to bell feed for doctor's reference
+          addNotificationToFeed({
+            title: 'Appointment Rescheduled',
+            body: 'Farzana Khan declined call and rebooked for tomorrow. Moved to history.',
+            type: 'system',
+            target: 'apt2'
+          });
+
+          // Remove Patient 2 from active desk queue
+          const p2Idx = queuePatients.findIndex(p => p.serial === '#2' || p.name === 'Farzana Khan' || p.id === 'apt2');
+          if (p2Idx !== -1) {
+            queuePatients.splice(p2Idx, 1);
+          }
+
+          // Immediately call Patient 3 (Tanvir Alam / #3)
+          const pat3 = queuePatients.find(p => p.status !== 'draft_rx' && p.status !== 'prescribed');
+          if (pat3) {
+            pat3.inCall = true;
+            pat3.hasJoinedCall = false; // Fresh call awaiting doctor
+
+            if (currentPatientIndex >= queuePatients.length) {
+              currentPatientIndex = 0;
+            }
+
+            renderDeskPatientCard(currentPatientIndex);
+            syncVideoCallScreenState(pat3);
+
+            // Push notification announcing Patient 3 has joined the call (completely invisible background transition!)
+            showPatientJoinedPushNotification(pat3);
+          }
+
+          renderAppointmentsList();
+        }, 1600);
+      } else {
+        setTimeout(() => {
+          if (queuePatients.includes(nextQueuedPat) && nextQueuedPat.status !== 'prescribed') {
+            nextQueuedPat.inCall = true;
+            nextQueuedPat.hasJoinedCall = false;
+            renderDeskPatientCard(currentPatientIndex);
+            syncVideoCallScreenState(nextQueuedPat);
+            showPatientJoinedPushNotification(nextQueuedPat);
+          }
+        }, 1600);
+      }
+    }
+
     function returnToDeskFromAi() {
       // Cancel auto-popover timer so it never interrupts the doctor on Desk
       if (aiAutoTransitionTimer) {
@@ -17904,23 +19638,25 @@
       }
 
       // Mark current patient appointment status as Draft Rx (completed in background)
-      const currentPat = queuePatients[currentPatientIndex];
-      const match = appointmentsData.find(a => a.serial === currentPat.serial || a.name === currentPat.name);
-      if (match) {
-        match.status = 'draft_rx';
+      const finishedPat = queuePatients[currentPatientIndex];
+      if (finishedPat) {
+        finishedPat.status = 'draft_rx';
+        finishedPat.inCall = false;
+        const match = appointmentsData.find(a => a.serial === finishedPat.serial || a.name === finishedPat.name);
+        if (match) {
+          match.status = 'draft_rx';
+          match.statusText = 'Draft Rx';
+        }
       }
-
-      // Advance Desk Hero Card to next patient in queue
-      currentPatientIndex = (currentPatientIndex + 1) % queuePatients.length;
-      const nextPat = queuePatients[currentPatientIndex];
-
-      updateDeskHeroPatient(nextPat);
-      syncVideoCallScreenState(nextPat);
-      callTimerSeconds = 0;
-      document.getElementById('callDurationTimer').textContent = '00:00';
 
       document.getElementById('pageAiWrapUp').className = 'app-page page-ai-wrapup page-right';
       document.getElementById('pageDesk').className = 'app-page active-page';
+
+      renderDeskPatientCard(currentPatientIndex);
+      renderAppointmentsList();
+
+      // Silent background call to next waiting patient
+      autoConnectNextQueuedPatient();
     }
 
     // Consultation Wrap-Up Review Actions & Modal Sheets
@@ -18460,23 +20196,66 @@
       }
 
       // Video Shift Completion
-      const finishedPat = queuePatients[currentPatientIndex];
-      const match = appointmentsData.find(a => a.serial === finishedPat.serial || a.name === finishedPat.name);
-      if (match) {
-        match.status = 'prescribed';
+      let finishedPatIndex = -1;
+      if (activeFinishingPatientSerial) {
+        finishedPatIndex = queuePatients.findIndex(p => p.serial === activeFinishingPatientSerial);
+      }
+      if (finishedPatIndex === -1) {
+        finishedPatIndex = queuePatients.findIndex(p => p.status === 'draft_rx');
+      }
+      if (finishedPatIndex === -1) {
+        finishedPatIndex = currentPatientIndex;
       }
 
-      currentPatientIndex++;
-      if (currentPatientIndex < queuePatients.length) {
-        const nextPat = queuePatients[currentPatientIndex];
-        updateDeskHeroPatient(nextPat);
-        syncVideoCallScreenState(nextPat);
-        callTimerSeconds = 0;
-        document.getElementById('callDurationTimer').textContent = '00:00';
-        showToast(`Consultation finished • Next: ${nextPat.name}`);
+      if (finishedPatIndex >= 0 && finishedPatIndex < queuePatients.length) {
+        const finishedPat = queuePatients[finishedPatIndex];
+        const match = appointmentsData.find(a => (a.shiftId === 1 || !a.shiftId) && (a.serial === finishedPat.serial || a.name === finishedPat.name));
+        if (match) {
+          match.status = 'prescribed';
+          match.statusText = 'Prescribed';
+          match.prescriptionPdf = `RX_${finishedPat.name.replace(/ /g, '_')}_Sep29.pdf`;
+        }
+        // Remove completed patient from active homepage cards queue
+        queuePatients.splice(finishedPatIndex, 1);
+      }
+      activeFinishingPatientSerial = null;
+
+      renderAppointmentsList();
+
+      if (queuePatients.length > 0) {
+        // Check if another patient is ALREADY in call (e.g. Patient 2 joined while finishing Rx)
+        const alreadyInCallIndex = queuePatients.findIndex(p => p.inCall || p.status === 'in_call');
+
+        if (alreadyInCallIndex !== -1) {
+          currentPatientIndex = alreadyInCallIndex;
+          const activeCallPat = queuePatients[currentPatientIndex];
+          activeCallPat.inCall = true;
+          renderDeskPatientCard(currentPatientIndex);
+          syncVideoCallScreenState(activeCallPat);
+          callTimerSeconds = 0;
+          const timerEl = document.getElementById('callDurationTimer');
+          if (timerEl) timerEl.textContent = '00:00';
+          showToast(`Prescription saved • ${activeCallPat.name} is waiting in room`);
+          // Note: Patient is already connected in room, keep Join Call button and do not re-trigger call notification
+        } else {
+          if (currentPatientIndex >= queuePatients.length) {
+            currentPatientIndex = 0;
+          }
+          const nextPat = queuePatients[currentPatientIndex];
+          nextPat.inCall = false;
+          renderDeskPatientCard(currentPatientIndex);
+          syncVideoCallScreenState(nextPat);
+          callTimerSeconds = 0;
+          const timerEl = document.getElementById('callDurationTimer');
+          if (timerEl) timerEl.textContent = '00:00';
+          showToast(`Prescription sent • Next: ${nextPat.name}`);
+
+          // Auto-initiate background call to next patient
+          autoConnectNextQueuedPatient();
+        }
       } else {
-        // Shift 1 Video complete -> Auto transition to Shift 2 (In-Person)!
-        startInPersonShiftFromShift1Completion();
+        renderDeskPatientCard(0);
+        showToast('Shift 1 complete • All 6 consultations finished');
       }
     }
 
@@ -18908,12 +20687,11 @@
       const heroContainer = document.getElementById('heroCardInner');
       if (!heroContainer) return;
       heroContainer.innerHTML = `
-        <div class="card-badge-row">
-          <span class="badge-pill-light">
-            <i class="ph ph-check-circle"></i>
-            Shift 2
+        <div class="card-meta-row">
+          <span class="hero-meta-text">
+            <i class="ph ph-check-circle" style="font-size: 13px; margin-right: 3px;"></i>Shift 2
           </span>
-          <span class="badge-pill-status">Completed</span>
+          <span class="hero-meta-text">Completed</span>
         </div>
 
         <div class="patient-details">
@@ -18923,7 +20701,7 @@
           </div>
         </div>
 
-        <button class="btn-hero-action" style="background: #FFFFFF; border: 1.5px solid #CBD5E1; color: #1E293B; font-weight: 700;" onclick="navigateToSchedule()">
+        <button class="btn-hero-action" style="background: #E2E8F0; border: none; color: #0F172A; font-weight: 700;" onclick="navigateToSchedule()">
           <i class="ph-bold ph-calendar"></i>
           <span>View Schedule</span>
         </button>
@@ -20305,14 +22083,11 @@
       const bookedCount = firstShift.booked || 0;
 
       if (bookedCount === 0) {
-        // 0 Bookings Yet: clean tags (Video on left, Shift 1 on right), spaced out, uncluttered
+        // 0 Bookings Yet: plain text meta
         heroContainer.innerHTML = `
-          <div class="card-badge-row">
-            <span class="badge-pill-light">
-              <i class="ph ${typeIcon}"></i>
-              ${typeBadge}
-            </span>
-            <span class="badge-pill-status">${firstShift.name || 'Shift 1'}</span>
+          <div class="card-meta-row">
+            <span class="hero-meta-text">${typeBadge}</span>
+            <span class="hero-meta-text">${firstShift.name || 'Shift 1'}</span>
           </div>
 
           <div class="patient-details">
@@ -20322,20 +22097,17 @@
             </div>
           </div>
 
-          <button class="btn-hero-action" style="background: #FFFFFF; border: 1.5px solid #CBD5E1; color: #1E293B; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,0.04);" onclick="navigateToSchedule()">
+          <button class="btn-hero-action" style="background: #E2E8F0; border: none; color: #0F172A; font-weight: 700;" onclick="navigateToSchedule()">
             <i class="ph-bold ph-calendar"></i>
             <span>Manage Shift</span>
           </button>
         `;
       } else {
-        // Booked patients exist: Ready To Begin with primary action button
+        // Booked patients exist: Ready To Begin with plain text meta
         heroContainer.innerHTML = `
-          <div class="card-badge-row">
-            <span class="badge-pill-light">
-              <i class="ph ${typeIcon}"></i>
-              ${typeBadge}
-            </span>
-            <span class="badge-pill-status">${firstShift.name || 'Shift 1'}</span>
+          <div class="card-meta-row">
+            <span class="hero-meta-text">${typeBadge}</span>
+            <span class="hero-meta-text">${firstShift.name || 'Shift 1'}</span>
           </div>
 
           <div class="patient-details">
@@ -20434,12 +22206,11 @@
         setTimeout(() => {
           if (heroCard) heroCard.className = 'patient-hero-card locked-card';
           heroContainer.innerHTML = `
-            <div class="card-badge-row">
-              <span class="badge-pill-light">
-                <i class="ph ph-lock-key"></i>
-                Shift 2 (6:00 PM)
+            <div class="card-meta-row">
+              <span class="hero-meta-text">
+                <i class="ph ph-lock-key" style="font-size: 13px; margin-right: 3px;"></i>Shift 2 (6:00 PM)
               </span>
-              <span class="badge-pill-status">8 in Queue</span>
+              <span class="hero-meta-text">8 in Queue</span>
             </div>
 
             <div class="patient-details">
@@ -20479,12 +22250,11 @@
       
       if (heroCard) heroCard.className = 'patient-hero-card locked-card';
       heroContainer.innerHTML = `
-        <div class="card-badge-row">
-          <span class="badge-pill-light">
-            <i class="ph ph-lock-key"></i>
-            Shift 1
+        <div class="card-meta-row">
+          <span class="hero-meta-text">
+            <i class="ph ph-lock-key" style="font-size: 13px; margin-right: 3px;"></i>Shift 1
           </span>
-          <span class="badge-pill-status">6 in Queue</span>
+          <span class="hero-meta-text">6 in Queue</span>
         </div>
 
         <div class="patient-details">
@@ -20513,12 +22283,9 @@
 
       if (heroCard) heroCard.className = 'patient-hero-card';
       heroContainer.innerHTML = `
-        <div class="card-badge-row">
-          <span class="badge-pill-light">
-            <i class="ph ph-video-camera"></i>
-            Video
-          </span>
-          <span class="badge-pill-status">Shift 1</span>
+        <div class="card-meta-row">
+          <span class="hero-meta-text">Video</span>
+          <span class="hero-meta-text">Shift 1</span>
         </div>
 
         <div class="patient-details">
@@ -21197,9 +22964,9 @@
       if (heroCard) heroCard.className = 'patient-hero-card no-shift-card';
 
       heroContainer.innerHTML = `
-        <div class="patient-details" style="margin-bottom: 16px;">
-          <h3 class="patient-name" style="font-size: 20px; font-weight: 800; color: #0F172A; margin-bottom: 4px;">No Shift Today</h3>
-          <div class="patient-info" style="font-size: 13.5px; color: #64748B;">
+        <div class="patient-details" style="margin-bottom: 14px;">
+          <h3 class="patient-name" style="font-size: 19px; font-weight: 700; color: #0F172A; margin-bottom: 2px;">No Shift Today</h3>
+          <div class="patient-info" style="font-size: 13px; color: #64748B;">
             <span>Create a shift to start accepting appointments.</span>
           </div>
         </div>
@@ -21253,6 +23020,14 @@
       // Initialize full month date carousel and schedule
       renderDateCarouselStrip();
       renderDateSchedule(currentSelectedDate);
+
+      // Initialize Desk patient swipe card and gestures
+      if (typeof renderDeskPatientCard === 'function') {
+        renderDeskPatientCard(0);
+      }
+      if (typeof initPatientCarouselGestures === 'function') {
+        initPatientCarouselGestures();
+      }
 
       document.addEventListener('click', (e) => {
         if (isWithdrawDropdownOpen) {
