@@ -9536,19 +9536,24 @@
 
 
     /* Withdraw Funds Modal Styles */
-    .withdraw-avail-pill {
-      background: #EAFBF5;
-      border: 1px solid #B7F1DF;
-      color: #0D8B68;
-      border-radius: 100px;
-      padding: 6px 14px;
+    .withdraw-avail-text {
       font-family: var(--font-heading);
-      font-size: 13.5px;
+      font-size: 15.5px;
       font-weight: 700;
-      display: inline-flex;
+      color: #0E8070;
+      letter-spacing: -0.01em;
+      display: flex;
       align-items: center;
       gap: 6px;
       margin-bottom: 14px;
+      padding: 0 2px;
+    }
+
+    .withdraw-avail-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748B;
     }
 
     /* Enhanced Prominent Amount Input Card (On Top) */
@@ -13769,11 +13774,9 @@
             <p class="sheet-minimal-subtitle">Transfer your earnings directly to your bank account or bKash.</p>
           </div>
 
-          <div style="margin-bottom: 6px;">
-            <div class="withdraw-avail-pill">
-              <i class="ph-fill ph-check-circle"></i>
-              <span id="withdrawModalAvailText">৳ 12,400 Available</span>
-            </div>
+          <div class="withdraw-avail-text">
+            <span class="withdraw-avail-label">Available:</span>
+            <span id="withdrawModalAvailText">৳ 12,400</span>
           </div>
 
           <!-- 1. Amount Input Card (ON TOP) -->
@@ -17116,7 +17119,7 @@
       }
       const modalAvailText = document.getElementById('withdrawModalAvailText');
       if (modalAvailText) {
-        modalAvailText.textContent = `৳ ${earningsData.availableBalance.toLocaleString('en-US')} Available`;
+        modalAvailText.textContent = `৳ ${earningsData.availableBalance.toLocaleString('en-US')}`;
       }
       const todayStat = document.getElementById('walletTodayStatVal');
       if (todayStat) {
