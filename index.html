@@ -9188,7 +9188,117 @@
       gap: 16px;
     }
 
-    /* 1. Main Hero Balance Card (Card Sage Glassmorphism - Matches Desk Pre-Shift & Metrics Hero) */
+    /* 1. Cardless Available Balance Section (Minimalist Typography Standard) */
+    .wallet-balance-section {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 4px 2px 10px 2px;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+
+    .wallet-balance-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .wallet-balance-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: #556B67;
+      letter-spacing: 0.01em;
+    }
+
+    .wallet-balance-amount {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 800;
+      color: #02241F;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      margin: 0;
+    }
+
+    .btn-wallet-withdraw-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 42px;
+      padding: 0 18px;
+      background: var(--color-primary-btn);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.18);
+      transition: background 0.2s ease, transform 0.15s ease;
+      flex-shrink: 0;
+      margin-bottom: 2px;
+    }
+
+    .btn-wallet-withdraw-cta:hover {
+      background: var(--color-primary-btn-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-wallet-withdraw-cta:active {
+      transform: scale(0.97);
+    }
+
+    .btn-wallet-show-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: transparent;
+      border: none;
+      color: #0E8070;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 4px 4px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-wallet-show-all i {
+      font-size: 14px;
+      transition: transform 0.15s ease;
+    }
+
+    .btn-wallet-show-all:hover {
+      color: #052E28;
+    }
+
+    .btn-wallet-show-all:hover i {
+      transform: translateX(2px);
+    }
+
+    .btn-sheet-confirm:disabled {
+      opacity: 0.45 !important;
+      cursor: not-allowed !important;
+      pointer-events: none !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    .app-page.page-all-transactions {
+      background: var(--color-app-bg);
+      padding: 12px 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    /* 1. Main Hero Balance Card (Card Sage Glassmorphism - Retained for legacy/compatibility) */
     .wallet-hero-card {
       background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%);
       backdrop-filter: blur(16px);
@@ -12210,17 +12320,15 @@
               </button>
             </div>
 
-            <!-- 1. Main Hero Balance Card (Card Sage Glassmorphism - Matches Desk Pre-Shift & Metrics Hero) -->
-            <div class="wallet-hero-card" id="walletBalanceHeroCard">
-              <div class="wallet-hero-badges-row">
-                <span class="badge-pill-light"><i class="ph ph-wallet"></i> Available Balance</span>
+            <!-- 1. Cardless Available Balance Section (Minimalist Typography Standard) -->
+            <div class="wallet-balance-section">
+              <div class="wallet-balance-meta">
+                <span class="wallet-balance-label">Available Balance</span>
+                <h2 class="wallet-balance-amount" id="walletAvailableBalanceText">&#2547; 12,400</h2>
               </div>
-              <div class="wallet-hero-num-row">
-                <h2 class="wallet-hero-val" id="walletAvailableBalanceText">&#2547; 12,400</h2>
-              </div>
-              <button class="btn-wallet-hero-action" onclick="openWithdrawFundsModal()">
+              <button class="btn-wallet-withdraw-cta" onclick="openWithdrawFundsModal()" aria-label="Withdraw Funds">
                 <i class="ph ph-arrow-up-right"></i>
-                <span>Withdraw Funds</span>
+                <span>Withdraw</span>
               </button>
             </div>
 
@@ -12237,21 +12345,47 @@
               </div>
             </div>
 
-            <!-- 3. Recent Transactions Section (Matches All Appointments & Patients Directory) -->
+            <!-- 3. Today's Transactions Section (Only Today's Transactions with Show All Link) -->
             <section class="wallet-transactions-section">
               <div class="wallet-transactions-header">
-                <h2 class="section-title">Recent Transactions</h2>
-                <button class="btn-circle-icon" id="btnTxFilterTrigger" style="width: 36px; height: 36px; font-size: 16px; background: #F6F8F9; border: 1.5px solid #EDF2F1; position: relative;" onclick="openTransactionFilterModal()" aria-label="Filter transactions">
-                  <i class="ph ph-sliders-horizontal"></i>
-                  <span class="filter-active-dot" id="txFilterActiveDot" style="display: none; position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: #0E8070; border: 1.5px solid #FFFFFF;"></span>
+                <h2 class="section-title">Today’s Transactions</h2>
+                <button class="btn-wallet-show-all" onclick="openAllTransactionsPage()" aria-label="Show all transactions">
+                  <span>Show All</span>
+                  <i class="ph ph-caret-right"></i>
                 </button>
               </div>
 
-              <!-- Transactions Grouped Dynamic Container -->
+              <!-- Transactions Container (Populated with Today's Transactions) -->
               <div class="wallet-transactions-list" id="walletTransactionsList">
                 <!-- Dynamically populated by renderTransactionsList() -->
               </div>
             </section>
+
+          </div>
+
+          <!-- =======================================================
+               VIEW 11B: ALL TRANSACTIONS (EXPANDED FINANCIAL HISTORY)
+               ======================================================= -->
+          <div class="app-page page-all-transactions page-right" id="pageAllTransactions">
+            
+            <!-- Top Sticky Header -->
+            <div class="appointments-top-bar" style="margin-bottom: 12px;">
+              <div class="rx-preview-left-head">
+                <button class="btn-circle-icon" onclick="navigateBackFromAllTransactions()" aria-label="Back to Wallet">
+                  <i class="ph ph-arrow-left"></i>
+                </button>
+                <h1 class="page-top-title">All Transactions</h1>
+              </div>
+              <button class="btn-circle-icon" id="btnTxFilterTriggerAll" style="width: 38px; height: 38px; font-size: 16px; background: #F6F8F9; border: 1.5px solid #EDF2F1; position: relative;" onclick="openTransactionFilterModal()" aria-label="Filter transactions">
+                <i class="ph ph-sliders-horizontal"></i>
+                <span class="filter-active-dot" id="txFilterActiveDotAll" style="display: none; position: absolute; top: 6px; right: 6px; width: 7px; height: 7px; border-radius: 50%; background: #0E8070; border: 1.5px solid #FFFFFF;"></span>
+              </button>
+            </div>
+
+            <!-- Full Grouped Transactions Container -->
+            <div class="wallet-transactions-list" id="allTransactionsFullList" style="padding-bottom: 40px;">
+              <!-- Dynamically populated by renderAllTransactionsList() -->
+            </div>
 
           </div>
 
@@ -13650,7 +13784,7 @@
             </div>
             <div class="withdraw-input-row">
               <span class="withdraw-currency-symbol">৳</span>
-              <input type="number" class="withdraw-amount-input" id="withdrawAmountInput" value="12400" placeholder="0" min="100">
+              <input type="number" class="withdraw-amount-input" id="withdrawAmountInput" value="0" placeholder="0" min="1" oninput="handleWithdrawAmountInput()">
             </div>
           </div>
 
@@ -13675,7 +13809,7 @@
           <!-- Action Buttons -->
           <div class="sheet-actions-group">
             <button type="button" class="btn-sheet-cancel" onclick="closeWithdrawFundsModal()">Cancel</button>
-            <button type="button" class="btn-sheet-confirm" onclick="confirmWithdrawal()">
+            <button type="button" class="btn-sheet-confirm" id="btnConfirmWithdraw" onclick="confirmWithdrawal()" disabled>
               <i class="ph ph-arrow-up-right"></i>
               <span>Withdraw</span>
             </button>
@@ -15557,7 +15691,7 @@
       const allPages = [
         'pageDesk', 'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
         'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications', 'pageAllTransactions'
       ];
       allPages.forEach(pId => {
         const el = document.getElementById(pId);
@@ -16249,7 +16383,7 @@
       const allPages = [
         'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
         'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
+        'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications', 'pageAllTransactions'
       ];
       allPages.forEach(pId => {
         const el = document.getElementById(pId);
@@ -16301,7 +16435,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
+          'pageAppointmentDetails', 'pagePatientProfile', 'pageWallet', 'pageDoctorProfile', 'pageSettings', 'pageNotifications', 'pageAllTransactions'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -16330,7 +16464,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageSettings', 'pageNotifications'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageSettings', 'pageNotifications', 'pageAllTransactions'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -16359,7 +16493,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageNotifications'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageWallet', 'pageNotifications', 'pageAllTransactions'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -16750,7 +16884,7 @@
           }
         }
       });
-      const pageNotif = document.getElementById('pageNotifications');
+      const pageNotif = document.getElementById('pageNotifications', 'pageAllTransactions');
       if (pageNotif) {
         pageNotif.scrollTop = 0;
         pageNotif.className = 'app-page page-notifications active-page';
@@ -16759,7 +16893,7 @@
     }
 
     function closeNotificationsPage() {
-      const pageNotif = document.getElementById('pageNotifications');
+      const pageNotif = document.getElementById('pageNotifications', 'pageAllTransactions');
       if (pageNotif) pageNotif.className = 'app-page page-notifications page-right';
 
       if (notificationsBackTarget === 'desk') {
@@ -16959,7 +17093,7 @@
         const otherPages = [
           'pageSchedule', 'pageVideoCall', 'pageAiWrapUp', 
           'pageConsultationReview', 'pagePrescriptionPreview', 'pageAppointments', 
-          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageDoctorProfile', 'pageSettings', 'pageNotifications'
+          'pageAppointmentDetails', 'pagePatientsList', 'pagePatientProfile', 'pageDoctorProfile', 'pageSettings', 'pageNotifications', 'pageAllTransactions'
         ];
         otherPages.forEach(pId => {
           const el = document.getElementById(pId);
@@ -16996,8 +17130,89 @@
       renderTransactionsList();
     }
 
-    function renderTransactionsList() {
+    // Reusable single transaction item renderer
+    function buildTransactionItemHtml(tx) {
+      const isInflow = tx.type === 'inflow';
+      const amountClass = isInflow ? 'inflow' : 'outflow';
+      const formattedAmount = isInflow ? `+৳ ${tx.amount.toLocaleString()}` : `-৳ ${tx.amount.toLocaleString()}`;
+
+      // 1. Modality icon
+      let iconClass = 'ph ph-arrow-up-right';
+      let boxClass = 'outflow';
+      if (isInflow) {
+        const mode = (tx.consultType || tx.subtitle || '').toLowerCase();
+        if (mode.includes('audio') || mode.includes('phone') || mode.includes('voice')) {
+          iconClass = 'ph ph-phone-call';
+          boxClass = 'audio';
+        } else if (mode.includes('in-person') || mode.includes('inperson')) {
+          iconClass = 'ph ph-users';
+          boxClass = 'inperson';
+        } else {
+          iconClass = 'ph ph-video-camera';
+          boxClass = 'inflow';
+        }
+      }
+
+      // 2. Transfer method & time
+      const rawMethod = (tx.method || tx.subtitle || '').toLowerCase();
+      let methodLabel = 'Bank Transfer';
+      if (rawMethod.includes('bkash')) methodLabel = 'bKash';
+      else if (rawMethod.includes('nagad')) methodLabel = 'Nagad';
+      else if (rawMethod.includes('prime bank')) methodLabel = 'Prime Bank';
+      else if (rawMethod.includes('city bank')) methodLabel = 'City Bank';
+      else if (rawMethod.includes('brac')) methodLabel = 'BRAC Bank';
+      else if (rawMethod.includes('ebl')) methodLabel = 'EBL';
+      else if (rawMethod.includes('bank')) methodLabel = 'Bank Account';
+      else if (!isInflow) methodLabel = 'Bank Withdrawal';
+
+      const cleanMeta = `${methodLabel} • ${tx.time}`;
+
+      return `
+        <div class="transaction-item-card" onclick="openTransactionDetails('${tx.id}')">
+          <div class="tx-item-left">
+            <div class="tx-icon-box ${boxClass}">
+              <i class="${iconClass}"></i>
+            </div>
+            <div class="tx-item-meta">
+              <span class="tx-item-name">${tx.title}</span>
+              <span class="tx-item-sub">${cleanMeta}</span>
+            </div>
+          </div>
+          <div class="tx-amount-val ${amountClass}">${formattedAmount}</div>
+        </div>
+      `;
+    }
+
+    // Render only Today's transactions on the main Wallet page
+    function renderWalletTodayTransactions() {
       const container = document.getElementById('walletTransactionsList');
+      if (!container) return;
+
+      const todayTxs = earningsData.transactions.filter(t => t.period === 'today');
+      if (todayTxs.length === 0) {
+        container.innerHTML = `
+          <div style="padding: 28px 16px; text-align: center; color: var(--color-text-secondary); font-family: var(--font-body); font-size: 13.5px; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="width: 42px; height: 42px; border-radius: 50%; background: #EFF7F5; color: #052E28; display: flex; align-items: center; justify-content: center; font-size: 19px;">
+              <i class="ph ph-receipt"></i>
+            </div>
+            <div style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: #1D2322;">No Transactions Today</div>
+            <div style="font-size: 12.5px; color: #64748B;">Any consultations or payouts made today will appear here.</div>
+          </div>
+        `;
+        return;
+      }
+
+      let itemsHtml = todayTxs.map(tx => buildTransactionItemHtml(tx)).join('');
+      container.innerHTML = `
+        <div class="wallet-date-group-items">
+          ${itemsHtml}
+        </div>
+      `;
+    }
+
+    // Render All grouped transactions on the dedicated All Transactions page
+    function renderAllTransactionsList() {
+      const container = document.getElementById('allTransactionsFullList');
       if (!container) return;
 
       let filtered = earningsData.transactions;
@@ -17044,59 +17259,7 @@
 
       let html = '';
       Object.keys(groups).forEach(grpKey => {
-        let itemsHtml = '';
-        groups[grpKey].forEach(tx => {
-          const isInflow = tx.type === 'inflow';
-          const amountClass = isInflow ? 'inflow' : 'outflow';
-          const formattedAmount = isInflow ? `+৳ ${tx.amount.toLocaleString()}` : `-৳ ${tx.amount.toLocaleString()}`;
-
-          // 1. Icon displays modality (Video camera / Audio phone / Withdrawal arrow)
-          let iconClass = 'ph ph-arrow-up-right';
-          let boxClass = 'outflow';
-          if (isInflow) {
-            const mode = (tx.consultType || tx.subtitle || '').toLowerCase();
-            if (mode.includes('audio') || mode.includes('phone') || mode.includes('voice')) {
-              iconClass = 'ph ph-phone-call';
-              boxClass = 'audio';
-            } else if (mode.includes('in-person') || mode.includes('inperson')) {
-              iconClass = 'ph ph-users';
-              boxClass = 'inperson';
-            } else {
-              iconClass = 'ph ph-video-camera';
-              boxClass = 'inflow';
-            }
-          }
-
-          // 2. Subtitle displays transfer method (bKash, Nagad, Prime Bank, etc.) and time
-          const rawMethod = (tx.method || tx.subtitle || '').toLowerCase();
-          let methodLabel = 'Bank Transfer';
-          if (rawMethod.includes('bkash')) methodLabel = 'bKash';
-          else if (rawMethod.includes('nagad')) methodLabel = 'Nagad';
-          else if (rawMethod.includes('prime bank')) methodLabel = 'Prime Bank';
-          else if (rawMethod.includes('city bank')) methodLabel = 'City Bank';
-          else if (rawMethod.includes('brac')) methodLabel = 'BRAC Bank';
-          else if (rawMethod.includes('ebl')) methodLabel = 'EBL';
-          else if (rawMethod.includes('bank')) methodLabel = 'Bank Account';
-          else if (!isInflow) methodLabel = 'Bank Withdrawal';
-
-          const cleanMeta = `${methodLabel} • ${tx.time}`;
-
-          itemsHtml += `
-            <div class="transaction-item-card" onclick="openTransactionDetails('${tx.id}')">
-              <div class="tx-item-left">
-                <div class="tx-icon-box ${boxClass}">
-                  <i class="${iconClass}"></i>
-                </div>
-                <div class="tx-item-meta">
-                  <span class="tx-item-name">${tx.title}</span>
-                  <span class="tx-item-sub">${cleanMeta}</span>
-                </div>
-              </div>
-              <div class="tx-amount-val ${amountClass}">${formattedAmount}</div>
-            </div>
-          `;
-        });
-
+        let itemsHtml = groups[grpKey].map(tx => buildTransactionItemHtml(tx)).join('');
         html += `
           <div class="wallet-date-group">
             <div class="wallet-date-group-header">${grpKey}</div>
@@ -17110,6 +17273,47 @@
       container.innerHTML = html;
     }
 
+    function renderTransactionsList() {
+      renderWalletTodayTransactions();
+      renderAllTransactionsList();
+    }
+
+    // Page navigation controllers for All Transactions page
+    function openAllTransactionsPage() {
+      const pageWallet = document.getElementById('pageWallet');
+      const pageAllTx = document.getElementById('pageAllTransactions');
+      if (pageWallet && pageAllTx) {
+        pageAllTx.scrollTop = 0;
+        pageWallet.className = 'app-page page-wallet page-left';
+        pageAllTx.className = 'app-page page-all-transactions active-page';
+        renderAllTransactionsList();
+        updateBottomNavVisibility();
+      }
+    }
+
+    function navigateBackFromAllTransactions() {
+      const pageWallet = document.getElementById('pageWallet');
+      const pageAllTx = document.getElementById('pageAllTransactions');
+      if (pageWallet && pageAllTx) {
+        pageAllTx.className = 'app-page page-all-transactions page-right';
+        pageWallet.className = 'app-page page-wallet active-page';
+        updateBottomNavVisibility();
+      }
+    }
+
+    function handleWithdrawAmountInput() {
+      const input = document.getElementById('withdrawAmountInput');
+      const btn = document.getElementById('btnConfirmWithdraw');
+      if (!input || !btn) return;
+      const rawVal = input.value.trim();
+      const amt = parseFloat(rawVal);
+      if (!rawVal || isNaN(amt) || amt <= 0 || amt > earningsData.availableBalance) {
+        btn.disabled = true;
+      } else {
+        btn.disabled = false;
+      }
+    }
+
     let selectedWithdrawAccountId = 'acc_1';
     let isWithdrawDropdownOpen = false;
 
@@ -17120,8 +17324,9 @@
       const backdrop = document.getElementById('modalBackdrop');
       const input = document.getElementById('withdrawAmountInput');
       if (input) {
-        input.value = earningsData.availableBalance;
+        input.value = '0';
       }
+      handleWithdrawAmountInput();
       if (modal) modal.classList.add('active');
       if (backdrop) backdrop.classList.add('active');
     }
@@ -17398,11 +17603,15 @@
       earningsData.activeFilter = tempTxFilters.type;
       earningsData.activeDateFilter = tempTxFilters.date;
 
-      // Update active dot indicator on trigger button
+      // Update active dot indicator on trigger buttons
       const hasActive = (earningsData.activeFilter !== 'all' || earningsData.activeDateFilter !== 'all');
       const dotEl = document.getElementById('txFilterActiveDot');
       if (dotEl) {
         dotEl.style.display = hasActive ? 'block' : 'none';
+      }
+      const dotElAll = document.getElementById('txFilterActiveDotAll');
+      if (dotElAll) {
+        dotElAll.style.display = hasActive ? 'block' : 'none';
       }
 
       renderTransactionsList();
@@ -18826,7 +19035,7 @@
           pageProfile.className = 'app-page page-patient-profile active-page';
         }
       } else if (appointmentDetailsBackTarget === 'notifications') {
-        const pageNotif = document.getElementById('pageNotifications');
+        const pageNotif = document.getElementById('pageNotifications', 'pageAllTransactions');
         if (pageNotif) {
           pageDetails.className = 'app-page page-appointment-details page-right';
           pageNotif.className = 'app-page page-notifications active-page';
