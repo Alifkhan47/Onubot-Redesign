@@ -822,53 +822,76 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ---
 
-## 22. Onu Clinical AI Copilot & Unified Screen Standard
+## 22. Onu Clinical AI Copilot & Unified Chatbot Standard (ChatGPT & Claude Mobile Spec)
 
-### 22.1 Default Landing & Gemini Ambient Brand Gradient
+### 22.1 Minimal Pure Canvas & Top Navigation App Bar
 * **Default Active View**: When the doctor opens the app, **Onu (`#pageOnu`)** is the default active view (`.active-page`), and the bottom navigation bar selects the center **Onu** tab.
-* **Ambient Brand Gradient**: Luminous, subtle multi-point radial gradient inspired by Google Gemini, crafted with Onu's signature sage, mint, and aquamarine palette:
-  * Center aura: `rgba(214, 234, 230, 0.75)` (Soft Sage) fading gently to `rgba(232, 246, 243, 0.5)` and white.
-  * Top-right ambient highlight: `rgba(204, 251, 241, 0.5)` (Soft Aquamarine).
-  * Bottom-left ambient tint: `rgba(239, 247, 245, 0.7)`.
-  * **Dynamic Chat Transition**: Smoothly transitions to pure `#FFFFFF` as soon as the doctor starts a chat session (`.page-onu.chat-active`).
-* **Unified Universal App Header**:
-  * **Left**: Screen Title `Onu` in `Urbanist 25px Bold #000000` + Subtitle `Your Clinical AI Assistant` in `DM Sans 13.5px Regular #717171`.
-  * **Right**: Circular action button (`.btn-circle-icon` with `ph-clock-counter-clockwise` in `#052E28` on soft `#F0F6F5` background) positioned on the top right for natural right-handed mobile thumb access.
-  * **Right-Hand History Drawer**: Tapping the top-right history icon slides out the full-height chat thread history drawer (`#onuHistoryDrawer`) from the right.
+* **Pure Clean Canvas**: Crisp, pure white `#FFFFFF` background matching modern Claude and ChatGPT mobile applications without distracting heavy ambient gradients.
+* **3-Column Top Navigation App Bar (`.onu-app-bar`)**:
+  * **Left**: Sidebar / history drawer trigger button (`.btn-onu-nav-action` with `ph ph-sidebar-simple` or `ph ph-list`) sliding out the conversation history drawer.
+  * **Center**: Interactive Model Selector Pill (`.onu-model-pill`):
+    * Displays active model (`Onu 3.5`, `Onu Pro`, or `Onu Live Voice`) with green status dot and subtle chevron (`ph ph-caret-down`).
+    * Tapping opens the **AI Model Selector Bottom Sheet (`#onuModelSelectorSheet`)** allowing instant switching between fast triage, deep clinical reasoning, and live voice mode.
+  * **Right**: Quick New Chat icon button (`.btn-onu-nav-action` with `ph ph-note-pencil`) to start a fresh consultation session with a single tap.
 
-### 22.2 Welcome State (Gemini Pure Clean Empty State)
-* **Design Philosophy**: Mirroring Google Gemini's minimalist mobile experience with generous negative space and zero cluttered cards or suggestion grids.
-* **Centered Sparkle & Refined Greeting**:
-  * **Gradient Sparkle Icon**: Clean 4-point star SVG with emerald-teal-sky gradient (`#0D7A5F` → `#2DD4BF` → `#38BDF8`) and soft ambient drop shadow (`0 4px 14px rgba(13, 122, 95, 0.25)`).
-  * **Refined Greeting Heading**: `Ask away, Dr. Sifat !` in `Urbanist 21px SemiBold #0F172A` (`letter-spacing: -0.015em`, lighter and more elegant than heavy bold).
-  * **Greeting Subtitle**: `Your clinical AI copilot is ready.` in `DM Sans 13.5px Regular #64748B`.
+### 22.2 Welcome State (ChatGPT & Claude Mobile Standard)
+* **Centered Brand Glyph**: Minimalist emerald-teal spark glyph (`.onu-brand-mark` with `ph-fill ph-sparkle` in `#0D7A5F` on `#F0FDF4` soft surface).
+* **Refined Hero Greeting**:
+  * Heading: `Where should we begin, Dr. Sifat?` in `Urbanist 21px SemiBold #0F172A` (`letter-spacing: -0.02em`).
+  * Subtitle: `Your clinical AI copilot for patients, protocols & practice` in `DM Sans 13px Regular #64748B`.
+* **2x2 Prompt Suggestion Grid (`.onu-prompt-grid`)**:
+  * 4 sleek, high-utility suggestion cards with leading Phosphor icons:
+    1. **Summarize today's queue** (`ph-clipboard-text`) — Review 6 patients in Shift 1.
+    2. **Recap Alif Khan's visit** (`ph-user`) — Viral pharyngitis diagnosis & Rx.
+    3. **Hypertension protocol** (`ph-heartbeat`) — AHA/ACC adult dosage & triage.
+    4. **Financial summary** (`ph-wallet`) — This month's earnings & payouts.
+  * Tapping any prompt card immediately submits the query into the chat stream with instant execution.
 
-### 22.3 Conversational Feed & Realistic Clinical AI Intelligence
-* **User Messages**: Rounded speech bubble (`#EEF2F4` surface, `#0F172A` text, `20px` radius, `14.5px` body) with micro-actions for Copy and Edit.
-* **Onu AI Responses**: Collapsible reasoning indicators (`● Thought for 2-4 seconds`), clean high-contrast clinical text, and structured metric overview cards when relevant (without extra action chips).
-* **Realistic Clinical Knowledge Engine (`generateOnuClinicalResponse`)**:
-  * **Clinical Conditions**: Dedicated evidence-based protocols for Hypertension (AHA/ACC targets & first-line agents), Diabetes (ADA HbA1c goals & Metformin/SGLT2i), Cephalalgia/Headaches (SNOOP4 red flags & acute abortive therapies), and Fever/Infections (antipyretics, hydration, CBC/CRP lab stewardship).
-  * **Practice Intelligence Fallback**: For any general or freeform typed query, Onu provides realistic clinical context connecting the query to active queue patients (Farzana Khan, Alif Khan, Tariqul Islam) with diagnostic considerations and safe medication guidance instead of generic robotic fallbacks.
+### 22.3 Conversational Feed, Collapsible Reasoning & Action Toolbar
+* **User Messages (`.onu-msg-user-bubble`)**: Right-aligned smooth rounded bubble (`#F1F5F9` background, `#0F172A` text, `18px 18px 4px 18px` radius) with micro-actions for Copy and Edit.
+* **Assistant Typography**: Left-aligned pure canvas markdown typography (`14.5px`, line-height `1.6`, `#1E293B`) with formatted bullet lists.
+* **Collapsible Thought / Reasoning Pill (`.onu-thought-pill`)**:
+  * Claude 3.7 & ChatGPT o1/o3 style: `Thought for 3 seconds ▾` with animated green dot and rotating chevron.
+  * Tapping smoothly toggles the disclosure panel (`.onu-thought-details`) revealing retrieved clinical records, ontological rules, and guideline verification steps.
+* **Assistant Action Toolbar (`.onu-msg-ai-actions`)**:
+  * Located immediately beneath each AI response:
+    * **Copy Response** (`ph-copy`) — Copies clean text to clipboard with confirmation toast.
+    * **Thumbs Up** (`ph-thumbs-up`) — Records positive clinical feedback.
+    * **Thumbs Down** (`ph-thumbs-down`) — Flags response for review.
+    * **Read Aloud** (`ph-speaker-high`) — Browser speech synthesis reads the clinical answer aloud.
+    * **Regenerate** (`ph-arrows-clockwise`) — Reruns the clinical query with fresh reasoning steps.
 
-### 22.4 Floating Input Dock (Google Gemini Unified Pill Model)
-* **Dock Position**: Floats above the bottom navigation bar (`position: absolute; bottom: 64px; left: 0; right: 0;`).
-* **Single Unified Input Pill Container (`.onu-input-pill-box`)**:
-  * Height `52px`, `background: #FFFFFF`, `border: 1.5px solid #E2ECEA`, `border-radius: 28px`, `box-shadow: 0 4px 20px rgba(5, 46, 40, 0.08)`.
-  * **Left**: `+` Attach/Tag button (`.btn-onu-attach` with `ph-plus`).
-  * **Center**: Text input field (`Ask anything...` placeholder in `DM Sans 15px`).
-  * **Right**: Speech-to-Text dictation mic button (`.btn-onu-mic` with `ph-microphone`).
-  * **Far Right Action (Morphing Voice Bot / Send Button)**:
-    * **Empty Input State (Voice Mode)**: Displays a circular soft sage pill button (`.btn-onu-action-morph.voice-mode`: `#E8F6F3` background, `#0D7A5F` waveform icon `ph-waveform`). Tapping immediately opens the full-screen **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
-    * **Active Typing State (Send Mode)**: Smoothly morphs into a deep forest green circular Send button (`.btn-onu-action-morph.send-mode`: `#052E28` background, `#FFFFFF` crisp arrow `ph-bold ph-arrow-up`). Tapping sends the message to Onu.
-* **Subtle AI Disclaimer**: `Onubot can make mistakes. Check important info.` (`DM Sans 10px #94A3B8`).
+### 22.4 Claude Mobile Style Artifacts in Chat (`.onu-artifact-card`)
+* **Core Concept**: Complex, structured deliverables (patient dossiers, financial summaries, guideline checklists, queue rosters) render as Claude-style Artifact cards inside the chat stream rather than unorganized plain text.
+* **Artifact Card Geometry & Architecture**:
+  * **Header**:
+    * Leading icon in soft sage tile (e.g. `ph-users`, `ph-wallet`, `ph-thermometer`, `ph-heartbeat`).
+    * Monospace uppercase type badge (`CLINICAL DOSSIER`, `FINANCIAL DOSSIER`, `CLINICAL PROTOCOL`, `QUEUE ROSTER`, `TRIAGE PROTOCOL`).
+    * Dark slate title (`Urbanist 13.5px SemiBold #0F172A`).
+    * Trailing **"Open" Pill Button** (`ph-arrow-up-right`) opening the full artifact modal.
+  * **Body**: High-density structured preview (2x2 metric box grid or clinical checklist).
+  * **Footer**: Action buttons for **Copy** (`ph-copy`) and **Share** (`ph-share-network`) alongside version indicator tag (e.g. `Live EHR Sync • 2026`, `AHA/ACC 2026 Standards`).
+* **Full Artifact Modal Sheet (`#onuArtifactModalSheet`)**:
+  * Tapping "Open" slides up a dedicated high-capacity bottom sheet displaying the complete clinical dossier with rich formatting, printing/sharing actions, and quick export.
 
-### 22.5 Seamless Full-Screen Onu History Side Panel (`#onuHistoryDrawer`)
-* **Full-Height Geometry**: Attached directly to `.phone-screen` (`top: 0; bottom: 0; right: 0; z-index: 155; width: 82%; max-width: 320px;`) with high-blur full-screen backdrop (`#onuDrawerBackdrop`, `z-index: 150`).
-* **Seamless White Canvas & Top Clearance**:
-  * Pure white `#FFFFFF` surface extends all the way to the top edge of the phone frame.
-  * Header padding (`padding: 50px 16px 14px 16px`) comfortably accommodates the 44px status bar notch with 6px of breathing room, ensuring zero color splitting or background mismatch above the drawer.
-* **Header Components**: Onu brand glyph + title on left, Search and Close (`ph-x`) circular icon buttons on right.
-* **New Chat CTA**: Prominent soft sage button (`.onu-drawer-new-chat-btn`) + clean chronological Recents thread list with single-line titles and tap-to-load interactions.
+### 22.5 Floating Input Dock & Attachment Sheet
+* **Capsule Dock (`.onu-input-pill-box`)**:
+  * Floats cleanly above bottom navigation bar with `50px` height, `#FFFFFF` background, `1.5px solid #E2E8F0` border, and soft elevation shadow.
+  * **Left**: `+` Attachment button (`.btn-onu-attach` with `ph-plus`) triggering the **Attachment Bottom Sheet (`#onuAttachModalSheet`)** for tagging patients (`@Farzana Khan`), attaching lab/CBC reports, importing shift rosters, or checking drug protocols.
+  * **Center**: Text input field (`input-onu-field` with `Message Onu...` placeholder).
+  * **Right**: Dictation mic (`.btn-onu-mic` with `ph-microphone`) with pulse animation during listening.
+  * **Far Right Action Button (`.btn-onu-action-morph`)**:
+    * **Empty State (Voice Mode)**: Soft sage waveform button (`ph-waveform` on `#F0FDF4`). Opens the **Live AI Voice Bot Modal (`#modalLiveVoiceBot`)**.
+    * **Typing State (Send Mode)**: Circular forest green send button (`#0D7A5F` background with white up-arrow `ph-bold ph-arrow-up`).
+* **Minimalist Disclaimer**: `Onu can make mistakes. Verify clinical decisions.` (`DM Sans 10px #94A3B8`).
+
+### 22.6 Categorized Chat History Drawer (`#onuHistoryDrawer`)
+* **Categorized Chronological Sections**:
+  * Threads are neatly organized under uppercase section headings: `TODAY`, `YESTERDAY`, and `PREVIOUS 7 DAYS`.
+  * Each conversation item displays a single-line title with ellipsis and a trailing `...` icon button (`ph-dots-three-vertical`) for quick Rename and Delete actions.
+* **Top Header**: Brand mark + "Onu", Search button (`ph-magnifying-glass`), and Close button (`ph-x`).
+* **Prominent New Chat Button**: Soft sage pill (`.onu-drawer-new-chat-btn` with `ph-note-pencil`).
+* **Bottom Profile Footer**: Doctor avatar, name (`Dr. Sifat Khan`), and edition badge (`Clinical Copilot Pro`).
 
 ---
 

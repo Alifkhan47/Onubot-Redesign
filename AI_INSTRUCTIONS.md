@@ -190,27 +190,34 @@ c:\Alif\Onu App Prototype\
 ## 5. Screen-by-Screen User Journeys
 
 ### Screen 0: Onu Clinical AI Copilot & Default Home (`#pageOnu`)
-* **Purpose**: The primary focal point and default landing screen for the doctor upon opening the app. Serves as an intelligent AI clinical copilot for rapid patient dossiers, lab investigation inquiries, drug safety verification, and shift preparation.
+* **Purpose**: The primary focal point and default landing screen for the doctor upon opening the app. Serves as an intelligent AI clinical copilot inspired by modern ChatGPT and Claude mobile applications for rapid patient dossiers, lab investigation inquiries, drug safety verification, and shift preparation.
 * **Key Components**:
-  * **Brand Header**: Editorial title `Onu` with live status pill (`✨ AI Copilot` with pulsing mint dot) and New Chat action (`ph-note-pencil`).
-  * **Editorial Hero Greeting**: Confident greeting `Hello, Doctor Sifat` in `Urbanist 28px Bold`.
-  * **Live Clinic Context Banner**: Soft sage interactive banner displaying current shift schedule and queue count (`Shift 1 starts at 9:00 AM • 6 patients in queue`). Tapping navigates straight to My Desk.
-  * **Smart Clinical Prompts (2x2 Grid)**:
-    1. 🩺 **Patient Summary**: *"Summarize Tariqul's visits & current vitals"* -> instant clinical briefing on complaints, history, and medications.
-    2. 🧪 **Lab & Reports**: *"Show Farzana's CBC & endoscopy results"* -> breakdown of recent investigations and diagnostic findings.
-    3. 💊 **Drug Interaction**: *"Verify Telmisartan + Amlodipine safety"* -> pharmacology check with clinical recommendations.
-    4. 📋 **Shift Briefing**: *"Overview of today's Shift 1 patient queue"* -> patient order and chief complaints.
-  * **Interactive Conversation Stream**:
-    * Clean doctor query speech bubbles (`#052E28`).
-    * Structured Onu AI response cards with clinical bullet points, vitals, and actionable quick chips (`[View Profile]`, `[Start Shift Call]`, `[Full Queue List]`).
-    * Realistic typing indicator animation (`onu-typing-indicator`).
-  * **Floating Glassmorphic Input Dock**:
-    * `+` Attachment & Patient Tag button (`openOnuAttachMenu`).
-    * Smart text field with Enter key support.
+  * **3-Column Top Navigation App Bar (`.onu-app-bar`)**:
+    * **Left**: Sidebar / history drawer toggle button (`ph-sidebar-simple`) sliding out the conversation history drawer.
+    * **Center**: Interactive Model Selector Pill (`.onu-model-pill`): displays active model (`Onu 3.5`, `Onu Pro`, `Onu Live Voice`) with green status dot and subtle chevron (`ph-caret-down`). Tapping triggers `#onuModelSelectorSheet`.
+    * **Right**: Quick New Chat icon button (`ph-note-pencil`) to start a fresh consultation session with a single tap.
+  * **Claude / ChatGPT Mobile Welcome State (`#onuWelcomeView`)**:
+    * Pure white `#FFFFFF` canvas without distracting heavy background gradients.
+    * Minimalist emerald-teal spark glyph (`ph-fill ph-sparkle`).
+    * Refined heading: `Where should we begin, Dr. Sifat?` + subtitle: `Your clinical AI copilot for patients, protocols & practice`.
+    * **2x2 Prompt Suggestion Grid (`.onu-prompt-grid`)**:
+      1. 📋 **Summarize today's queue** — Review 6 patients in Shift 1.
+      2. 👤 **Recap Alif Khan's visit** — Viral pharyngitis diagnosis & Rx.
+      3. 🩺 **Hypertension protocol** — AHA/ACC adult dosage & triage.
+      4. 💰 **Financial summary** — This month's earnings & payouts.
+  * **Interactive Conversation Feed & Claude Artifacts**:
+    * Clean doctor query speech bubbles (`#F1F5F9`, `18px 18px 4px 18px` radius) with Copy and Edit micro-actions.
+    * **Collapsible Thought / Reasoning Pill (`.onu-thought-pill`)**: `Thought for 3 seconds ▾` with animated green dot and rotating chevron, toggling detailed ontological and clinical reasoning disclosure (`.onu-thought-details`).
+    * **Claude-Style Interactive Artifact Cards (`.onu-artifact-card`)**: Complex structured deliverables (patient dossiers, financial summaries, guideline checklists, queue rosters) render as Claude-style Artifact cards with leading icon tile, uppercase document type badge, dark title, "Open" pill button (`ph-arrow-up-right`), metric preview body, and Copy/Share footer.
+    * **Full Artifact Modal Sheet (`#onuArtifactModalSheet`)**: Tapping "Open" expands the complete clinical dossier with rich formatting and print/export/share options.
+    * **Assistant Action Toolbar (`.onu-msg-ai-actions`)**: Copy response, Thumbs up, Thumbs down, Audio Read Aloud (speech synthesis), and Regenerate.
+  * **Floating Input Dock (`.onu-input-pill-box`)**:
+    * `+` Attachment button (`openOnuAttachMenu`) triggering `#onuAttachModalSheet` to tag patients (`@Farzana Khan`), attach CBC reports, or insert shift rosters.
+    * Text field with `Message Onu...` placeholder.
     * Voice Dictation mic button with pulsating listening state (`toggleOnuVoiceListening`).
-    * Primary Send / Waveform button (`sendOnuMessage`).
-    * Subtle AI disclaimer text at base.
-  * **Seamless Full-Screen History Side Panel (`#onuHistoryDrawer`)**: Full-height drawer attached to `.phone-screen` (`z-index: 155`) with full-screen backdrop (`#onuDrawerBackdrop`, `z-index: 150`) and top status bar clearance padding, providing seamless white coverage from the top notch down.
+    * Morphing Voice Bot / Send button: Waveform button (`ph-waveform`) in empty state triggering `#modalLiveVoiceBot`; vibrant forest green Send button (`ph-arrow-up`) when typing.
+    * Minimalist AI disclaimer: `Onu can make mistakes. Verify clinical decisions.`
+  * **Categorized History Side Drawer (`#onuHistoryDrawer`)**: Full-height drawer organized into `Today`, `Yesterday`, and `Previous 7 Days` sections with `...` context menu for quick Rename/Delete actions, Search, New Chat button, and doctor profile tile footer (`Dr. Sifat Khan • Clinical Copilot Pro`).
 
 ### Screen 1: My Desk (`#pageDesk`)
 * **Purpose**: The primary operational dashboard for the doctor during their shift.

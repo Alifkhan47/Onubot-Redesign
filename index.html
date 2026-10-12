@@ -8440,13 +8440,13 @@
     }
 
     /* ============================================================
-       VIEW 11: ONU CLINICAL AI COPILOT (GEMINI AMBIENT BRAND GRADIENT)
+       VIEW 11: ONU CLINICAL AI COPILOT (CHATGPT & CLAUDE MOBILE SPEC)
        ============================================================ */
     .page-onu {
       display: flex;
       flex-direction: column;
       height: 100%;
-      background: transparent !important;
+      background: #FFFFFF !important;
       position: absolute;
       top: 0;
       left: 0;
@@ -8454,7 +8454,7 @@
       bottom: 0;
       box-sizing: border-box;
       z-index: 10;
-      padding: 12px 20px 0 20px;
+      padding: 0;
       overflow: hidden;
     }
 
@@ -8462,23 +8462,85 @@
       background: #FFFFFF !important;
     }
 
-    .page-onu .app-header {
-      background: transparent !important;
+    /* Claude / ChatGPT Mobile Top App Bar */
+    .onu-app-bar {
+      height: 52px;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #F1F5F9;
+      background: #FFFFFF;
+      flex-shrink: 0;
+      z-index: 20;
     }
 
-    .page-onu .btn-circle-icon {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid rgba(214, 234, 230, 0.7);
-      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.04);
+    .btn-onu-nav-action {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: #334155;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.16s ease;
     }
 
+    .btn-onu-nav-action:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    .btn-onu-nav-action:active {
+      transform: scale(0.95);
+    }
+
+    /* Model Pill / Dropdown Selector (ChatGPT & Claude Style) */
+    .onu-model-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .onu-model-pill:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .onu-model-pill i {
+      font-size: 11px;
+      color: #64748B;
+      transition: transform 0.15s ease;
+    }
+
+    .onu-model-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0D7A5F;
+    }
+
+    /* Scrollable Content Stream */
     .onu-content-area {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
-      padding: 4px 0 148px 0; /* Generous 148px bottom clearance to prevent any overlap with floating dock */
+      padding: 12px 18px 144px 18px;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -8490,7 +8552,7 @@
       display: none;
     }
 
-    /* Welcome / Hero State (Gemini Clean Standard) */
+    /* Welcome / Hero State (ChatGPT & Claude Mobile Pure Standard) */
     .onu-welcome-container {
       display: flex;
       flex-direction: column;
@@ -8498,25 +8560,25 @@
       justify-content: center;
       text-align: center;
       width: 100%;
-      min-height: 48vh;
-      padding: 60px 16px 0 16px;
+      min-height: 52vh;
+      padding: 30px 8px 12px 8px;
       box-sizing: border-box;
-      gap: 10px;
+      gap: 20px;
+      margin: auto 0;
     }
 
-    .gemini-sparkle-box {
-      width: 44px;
-      height: 44px;
+    .onu-brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #F0FDF4;
+      border: 1.5px solid #DCFCE7;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2px;
-      filter: drop-shadow(0 4px 14px rgba(13, 122, 95, 0.25));
-    }
-
-    .gemini-sparkle-svg {
-      width: 36px;
-      height: 36px;
+      color: #0D7A5F;
+      font-size: 24px;
+      box-shadow: 0 2px 8px rgba(13, 122, 95, 0.08);
     }
 
     .onu-hero-greeting {
@@ -8531,22 +8593,79 @@
       font-size: 21px;
       font-weight: 600;
       color: #0F172A;
-      letter-spacing: -0.015em;
+      letter-spacing: -0.02em;
       margin: 0;
       line-height: 1.25;
     }
 
     .onu-greeting-sub {
       font-family: var(--font-body);
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 400;
       color: #64748B;
       margin: 0;
       line-height: 1.4;
     }
 
+    /* Prompt Suggestion Cards (ChatGPT / Claude mobile 2x2 grid) */
+    .onu-prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 440px;
+      margin-top: 6px;
+    }
+
+    .onu-prompt-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      user-select: none;
+    }
+
+    .onu-prompt-card:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .onu-prompt-card:active {
+      transform: scale(0.98);
+    }
+
+    .onu-prompt-icon {
+      font-size: 16px;
+      color: #0D7A5F;
+      margin-bottom: 2px;
+    }
+
+    .onu-prompt-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      line-height: 1.3;
+    }
+
+    .onu-prompt-sub {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: #64748B;
+      line-height: 1.35;
+    }
+
     /* ============================================================
-       SLIDE-OUT CHAT HISTORY DRAWER & BACKDROP (RIGHT-HAND SLIDE)
+       SLIDE-OUT CHAT HISTORY DRAWER & BACKDROP
        ============================================================ */
     .onu-drawer-backdrop {
       position: absolute;
@@ -8571,17 +8690,17 @@
     .onu-history-drawer {
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       bottom: 0;
       width: 82%;
       max-width: 320px;
       background: #FFFFFF;
       z-index: 155;
-      transform: translateX(100%);
+      transform: translateX(-100%);
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -8591,11 +8710,11 @@
     }
 
     .onu-drawer-header {
-      padding: 50px 16px 14px 16px;
+      padding: 48px 16px 14px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid #EDF2F1;
+      border-bottom: 1px solid #F1F5F9;
       flex-shrink: 0;
       background: #FFFFFF;
     }
@@ -8605,9 +8724,9 @@
       align-items: center;
       gap: 8px;
       font-family: var(--font-heading);
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--color-text-primary);
+      font-size: 17px;
+      font-weight: 700;
+      color: #0F172A;
     }
 
     .onu-drawer-header-actions {
@@ -8618,31 +8737,25 @@
 
     .onu-drawer-new-chat-btn {
       margin: 12px 16px;
-      padding: 13px 16px;
-      border-radius: 16px;
-      background: rgba(214, 234, 230, 0.75);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(126, 184, 174, 0.45);
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: #F0FDF4;
+      border: 1px solid #DCFCE7;
       display: flex;
       align-items: center;
       gap: 10px;
       font-family: var(--font-heading);
-      font-size: 14.5px;
-      font-weight: 700;
-      color: var(--color-primary-btn);
+      font-size: 14px;
+      font-weight: 600;
+      color: #0D7A5F;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.06);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       flex-shrink: 0;
     }
 
     .onu-drawer-new-chat-btn:hover {
-      background: rgba(214, 234, 230, 0.95);
-      border-color: var(--color-border-selected);
-      color: var(--color-primary-btn);
+      background: #DCFCE7;
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(5, 46, 40, 0.1);
     }
 
     .onu-drawer-new-chat-btn:active {
@@ -8652,7 +8765,7 @@
     .onu-drawer-recents-list {
       flex: 1;
       overflow-y: auto;
-      padding: 6px 12px 28px 12px;
+      padding: 4px 12px 24px 12px;
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -8663,108 +8776,106 @@
       display: none;
     }
 
-    .onu-drawer-recents-title {
+    .onu-drawer-section-title {
       font-family: var(--font-heading);
-      font-size: 13px;
+      font-size: 11.5px;
       font-weight: 700;
-      color: #8E9F9D;
-      letter-spacing: 0.04em;
+      color: #94A3B8;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       margin: 14px 0 6px 10px;
     }
 
     .onu-drawer-item {
-      padding: 10px 14px;
-      border-radius: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 8px;
       cursor: pointer;
-      transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.15s ease;
       user-select: none;
-      -webkit-user-select: none;
-      position: relative;
     }
 
     .onu-drawer-item:hover {
-      background: #F4F7F6;
+      background: #F8FAFC;
     }
 
     .onu-drawer-item:active {
-      background: var(--color-card-sage);
-      transform: scale(0.99);
+      background: #F1F5F9;
     }
 
     .onu-drawer-item-title {
       font-family: var(--font-body);
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 500;
-      color: #1D2322;
+      color: #1E293B;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      width: 100%;
-      letter-spacing: -0.01em;
+      flex: 1;
       line-height: 1.4;
     }
 
-    /* Context Menu Bottom Sheet for Thread Actions */
-    .thread-menu-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 10px;
+    .onu-drawer-item-dots {
+      color: #94A3B8;
+      font-size: 16px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      opacity: 0.6;
+      transition: opacity 0.15s ease;
     }
 
-    .thread-menu-btn {
-      width: 100%;
-      height: 48px;
-      border-radius: 14px;
-      background: #F7FAFA;
-      border: 1.5px solid #E2ECE9;
+    .onu-drawer-item:hover .onu-drawer-item-dots {
+      opacity: 1;
+    }
+
+    .onu-drawer-footer-user {
+      padding: 14px 16px;
+      border-top: 1px solid #F1F5F9;
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 0 16px;
+      gap: 10px;
+      background: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .onu-drawer-user-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .onu-drawer-user-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .onu-drawer-user-name {
       font-family: var(--font-heading);
-      font-size: 14.5px;
+      font-size: 13px;
       font-weight: 600;
-      color: #1D2322;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      color: #0F172A;
+      line-height: 1.2;
     }
 
-    .thread-menu-btn:hover {
-      background: #EFF7F5;
-      border-color: #052E28;
-    }
-
-    .thread-menu-btn i {
-      font-size: 18px;
-      color: #052E28;
-    }
-
-    .thread-menu-btn.thread-menu-btn-danger {
-      color: #D92D20;
-      background: #FEF3F2;
-      border-color: #FECDCA;
-    }
-
-    .thread-menu-btn.thread-menu-btn-danger i {
-      color: #D92D20;
-    }
-
-    .thread-menu-btn.thread-menu-btn-danger:hover {
-      background: #FEE4E2;
-      border-color: #D92D20;
+    .onu-drawer-user-badge {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #0D7A5F;
+      font-weight: 500;
     }
 
     /* ============================================================
-       ACTIVE CHAT STREAM (FAMILIAR & CLEAN CHATBOT PRESENTATION)
+       ACTIVE CHAT STREAM (CHATGPT & CLAUDE MOBILE STANDARDS)
        ============================================================ */
     .onu-messages-stream {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 22px;
       width: 100%;
     }
 
@@ -8777,22 +8888,22 @@
     }
 
     .onu-msg-user-bubble {
-      background: #EEF2F4;
+      background: #F1F5F9;
       color: #0F172A;
       font-family: var(--font-body);
       font-size: 14.5px;
       font-weight: 500;
       line-height: 1.45;
-      padding: 12px 18px;
-      border-radius: 20px;
-      max-width: 84%;
+      padding: 11px 16px;
+      border-radius: 18px 18px 4px 18px;
+      max-width: 82%;
       word-wrap: break-word;
     }
 
     .onu-msg-user-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       padding-right: 4px;
     }
 
@@ -8810,40 +8921,79 @@
     }
 
     .onu-msg-user-action-btn:hover {
-      color: var(--color-text-primary);
+      color: #0F172A;
     }
 
     .onu-message-ai-wrap {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
       width: 100%;
+      animation: fadeIn 0.2s ease;
     }
 
-    /* Thought Reasoning Pill */
+    /* Collapsible Thought / Reasoning Pill (Claude 3.7 & ChatGPT o1/o3 style) */
     .onu-thought-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      padding: 4px 10px;
+      border-radius: 16px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
       font-family: var(--font-body);
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 500;
       color: #64748B;
       cursor: pointer;
       width: fit-content;
       user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .onu-thought-pill:hover {
+      background: #F1F5F9;
+      color: #334155;
     }
 
     .onu-thought-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #94A3B8;
+      background: #0D7A5F;
+    }
+
+    .onu-thought-chevron {
+      font-size: 11px;
+      color: #94A3B8;
+      transition: transform 0.2s ease;
+    }
+
+    .onu-thought-pill.is-open .onu-thought-chevron {
+      transform: rotate(180deg);
+    }
+
+    .onu-thought-details {
+      display: none;
+      background: #F8FAFC;
+      border-left: 2.5px solid #0D7A5F;
+      border-radius: 0 8px 8px 0;
+      padding: 8px 12px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.5;
+      margin-top: -2px;
+      margin-bottom: 4px;
+    }
+
+    .onu-thought-details.is-open {
+      display: block;
     }
 
     .onu-msg-ai-text {
       font-family: var(--font-body);
-      font-size: 14px;
+      font-size: 14.5px;
       color: #1E293B;
       line-height: 1.6;
       margin: 0;
@@ -8862,47 +9012,122 @@
       margin-bottom: 5px;
     }
 
-    /* Rich Embedded Widgets in Chat */
-    .onu-widget-card {
+    /* ============================================================
+       CLAUDE MOBILE STYLE ARTIFACTS IN CHAT
+       ============================================================ */
+    .onu-artifact-card {
       background: #FFFFFF;
-      border: 1.5px solid #EDF2F1;
-      border-radius: 18px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      overflow: hidden;
       width: 100%;
       box-sizing: border-box;
-      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: all 0.16s ease;
+      margin: 4px 0;
     }
 
-    .onu-widget-header {
+    .onu-artifact-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .onu-artifact-header {
+      background: #F8FAFC;
+      border-bottom: 1px solid #F1F5F9;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
+      cursor: pointer;
     }
 
-    .onu-widget-title-left {
+    .onu-artifact-header-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      min-width: 0;
     }
 
-    .onu-widget-title {
-      font-family: var(--font-heading);
-      font-size: 15px;
+    .onu-artifact-icon-tile {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #E8F5F1;
+      color: #0D7A5F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .onu-artifact-meta {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .onu-artifact-type-tag {
+      font-family: var(--font-mono, monospace);
+      font-size: 10px;
       font-weight: 700;
-      color: var(--color-text-primary);
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
     }
 
-    .onu-widget-grid {
+    .onu-artifact-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .onu-artifact-view-pill {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #0F172A;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .onu-artifact-view-pill:hover {
+      background: #F1F5F9;
+      border-color: #CBD5E1;
+    }
+
+    .onu-artifact-body {
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+
+    .onu-artifact-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
     }
 
-    .onu-widget-metric-box {
+    .onu-artifact-metric-box {
       background: #F8FAFB;
       border: 1px solid #EDF2F1;
       border-radius: 12px;
@@ -8912,19 +9137,95 @@
       gap: 2px;
     }
 
-    .onu-widget-metric-label {
+    .onu-artifact-metric-label {
       font-family: var(--font-body);
       font-size: 11.5px;
       font-weight: 500;
       color: #64748B;
     }
 
-    .onu-widget-metric-value {
+    .onu-artifact-metric-value {
       font-family: var(--font-heading);
       font-size: 20px;
       font-weight: 800;
       color: var(--color-text-primary);
       margin-top: 2px;
+    }
+
+    .onu-artifact-footer {
+      background: #FCFDFD;
+      border-top: 1px solid #F1F5F9;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .onu-artifact-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .onu-artifact-action-btn {
+      background: transparent;
+      border: none;
+      color: #64748B;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .onu-artifact-action-btn:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    .onu-artifact-version-tag {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #94A3B8;
+    }
+
+    /* Assistant Message Action Toolbar (ChatGPT / Claude style) */
+    .onu-msg-ai-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+      padding-left: 2px;
+    }
+
+    .onu-ai-action-btn {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .onu-ai-action-btn:hover {
+      color: #0F172A;
+      background: #F1F5F9;
+    }
+
+    .onu-ai-action-btn.active {
+      color: #0D7A5F;
+      background: #F0FDF4;
     }
 
     /* Typing Indicator */
@@ -8933,8 +9234,8 @@
       align-items: center;
       gap: 4px;
       padding: 8px 12px;
-      background: #F6F8F9;
-      border: 1.5px solid #E2ECEA;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
       border-radius: 14px;
       width: fit-content;
     }
@@ -8956,7 +9257,7 @@
     }
 
     /* ============================================================
-       ONU FLOATING INPUT DOCK (GEMINI UNIFIED PILL MODEL)
+       ONU FLOATING INPUT DOCK (CHATGPT / CLAUDE MOBILE PILL)
        ============================================================ */
     .onu-floating-input-dock {
       position: absolute;
@@ -8973,35 +9274,34 @@
       pointer-events: none;
     }
 
-    /* Single Unified Input Pill Container (Gemini Spec) */
     .onu-input-pill-box {
       pointer-events: auto;
       width: 100%;
-      height: 52px;
+      height: 50px;
       background: #FFFFFF;
-      border: 1.5px solid #E2ECEA;
-      border-radius: 28px;
-      padding: 4px 6px 4px 12px;
+      border: 1.5px solid #E2E8F0;
+      border-radius: 26px;
+      padding: 4px 6px 4px 10px;
       display: flex;
       align-items: center;
       gap: 8px;
       box-sizing: border-box;
-      box-shadow: 0 4px 20px rgba(5, 46, 40, 0.08);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .onu-input-pill-box:focus-within {
-      border-color: var(--color-primary-btn);
-      box-shadow: 0 6px 24px rgba(5, 46, 40, 0.14);
+      border-color: #0D7A5F;
+      box-shadow: 0 4px 20px rgba(13, 122, 95, 0.12);
     }
 
     .btn-onu-attach {
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: #F1F5F4;
-      border: 1px solid #E2ECEA;
-      color: var(--color-primary-btn);
+      background: #F1F5F9;
+      border: none;
+      color: #334155;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -9012,7 +9312,8 @@
     }
 
     .btn-onu-attach:hover {
-      background: #E8F4F1;
+      background: #E2E8F0;
+      color: #0F172A;
       transform: scale(1.05);
     }
 
@@ -9025,8 +9326,8 @@
       border: none;
       background: transparent;
       font-family: var(--font-body);
-      font-size: 15px;
-      color: var(--color-text-primary);
+      font-size: 14.5px;
+      color: #0F172A;
       outline: none;
       padding: 6px 2px;
       min-width: 0;
@@ -9038,8 +9339,8 @@
     }
 
     .btn-onu-mic {
-      width: 36px;
-      height: 36px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: transparent;
       border: none;
@@ -9047,14 +9348,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 18px;
       cursor: pointer;
       flex-shrink: 0;
       transition: all 0.16s ease;
     }
 
     .btn-onu-mic:hover {
-      color: var(--color-primary-btn);
+      color: #0D7A5F;
     }
 
     .btn-onu-mic.is-listening {
@@ -9068,50 +9369,48 @@
       50% { transform: scale(1.12); }
     }
 
-    /* Morphing Voice Bot / Send Action Button (Gemini Spec) */
+    /* Morphing Voice Bot / Send Action Button */
     .btn-onu-action-morph {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       flex-shrink: 0;
-      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Empty input state: Voice bot waveform button */
+    /* Empty input: Voice bot button */
     .btn-onu-action-morph.voice-mode {
-      background: #E8F6F3;
-      border: 1.5px solid #C2E7DF;
+      background: #F0FDF4;
+      border: 1px solid #DCFCE7;
       color: #0D7A5F;
-      font-size: 20px;
-      box-shadow: 0 2px 8px rgba(13, 122, 95, 0.1);
+      font-size: 18px;
     }
 
     .btn-onu-action-morph.voice-mode:hover {
-      background: #D5EFE9;
-      color: #052E28;
-      transform: scale(1.06);
+      background: #DCFCE7;
+      transform: scale(1.05);
     }
 
     .btn-onu-action-morph.voice-mode:active {
-      transform: scale(0.93);
+      transform: scale(0.94);
     }
 
-    /* Active typing state: Morphs into Send button */
+    /* Active typing: Morphs into Send button */
     .btn-onu-action-morph.send-mode {
-      background: var(--color-primary-btn);
+      background: #0D7A5F;
       border: none;
       color: #FFFFFF;
-      font-size: 20px;
-      box-shadow: 0 3px 10px rgba(5, 46, 40, 0.25);
+      font-size: 18px;
+      box-shadow: 0 2px 8px rgba(13, 122, 95, 0.3);
     }
 
     .btn-onu-action-morph.send-mode i {
       color: #FFFFFF !important;
-      font-size: 20px !important;
+      font-size: 18px !important;
       line-height: 1;
       display: inline-flex;
       align-items: center;
@@ -9119,12 +9418,12 @@
     }
 
     .btn-onu-action-morph.send-mode:hover {
-      background: #0D7A5F;
-      transform: scale(1.06);
+      background: #0B6B53;
+      transform: scale(1.05);
     }
 
     .btn-onu-action-morph.send-mode:active {
-      transform: scale(0.93);
+      transform: scale(0.94);
     }
 
     .onu-disclaimer {
@@ -9134,6 +9433,126 @@
       margin: 0;
       text-align: center;
       pointer-events: auto;
+    }
+
+    /* Model Selector Sheet Items */
+    .model-selector-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1.5px solid #E2E8F0;
+      background: #FFFFFF;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .model-selector-item:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+    }
+
+    .model-selector-item.active {
+      border-color: #0D7A5F;
+      background: #F0FDF4;
+    }
+
+    .model-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .model-item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #E8F5F1;
+      color: #0D7A5F;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .model-item-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .model-item-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: #0F172A;
+      line-height: 1.25;
+    }
+
+    .model-item-desc {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: #64748B;
+      line-height: 1.3;
+    }
+
+    .model-item-check {
+      color: #0D7A5F;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    /* Attachment Bottom Sheet Items */
+    .attach-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .attach-card:hover {
+      border-color: #CBD5E1;
+      background: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .attach-card:active {
+      transform: scale(0.98);
+    }
+
+    .attach-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-bottom: 2px;
+    }
+
+    .attach-card-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      line-height: 1.25;
+    }
+
+    .attach-card-sub {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: #64748B;
+      line-height: 1.3;
     }
 
     /* ============================================================
@@ -11474,37 +11893,56 @@
                ======================================================= -->
           <div class="app-page page-onu active-page" id="pageOnu">
             
-            <!-- Unified Universal App Header (Consistent with Desk & Patients, Right-Hand Reach) -->
-            <div class="app-header">
-              <div class="header-text">
-                <h1 class="header-title">Onu</h1>
-                <p class="header-subtitle">Your Clinical AI Assistant</p>
-              </div>
-              <button class="btn-circle-icon" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
-                <i class="ph ph-clock-counter-clockwise"></i>
+            <!-- ChatGPT & Claude Mobile Top App Bar -->
+            <div class="onu-app-bar">
+              <button class="btn-onu-nav-action" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
+                <i class="ph ph-sidebar-simple"></i>
+              </button>
+              <button class="onu-model-pill" onclick="openOnuModelSelector()" title="Switch Model" aria-label="Switch Model">
+                <span class="onu-model-dot"></span>
+                <span id="onuActiveModelLabel">Onu 3.5</span>
+                <i class="ph ph-caret-down"></i>
+              </button>
+              <button class="btn-onu-nav-action" onclick="startNewOnuChat()" title="New Chat" aria-label="New Chat">
+                <i class="ph ph-note-pencil"></i>
               </button>
             </div>
 
             <!-- Scrollable Content Area -->
             <div class="onu-content-area" id="onuChatScrollArea">
               
-              <!-- Welcome State View (Gemini Pure Clean Empty State) -->
+              <!-- Welcome State View (ChatGPT & Claude Mobile Standard) -->
               <div class="onu-welcome-container" id="onuWelcomeView">
-                <div class="gemini-sparkle-box">
-                  <svg class="gemini-sparkle-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2C12 7.52285 7.52285 12 2 12C7.52285 12 12 16.4771 12 22C12 16.4771 16.4771 12 22 12C16.4771 12 12 7.52285 12 2Z" fill="url(#onuSparkleGrad)"/>
-                    <defs>
-                      <linearGradient id="onuSparkleGrad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                        <stop stop-color="#0D7A5F"/>
-                        <stop offset="0.5" stop-color="#2DD4BF"/>
-                        <stop offset="1" stop-color="#38BDF8"/>
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                <div class="onu-brand-mark">
+                  <i class="ph-fill ph-sparkle"></i>
                 </div>
                 <div class="onu-hero-greeting">
-                  <h2 class="onu-greeting-name">Ask away, Dr. Sifat !</h2>
-                  <p class="onu-greeting-sub">Your clinical AI copilot is ready.</p>
+                  <h2 class="onu-greeting-name">Where should we begin, Dr. Sifat?</h2>
+                  <p class="onu-greeting-sub">Your clinical AI copilot for patients, protocols & practice</p>
+                </div>
+
+                <!-- 4 Prompt Suggestion Cards (2x2 Grid) -->
+                <div class="onu-prompt-grid">
+                  <div class="onu-prompt-card" onclick="askOnuPreset('How many patients in my shift queue today?')">
+                    <i class="ph ph-clipboard-text onu-prompt-icon"></i>
+                    <span class="onu-prompt-title">Summarize today's queue</span>
+                    <span class="onu-prompt-sub">Review 6 patients in Shift 1</span>
+                  </div>
+                  <div class="onu-prompt-card" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
+                    <i class="ph ph-user onu-prompt-icon"></i>
+                    <span class="onu-prompt-title">Recap Alif Khan's visit</span>
+                    <span class="onu-prompt-sub">Viral pharyngitis diagnosis & Rx</span>
+                  </div>
+                  <div class="onu-prompt-card" onclick="askOnuPreset('Clinical Hypertension Management Guidelines')">
+                    <i class="ph ph-heartbeat onu-prompt-icon"></i>
+                    <span class="onu-prompt-title">Hypertension protocol</span>
+                    <span class="onu-prompt-sub">AHA/ACC dosage & triage</span>
+                  </div>
+                  <div class="onu-prompt-card" onclick="askOnuPreset('How much money did I make today and this week?')">
+                    <i class="ph ph-wallet onu-prompt-icon"></i>
+                    <span class="onu-prompt-title">Financial summary</span>
+                    <span class="onu-prompt-sub">This month's earnings & payouts</span>
+                  </div>
                 </div>
               </div>
 
@@ -11521,7 +11959,7 @@
                 <button type="button" class="btn-onu-attach" onclick="openOnuAttachMenu()" title="Attach patient file or tag patient" aria-label="Attach">
                   <i class="ph ph-plus"></i>
                 </button>
-                <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Ask anything..." onkeydown="handleOnuInputKey(event)" oninput="handleOnuInputChange(this)" />
+                <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Message Onu..." onkeydown="handleOnuInputKey(event)" oninput="handleOnuInputChange(this)" />
                 <button type="button" class="btn-onu-mic" id="btnOnuMic" onclick="toggleOnuVoiceListening()" title="Voice dictation (speech-to-text)" aria-label="Voice Mic">
                   <i class="ph ph-microphone"></i>
                 </button>
@@ -11529,7 +11967,7 @@
                   <i class="ph ph-waveform" id="onuMorphIcon"></i>
                 </button>
               </div>
-              <p class="onu-disclaimer">Onubot can make mistakes. Check important info.</p>
+              <p class="onu-disclaimer">Onu can make mistakes. Verify clinical decisions.</p>
             </div>
 
           </div>
@@ -13059,7 +13497,7 @@
         <div class="onu-history-drawer" id="onuHistoryDrawer">
           <div class="onu-drawer-header">
             <div class="onu-drawer-brand">
-              <i class="ph-fill ph-chat-centered-dots" style="color: var(--color-primary-btn); font-size: 22px;"></i>
+              <i class="ph-fill ph-sparkle" style="color: #0D7A5F; font-size: 20px;"></i>
               <span>Onu</span>
             </div>
             <div class="onu-drawer-header-actions">
@@ -13073,13 +13511,20 @@
           </div>
 
           <button type="button" class="onu-drawer-new-chat-btn" onclick="startNewOnuChat(); closeOnuHistoryDrawer();">
-            <i class="ph ph-note-pencil" style="font-size: 18px; color: var(--color-primary-btn);"></i>
+            <i class="ph ph-note-pencil" style="font-size: 18px; color: #0D7A5F;"></i>
             <span>New chat</span>
           </button>
 
           <div class="onu-drawer-recents-list" id="onuDrawerRecentsList">
-            <span class="onu-drawer-recents-title">Recents</span>
-            <!-- Dynamically populated clean single-line items -->
+            <!-- Dynamically populated categorized items (Today, Yesterday, Previous 7 Days) -->
+          </div>
+
+          <div class="onu-drawer-footer-user">
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Dr. Sifat" class="onu-drawer-user-avatar">
+            <div class="onu-drawer-user-meta">
+              <span class="onu-drawer-user-name">Dr. Sifat Khan</span>
+              <span class="onu-drawer-user-badge">Clinical Copilot Pro</span>
+            </div>
           </div>
         </div>
 
@@ -13966,6 +14411,131 @@
                 <span>Save</span>
               </button>
             </div>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             12D. ONU AI MODEL SELECTOR BOTTOM SHEET (CHATGPT / CLAUDE MOBILE)
+             ======================================================= -->
+        <div class="bottom-sheet" id="onuModelSelectorSheet" style="z-index: 155;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon">
+              <i class="ph ph-cpu"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeOnuModelSelector()" aria-label="Close Model Switcher">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" style="font-size: 20px;">AI Model</h2>
+            <p class="sheet-minimal-subtitle">Select intelligence engine for clinical copilot</p>
+          </div>
+          <div class="model-selector-list" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+            <div class="model-selector-item active" id="modelItem_onu35" onclick="selectOnuModel('Onu 3.5')">
+              <div class="model-item-left">
+                <div class="model-item-icon"><i class="ph-fill ph-lightning"></i></div>
+                <div class="model-item-meta">
+                  <span class="model-item-title">Onu 3.5</span>
+                  <span class="model-item-desc">Fast daily triage & rapid consultation notes</span>
+                </div>
+              </div>
+              <i class="ph-bold ph-check model-item-check" id="modelCheck_onu35"></i>
+            </div>
+            <div class="model-selector-item" id="modelItem_onuPro" onclick="selectOnuModel('Onu Pro')">
+              <div class="model-item-left">
+                <div class="model-item-icon" style="background: #EEF2F6; color: #1E293B;"><i class="ph-fill ph-brain"></i></div>
+                <div class="model-item-meta">
+                  <span class="model-item-title">Onu Clinical Pro</span>
+                  <span class="model-item-desc">Deep diagnostic reasoning & multi-drug pathology</span>
+                </div>
+              </div>
+              <i class="ph-bold ph-check model-item-check" id="modelCheck_onuPro" style="display: none;"></i>
+            </div>
+            <div class="model-selector-item" id="modelItem_onuLive" onclick="selectOnuModel('Onu Live Voice')">
+              <div class="model-item-left">
+                <div class="model-item-icon" style="background: #F0FDF4; color: #0D7A5F;"><i class="ph-fill ph-waveform"></i></div>
+                <div class="model-item-meta">
+                  <span class="model-item-title">Onu Live Voice</span>
+                  <span class="model-item-desc">Real-time bidirectional hands-free audio assistant</span>
+                </div>
+              </div>
+              <i class="ph-bold ph-check model-item-check" id="modelCheck_onuLive" style="display: none;"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             12E. ONU ATTACHMENT BOTTOM SHEET (CLAUDE / CHATGPT MOBILE)
+             ======================================================= -->
+        <div class="bottom-sheet" id="onuAttachModalSheet" style="z-index: 155;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon">
+              <i class="ph ph-paperclip"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeOnuAttachMenu()" aria-label="Close Attachment Menu">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title" style="font-size: 20px;">Attach to Query</h2>
+            <p class="sheet-minimal-subtitle">Include clinical records or tag a patient file</p>
+          </div>
+          <div class="attach-menu-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
+            <div class="attach-card" onclick="selectAttachOption('tag_patient')">
+              <div class="attach-card-icon" style="background: #E8F5F1; color: #0D7A5F;"><i class="ph ph-user"></i></div>
+              <span class="attach-card-title">Tag Patient</span>
+              <span class="attach-card-sub">@Farzana Khan</span>
+            </div>
+            <div class="attach-card" onclick="selectAttachOption('lab_report')">
+              <div class="attach-card-icon" style="background: #EEF2F6; color: #1E293B;"><i class="ph ph-file-text"></i></div>
+              <span class="attach-card-title">Lab / CBC Report</span>
+              <span class="attach-card-sub">Attach test panel</span>
+            </div>
+            <div class="attach-card" onclick="selectAttachOption('shift_queue')">
+              <div class="attach-card-icon" style="background: #FEF3C7; color: #D97706;"><i class="ph ph-calendar-check"></i></div>
+              <span class="attach-card-title">Shift Queue</span>
+              <span class="attach-card-sub">Attach 6 queued files</span>
+            </div>
+            <div class="attach-card" onclick="selectAttachOption('rx_protocol')">
+              <div class="attach-card-icon" style="background: #F3E8FF; color: #9333EA;"><i class="ph ph-prescription"></i></div>
+              <span class="attach-card-title">Rx Protocol</span>
+              <span class="attach-card-sub">Drug guidelines</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             12F. CLAUDE ARTIFACT FULL VIEW BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="onuArtifactModalSheet" style="z-index: 160; max-height: 90vh;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" id="artifactModalBadgeIcon" style="background: #E8F5F1; color: #0D7A5F;">
+              <i class="ph ph-file-text"></i>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" class="btn-circle-icon" onclick="copyCurrentArtifactModal()" title="Copy artifact" aria-label="Copy Artifact">
+                <i class="ph ph-copy"></i>
+              </button>
+              <button type="button" class="btn-circle-icon" onclick="closeArtifactModal()" aria-label="Close Artifact">
+                <i class="ph ph-x"></i>
+              </button>
+            </div>
+          </div>
+          <div class="sheet-hero-header">
+            <span id="artifactModalTypeTag" style="font-family: var(--font-mono, monospace); font-size: 11px; font-weight: 700; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em;">CLINICAL DOSSIER</span>
+            <h2 class="sheet-editorial-title" id="artifactModalTitle" style="font-size: 20px; margin-top: 2px;">Patient Overview</h2>
+          </div>
+          <div id="artifactModalContentBody" style="padding: 10px 0 20px 0; font-family: var(--font-body); font-size: 14px; color: #1E293B; line-height: 1.6; overflow-y: auto; max-height: 55vh;">
+            <!-- Dynamically populated -->
+          </div>
+          <div class="sheet-actions-group">
+            <button type="button" class="btn-sheet-confirm" onclick="shareCurrentArtifactModal()">
+              <i class="ph ph-share-network"></i>
+              <span>Share Artifact</span>
+            </button>
           </div>
         </div>
 
@@ -15925,52 +16495,157 @@
     }
 
     // =======================================================
-    // ONU RECENT CHAT THREADS MANAGEMENT (ChatGPT/Gemini Minimal Single-Line Standard)
+    // ONU CLINICAL AI COPILOT CONTROLLER (CHATGPT & CLAUDE MOBILE SPEC)
     // =======================================================
+    let activeOnuModel = 'Onu 3.5';
+    let lastUserQuery = '';
+    let currentActiveArtifactId = null;
+
+    // Claude Artifacts Registry Store
+    const claudeArtifactsStore = {};
+
     let recentChatThreads = [
-      { id: 'thread_1', title: 'My patients overview', query: 'Check my patients' },
-      { id: 'thread_2', title: 'Today’s earnings & payouts', query: 'How much money did I make today and this week?' },
-      { id: 'thread_3', title: 'Doctor Patient Appointment Schedule', query: 'How many patients in my shift queue today?' },
-      { id: 'thread_4', title: 'Patients with active fever', query: 'Patients with active fever' },
-      { id: 'thread_5', title: 'Amr last paitent er prescription', query: 'Recap my last consultation with Alif Khan' },
-      { id: 'thread_6', title: 'Daily Doctor Visit Summary', query: 'Daily Doctor Visit Summary' },
-      { id: 'thread_7', title: 'Pediatric Dosage Guidelines', query: 'Pediatric Dosage Guidelines for Napa' },
-      { id: 'thread_8', title: 'ECG Report Interpretation', query: 'ECG Report Interpretation for sinus rhythm' }
+      { id: 'thread_1', title: 'My patients overview', query: 'Check my patients', category: 'Today' },
+      { id: 'thread_2', title: 'Today’s earnings & payouts', query: 'How much money did I make today and this week?', category: 'Today' },
+      { id: 'thread_3', title: 'Shift 1 consultation queue', query: 'How many patients in my shift queue today?', category: 'Today' },
+      { id: 'thread_4', title: 'Patients with active fever', query: 'Patients with active fever', category: 'Yesterday' },
+      { id: 'thread_5', title: 'Alif Khan clinical recap', query: 'Recap my last consultation with Alif Khan', category: 'Yesterday' },
+      { id: 'thread_6', title: 'Hypertension guideline protocol', query: 'Clinical Hypertension Management Guidelines', category: 'Previous 7 Days' },
+      { id: 'thread_7', title: 'Pediatric Dosage Guidelines', query: 'Pediatric Dosage Guidelines for Napa', category: 'Previous 7 Days' },
+      { id: 'thread_8', title: 'ECG Report Interpretation', query: 'ECG Report Interpretation for sinus rhythm', category: 'Previous 7 Days' }
     ];
 
     let longPressTimer = null;
     let isLongPressTriggered = false;
     let activeContextMenuThreadId = null;
 
+    // Model Selector Handlers (ChatGPT / Claude mobile)
+    function openOnuModelSelector() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('onuModelSelectorSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeOnuModelSelector() {
+      const sheet = document.getElementById('onuModelSelectorSheet');
+      if (sheet) sheet.classList.remove('active');
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
+    function selectOnuModel(modelName) {
+      activeOnuModel = modelName;
+      const label = document.getElementById('onuActiveModelLabel');
+      if (label) label.textContent = modelName;
+
+      // Update checkmarks in sheet
+      const models = [
+        { id: 'onu35', name: 'Onu 3.5' },
+        { id: 'onuPro', name: 'Onu Pro' },
+        { id: 'onuLive', name: 'Onu Live Voice' }
+      ];
+
+      models.forEach(m => {
+        const item = document.getElementById(`modelItem_${m.id}`);
+        const check = document.getElementById(`modelCheck_${m.id}`);
+        if (item) {
+          if (m.name === modelName) {
+            item.classList.add('active');
+            if (check) check.style.display = 'block';
+          } else {
+            item.classList.remove('active');
+            if (check) check.style.display = 'none';
+          }
+        }
+      });
+
+      closeOnuModelSelector();
+      showToast(`Model switched to ${modelName}`);
+
+      if (modelName === 'Onu Live Voice') {
+        setTimeout(() => openLiveVoiceBotModal(), 300);
+      }
+    }
+
+    // Attachment Menu Handlers
+    function openOnuAttachMenu() {
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('onuAttachModalSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeOnuAttachMenu() {
+      const sheet = document.getElementById('onuAttachModalSheet');
+      if (sheet) sheet.classList.remove('active');
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
+    function selectAttachOption(type) {
+      const inputField = document.getElementById('inputOnuChat');
+      closeOnuAttachMenu();
+      if (!inputField) return;
+
+      if (type === 'tag_patient') {
+        inputField.value = '@Farzana Khan ';
+        inputField.focus();
+        showToast('Tagged patient Farzana Khan');
+      } else if (type === 'lab_report') {
+        inputField.value = 'Review CBC & Lipid Panel: ';
+        inputField.focus();
+        showToast('Attached lab panel template');
+      } else if (type === 'shift_queue') {
+        inputField.value = 'Summarize today\'s Shift 1 patient queue: ';
+        inputField.focus();
+        showToast('Shift queue attached');
+      } else if (type === 'rx_protocol') {
+        inputField.value = 'Recommend clinical dosage guidelines for: ';
+        inputField.focus();
+        showToast('Rx protocol template added');
+      }
+      handleOnuInputChange(inputField);
+    }
+
+    // Categorized Chat History Drawer (ChatGPT & Claude Mobile Standard)
     function renderOnuRecentsList() {
       const container = document.getElementById('onuDrawerRecentsList');
       if (!container) return;
 
       if (recentChatThreads.length === 0) {
         container.innerHTML = `
-          <span class="onu-drawer-recents-title">Recents</span>
-          <div style="padding: 16px 10px; font-family: var(--font-body); font-size: 13px; color: #8E9F9D; font-style: italic;">No recent chats</div>
+          <div style="padding: 24px 10px; font-family: var(--font-body); font-size: 13.5px; color: #94A3B8; text-align: center; font-style: italic;">No recent conversations</div>
         `;
         return;
       }
 
-      let html = '<span class="onu-drawer-recents-title">Recents</span>';
-      recentChatThreads.forEach(thread => {
-        html += `
-          <div class="onu-drawer-item" 
-               id="threadItem_${thread.id}"
-               data-id="${thread.id}"
-               onmousedown="handleThreadMouseDown('${thread.id}', event)"
-               onmouseup="handleThreadMouseUp('${thread.id}', event)"
-               onmouseleave="handleThreadMouseLeave()"
-               ontouchstart="handleThreadTouchStart('${thread.id}', event)"
-               ontouchend="handleThreadTouchEnd('${thread.id}', event)"
-               ontouchcancel="handleThreadMouseLeave()"
-               oncontextmenu="handleThreadContextMenu('${thread.id}', event)"
-               onclick="handleThreadItemClick('${thread.id}', '${thread.query.replace(/'/g, "\\'")}')">
-            <span class="onu-drawer-item-title">${thread.title}</span>
-          </div>
-        `;
+      const categories = ['Today', 'Yesterday', 'Previous 7 Days'];
+      let html = '';
+
+      categories.forEach(cat => {
+        const catThreads = recentChatThreads.filter(t => (t.category || 'Today') === cat);
+        if (catThreads.length > 0) {
+          html += `<div class="onu-drawer-section-title">${cat}</div>`;
+          catThreads.forEach(thread => {
+            html += `
+              <div class="onu-drawer-item" 
+                   id="threadItem_${thread.id}"
+                   data-id="${thread.id}"
+                   onmousedown="handleThreadMouseDown('${thread.id}', event)"
+                   onmouseup="handleThreadMouseUp('${thread.id}', event)"
+                   onmouseleave="handleThreadMouseLeave()"
+                   ontouchstart="handleThreadTouchStart('${thread.id}', event)"
+                   ontouchend="handleThreadTouchEnd('${thread.id}', event)"
+                   ontouchcancel="handleThreadMouseLeave()"
+                   oncontextmenu="handleThreadContextMenu('${thread.id}', event)"
+                   onclick="handleThreadItemClick('${thread.id}', '${thread.query.replace(/'/g, "\\'")}')">
+                <span class="onu-drawer-item-title">${escapeHtml(thread.title)}</span>
+                <i class="ph ph-dots-three-vertical onu-drawer-item-dots" onclick="event.stopPropagation(); openThreadContextMenu('${thread.id}')"></i>
+              </div>
+            `;
+          });
+        }
       });
 
       container.innerHTML = html;
@@ -15983,7 +16658,7 @@
       longPressTimer = setTimeout(() => {
         isLongPressTriggered = true;
         openThreadContextMenu(threadId);
-      }, 500);
+      }, 480);
     }
 
     function handleThreadMouseUp(threadId, e) {
@@ -16000,7 +16675,7 @@
       longPressTimer = setTimeout(() => {
         isLongPressTriggered = true;
         openThreadContextMenu(threadId);
-      }, 500);
+      }, 480);
     }
 
     function handleThreadTouchEnd(threadId, e) {
@@ -16135,7 +16810,7 @@
         inputField.value = '';
         handleOnuInputChange(inputField);
       }
-      onuChatHistory = [];
+      lastUserQuery = '';
     }
 
     function askOnuPreset(promptText) {
@@ -16178,18 +16853,235 @@
       }
     }
 
+    function toggleThoughtPill(pillEl) {
+      if (!pillEl) return;
+      pillEl.classList.toggle('is-open');
+      const detailsEl = pillEl.nextElementSibling;
+      if (detailsEl && detailsEl.classList.contains('onu-thought-details')) {
+        detailsEl.classList.toggle('is-open');
+      }
+    }
+
+    // Claude Artifact Card Helper Builder
+    function renderClaudeArtifactCard({ id, type, title, icon, summaryHtml, fullContentHtml, version }) {
+      // Store in memory registry
+      claudeArtifactsStore[id] = { id, type, title, icon, summaryHtml, fullContentHtml, version };
+
+      return `
+        <div class="onu-artifact-card" id="artifactCard_${id}">
+          <div class="onu-artifact-header" onclick="openClaudeArtifactModal('${id}')">
+            <div class="onu-artifact-header-left">
+              <div class="onu-artifact-icon-tile">
+                <i class="${icon}"></i>
+              </div>
+              <div class="onu-artifact-meta">
+                <span class="onu-artifact-type-tag">${type}</span>
+                <h4 class="onu-artifact-title">${escapeHtml(title)}</h4>
+              </div>
+            </div>
+            <button type="button" class="onu-artifact-view-pill" onclick="event.stopPropagation(); openClaudeArtifactModal('${id}')">
+              <span>Open</span>
+              <i class="ph ph-arrow-up-right"></i>
+            </button>
+          </div>
+          <div class="onu-artifact-body">
+            ${summaryHtml}
+          </div>
+          <div class="onu-artifact-footer">
+            <div class="onu-artifact-actions">
+              <button type="button" class="onu-artifact-action-btn" onclick="copyArtifactCard('${id}')">
+                <i class="ph ph-copy"></i>
+                <span>Copy</span>
+              </button>
+              <button type="button" class="onu-artifact-action-btn" onclick="shareArtifactCard('${id}')">
+                <i class="ph ph-share-network"></i>
+                <span>Share</span>
+              </button>
+            </div>
+            <span class="onu-artifact-version-tag">${version || 'v1.0 • Clinical Protocol'}</span>
+          </div>
+        </div>
+      `;
+    }
+
+    // Claude Artifact Modal Handlers
+    function openClaudeArtifactModal(id) {
+      const artifact = claudeArtifactsStore[id];
+      if (!artifact) return;
+
+      currentActiveArtifactId = id;
+      const badge = document.getElementById('artifactModalBadgeIcon');
+      const tag = document.getElementById('artifactModalTypeTag');
+      const title = document.getElementById('artifactModalTitle');
+      const body = document.getElementById('artifactModalContentBody');
+
+      if (badge) badge.innerHTML = `<i class="${artifact.icon}"></i>`;
+      if (tag) tag.textContent = artifact.type;
+      if (title) title.textContent = artifact.title;
+      if (body) body.innerHTML = artifact.fullContentHtml || artifact.summaryHtml;
+
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('onuArtifactModalSheet');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeArtifactModal() {
+      const sheet = document.getElementById('onuArtifactModalSheet');
+      if (sheet) sheet.classList.remove('active');
+      const backdrop = document.getElementById('modalBackdrop');
+      if (backdrop) backdrop.classList.remove('active');
+      currentActiveArtifactId = null;
+    }
+
+    function copyCurrentArtifactModal() {
+      if (!currentActiveArtifactId) return;
+      const artifact = claudeArtifactsStore[currentActiveArtifactId];
+      if (artifact) {
+        copyArtifactCard(artifact.id);
+      }
+    }
+
+    function shareCurrentArtifactModal() {
+      if (!currentActiveArtifactId) return;
+      const artifact = claudeArtifactsStore[currentActiveArtifactId];
+      if (artifact) {
+        shareArtifactCard(artifact.id);
+      }
+    }
+
+    function copyArtifactCard(id) {
+      const artifact = claudeArtifactsStore[id];
+      if (!artifact) return;
+      const textToCopy = `${artifact.title} (${artifact.type})\n${artifact.fullContentHtml ? artifact.fullContentHtml.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : ''}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(textToCopy);
+      }
+      showToast('Artifact copied to clipboard');
+    }
+
+    function shareArtifactCard(id) {
+      const artifact = claudeArtifactsStore[id];
+      if (!artifact) return;
+      if (navigator.share) {
+        navigator.share({
+          title: artifact.title,
+          text: `Clinical Artifact: ${artifact.title}`
+        }).catch(() => {});
+      } else {
+        showToast(`Share link created for "${artifact.title}"`);
+      }
+    }
+
+    // Assistant Message Action Toolbar Handlers
+    function copyAiResponse(btn) {
+      const wrap = btn.closest('.onu-message-ai-wrap');
+      if (wrap) {
+        const textEl = wrap.querySelector('.onu-msg-ai-text');
+        if (textEl && navigator.clipboard) {
+          navigator.clipboard.writeText(textEl.innerText);
+        }
+      }
+      showToast('Response copied to clipboard');
+    }
+
+    function toggleAiFeedback(btn, type) {
+      const allButtons = btn.parentElement.querySelectorAll('.onu-ai-action-btn');
+      allButtons.forEach(b => {
+        if (b !== btn) b.classList.remove('active');
+      });
+      btn.classList.toggle('active');
+      if (btn.classList.contains('active')) {
+        showToast(type === 'up' ? 'Marked as helpful' : 'Feedback recorded');
+      }
+    }
+
+    let currentSpeakingUtterance = null;
+    function speakAiResponse(btn) {
+      const wrap = btn.closest('.onu-message-ai-wrap');
+      if (!wrap) return;
+      const textEl = wrap.querySelector('.onu-msg-ai-text');
+      if (!textEl) return;
+
+      if ('speechSynthesis' in window) {
+        if (window.speechSynthesis.speaking) {
+          window.speechSynthesis.cancel();
+          btn.classList.remove('active');
+          showToast('Speech paused');
+          return;
+        }
+
+        const plainText = textEl.innerText;
+        currentSpeakingUtterance = new SpeechSynthesisUtterance(plainText);
+        currentSpeakingUtterance.rate = 1.0;
+        currentSpeakingUtterance.onend = () => {
+          btn.classList.remove('active');
+        };
+        btn.classList.add('active');
+        window.speechSynthesis.speak(currentSpeakingUtterance);
+        showToast('Reading response aloud...');
+      } else {
+        showToast('Audio reading not supported in browser');
+      }
+    }
+
+    function regenerateLastAiResponse() {
+      if (!lastUserQuery) {
+        showToast('No query to regenerate');
+        return;
+      }
+      const streamView = document.getElementById('onuMessagesStream');
+      const scrollArea = document.getElementById('onuChatScrollArea');
+      if (!streamView) return;
+
+      // Remove last AI response if present
+      const allAiWraps = streamView.querySelectorAll('.onu-message-ai-wrap');
+      if (allAiWraps.length > 0) {
+        allAiWraps[allAiWraps.length - 1].remove();
+      }
+
+      // Render Typing Indicator
+      const typingId = 'onuTyping_' + Date.now();
+      const typingHtml = `
+        <div class="onu-message-ai-wrap" id="${typingId}">
+          <div class="onu-thought-pill">
+            <span class="onu-thought-dot"></span>
+            <span>Thinking...</span>
+          </div>
+          <div class="onu-typing-indicator">
+            <span class="onu-typing-dot"></span>
+            <span class="onu-typing-dot"></span>
+            <span class="onu-typing-dot"></span>
+          </div>
+        </div>
+      `;
+      streamView.insertAdjacentHTML('beforeend', typingHtml);
+      if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+
+      setTimeout(() => {
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        const aiResponse = generateOnuClinicalResponse(lastUserQuery);
+        streamView.insertAdjacentHTML('beforeend', aiResponse);
+        if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+        showToast('Regenerated clinical response');
+      }, 550);
+    }
+
+    // Main Send Message Function
     function sendOnuMessage() {
       const inputField = document.getElementById('inputOnuChat');
       if (!inputField) return;
       const text = inputField.value.trim();
       if (!text) return;
 
+      lastUserQuery = text;
       const welcomeView = document.getElementById('onuWelcomeView');
       const streamView = document.getElementById('onuMessagesStream');
       const scrollArea = document.getElementById('onuChatScrollArea');
       const pageOnu = document.getElementById('pageOnu');
 
-      // Make background pure white and transition to stream view
       if (pageOnu) pageOnu.classList.add('chat-active');
       if (welcomeView) welcomeView.style.display = 'none';
       if (streamView) streamView.style.display = 'flex';
@@ -16211,6 +17103,16 @@
       streamView.insertAdjacentHTML('beforeend', userBubbleHtml);
       inputField.value = '';
       handleOnuInputChange(inputField);
+
+      // Save to recent threads if novel
+      if (!recentChatThreads.some(t => t.query.toLowerCase() === text.toLowerCase())) {
+        recentChatThreads.unshift({
+          id: 'thread_' + Date.now(),
+          title: text.length > 32 ? text.substring(0, 32) + '...' : text,
+          query: text,
+          category: 'Today'
+        });
+      }
 
       // 2. Render Typing / Thought Indicator
       const typingId = 'onuTyping_' + Date.now();
@@ -16297,232 +17199,477 @@
       }
     }
 
+    // Contextual Clinical Response Engine with Claude-Style Artifacts
     function generateOnuClinicalResponse(query) {
       const q = query.toLowerCase();
+      const modelBadge = activeOnuModel === 'Onu Pro' ? 'Pro Clinical Reasoning' : 'Onu 3.5 Copilot';
 
-      // Case 1: Check my patients / Patient Overview (Clean, No action chips)
+      // Reusable Assistant Actions HTML
+      const actionToolbarHtml = `
+        <div class="onu-msg-ai-actions">
+          <button class="onu-ai-action-btn" onclick="copyAiResponse(this)" title="Copy response"><i class="ph ph-copy"></i></button>
+          <button class="onu-ai-action-btn" onclick="toggleAiFeedback(this, 'up')" title="Helpful"><i class="ph ph-thumbs-up"></i></button>
+          <button class="onu-ai-action-btn" onclick="toggleAiFeedback(this, 'down')" title="Not helpful"><i class="ph ph-thumbs-down"></i></button>
+          <button class="onu-ai-action-btn" onclick="speakAiResponse(this)" title="Read aloud"><i class="ph ph-speaker-high"></i></button>
+          <button class="onu-ai-action-btn" onclick="regenerateLastAiResponse()" title="Regenerate"><i class="ph ph-arrows-clockwise"></i></button>
+        </div>
+      `;
+
+      // Case 1: Check my patients / Patient Overview
       if (q.includes('patient') || q.includes('unique') || q.includes('directory')) {
+        const artifactId = 'art_patients_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'CLINICAL DOSSIER',
+          title: 'Patient Directory & Queue Roster',
+          icon: 'ph ph-users',
+          version: 'Live EHR Sync • 2026',
+          summaryHtml: `
+            <div class="onu-artifact-grid">
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Unique Patients</span>
+                <span class="onu-artifact-metric-value">8</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Total Visits</span>
+                <span class="onu-artifact-metric-value">24</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Completed Consults</span>
+                <span class="onu-artifact-metric-value">18</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Queued Today</span>
+                <span class="onu-artifact-metric-value">6</span>
+              </div>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Clinical Patient Directory Breakdown:</strong></p>
+            <p>You have 8 active unique patients under management with 18 completed consultations and 6 upcoming queued appointments in today's telemedicine shifts.</p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Tariqul Islam (34M):</strong> Follow-up Tension Headache (Shift 1, Serial #1)</li>
+              <li><strong>Farzana Khan (31F):</strong> Fever & Acute Pharyngitis (Shift 1, Serial #2)</li>
+              <li><strong>Nusrat Jahan (26F):</strong> Urticaria & Atopic Dermatitis (Shift 1, Serial #3)</li>
+              <li><strong>Alif Khan (28M):</strong> Post-viral Recovery & Saline Protocol (Completed Sep 29)</li>
+            </ul>
+            <p>All records synced securely under BMDC Telemedicine Standards.</p>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Thought for 3 seconds</span>
+              <span class="onu-thought-label">Thought for 3 seconds</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Queried EHR patient registry for Dr. Sifat Khan<br>
+              • Computed unique patient count (8) and consultation records (24 total)<br>
+              • Formatted structured clinical dossier artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>You currently have 8 unique patients with a total of 24 appointments, including 18 completed consultations and 6 upcoming queued appointments.</p>
+              <p>You currently manage <strong>8 unique patients</strong> across 24 recorded encounters, including 18 completed consults and 6 queued for today's shifts:</p>
             </div>
-            
-            <div class="onu-widget-card">
-              <div class="onu-widget-header">
-                <div class="onu-widget-title-left">
-                  <i class="ph ph-users" style="color: #0D7A5F; font-size: 18px;"></i>
-                  <span class="onu-widget-title">Patient Overview</span>
-                </div>
-                <span class="info-chip info-chip-neutral" style="font-size: 11px; text-transform: none;">All time</span>
-              </div>
-              <div class="onu-widget-grid">
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Unique patients</span>
-                  <span class="onu-widget-metric-value">8</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Total appointments</span>
-                  <span class="onu-widget-metric-value">24</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Completed visits</span>
-                  <span class="onu-widget-metric-value">18</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Upcoming visits</span>
-                  <span class="onu-widget-metric-value">6</span>
-                </div>
-              </div>
-            </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
-      // Case 2: Check my earnings / Money Made (Clean, No action chips)
+      // Case 2: Earnings / Money Made
       if (q.includes('money') || q.includes('earn') || q.includes('income') || q.includes('balance') || q.includes('wallet') || q.includes('taka')) {
+        const artifactId = 'art_fin_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'FINANCIAL DOSSIER',
+          title: 'Practice Income & Telehealth Payouts',
+          icon: 'ph ph-wallet',
+          version: 'Verified Oct 2026',
+          summaryHtml: `
+            <div class="onu-artifact-grid">
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Total Income</span>
+                <span class="onu-artifact-metric-value">&#2547;45,200</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Available Balance</span>
+                <span class="onu-artifact-metric-value">&#2547;12,400</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Completed Consults</span>
+                <span class="onu-artifact-metric-value">18</span>
+              </div>
+              <div class="onu-artifact-metric-box">
+                <span class="onu-artifact-metric-label">Avg per Patient</span>
+                <span class="onu-artifact-metric-value">&#2547;800</span>
+              </div>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Practice Financial Statement — October 2026:</strong></p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Gross Telemedicine Consultations:</strong> &#2547;45,200 (18 visits @ avg &#2547;800)</li>
+              <li><strong>Instant Payouts Cleared:</strong> &#2547;32,800 to bKash & Bank</li>
+              <li><strong>Current Available Balance:</strong> &#2547;12,400 ready for instant withdrawal</li>
+              <li><strong>Platform Fee:</strong> 0% promotional rate applied</li>
+            </ul>
+            <p>You can withdraw available balance instantly via the Wallet tab.</p>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Thought for 4 seconds</span>
+              <span class="onu-thought-label">Thought for 2 seconds</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Retrieved ledger from practice transaction database<br>
+              • Calculated completed shifts and pending payouts<br>
+              • Formatted financial intelligence artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>Here is your current financial summary across your active practice and completed telemedicine shifts for this month:</p>
+              <p>Here is your practice revenue and payout overview for this month across all completed shifts:</p>
             </div>
-            
-            <div class="onu-widget-card">
-              <div class="onu-widget-header">
-                <div class="onu-widget-title-left">
-                  <i class="ph ph-wallet" style="color: #0D7A5F; font-size: 18px;"></i>
-                  <span class="onu-widget-title">Financial Summary</span>
-                </div>
-                <span class="info-chip info-chip-neutral" style="font-size: 11px; text-transform: none;">This Month</span>
-              </div>
-              <div class="onu-widget-grid">
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Total Income</span>
-                  <span class="onu-widget-metric-value">&#2547;45,200</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Available Balance</span>
-                  <span class="onu-widget-metric-value">&#2547;12,400</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Consultations</span>
-                  <span class="onu-widget-metric-value">18</span>
-                </div>
-                <div class="onu-widget-metric-box">
-                  <span class="onu-widget-metric-label">Avg per Patient</span>
-                  <span class="onu-widget-metric-value">&#2547;800</span>
-                </div>
-              </div>
-            </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
       // Case 3: Recap last visit (Alif Khan)
       if (q.includes('alif') || q.includes('recap') || q.includes('last visit')) {
+        const artifactId = 'art_alif_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'CONSULTATION RECORD',
+          title: 'Alif Khan (28M) — Clinical Encounter Summary',
+          icon: 'ph ph-user-circle',
+          version: 'Encounter Sep 29, 2026',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Primary Diagnosis:</strong> Viral Pharyngitis & Mild Cephalalgia</p>
+              <p style="margin: 0 0 6px 0;"><strong>Prescription:</strong> Paracetamol 500mg TDS (3 days) + Warm Saline Gargle</p>
+              <p style="margin: 0;"><strong>Known Allergies:</strong> Seasonal Rhinitis (Fexofenadine 120mg PRN)</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Clinical Consultation Summary (SOAP Note):</strong></p>
+            <p><strong>Patient:</strong> Alif Khan (28 Male) • Encounter Date: Sep 29, 2026</p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Subjective:</strong> 3-day history of scratchy sore throat, low-grade fever (99.8°F), and bilateral tension-like headache. No dyspnea.</li>
+              <li><strong>Objective:</strong> Oropharyngeal erythema without follicular exudates; tonsils non-hypertrophic; neck supple without adenopathy.</li>
+              <li><strong>Assessment:</strong> Acute viral pharyngitis with secondary mild cephalalgia.</li>
+              <li><strong>Plan:</strong> Paracetamol 500mg PO TDS for 3 days; warm saline gargle QDS; hydration; review if high fever &gt; 101°F occurs.</li>
+            </ul>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Thought for 3 seconds</span>
+              <span class="onu-thought-label">Thought for 3 seconds</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Retrieved patient file #ALF-28 from directory<br>
+              • Extracted diagnostic assessment, medication history, and pre-visit intake<br>
+              • Prepared verified clinical encounter dossier
             </div>
             <div class="onu-msg-ai-text">
-              <p>Clinical summary from your last consultation with <strong>Alif Khan (28M)</strong> on Sep 29, 2026:</p>
-              <ul>
-                <li><strong>Diagnosis:</strong> Viral Pharyngitis & Mild Cephalalgia.</li>
-                <li><strong>Prescribed:</strong> Paracetamol 500mg TDS for 3 days & warm saline gargling.</li>
-                <li><strong>Pre-visit Intake:</strong> Scratchy sore throat and low-grade fever for 3 days.</li>
-                <li><strong>Known Allergies:</strong> Seasonal Allergic Rhinitis (Fexofenadine 120mg PRN).</li>
-              </ul>
+              <p>Here is the verified encounter recap for <strong>Alif Khan (28M)</strong> from his last consultation on Sep 29, 2026:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
       // Case 4: Today's queue / Shift preparation
       if (q.includes('queue') || q.includes('shift') || q.includes('today') || q.includes('turn')) {
+        const artifactId = 'art_queue_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'QUEUE ROSTER',
+          title: 'Shift 1 Active Consultation Roster',
+          icon: 'ph ph-calendar-check',
+          version: '9:00 AM – 11:00 AM Today',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Serial #1:</strong> Tariqul Islam (34M) — Tension Headache (Follow-up)</p>
+              <p style="margin: 0 0 6px 0;"><strong>Serial #2:</strong> Farzana Khan (31F) — Fever & Body Aches (Initial)</p>
+              <p style="margin: 0 0 6px 0;"><strong>Serial #3:</strong> Nusrat Jahan (26F) — Skin Rash & Allergy (Initial)</p>
+              <p style="margin: 0;"><strong>Serial #4:</strong> Farhan Hossain (28M) — Post-viral Cough (Initial)</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Shift 1 Consultation Queue (9:00 AM – 11:00 AM):</strong></p>
+            <ol style="margin: 10px 0 14px 20px;">
+              <li><strong>Tariqul Islam (34M):</strong> Tension headache evaluation; review BP & Naproxen response.</li>
+              <li><strong>Farzana Khan (31F):</strong> Fever 100.4°F, myalgia; pre-visit intake completed.</li>
+              <li><strong>Nusrat Jahan (26F):</strong> Acute contact dermatitis vs urticaria; photos uploaded.</li>
+              <li><strong>Farhan Hossain (28M):</strong> Dry irritative cough post upper respiratory tract infection.</li>
+              <li><strong>Maruf Islam (42M):</strong> Routine BP check & lifestyle consultation.</li>
+              <li><strong>Sadia Rahman (29F):</strong> General telehealth wellness review.</li>
+            </ol>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Thought for 4 seconds</span>
+              <span class="onu-thought-label">Thought for 4 seconds</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Verified schedule calendar for Shift 1 (9:00 AM – 11:00 AM)<br>
+              • Extracted serial bookings and patient pre-consultation chief complaints<br>
+              • Generated clinical queue roster artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>You have <strong>Shift 1</strong> scheduled today (9:00 AM – 11:00 AM) with 6 queued patients ready for consultation:</p>
-              <ul>
-                <li><strong>Serial #1:</strong> Tariqul Islam (34M) - Tension Headache (Follow-up)</li>
-                <li><strong>Serial #2:</strong> Farzana Khan (31F) - Fever & Body Aches (Initial)</li>
-                <li><strong>Serial #3:</strong> Nusrat Jahan (26F) - Skin Rash & Allergy (Initial)</li>
-                <li><strong>Serial #4:</strong> Farhan Hossain (28M) - Post-viral Cough (Initial)</li>
-              </ul>
+              <p>You have <strong>Shift 1</strong> scheduled today with 6 booked patients queued for consultation:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
-      // Case 5: Patients with active fever / infection
+      // Case 5: Fever / Infection
       if (q.includes('fever') || q.includes('infection') || q.includes('temperature')) {
+        const artifactId = 'art_fever_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'CLINICAL PROTOCOL',
+          title: 'Acute Febrile Illness Protocol & Cohort',
+          icon: 'ph ph-thermometer',
+          version: 'v2.4 • Clinical Guidelines',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Active Patients:</strong> Farzana Khan (31F, 100.4°F), Alif Khan (28M, recovered)</p>
+              <p style="margin: 0 0 6px 0;"><strong>First-Line Rx:</strong> Paracetamol 500mg TDS PO, oral hydration therapy</p>
+              <p style="margin: 0;"><strong>Warning Signs:</strong> Persistent fever &gt; 5d, tachypnea, petechial rash (Order CBC + CRP)</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Acute Febrile Illness Ambulatory Protocol:</strong></p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Active Patient Alert:</strong> Farzana Khan (31F) in today's Shift 1 (Serial #2) has fever 100.4°F for 3 days with constitutional malaise.</li>
+              <li><strong>First-Line Antipyresis:</strong> Paracetamol 500mg–1000mg PO every 6–8h (max 4g/day); avoid NSAIDs until dengue/platelet count assessed if endemic.</li>
+              <li><strong>Diagnostic Testing:</strong> Recommend CBC + Platelets, CRP, and Dengue NS1 if fever exceeds 72 hours with severe retro-orbital headache.</li>
+            </ul>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Thought for 3 seconds</span>
+              <span class="onu-thought-label">Thought for 3 seconds</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Filtered patient cohort by documented pyrexia symptoms<br>
+              • Cross-referenced ambulatory triage guidelines for tropical & seasonal viral fevers<br>
+              • Formatted clinical protocol artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>Active patients in your practice with documented fever symptoms:</p>
-              <ul>
-                <li><strong>Farzana Khan (31F):</strong> Low-grade fever (100.4°F), joint aches & dry cough for 3 days. Scheduled in Shift 1 (Serial #2).</li>
-                <li><strong>Alif Khan (28M):</strong> Mild fever & scratchy sore throat for 3 days. Prescribed antipyretics and rest.</li>
-              </ul>
-              <p><strong>Clinical Protocol:</strong> Recommend hydration, Paracetamol 500mg PO TDS, and baseline CBC + CRP if fever persists &gt; 5 days.</p>
+              <p>Active practice cohort and evidence-based diagnostic protocol for acute fever:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
-      // Case 6: Hypertension / Blood Pressure
+      // Case 6: Hypertension / BP
       if (q.includes('bp') || q.includes('hypertension') || q.includes('pressure')) {
+        const artifactId = 'art_bp_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'CLINICAL PROTOCOL',
+          title: 'AHA/ACC Hypertension Management Guidelines',
+          icon: 'ph ph-heartbeat',
+          version: 'AHA/ACC 2026 Standards',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Target BP:</strong> &lt; 130/80 mmHg (General adults); &lt; 140/90 mmHg (Elderly &gt; 75)</p>
+              <p style="margin: 0 0 6px 0;"><strong>First-Line Agents:</strong> Amlodipine 5mg OD, Telmisartan 40mg OD, Chlorthalidone 12.5mg OD</p>
+              <p style="margin: 0;"><strong>Directory Alert:</strong> Tariqul Islam & Maruf Islam have recorded stage-1 elevated BP</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>AHA/ACC Hypertension Clinical Practice Protocol:</strong></p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Classification:</strong> Normal &lt; 120/80; Elevated 120-129/&lt;80; Stage 1: 130-139/80-89; Stage 2: &ge; 140/90 mmHg.</li>
+              <li><strong>Monotherapy vs Dual Therapy:</strong> Initiate dual therapy if BP &gt; 20/10 mmHg over goal. Preferred combination: ARB (Telmisartan) + CCB (Amlodipine).</li>
+              <li><strong>Baseline Labs:</strong> Serum electrolytes, eGFR, fasting lipid panel, urinalysis for microalbuminuria.</li>
+            </ul>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Guideline Protocol • 3s</span>
+              <span class="onu-thought-label">Guideline Protocol • 3s</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Loaded AHA/ACC 2026 ambulatory hypertension guidelines<br>
+              • Scanned patient roster for documented hypertensive trends<br>
+              • Generated pharmacotherapy protocol artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>Clinical Hypertension Management Guidelines (AHA/ACC Standards):</p>
-              <ul>
-                <li><strong>Target BP:</strong> &lt; 130/80 mmHg for general adult outpatients; &lt; 140/90 mmHg for elderly patients.</li>
-                <li><strong>First-Line Pharmacotherapy:</strong> Amlodipine 5mg OD, Telmisartan 40mg OD, or Hydrochlorothiazide 12.5mg OD based on renal & electrolyte profiles.</li>
-                <li><strong>Patient Alert:</strong> 2 patients in your directory (Tariqul Islam, Maruf Islam) have stage-1 elevated BP documented in recent visits.</li>
-              </ul>
+              <p>Ambulatory blood pressure management guidelines and practice cohort alerts:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
       // Case 7: Diabetes / Blood Sugar
       if (q.includes('diabetes') || q.includes('sugar') || q.includes('glucose') || q.includes('hba1c')) {
+        const artifactId = 'art_dm_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'CLINICAL PROTOCOL',
+          title: 'ADA Glycemic Control & T2D Management',
+          icon: 'ph ph-drop',
+          version: 'ADA Standards 2026',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Targets:</strong> HbA1c &lt; 7.0%, Fasting 80–130 mg/dL, 2h PPG &lt; 180 mg/dL</p>
+              <p style="margin: 0 0 6px 0;"><strong>First-Line:</strong> Metformin 500mg BD with meals + Lifestyle modification</p>
+              <p style="margin: 0;"><strong>Cardio-Renal:</strong> Add SGLT2 inhibitor (Empagliflozin 10mg) if eGFR &gt; 30</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Type-2 Diabetes Ambulatory Management (ADA Standards):</strong></p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Glycemic Goals:</strong> Individualize HbA1c targets (&lt; 6.5% for young/newly diagnosed, &lt; 8.0% for frail elderly).</li>
+              <li><strong>First-Line Pharmacotherapy:</strong> Metformin extended-release titrated to 1000mg BD. Monitor B12 levels periodically.</li>
+              <li><strong>Organ Protection:</strong> Prioritize SGLT2i or GLP-1 RA in patients with established ASCVD, heart failure, or CKD regardless of baseline HbA1c.</li>
+            </ul>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>ADA Protocol • 3s</span>
+              <span class="onu-thought-label">ADA Protocol • 3s</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Retrieved ADA Standards of Care glycemic guidelines<br>
+              • Checked dosage contraindications based on renal thresholds<br>
+              • Built structured management dossier artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>Type-2 Diabetes Clinical Management Summary (ADA Standards):</p>
-              <ul>
-                <li><strong>Glycemic Targets:</strong> Target HbA1c &lt; 7.0%, Fasting Blood Glucose 80–130 mg/dL, 2h Post-prandial &lt; 180 mg/dL.</li>
-                <li><strong>First-Line Therapy:</strong> Metformin 500mg BD with meals + lifestyle intervention; add SGLT2i (Empagliflozin 10mg) for cardio-renal protection if indicated.</li>
-                <li><strong>Recommended Labs:</strong> Routine HbA1c, Serum Creatinine & eGFR testing every 3–6 months.</li>
-              </ul>
+              <p>Type-2 Diabetes clinical management and pharmacotherapy summary:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
       // Case 8: Headache / Migraine
       if (q.includes('headache') || q.includes('migraine') || q.includes('head')) {
+        const artifactId = 'art_headache_' + Date.now();
+        const artifactHtml = renderClaudeArtifactCard({
+          id: artifactId,
+          type: 'TRIAGE PROTOCOL',
+          title: 'Cephalalgia & Headache Triage Guidelines',
+          icon: 'ph ph-headset',
+          version: 'Neurological Triage v1.8',
+          summaryHtml: `
+            <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+              <p style="margin: 0 0 6px 0;"><strong>Red Flags (SNOOP4):</strong> Thunderclap onset, neurological deficits, papilledema</p>
+              <p style="margin: 0 0 6px 0;"><strong>First-Line Acute:</strong> Naproxen 250mg PO or Paracetamol 1000mg with antiemetic</p>
+              <p style="margin: 0;"><strong>Queued Patient:</strong> Tariqul Islam (34M) scheduled today for tension headache follow-up</p>
+            </div>
+          `,
+          fullContentHtml: `
+            <p><strong>Cephalalgia Clinical Assessment Protocol:</strong></p>
+            <ul style="margin: 10px 0 14px 20px;">
+              <li><strong>Tension-Type Headache:</strong> Bilateral pressing/tightening quality of mild-to-moderate intensity; not aggravated by routine physical activity. First-line: Simple analgesics + trigger diary.</li>
+              <li><strong>Migraine:</strong> Unilateral pulsating headache lasting 4–72 hours with nausea and photophobia. First-line abortive: Sumatriptan 50mg PO or NSAID combination.</li>
+              <li><strong>Queued Patient Note:</strong> Tariqul Islam (Serial #1) presented with bilateral band-like occipital pressure related to computer screen fatigue.</li>
+            </ul>
+          `
+        });
+
         return `
           <div class="onu-message-ai-wrap">
-            <div class="onu-thought-pill">
+            <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
               <span class="onu-thought-dot"></span>
-              <span>Clinical Assessment • 2s</span>
+              <span class="onu-thought-label">Clinical Assessment • 2s</span>
+              <i class="ph ph-caret-down onu-thought-chevron"></i>
+            </div>
+            <div class="onu-thought-details">
+              • Cross-referenced SNOOP4 red-flag neurological criteria<br>
+              • Correlated with Serial #1 patient complaint in Shift 1 queue<br>
+              • Formatted triage guideline artifact
             </div>
             <div class="onu-msg-ai-text">
-              <p>Clinical Cephalalgia & Headache Triage Protocol:</p>
-              <ul>
-                <li><strong>Red Flags (SNOOP4):</strong> Rule out thunderclap onset, focal neurological signs, papilledema, or postural worsening.</li>
-                <li><strong>First-Line Management:</strong> Naproxen 250mg PO or Paracetamol 500–1000mg for acute episodes; advise sleep hygiene and trigger avoidance.</li>
-                <li><strong>Queued Patient:</strong> Serial #1 (Tariqul Islam, 34M) is scheduled today in Shift 1 for tension-type headache evaluation.</li>
-              </ul>
+              <p>Evidence-based cephalalgia triage protocol and queued patient correlation:</p>
             </div>
+            ${artifactHtml}
+            ${actionToolbarHtml}
           </div>
         `;
       }
 
-      // Case 9: Realistic Health & Practice Intelligence Fallback (for any typed text)
+      // Case 9: Generic Fallback with Clinical Intelligence Brief
+      const artifactId = 'art_brief_' + Date.now();
+      const artifactHtml = renderClaudeArtifactCard({
+        id: artifactId,
+        type: 'PRACTICE BRIEF',
+        title: `Clinical Inquiry: "${query.length > 28 ? query.substring(0, 28) + '...' : query}"`,
+        icon: 'ph ph-sparkle',
+        version: `${modelBadge}`,
+        summaryHtml: `
+          <div style="font-size: 13px; color: #334155; line-height: 1.55;">
+            <p style="margin: 0 0 6px 0;"><strong>Cohort Analysis:</strong> Reviewed active shift queue and patient histories matching your query.</p>
+            <p style="margin: 0;"><strong>Clinical Recommendation:</strong> Evaluate patient vitals, verify drug allergies, and confirm dosing protocol.</p>
+          </div>
+        `,
+        fullContentHtml: `
+          <p><strong>Clinical Copilot Intelligence Brief:</strong></p>
+          <p>Query: <em>"${escapeHtml(query)}"</em></p>
+          <ul style="margin: 10px 0 14px 20px;">
+            <li><strong>Practice Context:</strong> 8 active patients under care; Shift 1 active today with 6 scheduled telehealth appointments.</li>
+            <li><strong>Diagnostic Protocol:</strong> Verify red-flag symptoms and cross-reference patient pre-visit intake records.</li>
+            <li><strong>Suggested Follow-ups:</strong> You can ask to summarize queue files, generate prescription drafts, or review today's consultations.</li>
+          </ul>
+        `
+      });
+
       return `
         <div class="onu-message-ai-wrap">
-          <div class="onu-thought-pill">
+          <div class="onu-thought-pill" onclick="toggleThoughtPill(this)">
             <span class="onu-thought-dot"></span>
-            <span>Clinical Intelligence • 2s</span>
+            <span class="onu-thought-label">Clinical Intelligence • 2s</span>
+            <i class="ph ph-caret-down onu-thought-chevron"></i>
+          </div>
+          <div class="onu-thought-details">
+            • Analyzed query semantics against clinical ontology<br>
+            • Verified active EHR directory and shift calendar<br>
+            • Synthesized guidance into actionable practice brief
           </div>
           <div class="onu-msg-ai-text">
-            <p>I reviewed your clinical database and evidence-based diagnostic protocols regarding <strong>"${escapeHtml(query)}"</strong>:</p>
-            <ul>
-              <li><strong>Cohort Summary:</strong> 2 patients in your active shift queue (Farzana Khan and Alif Khan) have recorded similar acute constitutional symptoms in their recent pre-visit intake.</li>
-              <li><strong>Diagnostic Guidance:</strong> Verify symptom duration, rule out red-flag vitals, and review current medications for contraindications before prescribing.</li>
-              <li><strong>Practice Quick-Actions:</strong> You can ask me to summarize queued patient files, check today's consultation earnings, or review shift schedules.</li>
-            </ul>
+            <p>I reviewed your clinical practice records and evidence-based medicine protocols regarding <strong>"${escapeHtml(query)}"</strong>:</p>
           </div>
+          ${artifactHtml}
+          ${actionToolbarHtml}
         </div>
       `;
     }
@@ -16547,19 +17694,11 @@
           isListeningVoice = false;
           micBtn.classList.remove('is-listening');
           if (inputField) {
-            inputField.placeholder = "Ask Anything";
+            inputField.placeholder = "Message Onu...";
             inputField.value = "Check my patients";
           }
           sendOnuMessage();
         }, 2200);
-      }
-    }
-
-    function openOnuAttachMenu() {
-      const inputField = document.getElementById('inputOnuChat');
-      if (inputField) {
-        inputField.value = "@Farzana Khan ";
-        inputField.focus();
       }
     }
 
