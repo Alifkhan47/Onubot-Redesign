@@ -13100,7 +13100,7 @@
           <!-- Hero Editorial Header -->
           <div class="sheet-hero-header" style="margin-bottom: 8px;">
             <h2 class="sheet-editorial-title">Clear Schedule</h2>
-            <p class="sheet-minimal-subtitle" style="font-size: 13px; color: #64748B; margin-top: 2px;">Select dates to clear. Booked patients will auto-reschedule.</p>
+            <p class="sheet-minimal-subtitle" style="font-size: 13px; color: #64748B; margin-top: 2px;">Select dates to clear. Booked patients will be cancelled & notified.</p>
           </div>
 
           <!-- Month & View Toggle Row -->
@@ -13157,7 +13157,7 @@
         </div>
 
         <!-- =======================================================
-             4B. CLEAR SCHEDULE CONFIRMED & AUTO-RESCHEDULE BOTTOM SHEET MODAL
+             4B. CLEAR SCHEDULE CONFIRMED BOTTOM SHEET MODAL (Box-less Pixel-Perfect UI)
              ======================================================= -->
         <div class="bottom-sheet" id="clearScheduleConfirmedModalSheet" style="border-radius: 32px 32px 0 0; padding: 24px 22px 32px; z-index: 150;">
           <div class="sheet-drag-handle" style="margin-bottom: 12px;"></div>
@@ -13170,27 +13170,27 @@
           </div>
 
           <!-- Hero Editorial Header -->
-          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 14px;">
-            <h2 class="sheet-editorial-title" style="font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4px;">Schedule Cleared</h2>
-            <p style="font-size: 13px; color: #64748B; margin: 0 0 14px;">All shifts removed & patients auto-rescheduled.</p>
+          <div class="sheet-hero-header" style="text-align: center; margin-bottom: 16px;">
+            <h2 class="sheet-editorial-title" style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 4px;">Schedule Cleared</h2>
+            <p class="sheet-minimal-subtitle" id="clearConfirmedSubtitle" style="font-size: 13.5px; color: #64748B; margin: 0 0 14px;">All shifts removed & patients notified.</p>
+          </div>
 
-            <!-- Structured Status Summary Card -->
-            <div style="background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 14px 16px; text-align: left; display: flex; flex-direction: column; gap: 10px;">
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: #0F172A;">
-                  <i class="ph-fill ph-calendar" style="color: #0E8070; font-size: 16px;"></i>
-                  <span id="clearConfirmedDatesRange">Sept 15 (1 Day)</span>
-                </div>
-                <span style="background: #FEE2E2; color: #DC2626; font-size: 10.5px; font-weight: 700; padding: 2.5px 8px; border-radius: 6px; letter-spacing: 0.02em;">CLEARED</span>
+          <!-- Box-less visually pleasing clean details -->
+          <div class="clear-confirmed-boxless-wrap" id="clearConfirmedDetailsWrap" style="display: flex; flex-direction: column; gap: 12px; margin: 4px 0 18px; width: 100%;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 4px;">
+              <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 600; color: #0F172A;">
+                <i class="ph ph-calendar-blank" style="color: #64748B; font-size: 18px;"></i>
+                <span id="clearConfirmedDatesRange">Sept 15 (1 Day)</span>
               </div>
-              <div style="height: 1px; background: #E2E8F0; width: 100%;"></div>
-              <div style="display: flex; align-items: center; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 13.5px; font-weight: 600; color: #334155;">
-                  <i class="ph-fill ph-users" style="color: #0E8070; font-size: 15px;"></i>
-                  <span id="clearConfirmedPatientsCount">4 Patients</span>
-                </div>
-                <span id="clearConfirmedRescheduleBadge" style="background: #EFF7F5; color: #0E8070; border: 1px solid rgba(126, 184, 174, 0.4); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; letter-spacing: 0.01em;">Rescheduled</span>
+              <span style="font-size: 12.5px; font-weight: 700; color: #DC2626; letter-spacing: 0.01em;">Cleared</span>
+            </div>
+
+            <div id="clearConfirmedPatientsRow" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 4px 2px; border-top: 1px solid #F1F5F9;">
+              <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 600; color: #0F172A;">
+                <i class="ph ph-users" style="color: #64748B; font-size: 18px;"></i>
+                <span id="clearConfirmedPatientsCount">4 Patients</span>
               </div>
+              <span id="clearConfirmedStatusText" style="font-size: 12.5px; font-weight: 700; color: #0E8070;">Notified</span>
             </div>
           </div>
 
@@ -23177,6 +23177,7 @@
     let selectedClearDays = []; // Selected day numbers to clear
     let clearScheduleCurrentMonth = 8; // 8 = September, 9 = October
     let clearScheduleCurrentYear = 2026;
+    let lastClearedBookingsCount = 0;
 
     function openClearScheduleModal() {
       selectedClearDays = []; // Always start fresh with 0 selected days
@@ -23427,86 +23428,29 @@
         const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
         totalShifts += shifts.length;
         shifts.forEach(s => {
-          const booked = s.booked || 0;
-          totalBookings += booked;
-          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
-          if (isVideo) {
-            clearedVideoPatients += booked;
-          } else {
-            clearedInPersonPatients += booked;
-          }
+          totalBookings += (s.booked || 0);
         });
       });
 
-      // Check future available shifts in other non-cleared dates
-      let futureVideoShiftsCount = 0;
-      let futureInPersonShiftsCount = 0;
+      lastClearedBookingsCount = totalBookings;
 
-      // Check remaining September dates (day 15 to 30)
-      for (let day = 15; day <= 30; day++) {
-        if (clearScheduleCurrentMonth === 8 && selectedClearDays.includes(day)) continue;
-        const shifts = getShiftsForDay(8, day);
-        shifts.forEach(s => {
-          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
-          if (isVideo) futureVideoShiftsCount++;
-          else futureInPersonShiftsCount++;
-        });
-      }
-
-      // Check remaining October dates (day 1 to 31)
-      for (let day = 1; day <= 31; day++) {
-        if (clearScheduleCurrentMonth === 9 && selectedClearDays.includes(day)) continue;
-        const shifts = getShiftsForDay(9, day);
-        shifts.forEach(s => {
-          const isVideo = (s.type && s.type.toLowerCase().includes('video')) || (s.typeIcon && s.typeIcon.includes('video'));
-          if (isVideo) futureVideoShiftsCount++;
-          else futureInPersonShiftsCount++;
-        });
-      }
-
-      const videoNeedsShift = (clearedVideoPatients > 0 && futureVideoShiftsCount === 0);
-      const inPersonNeedsShift = (clearedInPersonPatients > 0 && futureInPersonShiftsCount === 0);
-
-      // If missing any upcoming shift types for booked patients, trigger the Smart Transfer Diagnosis Sheet
-      if (videoNeedsShift || inPersonNeedsShift) {
-        openMissingShiftTransferModal({
-          dateRangeStr,
-          clearedVideoPatients,
-          clearedInPersonPatients,
-          futureVideoShiftsCount,
-          futureInPersonShiftsCount,
-          videoNeedsShift,
-          inPersonNeedsShift
-        });
-        return;
-      }
-
-      // All types have future shifts -> Proceed to standard clear confirmation
-      const datesRangeEl = document.getElementById('clearConfirmedDatesRange') || document.getElementById('offlineConfirmedDatesRange');
+      // Populate Box-less Confirmation Sheet
+      const datesRangeEl = document.getElementById('clearConfirmedDatesRange');
+      const subtitleEl = document.getElementById('clearConfirmedSubtitle');
+      const patientsRowEl = document.getElementById('clearConfirmedPatientsRow');
       const patientsCountEl = document.getElementById('clearConfirmedPatientsCount');
-      const rescheduleBadgeEl = document.getElementById('clearConfirmedRescheduleBadge');
-      const descEl = document.getElementById('clearConfirmedRescheduleDesc');
+      const statusTextEl = document.getElementById('clearConfirmedStatusText');
 
       if (datesRangeEl) datesRangeEl.textContent = dateRangeStr;
 
-      if (patientsCountEl) {
-        patientsCountEl.textContent = `${totalBookings} Patient${totalBookings !== 1 ? 's' : ''}`;
-      }
-      if (rescheduleBadgeEl) {
-        if (totalBookings > 0) {
-          rescheduleBadgeEl.textContent = 'Rescheduled';
-          rescheduleBadgeEl.style.background = '#EFF7F5';
-          rescheduleBadgeEl.style.color = '#0E8070';
-          rescheduleBadgeEl.style.borderColor = 'rgba(126, 184, 174, 0.4)';
-        } else {
-          rescheduleBadgeEl.textContent = 'No Conflicts';
-          rescheduleBadgeEl.style.background = '#F8FAFC';
-          rescheduleBadgeEl.style.color = '#64748B';
-          rescheduleBadgeEl.style.borderColor = '#E2E8F0';
-        }
-      }
-      if (descEl) {
-        descEl.textContent = `${totalShifts} shift${totalShifts > 1 ? 's' : ''} • ${totalBookings} patient${totalBookings !== 1 ? 's' : ''} rescheduled`;
+      if (totalBookings > 0) {
+        if (subtitleEl) subtitleEl.textContent = 'All shifts removed & patients notified.';
+        if (patientsRowEl) patientsRowEl.style.display = 'flex';
+        if (patientsCountEl) patientsCountEl.textContent = `${totalBookings} Patient${totalBookings !== 1 ? 's' : ''}`;
+        if (statusTextEl) statusTextEl.textContent = 'Notified';
+      } else {
+        if (subtitleEl) subtitleEl.textContent = 'All shifts removed from your schedule.';
+        if (patientsRowEl) patientsRowEl.style.display = 'none'; // Box-less: if none then nothing!
       }
 
       // Close Picker Sheet & Open Confirmation Sheet
@@ -23514,7 +23458,7 @@
       if (sheet1) sheet1.classList.remove('active');
 
       setTimeout(() => {
-        const sheet2 = document.getElementById('clearScheduleConfirmedModalSheet') || document.getElementById('offlineConfirmedModalSheet');
+        const sheet2 = document.getElementById('clearScheduleConfirmedModalSheet');
         if (sheet2) sheet2.classList.add('active');
       }, 150);
     }
@@ -23656,7 +23600,23 @@
         renderAppointmentsList();
       }
 
-      showToast('Schedule Cleared • Patients Rescheduled');
+      if (typeof appointmentsData !== 'undefined') {
+        const monthPrefix = clearScheduleCurrentMonth === 8 ? 'Sept' : 'Oct';
+        appointmentsData.forEach(apt => {
+          selectedClearDays.forEach(day => {
+            const regex = new RegExp(`\\b${monthPrefix}\\s+${day}\\b`, 'i');
+            if (apt.date && regex.test(apt.date)) {
+              apt.status = 'cancelled';
+              apt.statusText = 'Cancelled & Notified';
+            }
+          });
+        });
+      }
+
+      const toastMsg = lastClearedBookingsCount > 0 
+        ? 'Schedule Cleared • Patients Notified'
+        : 'Schedule Cleared';
+      showToast(toastMsg);
     }
 
     // Clean Minimal No-Shift State on Desk Hero Card
