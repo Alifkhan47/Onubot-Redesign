@@ -4205,6 +4205,23 @@
       line-height: 1.4;
     }
 
+    .cancel-shift-plain-note {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #D92D20;
+      margin: 8px 0 4px 0;
+      padding: 0 2px;
+    }
+
+    .cancel-shift-plain-note i {
+      font-size: 16px;
+      color: #D92D20;
+    }
+
     .cancel-rebook-notice {
       display: flex;
       align-items: flex-start;
@@ -13714,8 +13731,8 @@
             <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 15 • 10:00 AM – 12:00 PM</p>
           </div>
 
-          <!-- Impact Box -->
-          <div class="cancel-shift-impact-box">
+          <!-- Impact Box (When patients are booked) -->
+          <div class="cancel-shift-impact-box" id="cancelShiftImpactBox" style="display: none;">
             <div class="cancel-impact-top">
               <i class="ph-fill ph-warning-circle"></i>
               <span id="cancelShiftPatientCountText">4 Patients Already Booked</span>
@@ -13723,6 +13740,12 @@
             <p class="cancel-impact-desc" id="cancelShiftImpactDesc">
               Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.
             </p>
+          </div>
+
+          <!-- Plain Text Impact Note (When NO patients booked: plain text with color & icon, no box) -->
+          <div class="cancel-shift-plain-note" id="cancelShiftPlainNote" style="display: none;">
+            <i class="ph-fill ph-warning-circle"></i>
+            <span>No Booked Patients</span>
           </div>
 
           <!-- Recurring Scope Options (Shown dynamically if shift is recurring) -->
@@ -13734,11 +13757,18 @@
                 <div class="scope-desc" id="deleteScopeThisDesc">Sept 15 only</div>
               </div>
             </div>
-            <div class="recurring-scope-option" id="deleteScopeFutureOption" onclick="selectRecurringScope('delete', 'future')">
+            <div class="recurring-scope-option" id="deleteScopeThisAndFutureOption" onclick="selectRecurringScope('delete', 'this_and_future')">
               <div class="scope-radio-dot"></div>
               <div class="scope-text-wrap">
                 <div class="scope-title">This and future shifts</div>
-                <div class="scope-desc" id="deleteScopeFutureDesc">From Sept 15 onward</div>
+                <div class="scope-desc" id="deleteScopeThisAndFutureDesc">From Sept 15 onward</div>
+              </div>
+            </div>
+            <div class="recurring-scope-option" id="deleteScopeFutureExceptThisOption" onclick="selectRecurringScope('delete', 'future_except_this')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">Future shifts except this</div>
+                <div class="scope-desc" id="deleteScopeFutureExceptThisDesc">Keep Sept 15 • Delete following weeks</div>
               </div>
             </div>
           </div>
@@ -13776,11 +13806,18 @@
                 <div class="scope-desc" id="editScopeThisDesc">Update this date only</div>
               </div>
             </div>
-            <div class="recurring-scope-option" id="editScopeFutureOption" onclick="selectRecurringScope('edit', 'future')">
+            <div class="recurring-scope-option" id="editScopeThisAndFutureOption" onclick="selectRecurringScope('edit', 'this_and_future')">
               <div class="scope-radio-dot"></div>
               <div class="scope-text-wrap">
                 <div class="scope-title">This and future shifts</div>
-                <div class="scope-desc" id="editScopeFutureDesc">Update this and all future weeks</div>
+                <div class="scope-desc" id="editScopeThisAndFutureDesc">Update from this date onward</div>
+              </div>
+            </div>
+            <div class="recurring-scope-option" id="editScopeFutureExceptThisOption" onclick="selectRecurringScope('edit', 'future_except_this')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">Future shifts except this</div>
+                <div class="scope-desc" id="editScopeFutureExceptThisDesc">Keep this date as is • Update future weeks</div>
               </div>
             </div>
           </div>
@@ -22395,34 +22432,47 @@
       return month * 100 + day;
     }
 
-    let selectedRecurringScope = 'this';
+    let selectedRecurringScope = 'this_and_future';
 
     function selectRecurringScope(actionType, scope) {
       selectedRecurringScope = scope;
       const prefix = actionType === 'delete' ? 'deleteScope' : 'editScope';
       const thisOpt = document.getElementById(`${prefix}ThisOption`);
-      const futureOpt = document.getElementById(`${prefix}FutureOption`);
-      if (thisOpt && futureOpt) {
-        if (scope === 'this') {
-          thisOpt.classList.add('active');
-          futureOpt.classList.remove('active');
-        } else {
-          futureOpt.classList.add('active');
-          thisOpt.classList.remove('active');
-        }
+      const thisAndFutureOpt = document.getElementById(`${prefix}ThisAndFutureOption`);
+      const futureExceptThisOpt = document.getElementById(`${prefix}FutureExceptThisOption`);
+
+      [thisOpt, thisAndFutureOpt, futureExceptThisOpt].forEach(opt => {
+        if (opt) opt.classList.remove('active');
+      });
+
+      if (scope === 'this' && thisOpt) {
+        thisOpt.classList.add('active');
+      } else if ((scope === 'this_and_future' || scope === 'future') && thisAndFutureOpt) {
+        thisAndFutureOpt.classList.add('active');
+      } else if (scope === 'future_except_this' && futureExceptThisOpt) {
+        futureExceptThisOpt.classList.add('active');
       }
     }
 
     function openEditRecurringModal() {
-      selectedRecurringScope = 'this';
-      selectRecurringScope('edit', 'this');
+      selectedRecurringScope = 'this_and_future';
+      selectRecurringScope('edit', 'this_and_future');
+      const dateKey = findDateScheduleKey(currentSelectedDate);
+      const shift = (dateSchedules[dateKey] || []).find(
+        s => s.id === currentEditingShiftId || s.name === currentEditingShiftId
+      );
+      const cleanShiftName = (shift && shift.name) ? shift.name : 'Shift';
+
       const subEl = document.getElementById('editRecurringShiftSubtitle');
-      if (subEl) subEl.textContent = `${currentSelectedDate} • ${currentEditingShiftId || 'Shift'}`;
+      if (subEl) subEl.textContent = `${currentSelectedDate} • ${cleanShiftName}`;
       
       const thisDesc = document.getElementById('editScopeThisDesc');
-      const futureDesc = document.getElementById('editScopeFutureDesc');
+      const thisAndFutureDesc = document.getElementById('editScopeThisAndFutureDesc');
+      const futureExceptThisDesc = document.getElementById('editScopeFutureExceptThisDesc');
+
       if (thisDesc) thisDesc.textContent = `Update ${currentSelectedDate} only`;
-      if (futureDesc) futureDesc.textContent = `Update from ${currentSelectedDate} onward`;
+      if (thisAndFutureDesc) thisAndFutureDesc.textContent = `Update from ${currentSelectedDate} onward`;
+      if (futureExceptThisDesc) futureExceptThisDesc.textContent = `Keep ${currentSelectedDate} as is • Apply to upcoming weeks`;
 
       document.getElementById('modalBackdrop').classList.add('active');
       document.getElementById('editRecurringShiftModalSheet').classList.add('active');
@@ -22451,7 +22501,8 @@
 
       // Check if editing an existing recurring shift
       if (currentEditingShiftId) {
-        const existingShift = (dateSchedules[currentSelectedDate] || []).find(
+        const dateKey = findDateScheduleKey(currentSelectedDate);
+        const existingShift = (dateSchedules[dateKey] || []).find(
           s => s.id === currentEditingShiftId || s.name === currentEditingShiftId
         );
         if (existingShift && existingShift.isRecurring !== false) {
@@ -22460,10 +22511,10 @@
         }
       }
 
-      executeSaveShift('future');
+      executeSaveShift('this_and_future');
     }
 
-    function executeSaveShift(scope = 'future') {
+    function executeSaveShift(scope = 'this_and_future') {
       const startTime = document.getElementById('formStartTime').textContent.trim();
       const endTime = document.getElementById('formEndTime').textContent.trim();
       const isVideo = document.getElementById('btnTypeVideo').classList.contains('active');
@@ -22487,6 +22538,8 @@
           s => s.id === currentEditingShiftId || s.name === currentEditingShiftId
         );
         if (shift) {
+          const targetSeriesId = shift.seriesId || ('series_' + Date.now());
+
           if (scope === 'this') {
             // Modify this shift only (detach from recurring series)
             shift.startTime = startTime;
@@ -22495,10 +22548,62 @@
             shift.type = typeLabel;
             shift.typeIcon = typeIcon;
             shift.isRecurring = false;
+            delete shift.seriesId;
             showToast(`Updated shift for ${currentSelectedDate}`);
+          } else if (scope === 'future_except_this') {
+            // Keep currentSelectedDate completely untouched (detach it from recurrence)
+            shift.isRecurring = false;
+            delete shift.seriesId;
+
+            if (!isRepeatWeekly) {
+              // Stopped repeating for future weeks: remove future occurrences in this series
+              for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
+                if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) > currentDateVal) {
+                  dateSchedules[dateKey] = shifts.filter(s => s.seriesId !== targetSeriesId);
+                }
+              }
+              showToast(`Kept ${currentSelectedDate} • Stopped future repeats`);
+            } else {
+              // Apply updates across all future matching dates (dateVal > currentDateVal)
+              for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
+                if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) > currentDateVal) {
+                  const firstWord = dateKey.split(',')[0].trim();
+                  const dateWeekdayIdx = dayNames.indexOf(firstWord);
+
+                  if (!allRoutineDays.includes(dateWeekdayIdx)) {
+                    dateSchedules[dateKey] = shifts.filter(s => s.seriesId !== targetSeriesId);
+                  } else {
+                    const matching = shifts.find(s => s.seriesId === targetSeriesId);
+                    if (matching) {
+                      matching.startTime = startTime;
+                      matching.endTime = endTime;
+                      matching.max = currentLimit;
+                      matching.type = typeLabel;
+                      matching.typeIcon = typeIcon;
+                      matching.repeatDays = allRoutineDays;
+                    } else {
+                      shifts.push({
+                        id: 'shiftCard_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                        name: `Shift ${shifts.length + 1}`,
+                        seriesId: targetSeriesId,
+                        isRecurring: true,
+                        repeatDays: allRoutineDays,
+                        type: typeLabel,
+                        typeIcon: typeIcon,
+                        startTime: startTime,
+                        endTime: endTime,
+                        booked: 0,
+                        max: currentLimit,
+                        locked: false
+                      });
+                    }
+                  }
+                }
+              }
+              showToast(`Kept ${currentSelectedDate} • Updated future shifts`);
+            }
           } else {
-            // Modify this and future shifts
-            const targetSeriesId = shift.seriesId || 'series_' + Date.now();
+            // 'this_and_future' (or legacy 'future')
             shift.seriesId = targetSeriesId;
             shift.startTime = startTime;
             shift.endTime = endTime;
@@ -22515,7 +22620,7 @@
                   dateSchedules[dateKey] = shifts.filter(s => s.seriesId !== targetSeriesId);
                 }
               }
-              showToast(`Stopped future repeats from ${currentSelectedDate} onward`);
+              showToast(`Updated ${currentSelectedDate} • Stopped future repeats`);
             } else {
               // Apply updates across all future matching dates
               for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
@@ -22710,21 +22815,26 @@
       const subEl = document.getElementById('cancelShiftModalSubtitle');
       const countEl = document.getElementById('cancelShiftPatientCountText');
       const descEl = document.getElementById('cancelShiftImpactDesc');
+      const impactBox = document.getElementById('cancelShiftImpactBox');
+      const plainNote = document.getElementById('cancelShiftPlainNote');
 
       const dateKey = findDateScheduleKey(currentSelectedDate);
       const shift = (dateSchedules[dateKey] || []).find(s => s.id === cardId || s.name === shiftName);
-      const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' && currentSelectedDate.includes('15') ? 4 : 0);
+      const cleanShiftName = (shift && shift.name) ? shift.name : (shiftName && !shiftName.startsWith('shiftCard_') ? shiftName : 'Shift');
+      const bookedCount = shift ? (shift.booked || 0) : (cleanShiftName === 'Shift 1' && currentSelectedDate.includes('15') ? 4 : 0);
       const isRecurring = Boolean(shift && (shift.isRecurring !== false));
 
-      if (titleEl) titleEl.textContent = `Delete ${shiftName}?`;
+      if (titleEl) titleEl.textContent = `Delete ${cleanShiftName}?`;
       if (subEl) subEl.textContent = `${currentSelectedDate} • ${shift ? `${shift.startTime} – ${shift.endTime}` : '10:00 AM – 12:00 PM'}`;
 
       if (bookedCount > 0) {
+        if (impactBox) impactBox.style.display = 'flex';
+        if (plainNote) plainNote.style.display = 'none';
         if (countEl) countEl.textContent = `${bookedCount} Patients Already Booked`;
         if (descEl) descEl.textContent = `Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.`;
       } else {
-        if (countEl) countEl.textContent = 'No Booked Patients';
-        if (descEl) descEl.textContent = `Shift has no bookings and will be removed from your schedule.`;
+        if (impactBox) impactBox.style.display = 'none';
+        if (plainNote) plainNote.style.display = 'flex';
       }
 
       const scopeEl = document.getElementById('cancelShiftRecurringScope');
@@ -22733,9 +22843,11 @@
           scopeEl.style.display = 'flex';
           selectRecurringScope('delete', 'this');
           const thisDesc = document.getElementById('deleteScopeThisDesc');
-          const futureDesc = document.getElementById('deleteScopeFutureDesc');
+          const thisAndFutureDesc = document.getElementById('deleteScopeThisAndFutureDesc');
+          const futureExceptThisDesc = document.getElementById('deleteScopeFutureExceptThisDesc');
           if (thisDesc) thisDesc.textContent = `${currentSelectedDate} only`;
-          if (futureDesc) futureDesc.textContent = `From ${currentSelectedDate} onward`;
+          if (thisAndFutureDesc) thisAndFutureDesc.textContent = `From ${currentSelectedDate} onward`;
+          if (futureExceptThisDesc) futureExceptThisDesc.textContent = `Keep ${currentSelectedDate} • Delete following weeks`;
         } else {
           scopeEl.style.display = 'none';
         }
@@ -22759,12 +22871,26 @@
       const isRecurring = Boolean(shift && (shift.isRecurring !== false));
       const targetSeriesId = shift ? shift.seriesId : null;
       const currentDateVal = getDateSortValue(currentSelectedDate);
+      const cleanShiftName = (shift && shift.name) ? shift.name : (pendingCancelShiftName && !pendingCancelShiftName.startsWith('shiftCard_') ? pendingCancelShiftName : 'Shift');
 
-      // Remove shift from current date across all key representations
-      removeShiftFromDate(currentSelectedDate, pendingCancelShiftCardId, pendingCancelShiftName);
-
-      // If delete scope is "future", also remove from future dates
-      if (isRecurring && selectedRecurringScope === 'future') {
+      if (selectedRecurringScope === 'future_except_this') {
+        // Keep shift on currentSelectedDate, detach recurrence
+        if (shift) {
+          shift.isRecurring = false;
+          delete shift.seriesId;
+        }
+        // Remove from future dates only
+        if (isRecurring && targetSeriesId) {
+          for (const [k, shifts] of Object.entries(dateSchedules)) {
+            if (getDateSortValue(k) > currentDateVal) {
+              dateSchedules[k] = shifts.filter(s => s.seriesId !== targetSeriesId);
+            }
+          }
+        }
+      } else if (selectedRecurringScope === 'this_and_future' || selectedRecurringScope === 'future') {
+        // Remove shift from current date across all key representations
+        removeShiftFromDate(currentSelectedDate, pendingCancelShiftCardId, pendingCancelShiftName);
+        // Also remove from future dates
         for (const [k, shifts] of Object.entries(dateSchedules)) {
           if (getDateSortValue(k) >= currentDateVal) {
             dateSchedules[k] = shifts.filter(
@@ -22772,19 +22898,24 @@
             );
           }
         }
+      } else {
+        // 'this' - Remove shift from current date only
+        removeShiftFromDate(currentSelectedDate, pendingCancelShiftCardId, pendingCancelShiftName);
       }
 
-      if (pendingCancelShiftName === 'Shift 1' || pendingCancelShiftCardId === 'shiftCard1') {
-        isShift1Cancelled = true;
-        promoteShift2OnDesk();
-        if (typeof appointmentsData !== 'undefined') {
-          appointmentsData.forEach(apt => {
-            if (apt.shift === 'Shift 1' || apt.shift === '1') {
-              apt.status = 'rescheduled';
-              apt.statusText = 'Auto-Rescheduled (Shift 2)';
-            }
-          });
-          renderAppointmentsList();
+      if (selectedRecurringScope !== 'future_except_this') {
+        if (cleanShiftName === 'Shift 1' || pendingCancelShiftCardId === 'shiftCard1') {
+          isShift1Cancelled = true;
+          promoteShift2OnDesk();
+          if (typeof appointmentsData !== 'undefined') {
+            appointmentsData.forEach(apt => {
+              if (apt.shift === 'Shift 1' || apt.shift === '1') {
+                apt.status = 'rescheduled';
+                apt.statusText = 'Auto-Rescheduled (Shift 2)';
+              }
+            });
+            renderAppointmentsList();
+          }
         }
       }
 
@@ -22792,9 +22923,12 @@
       if (typeof renderDateCarouselStrip === 'function') renderDateCarouselStrip();
       closeCancelShiftModal();
       
-      const toastMsg = (isRecurring && selectedRecurringScope === 'future')
-        ? `${pendingCancelShiftName || 'Shift'} and future occurrences deleted`
-        : `${pendingCancelShiftName || 'Shift'} deleted for ${currentSelectedDate}`;
+      let toastMsg = `${cleanShiftName} deleted for ${currentSelectedDate}`;
+      if (selectedRecurringScope === 'this_and_future' || selectedRecurringScope === 'future') {
+        toastMsg = `${cleanShiftName} and all future shifts deleted`;
+      } else if (selectedRecurringScope === 'future_except_this') {
+        toastMsg = `${cleanShiftName} kept for today • Future repeats deleted`;
+      }
       showToast(toastMsg);
     }
 
