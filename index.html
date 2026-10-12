@@ -3897,11 +3897,11 @@
 
     .sheet-editorial-title {
       font-family: var(--font-heading);
-      font-size: 32px;
-      font-weight: 800;
+      font-size: 24px;
+      font-weight: 700;
       color: #1E293B;
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     .sheet-minimal-subtitle {
@@ -4209,17 +4209,19 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
       color: #D92D20;
-      margin: 8px 0 4px 0;
-      padding: 0 2px;
+      margin: 10px 0 6px 0;
+      padding: 0;
+      line-height: 1.4;
     }
 
     .cancel-shift-plain-note i {
       font-size: 16px;
       color: #D92D20;
+      flex-shrink: 0;
     }
 
     .cancel-rebook-notice {
@@ -13702,7 +13704,7 @@
           </div>
           
           <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title" id="deleteModalTitle" style="font-weight: 700; font-size: 28px; line-height: 1.2;">Delete Item?</h2>
+            <h2 class="sheet-editorial-title" id="deleteModalTitle">Delete Item?</h2>
             <p class="sheet-minimal-subtitle" id="deleteModalSubtitle" style="display: none;"></p>
           </div>
 
@@ -13731,45 +13733,25 @@
             <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 15 • 10:00 AM – 12:00 PM</p>
           </div>
 
-          <!-- Impact Box (When patients are booked) -->
-          <div class="cancel-shift-impact-box" id="cancelShiftImpactBox" style="display: none;">
-            <div class="cancel-impact-top">
-              <i class="ph-fill ph-warning-circle"></i>
-              <span id="cancelShiftPatientCountText">4 Patients Already Booked</span>
-            </div>
-            <p class="cancel-impact-desc" id="cancelShiftImpactDesc">
-              Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.
-            </p>
-          </div>
-
-          <!-- Plain Text Impact Note (When NO patients booked: plain text with color & icon, no box) -->
+          <!-- Plain Text Impact Note (No box, plain text with color & icon) -->
           <div class="cancel-shift-plain-note" id="cancelShiftPlainNote" style="display: none;">
             <i class="ph-fill ph-warning-circle"></i>
-            <span>No Booked Patients</span>
+            <span id="cancelShiftPlainNoteText">No Booked Patients</span>
           </div>
 
           <!-- Recurring Scope Options (Shown dynamically if shift is recurring) -->
           <div class="recurring-scope-container" id="cancelShiftRecurringScope" style="display: none;">
             <div class="recurring-scope-option active" id="deleteScopeThisOption" onclick="selectRecurringScope('delete', 'this')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">This shift only</div>
-                <div class="scope-desc" id="deleteScopeThisDesc">Sept 15 only</div>
-              </div>
+              <span class="scope-title">This shift only</span>
             </div>
             <div class="recurring-scope-option" id="deleteScopeThisAndFutureOption" onclick="selectRecurringScope('delete', 'this_and_future')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">This and future shifts</div>
-                <div class="scope-desc" id="deleteScopeThisAndFutureDesc">From Sept 15 onward</div>
-              </div>
+              <span class="scope-title">This and future shifts</span>
             </div>
             <div class="recurring-scope-option" id="deleteScopeFutureExceptThisOption" onclick="selectRecurringScope('delete', 'future_except_this')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">Future shifts except this</div>
-                <div class="scope-desc" id="deleteScopeFutureExceptThisDesc">Keep Sept 15 • Delete following weeks</div>
-              </div>
+              <span class="scope-title">Future shifts except this</span>
             </div>
           </div>
 
@@ -13795,30 +13777,21 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Apply Changes</h2>
-            <p class="sheet-minimal-subtitle" id="editRecurringShiftSubtitle">This shift repeats weekly</p>
+            <p class="sheet-minimal-subtitle" id="editRecurringShiftSubtitle">Friday, Sept 24 • Shift 1 • Repeats weekly</p>
           </div>
 
           <div class="recurring-scope-container">
             <div class="recurring-scope-option active" id="editScopeThisOption" onclick="selectRecurringScope('edit', 'this')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">This shift only</div>
-                <div class="scope-desc" id="editScopeThisDesc">Update this date only</div>
-              </div>
+              <span class="scope-title">This shift only</span>
             </div>
             <div class="recurring-scope-option" id="editScopeThisAndFutureOption" onclick="selectRecurringScope('edit', 'this_and_future')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">This and future shifts</div>
-                <div class="scope-desc" id="editScopeThisAndFutureDesc">Update from this date onward</div>
-              </div>
+              <span class="scope-title">This and future shifts</span>
             </div>
             <div class="recurring-scope-option" id="editScopeFutureExceptThisOption" onclick="selectRecurringScope('edit', 'future_except_this')">
               <div class="scope-radio-dot"></div>
-              <div class="scope-text-wrap">
-                <div class="scope-title">Future shifts except this</div>
-                <div class="scope-desc" id="editScopeFutureExceptThisDesc">Keep this date as is • Update future weeks</div>
-              </div>
+              <span class="scope-title">Future shifts except this</span>
             </div>
           </div>
 
@@ -22464,15 +22437,7 @@
       const cleanShiftName = (shift && shift.name) ? shift.name : 'Shift';
 
       const subEl = document.getElementById('editRecurringShiftSubtitle');
-      if (subEl) subEl.textContent = `${currentSelectedDate} • ${cleanShiftName}`;
-      
-      const thisDesc = document.getElementById('editScopeThisDesc');
-      const thisAndFutureDesc = document.getElementById('editScopeThisAndFutureDesc');
-      const futureExceptThisDesc = document.getElementById('editScopeFutureExceptThisDesc');
-
-      if (thisDesc) thisDesc.textContent = `Update ${currentSelectedDate} only`;
-      if (thisAndFutureDesc) thisAndFutureDesc.textContent = `Update from ${currentSelectedDate} onward`;
-      if (futureExceptThisDesc) futureExceptThisDesc.textContent = `Keep ${currentSelectedDate} as is • Apply to upcoming weeks`;
+      if (subEl) subEl.textContent = `${currentSelectedDate} • ${cleanShiftName} • Repeats weekly`;
 
       document.getElementById('modalBackdrop').classList.add('active');
       document.getElementById('editRecurringShiftModalSheet').classList.add('active');
@@ -22813,10 +22778,8 @@
       
       const titleEl = document.getElementById('cancelShiftModalTitle');
       const subEl = document.getElementById('cancelShiftModalSubtitle');
-      const countEl = document.getElementById('cancelShiftPatientCountText');
-      const descEl = document.getElementById('cancelShiftImpactDesc');
-      const impactBox = document.getElementById('cancelShiftImpactBox');
       const plainNote = document.getElementById('cancelShiftPlainNote');
+      const plainNoteText = document.getElementById('cancelShiftPlainNoteText');
 
       const dateKey = findDateScheduleKey(currentSelectedDate);
       const shift = (dateSchedules[dateKey] || []).find(s => s.id === cardId || s.name === shiftName);
@@ -22825,16 +22788,23 @@
       const isRecurring = Boolean(shift && (shift.isRecurring !== false));
 
       if (titleEl) titleEl.textContent = `Delete ${cleanShiftName}?`;
-      if (subEl) subEl.textContent = `${currentSelectedDate} • ${shift ? `${shift.startTime} – ${shift.endTime}` : '10:00 AM – 12:00 PM'}`;
 
-      if (bookedCount > 0) {
-        if (impactBox) impactBox.style.display = 'flex';
-        if (plainNote) plainNote.style.display = 'none';
-        if (countEl) countEl.textContent = `${bookedCount} Patients Already Booked`;
-        if (descEl) descEl.textContent = `Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift.`;
-      } else {
-        if (impactBox) impactBox.style.display = 'none';
-        if (plainNote) plainNote.style.display = 'flex';
+      const timeRange = shift ? `${shift.startTime} – ${shift.endTime}` : '10:00 AM – 12:00 PM';
+      if (subEl) {
+        subEl.textContent = isRecurring 
+          ? `${currentSelectedDate} • ${timeRange} • Repeats weekly`
+          : `${currentSelectedDate} • ${timeRange}`;
+      }
+
+      if (plainNote) {
+        plainNote.style.display = 'flex';
+        if (plainNoteText) {
+          if (bookedCount > 0) {
+            plainNoteText.textContent = `${bookedCount} patient${bookedCount > 1 ? "s'" : "'s"} appointment will be cancelled & notified`;
+          } else {
+            plainNoteText.textContent = 'No Booked Patients';
+          }
+        }
       }
 
       const scopeEl = document.getElementById('cancelShiftRecurringScope');
@@ -22842,12 +22812,6 @@
         if (isRecurring) {
           scopeEl.style.display = 'flex';
           selectRecurringScope('delete', 'this');
-          const thisDesc = document.getElementById('deleteScopeThisDesc');
-          const thisAndFutureDesc = document.getElementById('deleteScopeThisAndFutureDesc');
-          const futureExceptThisDesc = document.getElementById('deleteScopeFutureExceptThisDesc');
-          if (thisDesc) thisDesc.textContent = `${currentSelectedDate} only`;
-          if (thisAndFutureDesc) thisAndFutureDesc.textContent = `From ${currentSelectedDate} onward`;
-          if (futureExceptThisDesc) futureExceptThisDesc.textContent = `Keep ${currentSelectedDate} • Delete following weeks`;
         } else {
           scopeEl.style.display = 'none';
         }
