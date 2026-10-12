@@ -3100,8 +3100,44 @@
       font-weight: 700;
     }
 
-    .btn-inpage-save-shift {
+    /* Dual Action Group: Cancel on Bottom Left, Save Shift on Right */
+    .inpage-card-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       width: 100%;
+      margin-top: 4px;
+    }
+
+    .btn-inpage-cancel {
+      flex: 1;
+      height: 46px;
+      background: #F1F5F9;
+      color: #334155;
+      border: 1px solid #E2E8F0;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .btn-inpage-cancel:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+
+    .btn-inpage-cancel:active {
+      transform: scale(0.98);
+    }
+
+    .btn-inpage-save-shift {
+      flex: 1.6;
       height: 46px;
       background: var(--color-primary-btn);
       color: #FFFFFF;
@@ -3118,7 +3154,6 @@
       gap: 8px;
       box-shadow: 0 4px 16px rgba(5, 46, 40, 0.18);
       transition: background 0.15s ease, transform 0.1s ease;
-      margin-top: 2px;
     }
 
     .btn-inpage-save-shift:hover {
@@ -3387,6 +3422,16 @@
       border-color: var(--color-border-selected);
       color: var(--color-primary-btn);
       font-weight: 700;
+    }
+
+    .day-chip-btn.current-locked {
+      background: var(--color-primary-btn) !important;
+      border-color: var(--color-primary-btn) !important;
+      color: #FFFFFF !important;
+      font-weight: 800 !important;
+      cursor: not-allowed !important;
+      opacity: 0.95 !important;
+      box-shadow: 0 2px 6px rgba(5, 46, 40, 0.15) !important;
     }
 
     .stepper-field-row {
@@ -11532,7 +11577,7 @@
 
               <!-- In-Page Shift Editor Card (Non-Modal, seamlessly embedded in page flow) -->
               <div class="inpage-shift-card" id="inPageShiftCard" style="display: none;">
-                <!-- Header -->
+                <!-- Header (Clean Editorial Header without X button) -->
                 <div class="inpage-card-header">
                   <div class="inpage-card-title-wrap">
                     <div class="inpage-card-icon-badge">
@@ -11540,9 +11585,6 @@
                     </div>
                     <h3 class="inpage-card-title" id="inPageShiftCardTitle">Add Shift Hours</h3>
                   </div>
-                  <button type="button" class="btn-inpage-card-close" onclick="closeInPageShiftCard()" aria-label="Close Shift Editor">
-                    <i class="ph ph-x"></i>
-                  </button>
                 </div>
 
                 <!-- Consultation Type Segment -->
@@ -11574,13 +11616,13 @@
                 <div class="form-field-group inpage-field-group" id="applyOtherDaysGroup" style="margin-bottom: 0;">
                   <div class="field-label-subtle">Repeat on other days</div>
                   <div class="days-picker-row inpage-days-row">
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">S</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">M</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">T</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">W</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">T</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">F</button>
-                    <button type="button" class="day-chip-btn" onclick="toggleDayPicker(this)">S</button>
+                    <button type="button" class="day-chip-btn" data-day="0" onclick="toggleDayPicker(this)">S</button>
+                    <button type="button" class="day-chip-btn" data-day="1" onclick="toggleDayPicker(this)">M</button>
+                    <button type="button" class="day-chip-btn" data-day="2" onclick="toggleDayPicker(this)">T</button>
+                    <button type="button" class="day-chip-btn" data-day="3" onclick="toggleDayPicker(this)">W</button>
+                    <button type="button" class="day-chip-btn" data-day="4" onclick="toggleDayPicker(this)">T</button>
+                    <button type="button" class="day-chip-btn" data-day="5" onclick="toggleDayPicker(this)">F</button>
+                    <button type="button" class="day-chip-btn" data-day="6" onclick="toggleDayPicker(this)">S</button>
                   </div>
                 </div>
 
@@ -11608,11 +11650,14 @@
                   </label>
                 </div>
 
-                <!-- Save / Update Button -->
-                <button type="button" class="btn-inpage-save-shift" onclick="saveShiftAction()">
-                  <i class="ph ph-check"></i>
-                  <span id="btnSaveLabel">Save Shift</span>
-                </button>
+                <!-- Action Buttons: Cancel on Bottom Left, Save Shift on Right -->
+                <div class="inpage-card-actions-group">
+                  <button type="button" class="btn-inpage-cancel" onclick="closeInPageShiftCard()">Cancel</button>
+                  <button type="button" class="btn-inpage-save-shift" onclick="saveShiftAction()">
+                    <i class="ph ph-check"></i>
+                    <span id="btnSaveLabel">Save Shift</span>
+                  </button>
+                </div>
               </div>
 
               <!-- Configured Shifts List Container -->
@@ -21562,6 +21607,36 @@
       openTimePickerModal('start');
     }
 
+    function getSelectedWeekdayIndex() {
+      if (!currentSelectedDate) return 0;
+      const str = currentSelectedDate.toLowerCase();
+      if (str.includes('sun')) return 0;
+      if (str.includes('mon')) return 1;
+      if (str.includes('tue')) return 2;
+      if (str.includes('wed')) return 3;
+      if (str.includes('thu')) return 4;
+      if (str.includes('fri')) return 5;
+      if (str.includes('sat')) return 6;
+      return 0;
+    }
+
+    function updateRepeatDayChips() {
+      const currentIdx = getSelectedWeekdayIndex();
+      document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach((btn, idx) => {
+        const chipDay = btn.getAttribute('data-day') !== null ? parseInt(btn.getAttribute('data-day'), 10) : idx;
+        if (chipDay === currentIdx) {
+          btn.classList.remove('selected');
+          btn.classList.add('current-locked');
+          btn.setAttribute('title', 'Current day (Shift will be saved for this day)');
+          btn.setAttribute('aria-disabled', 'true');
+        } else {
+          btn.classList.remove('current-locked');
+          btn.removeAttribute('title');
+          btn.removeAttribute('aria-disabled');
+        }
+      });
+    }
+
     function openInPageShiftForm(presetType = 'video') {
       currentEditingShiftId = null;
       currentEditingShiftBookedCount = 0;
@@ -21603,8 +21678,9 @@
 
       setConsultType(presetType || 'video');
       
-      // Reset repeat days and weekly toggle so they are never auto-selected
+      // Reset repeat days and set current weekday to locked
       document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach(btn => btn.classList.remove('selected'));
+      updateRepeatDayChips();
       if (repeatToggle) repeatToggle.checked = false;
 
       updateShiftModalDurationSummary();
@@ -21674,6 +21750,11 @@
         if (repeatToggle) repeatToggle.disabled = false;
       }
 
+      // Reset repeat days and set current weekday to locked
+      document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach(btn => btn.classList.remove('selected'));
+      updateRepeatDayChips();
+      if (repeatToggle) repeatToggle.checked = false;
+
       updateShiftModalDurationSummary();
 
       const card = document.getElementById('inPageShiftCard');
@@ -21700,6 +21781,9 @@
     }
 
     function toggleDayPicker(btn) {
+      if (btn.classList.contains('current-locked')) {
+        return; // Current weekday is disabled / locked as active
+      }
       if (currentEditingShiftBookedCount > 0) {
         showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change repeat days`);
         return;
@@ -22223,6 +22307,33 @@
           locked: false
         };
         dateSchedules[currentSelectedDate].push(newShift);
+      }
+
+      // Apply repeat to other selected weekdays if any are chosen
+      const selectedDayChips = document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn.selected');
+      if (selectedDayChips.length > 0) {
+        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        selectedDayChips.forEach(chip => {
+          const dIdx = parseInt(chip.getAttribute('data-day'), 10);
+          const targetDay = dayNames[dIdx];
+          for (const k of Object.keys(dateSchedules)) {
+            if (k.startsWith(targetDay) && k !== currentSelectedDate) {
+              if (!dateSchedules[k]) dateSchedules[k] = [];
+              const cloneShift = {
+                id: 'shiftCard_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                name: `Shift ${dateSchedules[k].length + 1}`,
+                type: typeLabel,
+                typeIcon: typeIcon,
+                startTime: startTime,
+                endTime: endTime,
+                booked: 0,
+                max: currentLimit,
+                locked: false
+              };
+              dateSchedules[k].push(cloneShift);
+            }
+          }
+        });
       }
 
       // Check if this saved shift applies to Today
