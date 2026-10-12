@@ -489,29 +489,33 @@ The Prescription screen provides an ultra-clean, legible, digital clinical lette
   * **Active Ongoing Shift (`isShiftActive`)**: Reflects live real-time status across patient cards (`Prescribed`, `Draft Rx`, `Skipped`, `In Call`, `In Queue`).
   * **Upcoming Shifts (e.g. Shift 2)**: All bookings remain cleanly indexed in queue order.
 
-### 14.2 Wise / Uber Minimalist Appointment Details Dossier (`#pageAppointmentDetails`)
-Adopting **Wise / Uber** clean minimalist UI standards to avoid nested "box-inside-a-box" card syndrome:
+### 14.2 Wise / Uber Minimalist Appointment & Visit Details Dossier (`#pageAppointmentDetails`)
+Adopting **Wise / Uber** clean minimalist UI standards to eliminate nested card boxes and unnecessary visual noise:
+* **Plain-Text Patient Header (`.details-patient-plain-container`)**:
+  * **No Box / No Avatar / Non-Collapsible**: Displays patient name in bold typography (`Alif Khan`) with age and gender (`28 Yrs, Male`) directly beneath it, with zero card enclosures or collapsible chevrons.
+  * **Dividing Line**: Separated from the content hierarchy below by a subtle horizontal divider line (`border-bottom: 1px solid #F1F5F9;`) matching the soft divider under the prescription card.
 * **Clean Flat Cards**: Single-level `#F6F8F9` background cards with soft `1.5px solid #EDF2F1` borders and `16px` border-radius.
-* **Single-Line Section Headers**: Left title (e.g. `Pre-visit Details`) + right single-line capsule tag (e.g. `<span class="ai-sparkle-tag">✨ AI Summary</span>`). No multi-line redundant headers.
-* **Direct Speech Quote**: Clean white surface with a refined `3px solid #0D9488` teal vertical accent bar.
-* **Soft Selection States**: Uses `--color-border-selected: #7EB8AE` for gentle visual ergonomics.
+* **Single-Line Section Headers**: Left title (e.g. `Pre-visit Details`) + right single-line capsule tag (e.g. `<span class="details-plain-tag tag-ai-note">AI Note</span>`).
 
 ### 14.3 Dynamic Relevance Content Ordering
 Sections are dynamically rendered based on the patient's lifecycle state:
 
-1. **For `Prescribed` (Done & Finalized Patients)**:
-   * **1. Issued Prescription (`#D6EAE6` Sage Banner Tile)**: Direct 1-tap `View Rx` action opening the A4 Digital Prescription.
-   * **2. Live Consultation Notes (`✨ Live Call AI`)**: Extracted clinical findings, medicines prescribed, and lifestyle advice.
-   * **3. Pre-visit Details (`✨ AI Summary`)**: Reported symptoms, duration, severity tags, and patient quote.
-   * **4. Patient Documents**: Past medical records and previous prescriptions uploaded during intake.
+1. **For `Prescribed` (Done & Finalized Patients / Visit Details)**:
+   * **1. Top Priority: Issued Prescription (`.details-rx-tile`)**: Placed at the very top of the hierarchy list with full card tap target, PDF icon, and eye preview trigger (`previewPrescriptionFromDetails()`).
+   * **2. Truncated Consultation Notes (`.details-notes-card.is-collapsed`)**: Shows a 2-line snippet with `Read full note ▾` hint. Has no redundant bottom border line since the `---- View More ▾ ----` divider directly follows. Clicking anywhere on the card smoothly expands the complete clinical text and toggles to `Show less ▴`.
+   * **3. Bottom Collapsible More Details (`.details-intake-collapsible-wrap`)**: Archival intake and meta records are housed behind a clean divider trigger (`---- View More ▾ ----`) with zero boxed container clutter. Tapping it smoothly reveals:
+     - **Consultation Info Chips (`.details-meta-chips-strip`)**: Completed status, date, and consultation mode pills in their established clean tag styling.
+     - **Pre-visit Intake Details Card**: Symptoms, duration, severity, and intake quote.
+     - **Patient Uploaded Documents**: Files list with preview triggers.
+     - Toggling smoothly switches between `View More ▾` and `View Less ▴`.
 
 2. **For `Draft Rx` (Call Ended, Awaiting Review)**:
-   * **1. Live Consultation Notes (`✨ Live Call AI`)**
-   * **2. Pre-visit Details (`✨ AI Summary`)**
+   * **1. Live Consultation Notes (`AI Note`)**
+   * **2. Pre-visit Details (`Patient Intake`)**
    * **3. Patient Documents**
 
 3. **For `In Queue` / `Upcoming` / `Skipped` / `In Call`**:
-   * **1. Pre-visit Details (`✨ AI Summary`)**
+   * **1. Pre-visit Details (`Patient Intake`)**
    * **2. Patient Documents**
 
 ### 14.4 Contextual Action Dock
@@ -824,28 +828,20 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ## 22. Onu Clinical AI Copilot & Unified Chatbot Standard (ChatGPT & Claude Mobile Spec)
 
-### 22.1 Minimal Pure Canvas & Top Navigation App Bar
+### 22.1 Minimal Pure Canvas & Universal App Header
 * **Default Active View**: When the doctor opens the app, **Onu (`#pageOnu`)** is the default active view (`.active-page`), and the bottom navigation bar selects the center **Onu** tab.
 * **Pure Clean Canvas**: Crisp, pure white `#FFFFFF` background matching modern Claude and ChatGPT mobile applications without distracting heavy ambient gradients.
-* **3-Column Top Navigation App Bar (`.onu-app-bar`)**:
-  * **Left**: Sidebar / history drawer trigger button (`.btn-onu-nav-action` with `ph ph-sidebar-simple` or `ph ph-list`) sliding out the conversation history drawer.
-  * **Center**: Interactive Model Selector Pill (`.onu-model-pill`):
-    * Displays active model (`Onu 3.5`, `Onu Pro`, or `Onu Live Voice`) with green status dot and subtle chevron (`ph ph-caret-down`).
-    * Tapping opens the **AI Model Selector Bottom Sheet (`#onuModelSelectorSheet`)** allowing instant switching between fast triage, deep clinical reasoning, and live voice mode.
-  * **Right**: Quick New Chat icon button (`.btn-onu-nav-action` with `ph ph-note-pencil`) to start a fresh consultation session with a single tap.
+* **Universal App Header (`.app-header`)**:
+  * **Branding**: Title `Onu` (`Urbanist 25px Bold #000000`, `letter-spacing: -0.02em`) with subtitle `Your Clinical AI Assistant` (`DM Sans 13.5px Regular #717171`).
+  * **Right Action**: Circular icon button (`.btn-circle-icon` with `ph ph-clock-counter-clockwise`) that slides out the chat history drawer (`openOnuHistoryDrawer()`).
+  * **Zero Model Clutter**: Strictly no model switcher pill, model selection sheets, or AI model tags anywhere in the interface or code.
 
 ### 22.2 Welcome State (ChatGPT & Claude Mobile Standard)
 * **Centered Brand Glyph**: Minimalist emerald-teal spark glyph (`.onu-brand-mark` with `ph-fill ph-sparkle` in `#0D7A5F` on `#F0FDF4` soft surface).
 * **Refined Hero Greeting**:
   * Heading: `Where should we begin, Dr. Sifat?` in `Urbanist 21px SemiBold #0F172A` (`letter-spacing: -0.02em`).
   * Subtitle: `Your clinical AI copilot for patients, protocols & practice` in `DM Sans 13px Regular #64748B`.
-* **2x2 Prompt Suggestion Grid (`.onu-prompt-grid`)**:
-  * 4 sleek, high-utility suggestion cards with leading Phosphor icons:
-    1. **Summarize today's queue** (`ph-clipboard-text`) — Review 6 patients in Shift 1.
-    2. **Recap Alif Khan's visit** (`ph-user`) — Viral pharyngitis diagnosis & Rx.
-    3. **Hypertension protocol** (`ph-heartbeat`) — AHA/ACC adult dosage & triage.
-    4. **Financial summary** (`ph-wallet`) — This month's earnings & payouts.
-  * Tapping any prompt card immediately submits the query into the chat stream with instant execution.
+* **Zero Box / Prompt Tab Clutter**: Clean negative space without prompt cards or suggestion tabs, creating an uncluttered, focus-driven conversation interface.
 
 ### 22.3 Conversational Feed, Collapsible Reasoning & Action Toolbar
 * **User Messages (`.onu-msg-user-bubble`)**: Right-aligned smooth rounded bubble (`#F1F5F9` background, `#0F172A` text, `18px 18px 4px 18px` radius) with micro-actions for Copy and Edit.
@@ -867,12 +863,11 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Header**:
     * Leading icon in soft sage tile (e.g. `ph-users`, `ph-wallet`, `ph-thermometer`, `ph-heartbeat`).
     * Monospace uppercase type badge (`CLINICAL DOSSIER`, `FINANCIAL DOSSIER`, `CLINICAL PROTOCOL`, `QUEUE ROSTER`, `TRIAGE PROTOCOL`).
-    * Dark slate title (`Urbanist 13.5px SemiBold #0F172A`).
-    * Trailing **"Open" Pill Button** (`ph-arrow-up-right`) opening the full artifact modal.
-  * **Body**: High-density structured preview (2x2 metric box grid or clinical checklist).
-  * **Footer**: Action buttons for **Copy** (`ph-copy`) and **Share** (`ph-share-network`) alongside version indicator tag (e.g. `Live EHR Sync • 2026`, `AHA/ACC 2026 Standards`).
+    * Full dark slate title (`Urbanist 13.5px SemiBold #0F172A`) with trailing subtle navigation chevron (`ph-caret-right`).
+  * **Body**: High-density structured preview (2x2 metric box grid or clinical checklist), tap anywhere to open full view.
+  * **Footer Action Section**: Dedicated unified actions row for **Open** (`ph-arrow-up-right`), **Copy** (`ph-copy`), and **Share** (`ph-share-network`) alongside version indicator tag (e.g. `Live EHR Sync • 2026`, `AHA/ACC 2026 Standards`).
 * **Full Artifact Modal Sheet (`#onuArtifactModalSheet`)**:
-  * Tapping "Open" slides up a dedicated high-capacity bottom sheet displaying the complete clinical dossier with rich formatting, printing/sharing actions, and quick export.
+  * Tapping "Open" slides up a dedicated high-capacity bottom sheet displaying the complete clinical dossier with rich formatting, printing/sharing actions, and paired Copy & Share buttons.
 
 ### 22.5 Floating Input Dock & Attachment Sheet
 * **Capsule Dock (`.onu-input-pill-box`)**:
@@ -885,13 +880,14 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * **Typing State (Send Mode)**: Circular forest green send button (`#0D7A5F` background with white up-arrow `ph-bold ph-arrow-up`).
 * **Minimalist Disclaimer**: `Onu can make mistakes. Verify clinical decisions.` (`DM Sans 10px #94A3B8`).
 
-### 22.6 Categorized Chat History Drawer (`#onuHistoryDrawer`)
+### 22.6 Right-Hand Chat History Drawer (`#onuHistoryDrawer`)
+* **Slide from Right**: Smoothly slides out from the right viewport (`right: 0`, `transform: translateX(100%)`).
 * **Categorized Chronological Sections**:
   * Threads are neatly organized under uppercase section headings: `TODAY`, `YESTERDAY`, and `PREVIOUS 7 DAYS`.
   * Each conversation item displays a single-line title with ellipsis and a trailing `...` icon button (`ph-dots-three-vertical`) for quick Rename and Delete actions.
 * **Top Header**: Brand mark + "Onu", Search button (`ph-magnifying-glass`), and Close button (`ph-x`).
 * **Prominent New Chat Button**: Soft sage pill (`.onu-drawer-new-chat-btn` with `ph-note-pencil`).
-* **Bottom Profile Footer**: Doctor avatar, name (`Dr. Sifat Khan`), and edition badge (`Clinical Copilot Pro`).
+* **Clean Drawer Layout**: Pure thread navigation without doctor profile footer.
 
 ---
 

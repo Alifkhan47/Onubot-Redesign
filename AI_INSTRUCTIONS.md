@@ -192,24 +192,20 @@ c:\Alif\Onu App Prototype\
 ### Screen 0: Onu Clinical AI Copilot & Default Home (`#pageOnu`)
 * **Purpose**: The primary focal point and default landing screen for the doctor upon opening the app. Serves as an intelligent AI clinical copilot inspired by modern ChatGPT and Claude mobile applications for rapid patient dossiers, lab investigation inquiries, drug safety verification, and shift preparation.
 * **Key Components**:
-  * **3-Column Top Navigation App Bar (`.onu-app-bar`)**:
-    * **Left**: Sidebar / history drawer toggle button (`ph-sidebar-simple`) sliding out the conversation history drawer.
-    * **Center**: Interactive Model Selector Pill (`.onu-model-pill`): displays active model (`Onu 3.5`, `Onu Pro`, `Onu Live Voice`) with green status dot and subtle chevron (`ph-caret-down`). Tapping triggers `#onuModelSelectorSheet`.
-    * **Right**: Quick New Chat icon button (`ph-note-pencil`) to start a fresh consultation session with a single tap.
-  * **Claude / ChatGPT Mobile Welcome State (`#onuWelcomeView`)**:
-    * Pure white `#FFFFFF` canvas without distracting heavy background gradients.
+  * **Universal App Header (`.app-header`)**:
+    * Clean left-aligned branding: Title `Onu` (`Urbanist 25px Bold #000000`, `letter-spacing: -0.02em`) and subtitle `Your Clinical AI Assistant` (`DM Sans 13.5px Regular #717171`).
+    * **Right**: Circular icon button (`.btn-circle-icon` with `ph ph-clock-counter-clockwise`) triggering the slide-out conversation history drawer (`openOnuHistoryDrawer()`).
+    * **Zero Model Mentions**: No model selector pill, model switcher bottom sheet, or AI model tags anywhere in the interface.
+  * **Claude / ChatGPT Mobile Clean Welcome State (`#onuWelcomeView`)**:
+    * Pure white `#FFFFFF` canvas across the entire viewport (status bar, header, and screen body have uniform matching `#FFFFFF` background with zero ambient gradients or color mismatch).
     * Minimalist emerald-teal spark glyph (`ph-fill ph-sparkle`).
-    * Refined heading: `Where should we begin, Dr. Sifat?` + subtitle: `Your clinical AI copilot for patients, protocols & practice`.
-    * **2x2 Prompt Suggestion Grid (`.onu-prompt-grid`)**:
-      1. 📋 **Summarize today's queue** — Review 6 patients in Shift 1.
-      2. 👤 **Recap Alif Khan's visit** — Viral pharyngitis diagnosis & Rx.
-      3. 🩺 **Hypertension protocol** — AHA/ACC adult dosage & triage.
-      4. 💰 **Financial summary** — This month's earnings & payouts.
+    * Refined centered greeting: `Where should we begin, Dr. Sifat?` + subtitle: `Your clinical AI copilot for patients, protocols & practice`.
+    * **Zero Suggestion Tab Clutter**: Clean negative space without prompt cards or suggestion boxes, keeping the focus entirely on the conversation and dock.
   * **Interactive Conversation Feed & Claude Artifacts**:
     * Clean doctor query speech bubbles (`#F1F5F9`, `18px 18px 4px 18px` radius) with Copy and Edit micro-actions.
     * **Collapsible Thought / Reasoning Pill (`.onu-thought-pill`)**: `Thought for 3 seconds ▾` with animated green dot and rotating chevron, toggling detailed ontological and clinical reasoning disclosure (`.onu-thought-details`).
-    * **Claude-Style Interactive Artifact Cards (`.onu-artifact-card`)**: Complex structured deliverables (patient dossiers, financial summaries, guideline checklists, queue rosters) render as Claude-style Artifact cards with leading icon tile, uppercase document type badge, dark title, "Open" pill button (`ph-arrow-up-right`), metric preview body, and Copy/Share footer.
-    * **Full Artifact Modal Sheet (`#onuArtifactModalSheet`)**: Tapping "Open" expands the complete clinical dossier with rich formatting and print/export/share options.
+    * **Claude-Style Interactive Artifact Cards (`.onu-artifact-card`)**: Complex structured deliverables (patient dossiers, financial summaries, guideline checklists, queue rosters) render as Claude-style Artifact cards with leading icon tile, uppercase document type badge, uncluttered full title, metric preview body, and dedicated **Open / Copy / Share** actions section at the bottom.
+    * **Full Artifact Modal Sheet (`#onuArtifactModalSheet`)**: Expands the complete clinical dossier with rich formatting and paired Copy & Share actions.
     * **Assistant Action Toolbar (`.onu-msg-ai-actions`)**: Copy response, Thumbs up, Thumbs down, Audio Read Aloud (speech synthesis), and Regenerate.
   * **Floating Input Dock (`.onu-input-pill-box`)**:
     * `+` Attachment button (`openOnuAttachMenu`) triggering `#onuAttachModalSheet` to tag patients (`@Farzana Khan`), attach CBC reports, or insert shift rosters.
@@ -217,7 +213,7 @@ c:\Alif\Onu App Prototype\
     * Voice Dictation mic button with pulsating listening state (`toggleOnuVoiceListening`).
     * Morphing Voice Bot / Send button: Waveform button (`ph-waveform`) in empty state triggering `#modalLiveVoiceBot`; vibrant forest green Send button (`ph-arrow-up`) when typing.
     * Minimalist AI disclaimer: `Onu can make mistakes. Verify clinical decisions.`
-  * **Categorized History Side Drawer (`#onuHistoryDrawer`)**: Full-height drawer organized into `Today`, `Yesterday`, and `Previous 7 Days` sections with `...` context menu for quick Rename/Delete actions, Search, New Chat button, and doctor profile tile footer (`Dr. Sifat Khan • Clinical Copilot Pro`).
+  * **Right-Hand Chat History Side Drawer (`#onuHistoryDrawer`)**: Full-height drawer sliding from the right (`right: 0`), organized into `Today`, `Yesterday`, and `Previous 7 Days` sections with `...` context menu for quick Rename/Delete actions, Search, and New Chat button (clean layout without doctor profile footer).
 
 ### Screen 1: My Desk (`#pageDesk`)
 * **Purpose**: The primary operational dashboard for the doctor during their shift.
@@ -296,23 +292,21 @@ c:\Alif\Onu App Prototype\
 
 ### Screen 8: Appointment & Visit Clinical Details (`#pageAppointmentDetails`)
 * **Purpose**: Detailed inspection of any individual appointment or historical visit record.
-* **Top Meta Strip Transformation**:
-  * **For Completed / Prescribed Appointments & Patient Visit Log Details**: Title displays `Visit Details`. The 3-box strip is replaced by `.visit-details-meta-card` containing:
-    * Top row: `● COMPLETED` green badge + consultation mode & duration pill (e.g. `Video Call • 25 Mins`).
-    * Bottom row: Consultation date (`Aug 20, 2026`) + call time (`08:00 PM`).
-  * **For Upcoming / Queued / Draft Rx / Skipped Appointments**: Title displays `Appointment Details`. Displays the 3-column info strip (`Status`, `Serial`, `Type`).
-  * **Top Right Action**: Headset support button (`.btn-circle-icon` with `ph-headset`) opening the **Help & Support Bottom Sheet (`#helpSupportModalSheet`)** with 4 contact channels (WhatsApp, Messenger, Email, Direct Call) and issue submission form.
-* **Card Color & Visual Hierarchy**:
-  * **Consultation Notes (`.details-notes-card`)**: High-importance clinical outcome card styled in crisp mint/sage tint (`#F4F8F7`, `border: 1.5px solid #D1E5E1`) with deep forest text (`#0F2F29`).
-  * **Pre-visit Details (`.details-previsit-card`)**: Patient intake history styled in soft, warm neutral tone (`#FAF8F5`, `border: 1.5px solid #EFE5D6`) with warm amber quote bar (`#D97706`) and `.info-chip-warm` tag. Displays the patient's specific chief complaint from AI triage (e.g. `Sore Throat & Mild Fever`, `Seasonal Allergies & Runny Nose`), duration, severity, and conversational complaint quote given to the AI intake bot.
-* **Dynamic Section Ordering**:
-  * **For Completed (`prescribed`)**: Issued Prescription -> Consultation Notes -> Pre-visit Details -> Patient Documents.
-  * **For Draft Rx (`draft_rx`)**: Consultation Notes -> Pre-visit Details -> Patient Documents (with sticky bottom dock `Review & Finalize Rx`).
-  * **For Queued / Upcoming**: Pre-visit Details -> Patient Documents.
+* **Plain-Text Patient Header (`.details-patient-plain-container`)**:
+  * **No Box / No Avatar / Non-Collapsible**: Compact, clean typography with patient name on top (`17px Bold #0F172A`) and demographics (`12.5px #64748B`) directly underneath.
+  * **Divider Break**: Separated from the rest of the page by a subtle horizontal divider line (`border-bottom: 1px solid #F1F5F9;`) matching the soft divider under the prescription card.
+* **Visual Hierarchy (Completed Visit / `prescribed`)**:
+  1. **Top Priority: Issued Prescription (`.details-rx-tile`)**: Placed at the very top of the hierarchy list with full card tap target, PDF icon, and eye preview trigger (`previewPrescriptionFromDetails()`).
+  2. **Truncated Consultation Notes (`.details-notes-card.is-collapsed`)**: Shows a 2-line snippet with `Read full note ▾` hint. Has no redundant bottom border line since the `---- View More ▾ ----` divider directly follows. Clicking anywhere on the card smoothly expands the complete clinical text and toggles to `Show less ▴`.
+  3. **Bottom Collapsible More Details (`.details-intake-collapsible-wrap`)**: Secondary archival records are tucked behind a clean divider trigger (`---- View More ▾ ----`) with no enclosing card/box. Tapping smoothly toggles open:
+     - **Consultation Info Chips (`.details-meta-chips-strip`)**: Completed status, date, and consultation type chips in their established clean tag style.
+     - **Pre-visit Details Card**: Symptoms, duration, severity, and intake quote.
+     - **Patient Uploaded Documents**: Document list with previews.
+     - Toggling switches the trigger label between `View More ▾` and `View Less ▴`.
+* **Top Right Action**: Headset support button (`.btn-circle-icon` with `ph-headset`) opening the **Help & Support Bottom Sheet (`#helpSupportModalSheet`)**.
 * **No Redundant Bottom Dock on Completed Visits**:
-  * The bottom dock button is removed for completed visits because the **Issued Prescription** card on top already contains the primary `View Rx` action. Bottom dock is active only for pending tasks (`Review & Finalize Rx`, `Re-join Active Call`).
-* **Empty State Handling**: If pre-visit intake is missing, displays `Not Submitted` tag and neutral empty card. If documents are missing, displays `0 Files` and `"No patient files uploaded for this visit"`.
-* **Contextual Back Navigation**: Back arrow returns to `#pagePatientProfile` if opened from a patient visit log, or to `#pageAppointments` if opened from the appointments list.
+  * The bottom dock button is hidden for completed visits because the **Issued Prescription** card on top already contains the primary `View Rx` action. Bottom dock is active only for pending tasks (`Review & Finalize Rx`, `Re-join Active Call`, or In-Person actions).
+* **Contextual Back Navigation**: Back arrow returns to `#pagePatientProfile` if opened from a patient visit log, `#pageAppointments` if opened from the appointments list, or `#pageDesk` if opened from desk.
 
 ### Screen 9: My Patients Directory (`#pagePatientsList`)
 * **Purpose**: Complete patient directory containing every patient ever consulted by the doctor once or multiple times.

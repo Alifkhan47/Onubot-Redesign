@@ -130,17 +130,13 @@
       transition: background 0.3s ease;
     }
 
-    /* Seamless full-screen ambient gradient on phone-screen when Onu is active */
-    .phone-screen:has(#pageOnu.active-page:not(.chat-active)) {
-      background: 
-        radial-gradient(ellipse at 50% 36%, rgba(214, 234, 230, 0.8) 0%, rgba(232, 246, 243, 0.55) 35%, rgba(240, 253, 250, 0.28) 58%, rgba(255, 255, 255, 0) 80%),
-        radial-gradient(circle at 82% 16%, rgba(204, 251, 241, 0.55) 0%, rgba(255, 255, 255, 0) 50%),
-        radial-gradient(circle at 18% 58%, rgba(239, 247, 245, 0.75) 0%, rgba(255, 255, 255, 0) 55%),
-        #FFFFFF !important;
+    /* Pure white background on phone-screen and status-bar when Onu is active */
+    .phone-screen:has(#pageOnu.active-page) {
+      background: #FFFFFF !important;
     }
 
-    .phone-screen:has(#pageOnu.active-page:not(.chat-active)) .status-bar {
-      background: transparent !important;
+    .phone-screen:has(#pageOnu.active-page) .status-bar {
+      background: #FFFFFF !important;
     }
 
     /* Status Bar */
@@ -6780,67 +6776,82 @@
       flex-shrink: 0;
     }
 
-    /* Patient Profile Card (White background with stroke) */
-    .details-patient-profile-card {
-      background: #FFFFFF !important;
-      border: 1px solid #E2E8F0 !important;
-      border-radius: 16px !important;
-      padding: 14px 16px !important;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-shrink: 0;
-      box-shadow: none !important;
-    }
-
-    .details-avatar-box {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: #E8F4F1 !important;
-      border: 1px solid #D1E5E1 !important;
-      color: var(--color-primary-btn, #02241F) !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-heading);
-      font-size: 16px;
-      font-weight: 800;
-      flex-shrink: 0;
-      overflow: hidden;
-    }
-
-    .details-avatar-box img {
+    /* Plain-Text Patient Header (No Box, Non-Collapsible, Name with Age+Gender Underneath) */
+    .details-patient-plain-container {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .details-patient-main {
+      padding: 2px 0 14px 0;
+      border-bottom: 1px solid #F1F5F9;
       display: flex;
       flex-direction: column;
-      gap: 2px;
-      min-width: 0;
+      gap: 3px;
+      flex-shrink: 0;
     }
 
-    .details-patient-name {
+    .details-patient-plain-name {
       font-family: var(--font-heading);
       font-size: 17px;
-      font-weight: 800;
+      font-weight: 700;
       color: #0F172A;
       letter-spacing: -0.01em;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      line-height: 1.25;
     }
 
-    .details-patient-meta {
+    .details-patient-plain-meta {
       font-family: var(--font-body);
-      font-size: 12px;
+      font-size: 12.5px;
       color: #64748B;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .details-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F1F5F9;
+      color: #475569;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 8px;
+    }
+
+    .details-meta-pill.status-prescribed {
+      background: #ECFDF5;
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .details-meta-pill.status-draft {
+      background: #FEF3C7;
+      color: #D97706;
+      font-weight: 700;
+    }
+
+    .details-meta-pill.status-skipped {
+      background: #FEE2E2;
+      color: #DC2626;
+      font-weight: 700;
+    }
+
+    .details-meta-pill.status-incall {
+      background: #D1FAE5;
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .details-meta-chips-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 2px 0 4px 0;
+    }
+
+    /* Legacy Fallback Classes (Preserved for compatibility) */
+    .details-patient-profile-card {
+      display: none;
     }
 
     /* 3-Column Info Strip (Plain Text, Middle / Center Aligned) */
@@ -6849,8 +6860,11 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       width: 100%;
-      padding: 6px 2px 18px 2px;
-      border-bottom: 1px solid #F1F5F9;
+      padding: 12px 6px 14px 6px;
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      box-sizing: border-box;
       flex-shrink: 0;
       align-items: center;
       justify-items: center;
@@ -7020,6 +7034,7 @@
       flex-shrink: 0;
     }
 
+    .details-clean-section.no-border,
     .details-clean-section:last-child {
       border-bottom: none;
       padding-bottom: 0;
@@ -7059,27 +7074,122 @@
       font-weight: 600 !important;
     }
 
-    /* Consultation Notes Card (Standard Neutral Card Surface #F4F6F8) */
+    /* Consultation Notes Card (Standard Neutral Card Surface #F4F6F8 with Truncation) */
     .details-notes-card {
       background: #F4F6F8 !important;
       border: none !important;
       border-radius: 16px !important;
-      padding: 16px 18px !important;
+      padding: 14px 16px !important;
       display: flex;
       flex-direction: column;
       gap: 8px;
       width: 100%;
       box-sizing: border-box;
       box-shadow: none !important;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+      user-select: none;
+    }
+
+    .details-notes-card:hover {
+      background: #EEF2F5 !important;
     }
 
     .details-notes-body {
       font-family: var(--font-body);
-      font-size: 14.5px; /* A bit bigger, clear and readable */
+      font-size: 14px;
       line-height: 1.6;
       color: #1E293B;
       font-weight: 400;
       margin: 0;
+      transition: all 0.2s ease;
+    }
+
+    .details-notes-card.is-collapsed .details-notes-body {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .details-notes-expand-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #0D7A5F;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .details-notes-expand-hint i {
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .details-notes-card:not(.is-collapsed) .details-notes-expand-hint i {
+      transform: rotate(180deg);
+    }
+
+    /* Bottom Collapsible Section: Divider with 'View More' */
+    .details-intake-collapsible-wrap {
+      width: 100%;
+      padding-top: 8px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .details-intake-divider-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .details-intake-divider-trigger:hover {
+      opacity: 0.75;
+    }
+
+    .details-intake-divider-line {
+      flex: 1;
+      height: 1px;
+      background: #E2E8F0;
+    }
+
+    .details-intake-divider-content {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748B;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .details-intake-divider-chevron {
+      font-size: 12px;
+      color: #94A3B8;
+      display: inline-flex;
+      transition: transform 0.2s ease;
+    }
+
+    .details-intake-collapsible-wrap.is-open .details-intake-divider-chevron {
+      transform: rotate(180deg);
+    }
+
+    .details-intake-collapsible-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 14px;
     }
 
     /* Pre-Visit Details: Single Card (Soft Warm Neutral Tint for Visual Hierarchy) */
@@ -8454,7 +8564,7 @@
       bottom: 0;
       box-sizing: border-box;
       z-index: 10;
-      padding: 0;
+      padding: 12px 20px 0 20px;
       overflow: hidden;
     }
 
@@ -8462,77 +8572,14 @@
       background: #FFFFFF !important;
     }
 
-    /* Claude / ChatGPT Mobile Top App Bar */
-    .onu-app-bar {
-      height: 52px;
-      padding: 0 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #F1F5F9;
-      background: #FFFFFF;
-      flex-shrink: 0;
-      z-index: 20;
+    .page-onu .app-header {
+      background: transparent !important;
     }
 
-    .btn-onu-nav-action {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: transparent;
-      border: none;
-      color: #334155;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.16s ease;
-    }
-
-    .btn-onu-nav-action:hover {
-      background: #F1F5F9;
-      color: #0F172A;
-    }
-
-    .btn-onu-nav-action:active {
-      transform: scale(0.95);
-    }
-
-    /* Model Pill / Dropdown Selector (ChatGPT & Claude Style) */
-    .onu-model-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      background: #F8FAFC;
-      border: 1px solid #E2E8F0;
-      font-family: var(--font-heading);
-      font-size: 13.5px;
-      font-weight: 600;
-      color: #0F172A;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .onu-model-pill:hover {
-      background: #F1F5F9;
-      border-color: #CBD5E1;
-    }
-
-    .onu-model-pill i {
-      font-size: 11px;
-      color: #64748B;
-      transition: transform 0.15s ease;
-    }
-
-    .onu-model-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #0D7A5F;
+    .page-onu .btn-circle-icon {
+      background: #F0F6F5;
+      border: 1px solid #D6EAE6;
+      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.04);
     }
 
     /* Scrollable Content Stream */
@@ -8621,12 +8668,12 @@
       background: #FFFFFF;
       border: 1px solid #E2E8F0;
       border-radius: 14px;
-      padding: 12px 14px;
+      padding: 16px 14px;
       text-align: left;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 10px;
       transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
       user-select: none;
@@ -8644,9 +8691,8 @@
     }
 
     .onu-prompt-icon {
-      font-size: 16px;
+      font-size: 19px;
       color: #0D7A5F;
-      margin-bottom: 2px;
     }
 
     .onu-prompt-title {
@@ -8654,13 +8700,6 @@
       font-size: 13.5px;
       font-weight: 600;
       color: #0F172A;
-      line-height: 1.3;
-    }
-
-    .onu-prompt-sub {
-      font-family: var(--font-body);
-      font-size: 11.5px;
-      color: #64748B;
       line-height: 1.35;
     }
 
@@ -8690,17 +8729,17 @@
     .onu-history-drawer {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       bottom: 0;
       width: 82%;
       max-width: 320px;
       background: #FFFFFF;
       z-index: 155;
-      transform: translateX(-100%);
+      transform: translateX(100%);
       transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       flex-direction: column;
-      box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+      box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
       box-sizing: border-box;
       overflow: hidden;
     }
@@ -9170,8 +9209,8 @@
 
     .onu-artifact-action-btn {
       background: transparent;
-      border: none;
-      color: #64748B;
+      border: 1px solid transparent;
+      color: #475569;
       font-family: var(--font-heading);
       font-size: 11.5px;
       font-weight: 600;
@@ -9179,14 +9218,25 @@
       align-items: center;
       gap: 4px;
       cursor: pointer;
-      padding: 3px 6px;
-      border-radius: 6px;
+      padding: 4px 8px;
+      border-radius: 8px;
       transition: all 0.15s ease;
     }
 
     .onu-artifact-action-btn:hover {
       background: #F1F5F9;
       color: #0F172A;
+    }
+
+    .onu-artifact-action-btn.btn-action-open {
+      color: #0D7A5F;
+      background: #F0FDF4;
+      border-color: #DCFCE7;
+      font-weight: 700;
+    }
+
+    .onu-artifact-action-btn.btn-action-open:hover {
+      background: #DCFCE7;
     }
 
     .onu-artifact-version-tag {
@@ -9433,77 +9483,6 @@
       margin: 0;
       text-align: center;
       pointer-events: auto;
-    }
-
-    /* Model Selector Sheet Items */
-    .model-selector-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1.5px solid #E2E8F0;
-      background: #FFFFFF;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .model-selector-item:hover {
-      background: #F8FAFC;
-      border-color: #CBD5E1;
-    }
-
-    .model-selector-item.active {
-      border-color: #0D7A5F;
-      background: #F0FDF4;
-    }
-
-    .model-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .model-item-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: #E8F5F1;
-      color: #0D7A5F;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .model-item-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      min-width: 0;
-    }
-
-    .model-item-title {
-      font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 600;
-      color: #0F172A;
-      line-height: 1.25;
-    }
-
-    .model-item-desc {
-      font-family: var(--font-body);
-      font-size: 11.5px;
-      color: #64748B;
-      line-height: 1.3;
-    }
-
-    .model-item-check {
-      color: #0D7A5F;
-      font-size: 18px;
-      flex-shrink: 0;
     }
 
     /* Attachment Bottom Sheet Items */
@@ -11893,25 +11872,21 @@
                ======================================================= -->
           <div class="app-page page-onu active-page" id="pageOnu">
             
-            <!-- ChatGPT & Claude Mobile Top App Bar -->
-            <div class="onu-app-bar">
-              <button class="btn-onu-nav-action" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
-                <i class="ph ph-sidebar-simple"></i>
-              </button>
-              <button class="onu-model-pill" onclick="openOnuModelSelector()" title="Switch Model" aria-label="Switch Model">
-                <span class="onu-model-dot"></span>
-                <span id="onuActiveModelLabel">Onu 3.5</span>
-                <i class="ph ph-caret-down"></i>
-              </button>
-              <button class="btn-onu-nav-action" onclick="startNewOnuChat()" title="New Chat" aria-label="New Chat">
-                <i class="ph ph-note-pencil"></i>
+            <!-- Unified Universal App Header (Consistent with Desk & Patients, Right-Hand Reach) -->
+            <div class="app-header">
+              <div class="header-text">
+                <h1 class="header-title">Onu</h1>
+                <p class="header-subtitle">Your Clinical AI Assistant</p>
+              </div>
+              <button class="btn-circle-icon" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
+                <i class="ph ph-clock-counter-clockwise"></i>
               </button>
             </div>
 
             <!-- Scrollable Content Area -->
             <div class="onu-content-area" id="onuChatScrollArea">
               
-              <!-- Welcome State View (ChatGPT & Claude Mobile Standard) -->
+              <!-- Welcome State View (Minimal Clean Standard) -->
               <div class="onu-welcome-container" id="onuWelcomeView">
                 <div class="onu-brand-mark">
                   <i class="ph-fill ph-sparkle"></i>
@@ -11919,30 +11894,6 @@
                 <div class="onu-hero-greeting">
                   <h2 class="onu-greeting-name">Where should we begin, Dr. Sifat?</h2>
                   <p class="onu-greeting-sub">Your clinical AI copilot for patients, protocols & practice</p>
-                </div>
-
-                <!-- 4 Prompt Suggestion Cards (2x2 Grid) -->
-                <div class="onu-prompt-grid">
-                  <div class="onu-prompt-card" onclick="askOnuPreset('How many patients in my shift queue today?')">
-                    <i class="ph ph-clipboard-text onu-prompt-icon"></i>
-                    <span class="onu-prompt-title">Summarize today's queue</span>
-                    <span class="onu-prompt-sub">Review 6 patients in Shift 1</span>
-                  </div>
-                  <div class="onu-prompt-card" onclick="askOnuPreset('Recap my last consultation with Alif Khan')">
-                    <i class="ph ph-user onu-prompt-icon"></i>
-                    <span class="onu-prompt-title">Recap Alif Khan's visit</span>
-                    <span class="onu-prompt-sub">Viral pharyngitis diagnosis & Rx</span>
-                  </div>
-                  <div class="onu-prompt-card" onclick="askOnuPreset('Clinical Hypertension Management Guidelines')">
-                    <i class="ph ph-heartbeat onu-prompt-icon"></i>
-                    <span class="onu-prompt-title">Hypertension protocol</span>
-                    <span class="onu-prompt-sub">AHA/ACC dosage & triage</span>
-                  </div>
-                  <div class="onu-prompt-card" onclick="askOnuPreset('How much money did I make today and this week?')">
-                    <i class="ph ph-wallet onu-prompt-icon"></i>
-                    <span class="onu-prompt-title">Financial summary</span>
-                    <span class="onu-prompt-sub">This month's earnings & payouts</span>
-                  </div>
                 </div>
               </div>
 
@@ -12738,33 +12689,10 @@
               </button>
             </div>
 
-            <!-- Patient Profile Hero Card -->
-            <div class="details-patient-profile-card">
-              <div class="details-avatar-box" id="detAvatarBox">
-                <i class="ph ph-user"></i>
-              </div>
-              <div class="details-patient-main">
-                <h2 class="details-patient-name" id="detPatientName">Farzana Khan</h2>
-                <span class="details-patient-meta" id="detPatientMeta">31 Yrs • Female</span>
-              </div>
-            </div>
-
-            <!-- Dynamic Top Meta Strip: Status/Serial/Type for upcoming/draft/skipped OR Completed Visit Card for prescribed/completed & visit log -->
-            <div id="detTopMetaContainer" class="details-top-meta-wrap">
-              <div class="details-info-grid">
-                <div class="details-info-item">
-                  <span class="details-info-label">Status</span>
-                  <span class="details-info-val" id="detStatusVal">In Queue</span>
-                </div>
-                <div class="details-info-item">
-                  <span class="details-info-label">Serial</span>
-                  <span class="details-info-val" id="detSerialVal">#2</span>
-                </div>
-                <div class="details-info-item">
-                  <span class="details-info-label">Type</span>
-                  <span class="details-info-val" id="detTypeVal">Initial</span>
-                </div>
-              </div>
+            <!-- Plain-Text Patient Header (No Box, Non-Collapsible, Name with Age+Gender Underneath) -->
+            <div class="details-patient-plain-container" id="detPatientPlainContainer">
+              <span class="details-patient-plain-name" id="detPatientName">Farzana Khan</span>
+              <span class="details-patient-plain-meta" id="detPatientMeta">31 Yrs, Female</span>
             </div>
 
             <!-- Dynamic Decluttered Sections Container -->
@@ -13519,13 +13447,6 @@
             <!-- Dynamically populated categorized items (Today, Yesterday, Previous 7 Days) -->
           </div>
 
-          <div class="onu-drawer-footer-user">
-            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Dr. Sifat" class="onu-drawer-user-avatar">
-            <div class="onu-drawer-user-meta">
-              <span class="onu-drawer-user-name">Dr. Sifat Khan</span>
-              <span class="onu-drawer-user-badge">Clinical Copilot Pro</span>
-            </div>
-          </div>
         </div>
 
         <!-- =======================================================
@@ -14414,56 +14335,6 @@
           </div>
         </div>
 
-        <!-- =======================================================
-             12D. ONU AI MODEL SELECTOR BOTTOM SHEET (CHATGPT / CLAUDE MOBILE)
-             ======================================================= -->
-        <div class="bottom-sheet" id="onuModelSelectorSheet" style="z-index: 155;">
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-top-row">
-            <div class="sheet-badge-icon">
-              <i class="ph ph-cpu"></i>
-            </div>
-            <button type="button" class="btn-circle-icon" onclick="closeOnuModelSelector()" aria-label="Close Model Switcher">
-              <i class="ph ph-x"></i>
-            </button>
-          </div>
-          <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title" style="font-size: 20px;">AI Model</h2>
-            <p class="sheet-minimal-subtitle">Select intelligence engine for clinical copilot</p>
-          </div>
-          <div class="model-selector-list" style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
-            <div class="model-selector-item active" id="modelItem_onu35" onclick="selectOnuModel('Onu 3.5')">
-              <div class="model-item-left">
-                <div class="model-item-icon"><i class="ph-fill ph-lightning"></i></div>
-                <div class="model-item-meta">
-                  <span class="model-item-title">Onu 3.5</span>
-                  <span class="model-item-desc">Fast daily triage & rapid consultation notes</span>
-                </div>
-              </div>
-              <i class="ph-bold ph-check model-item-check" id="modelCheck_onu35"></i>
-            </div>
-            <div class="model-selector-item" id="modelItem_onuPro" onclick="selectOnuModel('Onu Pro')">
-              <div class="model-item-left">
-                <div class="model-item-icon" style="background: #EEF2F6; color: #1E293B;"><i class="ph-fill ph-brain"></i></div>
-                <div class="model-item-meta">
-                  <span class="model-item-title">Onu Clinical Pro</span>
-                  <span class="model-item-desc">Deep diagnostic reasoning & multi-drug pathology</span>
-                </div>
-              </div>
-              <i class="ph-bold ph-check model-item-check" id="modelCheck_onuPro" style="display: none;"></i>
-            </div>
-            <div class="model-selector-item" id="modelItem_onuLive" onclick="selectOnuModel('Onu Live Voice')">
-              <div class="model-item-left">
-                <div class="model-item-icon" style="background: #F0FDF4; color: #0D7A5F;"><i class="ph-fill ph-waveform"></i></div>
-                <div class="model-item-meta">
-                  <span class="model-item-title">Onu Live Voice</span>
-                  <span class="model-item-desc">Real-time bidirectional hands-free audio assistant</span>
-                </div>
-              </div>
-              <i class="ph-bold ph-check model-item-check" id="modelCheck_onuLive" style="display: none;"></i>
-            </div>
-          </div>
-        </div>
 
         <!-- =======================================================
              12E. ONU ATTACHMENT BOTTOM SHEET (CLAUDE / CHATGPT MOBILE)
@@ -14531,10 +14402,14 @@
           <div id="artifactModalContentBody" style="padding: 10px 0 20px 0; font-family: var(--font-body); font-size: 14px; color: #1E293B; line-height: 1.6; overflow-y: auto; max-height: 55vh;">
             <!-- Dynamically populated -->
           </div>
-          <div class="sheet-actions-group">
-            <button type="button" class="btn-sheet-confirm" onclick="shareCurrentArtifactModal()">
-              <i class="ph ph-share-network"></i>
-              <span>Share Artifact</span>
+          <div class="sheet-actions-group" style="display: flex; gap: 10px; width: 100%;">
+            <button type="button" class="btn-sheet-cancel" style="flex: 1; height: 48px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; margin: 0;" onclick="copyCurrentArtifactModal()">
+              <i class="ph ph-copy" style="font-size: 16px;"></i>
+              <span>Copy</span>
+            </button>
+            <button type="button" class="btn-sheet-confirm" style="flex: 1; height: 48px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700;" onclick="shareCurrentArtifactModal()">
+              <i class="ph ph-share-network" style="font-size: 16px;"></i>
+              <span>Share</span>
             </button>
           </div>
         </div>
@@ -16497,7 +16372,6 @@
     // =======================================================
     // ONU CLINICAL AI COPILOT CONTROLLER (CHATGPT & CLAUDE MOBILE SPEC)
     // =======================================================
-    let activeOnuModel = 'Onu 3.5';
     let lastUserQuery = '';
     let currentActiveArtifactId = null;
 
@@ -16518,55 +16392,6 @@
     let longPressTimer = null;
     let isLongPressTriggered = false;
     let activeContextMenuThreadId = null;
-
-    // Model Selector Handlers (ChatGPT / Claude mobile)
-    function openOnuModelSelector() {
-      const backdrop = document.getElementById('modalBackdrop');
-      const sheet = document.getElementById('onuModelSelectorSheet');
-      if (backdrop) backdrop.classList.add('active');
-      if (sheet) sheet.classList.add('active');
-    }
-
-    function closeOnuModelSelector() {
-      const sheet = document.getElementById('onuModelSelectorSheet');
-      if (sheet) sheet.classList.remove('active');
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.remove('active');
-    }
-
-    function selectOnuModel(modelName) {
-      activeOnuModel = modelName;
-      const label = document.getElementById('onuActiveModelLabel');
-      if (label) label.textContent = modelName;
-
-      // Update checkmarks in sheet
-      const models = [
-        { id: 'onu35', name: 'Onu 3.5' },
-        { id: 'onuPro', name: 'Onu Pro' },
-        { id: 'onuLive', name: 'Onu Live Voice' }
-      ];
-
-      models.forEach(m => {
-        const item = document.getElementById(`modelItem_${m.id}`);
-        const check = document.getElementById(`modelCheck_${m.id}`);
-        if (item) {
-          if (m.name === modelName) {
-            item.classList.add('active');
-            if (check) check.style.display = 'block';
-          } else {
-            item.classList.remove('active');
-            if (check) check.style.display = 'none';
-          }
-        }
-      });
-
-      closeOnuModelSelector();
-      showToast(`Model switched to ${modelName}`);
-
-      if (modelName === 'Onu Live Voice') {
-        setTimeout(() => openLiveVoiceBotModal(), 300);
-      }
-    }
 
     // Attachment Menu Handlers
     function openOnuAttachMenu() {
@@ -16879,16 +16704,17 @@
                 <h4 class="onu-artifact-title">${escapeHtml(title)}</h4>
               </div>
             </div>
-            <button type="button" class="onu-artifact-view-pill" onclick="event.stopPropagation(); openClaudeArtifactModal('${id}')">
-              <span>Open</span>
-              <i class="ph ph-arrow-up-right"></i>
-            </button>
+            <i class="ph ph-caret-right" style="color: #94A3B8; font-size: 15px; margin-left: auto;"></i>
           </div>
-          <div class="onu-artifact-body">
+          <div class="onu-artifact-body" onclick="openClaudeArtifactModal('${id}')">
             ${summaryHtml}
           </div>
           <div class="onu-artifact-footer">
             <div class="onu-artifact-actions">
+              <button type="button" class="onu-artifact-action-btn btn-action-open" onclick="openClaudeArtifactModal('${id}')">
+                <i class="ph ph-arrow-up-right"></i>
+                <span>Open</span>
+              </button>
               <button type="button" class="onu-artifact-action-btn" onclick="copyArtifactCard('${id}')">
                 <i class="ph ph-copy"></i>
                 <span>Copy</span>
@@ -16898,7 +16724,7 @@
                 <span>Share</span>
               </button>
             </div>
-            <span class="onu-artifact-version-tag">${version || 'v1.0 • Clinical Protocol'}</span>
+            <span class="onu-artifact-version-tag">${version || 'Clinical Protocol • 2026'}</span>
           </div>
         </div>
       `;
@@ -17202,7 +17028,6 @@
     // Contextual Clinical Response Engine with Claude-Style Artifacts
     function generateOnuClinicalResponse(query) {
       const q = query.toLowerCase();
-      const modelBadge = activeOnuModel === 'Onu Pro' ? 'Pro Clinical Reasoning' : 'Onu 3.5 Copilot';
 
       // Reusable Assistant Actions HTML
       const actionToolbarHtml = `
@@ -17635,7 +17460,7 @@
         type: 'PRACTICE BRIEF',
         title: `Clinical Inquiry: "${query.length > 28 ? query.substring(0, 28) + '...' : query}"`,
         icon: 'ph ph-sparkle',
-        version: `${modelBadge}`,
+        version: 'Clinical Protocol • 2026',
         summaryHtml: `
           <div style="font-size: 13px; color: #334155; line-height: 1.55;">
             <p style="margin: 0 0 6px 0;"><strong>Cohort Analysis:</strong> Reviewed active shift queue and patient histories matching your query.</p>
@@ -19981,13 +19806,9 @@
 
     let appointmentDetailsBackTarget = 'appointments';
 
-    // Appointment / Visit Details Top Meta Renderer
-    function renderAppointmentTopMeta(appt, effectiveStatus) {
-      const container = document.getElementById('detTopMetaContainer');
-      if (!container) return;
-
+    // Helper to generate Meta Chips / Details Info Strip HTML
+    function getAppointmentMetaChipsHtml(appt, effectiveStatus) {
       if (effectiveStatus === 'prescribed') {
-        // COMPLETED VISIT: Clean 3-Column Info Strip (Status | Date | Type) matching Image 3, middle-aligned, plain text, no box/border
         let dateVal = 'Sep 29';
         if (appt.consultationDate) {
           dateVal = appt.consultationDate.replace('Today, ', '').replace(/,\s*\d{4}/, '').trim();
@@ -20002,66 +19823,81 @@
                            (appt.icon && (appt.icon.includes('users') || appt.icon.includes('user')));
         const typeVal = isInPerson ? 'In-Person' : 'Video Call';
 
-        container.innerHTML = `
-          <div class="details-info-grid">
-            <div class="details-info-item">
-              <span class="details-info-label">Status</span>
-              <span class="details-info-val status-prescribed" id="detStatusVal">Completed</span>
-            </div>
-            <div class="details-info-item">
-              <span class="details-info-label">Date</span>
-              <span class="details-info-val" id="detDateVal">${dateVal}</span>
-            </div>
-            <div class="details-info-item">
-              <span class="details-info-label">Type</span>
-              <span class="details-info-val" id="detTypeVal">${typeVal}</span>
-            </div>
+        return `
+          <div class="details-meta-chips-strip">
+            <span class="details-meta-pill status-prescribed"><i class="ph-fill ph-check-circle"></i> Completed</span>
+            <span class="details-meta-pill"><i class="ph ph-calendar"></i> ${dateVal}</span>
+            <span class="details-meta-pill"><i class="ph ${isInPerson ? 'ph-user' : 'ph-video-camera'}"></i> ${typeVal}</span>
           </div>
         `;
       } else {
-        // UPCOMING / QUEUED / DRAFT RX / SKIPPED / ABSENT / REQUEUED / IN CALL: 3-Column Info Strip
         let statusLabel = 'In Queue';
-        let statusClass = 'details-info-val';
+        let statusClass = 'details-meta-pill';
 
         if (effectiveStatus === 'draft_rx') {
           statusLabel = 'Draft Rx';
-          statusClass = 'details-info-val status-draft';
+          statusClass = 'details-meta-pill status-draft';
         } else if (effectiveStatus === 'cancelled' || effectiveStatus === 'declined') {
           statusLabel = 'Cancelled';
-          statusClass = 'details-info-val status-skipped';
+          statusClass = 'details-meta-pill status-skipped';
         } else if (effectiveStatus === 'absent') {
           statusLabel = 'Absent';
-          statusClass = 'details-info-val status-skipped';
+          statusClass = 'details-meta-pill status-skipped';
         } else if (effectiveStatus === 'requeued') {
           statusLabel = 'Re-queued';
-          statusClass = 'details-info-val status-draft';
+          statusClass = 'details-meta-pill status-draft';
         } else if (effectiveStatus === 'skipped') {
           statusLabel = 'Skipped';
-          statusClass = 'details-info-val status-skipped';
+          statusClass = 'details-meta-pill status-skipped';
         } else if (effectiveStatus === 'in_call') {
           statusLabel = 'In Call';
-          statusClass = 'details-info-val status-incall';
+          statusClass = 'details-meta-pill status-incall';
         }
 
         const serialVal = appt.serial || '#1';
         const typeVal = (appt.type || 'Initial').replace(' Consultation', '');
 
-        container.innerHTML = `
-          <div class="details-info-grid">
-            <div class="details-info-item">
-              <span class="details-info-label">Status</span>
-              <span class="${statusClass}" id="detStatusVal">${statusLabel}</span>
-            </div>
-            <div class="details-info-item">
-              <span class="details-info-label">Serial</span>
-              <span class="details-info-val" id="detSerialVal">${serialVal}</span>
-            </div>
-            <div class="details-info-item">
-              <span class="details-info-label">Type</span>
-              <span class="details-info-val" id="detTypeVal">${typeVal}</span>
-            </div>
+        return `
+          <div class="details-meta-chips-strip">
+            <span class="${statusClass}">${statusLabel}</span>
+            <span class="details-meta-pill">Serial ${serialVal}</span>
+            <span class="details-meta-pill">${typeVal}</span>
           </div>
         `;
+      }
+    }
+
+    function renderAppointmentTopMeta(appt, effectiveStatus) {
+      // Legacy wrapper hook - chips are now rendered inside View More section
+      const container = document.getElementById('detPatientCollapsibleMeta');
+      if (container) {
+        container.innerHTML = getAppointmentMetaChipsHtml(appt, effectiveStatus);
+      }
+    }
+
+    // Toggle Consultation Notes Truncation
+    function toggleConsultationNotes() {
+      const card = document.getElementById('detNotesCard');
+      const label = document.getElementById('detNotesToggleLabel');
+      if (!card) return;
+
+      const isCollapsed = card.classList.toggle('is-collapsed');
+      if (label) {
+        label.textContent = isCollapsed ? 'Read full note' : 'Show less';
+      }
+    }
+
+    // Toggle More Details (Pre-Visit Details & Documents) Collapsible Accordion
+    function toggleIntakeDocsSection() {
+      const wrap = document.getElementById('detIntakeCollapsibleWrap');
+      const body = document.getElementById('detIntakeCollapsibleBody');
+      const text = document.getElementById('detIntakeToggleText');
+      if (!wrap || !body) return;
+
+      const isOpen = wrap.classList.toggle('is-open');
+      body.style.display = isOpen ? 'flex' : 'none';
+      if (text) {
+        text.textContent = isOpen ? 'View Less' : 'View More';
       }
     }
 
@@ -20082,15 +19918,11 @@
         pageTitleEl.textContent = (effectiveStatus === 'prescribed') ? 'Visit Details' : 'Appointment Details';
       }
 
-      // Patient Demographics
-      document.getElementById('detPatientName').textContent = appt.name;
-      document.getElementById('detPatientMeta').textContent = `${appt.age} Yrs • ${appt.gender}`;
-      const initials = appt.initials || (appt.name ? appt.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'PT');
-      const detAvatarBox = document.getElementById('detAvatarBox');
-      if (detAvatarBox) detAvatarBox.textContent = initials;
-
-      // Render Dynamic Top Meta: Completed Card for 'prescribed', 3-Info Strip for others
-      renderAppointmentTopMeta(appt, effectiveStatus);
+      // Patient Demographics (Plain-Text Minimalist Standard)
+      const nameEl = document.getElementById('detPatientName');
+      const metaTextEl = document.getElementById('detPatientMeta');
+      if (nameEl) nameEl.textContent = appt.name;
+      if (metaTextEl) metaTextEl.textContent = `${appt.age} Yrs, ${appt.gender}`;
 
       // Render Dynamic Decluttered Sections in Strict Relevance Order
       renderAppointmentDetailsSections(appt, effectiveStatus);
@@ -20205,12 +20037,11 @@
       const pageTitleEl = document.querySelector('#pageAppointmentDetails .page-top-title');
       if (pageTitleEl) pageTitleEl.textContent = 'Visit Details';
 
-      // Patient Demographics
-      document.getElementById('detPatientName').textContent = pat.name;
-      document.getElementById('detPatientMeta').textContent = `${pat.age} Yrs • ${pat.gender}`;
-
-      // Render Top Meta: Completed Visit Meta Card
-      renderAppointmentTopMeta(visitAppt, 'prescribed');
+      // Patient Demographics (Plain-Text Minimalist Standard)
+      const nameEl = document.getElementById('detPatientName');
+      const metaTextEl = document.getElementById('detPatientMeta');
+      if (nameEl) nameEl.textContent = pat.name;
+      if (metaTextEl) metaTextEl.textContent = `${pat.age} Yrs, ${pat.gender}`;
 
       // Render Dynamic Decluttered Sections
       renderAppointmentDetailsSections(visitAppt, 'prescribed');
@@ -20262,15 +20093,19 @@
         </div>
       `;
 
-      // 2. Consultation Notes Component (AI Note in dark green)
+      // 2. Consultation Notes Component (Truncated with click-to-expand)
       const notesSectionHtml = `
         <div class="details-clean-section">
           <div class="details-clean-header">
             <span class="details-clean-title">Consultation Notes</span>
             <span class="details-plain-tag tag-ai-note">AI Note</span>
           </div>
-          <div class="details-notes-card">
-            <p class="details-notes-body">${appt.consultationNotes || 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay hydrated and follow up if symptoms persist beyond 5 days.'}</p>
+          <div class="details-notes-card is-collapsed" id="detNotesCard" onclick="toggleConsultationNotes()" role="button" tabindex="0" title="Tap to expand notes">
+            <p class="details-notes-body" id="detNotesBody">${appt.consultationNotes || 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay hydrated and follow up if symptoms persist beyond 5 days.'}</p>
+            <div class="details-notes-expand-hint">
+              <span id="detNotesToggleLabel">Read full note</span>
+              <i class="ph ph-caret-down" id="detNotesToggleIcon"></i>
+            </div>
           </div>
         </div>
       `;
@@ -20353,8 +20188,53 @@
 
       // Order dynamically by patient status!
       if (effectiveStatus === 'prescribed') {
-        // TOP: Issued Prescription -> Consultation Notes -> Pre-visit Details -> Patient Documents
-        container.innerHTML = rxSectionHtml + notesSectionHtml + preVisitHtml + docsSectionHtml;
+        // TOP HIERARCHY: Issued Prescription -> Consultation Notes (Truncated, no bottom border) -> Collapsible More Details at Bottom
+        const metaChipsHtml = getAppointmentMetaChipsHtml(appt, effectiveStatus);
+        const metaSectionHtml = `
+          <div class="details-clean-section">
+            <div class="details-clean-header">
+              <span class="details-clean-title">Consultation Info</span>
+            </div>
+            ${metaChipsHtml}
+          </div>
+        `;
+
+        // Consultation Notes without bottom divider border (since View More divider line directly follows)
+        const notesSectionNoBorderHtml = `
+          <div class="details-clean-section no-border">
+            <div class="details-clean-header">
+              <span class="details-clean-title">Consultation Notes</span>
+              <span class="details-plain-tag tag-ai-note">AI Note</span>
+            </div>
+            <div class="details-notes-card is-collapsed" id="detNotesCard" onclick="toggleConsultationNotes()" role="button" tabindex="0" title="Tap to expand notes">
+              <p class="details-notes-body" id="detNotesBody">${appt.consultationNotes || 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay hydrated and follow up if symptoms persist beyond 5 days.'}</p>
+              <div class="details-notes-expand-hint">
+                <span id="detNotesToggleLabel">Read full note</span>
+                <i class="ph ph-caret-down" id="detNotesToggleIcon"></i>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const collapsibleIntakeDocsHtml = `
+          <div class="details-intake-collapsible-wrap" id="detIntakeCollapsibleWrap">
+            <div class="details-intake-divider-trigger" onclick="toggleIntakeDocsSection()" role="button" tabindex="0" aria-label="Toggle More Details">
+              <div class="details-intake-divider-line"></div>
+              <div class="details-intake-divider-content">
+                <span id="detIntakeToggleText">View More</span>
+                <i class="ph ph-caret-down details-intake-divider-chevron" id="detIntakeChevron"></i>
+              </div>
+              <div class="details-intake-divider-line"></div>
+            </div>
+            <div class="details-intake-collapsible-body" id="detIntakeCollapsibleBody" style="display: none;">
+              ${metaSectionHtml}
+              ${preVisitHtml}
+              ${docsSectionHtml}
+            </div>
+          </div>
+        `;
+
+        container.innerHTML = rxSectionHtml + notesSectionNoBorderHtml + collapsibleIntakeDocsHtml;
       } else if (effectiveStatus === 'draft_rx') {
         // TOP: Consultation Notes -> Pre-visit Details -> Patient Documents
         container.innerHTML = notesSectionHtml + preVisitHtml + docsSectionHtml;
