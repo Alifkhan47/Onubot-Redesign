@@ -730,12 +730,19 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * **Unbooked Shifts (`booked === 0`)**: Full unrestricted editing of start time, end time, repeat days, and visit type.
 * **Safety Bottom Sheet (`#cancelShiftModalSheet`)**:
   * Triggered via the trash delete button.
-  * Title: `Delete Shift X?` with `ph-trash` danger badge icon.
-  * For booked shifts: Highlights `⚠️ X Patients Already Booked` with clear clinical explanation: *"Patients are already booked in this shift. Deleting will automatically reschedule them to your next available shift."*
-  * For empty shifts: Clean deletion confirmation (`"Shift has no bookings and will be removed from your schedule."`).
+  * Clean Editorial Title: `Delete Shift 1?` (always human-readable shift names, never raw technical IDs) with `ph-trash` danger badge icon.
+  * Subtitle indicates recurrence context: e.g. `Wednesday, Sept 15 • 09:00 AM – 11:00 AM • Repeats weekly`.
+  * **Box-less Plain Text Warning**: Zero heavy pink alert boxes. Displays clean inline plain text:
+    * When booked: `<i class="ph-fill ph-warning-circle"></i> <span>X patients' appointments will be cancelled & notified</span>`.
+    * When empty: `<i class="ph-fill ph-warning-circle"></i> <span>No Booked Patients</span>`.
+  * **3-Scope Recurrence Protocol (For Repeating Shifts)**: Sleek single-row options without redundant subtexts:
+    1. **`This shift only`**: Deletes/modifies only the selected date; detaches it from the recurring series.
+    2. **`This and future shifts`**: Deletes/modifies the selected date and all subsequent weeks.
+    3. **`Future shifts except this`**: Keeps the selected date completely intact; modifies/deletes following weeks only.
   * Action buttons: `Keep Shift` (secondary neutral) and `Delete Shift` (primary danger).
-* **Desk Hero Auto-Promotion & Auto-Rescheduling**:
-  * When a shift with booked patients is deleted, all appointments are automatically reassigned to the next available shift, and if the active first shift of the day is deleted, the Desk Hero card automatically shifts focus and promotes **Shift 2 (6:00 PM)** as the active upcoming shift (`Shift 2 Starts at 6:00 PM`), preserving queue flow continuity.
+* **Desk Hero Auto-Promotion & Patient Rebooking Protocol**:
+  * Deleting a shift cancels booked visits and notifies patients to rebook at their convenience (no forced auto-reschedule).
+  * If the active first shift of the day is deleted, the Desk Hero card automatically shifts focus and promotes **Shift 2 (6:00 PM)** as the active upcoming shift (`Shift 2 Starts at 6:00 PM`), preserving queue flow continuity.
 
 ---
 
@@ -972,15 +979,17 @@ Across all calendar views in the app, each date cell displays **at most one sing
 
 ## 26. Offline Confirmation & Schedule Transition Sheets
 
-### 26.1 Offline Confirmed Success Sheet (`#offlineConfirmedModalSheet`)
-* **Trigger**: Doctor selects 1 to 6 days in Go Offline modal and taps `Confirm Offline`.
-* **Hero Visual**: 68×68px crimson power badge (`#FEF2F2` background, `#FECACA` border, `ph-bold ph-power` in `#DC2626`) with overlaid dark forest checkmark sub-badge.
-* **Header**: Bold `You are now Offline` in `Urbanist 24px Bold #000000` (zero verbose paragraph clutter).
-* **Minimal Unified Info Tile (`.offline-minimal-summary-card`)**:
-  * Row 1: `[Calendar icon] Sept 15 – 16 (2 Days)` • `[Crimson Dot] Offline` badge.
-  * 1px subtle divider (`#E2E8F0`).
-  * Row 2: `[Green sync icon] X patients auto-rescheduled` (single concise line confirming automatic transfer).
-* **Primary CTA**: Full-width dark forest button `Back To Desk →` (`--color-primary-btn: #052E28`).
+### 26.1 Clear Schedule Confirmed Success Sheet (`#clearScheduleConfirmedModalSheet`)
+* **Trigger**: Doctor selects dates in Clear Schedule modal and taps `Clear Schedule`.
+* **Hero Visual**: 50×50px soft mint checkmark badge (`#EFF7F5` background, `1.5px solid rgba(126, 184, 174, 0.4)`, `ph-bold ph-check` in `#0E8070`).
+* **Header**: Editorial `Schedule Cleared` in `Urbanist 24px Bold #1E293B`.
+  * If patients affected: Subtitle *"All shifts removed & patients notified."*
+  * If 0 patients affected: Subtitle *"All shifts removed from your schedule."*
+* **Box-less Pixel-Perfect Layout (`.clear-confirmed-boxless-wrap`)**: Zero outer container boxes or card borders. Clean borderless key-value rows:
+  * Row 1: `[Calendar icon] Sept 15 (1 Day)` • `Cleared` in soft bold red (`#DC2626`).
+  * Row 2 (Shown only when patients affected): 1px hairline divider (`#F1F5F9`) + `[Users icon] 4 Patients` • `Notified` in subtle teal (`#0E8070`).
+  * If 0 patients affected: Row 2 is completely hidden ("If none, then nothing").
+* **Primary CTA**: Full-width button `[✓ Done]` (`--color-primary-btn: #02241F`).
 
 ### 26.2 Add Shift to Go Offline Transition Sheet (`#createShiftToOfflineModalSheet`)
 * **Trigger**: Doctor selects an entire week (>= 7 days) to go offline where no future open shifts remain to auto-reschedule affected patients.
@@ -1067,3 +1076,33 @@ Across all calendar views in the app, each date cell displays **at most one sing
   * Primary Action CTA: `Submit Issue` (`#052E28`).
 * **Confirmation Protocol (`#supportConfirmedModalSheet`)**:
   * Submitting an issue displays a clean confirmation bottom sheet with a unified soft mint success badge (`.support-success-hero-badge` with `ph-bold ph-check` in `#0E8070`), clear reassurance (*"Issue submitted to support. They will reach back to you shortly."*), and a full-width primary CTA `[✓ Done]` with the tick mark placed in front of the text.
+
+---
+
+## 30. Wise / Uber Box-Less Design Standard (Feeds, Notifications & Modal Layouts)
+
+### 30.1 Philosophy: Eliminating "Box Inside a Box" Fatigue
+Modern Western digital products like **Wise and Uber** avoid trapping content inside floating rounded card boxes with borders and shadows. Every unnecessary container boundary increases cognitive load for doctors.
+
+### 30.2 Notifications Page Redesign (`#pageNotifications`)
+* **Group Headers**: Categorized by clean uppercase labels (`TODAY`, `YESTERDAY`, `SEP 20, 2026`) in `DM Sans 11.5px Bold #94A3B8`, letter-spacing `0.06em`.
+* **Box-less Feed Architecture (`.notification-item-card`)**:
+  * `background: transparent; border: none; box-shadow: none; border-radius: 0;`
+  * Each notification row sits directly on the canvas with a soft hairline divider (`border-bottom: 1px solid #F1F5F9`).
+  * Subtle hover state (`background: #F8FAFC; border-radius: 12px;`).
+* **Circular Avatar Icons (`.notif-icon-box`)**:
+  * 40×40px circular badges (`border-radius: 50%`) with soft contextual tints:
+    * Booking: `#EFF7F5`, `#052E28` (`ph-video-camera`)
+    * Patient in Room: `#EFF6FF`, `#2563EB` (`ph-user-check`)
+    * Payout: `#F0FDF4`, `#16A34A` (`ph-wallet`)
+    * Prescription: `#FAF5FF`, `#7E22CE` (`ph-file-text`)
+* **Metadata & Unread State**:
+  * Title in `Urbanist 14.5px Bold #0F172A`.
+  * Timestamp on the right in `DM Sans 12px #94A3B8`.
+  * Body copy in `DM Sans 13px #64748B`.
+  * Unread state indicated by an emerald dot (`#10B981`) with soft pulse ring.
+
+### 30.3 Modal Layouts & Inline Alerts
+* **Recurrence Scope Options**: Single-row options (`This shift only`, `This and future shifts`, `Future shifts except this`) with radio dots and clean bold titles without paragraph subtexts.
+* **Inline Alert Notes**: Plain colored text with icons (`⚠️ X patients' appointments will be cancelled & notified`, `⚠️ No Booked Patients`) instead of heavy tinted background boxes.
+* **Clear Schedule Success Sheet**: Borderless key-value rows on pure white canvas; hides unaffected patient rows dynamically.

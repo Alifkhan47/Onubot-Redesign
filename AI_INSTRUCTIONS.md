@@ -18,7 +18,7 @@
    - **ALL Bottom Sheets** (Edit Shift, Withdraw Funds, Saved Accounts, Add Payout Method, Confirmations) **MUST ALWAYS** follow the standard editorial layout:
      1. Drag handle (`.sheet-drag-handle`)
      2. Top badge icon (`.sheet-badge-icon`, 40x40 rounded container)
-     3. Editorial header (`.sheet-hero-header` with `.sheet-editorial-title` in `Urbanist 32px Bold #1E293B` deep slate charcoal and `.sheet-minimal-subtitle` 14px)
+     3. Editorial header (`.sheet-hero-header` with `.sheet-editorial-title` in `Urbanist 24px Bold #1E293B` deep slate charcoal and `.sheet-minimal-subtitle` 13.5px)
      4. Content container / Form fields
      5. Standard action group (`.sheet-actions-group` with `.btn-sheet-cancel` and `.btn-sheet-confirm`) with generous bottom clearance.
    - **NEVER** create custom unstyled inline headers with raw 'x' buttons that deviate from this system.
@@ -40,9 +40,10 @@
 6. **GIT & VERSION CONTROL RULE**:
    - **NEVER run `git commit` or `git push`** under any circumstance unless the user explicitly commands you to do so.
 
-7. **LESS TEXT & COGNITIVE DECLUTTERING**:
+7. **LESS TEXT & WISE / UBER BOX-LESS DESIGN STANDARD**:
    - Keep labels, metrics, and fraction counters ultra-minimal.
-   - Zero nested boxes ("No boxes inside boxes inside boxes").
+   - **Zero Card/Box Fatigue ("No Boxes Inside Boxes")**: Lists and feeds (Notifications, Activity, Clear Schedule summaries, Recurrence scope options) **must be box-less**—use clean borderless list rows, subtle hairline dividers (`border-bottom: 1px solid #F1F5F9`), and circular icon avatars instead of wrapping every row in a floating card box.
+   - **Plain Text Warnings**: Use inline colored text with icons for warnings (e.g., `⚠️ No Booked Patients`, `⚠️ X patients' appointments will be cancelled & notified`) rather than heavy tinted alert boxes.
 
 ---
 
@@ -242,7 +243,13 @@ c:\Alif\Onu App Prototype\
   * Edit button (`editExistingShift`) and Delete trash button (`requestDeleteShift`).
   * **Booked Shift Editing & Start Time Lock**: Shifts with active booked patients can be edited freely (start time is locked to preserve booked appointments; end time and max patient capacity can be adjusted).
   * **Android Compose Floating Snackbar (`#androidSnackbar`)**: Tapping the locked start time tile (or other locked properties) displays an Android Compose-styled floating snackbar (`#2A2F2D` dark surface, mint accent icon, clear natural message e.g. *"4 patients already booked, can't change start time"*, `OK` action, auto-dismiss in 3s) without intrusive persistent banner clutter.
-  * **Shift Deletion & Auto-Rescheduling Protocol**: Always prompts `#cancelShiftModalSheet` before removing the shift. If patients are already booked, warns with `⚠️ X Patients Already Booked` and informs the doctor that deleting will automatically reschedule them to the next available shift, matching the offline auto-rescheduling protocol.
+  * **Shift Deletion & Patient Cancellation Notification Protocol**: Always prompts `#cancelShiftModalSheet` before removing a shift:
+    - **No Auto-Rescheduling**: Patients are NOT automatically rescheduled to future shifts. Instead, booked appointments are cancelled and patients receive an automated notification inviting them to rebook a new time.
+    - **Box-less Plain Text Warning**: When patients are booked, shows clean inline plain text `⚠️ X patients' appointments will be cancelled & notified`. When 0 bookings, shows `⚠️ No Booked Patients`. Zero heavy alert boxes.
+    - **3-Scope Recurrence Protocol**: If the shift repeats, provides 3 clean options with no redundant subtext:
+      1. `This shift only` (removes/updates only this date; detaches recurrence)
+      2. `This and future shifts` (removes/updates this date and all future weeks)
+      3. `Future shifts except this` (leaves this date completely intact; modifies/deletes upcoming weeks only)
 
 ### Screen 3: Video Consultation Call (`#pageVideoCall`)
 * **Purpose**: Telemedicine video interface between doctor and patient.
