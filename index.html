@@ -3164,6 +3164,94 @@
       transform: scale(0.99);
     }
 
+    /* Recurring Scope Selection Cards (Modal bottom sheets) */
+    .recurring-scope-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 6px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .recurring-scope-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 15px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECE9;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+      box-sizing: border-box;
+    }
+
+    .recurring-scope-option:hover {
+      border-color: #CBD5E1;
+      background: #F8FAFC;
+    }
+
+    .recurring-scope-option.active {
+      background: #EFF7F5;
+      border-color: var(--color-primary-btn);
+    }
+
+    .scope-radio-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #CBD5E1;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .scope-radio-dot::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--color-primary-btn);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 0.15s ease;
+    }
+
+    .recurring-scope-option.active .scope-radio-dot {
+      border-color: var(--color-primary-btn);
+    }
+
+    .recurring-scope-option.active .scope-radio-dot::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .scope-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .scope-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .scope-desc {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
     /* Live preview pill in Time Picker modal */
     .picker-live-preview-chip {
       display: inline-flex;
@@ -13637,11 +13725,70 @@
             </p>
           </div>
 
+          <!-- Recurring Scope Options (Shown dynamically if shift is recurring) -->
+          <div class="recurring-scope-container" id="cancelShiftRecurringScope" style="display: none;">
+            <div class="recurring-scope-option active" id="deleteScopeThisOption" onclick="selectRecurringScope('delete', 'this')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">This shift only</div>
+                <div class="scope-desc" id="deleteScopeThisDesc">Sept 15 only</div>
+              </div>
+            </div>
+            <div class="recurring-scope-option" id="deleteScopeFutureOption" onclick="selectRecurringScope('delete', 'future')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">This and future shifts</div>
+                <div class="scope-desc" id="deleteScopeFutureDesc">From Sept 15 onward</div>
+              </div>
+            </div>
+          </div>
+
           <div class="sheet-actions-group" style="margin-top: 14px;">
             <button type="button" class="btn-sheet-cancel" onclick="closeCancelShiftModal()">Keep Shift</button>
             <button type="button" class="btn-sheet-danger-confirm" onclick="confirmCancelShiftAction()">
               <i class="ph ph-trash"></i>
               <span>Delete Shift</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             10C. EDIT RECURRING SHIFT SCOPE BOTTOM SHEET MODAL
+             ======================================================= -->
+        <div class="bottom-sheet" id="editRecurringShiftModalSheet">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background:#EFF7F5; color:var(--color-primary-btn); border: 1px solid #D6EAE6; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px;">
+              <i class="ph ph-arrows-clockwise"></i>
+            </div>
+          </div>
+          
+          <div class="sheet-hero-header">
+            <h2 class="sheet-editorial-title">Apply Changes</h2>
+            <p class="sheet-minimal-subtitle" id="editRecurringShiftSubtitle">This shift repeats weekly</p>
+          </div>
+
+          <div class="recurring-scope-container">
+            <div class="recurring-scope-option active" id="editScopeThisOption" onclick="selectRecurringScope('edit', 'this')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">This shift only</div>
+                <div class="scope-desc" id="editScopeThisDesc">Update this date only</div>
+              </div>
+            </div>
+            <div class="recurring-scope-option" id="editScopeFutureOption" onclick="selectRecurringScope('edit', 'future')">
+              <div class="scope-radio-dot"></div>
+              <div class="scope-text-wrap">
+                <div class="scope-title">This and future shifts</div>
+                <div class="scope-desc" id="editScopeFutureDesc">Update this and all future weeks</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 14px;">
+            <button type="button" class="btn-sheet-cancel" onclick="closeEditRecurringModal()">Cancel</button>
+            <button type="button" class="btn-sheet-confirm" onclick="confirmEditRecurringAction()">
+              <span>Save Changes</span>
             </button>
           </div>
         </div>
@@ -21067,28 +21214,28 @@
 
     let dateSchedules = {
       'Sunday, Sept 15': [
-        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true },
-        { id: 'shiftCard2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false }
+        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] },
+        { id: 'shiftCard2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false, isRecurring: true, seriesId: 'series_evening_inperson', repeatDays: [0, 2] }
       ],
       'Monday, Sept 16': [
-        { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true },
+        { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] },
         { id: 'shiftCard16_2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '04:00 PM', endTime: '08:00 PM', booked: 2, max: 15, locked: true }
       ],
       'Tuesday, Sept 17': [
-        { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
+        { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
       ],
       'Wednesday, Sept 18': [
         { id: 'shiftCard18_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 6, max: 15, locked: true }
       ],
       'Thursday, Sept 19': [
-        { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true }
+        { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
       ],
       'Friday, Sept 20': [
         { id: 'shiftCard20_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Saturday, Sept 21': [],
       'Sunday, Sept 22': [
-        { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
+        { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
       ],
       'Monday, Sept 23': [],
       'Tuesday, Sept 24': [
@@ -21340,7 +21487,7 @@
             </div>
 
             <div class="saved-shift-actions-row">
-              <button type="button" class="btn-shift-edit" onclick="editExistingShift('${shiftTitle}', '${shift.startTime}', '${shift.endTime}', ${maxCapacity}, ${bookedCount})">
+              <button type="button" class="btn-shift-edit" onclick="editExistingShift('${shiftTitle}', '${shift.startTime}', '${shift.endTime}', ${maxCapacity}, ${bookedCount}, '${shift.id}')">
                 <i class="ph ph-pencil-simple"></i>
                 <span>Edit Shift</span>
               </button>
@@ -21701,9 +21848,11 @@
       currentEditingShiftBookedCount = 0;
     }
 
-    function editExistingShift(shiftLabel, start, end, limit, booked) {
-      currentEditingShiftId = shiftLabel;
+    function editExistingShift(shiftLabel, start, end, limit, booked, shiftId) {
+      currentEditingShiftId = shiftId || shiftLabel;
       currentEditingShiftBookedCount = booked || 0;
+
+      const shiftObj = (dateSchedules[currentSelectedDate] || []).find(s => s.id === currentEditingShiftId || s.name === shiftLabel);
 
       const titleEl = document.getElementById('inPageShiftCardTitle');
       const saveBtnLabel = document.getElementById('btnSaveLabel');
@@ -21750,10 +21899,27 @@
         if (repeatToggle) repeatToggle.disabled = false;
       }
 
-      // Reset repeat days and set current weekday to locked
-      document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach(btn => btn.classList.remove('selected'));
-      updateRepeatDayChips();
-      if (repeatToggle) repeatToggle.checked = false;
+      // Populate routine days and repeat weekly toggle
+      const isShiftRecurring = Boolean(shiftObj && (shiftObj.isRecurring !== false));
+      if (repeatToggle) repeatToggle.checked = isShiftRecurring;
+
+      const currentIdx = getSelectedWeekdayIndex();
+      const routineDays = (shiftObj && Array.isArray(shiftObj.repeatDays)) ? shiftObj.repeatDays : [currentIdx];
+
+      document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn').forEach((btn, idx) => {
+        const chipDay = btn.getAttribute('data-day') !== null ? parseInt(btn.getAttribute('data-day'), 10) : idx;
+        btn.classList.remove('selected', 'current-locked');
+        btn.removeAttribute('title');
+        btn.removeAttribute('aria-disabled');
+
+        if (chipDay === currentIdx) {
+          btn.classList.add('current-locked');
+          btn.setAttribute('title', 'Current day (Active)');
+          btn.setAttribute('aria-disabled', 'true');
+        } else if (routineDays.includes(chipDay)) {
+          btn.classList.add('selected');
+        }
+      });
 
       updateShiftModalDurationSummary();
 
@@ -22266,6 +22432,59 @@
       if (typeof closeTransactionFilterModal === 'function') closeTransactionFilterModal();
     }
 
+    function getDateSortValue(dateStr) {
+      if (!dateStr) return 0;
+      const match = dateStr.match(/(Sept|Oct)\s+(\d+)/i);
+      if (!match) return 0;
+      const month = match[1].toLowerCase() === 'sept' ? 9 : 10;
+      const day = parseInt(match[2], 10);
+      return month * 100 + day;
+    }
+
+    let selectedRecurringScope = 'this';
+
+    function selectRecurringScope(actionType, scope) {
+      selectedRecurringScope = scope;
+      const prefix = actionType === 'delete' ? 'deleteScope' : 'editScope';
+      const thisOpt = document.getElementById(`${prefix}ThisOption`);
+      const futureOpt = document.getElementById(`${prefix}FutureOption`);
+      if (thisOpt && futureOpt) {
+        if (scope === 'this') {
+          thisOpt.classList.add('active');
+          futureOpt.classList.remove('active');
+        } else {
+          futureOpt.classList.add('active');
+          thisOpt.classList.remove('active');
+        }
+      }
+    }
+
+    function openEditRecurringModal() {
+      selectedRecurringScope = 'this';
+      selectRecurringScope('edit', 'this');
+      const subEl = document.getElementById('editRecurringShiftSubtitle');
+      if (subEl) subEl.textContent = `${currentSelectedDate} • ${currentEditingShiftId || 'Shift'}`;
+      
+      const thisDesc = document.getElementById('editScopeThisDesc');
+      const futureDesc = document.getElementById('editScopeFutureDesc');
+      if (thisDesc) thisDesc.textContent = `Update ${currentSelectedDate} only`;
+      if (futureDesc) futureDesc.textContent = `Update from ${currentSelectedDate} onward`;
+
+      document.getElementById('modalBackdrop').classList.add('active');
+      document.getElementById('editRecurringShiftModalSheet').classList.add('active');
+    }
+
+    function closeEditRecurringModal() {
+      document.getElementById('modalBackdrop').classList.remove('active');
+      const sheet = document.getElementById('editRecurringShiftModalSheet');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function confirmEditRecurringAction() {
+      closeEditRecurringModal();
+      executeSaveShift(selectedRecurringScope);
+    }
+
     function saveShiftAction() {
       const startTime = document.getElementById('formStartTime').textContent.trim();
       const endTime = document.getElementById('formEndTime').textContent.trim();
@@ -22275,6 +22494,24 @@
         showToast('Shift duration must be at least 30 minutes.');
         return;
       }
+
+      // Check if editing an existing recurring shift
+      if (currentEditingShiftId) {
+        const existingShift = (dateSchedules[currentSelectedDate] || []).find(
+          s => s.id === currentEditingShiftId || s.name === currentEditingShiftId
+        );
+        if (existingShift && existingShift.isRecurring !== false) {
+          openEditRecurringModal();
+          return;
+        }
+      }
+
+      executeSaveShift('future');
+    }
+
+    function executeSaveShift(scope = 'future') {
+      const startTime = document.getElementById('formStartTime').textContent.trim();
+      const endTime = document.getElementById('formEndTime').textContent.trim();
       const isVideo = document.getElementById('btnTypeVideo').classList.contains('active');
       const typeLabel = isVideo ? 'Video Consultation' : 'In-Person Visit';
       const typeIcon = isVideo ? 'ph-video-camera' : 'ph-user';
@@ -22283,18 +22520,96 @@
         dateSchedules[currentSelectedDate] = [];
       }
 
+      const isRepeatWeekly = Boolean(document.getElementById('repeatWeeklyToggle')?.checked);
+      const selectedDayChips = document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn.selected');
+      const selectedDayIndices = Array.from(selectedDayChips).map(c => parseInt(c.getAttribute('data-day'), 10));
+      const currentDayIdx = getSelectedWeekdayIndex();
+      const allRoutineDays = Array.from(new Set([currentDayIdx, ...selectedDayIndices]));
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const currentDateVal = getDateSortValue(currentSelectedDate);
+
       if (currentEditingShiftId) {
-        const shift = dateSchedules[currentSelectedDate].find(s => s.name === currentEditingShiftId);
+        const shift = dateSchedules[currentSelectedDate].find(
+          s => s.id === currentEditingShiftId || s.name === currentEditingShiftId
+        );
         if (shift) {
-          shift.startTime = startTime;
-          shift.endTime = endTime;
-          shift.max = currentLimit;
-          shift.type = typeLabel;
-          shift.typeIcon = typeIcon;
+          if (scope === 'this') {
+            // Modify this shift only (detach from recurring series)
+            shift.startTime = startTime;
+            shift.endTime = endTime;
+            shift.max = currentLimit;
+            shift.type = typeLabel;
+            shift.typeIcon = typeIcon;
+            shift.isRecurring = false;
+            showToast(`Updated shift for ${currentSelectedDate}`);
+          } else {
+            // Modify this and future shifts
+            const targetSeriesId = shift.seriesId || 'series_' + Date.now();
+            shift.seriesId = targetSeriesId;
+            shift.startTime = startTime;
+            shift.endTime = endTime;
+            shift.max = currentLimit;
+            shift.type = typeLabel;
+            shift.typeIcon = typeIcon;
+            shift.isRecurring = isRepeatWeekly;
+            shift.repeatDays = allRoutineDays;
+
+            if (!isRepeatWeekly) {
+              // Stopped repeating: remove future occurrences in this series
+              for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
+                if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) >= currentDateVal) {
+                  dateSchedules[dateKey] = shifts.filter(s => s.seriesId !== targetSeriesId);
+                }
+              }
+              showToast(`Stopped future repeats from ${currentSelectedDate} onward`);
+            } else {
+              // Apply updates across all future matching dates
+              for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
+                if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) >= currentDateVal) {
+                  const firstWord = dateKey.split(',')[0].trim();
+                  const dateWeekdayIdx = dayNames.indexOf(firstWord);
+
+                  if (!allRoutineDays.includes(dateWeekdayIdx)) {
+                    // This weekday was removed from routine: delete future occurrences on this day
+                    dateSchedules[dateKey] = shifts.filter(s => s.seriesId !== targetSeriesId);
+                  } else {
+                    // Update existing or add if newly selected
+                    const matching = shifts.find(s => s.seriesId === targetSeriesId);
+                    if (matching) {
+                      matching.startTime = startTime;
+                      matching.endTime = endTime;
+                      matching.max = currentLimit;
+                      matching.type = typeLabel;
+                      matching.typeIcon = typeIcon;
+                      matching.repeatDays = allRoutineDays;
+                    } else {
+                      shifts.push({
+                        id: 'shiftCard_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                        name: `Shift ${shifts.length + 1}`,
+                        seriesId: targetSeriesId,
+                        isRecurring: true,
+                        repeatDays: allRoutineDays,
+                        type: typeLabel,
+                        typeIcon: typeIcon,
+                        startTime: startTime,
+                        endTime: endTime,
+                        booked: 0,
+                        max: currentLimit,
+                        locked: false
+                      });
+                    }
+                  }
+                }
+              }
+              showToast(`Updated this and all future shifts`);
+            }
+          }
         }
       } else {
+        // Adding a brand new shift
         shiftCount++;
         const newShiftNum = dateSchedules[currentSelectedDate].length + 1;
+        const newSeriesId = (isRepeatWeekly || selectedDayChips.length > 0) ? ('series_' + Date.now()) : null;
         const newShift = {
           id: 'shiftCard_' + Date.now(),
           name: `Shift ${newShiftNum}`,
@@ -22304,41 +22619,43 @@
           endTime: endTime,
           booked: 0,
           max: currentLimit,
-          locked: false
+          locked: false,
+          isRecurring: Boolean(newSeriesId),
+          seriesId: newSeriesId,
+          repeatDays: newSeriesId ? allRoutineDays : [currentDayIdx]
         };
         dateSchedules[currentSelectedDate].push(newShift);
-      }
 
-      // Apply repeat to other selected weekdays if any are chosen
-      const selectedDayChips = document.querySelectorAll('#applyOtherDaysGroup .day-chip-btn.selected');
-      if (selectedDayChips.length > 0) {
-        const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        selectedDayChips.forEach(chip => {
-          const dIdx = parseInt(chip.getAttribute('data-day'), 10);
-          const targetDay = dayNames[dIdx];
-          for (const k of Object.keys(dateSchedules)) {
-            if (k.startsWith(targetDay) && k !== currentSelectedDate) {
-              if (!dateSchedules[k]) dateSchedules[k] = [];
-              const cloneShift = {
-                id: 'shiftCard_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
-                name: `Shift ${dateSchedules[k].length + 1}`,
-                type: typeLabel,
-                typeIcon: typeIcon,
-                startTime: startTime,
-                endTime: endTime,
-                booked: 0,
-                max: currentLimit,
-                locked: false
-              };
-              dateSchedules[k].push(cloneShift);
+        // If repeating on other days or weekly, clone to future dates of those weekdays
+        if (newSeriesId && allRoutineDays.length > 0) {
+          for (const [k, shifts] of Object.entries(dateSchedules)) {
+            if (k !== currentSelectedDate && getDateSortValue(k) >= currentDateVal) {
+              const firstWord = k.split(',')[0].trim();
+              const dateWeekdayIdx = dayNames.indexOf(firstWord);
+              if (allRoutineDays.includes(dateWeekdayIdx)) {
+                shifts.push({
+                  id: 'shiftCard_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+                  name: `Shift ${shifts.length + 1}`,
+                  seriesId: newSeriesId,
+                  isRecurring: true,
+                  repeatDays: allRoutineDays,
+                  type: typeLabel,
+                  typeIcon: typeIcon,
+                  startTime: startTime,
+                  endTime: endTime,
+                  booked: 0,
+                  max: currentLimit,
+                  locked: false
+                });
+              }
             }
           }
-        });
+        }
+        showToast(`Saved shift for ${currentSelectedDate}`);
       }
 
       // Check if this saved shift applies to Today
       const isToday = currentSelectedDate.includes('Sept 15') || currentSelectedDate.includes('Sept 29') || currentSelectedDate.includes('Today');
-
       if (isToday) {
         for (const k of Object.keys(dateSchedules)) {
           if ((k.includes('Sept 15') || k.includes('Sept 29')) && k !== currentSelectedDate) {
@@ -22352,20 +22669,11 @@
       }
 
       renderDateSchedule(currentSelectedDate);
-      if (typeof renderDateCarouselStrip === 'function') {
-        renderDateCarouselStrip();
-      }
-      if (typeof renderMonthCalendarGrid === 'function') {
-        renderMonthCalendarGrid();
-      }
-      if (typeof renderClearScheduleDaysGrid === 'function') {
-        renderClearScheduleDaysGrid();
-      }
-      if (typeof renderAppointmentsList === 'function') {
-        renderAppointmentsList();
-      }
+      if (typeof renderDateCarouselStrip === 'function') renderDateCarouselStrip();
+      if (typeof renderMonthCalendarGrid === 'function') renderMonthCalendarGrid();
+      if (typeof renderClearScheduleDaysGrid === 'function') renderClearScheduleDaysGrid();
+      if (typeof renderAppointmentsList === 'function') renderAppointmentsList();
       closeInPageShiftCard();
-      showToast(`Saved shift for ${currentSelectedDate}`);
     }
 
     function renderDeskHeroStateForToday() {
@@ -22451,6 +22759,7 @@
 
       const shift = (dateSchedules[currentSelectedDate] || []).find(s => s.id === cardId || s.name === shiftName);
       const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' ? 4 : 0);
+      const isRecurring = Boolean(shift && (shift.isRecurring !== false));
 
       if (titleEl) titleEl.textContent = `Delete ${shiftName}?`;
       if (subEl) subEl.textContent = `${currentSelectedDate} • ${shift ? `${shift.startTime} – ${shift.endTime}` : '10:00 AM – 12:00 PM'}`;
@@ -22461,6 +22770,20 @@
       } else {
         if (countEl) countEl.textContent = 'No Booked Patients';
         if (descEl) descEl.textContent = `Shift has no bookings and will be removed from your schedule.`;
+      }
+
+      const scopeEl = document.getElementById('cancelShiftRecurringScope');
+      if (scopeEl) {
+        if (isRecurring) {
+          scopeEl.style.display = 'flex';
+          selectRecurringScope('delete', 'this');
+          const thisDesc = document.getElementById('deleteScopeThisDesc');
+          const futureDesc = document.getElementById('deleteScopeFutureDesc');
+          if (thisDesc) thisDesc.textContent = `${currentSelectedDate} only`;
+          if (futureDesc) futureDesc.textContent = `From ${currentSelectedDate} onward`;
+        } else {
+          scopeEl.style.display = 'none';
+        }
       }
 
       document.getElementById('modalBackdrop').classList.add('active');
@@ -22474,17 +22797,33 @@
     }
 
     function confirmCancelShiftAction() {
+      const shift = (dateSchedules[currentSelectedDate] || []).find(
+        s => s.id === pendingCancelShiftCardId || s.name === pendingCancelShiftName
+      );
+      const isRecurring = Boolean(shift && (shift.isRecurring !== false));
+      const targetSeriesId = shift ? shift.seriesId : null;
+      const currentDateVal = getDateSortValue(currentSelectedDate);
+
       if (dateSchedules[currentSelectedDate]) {
         dateSchedules[currentSelectedDate] = dateSchedules[currentSelectedDate].filter(
           s => s.id !== pendingCancelShiftCardId && s.name !== pendingCancelShiftName
         );
       }
 
+      // If delete scope is "future", also remove from future dates
+      if (isRecurring && selectedRecurringScope === 'future') {
+        for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
+          if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) >= currentDateVal) {
+            dateSchedules[dateKey] = shifts.filter(
+              s => (targetSeriesId ? s.seriesId !== targetSeriesId : (s.id !== pendingCancelShiftCardId && s.name !== pendingCancelShiftName))
+            );
+          }
+        }
+      }
+
       if (pendingCancelShiftName === 'Shift 1' || pendingCancelShiftCardId === 'shiftCard1') {
         isShift1Cancelled = true;
-        // Promote Shift 2 onto the Desk Hero Card!
         promoteShift2OnDesk();
-        // Update Shift 1 appointments to Rescheduled status in appointments list
         if (typeof appointmentsData !== 'undefined') {
           appointmentsData.forEach(apt => {
             if (apt.shift === 'Shift 1' || apt.shift === '1') {
@@ -22497,8 +22836,13 @@
       }
 
       renderDateSchedule(currentSelectedDate);
+      if (typeof renderDateCarouselStrip === 'function') renderDateCarouselStrip();
       closeCancelShiftModal();
-      showToast(`${pendingCancelShiftName || 'Shift'} deleted • Patients auto-rescheduled`);
+      
+      const toastMsg = (isRecurring && selectedRecurringScope === 'future')
+        ? `${pendingCancelShiftName || 'Shift'} and future occurrences deleted`
+        : `${pendingCancelShiftName || 'Shift'} deleted for ${currentSelectedDate}`;
+      showToast(toastMsg);
     }
 
     function promoteShift2OnDesk() {
