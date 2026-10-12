@@ -21213,138 +21213,75 @@
     };
 
     let dateSchedules = {
+      'Wednesday, Sept 15': [
+        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 4, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
+      ],
       'Sunday, Sept 15': [
-        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] },
-        { id: 'shiftCard2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false, isRecurring: true, seriesId: 'series_evening_inperson', repeatDays: [0, 2] }
+        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 4, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Monday, Sept 16': [
-        { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] },
-        { id: 'shiftCard16_2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '04:00 PM', endTime: '08:00 PM', booked: 2, max: 15, locked: true }
+      'Thursday, Sept 16': [
+        { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] },
+        { id: 'shiftCard16_2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '04:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Tuesday, Sept 17': [
-        { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
+      'Friday, Sept 17': [
+        { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Wednesday, Sept 18': [
-        { id: 'shiftCard18_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 6, max: 15, locked: true }
+      'Saturday, Sept 18': [
+        { id: 'shiftCard18_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Thursday, Sept 19': [
-        { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
+      'Sunday, Sept 19': [
+        { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Friday, Sept 20': [
+      'Monday, Sept 20': [
         { id: 'shiftCard20_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Saturday, Sept 21': [],
-      'Sunday, Sept 22': [
-        { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [0, 1, 2, 4] }
+      'Tuesday, Sept 21': [],
+      'Wednesday, Sept 22': [
+        { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Monday, Sept 23': [],
-      'Tuesday, Sept 24': [
+      'Thursday, Sept 23': [],
+      'Friday, Sept 24': [
         { id: 'shiftCard24_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Wednesday, Sept 25': [
+      'Saturday, Sept 25': [
         { id: 'shiftCard25_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Thursday, Sept 26': [
+      'Sunday, Sept 26': [
         { id: 'shiftCard26_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Friday, Sept 27': [
+      'Monday, Sept 27': [
         { id: 'shiftCard27_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Saturday, Sept 28': [
+      'Tuesday, Sept 28': [
         { id: 'shiftCard28_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Sunday, Sept 29': [
+      'Wednesday, Sept 29': [
         { id: 'shiftCard29_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Monday, Sept 30': [
+      'Thursday, Sept 30': [
         { id: 'shiftCard30_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Tuesday, Sept 29': [
-        { id: 'shiftCardTue1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 2, max: 15, locked: true },
-        { id: 'shiftCardTue2', name: 'Shift 2', type: 'In-Person Consultation', typeIcon: 'ph-user', startTime: '06:00 PM', endTime: '09:00 PM', booked: 3, max: 15, locked: false }
-      ],
-      'Wednesday, Sept 30': [
-        { id: 'shiftCardWed1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 7, max: 15, locked: true }
-      ],
       'Thursday, Oct 1': [
-        { id: 'shiftCardThu1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 6, max: 15, locked: true }
+        { id: 'shiftCardThu1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Friday, Oct 2': [
-        { id: 'shiftCardFri1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 8, max: 15, locked: true }
+        { id: 'shiftCardFri1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Saturday, Oct 3': [
-        { id: 'shiftCardSat1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 6, max: 15, locked: true }
+        { id: 'shiftCardSat1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Sunday, Oct 4': [
-        { id: 'shiftCardSun4', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
+        { id: 'shiftCardSun4', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Monday, Oct 5': [
-        { id: 'shiftCardMon5', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 5, max: 15, locked: true }
+        { id: 'shiftCardMon5', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Tuesday, Oct 6': [
         { id: 'shiftCardOct6', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Wednesday, Oct 7': [
-        { id: 'shiftCardOct7', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 4, max: 15, locked: true }
-      ],
-      'Thursday, Oct 8': [
-        { id: 'shiftCardOct8', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Friday, Oct 9': [
-        { id: 'shiftCardOct9', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Saturday, Oct 10': [],
-      'Sunday, Oct 11': [],
-      'Monday, Oct 12': [
-        { id: 'shiftCardOct12', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 3, max: 15, locked: true }
-      ],
-      'Tuesday, Oct 13': [
-        { id: 'shiftCardOct13', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Wednesday, Oct 14': [
-        { id: 'shiftCardOct14', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 5, max: 15, locked: true }
-      ],
-      'Thursday, Oct 15': [
-        { id: 'shiftCardOct15', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 2, max: 15, locked: true }
-      ],
-      'Friday, Oct 16': [
-        { id: 'shiftCardOct16', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Saturday, Oct 17': [],
-      'Sunday, Oct 18': [],
-      'Monday, Oct 19': [
-        { id: 'shiftCardOct19', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Tuesday, Oct 20': [
-        { id: 'shiftCardOct20', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 6, max: 15, locked: true }
-      ],
-      'Wednesday, Oct 21': [
-        { id: 'shiftCardOct21', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Thursday, Oct 22': [
-        { id: 'shiftCardOct22', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Friday, Oct 23': [
-        { id: 'shiftCardOct23', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 4, max: 15, locked: true }
-      ],
-      'Saturday, Oct 24': [],
-      'Sunday, Oct 25': [],
-      'Monday, Oct 26': [
-        { id: 'shiftCardOct26', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Tuesday, Oct 27': [
-        { id: 'shiftCardOct27', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 3, max: 15, locked: true }
-      ],
-      'Wednesday, Oct 28': [
-        { id: 'shiftCardOct28', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Thursday, Oct 29': [
-        { id: 'shiftCardOct29', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 5, max: 15, locked: true }
-      ],
-      'Friday, Oct 30': [
-        { id: 'shiftCardOct30', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
-      ],
-      'Saturday, Oct 31': []
+        { id: 'shiftCardOct7', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
+      ]
     };
 
     function getShiftsForDay(month, day) {
@@ -21356,6 +21293,33 @@
         }
       }
       return [];
+    }
+
+    function findDateScheduleKey(dateText) {
+      if (!dateText) return 'Wednesday, Sept 15';
+      if (dateSchedules[dateText]) return dateText;
+      const dayMatch = dateText.match(/(Sept|Oct)\s+(\d+)/i);
+      if (dayMatch) {
+        const keySnippet = `${dayMatch[1]} ${dayMatch[2]}`;
+        for (const k of Object.keys(dateSchedules)) {
+          if (k.includes(keySnippet)) {
+            return k;
+          }
+        }
+      }
+      return dateText;
+    }
+
+    function removeShiftFromDate(dateText, cardId, shiftName) {
+      const dayMatch = dateText ? dateText.match(/(Sept|Oct)\s+(\d+)/i) : null;
+      const snippet = dayMatch ? `${dayMatch[1]} ${dayMatch[2]}` : null;
+      for (const k of Object.keys(dateSchedules)) {
+        if (k === dateText || (snippet && k.includes(snippet))) {
+          dateSchedules[k] = (dateSchedules[k] || []).filter(
+            s => s.id !== cardId && s.name !== shiftName
+          );
+        }
+      }
     }
 
     function renderDateCarouselStrip() {
@@ -21883,21 +21847,19 @@
           startTile.title = 'Start time is locked';
         }
         if (startLabel) startLabel.innerHTML = 'Start Time <i class="ph-fill ph-lock" style="font-size:11px; margin-left:2px;"></i>';
-        if (consultSeg) consultSeg.classList.add('locked');
-        if (applyDays) applyDays.classList.add('locked');
-        if (repeatRow) repeatRow.classList.add('locked');
-        if (repeatToggle) repeatToggle.disabled = true;
       } else {
         if (startTile) {
           startTile.classList.remove('locked');
           startTile.title = 'Click to select Start Time';
         }
         if (startLabel) startLabel.textContent = 'Start Time';
-        if (consultSeg) consultSeg.classList.remove('locked');
-        if (applyDays) applyDays.classList.remove('locked');
-        if (repeatRow) repeatRow.classList.remove('locked');
-        if (repeatToggle) repeatToggle.disabled = false;
       }
+
+      // Always allow editing consult type, repeat on other days, and weekly repeat
+      if (consultSeg) consultSeg.classList.remove('locked');
+      if (applyDays) applyDays.classList.remove('locked');
+      if (repeatRow) repeatRow.classList.remove('locked');
+      if (repeatToggle) repeatToggle.disabled = false;
 
       // Populate routine days and repeat weekly toggle
       const isShiftRecurring = Boolean(shiftObj && (shiftObj.isRecurring !== false));
@@ -21933,10 +21895,6 @@
     }
 
     function setConsultType(type) {
-      if (currentEditingShiftBookedCount > 0) {
-        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change visit type`);
-        return;
-      }
       if (type === 'video') {
         document.getElementById('btnTypeVideo').classList.add('active');
         document.getElementById('btnTypeInPerson').classList.remove('active');
@@ -21949,10 +21907,6 @@
     function toggleDayPicker(btn) {
       if (btn.classList.contains('current-locked')) {
         return; // Current weekday is disabled / locked as active
-      }
-      if (currentEditingShiftBookedCount > 0) {
-        showAndroidSnackbar(`${currentEditingShiftBookedCount} patient${currentEditingShiftBookedCount > 1 ? 's' : ''} already booked, can't change repeat days`);
-        return;
       }
       btn.classList.toggle('selected');
     }
@@ -22757,8 +22711,9 @@
       const countEl = document.getElementById('cancelShiftPatientCountText');
       const descEl = document.getElementById('cancelShiftImpactDesc');
 
-      const shift = (dateSchedules[currentSelectedDate] || []).find(s => s.id === cardId || s.name === shiftName);
-      const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' ? 4 : 0);
+      const dateKey = findDateScheduleKey(currentSelectedDate);
+      const shift = (dateSchedules[dateKey] || []).find(s => s.id === cardId || s.name === shiftName);
+      const bookedCount = shift ? shift.booked : (shiftName === 'Shift 1' && currentSelectedDate.includes('15') ? 4 : 0);
       const isRecurring = Boolean(shift && (shift.isRecurring !== false));
 
       if (titleEl) titleEl.textContent = `Delete ${shiftName}?`;
@@ -22797,24 +22752,22 @@
     }
 
     function confirmCancelShiftAction() {
-      const shift = (dateSchedules[currentSelectedDate] || []).find(
+      const dateKey = findDateScheduleKey(currentSelectedDate);
+      const shift = (dateSchedules[dateKey] || []).find(
         s => s.id === pendingCancelShiftCardId || s.name === pendingCancelShiftName
       );
       const isRecurring = Boolean(shift && (shift.isRecurring !== false));
       const targetSeriesId = shift ? shift.seriesId : null;
       const currentDateVal = getDateSortValue(currentSelectedDate);
 
-      if (dateSchedules[currentSelectedDate]) {
-        dateSchedules[currentSelectedDate] = dateSchedules[currentSelectedDate].filter(
-          s => s.id !== pendingCancelShiftCardId && s.name !== pendingCancelShiftName
-        );
-      }
+      // Remove shift from current date across all key representations
+      removeShiftFromDate(currentSelectedDate, pendingCancelShiftCardId, pendingCancelShiftName);
 
       // If delete scope is "future", also remove from future dates
       if (isRecurring && selectedRecurringScope === 'future') {
-        for (const [dateKey, shifts] of Object.entries(dateSchedules)) {
-          if (dateKey !== currentSelectedDate && getDateSortValue(dateKey) >= currentDateVal) {
-            dateSchedules[dateKey] = shifts.filter(
+        for (const [k, shifts] of Object.entries(dateSchedules)) {
+          if (getDateSortValue(k) >= currentDateVal) {
+            dateSchedules[k] = shifts.filter(
               s => (targetSeriesId ? s.seriesId !== targetSeriesId : (s.id !== pendingCancelShiftCardId && s.name !== pendingCancelShiftName))
             );
           }
