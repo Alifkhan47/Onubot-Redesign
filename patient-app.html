@@ -1,0 +1,3395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <title>Onu App — Patient Care & Doctor Discovery</title>
+  
+  <!-- Google Fonts: Urbanist (Headings & Metrics) and DM Sans (Body & Meta) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <!-- Phosphor Icons (Regular, Fill & Bold) -->
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css"/>
+
+  <!-- Local fallback if available -->
+  <link rel="stylesheet" type="text/css" href="phosphor-embedded.css"/>
+
+  <style>
+    :root {
+      /* Brand Color Tokens (Master Design System) */
+      --color-primary-btn: #052E28;          /* Primary Action Buttons ONLY */
+      --color-primary-btn-hover: #011714;
+      --color-card-sage: #D6EAE6;            /* Selection states & active pills */
+      --color-border-selected: #7EB8AE;      /* Soft calming selection border */
+      --color-text-primary: #0F172A;         /* Primary text */
+      --color-text-secondary: #64748B;       /* Subtitles, labels & meta */
+      
+      /* Surface Tokens */
+      --color-card-neutral: #F8FAF9;
+      --color-app-bg: #FFFFFF;               /* Pure White canvas */
+      --color-divider: #F1F5F9;              /* Hairline dividers */
+      --color-nav-inactive: #717171;
+      --color-accent-teal: #0E8070;
+      --color-bell-bg: #EEF2F6;
+      
+      /* Typography System */
+      --font-heading: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0c1013;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(5, 46, 40, 0.4) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(5, 46, 40, 0.45) 0px, transparent 50%),
+        radial-gradient(circle at 50% 50%, #11181d 0%, #080a0c 100%);
+      font-family: var(--font-body);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      color: var(--color-text-primary);
+    }
+
+    /* Top Switcher Bar */
+    .top-ecosystem-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+
+    .app-brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #D6EAE6;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .app-brand-pill .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 8px #34D399;
+    }
+
+    .app-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .app-switch-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Device Mockup Wrapper */
+    .mockup-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Phone Outer Frame */
+    .phone-frame {
+      position: relative;
+      width: 100%;
+      background: #000000;
+      border-radius: 52px;
+      padding: 12px;
+      box-shadow: 
+        0 0 0 1px rgba(255, 255, 255, 0.15),
+        0 25px 60px -15px rgba(0, 0, 0, 0.8),
+        0 0 80px -20px rgba(214, 234, 230, 0.2);
+      border: 4px solid #23282b;
+    }
+
+    /* Side Buttons on Frame */
+    .phone-frame::before {
+      content: '';
+      position: absolute;
+      top: 110px;
+      left: -8px;
+      width: 4px;
+      height: 48px;
+      background: #2a3135;
+      border-radius: 4px 0 0 4px;
+      box-shadow: 0 64px 0 #2a3135, 0 120px 0 #2a3135;
+    }
+
+    .phone-frame::after {
+      content: '';
+      position: absolute;
+      top: 140px;
+      right: -8px;
+      width: 4px;
+      height: 72px;
+      background: #2a3135;
+      border-radius: 0 4px 4px 0;
+    }
+
+    /* Inner Screen Glass */
+    .phone-screen {
+      position: relative;
+      width: 100%;
+      height: 844px;
+      background: var(--color-app-bg);
+      border-radius: 40px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      contain: paint layout;
+    }
+
+    /* Status Bar */
+    .status-bar {
+      height: 44px;
+      padding: 10px 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #FFFFFF;
+      z-index: 50;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .status-time {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .dynamic-island-notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 108px;
+      height: 24px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 60;
+    }
+
+    .status-icons {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: var(--color-text-primary);
+      font-size: 13px;
+    }
+
+    /* Views Layout & Slide Transitions */
+    .app-page {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: #FFFFFF;
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+      display: flex;
+      flex-direction: column;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .app-page::-webkit-scrollbar {
+      display: none;
+    }
+
+    .app-page.active-page {
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .app-page.page-left {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .app-page.page-right {
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* ============================================================
+       PAGE 1: DISCOVER SCREEN (WISE / UBER LUXURY REDESIGN)
+       Clean, purposeful, high-end hero card with no empty desert
+       ============================================================ */
+    .page-discover {
+      padding: 16px 20px 110px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .discover-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding-top: 6px;
+    }
+
+    .discover-title {
+      font-family: var(--font-heading);
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    .discover-subtitle {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+
+    /* Hero Showcase Card: Discover Doctors (Minimal & Streamlined) */
+    .discover-hero-card {
+      background: #FFFFFF;
+      border: 1px solid #E2ECE9;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(5, 46, 40, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .discover-hero-card:hover {
+      border-color: #7EB8AE;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(5, 46, 40, 0.08);
+    }
+
+    .discover-hero-card:active {
+      transform: scale(0.99);
+    }
+
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .hero-icon-pill {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #EFF7F5;
+      border: 1px solid rgba(14, 128, 112, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #0E8070;
+    }
+
+    /* Boxless 100+ Doctors count */
+    .hero-doctors-count {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+    }
+
+    .hero-card-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    /* Text button with arrow - sleek and minimal */
+    .hero-text-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #0E8070;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      width: fit-content;
+    }
+
+    .discover-hero-card:hover .hero-text-btn {
+      color: #052E28;
+      gap: 9px;
+    }
+
+    /* Discover Streamlined Layout */
+    .page-discover {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+
+    /* ============================================================
+       PAGE 2: FIND A DOCTOR / DOCTOR DIRECTORY SCREEN
+       Exact doctor app system standard for top title bar
+       ============================================================ */
+    .page-doctors-list {
+      padding: 12px 20px 48px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Top Sticky Header (Doctor App System Standard) */
+    .page-top-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: -12px;
+      z-index: 20;
+      background: var(--color-app-bg);
+      padding: 12px 0 10px 0;
+      margin-top: -12px;
+    }
+
+    .page-top-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .btn-circle-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--color-bell-bg);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #0F172A;
+      font-size: 20px;
+      transition: transform 0.15s ease, background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-circle-icon:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-circle-icon:active {
+      transform: scale(0.92);
+      background: #CBD5E1;
+    }
+
+
+    /* Search & Filter Row (Doctor App System Standard: Pure White BG & Subtle Border) */
+    .doctors-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .doctors-search-box {
+      flex: 1;
+      height: 46px;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 10px;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .doctors-search-box:focus-within {
+      background: #FFFFFF !important;
+      border-color: #0F172A !important;
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .doctors-search-box i.ph-magnifying-glass {
+      font-size: 18px;
+      color: #94A3B8;
+      flex-shrink: 0;
+    }
+
+    .doctors-search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 400;
+      color: #0F172A;
+      width: 100%;
+    }
+
+    .doctors-search-input::placeholder {
+      color: #94A3B8;
+    }
+
+    .btn-clear-search {
+      background: transparent;
+      border: none;
+      color: #94A3B8;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+      padding: 2px;
+      flex-shrink: 0;
+    }
+
+    .btn-clear-search.show {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .doctors-filter-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #0F172A;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .doctors-filter-btn:hover,
+    .doctors-filter-btn:active {
+      background: #F8FAFC !important;
+      border-color: #CBD5E1 !important;
+    }
+
+    /* Specialty Filter Chips (Strict Selection State Rules) */
+    .filter-chips-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 -20px;
+      padding: 0 20px 4px 20px;
+      flex-shrink: 0;
+    }
+
+    .filter-chips-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .filter-chip {
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 500;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      color: #64748B;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .filter-chip:hover {
+      background: #EEF2F6;
+      color: #0F172A;
+    }
+
+    /* STRICT LAW: Selection State = #D6EAE6 + #7EB8AE + #052E28 */
+    .filter-chip.active {
+      background: var(--color-card-sage) !important;
+      border: 1.5px solid var(--color-border-selected) !important;
+      color: var(--color-primary-btn) !important;
+      font-weight: 700 !important;
+    }
+
+    /* Meta Count & Sort */
+    .results-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2px;
+      flex-shrink: 0;
+    }
+
+    .results-count-text {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    /* CARDLESS / BOXLESS DOCTOR DIRECTORY LIST (Doctor App System Standard) */
+    .doctors-directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+
+    .doctor-boxless-item {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #F1F5F9;
+      padding: 24px 2px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .doctor-boxless-item:last-child {
+      border-bottom: none;
+    }
+
+    .doctor-boxless-item:hover {
+      background: #F8FAFC;
+    }
+
+    .doctor-avatar-wrap {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .doctor-avatar-img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #E8F4F1;
+      border: 1px solid #D1E5E1;
+      display: block;
+    }
+
+    .doctor-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .doctor-name-line {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .doctor-name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .verified-icon {
+      color: #0D7A5F;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .doctor-degree-specialty {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      font-weight: 400;
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doctor-price-action-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .doctor-price-val {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+
+    .doctor-text-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: #0E8070;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 2px 0;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .doctor-boxless-item:hover .doctor-text-btn {
+      color: #052E28;
+      gap: 7px;
+    }
+
+
+    /* Empty state */
+    .empty-search-state {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 16px;
+      text-align: center;
+      gap: 12px;
+    }
+
+    .empty-search-state.show {
+      display: flex;
+    }
+
+    .empty-icon-wrap {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: #94A3B8;
+    }
+
+    .empty-state-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .empty-state-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      max-width: 240px;
+      line-height: 1.4;
+    }
+
+    .btn-reset-filters {
+      padding: 8px 16px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #052E28;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       PAGE 3: DOCTOR PROFILE SCREEN (CARDLESS LUXURY STANDARD)
+       ============================================================ */
+    .page-doctor-profile {
+      padding: 12px 20px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Doctor Hero Profile Info */
+    .doctor-profile-hero {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-top: 4px;
+    }
+
+    .profile-hero-avatar-wrap {
+      position: relative;
+      width: 68px;
+      height: 68px;
+      flex-shrink: 0;
+    }
+
+    .profile-hero-avatar-img {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #E8F4F1;
+      border: 1.5px solid #D1E5E1;
+      display: block;
+    }
+
+    .profile-hero-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .profile-doc-name {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .profile-verified-seal {
+      color: #0D7A5F;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .profile-doc-qual {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0E8070;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .profile-doc-degrees {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    /* Boxless Details List */
+    .profile-details-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .profile-info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 2px;
+    }
+
+    .profile-info-row.is-bio {
+      align-items: flex-start;
+    }
+
+    .profile-info-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-info-row.is-bio .profile-info-left {
+      align-items: flex-start;
+    }
+
+    .profile-info-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: #F8FAF9;
+      border: 1px solid #EAEFEF;
+      color: #0E8070;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 19px;
+      flex-shrink: 0;
+    }
+
+    .profile-info-content {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-info-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    .profile-info-val {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #0F172A;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+
+    .profile-info-val.fee-highlight {
+      font-size: 17.5px;
+      font-weight: 700;
+      color: #052E28;
+    }
+
+    .profile-bmdc-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bmdc-verified-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: #0E8070;
+      background: #EFF7F5;
+      border: 1px solid rgba(14, 128, 112, 0.2);
+      border-radius: 6px;
+      padding: 1px 6px;
+    }
+
+    .profile-bio-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+    }
+
+    .profile-bio-text {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      font-weight: 400;
+      color: #334155;
+      line-height: 1.6;
+      margin: 0;
+      transition: all 0.2s ease;
+    }
+
+    .profile-bio-text.clamped {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .btn-bio-toggle {
+      background: transparent;
+      border: none;
+      padding: 4px 0 0;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #0E8070;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.15s ease;
+      align-self: flex-start;
+    }
+
+    .btn-bio-toggle:hover {
+      color: #052E28;
+    }
+
+    .profile-info-divider {
+      height: 1px;
+      background: #EAEFEF;
+      width: 100%;
+    }
+
+    /* Fixed Sticky Bottom Action Dock for Doctor Profile */
+    .profile-fixed-bottom-dock {
+      position: sticky;
+      bottom: 0;
+      margin: auto -20px 0 -20px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 20px 72px 20px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      z-index: 35;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+
+    .btn-profile-book-cta {
+      width: 100%;
+      height: 48px;
+      background: #052E28;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.18);
+      transition: all 0.15s ease;
+    }
+
+    .btn-profile-book-cta:hover {
+      background: #011714;
+      transform: translateY(-1px);
+    }
+
+    .btn-profile-book-cta:active {
+      transform: scale(0.98);
+    }
+
+    /* ============================================================
+       PAGE 4: BOOK CONSULTATION SCREEN (HIGH FIDELITY REDESIGN)
+       Based on the live reference media_1791970883813_14ad684f.png
+       ============================================================ */
+    .page-book-consultation {
+      padding: 12px 20px 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 100%;
+      box-sizing: border-box;
+    }
+
+    /* Doctor Snippet Card */
+    .book-doc-snippet {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 4px 0 2px 0;
+    }
+
+    .book-doc-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #E8F4F1;
+      border: 1.5px solid #D1E5E1;
+      flex-shrink: 0;
+    }
+
+    .book-doc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .book-doc-name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .book-doc-name {
+      font-family: var(--font-heading);
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-doc-spec {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    .consult-badge-pill {
+      display: inline-flex;
+      align-self: flex-start;
+      margin-top: 3px;
+      background: #E8F7F4;
+      border: 1px solid rgba(13, 122, 95, 0.25);
+      border-radius: 6px;
+      padding: 2.5px 8px;
+      font-family: var(--font-heading);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0D7A5F;
+      letter-spacing: 0.04em;
+    }
+
+    /* Consultation Mode Switcher (Wise Segmented Control Standard) */
+    .consult-mode-switch {
+      display: flex;
+      gap: 4px;
+      background: #EFF3F2;
+      padding: 4px;
+      border-radius: 999px;
+    }
+
+    .consult-mode-card {
+      flex: 1;
+      height: 42px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #5D7079;
+      cursor: pointer;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      background: transparent;
+      border: none;
+    }
+
+    .consult-mode-card i {
+      font-size: 18px;
+      color: #5D7079;
+      transition: color 0.18s ease;
+    }
+
+    .consult-mode-card:hover {
+      color: #0F172A;
+    }
+
+    /* Wise Segmented Selected State: Pure White Elevated Pill, Dark Text, NO dark primary bg */
+    .consult-mode-card.active {
+      background: #FFFFFF !important;
+      color: #0F172A !important;
+      font-weight: 700 !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+    }
+
+    .consult-mode-card.active i {
+      color: #0E8070 !important;
+    }
+
+    /* Select Date Section */
+    .book-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .book-section-title {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      margin: 0;
+    }
+
+    .date-scroll-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      margin: 0 -20px;
+      padding: 0 20px 4px 20px;
+    }
+
+    .date-scroll-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .consult-date-card {
+      min-width: 58px;
+      height: 74px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECE9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      flex-shrink: 0;
+    }
+
+    .consult-date-card:hover {
+      border-color: var(--color-border-selected);
+    }
+
+    .date-card-day {
+      font-family: var(--font-heading);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #64748B;
+      letter-spacing: 0.04em;
+    }
+
+    .date-card-num {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+
+    .date-card-month {
+      font-family: var(--font-body);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #94A3B8;
+    }
+
+    /* Wise / Onubot System Selection State: Soft Sage (#D6EAE6 + #7EB8AE + #052E28 text) */
+    .consult-date-card.active {
+      background: var(--color-card-sage) !important;
+      border-color: var(--color-border-selected) !important;
+      box-shadow: 0 2px 8px rgba(5, 46, 40, 0.08) !important;
+    }
+
+    .consult-date-card.active .date-card-day {
+      color: #0E8070 !important;
+      font-weight: 700 !important;
+    }
+
+    .consult-date-card.active .date-card-num {
+      color: #052E28 !important;
+      font-weight: 800 !important;
+    }
+
+    .consult-date-card.active .date-card-month {
+      color: #0E8070 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Shift Slots Container & Multi-Shift Support */
+    .shifts-selection-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .shift-slot-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECE9;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      position: relative;
+    }
+
+    .shift-slot-card:hover {
+      border-color: #7EB8AE;
+    }
+
+    /* Selected Shift State: Soft Sage (#F2FAF7) - NO heavy dark main color */
+    .shift-slot-card.selected {
+      background: #F2FAF7;
+      border-color: #7EB8AE;
+      box-shadow: 0 3px 12px rgba(5, 46, 40, 0.06);
+    }
+
+    .shift-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .shift-left-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .shift-badge-pill {
+      background: #EFF7F5;
+      color: #0D7A5F;
+      border: 1px solid rgba(13, 122, 95, 0.25);
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .shift-slot-card.selected .shift-badge-pill {
+      background: #0D7A5F;
+      color: #FFFFFF;
+      border-color: #0D7A5F;
+    }
+
+    .shift-time-range {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .shift-radio-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #CBD5E1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      color: transparent;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .shift-slot-card.selected .shift-radio-indicator {
+      border-color: #0D7A5F;
+      background: #0D7A5F;
+      color: #FFFFFF;
+    }
+
+    .shift-serial-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 2px 0;
+    }
+
+    .serial-col, .booked-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .booked-col {
+      align-items: flex-end;
+    }
+
+    .serial-label {
+      font-family: var(--font-heading);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0E8070;
+      letter-spacing: 0.04em;
+    }
+
+    .serial-number {
+      font-family: var(--font-heading);
+      font-size: 26px;
+      font-weight: 800;
+      color: #052E28;
+      line-height: 1;
+    }
+
+    .booked-label {
+      font-family: var(--font-heading);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #64748B;
+      letter-spacing: 0.04em;
+    }
+
+    .booked-val {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-top: 2px;
+    }
+
+    .shift-card-divider {
+      height: 1px;
+      background: rgba(167, 243, 208, 0.7);
+    }
+
+    .shift-footer-note {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.4;
+    }
+
+    .shift-footer-note i {
+      font-size: 15px;
+      color: #0D7A5F;
+      flex-shrink: 0;
+    }
+
+    /* Billing Summary Card */
+    .book-bill-card {
+      background: #FFFFFF;
+      border: 1.5px solid #F1F5F9;
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .bill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: #64748B;
+    }
+
+    .bill-val {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .bill-val-highlight {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #0D7A5F;
+    }
+
+    .bill-divider {
+      border-bottom: 1px dashed #E2E8F0;
+      margin: 2px 0;
+    }
+
+    .bill-row.total-row {
+      padding-top: 2px;
+    }
+
+    .bill-total-label {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .bill-total-val {
+      font-family: var(--font-heading);
+      font-size: 19px;
+      font-weight: 800;
+      color: #0D7A5F;
+      letter-spacing: -0.01em;
+    }
+
+    /* Fixed Bottom Action Dock for Consultation */
+    .book-fixed-bottom-dock {
+      position: sticky;
+      bottom: 0;
+      margin: auto -20px 0 -20px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 20px 72px 20px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      z-index: 35;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+
+    .btn-confirm-pay {
+      width: 100%;
+      height: 48px;
+      background: #0D7A5F;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(13, 122, 95, 0.25);
+      transition: all 0.15s ease;
+    }
+
+    .btn-confirm-pay:hover {
+      background: #052E28;
+      transform: translateY(-1px);
+    }
+
+    .btn-confirm-pay:active {
+      transform: scale(0.98);
+    }
+
+    /* ============================================================
+       PAGE 5: BOOKING CONFIRMATION SCREEN (HIGH FIDELITY REDESIGN)
+       Clean, cardless luxury, soft neutral/sage, NO dark main color
+    /* ============================================================
+       VIEW 5: BOOKING CONFIRMATION SCREEN (HIGH FIDELITY REDESIGN)
+       ============================================================ */
+    .page-booking-confirmed {
+      padding: 20px 20px 0 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      box-sizing: border-box;
+      background: #FFFFFF;
+    }
+
+    .confirm-hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 16px 10px 4px 10px;
+      gap: 10px;
+    }
+
+    .confirm-success-seal {
+      font-size: 66px;
+      color: #0D7A5F;
+      animation: sealPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes sealPop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .confirm-hero-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .confirm-hero-sub {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: #64748B;
+      line-height: 1.5;
+      max-width: 290px;
+      margin: 0;
+    }
+
+    /* Elevated White Serial Card with Generous Spacing */
+    .confirm-serial-card {
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECE9;
+      border-radius: 20px;
+      padding: 22px 20px 18px 20px;
+      margin: 26px 0 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(5, 46, 40, 0.04);
+    }
+
+    .confirm-card-main-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .confirm-start-col {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .confirm-start-label-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .confirm-stat-label {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748B;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .confirm-shift-tag {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: #0D7A5F;
+      background: #EFF7F5;
+      padding: 2px 7px;
+      border-radius: 6px;
+      line-height: 1.2;
+    }
+
+    .confirm-start-val {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 800;
+      color: #0F172A;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .confirm-serial-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      text-align: right;
+    }
+
+    .confirm-serial-col .confirm-stat-label {
+      color: #0E8070;
+    }
+
+    .confirm-serial-num {
+      font-family: var(--font-heading);
+      font-size: 38px;
+      font-weight: 800;
+      color: #052E28;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .confirm-card-divider {
+      height: 1px;
+      background: #EAEFEF;
+    }
+
+    .confirm-note-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      line-height: 1.35;
+    }
+
+    .confirm-note-row i {
+      font-size: 16px;
+      color: #0E8070;
+      flex-shrink: 0;
+    }
+
+    /* Completely Boxless Doctor & Appointment Info */
+    .confirm-doc-section {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 0 2px 10px 2px;
+    }
+
+    .confirm-doc-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .confirm-doc-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #E8F4F1;
+      flex-shrink: 0;
+    }
+
+    .confirm-doc-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .confirm-doc-name {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 800;
+      color: #0F172A;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .confirm-doc-spec {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .confirm-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 6px;
+    }
+
+    .confirm-meta-val {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .confirm-meta-val.mode-highlight {
+      color: #0D7A5F;
+    }
+
+    /* Fixed Bottom Action Dock for Confirmation Screen */
+    .confirm-fixed-bottom-dock {
+      position: sticky;
+      bottom: 0;
+      margin: auto -20px 0 -20px;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 20px 72px 20px;
+      border-top: 1px solid #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      z-index: 35;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       UNIVERSAL BOTTOM NAVIGATION BAR
+       EXACT DOCTOR APP STANDARD: 5 equal nav-items, no bulging button
+       ============================================================ */
+    .bottom-nav-container {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      padding: 6px 14px 8px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      position: absolute;
+      bottom: 8px;
+      left: 12px;
+      right: 12px;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      border-radius: 28px;
+      box-shadow: 0 10px 30px rgba(5, 46, 40, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+      z-index: 60;
+      height: 58px;
+      box-sizing: border-box;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    /* Hide bottom navigation on pages with back button or sub-pages */
+    .phone-screen:has(.app-page.active-page:not(#pageDiscover)) .bottom-nav-container,
+    .phone-screen:has(#pageDoctorsList.active-page) .bottom-nav-container,
+    .phone-screen:has(#pageDoctorProfile.active-page) .bottom-nav-container,
+    .phone-screen:has(#pageBookConsultation.active-page) .bottom-nav-container,
+    .phone-screen:has(#pageBookingConfirmed.active-page) .bottom-nav-container,
+    .phone-screen.hide-bottom-nav .bottom-nav-container,
+    .bottom-nav-container.nav-hidden {
+      display: none !important;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--color-nav-inactive);
+      cursor: pointer;
+      text-decoration: none;
+      min-width: 48px;
+      height: 44px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .nav-item.disabled {
+      cursor: default;
+      pointer-events: none;
+      opacity: 0.55;
+    }
+
+    .nav-item i {
+      font-size: 21px;
+      color: #717171;
+      transition: all 0.2s ease;
+    }
+
+    .nav-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      color: #717171;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      transition: all 0.2s ease;
+    }
+
+    .nav-item.active {
+      color: var(--color-primary-btn);
+    }
+
+    .active-nav-pill {
+      width: 44px;
+      height: 38px;
+      border-radius: 12px;
+      background: rgba(214, 234, 230, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(126, 184, 174, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      gap: 2px;
+      animation: navPillPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes navPillPop {
+      0% { transform: scale(0.92); opacity: 0.8; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .active-nav-pill i {
+      font-size: 20px !important;
+      color: var(--color-primary-btn) !important;
+    }
+
+    .active-nav-pill::after {
+      content: '';
+      width: 18px;
+      height: 2.5px;
+      background: #A3D4C9;
+      border-radius: 4px;
+      margin-top: 1px;
+    }
+
+    /* Home Indicator */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 134px;
+      height: 4px;
+      background: #1e293b;
+      border-radius: 999px;
+      opacity: 0.22;
+      z-index: 40;
+      pointer-events: none;
+    }
+
+    /* ============================================================
+       BOTTOM SHEET MODAL SYSTEM
+       ============================================================ */
+    .modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 100;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .bottom-sheet {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #FFFFFF;
+      border-radius: 28px 28px 0 0;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 110;
+      max-height: 88%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-backdrop.is-open .bottom-sheet {
+      transform: translateY(0);
+    }
+
+    .sheet-drag-handle {
+      width: 36px;
+      height: 4.5px;
+      background: #CBD5E1;
+      border-radius: 999px;
+      margin: 10px auto 4px auto;
+      flex-shrink: 0;
+    }
+
+    .sheet-body {
+      padding: 14px 20px 32px 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .booking-doctor-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .booking-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      object-fit: cover;
+      background: #E2ECE9;
+    }
+
+    .booking-doc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .booking-doc-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .booking-doc-spec {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #0E8070;
+      font-weight: 600;
+    }
+
+    .booking-doc-chamber {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #64748B;
+    }
+
+    .sheet-section-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 4px;
+    }
+
+    /* Consultation Type Toggle (Strict Rule) */
+    .consult-type-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .consult-type-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .consult-type-card.selected {
+      background: var(--color-card-sage) !important;
+      border-color: var(--color-border-selected) !important;
+      color: var(--color-primary-btn) !important;
+    }
+
+    .consult-type-card i {
+      font-size: 18px;
+      color: #0E8070;
+    }
+
+    .consult-type-card.selected i {
+      color: #052E28;
+    }
+
+    .consult-card-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .consult-card-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .consult-type-card.selected .consult-card-title {
+      color: #052E28;
+    }
+
+    .consult-card-sub {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #64748B;
+    }
+
+    /* Date Pills */
+    .date-pills-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 2px;
+    }
+
+    .date-pills-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .date-select-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      padding: 10px 14px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 14px;
+      cursor: pointer;
+      min-width: 68px;
+      transition: all 0.15s ease;
+    }
+
+    .date-select-pill.selected {
+      background: var(--color-card-sage) !important;
+      border-color: var(--color-border-selected) !important;
+    }
+
+    .date-day-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    .date-num-val {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .date-select-pill.selected .date-day-label,
+    .date-select-pill.selected .date-num-val {
+      color: #052E28;
+    }
+
+    /* Slots Grid */
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .slot-pill {
+      padding: 10px 6px;
+      text-align: center;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 12px;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0F172A;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .slot-pill.selected {
+      background: var(--color-card-sage) !important;
+      border-color: var(--color-border-selected) !important;
+      color: var(--color-primary-btn) !important;
+    }
+
+    /* Summary & Booking CTA */
+    .booking-fee-summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 14px;
+    }
+
+    .fee-summary-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+    }
+
+    .fee-summary-val {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+    }
+
+    .btn-confirm-booking {
+      width: 100%;
+      height: 48px;
+      background: #052E28;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.2);
+      transition: all 0.15s ease;
+    }
+
+    .btn-confirm-booking:hover {
+      background: #011714;
+      transform: translateY(-0.5px);
+    }
+
+    .btn-confirm-booking:active {
+      transform: scale(0.98);
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: absolute;
+      top: 56px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: #052E28;
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(5, 46, 40, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 200;
+      white-space: nowrap;
+    }
+
+    .toast-pill.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast-pill i {
+      color: #34D399;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Ecosystem Switcher Bar -->
+  <div class="top-ecosystem-bar">
+    <div class="app-brand-pill">
+      <span class="live-dot"></span>
+      <span>Onu Patient App</span>
+    </div>
+    <a href="doctors-app.html" class="app-switch-btn" title="Open Doctor Desk App">
+      <i class="ph ph-stethoscope"></i>
+      <span>Switch to Doctor App</span>
+    </a>
+  </div>
+
+  <!-- Device Mockup Shell -->
+  <div class="mockup-container">
+    <div class="phone-frame">
+      <div class="phone-screen">
+
+        <!-- iOS / Android Status Bar with Real Clock -->
+        <div class="status-bar">
+          <span class="status-time" id="realTimeClock">9:41</span>
+          <div class="dynamic-island-notch"></div>
+          <div class="status-icons">
+            <i class="ph-bold ph-cell-signal-full"></i>
+            <i class="ph-bold ph-wifi-high"></i>
+            <i class="ph-bold ph-battery-full"></i>
+          </div>
+        </div>
+
+        <!-- Toast Pill -->
+        <div class="toast-pill" id="appToastPill">
+          <i class="ph-bold ph-check-circle"></i>
+          <span id="toastMsg">Appointment Confirmed</span>
+        </div>
+
+        <!-- =======================================================
+             VIEW 1: DISCOVER SCREEN (WISE / UBER LUXURY REDESIGN)
+             ======================================================= -->
+        <div class="app-page page-discover active-page" id="pageDiscover">
+          
+          <!-- Top App Header -->
+          <div class="discover-header">
+            <h1 class="discover-title">Discover</h1>
+            <p class="discover-subtitle">Book Doctors Appointment</p>
+          </div>
+
+          <!-- Discover Doctors Hero Showcase (Clean, Minimal, Text Link) -->
+          <div class="discover-hero-card" onclick="openDoctorsList()" role="button" tabindex="0">
+            <div class="hero-card-header">
+              <div class="hero-icon-pill">
+                <i class="ph ph-stethoscope"></i>
+              </div>
+              <span class="hero-doctors-count">100+ doctors</span>
+            </div>
+
+            <h2 class="hero-card-title">Discover Doctors</h2>
+
+            <div class="hero-text-btn">
+              <span>Find a Doctor</span>
+              <i class="ph ph-arrow-right"></i>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 2: FIND A DOCTOR SCREEN (BOXLESS LIST REDESIGN)
+             ======================================================= -->
+        <div class="app-page page-doctors-list page-right" id="pageDoctorsList">
+          
+          <!-- Top Title Bar (Doctor App System Standard) -->
+          <div class="page-top-bar">
+            <button class="btn-circle-icon" onclick="navigateToDiscover()" aria-label="Back">
+              <i class="ph ph-arrow-left"></i>
+            </button>
+            <h1 class="page-top-title">Find a Doctor</h1>
+          </div>
+
+          <!-- Search & Filter Row (Exact Doctor App Standard) -->
+          <div class="doctors-search-row">
+            <div class="doctors-search-box">
+              <i class="ph ph-magnifying-glass"></i>
+              <input type="text" class="doctors-search-input" id="doctorSearchInput" placeholder="Search by name, ID or phone..." oninput="onDoctorSearchInput(this.value)">
+              <button class="btn-clear-search" id="btnClearSearch" onclick="clearDoctorSearch()" aria-label="Clear Search">
+                <i class="ph ph-x-circle"></i>
+              </button>
+            </div>
+            <button class="doctors-filter-btn" onclick="toggleDoctorFilters()" aria-label="Filter directory" title="Filter directory">
+              <i class="ph ph-sliders-horizontal"></i>
+            </button>
+          </div>
+
+          <!-- Specialty Filter Chips (Horizontal Strip) -->
+          <div class="filter-chips-strip" id="specialtyFilterStrip">
+            <div class="filter-chip active" onclick="setDoctorFilter('All', this)">All</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Cardiology', this)">Cardiology</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Medicine', this)">Medicine</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Pediatrics', this)">Pediatrics</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Neurology', this)">Neurology</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Dermatology', this)">Dermatology</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Gynecology', this)">Gynecology</div>
+            <div class="filter-chip" onclick="setDoctorFilter('Orthopedics', this)">Orthopedics</div>
+          </div>
+
+          <!-- Meta Count -->
+          <div class="results-meta-row">
+            <span class="results-count-text" id="doctorResultsCount">Showing 8 doctors</span>
+          </div>
+
+          <!-- The Redesigned Doctor Directory List -->
+          <div class="doctors-directory-list" id="doctorsDirectoryList">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+          <!-- Empty State -->
+          <div class="empty-search-state" id="emptyDoctorState">
+            <div class="empty-icon-wrap">
+              <i class="ph ph-magnifying-glass"></i>
+            </div>
+            <h3 class="empty-state-title">No doctors found</h3>
+            <p class="empty-state-desc">We couldn't find matches for your search. Try resetting filters or search by specialty.</p>
+            <button class="btn-reset-filters" onclick="resetAllDoctorFilters()">Clear Filters</button>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 3: DOCTOR PROFILE SCREEN (CARDLESS LUXURY STANDARD)
+             ======================================================= -->
+        <div class="app-page page-doctor-profile page-right" id="pageDoctorProfile">
+          
+          <!-- Top Title Bar (Doctor App System Standard - No Share) -->
+          <div class="page-top-bar">
+            <button class="btn-circle-icon" onclick="returnFromDoctorProfile()" aria-label="Back">
+              <i class="ph ph-arrow-left"></i>
+            </button>
+            <h1 class="page-top-title">Doctor Profile</h1>
+          </div>
+
+          <!-- Doctor Hero Profile Info -->
+          <div class="doctor-profile-hero">
+            <div class="profile-hero-avatar-wrap">
+              <img src="" alt="" class="profile-hero-avatar-img" id="profileDocAvatar">
+            </div>
+
+            <div class="profile-hero-info">
+              <div class="profile-name-row">
+                <h2 class="profile-doc-name" id="profileDocName">Dr. Mahim Khan</h2>
+                <i class="ph-fill ph-seal-check profile-verified-seal"></i>
+              </div>
+              <p class="profile-doc-qual" id="profileDocQual">Cardiologist • Ast. Professor</p>
+              <p class="profile-doc-degrees" id="profileDocDegrees">MBBS, FCPS (Cardiology)</p>
+            </div>
+          </div>
+
+          <!-- Boxless Details List with Subtle Hairlines -->
+          <div class="profile-details-list">
+            
+            <!-- Fee -->
+            <div class="profile-info-row">
+              <div class="profile-info-left">
+                <div class="profile-info-icon">
+                  <i class="ph ph-receipt"></i>
+                </div>
+                <div class="profile-info-content">
+                  <span class="profile-info-label">Consultation Fee</span>
+                  <span class="profile-info-val fee-highlight" id="profileDocFee">&#2547; 1,200</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-info-divider"></div>
+
+            <!-- BMDC Number -->
+            <div class="profile-info-row">
+              <div class="profile-info-left">
+                <div class="profile-info-icon">
+                  <i class="ph ph-shield-check"></i>
+                </div>
+                <div class="profile-info-content">
+                  <span class="profile-info-label">BMDC Registration</span>
+                  <div class="profile-bmdc-row">
+                    <span class="profile-info-val" id="profileDocBmdc">A-74829</span>
+                    <span class="bmdc-verified-badge"><i class="ph-bold ph-check"></i> Verified</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-info-divider"></div>
+
+            <!-- Chamber Address -->
+            <div class="profile-info-row">
+              <div class="profile-info-left">
+                <div class="profile-info-icon">
+                  <i class="ph ph-map-pin"></i>
+                </div>
+                <div class="profile-info-content">
+                  <span class="profile-info-label">Chamber Address</span>
+                  <span class="profile-info-val" id="profileDocChamber">BSMMU (PG Hospital), Shahbag, Dhaka</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-info-divider"></div>
+
+            <!-- About Doctor (Bio) -->
+            <div class="profile-info-row is-bio">
+              <div class="profile-info-left">
+                <div class="profile-info-icon">
+                  <i class="ph ph-article"></i>
+                </div>
+                <div class="profile-info-content">
+                  <span class="profile-info-label">About Doctor</span>
+                  <div class="profile-bio-wrap">
+                    <p class="profile-bio-text clamped" id="profileDocBio">Doctor's biography details...</p>
+                    <button type="button" class="btn-bio-toggle" id="btnBioToggle" onclick="toggleBioExpand()">
+                      <span id="bioToggleText">View more</span>
+                      <i class="ph ph-caret-down" id="bioToggleIcon"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Fixed Sticky Bottom Action Dock -->
+          <div class="profile-fixed-bottom-dock">
+            <button type="button" class="btn-profile-book-cta" onclick="openBookConsultationPage()">
+              <i class="ph ph-calendar-plus"></i>
+              <span>Book Appointment</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 4: BOOK CONSULTATION SCREEN (HIGH FIDELITY REDESIGN)
+             ======================================================= -->
+        <div class="app-page page-book-consultation page-right" id="pageBookConsultation">
+          
+          <!-- Top Title Bar -->
+          <div class="page-top-bar">
+            <button class="btn-circle-icon" onclick="returnFromBookConsultation()" aria-label="Back">
+              <i class="ph ph-arrow-left"></i>
+            </button>
+            <h1 class="page-top-title">Book Consultation</h1>
+          </div>
+
+          <!-- Doctor Snippet Header -->
+          <div class="book-doc-snippet">
+            <img src="" alt="" class="book-doc-avatar" id="bookConsultDocAvatar">
+            <div class="book-doc-info">
+              <div class="book-doc-name-row">
+                <span class="book-doc-name" id="bookConsultDocName">Ast. Prof. Dr. Mahim Khan</span>
+                <i class="ph-fill ph-seal-check verified-icon"></i>
+              </div>
+              <span class="book-doc-spec" id="bookConsultDocSpec">Cardiology</span>
+              <span class="consult-badge-pill">INITIAL CONSULTATION</span>
+            </div>
+          </div>
+
+          <!-- Consultation Mode Switcher -->
+          <div class="consult-mode-switch">
+            <div class="consult-mode-card active" id="modeVideoCall" onclick="selectConsultMode('video')">
+              <i class="ph ph-video-camera"></i>
+              <span>Video Call</span>
+            </div>
+            <div class="consult-mode-card" id="modeInPerson" onclick="selectConsultMode('in-person')">
+              <i class="ph ph-user"></i>
+              <span>In Person</span>
+            </div>
+          </div>
+
+          <!-- Select Date Section -->
+          <div class="book-section">
+            <h3 class="book-section-title">Select Date</h3>
+            <div class="date-scroll-strip" id="consultDateStrip">
+              <div class="consult-date-card active" onclick="selectConsultDate(this, 'TODAY', '14', 'OCT')">
+                <span class="date-card-day">TODAY</span>
+                <span class="date-card-num">14</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'WED', '15', 'OCT')">
+                <span class="date-card-day">WED</span>
+                <span class="date-card-num">15</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'THU', '16', 'OCT')">
+                <span class="date-card-day">THU</span>
+                <span class="date-card-num">16</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'FRI', '17', 'OCT')">
+                <span class="date-card-day">FRI</span>
+                <span class="date-card-num">17</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'SAT', '18', 'OCT')">
+                <span class="date-card-day">SAT</span>
+                <span class="date-card-num">18</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'SUN', '19', 'OCT')">
+                <span class="date-card-day">SUN</span>
+                <span class="date-card-num">19</span>
+                <span class="date-card-month">OCT</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shift Slots Selection Container (Supports multiple shifts per day) -->
+          <div class="shifts-selection-wrap" id="shiftsSelectionContainer">
+            <!-- Dynamically populated by renderDateShifts() -->
+          </div>
+
+          <!-- Billing Breakdown Card -->
+          <div class="book-bill-card">
+            <div class="bill-row">
+              <span class="bill-label">Selected Shift</span>
+              <span class="bill-val-highlight" id="bookBillShift">Shift 1</span>
+            </div>
+            <div class="bill-row">
+              <span class="bill-label">Consultation Fee</span>
+              <span class="bill-val" id="bookBillFee">&#2547; 1,200</span>
+            </div>
+            <div class="bill-row">
+              <span class="bill-label">Service Charge</span>
+              <span class="bill-val">&#2547; 30</span>
+            </div>
+
+            <div class="bill-divider"></div>
+
+            <div class="bill-row total-row">
+              <span class="bill-total-label">Total Payable</span>
+              <span class="bill-total-val" id="bookBillTotal">&#2547; 1,230</span>
+            </div>
+          </div>
+
+          <!-- Fixed Sticky Bottom Action Dock -->
+          <div class="book-fixed-bottom-dock">
+            <button type="button" class="btn-confirm-pay" onclick="confirmConsultationBooking()">
+              <i class="ph ph-credit-card"></i>
+              <span>Confirm & Pay <strong id="btnPayTotalText">&#2547; 1,230</strong></span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 5: BOOKING CONFIRMATION SCREEN (PIXEL-PERFECT REDESIGN)
+             Reference: media_1791977346242_bea94c17.png
+             ======================================================= -->
+        <div class="app-page page-booking-confirmed page-right" id="pageBookingConfirmed">
+          
+          <!-- Hero Success Section (Top bar and X removed as requested) -->
+          <div class="confirm-hero-section">
+            <i class="ph-fill ph-seal-check confirm-success-seal"></i>
+            <h1 class="confirm-hero-title">Booking Confirmed!</h1>
+            <p class="confirm-hero-sub">Your <span id="confirmedModeText">video</span> consultation appointment has been successfully booked &amp; paid</p>
+          </div>
+
+          <!-- White Background Serial Card (Spacious: Start Time on Left, Serial on Right) -->
+          <div class="confirm-serial-card">
+            <div class="confirm-card-main-row">
+              <div class="confirm-start-col">
+                <div class="confirm-start-label-row">
+                  <span class="confirm-stat-label">START TIME</span>
+                  <span class="confirm-shift-tag" id="confirmedShiftBadge">Shift 1</span>
+                </div>
+                <span class="confirm-start-val" id="confirmedStartTimeVal">06:00 PM</span>
+              </div>
+
+              <div class="confirm-serial-col">
+                <span class="confirm-stat-label">SERIAL NUMBER</span>
+                <span class="confirm-serial-num" id="confirmedSerialVal">#5</span>
+              </div>
+            </div>
+
+            <div class="confirm-card-divider"></div>
+
+            <div class="confirm-note-row">
+              <i class="ph ph-bell"></i>
+              <span>You will be called when it's your turn.</span>
+            </div>
+          </div>
+
+          <!-- Doctor & Appointment Info (Completely Boxless) -->
+          <div class="confirm-doc-section">
+            <div class="confirm-doc-header">
+              <img src="" alt="" class="confirm-doc-avatar" id="confirmedDocAvatar">
+              <div class="confirm-doc-meta">
+                <span class="confirm-doc-name" id="confirmedDocName">Ast. Prof. Dr. Mahim Khan</span>
+                <span class="confirm-doc-spec" id="confirmedDocSub">MBBS, FCPS - Cardiology</span>
+              </div>
+            </div>
+
+            <div class="confirm-meta-row">
+              <span class="confirm-meta-val" id="confirmedDateLabel">Tue, Oct 14</span>
+              <span class="confirm-meta-val mode-highlight" id="confirmedModeLabel">Video Call</span>
+            </div>
+          </div>
+
+          <!-- Fixed Sticky Bottom Action Dock -->
+          <div class="confirm-fixed-bottom-dock">
+            <button type="button" class="btn-confirm-pay" onclick="dismissBookingConfirmation()">
+              <i class="ph ph-calendar-check"></i>
+              <span>Go To My Visits</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             UNIVERSAL 5-TAB BOTTOM NAVIGATION BAR
+             Matches Doctor App layout exactly. Inactive tabs are disabled.
+             ======================================================= -->
+        <div class="bottom-nav-container" id="patientBottomNav">
+          
+          <!-- Tab 1: Discover (Active) -->
+          <div class="nav-item active" id="navItemDiscover" onclick="navigateToDiscover()">
+            <div class="active-nav-pill">
+              <i class="ph-fill ph-stethoscope"></i>
+            </div>
+          </div>
+
+          <!-- Tab 2: Visits (Disabled) -->
+          <div class="nav-item disabled" id="navItemVisits" title="Visits">
+            <i class="ph ph-calendar-check"></i>
+            <span class="nav-label">Visits</span>
+          </div>
+
+          <!-- Tab 3: Onu AI (Center Tab - Exact Nav Item Format, Disabled) -->
+          <div class="nav-item disabled" id="navItemAi" title="Onu AI">
+            <i class="ph ph-sparkle"></i>
+            <span class="nav-label">Onu AI</span>
+          </div>
+
+          <!-- Tab 4: Profile (Disabled) -->
+          <div class="nav-item disabled" id="navItemProfile" title="Profile">
+            <i class="ph ph-user"></i>
+            <span class="nav-label">Profile</span>
+          </div>
+
+          <!-- Tab 5: Alerts (Disabled) -->
+          <div class="nav-item disabled" id="navItemAlerts" title="Alerts">
+            <i class="ph ph-bell"></i>
+            <span class="nav-label">Alerts</span>
+          </div>
+
+        </div>
+
+        <!-- Home Indicator Bar -->
+        <div class="home-indicator"></div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Application Controller -->
+  <script>
+    // Live Clock Display
+    function updateClock() {
+      const now = new Date();
+      let hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      hours = hours % 12 || 12;
+      const el = document.getElementById('realTimeClock');
+      if (el) el.textContent = `${hours}:${minutes}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Doctors Database (Realistic, High Fidelity with Doctor App Bios & Credentials)
+    const doctorsDb = [
+      {
+        id: 1,
+        name: "Ast. Prof. Dr. Mahim Khan",
+        degreeSpecialty: "MBBS, FCPS - Cardiology",
+        specialty: "Cardiology",
+        hospital: "BSMMU (PG Hospital), Shahbag",
+        bmdc: "A-74829",
+        chamber: "BSMMU (PG Hospital), Block C, Shahbag, Dhaka",
+        bio: "Associate Professor of Cardiology at BSMMU. Specializing in preventive cardiology, hypertension, ischemic heart diseases, and echocardiography with over 8 years of intensive clinical experience at leading academic medical centers.",
+        fee: 1200,
+        avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 2,
+        name: "Prof. Dr. Ayesha Rahman",
+        degreeSpecialty: "MBBS, BCS (Health), FCPS - General Medicine",
+        specialty: "Medicine",
+        hospital: "Dhaka Medical College Hospital",
+        bmdc: "A-68412",
+        chamber: "Dhaka Medical College Hospital, Secretariate Rd, Dhaka",
+        bio: "Professor & Consultant Physician in General Medicine. Focused on adult internal medicine, diabetes management, multi-morbidity care, infectious disease treatment, and comprehensive chronic patient care.",
+        fee: 1000,
+        avatar: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 3,
+        name: "Ast. Prof. Dr. Mark Alister",
+        degreeSpecialty: "MBBS, MD - Neurology",
+        specialty: "Neurology",
+        hospital: "Evercare Hospital, Bashundhara",
+        bmdc: "A-82154",
+        chamber: "Evercare Hospital, Plot 81, Block E, Bashundhara, Dhaka",
+        bio: "Assistant Professor of Neurology with international fellowship training. Specialized in stroke management, epilepsy, neuromuscular disorders, and complex neuro-rehabilitation therapy.",
+        fee: 1500,
+        avatar: "https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 4,
+        name: "Dr. Mary Anne",
+        degreeSpecialty: "MBBS, DCH, FCPS - Pediatrics",
+        specialty: "Pediatrics",
+        hospital: "Dhaka Shishu (Children) Hospital",
+        bmdc: "A-59123",
+        chamber: "Dhaka Shishu (Children) Hospital, Sher-e-Bangla Nagar, Dhaka",
+        bio: "Pediatric specialist dedicated to newborn care, child development, immunization counseling, and pediatric infectious disease management.",
+        fee: 1000,
+        avatar: "https://images.unsplash.com/photo-1594824813689-53e99beea194?w=300&auto=format&fit=crop&q=80",
+        online: false
+      },
+      {
+        id: 5,
+        name: "Ast. Prof. Dr. Tanvir Ahmed",
+        degreeSpecialty: "MBBS, MS - Orthopedics",
+        specialty: "Orthopedics",
+        hospital: "National Institute of Traumatology",
+        bmdc: "A-71935",
+        chamber: "National Institute of Traumatology (NITOR), Sher-e-Bangla Nagar, Dhaka",
+        bio: "Assistant Professor of Orthopedic Surgery and trauma specialist specializing in joint pain, sports injuries, fractures, and musculoskeletal rehabilitation.",
+        fee: 1200,
+        avatar: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 6,
+        name: "Dr. Nusrat Jahan",
+        degreeSpecialty: "MBBS, DDV, FCPS - Dermatology",
+        specialty: "Dermatology",
+        hospital: "BIRDEM General Hospital, Shahbag",
+        bmdc: "A-84291",
+        chamber: "BIRDEM General Hospital, Kazi Nazrul Islam Ave, Shahbag, Dhaka",
+        bio: "Consultant Dermatologist and Dermato-surgeon focusing on clinical dermatology, acne, eczema, psoriasis, and medical aesthetic treatments.",
+        fee: 1100,
+        avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 7,
+        name: "Assoc. Prof. Dr. Farhan Kabir",
+        degreeSpecialty: "MBBS, MD, FCPS - Cardiology",
+        specialty: "Cardiology",
+        hospital: "National Institute of Cardiovascular Diseases",
+        bmdc: "A-63048",
+        chamber: "National Institute of Cardiovascular Diseases (NICVD), Sher-e-Bangla Nagar, Dhaka",
+        bio: "Associate Professor of Cardiology at NICVD. Expert in coronary angiography, heart failure management, and comprehensive clinical cardiology with 14+ years of clinical service.",
+        fee: 1400,
+        avatar: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&auto=format&fit=crop&q=80",
+        online: true
+      },
+      {
+        id: 8,
+        name: "Dr. Samira Haque",
+        degreeSpecialty: "MBBS, FCPS, MS - Gynecology",
+        specialty: "Gynecology",
+        hospital: "Sir Salimullah Medical College",
+        bmdc: "A-77319",
+        chamber: "Sir Salimullah Medical College & Mitford Hospital, Dhaka",
+        bio: "Consultant Gynecologist & Obstetrician with MRCOG (UK). Specialist in high-risk pregnancy care, reproductive health, and laparoscopic gynecological procedures.",
+        fee: 1200,
+        avatar: "https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=300&auto=format&fit=crop&q=80",
+        online: true
+      }
+    ];
+
+    // Filter & Search State
+    let currentCategoryFilter = 'All';
+    let currentSearchQuery = '';
+
+    // Active Profile & Booking Doctor
+    let activeProfileDoctor = null;
+    let activeBookingDoctor = null;
+    let isBioExpanded = false;
+
+    // ============================================================
+    // NAVIGATION CONTROLLER (FOOLPROOF & RELIABLE)
+    // ============================================================
+    function navigateToDiscover() {
+      const pageDiscover = document.getElementById('pageDiscover');
+      const pageDoctors = document.getElementById('pageDoctorsList');
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+      
+      if (phoneScreen) phoneScreen.classList.remove('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.remove('nav-hidden');
+
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile page-right';
+      }
+      if (pageDoctors) {
+        pageDoctors.className = 'app-page page-doctors-list page-right';
+      }
+      if (pageDiscover) {
+        pageDiscover.className = 'app-page page-discover active-page';
+        pageDiscover.scrollTop = 0;
+      }
+    }
+
+    function openDoctorsList(options = {}) {
+      const pageDiscover = document.getElementById('pageDiscover');
+      const pageDoctors = document.getElementById('pageDoctorsList');
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+      
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile page-right';
+      }
+      if (pageDiscover) {
+        pageDiscover.className = 'app-page page-discover page-left';
+      }
+      if (pageDoctors) {
+        pageDoctors.className = 'app-page page-doctors-list active-page';
+        pageDoctors.scrollTop = 0;
+      }
+
+      if (options.specialty) {
+        setDoctorFilter(options.specialty);
+      } else {
+        renderDoctorsDirectory();
+      }
+    }
+
+    function openDoctorProfile(docId) {
+      const doc = doctorsDb.find(d => d.id === docId);
+      if (!doc) return;
+
+      activeProfileDoctor = doc;
+      
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      const avatarEl = document.getElementById('profileDocAvatar');
+      if (avatarEl) {
+        avatarEl.src = doc.avatar;
+        avatarEl.onerror = function() {
+          this.onerror = null;
+          this.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80';
+        };
+      }
+      
+      document.getElementById('profileDocName').textContent = doc.name;
+      document.getElementById('profileDocQual').textContent = doc.degreeSpecialty;
+      document.getElementById('profileDocDegrees').textContent = doc.hospital;
+      document.getElementById('profileDocFee').innerHTML = `&#2547; ${doc.fee.toLocaleString()}`;
+      document.getElementById('profileDocBmdc').textContent = doc.bmdc;
+      document.getElementById('profileDocChamber').textContent = doc.chamber;
+      
+      // Bio handling with clamp & toggle
+      isBioExpanded = false;
+      const bioEl = document.getElementById('profileDocBio');
+      if (bioEl) {
+        bioEl.textContent = doc.bio;
+        bioEl.classList.add('clamped');
+      }
+      const textEl = document.getElementById('bioToggleText');
+      const iconEl = document.getElementById('bioToggleIcon');
+      const btnToggle = document.getElementById('btnBioToggle');
+      if (textEl) textEl.textContent = 'View more';
+      if (iconEl) iconEl.className = 'ph ph-caret-down';
+      if (btnToggle) {
+        btnToggle.style.display = doc.bio.length > 130 ? 'inline-flex' : 'none';
+      }
+
+      const pageDoctors = document.getElementById('pageDoctorsList');
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      if (pageDoctors) {
+        pageDoctors.className = 'app-page page-doctors-list page-left';
+      }
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile active-page';
+        pageProfile.scrollTop = 0;
+      }
+    }
+
+    function toggleBioExpand() {
+      const bioEl = document.getElementById('profileDocBio');
+      const textEl = document.getElementById('bioToggleText');
+      const iconEl = document.getElementById('bioToggleIcon');
+      if (!bioEl) return;
+
+      isBioExpanded = !isBioExpanded;
+      if (isBioExpanded) {
+        bioEl.classList.remove('clamped');
+        if (textEl) textEl.textContent = 'View less';
+        if (iconEl) iconEl.className = 'ph ph-caret-up';
+      } else {
+        bioEl.classList.add('clamped');
+        if (textEl) textEl.textContent = 'View more';
+        if (iconEl) iconEl.className = 'ph ph-caret-down';
+      }
+    }
+
+    function returnFromDoctorProfile() {
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageDoctors = document.getElementById('pageDoctorsList');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      // Keep bottom nav hidden on pages with back button
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile page-right';
+      }
+      if (pageDoctors) {
+        pageDoctors.className = 'app-page page-doctors-list active-page';
+        pageDoctors.scrollTop = 0;
+      }
+    }
+
+    // ============================================================
+    // BOOK CONSULTATION SCREEN CONTROLLER (PAGE 4)
+    // ============================================================
+    function openBookConsultationPage() {
+      if (!activeProfileDoctor) return;
+      const doc = activeProfileDoctor;
+      activeBookingDoctor = doc;
+
+      // Populate doctor snippet in Book Consultation page
+      const avatarEl = document.getElementById('bookConsultDocAvatar');
+      if (avatarEl) {
+        avatarEl.src = doc.avatar;
+        avatarEl.onerror = function() {
+          this.onerror = null;
+          this.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80';
+        };
+      }
+      const nameEl = document.getElementById('bookConsultDocName');
+      if (nameEl) nameEl.textContent = doc.name;
+
+      const specEl = document.getElementById('bookConsultDocSpec');
+      if (specEl) specEl.textContent = doc.specialty;
+
+      const feeEl = document.getElementById('bookBillFee');
+      if (feeEl) feeEl.innerHTML = `&#2547; ${doc.fee.toLocaleString()}`;
+
+      const totalFee = doc.fee + 30;
+      const totalEl = document.getElementById('bookBillTotal');
+      if (totalEl) totalEl.innerHTML = `&#2547; ${totalFee.toLocaleString()}`;
+
+      const btnTotalText = document.getElementById('btnPayTotalText');
+      if (btnTotalText) btnTotalText.innerHTML = `&#2547; ${totalFee.toLocaleString()}`;
+
+      // Render shift options for selected date
+      renderDateShifts(selectedConsultNum);
+
+      // Transition pages
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile page-left';
+      }
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation active-page';
+        pageConsult.scrollTop = 0;
+      }
+    }
+
+    function returnFromBookConsultation() {
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      // Keep bottom nav hidden since pageDoctorProfile has back button
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      if (pageProfile) {
+        pageProfile.className = 'app-page page-doctor-profile active-page';
+        pageProfile.scrollTop = 0;
+      }
+    }
+
+    // Dynamic Multi-Shift Database by Date
+    let activeConsultMode = 'video';
+    let selectedConsultDay = 'TODAY';
+    let selectedConsultNum = '14';
+    let selectedConsultMonth = 'OCT';
+    let activeShiftId = 1;
+
+    const dateShiftsData = {
+      '14': [
+        { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#5', booked: '4 Patients', estTime: '~ 06:40 PM' }
+      ],
+      '15': [
+        { id: 1, name: 'Shift 1', time: '10:00 AM - 01:00 PM', serial: '#3', booked: '2 Patients', estTime: '~ 10:30 AM' },
+        { id: 2, name: 'Shift 2', time: '06:00 PM - 10:00 PM', serial: '#9', booked: '8 Patients', estTime: '~ 07:20 PM' }
+      ],
+      '16': [
+        { id: 1, name: 'Shift 1', time: '05:00 PM - 09:00 PM', serial: '#2', booked: '1 Patient', estTime: '~ 05:15 PM' }
+      ],
+      '17': [
+        { id: 1, name: 'Shift 1', time: '10:00 AM - 01:00 PM', serial: '#4', booked: '3 Patients', estTime: '~ 10:45 AM' },
+        { id: 2, name: 'Shift 2', time: '06:00 PM - 10:00 PM', serial: '#7', booked: '6 Patients', estTime: '~ 07:00 PM' }
+      ],
+      '18': [
+        { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#6', booked: '5 Patients', estTime: '~ 06:50 PM' }
+      ],
+      '19': [
+        { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#1', booked: '0 Patients', estTime: '~ 06:00 PM' }
+      ]
+    };
+
+    function renderDateShifts(num) {
+      const container = document.getElementById('shiftsSelectionContainer');
+      if (!container) return;
+      const shifts = dateShiftsData[num] || dateShiftsData['14'];
+
+      // Ensure activeShiftId is valid for current shifts
+      if (!shifts.some(s => s.id === activeShiftId)) {
+        activeShiftId = shifts[0].id;
+      }
+
+      container.innerHTML = shifts.map(s => {
+        const isSelected = (s.id === activeShiftId);
+        return `
+          <div class="shift-slot-card ${isSelected ? 'selected' : ''}" onclick="selectShift(${s.id})">
+            <div class="shift-top-row">
+              <div class="shift-left-head">
+                <span class="shift-badge-pill">${s.name}</span>
+                <span class="shift-time-range">${s.time}</span>
+              </div>
+              <div class="shift-radio-indicator">
+                ${isSelected ? '<i class="ph-bold ph-check"></i>' : ''}
+              </div>
+            </div>
+
+            <div class="shift-serial-row">
+              <div class="serial-col">
+                <span class="serial-label">YOUR SERIAL NUMBER</span>
+                <span class="serial-number">${s.serial}</span>
+              </div>
+              <div class="booked-col">
+                <span class="booked-label">CURRENTLY BOOKED</span>
+                <span class="booked-val">${s.booked}</span>
+              </div>
+            </div>
+
+            <div class="shift-card-divider"></div>
+
+            <div class="shift-footer-note">
+              <i class="ph ph-info"></i>
+              <span>You will be called when it's your turn.</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Update Shift info in billing breakdown (strictly "Shift 1")
+      const activeShift = shifts.find(s => s.id === activeShiftId) || shifts[0];
+      const shiftBillEl = document.getElementById('bookBillShift');
+      if (shiftBillEl) {
+        shiftBillEl.textContent = activeShift.name;
+      }
+    }
+
+    function selectShift(shiftId) {
+      activeShiftId = shiftId;
+      renderDateShifts(selectedConsultNum);
+    }
+
+    function selectConsultMode(mode) {
+      activeConsultMode = mode;
+      const videoCard = document.getElementById('modeVideoCall');
+      const inPersonCard = document.getElementById('modeInPerson');
+      if (mode === 'video') {
+        videoCard?.classList.add('active');
+        inPersonCard?.classList.remove('active');
+      } else {
+        inPersonCard?.classList.add('active');
+        videoCard?.classList.remove('active');
+      }
+    }
+
+    function selectConsultDate(element, day, num, month) {
+      const cards = document.querySelectorAll('#consultDateStrip .consult-date-card');
+      cards.forEach(c => c.classList.remove('active'));
+      element.classList.add('active');
+
+      selectedConsultDay = day;
+      selectedConsultNum = num;
+      selectedConsultMonth = month;
+      renderDateShifts(num);
+    }
+
+    function confirmConsultationBooking() {
+      const doc = activeBookingDoctor || doctorsDb[0];
+      const shifts = dateShiftsData[selectedConsultNum] || dateShiftsData['14'];
+      const currentShift = shifts.find(s => s.id === activeShiftId) || shifts[0];
+
+      // Populate Confirmation Screen (media_1791977346242_bea94c17.png)
+      const docAvatar = document.getElementById('confirmedDocAvatar');
+      const docName = document.getElementById('confirmedDocName');
+      const docSub = document.getElementById('confirmedDocSub');
+      const modeText = document.getElementById('confirmedModeText');
+      const modeLabel = document.getElementById('confirmedModeLabel');
+      const dateLabel = document.getElementById('confirmedDateLabel');
+      const shiftBadge = document.getElementById('confirmedShiftBadge');
+      const serialVal = document.getElementById('confirmedSerialVal');
+      const startTimeVal = document.getElementById('confirmedStartTimeVal');
+
+      if (docAvatar) {
+        docAvatar.src = doc.avatar;
+        docAvatar.onerror = function() {
+          this.onerror = null;
+          this.src = 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80';
+        };
+      }
+      if (docName) docName.textContent = doc.name;
+      if (docSub) docSub.textContent = doc.degreeSpecialty;
+      if (modeText) modeText.textContent = (activeConsultMode === 'video' ? 'video' : 'in-person');
+      if (modeLabel) modeLabel.textContent = (activeConsultMode === 'video' ? 'Video Call' : 'In Person');
+      
+      const dayFormatted = (selectedConsultDay === 'TODAY' ? 'Tue' : selectedConsultDay.charAt(0) + selectedConsultDay.slice(1).toLowerCase());
+      const monthFormatted = selectedConsultMonth.charAt(0) + selectedConsultMonth.slice(1).toLowerCase();
+      if (dateLabel) dateLabel.textContent = `${dayFormatted}, ${monthFormatted} ${selectedConsultNum}`;
+
+      if (shiftBadge) shiftBadge.textContent = currentShift.name;
+      if (serialVal) serialVal.textContent = currentShift.serial;
+      if (startTimeVal) {
+        const startTime = currentShift.time.split(' - ')[0] || currentShift.time;
+        startTimeVal.textContent = startTime;
+      }
+
+      // Transition to Confirmation Screen
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const pageConfirmed = document.getElementById('pageBookingConfirmed');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-left';
+      }
+      if (pageConfirmed) {
+        pageConfirmed.className = 'app-page page-booking-confirmed active-page';
+        pageConfirmed.scrollTop = 0;
+      }
+    }
+
+    function dismissBookingConfirmation() {
+      const pageConfirmed = document.getElementById('pageBookingConfirmed');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      if (pageConfirmed) {
+        pageConfirmed.className = 'app-page page-booking-confirmed page-right';
+      }
+      if (pageConsult) {
+        pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      navigateToDiscover();
+      showToast('Appointment saved to your visits!');
+    }
+
+    // ============================================================
+    // DOCTORS DIRECTORY CONTROLLER
+    // ============================================================
+    function renderDoctorsDirectory() {
+      const listEl = document.getElementById('doctorsDirectoryList');
+      const countEl = document.getElementById('doctorResultsCount');
+      const emptyEl = document.getElementById('emptyDoctorState');
+      if (!listEl) return;
+
+      // Filter by category
+      let filtered = doctorsDb.filter(doc => {
+        const matchesCategory = (currentCategoryFilter === 'All') || (doc.specialty.toLowerCase() === currentCategoryFilter.toLowerCase());
+        const query = currentSearchQuery.trim().toLowerCase();
+        const matchesQuery = !query || 
+          doc.name.toLowerCase().includes(query) ||
+          doc.specialty.toLowerCase().includes(query) ||
+          doc.hospital.toLowerCase().includes(query) ||
+          doc.degreeSpecialty.toLowerCase().includes(query) ||
+          (doc.chamber && doc.chamber.toLowerCase().includes(query)) ||
+          (doc.bio && doc.bio.toLowerCase().includes(query));
+        return matchesCategory && matchesQuery;
+      });
+
+      // Update counter
+      if (countEl) {
+        countEl.textContent = `Showing ${filtered.length} doctor${filtered.length === 1 ? '' : 's'}`;
+      }
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = '';
+        if (emptyEl) emptyEl.classList.add('show');
+        return;
+      }
+
+      if (emptyEl) emptyEl.classList.remove('show');
+
+      // Cardless / Boxless doctor items: Title in name, MBBS, FCPS - Specialty format, bold price and Book Doctor text button on same row
+      listEl.innerHTML = filtered.map(doc => `
+        <div class="doctor-boxless-item" onclick="openDoctorProfile(${doc.id})">
+          <div class="doctor-avatar-wrap">
+            <img src="${doc.avatar}" alt="" class="doctor-avatar-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=160&auto=format&fit=crop&q=80';">
+          </div>
+
+          <div class="doctor-info-col">
+            <div class="doctor-name-line">
+              <h3 class="doctor-name">${doc.name}</h3>
+              <i class="ph-fill ph-seal-check verified-icon" title="BMDC Verified Specialist"></i>
+            </div>
+
+            <span class="doctor-degree-specialty">${doc.degreeSpecialty}</span>
+
+            <div class="doctor-price-action-row">
+              <span class="doctor-price-val">&#2547; ${doc.fee.toLocaleString()}</span>
+              <div class="doctor-text-btn" onclick="event.stopPropagation(); openDoctorProfile(${doc.id})">
+                <span>Book Doctor</span>
+                <i class="ph ph-arrow-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setDoctorFilter(category, clickedElement) {
+      currentCategoryFilter = category;
+
+      // Update UI active chip
+      const chips = document.querySelectorAll('#specialtyFilterStrip .filter-chip');
+      chips.forEach(c => {
+        if (c.textContent.trim().toLowerCase() === category.toLowerCase()) {
+          c.classList.add('active');
+        } else {
+          c.classList.remove('active');
+        }
+      });
+
+      renderDoctorsDirectory();
+    }
+
+    function toggleDoctorFilters() {
+      const strip = document.getElementById('specialtyFilterStrip');
+      if (strip) {
+        strip.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function onDoctorSearchInput(val) {
+      currentSearchQuery = val;
+      const clearBtn = document.getElementById('btnClearSearch');
+      if (clearBtn) {
+        if (val.length > 0) {
+          clearBtn.classList.add('show');
+        } else {
+          clearBtn.classList.remove('show');
+        }
+      }
+      
+      // If user is searching and no match in current category, auto-expand to All
+      if (val.trim().length > 0 && currentCategoryFilter !== 'All') {
+        const matchesInCurrent = doctorsDb.some(d => 
+          d.specialty.toLowerCase() === currentCategoryFilter.toLowerCase() &&
+          (d.name.toLowerCase().includes(val.toLowerCase()) || 
+           d.specialty.toLowerCase().includes(val.toLowerCase()) || 
+           d.degreeSpecialty.toLowerCase().includes(val.toLowerCase()))
+        );
+        if (!matchesInCurrent) {
+          currentCategoryFilter = 'All';
+          document.querySelectorAll('#specialtyFilterStrip .filter-chip').forEach(c => {
+            if (c.textContent.trim().toLowerCase() === 'all') c.classList.add('active');
+            else c.classList.remove('active');
+          });
+        }
+      }
+
+      renderDoctorsDirectory();
+    }
+
+    function clearDoctorSearch() {
+      const inp = document.getElementById('doctorSearchInput');
+      if (inp) {
+        inp.value = '';
+        inp.focus();
+      }
+      onDoctorSearchInput('');
+    }
+
+    function resetAllDoctorFilters() {
+      clearDoctorSearch();
+      setDoctorFilter('All');
+    }
+
+    // ============================================================
+    // TOAST SYSTEM
+    // ============================================================
+    let toastTimeout = null;
+    function showToast(msg) {
+      const pill = document.getElementById('appToastPill');
+      const text = document.getElementById('toastMsg');
+      if (!pill || !text) return;
+      text.textContent = msg;
+      pill.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        pill.classList.remove('show');
+      }, 2600);
+    }
+
+    // Initial state
+    renderDoctorsDirectory();
+  </script>
+</body>
+</html>

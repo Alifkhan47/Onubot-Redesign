@@ -54,7 +54,7 @@
 ### 1.1 Core Mission & Product Identity
 * **Target User**: Busy doctors, middle-aged and senior healthcare professionals who require clean, friction-free scannability without cognitive overload or clutter.
 * **Design Aesthetic**: Modern Western / European minimal healthtech standard inspired by **Wise, Uber, Hims, Alan Health, and Qonto**. Pure white canvas (`#FFFFFF`), gentle neutral surface cards (`#F6F8F9`), high-contrast typography, and single-purpose primary action buttons.
-* **Tech Stack**: High-fidelity, self-contained single-page interactive web prototype in [`index.html`](file:///c:/Alif/Onu%20App%20Prototype/index.html) powered by vanilla HTML5, CSS3, and JavaScript, with Phosphor Icons and Google Fonts (`Urbanist` + `DM Sans`).
+* **Tech Stack**: High-fidelity, self-contained single-page interactive web prototypes in [`doctors-app.html`](./doctors-app.html) and [`patient-app.html`](./patient-app.html) powered by vanilla HTML5, CSS3, and JavaScript, with Phosphor Icons and Google Fonts (`Urbanist` + `DM Sans`).
 
 ---
 
@@ -108,13 +108,16 @@ When rendering a patient's historical details in `#pageAppointmentDetails`:
 The prototype lives in the root directory:
 
 ```
-c:\Alif\Onu App Prototype\
-├── index.html              # Main interactive SPA prototype (HTML + CSS + JS)
+g:\Projects\ONUBOT Redesign\
+├── doctors-app.html        # Doctor Desk & Shift Management SPA Prototype
+├── patient-app.html        # Patient Care Discovery & Booking SPA Prototype
+├── phosphor-embedded.css   # Embedded Phosphor icons stylesheet
 ├── DESIGN_GUIDELINE.md     # Visual design system, color tokens, and UI SOPs
-└── AI_INSTRUCTIONS.md      # This file: Project context, clinical logic & AI instructions
+├── AI_INSTRUCTIONS.md      # This file: Project context, clinical logic & AI instructions
+└── README.md               # Project overview and documentation
 ```
 
-### 3.1 Structure of `index.html`
+### 3.1 Structure of `doctors-app.html`
 * **Lines 1–150**: HTML `<head>` with CDN stylesheets (Phosphor Icons, Google Fonts `Urbanist` & `DM Sans`).
 * **Lines 150–4200**: Comprehensive CSS Design System:
   * CSS Variables (`:root`) defining colors, typography, spacing, shadows, and transitions.
@@ -234,7 +237,7 @@ c:\Alif\Onu App Prototype\
     * **Confirmation Flows**:
       * Selecting 1–6 days opens `#offlineConfirmedModalSheet` with clean summary tile (`Sept 15 – 16 • Offline` + auto-reschedule confirmation).
       * Selecting an entire week (>= 7 days) with no remaining open shifts opens `#createShiftToOfflineModalSheet` with an amber calendar badge guiding the doctor to open a new shift.
-  * **Interactive Demo Mechanism**: Tapping the clock time in the status bar (`#statusClockTime`) toggles between Locked (`8:22 AM`) and Ready (`8:58 AM`) anytime for effortless presentations.
+  * **Pre-Visit Details & Uploaded Rx**: Displays the active patient's pre-visit clinical triage (symptoms, duration, severity, intake quote) along with a boxless patient uploaded prescription tile (`.desk-uploaded-rx-tile`) with eye preview trigger, and an explicit action link (`View full details →`) opening this patient's complete appointment dossier.
   * **Action Cards**: Quick access to `View All Appointments` and `Edit Schedule`.
 
 ### Screen 2: Edit Shift / Schedule (`#pageSchedule`)
@@ -293,17 +296,17 @@ c:\Alif\Onu App Prototype\
 ### Screen 8: Appointment & Visit Clinical Details (`#pageAppointmentDetails`)
 * **Purpose**: Detailed inspection of any individual appointment or historical visit record.
 * **Plain-Text Patient Header (`.details-patient-plain-container`)**:
-  * **No Box / No Avatar / Non-Collapsible**: Compact, clean typography with patient name on top (`17px Bold #0F172A`) and demographics (`12.5px #64748B`) directly underneath.
+  * **No Box / No Avatar / Non-Collapsible**: Compact, clean typography with patient name on top (`17px Bold #0F172A`), demographics (`12.5px #64748B`) directly underneath, and the appointment date (`Today, Sept 29` in `12.5px #64748B`) aligned directly opposite on the right side as plain text.
   * **Divider Break**: Separated from the rest of the page by a subtle horizontal divider line (`border-bottom: 1px solid #F1F5F9;`) matching the soft divider under the prescription card.
 * **Visual Hierarchy (Completed Visit / `prescribed`)**:
   1. **Top Priority: Issued Prescription (`.details-rx-tile`)**: Placed at the very top of the hierarchy list with full card tap target, PDF icon, and eye preview trigger (`previewPrescriptionFromDetails()`).
-  2. **Truncated Consultation Notes (`.details-notes-card.is-collapsed`)**: Shows a 2-line snippet with `Read full note ▾` hint. Has no redundant bottom border line since the `---- View More ▾ ----` divider directly follows. Clicking anywhere on the card smoothly expands the complete clinical text and toggles to `Show less ▴`.
+  2. **Truncated Consultation Notes (`.details-notes-card.is-collapsed`) & Audio Player**: Shows a 2-line snippet with `Read full note ▾` hint. Directly below the card, a subtle text-based button (`.btn-listen-audio-trigger`: `Listen to audio` with duration e.g. `12:32`) triggers the **Boxless Consultation Audio Player Bottom Sheet (`#modalConsultationAudio`)**, featuring a seamless borderless layout, live animated waveform visualizer, dynamic filled-progress timeline scrubber (`#052E28` elapsed track fill), ±10s skip controls, speed multiplier chips (1.0x–2.0x), and mute toggle.
   3. **Bottom Collapsible More Details (`.details-intake-collapsible-wrap`)**: Secondary archival records are tucked behind a clean divider trigger (`---- View More ▾ ----`) with no enclosing card/box. Tapping smoothly toggles open:
      - **Consultation Info Chips (`.details-meta-chips-strip`)**: Completed status, date, and consultation type chips in their established clean tag style.
      - **Pre-visit Details Card**: Symptoms, duration, severity, and intake quote.
      - **Patient Uploaded Documents**: Document list with previews.
      - Toggling switches the trigger label between `View More ▾` and `View Less ▴`.
-* **Top Right Action**: Headset support button (`.btn-circle-icon` with `ph-headset`) opening the **Help & Support Bottom Sheet (`#helpSupportModalSheet`)**.
+* **Top Right Action**: Headset support button (`.btn-circle-icon` with `ph-headset`) opening the **Help & Support Bottom Sheet (`#helpSupportModalSheet`)** featuring boxless contact channels (WhatsApp, Messenger, Email, Call Us) and photo/screenshot attachment uploads.
 * **No Redundant Bottom Dock on Completed Visits**:
   * The bottom dock button is hidden for completed visits because the **Issued Prescription** card on top already contains the primary `View Rx` action. Bottom dock is active only for pending tasks (`Review & Finalize Rx`, `Re-join Active Call`, or In-Person actions).
 * **Contextual Back Navigation**: Back arrow returns to `#pagePatientProfile` if opened from a patient visit log, `#pageAppointments` if opened from the appointments list, or `#pageDesk` if opened from desk.
@@ -349,22 +352,25 @@ c:\Alif\Onu App Prototype\
 ### Screen 12: My Wallet & Payout System (`#pageWallet`)
 * **Purpose**: Doctor earnings tracking, transaction history, withdrawal requests, and payment method management.
 * **Key Components**:
-  * **Header**: `My Wallet` with Settings gear button opening Saved Accounts & Payout Settings.
-  * **Hero Balance Card**: Sage glassmorphic card with available balance (`৳ 12,400`) and full-width `Withdraw Funds` CTA.
-  * **Financial Overview**: Split metrics for `Today's Earnings` and `Total Earnings`.
+  * **Header**: `My Wallet` with regular Phosphor bank icon button (`ph ph-bank`) opening Saved Accounts & Payout Settings with consistent stroke weight.
+  * **Hero Available Balance Card (`.wallet-balance-container`)**: Clean elevated card surface (`#FFFFFF`, border `#E2ECE9`, radius `20px`) with a top header row featuring `Available Balance` and a live status chip (`Ready to withdraw` with pulsing dot), large 38px bold balance (`৳ 12,400`), and a full-width primary `Withdraw` CTA button (`#052E28`).
+  * **Symmetrically Aligned Collapsible Earnings Breakdown (`.wallet-earnings-collapsible`)**: Balanced `Breakdown ▾` trigger expanding into a full-width 2-column grid (`Today` left half, `Total` right half with centered hairline divider and generous top margin).
+  * **Generous Spacing**: Increased separation (`margin-top: 36px`) between top earnings and `Today's Transactions`.
+  * **Withdraw Bottom Sheet (`#withdrawFundsModalSheet`)**: Streamlined modal with prominent 22px bold available balance (`৳ 12,400`), zero redundant explanatory text, and quick withdrawal amount input.
   * **Recent Transactions List**: Grouped transactions with income/payout icons, amounts, and dates.
   * **Transaction Filter Bottom Sheet (`#transactionFilterSheet`)**: Dual-filter modal supporting **Transaction Type** (`All`, `Payouts`, `Withdrawals`) and **Date Period** (`All Time`, `Today`, `Yesterday`, `This Week`, `This Month`) with paired Reset and Apply Filter actions. Trigger button features an active filter dot indicator.
 
 ### Screen 13: Doctor Profile & Practice Details (`#pageDoctorProfile`)
 * **Purpose**: Manage physician clinical identity, contact details, chamber address, bio, and settings.
 * **Key Components**:
-  * **Hero Card**: Avatar with camera photo picker, BMDC Verified seal, specialty subtitle, and embedded stats row (`Total Patients: 1,420+`, `Experience: 5+ Years`).
-  * **Contact & Practice Section (Editable)**:
-    * **Contact Phone Tile**: Dynamic phone display with bottom sheet editor (`#editPhoneModalSheet`).
-    * **Chamber Address Tile**: Dynamic chamber location (e.g. `BSMMU (PG Hospital), Shahbag, Dhaka`) with bottom sheet editor (`#editChamberModalSheet`).
-    * **About You Bio Card**: Formatted bio preview with bottom sheet popup editor (`#editBioModalSheet`), supporting real-time character count and instant saving.
-  * **Professional Identity (Verified)**: BMDC Registration (`437193172`) and verified Consultation Fee (`৳ 1,200 BDT`).
-  * **More Navigation**: Settings, Help & Support, and Log Out modal triggers.
+  * **Boxless Hero Identity (`.doctor-hero-boxless`)**: Flat, borderless header with circular avatar photo picker (`#doctorProfileAvatarImg`), BMDC Verified seal, specialty subtitle, email line, and inline stats (`1,420+ Patients • 5+ Years Experience`).
+  * **Spacious Practice Details (Boxless List with Hairline Dividers)**:
+    * Generous row padding (`16px 4px`), 40px circular icons, 12px labels, and bold 15px values.
+    * **Phone Row**: Dynamic phone display with inline edit trigger (`#editPhoneModalSheet`).
+    * **Chamber Row**: Dynamic chamber location with inline edit trigger (`#editChamberModalSheet`).
+    * **About Row**: 2-line bio preview with inline edit trigger (`#editBioModalSheet`).
+  * **Credentials (Boxless)**: BMDC Registration (`437193172` with verified shield) and Consultation Fee (`৳ 1,200`) with spacious 15px typography.
+  * **Account Menu (Boxless)**: Large, roomy Settings, Help & Support, and Log Out rows with 20px icons, 15px titles, and hairline dividers.
 
 ### Bottom Navigation Bar Master Standard
 * **Active Tab**: Displays inside a soft rounded pastel pill (`.active-nav-pill` on `#EFF7F5`), with the **filled icon** (`ph-fill`) in `#052E28`, a subtle horizontal accent indicator bar, and **NO title text**.
@@ -404,7 +410,7 @@ When you are prompted by the user to add a feature, fix a bug, or redesign a scr
 - **DO NOT** revert the pure white canvas (`#FFFFFF`) to dark or gray backgrounds.
 
 ### Step 3: Implement & Keep Context Synchronized
-- Modify `index.html` cleanly using single contiguous replacements.
+- Modify `doctors-app.html` or `patient-app.html` cleanly using single contiguous replacements.
 - Test and verify state changes, DOM IDs, and transition classes.
-- Always update [`DESIGN_GUIDELINE.md`](file:///c:/Alif/Onu%20App%20Prototype/DESIGN_GUIDELINE.md) and [`AI_INSTRUCTIONS.md`](file:///c:/Alif/Onu%20App%20Prototype/AI_INSTRUCTIONS.md) after modifying or expanding screens.
+- Always update [`DESIGN_GUIDELINE.md`](./DESIGN_GUIDELINE.md) and [`AI_INSTRUCTIONS.md`](./AI_INSTRUCTIONS.md) after modifying or expanding screens.
 - **MANDATORY**: After making any significant structural, behavioral, or feature changes, update both `DESIGN_GUIDELINE.md` and `AI_INSTRUCTIONS.md` to reflect the latest modifications.

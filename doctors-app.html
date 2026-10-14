@@ -6796,12 +6796,28 @@
       line-height: 1.25;
     }
 
+    .details-patient-plain-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     .details-patient-plain-meta {
       font-family: var(--font-body);
       font-size: 12.5px;
       color: #64748B;
       font-weight: 500;
       line-height: 1.25;
+    }
+
+    .details-patient-plain-date {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 500;
+      line-height: 1.25;
+      text-align: right;
     }
 
     .details-meta-pill {
@@ -7130,6 +7146,50 @@
 
     .details-notes-card:not(.is-collapsed) .details-notes-expand-hint i {
       transform: rotate(180deg);
+    }
+
+    /* Subtle Text Button to Listen to Full Consultation Audio */
+    .btn-listen-audio-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 10px 4px 2px 4px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-listen-audio-trigger:hover {
+      opacity: 0.8;
+      transform: translateY(-0.5px);
+    }
+
+    .btn-listen-audio-trigger:active {
+      transform: scale(0.99);
+    }
+
+    .btn-listen-audio-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #0E8070;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-listen-audio-left i {
+      font-size: 16px;
+      color: #0E8070;
+    }
+
+    .btn-listen-audio-duration {
+      font-size: 12px;
+      color: #64748B;
+      font-weight: 500;
     }
 
     /* Bottom Collapsible Section: Divider with 'View More' */
@@ -7475,6 +7535,23 @@
     .details-file-row-action:hover {
       background: #F1F5F9;
       color: #0F172A;
+    }
+
+    /* Desk Uploaded Prescription Boxless Tile */
+    .desk-uploaded-rx-tile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0 8px 0;
+      margin-top: 8px;
+      border-top: 1px solid #F1F5F9;
+      background: transparent;
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .desk-uploaded-rx-tile:hover {
+      opacity: 0.85;
     }
 
     .details-empty-docs {
@@ -9848,86 +9925,204 @@
       overflow-y: auto;
     }
 
-    /* 1. Main Hero Balance Card (Sage Glassmorphism - Matches Desk Patient Card Exactly) */
-    .wallet-hero-card {
-      background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%) !important;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(126, 184, 174, 0.4) !important;
-      border-radius: 20px !important;
-      padding: 18px 20px 18px 20px;
-      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
+    /* 1. Elevated Available Balance Hero Card */
+    .wallet-balance-container {
+      background: #FFFFFF;
+      border: 1.5px solid #E2ECE9;
+      border-radius: 20px;
+      padding: 18px 20px 20px 20px;
+      box-shadow: 0 4px 16px -2px rgba(5, 46, 40, 0.04);
       flex-shrink: 0;
-      transition: all 0.2s ease;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .wallet-hero-card:hover {
-      background: linear-gradient(135deg, rgba(232, 244, 241, 0.98) 0%, rgba(206, 230, 225, 0.88) 100%) !important;
-      border-color: rgba(126, 184, 174, 0.55) !important;
-    }
-
-    .wallet-hero-top {
+    .wallet-balance-header {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .wallet-hero-label {
+    .wallet-balance-label {
       font-family: var(--font-body);
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 600;
-      color: #556B67;
-      letter-spacing: 0.01em;
+      color: #64748B;
+      letter-spacing: -0.01em;
+    }
+
+    .wallet-payout-status-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: #E6F4F1;
+      border: 1px solid rgba(14, 128, 112, 0.16);
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      color: #0E8070;
+    }
+
+    .wallet-payout-status-chip .status-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0E8070;
+      box-shadow: 0 0 0 2px rgba(14, 128, 112, 0.2);
     }
 
     .wallet-hero-val {
       font-family: var(--font-heading);
-      font-size: 27px; /* Refined smaller, uncluttered typography */
+      font-size: 38px;
       font-weight: 800;
-      color: var(--color-primary-btn);
-      letter-spacing: -0.02em;
-      line-height: 1.1;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1;
       margin: 0;
     }
 
-    .btn-wallet-hero-action {
+    .wallet-actions-row {
+      display: flex;
+      align-items: center;
+      padding-top: 4px;
+    }
+
+    .btn-wallet-action-primary {
       width: 100%;
       height: 44px;
-      min-height: 44px;
-      max-height: 44px;
-      flex-shrink: 0;
-      background: var(--color-primary-btn);
-      color: #ffffff;
+      background: #052E28;
+      color: #FFFFFF;
       border: none;
-      border-radius: 12px;
+      border-radius: 14px;
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      transition: background 0.2s ease, transform 0.15s ease;
-      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.18);
-      margin-top: 2px;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.16);
+      transition: all 0.15s ease;
     }
 
-    .btn-wallet-hero-action:hover {
-      background: var(--color-primary-btn-hover);
-      transform: translateY(-1px);
+    .btn-wallet-action-primary i {
+      font-size: 16px;
     }
 
-    .btn-wallet-hero-action:active {
+    .btn-wallet-action-primary:hover {
+      background: #011714;
+      transform: translateY(-0.5px);
+    }
+
+    .btn-wallet-action-primary:active {
       transform: scale(0.98);
+    }
+
+    /* 2. Collapsible Earnings Breakdown with Perfect Symmetric Alignment */
+    .wallet-earnings-collapsible {
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      overflow: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      margin-top: 10px;
+    }
+
+    .wallet-earnings-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 4px;
+      cursor: pointer;
+      user-select: none;
+      background: transparent;
+      transition: opacity 0.15s ease;
+    }
+
+    .wallet-earnings-trigger:hover {
+      opacity: 0.75;
+    }
+
+    .wallet-trigger-title {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0E8070;
+      letter-spacing: -0.01em;
+    }
+
+    .wallet-earnings-trigger i {
+      font-size: 14px;
+      color: #0E8070;
+      transition: transform 0.25s ease;
+    }
+
+    .wallet-earnings-body {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease, padding 0.25s ease;
+      padding: 0;
+    }
+
+    .wallet-earnings-collapsible.is-expanded .wallet-earnings-body {
+      max-height: 100px;
+      opacity: 1;
+      padding: 10px 0 4px 0;
+    }
+
+    .wallet-earnings-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 12px 6px;
+      border-top: 1px solid #E8F0EE;
+      border-bottom: 1px solid #E8F0EE;
+    }
+
+    .wallet-stat-tile {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .wallet-stat-tile:first-child {
+      padding-left: 2px;
+    }
+
+    .wallet-stat-tile:last-child {
+      padding-left: 24px;
+    }
+
+    .wallet-stat-tile-divider {
+      width: 1px;
+      height: 32px;
+      background: #E2ECE9;
+    }
+
+    .wallet-stat-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    .wallet-stat-val {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
     }
 
     /* 3. Recent Transactions Section (Unified Plain Text List with Line Dividers & Generous Spacing) */
     .wallet-transactions-section {
-      margin-top: 12px;
+      margin-top: 36px;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -10093,23 +10288,26 @@
 
     /* Withdraw Funds Modal Styles */
     .withdraw-avail-text {
-      font-family: var(--font-heading);
-      font-size: 15.5px;
-      font-weight: 700;
-      color: #0E8070;
-      letter-spacing: -0.01em;
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 6px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       padding: 0 2px;
     }
 
     .withdraw-avail-label {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 500;
       color: #64748B;
+    }
+
+    #withdrawModalAvailText {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: #052E28;
+      letter-spacing: -0.02em;
     }
 
     /* Enhanced Prominent Amount Input Card (On Top) */
@@ -10872,34 +11070,31 @@
       display: none;
     }
 
-    /* Unified Doctor Hero Profile Card with Embedded Stats */
-    .doctor-hero-card {
-      background: linear-gradient(180deg, #F2F8F6 0%, #E6F2EE 100%);
-      border: 1.5px solid #CDE5DF;
-      border-radius: 22px;
-      padding: 22px 16px 16px 16px;
+    /* ============================================================
+       BOXLESS LUXURY DOCTOR PROFILE STYLES
+       ============================================================ */
+    .doctor-hero-boxless {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.05);
+      padding: 6px 0 16px 0;
       position: relative;
     }
 
     .doctor-avatar-wrap {
       position: relative;
-      width: 82px;
-      height: 82px;
-      margin-bottom: 4px;
+      width: 86px;
+      height: 86px;
+      margin-bottom: 6px;
     }
 
     .doctor-avatar-img {
-      width: 82px;
-      height: 82px;
+      width: 86px;
+      height: 86px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid #FFFFFF;
-      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.1);
+      box-shadow: 0 4px 16px rgba(5, 46, 40, 0.12);
       display: block;
       background: #E2ECE9;
     }
@@ -10942,11 +11137,11 @@
 
     .doctor-name-title {
       font-family: var(--font-heading);
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 700;
-      color: #052E28;
+      color: #0F172A;
       margin: 0;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
     }
 
     .doctor-verified-seal {
@@ -10959,240 +11154,251 @@
       font-family: var(--font-body);
       font-size: 13px;
       font-weight: 400;
-      color: #55726B;
-      margin: 0 0 6px 0;
+      color: #64748B;
+      margin: 0 0 4px 0;
     }
 
-    .doctor-email-badge {
+    .doctor-email-line {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(126, 184, 174, 0.35);
-      border-radius: 100px;
+      gap: 5px;
       font-family: var(--font-body);
-      font-size: 11.5px;
-      font-weight: 500;
-      color: #052E28;
-      margin-bottom: 8px;
+      font-size: 12px;
+      color: #64748B;
+      margin-bottom: 12px;
     }
 
-    .doctor-email-badge i {
+    .doctor-email-line i {
       font-size: 13px;
-      color: #0D7A5F;
+      color: #94A3B8;
     }
 
-    /* Embedded Hero Stats Bar */
-    .doctor-hero-stats-row {
-      width: 100%;
-      margin-top: 6px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(126, 184, 174, 0.28);
+    /* Boxless Inline Stats */
+    .doctor-stats-inline {
       display: flex;
       align-items: center;
-      justify-content: space-around;
-      box-sizing: border-box;
+      justify-content: center;
+      gap: 16px;
+      padding: 6px 0;
+      width: 100%;
     }
 
-    .hero-stat-col {
-      flex: 1;
-      text-align: center;
+    .doctor-stat-inline-item {
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      align-items: center;
+      gap: 5px;
     }
 
-    .hero-stat-label {
-      font-family: var(--font-body);
-      font-size: 10px;
-      font-weight: 600;
-      color: #55726B;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .hero-stat-val {
+    .doctor-stat-inline-val {
       font-family: var(--font-heading);
-      font-size: 16px;
+      font-size: 13.5px;
       font-weight: 700;
-      color: #052E28;
+      color: #0F172A;
     }
 
-    .hero-stat-divider {
-      width: 1px;
-      height: 24px;
-      background: rgba(126, 184, 174, 0.32);
+    .doctor-stat-inline-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #64748B;
     }
 
-    /* Profile Sections & Badges */
-    .profile-group-section {
+    .doctor-stat-inline-dot {
+      color: #CBD5E1;
+      font-size: 11px;
+    }
+
+    /* Boxless Group Sections - Spacious & Generous Sizing */
+    .profile-boxless-group {
+      margin-top: 24px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
-    .profile-section-header {
+    .profile-boxless-header {
+      padding: 0 4px 6px 4px;
+    }
+
+    .profile-boxless-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748B;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .profile-boxless-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .profile-boxless-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2px;
-      margin-bottom: 2px;
+      gap: 14px;
+      padding: 16px 4px;
+      cursor: pointer;
+      transition: background 0.12s ease;
     }
 
-    .profile-section-title {
+    .profile-boxless-row:hover {
+      background: #F8FAFC;
+    }
+
+    .profile-boxless-row.is-bio {
+      align-items: flex-start;
+    }
+
+    .profile-boxless-row-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-boxless-row.is-bio .profile-boxless-row-left {
+      align-items: flex-start;
+    }
+
+    .profile-boxless-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #F8FAFC;
+      border: 1px solid #EDF2F1;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .profile-boxless-row-body {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .profile-boxless-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    .profile-boxless-value {
       font-family: var(--font-heading);
       font-size: 15px;
       font-weight: 700;
       color: #0F172A;
-      margin: 0;
-      letter-spacing: -0.01em;
-    }
-
-    .profile-badge-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 500;
-      color: #0D7A5F;
-      background: #EFF7F5;
-      border: 1px solid #D6EAE6;
-      border-radius: 100px;
-      padding: 2px 8px;
-    }
-
-    .profile-badge-locked {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 500;
-      color: #64748B;
-      background: #F8FAF9;
-      border: 1px solid #E2E8F0;
-      border-radius: 100px;
-      padding: 2px 8px;
-    }
-
-    /* Editable Contact Phone & Practice Tiles */
-    .profile-phone-tile {
-      background: #FFFFFF;
-      border: 1.5px solid #EDF2F1;
-      border-radius: 16px;
-      padding: 13px 14px;
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
-      transition: border-color 0.15s ease;
-    }
-
-    .profile-phone-tile:hover {
-      border-color: #7EB8AE;
-    }
-
-    .profile-tile-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: #EFF7F5;
-      color: #052E28;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .profile-tile-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      min-width: 0;
-    }
-
-    .profile-tile-label {
-      font-family: var(--font-body);
-      font-size: 10.5px;
-      font-weight: 600;
-      color: #64748B;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .profile-tile-value {
-      font-family: var(--font-heading);
-      font-size: 14.5px;
-      font-weight: 700;
-      color: #052E28;
-      line-height: 1.38;
+      line-height: 1.4;
       word-break: break-word;
     }
 
-    .btn-edit-tile-action {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #F8FAF9;
-      border: 1px solid #E2ECE9;
-      color: #052E28;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .btn-edit-tile-action:hover {
-      background: #EFF7F5;
-      border-color: #7EB8AE;
-      color: #052E28;
-    }
-
-    /* Editable About You Card */
-    .profile-bio-box {
-      background: #FFFFFF;
-      border: 1.5px solid #EDF2F1;
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
-      transition: border-color 0.15s ease;
-    }
-
-    .profile-bio-box:hover {
-      border-color: #7EB8AE;
-    }
-
-    .profile-bio-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .profile-bio-title-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .profile-bio-display-text {
+    .profile-boxless-bio {
       font-family: var(--font-body);
-      font-size: 13.5px;
-      font-weight: 500;
+      font-size: 14px;
+      font-weight: 400;
       color: #334155;
       line-height: 1.55;
       margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .profile-boxless-edit-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: transparent;
+      border: none;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+
+    .profile-boxless-edit-btn:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    .profile-boxless-divider {
+      height: 1px;
+      background: #F1F5F9;
+      width: 100%;
+    }
+
+    .profile-boxless-cred-label {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    .profile-boxless-cred-val {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+      display: flex;
+      align-items: center;
+    }
+
+    .profile-boxless-menu-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 4px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.12s ease;
+    }
+
+    .profile-boxless-menu-row:hover {
+      background: #F8FAFC;
+    }
+
+    .profile-menu-row-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: #1E293B;
+    }
+
+    .profile-menu-row-left i {
+      font-size: 20px;
+      color: #64748B;
+    }
+
+    .profile-boxless-menu-row.logout-row .profile-menu-row-left {
+      color: #DC2626;
+    }
+
+    .profile-boxless-menu-row.logout-row .profile-menu-row-left i {
+      color: #DC2626;
+    }
+
+    .profile-menu-row-arrow {
+      font-size: 15px;
+      color: #94A3B8;
     }
 
     .profile-bio-textarea {
@@ -11218,175 +11424,359 @@
       box-shadow: 0 0 0 3px rgba(126, 184, 174, 0.14);
     }
 
-    .profile-bio-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-family: var(--font-body);
-      font-size: 11px;
-      color: #64748B;
-    }
-
-    /* Verified Professional Identity Group (Airy Minimalist Card) */
-    .profile-info-card {
-      background: #FFFFFF;
-      border: 1.5px solid #EDF2F1;
-      border-radius: 18px;
-      padding: 4px 18px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
-    }
-
-    .profile-info-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      gap: 16px;
-    }
-
-    .info-row-label {
-      font-family: var(--font-body);
-      font-size: 13px;
-      font-weight: 500;
-      color: #64748B;
-      flex-shrink: 0;
-    }
-
-    .info-row-value {
-      font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 700;
-      color: #052E28;
-      text-align: right;
-      word-break: break-word;
-    }
-
-    .info-row-divider {
-      height: 1px;
-      background: #F1F5F4;
-      width: 100%;
-    }
-
-    /* Settings & Support Menu Card */
-    .profile-menu-box {
-      background: #FFFFFF;
-      border: 1.5px solid #EDF2F1;
-      border-radius: 16px;
-      padding: 2px 14px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.015);
-      margin-bottom: 24px;
-    }
-
-    .profile-menu-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0;
-      cursor: pointer;
-      transition: background 0.15s ease;
-      user-select: none;
-    }
-
-    .menu-row-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .menu-row-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #F8FAF9;
-      color: #334155;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      flex-shrink: 0;
-    }
-
-    .menu-row-text {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .menu-row-title {
-      font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 700;
-      color: #0F172A;
-    }
-
-    .menu-row-sub {
-      font-family: var(--font-body);
-      font-size: 11px;
-      color: #64748B;
-    }
-
-    .menu-row-arrow {
-      color: #94A3B8;
-      font-size: 15px;
-    }
-
-    .profile-menu-row.logout-row .menu-row-icon {
-      background: #FEF2F2;
-      color: #DC2626;
-    }
-
-    /* 4-Item Support Quick Channel Grid */
+    /* 4-Item Support Quick Channels (Wise Boxless Standard) */
     .support-channels-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 6px 4px 14px 4px;
+      margin-top: 4px;
+      border-bottom: 1px solid #F1F5F9;
     }
 
     .support-channel-card {
-      background: #F8FAF9;
-      border: 1.5px solid #E2ECE9;
-      border-radius: 14px;
-      padding: 12px 6px 10px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 4px 8px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: transform 0.15s ease, opacity 0.15s ease;
       text-decoration: none;
       user-select: none;
     }
 
     .support-channel-card:hover {
-      background: #EFF7F5;
-      border-color: #7EB8AE;
-      transform: translateY(-1px);
+      background: transparent;
+      border: none;
+      transform: translateY(-2px);
+      opacity: 0.85;
     }
 
     .support-channel-card:active {
-      transform: scale(0.97);
+      transform: scale(0.94);
     }
 
     .support-channel-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 22px;
+      transition: transform 0.15s ease;
     }
 
     .support-channel-name {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      color: #334155;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
       letter-spacing: -0.01em;
       text-align: center;
+    }
+
+    /* Support Photo Attachment (Wise Boxless Standard) */
+    .support-photos-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .support-photos-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .support-photos-title {
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .support-photos-limit {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    .support-photos-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-support-add-photo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: #F1F5F9;
+      border: 1px dashed #CBD5E1;
+      color: #0F172A;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-support-add-photo:hover {
+      background: #EFF7F5;
+      border-color: #7EB8AE;
+      color: #0E8070;
+    }
+
+    .support-photos-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .support-photo-thumb-wrap {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #E2ECE9;
+      background: #F8FAF9;
+    }
+
+    .support-photo-thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .support-photo-remove-btn {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.75);
+      color: #FFFFFF;
+      border: none;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .support-photo-remove-btn:hover {
+      background: #DC2626;
+    }
+
+    /* Consultation Audio Player Styles */
+    @keyframes wavePulse {
+      0% { height: 6px; }
+      50% { height: 28px; }
+      100% { height: 12px; }
+    }
+
+    .audio-player-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      padding: 4px 0 8px 0;
+      margin: 4px 0 12px 0;
+    }
+
+    .audio-wave-visualizer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 36px;
+      padding: 0;
+    }
+
+    .wave-bar {
+      width: 4px;
+      min-height: 6px;
+      max-height: 32px;
+      background: #7EB8AE;
+      border-radius: 3px;
+      transition: height 0.2s ease, background 0.2s ease;
+    }
+
+    .audio-wave-visualizer.is-playing .wave-bar {
+      background: #0E8070;
+      animation: wavePulse 0.8s ease-in-out infinite alternate;
+    }
+
+    .audio-wave-visualizer.is-playing .wave-bar:nth-child(2n) { animation-duration: 0.6s; animation-delay: 0.1s; }
+    .audio-wave-visualizer.is-playing .wave-bar:nth-child(3n) { animation-duration: 0.9s; animation-delay: 0.2s; }
+    .audio-wave-visualizer.is-playing .wave-bar:nth-child(4n) { animation-duration: 0.7s; animation-delay: 0.15s; }
+    .audio-wave-visualizer.is-playing .wave-bar:nth-child(5n) { animation-duration: 1.1s; animation-delay: 0.05s; }
+
+    /* Draggable Progress Bar / Scrubber */
+    .audio-progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .audio-progress-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 4px;
+      background: linear-gradient(to right, #052E28 var(--progress, 0%), #E2ECE9 var(--progress, 0%));
+      outline: none;
+      cursor: pointer;
+      accent-color: #052E28;
+    }
+
+    .audio-progress-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #052E28;
+      border: 2.5px solid #FFFFFF;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .audio-progress-range::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .audio-timestamps-row {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748B;
+    }
+
+    /* Player Controls */
+    .audio-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 2px;
+    }
+
+    .btn-audio-speed {
+      background: #EFF7F5;
+      border: none;
+      border-radius: 100px;
+      padding: 5px 11px;
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0E8070;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-audio-speed:hover {
+      background: #D6EAE6;
+    }
+
+    .audio-center-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .btn-audio-skip {
+      background: #F8FAFC;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #334155;
+      font-size: 15px;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+
+    .btn-audio-skip:hover {
+      background: #F1F5F9;
+      transform: scale(1.05);
+    }
+
+    .btn-audio-skip .skip-sec-label {
+      font-size: 8px;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: -2px;
+    }
+
+    .btn-audio-play-pause {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #052E28;
+      border: none;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(5, 46, 40, 0.25);
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-audio-play-pause:hover {
+      background: #011714;
+      transform: scale(1.06);
+    }
+
+    .btn-audio-play-pause:active {
+      transform: scale(0.96);
+    }
+
+    .btn-audio-icon-aux {
+      background: transparent;
+      border: none;
+      color: #64748B;
+      font-size: 19px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-audio-icon-aux:hover {
+      color: #0F172A;
+      background: #F1F5F9;
     }
 
     /* Clean Support Success Hero Badge */
@@ -11782,6 +12172,18 @@
     </button>
   </div>
 
+  <!-- Top Ecosystem Switcher Bar -->
+  <div class="top-ecosystem-bar" style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:400px; margin-bottom:14px; padding:0 4px;">
+    <div style="display:inline-flex; align-items:center; gap:7px; font-family:var(--font-heading); font-size:13.5px; font-weight:700; color:#D6EAE6; background:rgba(255,255,255,0.08); backdrop-filter:blur(8px); padding:6px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.12);">
+      <span style="width:6px; height:6px; border-radius:50%; background:#34D399; box-shadow:0 0 8px #34D399;"></span>
+      <span>Onu Doctor App</span>
+    </div>
+    <a href="patient-app.html" style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-body); font-size:12px; font-weight:600; color:#94A3B8; background:rgba(255,255,255,0.05); padding:6px 12px; border-radius:999px; text-decoration:none; border:1px solid rgba(255,255,255,0.08);" title="Open Patient Discovery App">
+      <i class="ph ph-user"></i>
+      <span>Switch to Patient App</span>
+    </a>
+  </div>
+
   <!-- Mockup Phone Container -->
   <div class="mockup-container">
     <div class="phone-frame">
@@ -12017,11 +12419,26 @@
                       “I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.”
                     </div>
 
-                    <div class="desk-previsit-files-row" id="deskPreVisitFilesRow" style="display: none;"></div>
+                    <div class="desk-previsit-files-row" id="deskPreVisitFilesRow">
+                      <div class="desk-uploaded-rx-tile" onclick="openDocPreviewModal('Previous_Rx_Aug2026.pdf')">
+                        <div class="details-file-row-left">
+                          <div class="details-file-row-icon" style="background: #EFF7F5; color: #0E8070;">
+                            <i class="ph-bold ph-file-pdf"></i>
+                          </div>
+                          <div class="details-file-row-meta">
+                            <span class="details-file-row-name">Previous_Rx_Aug2026.pdf</span>
+                            <span class="details-file-row-sub">1.2 MB • Patient Uploaded Rx</span>
+                          </div>
+                        </div>
+                        <button type="button" class="details-file-row-action" title="Preview Prescription">
+                          <i class="ph ph-eye"></i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
                   <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
-                    <span>Appointment Details</span>
+                    <span id="deskSeeDetailsBtnText">View full details</span>
                     <i class="ph ph-arrow-right"></i>
                   </button>
                 </div>
@@ -12689,10 +13106,13 @@
               </button>
             </div>
 
-            <!-- Plain-Text Patient Header (No Box, Non-Collapsible, Name with Age+Gender Underneath) -->
+            <!-- Plain-Text Patient Header (No Box, Non-Collapsible, Name with Age+Gender & Date Underneath) -->
             <div class="details-patient-plain-container" id="detPatientPlainContainer">
               <span class="details-patient-plain-name" id="detPatientName">Farzana Khan</span>
-              <span class="details-patient-plain-meta" id="detPatientMeta">31 Yrs, Female</span>
+              <div class="details-patient-plain-meta-row">
+                <span class="details-patient-plain-meta" id="detPatientMeta">31 Yrs, Female</span>
+                <span class="details-patient-plain-date" id="detPatientDate">Today, Sept 29</span>
+              </div>
             </div>
 
             <!-- Dynamic Decluttered Sections Container -->
@@ -12841,39 +13261,55 @@
                ======================================================= -->
           <div class="app-page page-wallet page-right" id="pageWallet">
             
-            <!-- Top App Header (Exact match to My Desk & My Patients) -->
+            <!-- Top App Header -->
             <div class="app-header">
               <div class="header-text">
                 <h1 class="header-title">My Wallet</h1>
                 <p class="header-subtitle">Balance & payouts</p>
               </div>
-              <button class="btn-circle-icon" onclick="openEarningsSettingsModal()" aria-label="Settings">
-                <i class="ph ph-gear"></i>
+              <button class="btn-circle-icon" onclick="openEarningsSettingsModal()" aria-label="Payout Accounts" title="Payout Accounts">
+                <i class="ph ph-bank"></i>
               </button>
             </div>
 
-            <!-- 1. Main Available Balance Card (Sage Glassmorphism Card - Matches Desk Patient Card) -->
-            <div class="wallet-hero-card" id="walletBalanceHeroCard">
-              <div class="wallet-hero-top">
-                <span class="wallet-hero-label">Available Balance</span>
-                <h2 class="wallet-hero-val" id="walletAvailableBalanceText">&#2547; 12,400</h2>
+            <!-- 1. Available Balance Card -->
+            <div class="wallet-balance-container" id="walletBalanceHeroCard">
+              <div class="wallet-balance-header">
+                <span class="wallet-balance-label">Available Balance</span>
+                <span class="wallet-payout-status-chip">
+                  <span class="status-live-dot"></span>
+                  <span>Ready to withdraw</span>
+                </span>
               </div>
-              <button type="button" class="btn-wallet-hero-action" onclick="openWithdrawFundsModal()" aria-label="Withdraw Funds">
-                <i class="ph ph-arrow-up-right"></i>
-                <span>Withdraw Funds</span>
-              </button>
+              <h2 class="wallet-hero-val" id="walletAvailableBalanceText">&#2547; 12,400</h2>
+
+              <div class="wallet-actions-row">
+                <button type="button" class="btn-wallet-action-primary" onclick="openWithdrawFundsModal()" aria-label="Withdraw">
+                  <i class="ph ph-arrow-up-right"></i>
+                  <span>Withdraw</span>
+                </button>
+              </div>
             </div>
 
-            <!-- 2. Secondary Financial Split Card (Unified Financial Card - Matches Desk Page Exactly) -->
-            <div class="financial-card">
-              <div class="financial-column left">
-                <span class="metric-label">Today’s Earnings</span>
-                <span class="metric-value" id="walletTodayStatVal">&#2547; 2,400</span>
+            <!-- 2. Boxless Collapsible Earnings Breakdown -->
+            <div class="wallet-earnings-collapsible" id="walletEarningsCollapsible">
+              <div class="wallet-earnings-trigger" onclick="toggleWalletEarningsBreakdown()" role="button" tabindex="0" aria-label="Toggle Breakdown">
+                <span class="wallet-trigger-title">Breakdown</span>
+                <i class="ph ph-caret-down" id="walletEarningsToggleCaret"></i>
               </div>
 
-              <div class="financial-column right">
-                <span class="metric-label">Total Earnings</span>
-                <span class="metric-value" id="walletTotalStatVal">&#2547; 45,200</span>
+              <div class="wallet-earnings-body" id="walletEarningsBody">
+                <div class="wallet-earnings-grid">
+                  <div class="wallet-stat-tile">
+                    <span class="wallet-stat-label">Today</span>
+                    <span class="wallet-stat-val" id="walletTodayStatVal">&#2547; 2,400</span>
+                  </div>
+                  <div class="wallet-stat-tile-divider"></div>
+                  <div class="wallet-stat-tile">
+                    <span class="wallet-stat-label">Total</span>
+                    <span class="wallet-stat-val" id="walletTotalStatVal">&#2547; 45,200</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -12930,15 +13366,14 @@
             <div class="app-header">
               <div class="header-text">
                 <h1 class="header-title">Doctor Profile</h1>
-                <p class="header-subtitle">Manage your profile & settings</p>
               </div>
               <button class="btn-circle-icon has-dot" onclick="openNotificationsPage('profile')" aria-label="Notifications">
                 <i class="ph ph-bell"></i>
               </button>
             </div>
 
-            <!-- 1. Main Hero Identity Card with Embedded Stats Bar -->
-            <div class="doctor-hero-card">
+            <!-- 1. Boxless Hero Identity (Flat Luxury Surface) -->
+            <div class="doctor-hero-boxless">
               <div class="doctor-avatar-wrap">
                 <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Dr. Sifat Khan" class="doctor-avatar-img" id="doctorProfileAvatarImg">
                 <button type="button" class="btn-avatar-camera" onclick="openAvatarPickerModal()" title="Change Profile Picture" aria-label="Change Profile Picture">
@@ -12954,141 +13389,134 @@
 
               <p class="doctor-specialty-line">General Medicine • MBBS, FCPS</p>
               
-              <div class="doctor-email-badge">
+              <div class="doctor-email-line">
                 <i class="ph ph-envelope-simple"></i>
                 <span id="doctorEmailDisplay">sifat@pghospital.com</span>
               </div>
 
-              <!-- Embedded Hero Stats Bar -->
-              <div class="doctor-hero-stats-row">
-                <div class="hero-stat-col">
-                  <span class="hero-stat-label">Total Patients</span>
-                  <span class="hero-stat-val">1,420+</span>
+              <!-- Boxless Inline Stats -->
+              <div class="doctor-stats-inline">
+                <div class="doctor-stat-inline-item">
+                  <span class="doctor-stat-inline-val">1,420+</span>
+                  <span class="doctor-stat-inline-label">Patients</span>
                 </div>
-                
-                <div class="hero-stat-divider"></div>
-
-                <div class="hero-stat-col">
-                  <span class="hero-stat-label">Experience</span>
-                  <span class="hero-stat-val">5+ Years</span>
+                <div class="doctor-stat-inline-dot">•</div>
+                <div class="doctor-stat-inline-item">
+                  <span class="doctor-stat-inline-val">5+ Years</span>
+                  <span class="doctor-stat-inline-label">Experience</span>
                 </div>
               </div>
             </div>
 
-            <!-- 2. Section: Contact & Practice (Editable by Doctor) -->
-            <section class="profile-group-section">
-              <div class="profile-section-header">
-                <h3 class="profile-section-title">Contact & Practice</h3>
+            <!-- 2. Section: Contact & Practice (Boxless List with Hairline Dividers) -->
+            <section class="profile-boxless-group">
+              <div class="profile-boxless-header">
+                <h3 class="profile-boxless-title">Practice Details</h3>
               </div>
 
-              <!-- Editable Phone Number Tile -->
-              <div class="profile-phone-tile" onclick="openEditPhoneModal()" style="cursor: pointer;">
-                <div class="profile-tile-icon">
-                  <i class="ph ph-phone"></i>
-                </div>
-                <div class="profile-tile-body">
-                  <span class="profile-tile-label">Contact Phone</span>
-                  <span class="profile-tile-value" id="doctorPhoneDisplay">+880 1572 829231</span>
-                </div>
-                <button type="button" class="btn-edit-tile-action" onclick="event.stopPropagation(); openEditPhoneModal()" aria-label="Edit Phone Number">
-                  <i class="ph ph-pencil-simple"></i>
-                </button>
-              </div>
-
-              <!-- Editable Chamber Address Tile -->
-              <div class="profile-phone-tile" onclick="openEditChamberModal()" style="cursor: pointer;">
-                <div class="profile-tile-icon">
-                  <i class="ph ph-map-pin"></i>
-                </div>
-                <div class="profile-tile-body">
-                  <span class="profile-tile-label">Chamber Address</span>
-                  <span class="profile-tile-value" id="doctorChamberDisplay">BSMMU (PG Hospital), Shahbag, Dhaka</span>
-                </div>
-                <button type="button" class="btn-edit-tile-action" onclick="event.stopPropagation(); openEditChamberModal()" aria-label="Edit Chamber Address">
-                  <i class="ph ph-pencil-simple"></i>
-                </button>
-              </div>
-
-              <!-- Editable About You Bio Card -->
-              <div class="profile-bio-box" onclick="openEditBioModal()" style="cursor: pointer;">
-                <div class="profile-bio-header">
-                  <div class="profile-bio-title-wrap">
-                    <div class="profile-tile-icon" style="margin-top: 0;">
-                      <i class="ph ph-user"></i>
+              <div class="profile-boxless-list">
+                <!-- Phone -->
+                <div class="profile-boxless-row" onclick="openEditPhoneModal()" role="button" tabindex="0">
+                  <div class="profile-boxless-row-left">
+                    <div class="profile-boxless-icon">
+                      <i class="ph ph-phone"></i>
                     </div>
-                    <span class="profile-tile-label">About You</span>
+                    <div class="profile-boxless-row-body">
+                      <span class="profile-boxless-label">Phone</span>
+                      <span class="profile-boxless-value" id="doctorPhoneDisplay">+880 1572 829231</span>
+                    </div>
                   </div>
-                  <button type="button" class="btn-edit-tile-action" style="margin-top: 0;" onclick="event.stopPropagation(); openEditBioModal()" aria-label="Edit Bio">
+                  <button type="button" class="profile-boxless-edit-btn" onclick="event.stopPropagation(); openEditPhoneModal()" aria-label="Edit Phone">
                     <i class="ph ph-pencil-simple"></i>
                   </button>
                 </div>
-                <p class="profile-bio-display-text" id="doctorBioDisplay">Consultant Physician specializing in internal medicine, chronic disease management, and primary telehealth care with over 5 years of clinical practice.</p>
-                <div class="profile-bio-footer">
-                  <span style="font-size: 11px; color: #64748B;"><i class="ph ph-eye"></i> Visible to patients</span>
+
+                <div class="profile-boxless-divider"></div>
+
+                <!-- Chamber -->
+                <div class="profile-boxless-row" onclick="openEditChamberModal()" role="button" tabindex="0">
+                  <div class="profile-boxless-row-left">
+                    <div class="profile-boxless-icon">
+                      <i class="ph ph-map-pin"></i>
+                    </div>
+                    <div class="profile-boxless-row-body">
+                      <span class="profile-boxless-label">Chamber</span>
+                      <span class="profile-boxless-value" id="doctorChamberDisplay">BSMMU (PG Hospital), Shahbag, Dhaka</span>
+                    </div>
+                  </div>
+                  <button type="button" class="profile-boxless-edit-btn" onclick="event.stopPropagation(); openEditChamberModal()" aria-label="Edit Chamber">
+                    <i class="ph ph-pencil-simple"></i>
+                  </button>
+                </div>
+
+                <div class="profile-boxless-divider"></div>
+
+                <!-- Bio -->
+                <div class="profile-boxless-row is-bio" onclick="openEditBioModal()" role="button" tabindex="0">
+                  <div class="profile-boxless-row-left">
+                    <div class="profile-boxless-icon">
+                      <i class="ph ph-user"></i>
+                    </div>
+                    <div class="profile-boxless-row-body">
+                      <span class="profile-boxless-label">About</span>
+                      <p class="profile-boxless-bio" id="doctorBioDisplay">Consultant Physician specializing in internal medicine, chronic disease management, and primary telehealth care with over 5 years of clinical practice.</p>
+                    </div>
+                  </div>
+                  <button type="button" class="profile-boxless-edit-btn" onclick="event.stopPropagation(); openEditBioModal()" aria-label="Edit Bio">
+                    <i class="ph ph-pencil-simple"></i>
+                  </button>
                 </div>
               </div>
             </section>
 
-            <!-- 4. Section: Professional Identity (Non-Editable / Verified) -->
-            <section class="profile-group-section">
-              <div class="profile-section-header">
-                <h3 class="profile-section-title">Professional Identity</h3>
+            <!-- 3. Section: Professional Identity (Boxless) -->
+            <section class="profile-boxless-group">
+              <div class="profile-boxless-header">
+                <h3 class="profile-boxless-title">Credentials</h3>
               </div>
 
-              <div class="profile-info-card">
-                <div class="profile-info-row">
-                  <span class="info-row-label">BMDC Registration</span>
-                  <span class="info-row-value">437193172</span>
+              <div class="profile-boxless-list">
+                <div class="profile-boxless-row">
+                  <span class="profile-boxless-cred-label">BMDC Registration</span>
+                  <span class="profile-boxless-cred-val"><i class="ph-bold ph-shield-check" style="color: #0E8070; margin-right: 4px;"></i>437193172</span>
                 </div>
-
-                <div class="info-row-divider"></div>
-
-                <div class="profile-info-row">
-                  <span class="info-row-label">Consultation Fee</span>
-                  <span class="info-row-value">&#2547; 1,200 BDT</span>
+                <div class="profile-boxless-divider"></div>
+                <div class="profile-boxless-row">
+                  <span class="profile-boxless-cred-label">Consultation Fee</span>
+                  <span class="profile-boxless-cred-val">&#2547; 1,200</span>
                 </div>
               </div>
             </section>
 
-            <!-- 5. Section: More -->
-            <section class="profile-group-section">
-              <div class="profile-section-header">
-                <h3 class="profile-section-title">More</h3>
+            <!-- 4. Section: More (Boxless Menu) -->
+            <section class="profile-boxless-group" style="margin-bottom: 30px;">
+              <div class="profile-boxless-header">
+                <h3 class="profile-boxless-title">Account</h3>
               </div>
 
-              <div class="profile-menu-box">
-                <div class="profile-menu-row" onclick="navigateToSettings()">
-                  <div class="menu-row-left">
-                    <div class="menu-row-icon"><i class="ph ph-gear"></i></div>
-                    <div class="menu-row-text">
-                      <span class="menu-row-title">Settings</span>
-                    </div>
+              <div class="profile-boxless-list">
+                <div class="profile-boxless-menu-row" onclick="navigateToSettings()">
+                  <div class="profile-menu-row-left">
+                    <i class="ph ph-gear"></i>
+                    <span>Settings</span>
                   </div>
-                  <i class="ph ph-caret-right menu-row-arrow"></i>
+                  <i class="ph ph-caret-right profile-menu-row-arrow"></i>
                 </div>
-
-                <div class="dossier-divider"></div>
-
-                <div class="profile-menu-row" onclick="openHelpSupportModal()">
-                  <div class="menu-row-left">
-                    <div class="menu-row-icon"><i class="ph ph-question"></i></div>
-                    <div class="menu-row-text">
-                      <span class="menu-row-title">Help & Support</span>
-                    </div>
+                <div class="profile-boxless-divider"></div>
+                <div class="profile-boxless-menu-row" onclick="openHelpSupportModal()">
+                  <div class="profile-menu-row-left">
+                    <i class="ph ph-question"></i>
+                    <span>Help & Support</span>
                   </div>
-                  <i class="ph ph-caret-right menu-row-arrow"></i>
+                  <i class="ph ph-caret-right profile-menu-row-arrow"></i>
                 </div>
-
-                <div class="dossier-divider"></div>
-
-                <div class="profile-menu-row logout-row" onclick="openLogoutModal()">
-                  <div class="menu-row-left">
-                    <div class="menu-row-icon"><i class="ph ph-sign-out"></i></div>
-                    <div class="menu-row-text">
-                      <span class="menu-row-title">Log Out</span>
-                    </div>
+                <div class="profile-boxless-divider"></div>
+                <div class="profile-boxless-menu-row logout-row" onclick="openLogoutModal()">
+                  <div class="profile-menu-row-left">
+                    <i class="ph ph-sign-out"></i>
+                    <span>Log Out</span>
                   </div>
-                  <i class="ph ph-arrow-square-out menu-row-arrow"></i>
+                  <i class="ph ph-arrow-square-out profile-menu-row-arrow"></i>
                 </div>
               </div>
             </section>
@@ -14425,9 +14853,8 @@
             </div>
           </div>
           
-          <div class="sheet-hero-header">
+          <div class="sheet-hero-header" style="margin-bottom: 8px;">
             <h2 class="sheet-editorial-title">Withdraw Funds</h2>
-            <p class="sheet-minimal-subtitle">Transfer your earnings directly to your bank account or bKash.</p>
           </div>
 
           <div class="withdraw-avail-text">
@@ -15013,6 +15440,22 @@
             <textarea class="profile-bio-textarea" id="inputSupportIssueText" rows="3" maxlength="500" placeholder="Type your issue, clinical query, or feedback here..."></textarea>
           </div>
 
+          <!-- Attach Photos / Screenshots Section (Wise Boxless Standard) -->
+          <div class="support-photos-section">
+            <div class="support-photos-header">
+              <span class="support-photos-title">Attach Photos / Screenshots</span>
+              <span class="support-photos-limit" id="supportPhotoCount">0/3</span>
+            </div>
+            <div class="support-photos-row" id="supportPhotosRow">
+              <button type="button" class="btn-support-add-photo" id="btnAddSupportPhoto" onclick="triggerSupportPhotoUpload()">
+                <i class="ph-bold ph-camera"></i>
+                <span>Add Photo</span>
+              </button>
+              <div class="support-photos-list" id="supportPhotosList"></div>
+            </div>
+            <input type="file" id="supportPhotoFileInput" accept="image/*" multiple style="display: none;" onchange="handleSupportPhotosSelected(event)">
+          </div>
+
           <div class="sheet-actions-group" style="margin-top: 16px;">
             <button type="button" class="btn-sheet-cancel" onclick="closeHelpSupportModal()">Cancel</button>
             <button type="button" class="btn-sheet-confirm" onclick="submitSupportIssue()">Submit Issue</button>
@@ -15041,6 +15484,88 @@
             <i class="ph-bold ph-check"></i>
             <span>Done</span>
           </button>
+        </div>
+
+        <!-- =======================================================
+             CONSULTATION AUDIO RECORDING PLAYER MODAL BOTTOM SHEET
+             ======================================================= -->
+        <div class="bottom-sheet" id="modalConsultationAudio" style="max-height: 85%; overflow-y: auto; scrollbar-width: none; border-radius: 32px 32px 0 0; padding: 22px 22px 30px; z-index: 155;">
+          <div class="sheet-drag-handle"></div>
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #EFF7F5; color: #0E8070;">
+              <i class="ph-fill ph-waveform"></i>
+            </div>
+          </div>
+
+          <div class="sheet-hero-header" style="margin-bottom: 14px;">
+            <h2 class="sheet-editorial-title" id="audioPlayerPatientName">Consultation Audio</h2>
+            <p class="sheet-editorial-sub" id="audioPlayerMetaSub">Tariqul Islam • 12:32</p>
+          </div>
+
+          <!-- Audio Player Container -->
+          <div class="audio-player-wrapper">
+            <!-- Dynamic Audio Waveform Visualizer -->
+            <div class="audio-wave-visualizer" id="audioWaveVisualizer">
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+              <span class="wave-bar"></span>
+            </div>
+
+            <!-- Draggable Progress Bar & Timestamps -->
+            <div class="audio-progress-container">
+              <input type="range" class="audio-progress-range" id="audioProgressRange" min="0" max="752" value="0" step="1" oninput="onAudioSeekInput(this.value)" onchange="onAudioSeekChange(this.value)">
+              <div class="audio-timestamps-row">
+                <span class="audio-time-current" id="audioCurrentTime">00:00</span>
+                <span class="audio-time-total" id="audioTotalTime">12:32</span>
+              </div>
+            </div>
+
+            <!-- Player Controls -->
+            <div class="audio-controls-row">
+              <button type="button" class="btn-audio-speed" id="btnAudioSpeed" onclick="cycleAudioPlaybackSpeed()">1.0x</button>
+              
+              <div class="audio-center-controls">
+                <button type="button" class="btn-audio-skip" onclick="seekAudioRelative(-10)" title="Rewind 10s">
+                  <i class="ph-bold ph-arrow-counter-clockwise"></i>
+                  <span class="skip-sec-label">10</span>
+                </button>
+
+                <button type="button" class="btn-audio-play-pause" id="btnAudioPlayPause" onclick="toggleAudioPlayback()" title="Play/Pause">
+                  <i class="ph-fill ph-play" id="iconAudioPlay"></i>
+                </button>
+
+                <button type="button" class="btn-audio-skip" onclick="seekAudioRelative(10)" title="Forward 10s">
+                  <i class="ph-bold ph-arrow-clockwise"></i>
+                  <span class="skip-sec-label">10</span>
+                </button>
+              </div>
+
+              <button type="button" class="btn-audio-icon-aux" onclick="toggleAudioMute()" id="btnAudioMute" title="Mute/Unmute">
+                <i class="ph ph-speaker-high" id="iconAudioSpeaker"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="sheet-actions-group" style="margin-top: 18px;">
+            <button type="button" class="btn-sheet-confirm" style="width: 100%; text-align: center;" onclick="closeConsultationAudioModal()">Done</button>
+          </div>
         </div>
 
       </div>
@@ -15137,6 +15662,7 @@
           severity: 'Mild (2/10)',
           complaintQuote: 'Mild lightheadedness during afternoon hours, home blood pressure reading 135/85 mmHg.',
           uploadedDocs: [
+            { name: 'Previous_Rx_Jul2026.pdf', size: '920 KB', type: 'Prescription', icon: 'ph-file-pdf' },
             { name: 'BP_Log_Sep2026.pdf', size: '640 KB', type: 'Log Sheet', icon: 'ph-file-text' }
           ]
         }
@@ -15301,6 +15827,7 @@
           severityLevel: 'mild',
           complaintQuote: 'Mild lightheadedness during afternoon hours, home blood pressure reading 135/85 mmHg.',
           uploadedDocs: [
+            { name: 'Previous_Rx_Jul2026.pdf', size: '920 KB', type: 'Prescription', icon: 'ph-file-pdf' },
             { name: 'BP_Log_Sep2026.pdf', size: '640 KB', type: 'Log Sheet', icon: 'ph-file-text' }
           ]
         },
@@ -17932,9 +18459,13 @@
       showToast('Opening Privacy Policy...');
     }
 
+    let supportAttachedPhotos = [];
+
     function openHelpSupportModal() {
       const textarea = document.getElementById('inputSupportIssueText');
       if (textarea) textarea.value = '';
+      supportAttachedPhotos = [];
+      renderSupportPhotos();
       const backdrop = document.getElementById('modalBackdrop');
       const sheet = document.getElementById('helpSupportModalSheet');
       if (backdrop) backdrop.classList.add('active');
@@ -17946,6 +18477,58 @@
       const sheet = document.getElementById('helpSupportModalSheet');
       if (backdrop) backdrop.classList.remove('active');
       if (sheet) sheet.classList.remove('active');
+    }
+
+    function triggerSupportPhotoUpload() {
+      if (supportAttachedPhotos.length >= 3) {
+        showToast('Maximum 3 photos allowed');
+        return;
+      }
+      const input = document.getElementById('supportPhotoFileInput');
+      if (input) input.click();
+    }
+
+    function handleSupportPhotosSelected(e) {
+      const files = e.target.files;
+      if (!files || files.length === 0) return;
+      for (let i = 0; i < files.length; i++) {
+        if (supportAttachedPhotos.length >= 3) break;
+        const file = files[i];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          supportAttachedPhotos.push({
+            name: file.name,
+            url: event.target.result
+          });
+          renderSupportPhotos();
+        };
+        reader.readAsDataURL(file);
+      }
+      e.target.value = '';
+    }
+
+    function removeSupportPhoto(idx) {
+      supportAttachedPhotos.splice(idx, 1);
+      renderSupportPhotos();
+    }
+
+    function renderSupportPhotos() {
+      const listEl = document.getElementById('supportPhotosList');
+      const countEl = document.getElementById('supportPhotoCount');
+      const btnAdd = document.getElementById('btnAddSupportPhoto');
+      if (countEl) countEl.textContent = `${supportAttachedPhotos.length}/3`;
+      if (btnAdd) {
+        btnAdd.style.display = supportAttachedPhotos.length >= 3 ? 'none' : 'inline-flex';
+      }
+      if (!listEl) return;
+      listEl.innerHTML = supportAttachedPhotos.map((photo, idx) => `
+        <div class="support-photo-thumb-wrap">
+          <img src="${photo.url}" alt="Attachment ${idx+1}">
+          <button type="button" class="support-photo-remove-btn" onclick="removeSupportPhoto(${idx})" title="Remove photo">
+            <i class="ph-bold ph-x"></i>
+          </button>
+        </div>
+      `).join('');
     }
 
     function contactSupportChannel(channel) {
@@ -17963,10 +18546,11 @@
     function submitSupportIssue() {
       const textarea = document.getElementById('inputSupportIssueText');
       const issueText = textarea ? textarea.value.trim() : '';
-      if (!issueText) {
-        showToast('Please type a brief description of your issue');
+      if (!issueText && supportAttachedPhotos.length === 0) {
+        showToast('Please describe your issue or attach a screenshot/photo');
         return;
       }
+      const photoCount = supportAttachedPhotos.length;
       closeHelpSupportModal();
       
       // Open confirmation modal
@@ -17975,7 +18559,10 @@
         const sheet = document.getElementById('supportConfirmedModalSheet');
         if (backdrop) backdrop.classList.add('active');
         if (sheet) sheet.classList.add('active');
-        showToast('Issue submitted to support • They will reach back to you');
+        const msg = photoCount > 0 
+          ? `Issue & ${photoCount} photo(s) submitted • Support will reach back` 
+          : 'Issue submitted to support • They will reach back to you';
+        showToast(msg);
       }, 220);
     }
 
@@ -17984,6 +18571,174 @@
       const sheet = document.getElementById('supportConfirmedModalSheet');
       if (backdrop) backdrop.classList.remove('active');
       if (sheet) sheet.classList.remove('active');
+    }
+
+    // =======================================================
+    // CONSULTATION AUDIO RECORDING PLAYER CONTROLLER
+    // =======================================================
+    let audioCurrentSeconds = 0;
+    let audioTotalSeconds = 752; // 12:32 min
+    let isAudioPlaying = false;
+    let audioPlaybackTimer = null;
+    let audioPlaybackSpeed = 1.0;
+    let isAudioMuted = false;
+
+    function formatAudioTime(seconds) {
+      const m = Math.floor(seconds / 60);
+      const s = Math.floor(seconds % 60);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function openConsultationAudioModal(apptId) {
+      const appt = (apptId ? appointmentsData.find(a => a.id === apptId) : null) || currentDetailsAppt || (appointmentsData && appointmentsData.length ? appointmentsData[0] : null) || {};
+      const titleEl = document.getElementById('audioPlayerPatientName');
+      const subEl = document.getElementById('audioPlayerMetaSub');
+      const totalTimeEl = document.getElementById('audioTotalTime');
+      const rangeEl = document.getElementById('audioProgressRange');
+
+      const patName = appt.name || 'Patient';
+      let durationStr = appt.callDuration || '12:32 min';
+      if (!durationStr.includes(':')) {
+        const num = parseInt(durationStr) || 12;
+        audioTotalSeconds = num * 60 + 32;
+      } else {
+        const clean = durationStr.replace(' min', '').trim();
+        const parts = clean.split(':');
+        audioTotalSeconds = (parseInt(parts[0]) || 12) * 60 + (parseInt(parts[1]) || 32);
+      }
+
+      if (titleEl) titleEl.textContent = `Consultation Audio`;
+      if (subEl) subEl.textContent = `${patName} • ${formatAudioTime(audioTotalSeconds)}`;
+      if (totalTimeEl) totalTimeEl.textContent = formatAudioTime(audioTotalSeconds);
+      if (rangeEl) {
+        rangeEl.max = audioTotalSeconds;
+        rangeEl.value = audioCurrentSeconds;
+      }
+
+      updateAudioTimeDisplays();
+
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('modalConsultationAudio');
+      if (backdrop) backdrop.classList.add('active');
+      if (sheet) sheet.classList.add('active');
+    }
+
+    function closeConsultationAudioModal() {
+      pauseAudioPlayback();
+      const backdrop = document.getElementById('modalBackdrop');
+      const sheet = document.getElementById('modalConsultationAudio');
+      if (backdrop) backdrop.classList.remove('active');
+      if (sheet) sheet.classList.remove('active');
+    }
+
+    function toggleAudioPlayback() {
+      if (isAudioPlaying) {
+        pauseAudioPlayback();
+      } else {
+        startAudioPlayback();
+      }
+    }
+
+    function startAudioPlayback() {
+      if (audioCurrentSeconds >= audioTotalSeconds) {
+        audioCurrentSeconds = 0;
+      }
+      isAudioPlaying = true;
+      updateAudioPlayButtonUI();
+      
+      const visualizer = document.getElementById('audioWaveVisualizer');
+      if (visualizer) visualizer.classList.add('is-playing');
+
+      if (audioPlaybackTimer) clearInterval(audioPlaybackTimer);
+      const intervalMs = Math.round(1000 / audioPlaybackSpeed);
+      audioPlaybackTimer = setInterval(() => {
+        audioCurrentSeconds++;
+        if (audioCurrentSeconds >= audioTotalSeconds) {
+          audioCurrentSeconds = audioTotalSeconds;
+          pauseAudioPlayback();
+        }
+        updateAudioTimeDisplays();
+      }, intervalMs);
+    }
+
+    function pauseAudioPlayback() {
+      isAudioPlaying = false;
+      if (audioPlaybackTimer) {
+        clearInterval(audioPlaybackTimer);
+        audioPlaybackTimer = null;
+      }
+      updateAudioPlayButtonUI();
+      const visualizer = document.getElementById('audioWaveVisualizer');
+      if (visualizer) visualizer.classList.remove('is-playing');
+    }
+
+    function updateAudioPlayButtonUI() {
+      const icon = document.getElementById('iconAudioPlay');
+      if (!icon) return;
+      if (isAudioPlaying) {
+        icon.className = 'ph-fill ph-pause';
+      } else {
+        icon.className = 'ph-fill ph-play';
+      }
+    }
+
+    function updateAudioTimeDisplays() {
+      const curEl = document.getElementById('audioCurrentTime');
+      const rangeEl = document.getElementById('audioProgressRange');
+      if (curEl) curEl.textContent = formatAudioTime(audioCurrentSeconds);
+      if (rangeEl) {
+        rangeEl.value = audioCurrentSeconds;
+        const pct = audioTotalSeconds > 0 ? (audioCurrentSeconds / audioTotalSeconds) * 100 : 0;
+        rangeEl.style.setProperty('--progress', `${pct}%`);
+      }
+    }
+
+    function onAudioSeekInput(val) {
+      audioCurrentSeconds = parseInt(val) || 0;
+      const curEl = document.getElementById('audioCurrentTime');
+      const rangeEl = document.getElementById('audioProgressRange');
+      if (curEl) curEl.textContent = formatAudioTime(audioCurrentSeconds);
+      if (rangeEl) {
+        const pct = audioTotalSeconds > 0 ? (audioCurrentSeconds / audioTotalSeconds) * 100 : 0;
+        rangeEl.style.setProperty('--progress', `${pct}%`);
+      }
+    }
+
+    function onAudioSeekChange(val) {
+      audioCurrentSeconds = parseInt(val) || 0;
+      updateAudioTimeDisplays();
+      if (isAudioPlaying) {
+        startAudioPlayback();
+      }
+    }
+
+    function seekAudioRelative(deltaSec) {
+      audioCurrentSeconds = Math.max(0, Math.min(audioTotalSeconds, audioCurrentSeconds + deltaSec));
+      updateAudioTimeDisplays();
+    }
+
+    function cycleAudioPlaybackSpeed() {
+      const speeds = [1.0, 1.25, 1.5, 2.0];
+      const curIdx = speeds.indexOf(audioPlaybackSpeed);
+      const nextIdx = (curIdx + 1) % speeds.length;
+      audioPlaybackSpeed = speeds[nextIdx];
+
+      const btn = document.getElementById('btnAudioSpeed');
+      if (btn) btn.textContent = `${audioPlaybackSpeed}x`;
+      showToast(`Playback speed: ${audioPlaybackSpeed}x`);
+
+      if (isAudioPlaying) {
+        startAudioPlayback();
+      }
+    }
+
+    function toggleAudioMute() {
+      isAudioMuted = !isAudioMuted;
+      const icon = document.getElementById('iconAudioSpeaker');
+      if (icon) {
+        icon.className = isAudioMuted ? 'ph ph-speaker-slash' : 'ph ph-speaker-high';
+      }
+      showToast(isAudioMuted ? 'Audio muted' : 'Audio unmuted');
     }
 
     function openLogoutModal() {
@@ -18284,6 +19039,25 @@
         setActiveNavTab('wallet');
         updateBottomNavVisibility();
         renderWalletPage();
+      }
+    }
+
+    let isWalletEarningsExpanded = false;
+
+    function toggleWalletEarningsBreakdown() {
+      isWalletEarningsExpanded = !isWalletEarningsExpanded;
+      const wrap = document.getElementById('walletEarningsCollapsible');
+      const hint = document.getElementById('walletEarningsToggleHint');
+      const caret = document.getElementById('walletEarningsToggleCaret');
+
+      if (wrap) {
+        wrap.classList.toggle('is-expanded', isWalletEarningsExpanded);
+      }
+      if (hint) {
+        hint.textContent = isWalletEarningsExpanded ? 'Hide breakdown' : 'View breakdown';
+      }
+      if (caret) {
+        caret.style.transform = isWalletEarningsExpanded ? 'rotate(180deg)' : 'rotate(0deg)';
       }
     }
 
@@ -19788,7 +20562,7 @@
                 <div class="shift-title-cluster">
                   <i class="ph ${isShiftInPerson ? 'ph-users' : 'ph-video-camera'}" style="color: ${isShiftInPerson ? '#4F46E5' : '#0E8070'};"></i>
                   <span class="shift-title-text">${sKey}</span>
-                  <span class="shift-type-indicator ${isShiftInPerson ? 'shift-badge-inperson' : 'shift-badge-video'}">${isShiftInPerson ? 'In-Person' : 'Video'}</span>
+                  ${isShiftInPerson ? '<span class="shift-type-indicator shift-badge-inperson">In-Person</span>' : ''}
                 </div>
                 <span class="shift-capacity-tag">${shiftItems.length} ${shiftItems.length === 1 ? 'Patient' : 'Patients'}</span>
               </div>
@@ -19921,8 +20695,12 @@
       // Patient Demographics (Plain-Text Minimalist Standard)
       const nameEl = document.getElementById('detPatientName');
       const metaTextEl = document.getElementById('detPatientMeta');
+      const dateTextEl = document.getElementById('detPatientDate');
       if (nameEl) nameEl.textContent = appt.name;
       if (metaTextEl) metaTextEl.textContent = `${appt.age} Yrs, ${appt.gender}`;
+      if (dateTextEl) {
+        dateTextEl.textContent = appt.dateLabel || appt.consultationDate || appt.date || 'Today, Sept 29';
+      }
 
       // Render Dynamic Decluttered Sections in Strict Relevance Order
       renderAppointmentDetailsSections(appt, effectiveStatus);
@@ -20040,8 +20818,12 @@
       // Patient Demographics (Plain-Text Minimalist Standard)
       const nameEl = document.getElementById('detPatientName');
       const metaTextEl = document.getElementById('detPatientMeta');
+      const dateTextEl = document.getElementById('detPatientDate');
       if (nameEl) nameEl.textContent = pat.name;
       if (metaTextEl) metaTextEl.textContent = `${pat.age} Yrs, ${pat.gender}`;
+      if (dateTextEl) {
+        dateTextEl.textContent = visit.date || 'Today, Sept 29';
+      }
 
       // Render Dynamic Decluttered Sections
       renderAppointmentDetailsSections(visitAppt, 'prescribed');
@@ -20107,6 +20889,13 @@
               <i class="ph ph-caret-down" id="detNotesToggleIcon"></i>
             </div>
           </div>
+          <button type="button" class="btn-listen-audio-trigger" onclick="openConsultationAudioModal('${appt.id || ''}')">
+            <div class="btn-listen-audio-left">
+              <i class="ph-bold ph-waveform"></i>
+              <span>Listen to audio</span>
+            </div>
+            <span class="btn-listen-audio-duration">${appt.callDuration || '12:32'}</span>
+          </button>
         </div>
       `;
 
@@ -20213,6 +21002,13 @@
                 <i class="ph ph-caret-down" id="detNotesToggleIcon"></i>
               </div>
             </div>
+            <button type="button" class="btn-listen-audio-trigger" onclick="openConsultationAudioModal('${appt.id || ''}')">
+              <div class="btn-listen-audio-left">
+                <i class="ph-bold ph-waveform"></i>
+                <span>Listen to audio</span>
+              </div>
+              <span class="btn-listen-audio-duration">${appt.callDuration || '12:32'}</span>
+            </button>
           </div>
         `;
 
@@ -20554,9 +21350,29 @@
           quoteEl.textContent = `“${preVisit.complaintQuote || 'No specific complaint notes recorded.'}”`;
         }
         if (filesRow) {
-          // Docs kept hidden on Desk page to keep it minimal; viewed via Appointment Details
-          filesRow.style.display = 'none';
-          filesRow.innerHTML = '';
+          const rxDoc = (preVisit.uploadedDocs && preVisit.uploadedDocs.find(d => (d.type && d.type.toLowerCase().includes('prescription')) || (d.name && (d.name.includes('Rx') || d.name.includes('Prescription'))))) || (preVisit.uploadedDocs && preVisit.uploadedDocs[0]);
+          if (rxDoc) {
+            filesRow.style.display = 'block';
+            filesRow.innerHTML = `
+              <div class="desk-uploaded-rx-tile" onclick="openDocPreviewModal('${rxDoc.name}')">
+                <div class="details-file-row-left">
+                  <div class="details-file-row-icon" style="background: #EFF7F5; color: #0E8070;">
+                    <i class="ph-bold ph-file-pdf"></i>
+                  </div>
+                  <div class="details-file-row-meta">
+                    <span class="details-file-row-name">${rxDoc.name}</span>
+                    <span class="details-file-row-sub">${rxDoc.size || '1.2 MB'} • Patient Uploaded Rx</span>
+                  </div>
+                </div>
+                <button type="button" class="details-file-row-action" title="Preview Prescription">
+                  <i class="ph ph-eye"></i>
+                </button>
+              </div>
+            `;
+          } else {
+            filesRow.style.display = 'none';
+            filesRow.innerHTML = '';
+          }
         }
       } else {
         if (symptomNameEl) symptomNameEl.textContent = 'General Follow-up';
@@ -20639,7 +21455,7 @@
             </div>
 
             <button type="button" class="btn-see-full-details" onclick="openCurrentPatientDetails()">
-              <span>Appointment Details</span>
+              <span id="deskSeeDetailsBtnText">View full details</span>
               <i class="ph ph-arrow-right"></i>
             </button>
           </div>
@@ -23417,6 +24233,7 @@
       if (typeof closeThreadContextMenu === 'function') closeThreadContextMenu();
       if (typeof closeApptFilterModal === 'function') closeApptFilterModal();
       if (typeof closeTransactionFilterModal === 'function') closeTransactionFilterModal();
+      if (typeof pauseAudioPlayback === 'function') pauseAudioPlayback();
     }
 
     function getDateSortValue(dateStr) {
