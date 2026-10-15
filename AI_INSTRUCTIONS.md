@@ -56,6 +56,11 @@
 * **Design Aesthetic**: Modern Western / European minimal healthtech standard inspired by **Wise, Uber, Hims, Alan Health, and Qonto**. Pure white canvas (`#FFFFFF`), gentle neutral surface cards (`#F6F8F9`), high-contrast typography, and single-purpose primary action buttons.
 * **Tech Stack**: High-fidelity, self-contained single-page interactive web prototypes in [`doctors-app.html`](./doctors-app.html) and [`patient-app.html`](./patient-app.html) powered by vanilla HTML5, CSS3, and JavaScript, with Phosphor Icons and Google Fonts (`Urbanist` + `DM Sans`).
 
+### Prototype Data Convention
+- Use **Tuesday, September 29, 2026** as the fixed demo date across both apps. `Yesterday` is September 28; `Tomorrow` is September 30.
+- The apps use in-memory sample data. Booking, calls, payments, queues, schedules, and AI output are visual simulations, not connected production services. Refreshing a page restores its sample state.
+- Earlier dates on historical prescriptions and encounters are intentional.
+
 ---
 
 ## 2. Core Clinical Mental Model & Strict Rules
@@ -108,7 +113,7 @@ When rendering a patient's historical details in `#pageAppointmentDetails`:
 The prototype lives in the root directory:
 
 ```
-g:\Projects\ONUBOT Redesign\
+.
 ├── doctors-app.html        # Doctor Desk & Shift Management SPA Prototype
 ├── patient-app.html        # Patient Care Discovery & Booking SPA Prototype
 ├── phosphor-embedded.css   # Embedded Phosphor icons stylesheet
@@ -118,25 +123,8 @@ g:\Projects\ONUBOT Redesign\
 ```
 
 ### 3.1 Structure of `doctors-app.html`
-* **Lines 1–150**: HTML `<head>` with CDN stylesheets (Phosphor Icons, Google Fonts `Urbanist` & `DM Sans`).
-* **Lines 150–4200**: Comprehensive CSS Design System:
-  * CSS Variables (`:root`) defining colors, typography, spacing, shadows, and transitions.
-  * Mobile phone frame container (`.phone-mockup`, `.phone-screen`).
-  * Page views and smooth slide transitions (`.page-left`, `.page-right`, `.active-page`).
-  * Surface components, bottom sheet modal system (`.bottom-sheet`, `.modal-backdrop`), sticky docks, and status chips.
-* **Lines 4200–5600**: HTML Page Views and Modal Sheets:
-  1. `#pageDesk`: Doctor's Home Desk & Patient Queue Hero.
-  2. `#pageSchedule`: Calendar strip & shift slot editor.
-  3. `#pageVideoCall`: Fullscreen video consultation with PiP camera, call controls, and patient notes.
-  4. `#pageAiWrapUp`: Post-call AI transcription transition screen.
-  5. `#pageConsultationReview`: Prescription composer, chief complaint editor, medicine stack, lab tests, and referrals.
-  6. `#pagePrescriptionPreview`: Official PDF-like digital prescription preview.
-  7. `#pageAppointments`: All Appointments & Shift History with tab switching (`Upcoming` vs `History`) and Date/Shift filtering.
-  8. `#pageAppointmentDetails`: Clinical record inspection with dynamic relevance sorting.
-  * **Modals / Bottom Sheets**: `#shiftModalSheet`, `#timePickerModalSheet`, `#goingOfflineSheet`, `#cancelShiftModalSheet`, `#endCallModalSheet`, `#addMedicineModalSheet`, `#addLabModalSheet`, `#referDoctorModalSheet`, `#deleteConfirmModalSheet`, `#skipPatientModalSheet`, `#apptFilterModalSheet`.
-* **Lines 5600–7850**: Core JavaScript Application State & Controllers.
 
----
+The doctor prototype is a single HTML document containing its page styles, markup, demo data, and in-page JavaScript controllers. Its main areas include the doctor desk and queue, schedule editor, video consultation, AI wrap-up, prescription review and preview, appointments and patient records, wallet, profile, and supporting dialogs. Use HTML IDs and function names as navigation anchors; line numbers are intentionally omitted because the prototype changes frequently.
 
 ## 4. Key JavaScript State Variables & Data Models
 
@@ -154,13 +142,13 @@ g:\Projects\ONUBOT Redesign\
 
 ### 4.2 Data Collections
 * **`queuePatients`**: Array of active patients in the current live shift (`serial`, `name`, `age`, `gender`, `avatar`, `subtitle`, `time`, `phone`).
-* **`appointmentsData`**: Master collection of all appointment records spanning Today, Yesterday, Saturday Sep 27, Tomorrow Sep 30, and Thu Oct 1.
+* **`appointmentsData`**: Master collection of sample appointment records spanning Today (Sep 29), Yesterday (Sep 28), Sep 27, Tomorrow (Sep 30), and later dates.
 
 ```javascript
 // Example Appointment Record Schema
 {
   id: 'apt1',
-  dateKey: 'today',             // 'today' | 'yesterday' | 'sept27' | 'sept30' | 'oct01'
+  dateKey: 'today',             // 'today' | 'yesterday' | 'sept27' | 'sept30' | later dates
   dateLabel: 'Today, Sept 29',
   shiftId: 1,                   // 1 | 2
   shiftName: 'Shift 1 • 9:00–11:00 AM',
@@ -235,15 +223,15 @@ g:\Projects\ONUBOT Redesign\
     * **Month View**: Standard Sunday-to-Saturday grid with weekday headers and **numbers only** inside cards (zero redundant day names).
     * **Unified Single-Dot Indicator**: At most 1 dot per date (No dot = empty; Soft Light Eucalyptus `#48BB95` = empty shift; Soft Light Apricot `#F6A84B` = booked shift).
     * **Confirmation Flows**:
-      * Selecting 1–6 days opens `#offlineConfirmedModalSheet` with clean summary tile (`Sept 15 – 16 • Offline` + auto-reschedule confirmation).
+      * Selecting 1–6 days opens `#offlineConfirmedModalSheet` with a summary for the selected dates (for example, `Sept 29 – 30 • Offline`).
       * Selecting an entire week (>= 7 days) with no remaining open shifts opens `#createShiftToOfflineModalSheet` with an amber calendar badge guiding the doctor to open a new shift.
   * **Pre-Visit Details & Uploaded Rx**: Displays the active patient's pre-visit clinical triage (symptoms, duration, severity, intake quote) along with a boxless patient uploaded prescription tile (`.desk-uploaded-rx-tile`) with eye preview trigger, and an explicit action link (`View full details →`) opening this patient's complete appointment dossier.
   * **Action Cards**: Quick access to `View All Appointments` and `Edit Schedule`.
 
 ### Screen 2: Edit Shift / Schedule (`#pageSchedule`)
-* **Purpose**: View and manage consultation shift hours across a 7-day calendar strip.
+* **Purpose**: View and manage consultation shift hours across the September 15–October 7 demo date carousel.
 * **Key Components**:
-  * 7-day horizontal scrollable date strip with single-dot status indicators beneath each date pill.
+  * Horizontal date carousel with single-dot status indicators; Tuesday, September 29, 2026 is the selected Today date.
   * Prominent `+ Add Shift` action button triggering in-page shift creation.
   * List of configured shifts displaying all-caps shift chip container (`.shift-name-chip` e.g. `SHIFT 1`, `SHIFT 2`), consultation type pill (`[📹 Video Consultation]`), time window, and minimal capacity metric (e.g. `04/15 Patients` or `0/15 Patients` for new/empty shifts).
   * Edit button (`editExistingShift`) and Delete trash button (`requestDeleteShift`).

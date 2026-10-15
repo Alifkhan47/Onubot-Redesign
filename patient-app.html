@@ -1806,11 +1806,12 @@
     }
 
     /* Hide bottom navigation on pages with back button or sub-pages */
-    .phone-screen:has(.app-page.active-page:not(#pageDiscover)) .bottom-nav-container,
+    .phone-screen:has(.app-page.active-page:not(#pageDiscover):not(#pageVisits)) .bottom-nav-container,
     .phone-screen:has(#pageDoctorsList.active-page) .bottom-nav-container,
     .phone-screen:has(#pageDoctorProfile.active-page) .bottom-nav-container,
     .phone-screen:has(#pageBookConsultation.active-page) .bottom-nav-container,
     .phone-screen:has(#pageBookingConfirmed.active-page) .bottom-nav-container,
+    .phone-screen:has(#pagePatientRxPreview.active-page) .bottom-nav-container,
     .phone-screen.hide-bottom-nav .bottom-nav-container,
     .bottom-nav-container.nav-hidden {
       display: none !important;
@@ -2235,6 +2236,2359 @@
       color: #34D399;
       font-size: 16px;
     }
+
+    /* ============================================================
+       PAGE 5: MY VISITS SCREEN (WISE & UBER MINIMAL STANDARD)
+       ============================================================ */
+    .page-visits {
+      padding: 16px 20px 110px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #FFFFFF;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .page-visits::-webkit-scrollbar {
+      display: none;
+    }
+
+    .visits-top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-top: 4px;
+    }
+
+    .visits-title-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .visits-page-title {
+      font-family: var(--font-heading);
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .visits-page-subtitle {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: var(--color-text-secondary);
+      line-height: 1.3;
+    }
+
+    /* Segmented Tab Switcher: Upcoming vs Completed */
+    .visits-segment-tabs {
+      display: flex;
+      background: #F1F5F9;
+      padding: 3px;
+      border-radius: 12px;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    .visits-segment-tab {
+      flex: 1;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #64748B;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+      user-select: none;
+      background: transparent;
+      border: none;
+    }
+
+    .visits-segment-tab.active {
+      background: #FFFFFF;
+      color: #052E28;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .visits-tab-count-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #E2E8F0;
+      font-size: 11px;
+      font-weight: 700;
+      color: #475569;
+    }
+
+    .visits-segment-tab.active .visits-tab-count-pill {
+      background: var(--color-card-sage);
+      color: #052E28;
+    }
+
+    /* ============================================================
+       EXTERNAL SIMULATION DOCK (OUTSIDE PHONE SCREEN)
+       ============================================================ */
+    .external-sim-dock {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 12px;
+      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-sizing: border-box;
+    }
+
+    .ext-sim-label {
+      font-family: var(--font-heading);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #A7F3D0;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .ext-sim-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .ext-sim-btn {
+      flex: 1;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 0 6px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: #CBD5E1;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .ext-sim-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .ext-sim-btn.active {
+      background: #D6EAE6 !important;
+      color: #052E28 !important;
+      border-color: #7EB8AE !important;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .sim-dot-green {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+    }
+
+    /* ============================================================
+       VISITS SCREEN: OUTSIDE DATE GROUPING & SLEEK APPOINTMENT CARDS
+       Exact Reference Parity: media_1792045375573_397315d1.png (Frame 2414)
+       ============================================================ */
+    .visits-date-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .visits-date-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 6px 2px 0 2px;
+    }
+
+    .visits-date-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .visits-date-subtitle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    .visits-date-cards-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    /* Patient Visit Item Card (Minimal, Cardless Aesthetic, Breathable) */
+    .patient-visit-card {
+      background: #FFFFFF;
+      border: 1px solid #E8ECEF;
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      cursor: pointer;
+      transition: all 0.16s ease;
+      position: relative;
+    }
+
+    .patient-visit-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+    }
+
+    /* Top Row: Mode Circle Icon + Doctor Name & Meta + Chevron */
+    .patient-visit-main-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .patient-visit-info-cluster {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .patient-visit-mode-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #D6EAE6;
+      color: #0E8070;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .patient-visit-mode-icon.completed-badge {
+      background: #ECFDF5;
+      color: #059669;
+    }
+
+    .patient-visit-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .patient-visit-doc-name {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+      margin: 0;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .patient-visit-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    .patient-visit-meta-row .serial-tag {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: #0F172A;
+    }
+
+    .patient-visit-arrow {
+      color: #94A3B8;
+      font-size: 18px;
+      flex-shrink: 0;
+      transition: transform 0.15s ease;
+    }
+
+    .patient-visit-card:hover .patient-visit-arrow {
+      transform: translateX(2px);
+      color: #0F172A;
+    }
+
+    /* Live Queue & Auto-Call Status Line: Clean Minimal Line, NO BOX! */
+    .patient-visit-status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      padding-top: 2px;
+    }
+
+    .patient-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #94A3B8;
+      flex-shrink: 0;
+    }
+
+    .patient-status-dot.active {
+      background: #059669;
+      box-shadow: 0 0 6px rgba(5, 150, 105, 0.4);
+    }
+
+    .patient-status-dot.calling {
+      background: #0E8070;
+      box-shadow: 0 0 8px rgba(14, 128, 112, 0.6);
+      animation: pulseAlert 1.2s infinite ease-in-out;
+    }
+
+    .patient-status-desc {
+      flex: 1;
+      line-height: 1.3;
+    }
+
+    .patient-status-desc.calling-active {
+      font-weight: 700;
+      color: #0E8070;
+    }
+
+    /* Pre-Visit Intake Line: Minimal Text Action Row (NO BOX!) */
+    .patient-card-previsit-row {
+      display: flex;
+      align-items: center;
+      padding: 1px 0;
+    }
+
+    .patient-card-previsit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0D7A5F;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .patient-card-previsit-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    .patient-card-previsit-done {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #059669;
+      user-select: none;
+      cursor: default;
+    }
+
+    /* Hairline Divider under Pre-Visit Details */
+    .patient-card-divider {
+      height: 1px;
+      background: #F1F5F9;
+      width: 100%;
+      margin: 2px 0;
+    }
+
+    /* Bottom Row: Serial on Left | Live Status Badge on Right */
+    .patient-card-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      padding-top: 1px;
+    }
+
+    .patient-card-serial-num {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0F172A;
+      flex-shrink: 0;
+    }
+
+    .patient-card-status-plain {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: all 0.15s ease;
+      user-select: none;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .patient-card-status-plain.scheduled {
+      color: #64748B;
+    }
+
+    .patient-card-status-plain.scheduled .patient-status-dot {
+      background: #94A3B8;
+    }
+
+    .patient-card-status-plain.active {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .patient-card-status-plain.active .patient-status-dot {
+      background: #10B981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.5);
+    }
+
+    .patient-card-status-plain.turn {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .patient-card-status-plain.turn .patient-status-dot {
+      background: #059669;
+      box-shadow: 0 0 8px rgba(5, 150, 105, 0.6);
+      animation: pulseAlert 1.2s infinite ease-in-out;
+    }
+
+    /* Decluttered Clean Action Row for Pre-visit & Documents (No Box, No Subtext) */
+    .btn-clean-action-line {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-sizing: border-box;
+      cursor: pointer;
+      user-select: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-clean-action-line:hover {
+      opacity: 0.8;
+    }
+
+    .btn-clean-action-line .clean-action-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0D7A5F;
+    }
+
+    .btn-clean-action-line .clean-action-left i {
+      font-size: 19px;
+      color: #0D7A5F;
+    }
+
+    .btn-clean-action-line.doc-action .clean-action-left {
+      color: #0F172A;
+    }
+
+    .btn-clean-action-line.doc-action .clean-action-left i {
+      color: #64748B;
+    }
+
+    .btn-clean-action-line .clean-action-arrow {
+      color: #94A3B8;
+      font-size: 17px;
+    }
+
+    .btn-clean-text-action {
+      background: transparent;
+      border: none;
+      color: #0D7A5F;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .btn-clean-text-action:hover {
+      text-decoration: underline;
+    }
+
+    .details-plain-intake-content {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 2px 0 6px 0;
+    }
+
+    .intake-symptom-text {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1.35;
+    }
+
+    .intake-meta-sub {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    .intake-quote-line {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: #475569;
+      font-style: italic;
+      border-left: 2px solid #CBD5E1;
+      padding-left: 10px;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    /* Fixed Bottom Action Dock for Visit Details (Dual Action Standard) */
+    .btn-dock-action-secondary {
+      flex: 1;
+      height: 48px;
+      background: #FFFFFF;
+      color: #0F172A;
+      border: 1px solid #CBD5E1;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .btn-dock-action-secondary:hover {
+      background: #F8FAFC;
+      border-color: #94A3B8;
+    }
+
+    .btn-dock-action-secondary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-dock-action-secondary.danger-tint {
+      color: #BE123C;
+      border-color: #FECDD3;
+      background: #FFF1F2;
+    }
+
+    .btn-dock-action-secondary.danger-tint:hover {
+      background: #FFE4E6;
+      border-color: #FDA4AF;
+    }
+
+    /* ============================================================
+       PAST / COMPLETED VISITS MINIMAL LIST CARDS
+       Uncluttered Standard: Single Flat Card, No Crammed Prescription/Notes
+       ============================================================ */
+    .past-visits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .completed-visit-card.minimal-card {
+      background: #FFFFFF;
+      border: 1px solid #E2ECE9;
+      border-radius: 16px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 1px 4px rgba(5, 46, 40, 0.03);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .completed-visit-card.minimal-card:hover {
+      border-color: #CBD5E1;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transform: translateY(-1px);
+    }
+
+    .completed-card-info-col {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .completed-card-info-col .completed-doc-name {
+      font-family: var(--font-heading);
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+    }
+
+    .completed-card-info-col .completed-plain-meta-row {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+      font-weight: 400;
+    }
+
+    .completed-card-right-col {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .completed-rx-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #ECFDF5;
+      color: #059669;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: 8px;
+      padding: 3px 8px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .completed-arrow-icon {
+      font-size: 15px;
+      color: #94A3B8;
+      transition: transform 0.15s ease;
+    }
+
+    .completed-visit-card.minimal-card:hover .completed-arrow-icon {
+      transform: translateX(2px);
+      color: #052E28;
+    }
+
+    /* ============================================================
+       PAGE: VISIT & APPOINTMENT DETAILS SCREEN
+       Decluttered Minimal Standard (Matching Doctor App View 8)
+       ============================================================ */
+    .app-page.page-visit-details {
+      background: var(--color-app-bg);
+      padding: 12px 20px 0 20px !important;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      box-sizing: border-box;
+      gap: 20px;
+      z-index: 22;
+    }
+
+    .details-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: -12px;
+      z-index: 20;
+      background: var(--color-app-bg);
+      padding: 12px 0 6px 0;
+      margin-top: -12px;
+      flex-shrink: 0;
+    }
+
+    /* Plain-Text Patient / Doctor Header (No Box, Non-Collapsible, Wise/Uber Minimal Standard) */
+    .details-patient-plain-container {
+      width: 100%;
+      padding: 2px 0 16px 0;
+      border-bottom: 1px solid #F1F5F9;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .details-doc-header-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .details-doc-header-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .details-patient-plain-name {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+
+    .details-doc-specialty {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: #64748B;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .details-doc-serial-badge {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      flex-shrink: 0;
+    }
+
+    /* Doctor Header Minimal Schedule Row: Time Left, Video Right (Same Line) */
+    .details-doc-time-mode-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding-top: 4px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #475569;
+      font-weight: 500;
+    }
+
+    .details-time-col, .details-mode-col {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .details-time-col i, .details-mode-col i {
+      font-size: 15px;
+      color: #94A3B8;
+    }
+
+    /* Plain Expandable Trigger (No Box) */
+    .details-plain-collapse-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #0D7A5F;
+      cursor: pointer;
+      user-select: none;
+      padding-top: 4px;
+      width: fit-content;
+      transition: opacity 0.15s ease;
+    }
+
+    .details-plain-collapse-trigger:hover {
+      text-decoration: underline;
+    }
+
+    .details-plain-collapse-trigger i {
+      font-size: 13px;
+      transition: transform 0.2s ease;
+    }
+
+    .details-plain-collapse-trigger.expanded i {
+      transform: rotate(180deg);
+    }
+
+    /* Collapsible Body without any Box */
+    .details-plain-collapse-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-top: 6px;
+    }
+
+    .plain-info-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #64748B;
+    }
+
+    .plain-info-label {
+      font-weight: 500;
+      color: #94A3B8;
+      flex-shrink: 0;
+    }
+
+    .plain-info-val {
+      color: #1E293B;
+      font-weight: 600;
+      text-align: right;
+    }
+
+    /* Meta Pill Chips */
+    .details-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #F1F5F9;
+      color: #475569;
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 11px;
+      border-radius: 8px;
+    }
+
+    .details-meta-pill.status-prescribed {
+      background: #ECFDF5;
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .details-meta-pill.status-incall {
+      background: #D1FAE5;
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .details-meta-chips-strip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 2px 0 4px 0;
+    }
+
+    /* Clean Decluttered Dynamic Sections Stack */
+    .details-content-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      flex: 1;
+    }
+
+    .details-clean-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #F1F5F9;
+      flex-shrink: 0;
+    }
+
+    .details-clean-section.no-border,
+    .details-clean-section:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .details-clean-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2px 2px;
+    }
+
+    .details-clean-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .details-plain-tag {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: #64748B;
+      text-transform: none;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+
+    .details-plain-tag.tag-ai-note {
+      color: #065F46 !important;
+      font-weight: 600 !important;
+    }
+
+    .details-plain-tag.tag-intake {
+      color: #B45309 !important;
+      font-weight: 600 !important;
+    }
+
+    /* Clean Issued Prescription Tile - Color Only (Sage #D6EAE6, No Stroke) */
+    .details-rx-tile {
+      background: var(--color-card-sage);
+      border: none !important;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+      box-shadow: none !important;
+    }
+
+    .details-rx-tile:hover {
+      background: #DFECE8;
+    }
+
+    .details-rx-tile:active {
+      transform: scale(0.99);
+      background: #D5E6E1;
+    }
+
+    .details-rx-tile-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .details-rx-tile-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--color-primary-btn);
+      flex-shrink: 0;
+    }
+
+    .details-rx-tile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .details-rx-tile-name {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--color-primary-btn);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .details-rx-tile-sub {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #09453D;
+      font-weight: 500;
+    }
+
+    .btn-clean-rx-view {
+      height: 34px;
+      padding: 0 14px;
+      background: var(--color-primary-btn);
+      color: #ffffff;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .btn-clean-rx-view:hover {
+      background: var(--color-primary-btn-hover);
+    }
+
+    .details-rx-tile-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0E8070;
+      font-size: 20px;
+      flex-shrink: 0;
+      padding: 4px;
+      transition: transform 0.15s ease;
+    }
+
+    .details-rx-tile:hover .details-rx-tile-action {
+      transform: scale(1.08);
+    }
+
+    .details-doc-visit-date {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748B;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    /* Consultation Notes Card (#F4F6F8 with Truncation) */
+    .details-notes-card {
+      background: #F4F6F8 !important;
+      border: none !important;
+      border-radius: 16px !important;
+      padding: 14px 16px !important;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: none !important;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+      user-select: none;
+    }
+
+    .details-notes-card:hover {
+      background: #EEF2F5 !important;
+    }
+
+    .details-notes-body {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #1E293B;
+      font-weight: 400;
+      margin: 0;
+      transition: all 0.2s ease;
+    }
+
+    .details-notes-card.is-collapsed .details-notes-body {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .details-notes-expand-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #0D7A5F;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      padding-top: 2px;
+    }
+
+    .details-notes-expand-hint i {
+      font-size: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .details-notes-card:not(.is-collapsed) .details-notes-expand-hint i {
+      transform: rotate(180deg);
+    }
+
+    /* Listen Audio Button */
+    .btn-listen-audio-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 10px 4px 2px 4px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: opacity 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-listen-audio-trigger:hover {
+      opacity: 0.8;
+      transform: translateY(-0.5px);
+    }
+
+    .btn-listen-audio-left {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #0E8070;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .btn-listen-audio-left i {
+      font-size: 16px;
+      color: #0E8070;
+    }
+
+    .btn-listen-audio-duration {
+      font-size: 12px;
+      color: #64748B;
+      font-weight: 500;
+    }
+
+    /* Bottom Collapsible Section: Divider with '---- View More ----' */
+    .details-intake-collapsible-wrap {
+      width: 100%;
+      padding-top: 8px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+
+    .details-intake-divider-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .details-intake-divider-trigger:hover {
+      opacity: 0.75;
+    }
+
+    .details-intake-divider-line {
+      flex: 1;
+      height: 1px;
+      background: #E2E8F0;
+    }
+
+    .details-intake-divider-content {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748B;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .details-intake-divider-chevron {
+      font-size: 12px;
+      color: #94A3B8;
+      display: inline-flex;
+      transition: transform 0.2s ease;
+    }
+
+    .details-intake-collapsible-wrap.is-open .details-intake-divider-chevron {
+      transform: rotate(180deg);
+    }
+
+    .details-intake-collapsible-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-top: 14px;
+    }
+
+    /* Pre-Visit Details Card (Soft Warm Neutral Tint) */
+    .details-previsit-card {
+      background: #FAF8F5 !important;
+      border: 1px solid #EFE5D6 !important;
+      border-radius: 16px !important;
+      padding: 16px 18px !important;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: none !important;
+    }
+
+    .details-symptom-title {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 700;
+      color: #1E293B;
+    }
+
+    .details-symptom-meta-row {
+      font-family: var(--font-body);
+      font-size: 12.5px;
+      color: #786654;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .details-previsit-quote {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.55;
+      color: #334155;
+      font-style: normal;
+      background: transparent !important;
+      border: none !important;
+      padding: 6px 0 0 0 !important;
+      margin: 4px 0 0 0 !important;
+    }
+
+    /* Patient Documents List & File Rows */
+    .details-files-list {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .details-files-list .details-file-row:first-child {
+      padding-top: 2px !important;
+    }
+
+    .details-file-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 2px;
+      border-bottom: 1px solid #F1F5F9;
+      background: transparent;
+      transition: background 0.15s ease;
+    }
+
+    .details-file-row:last-child {
+      border-bottom: none;
+    }
+
+    .details-file-row-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .details-file-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F1F5F9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #475569;
+      flex-shrink: 0;
+    }
+
+    .details-file-row-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .details-file-row-name {
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #0F172A;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .details-file-row-sub {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      color: #64748B;
+    }
+
+    .details-file-row-action {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: #64748B;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .details-file-row-action:hover {
+      background: #F1F5F9;
+      color: #0F172A;
+    }
+
+    /* Fixed Bottom Action Dock for Visit Details (Safe Area Elevation) */
+    .details-bottom-dock {
+      position: sticky;
+      bottom: 0;
+      margin: auto -20px 0 -20px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid #F1F5F9;
+      padding: 14px 20px 68px 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 35;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .btn-details-dock-main {
+      flex: 1;
+      height: 46px;
+      background: var(--color-primary-btn);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-details-dock-main:hover {
+      background: var(--color-primary-btn-hover);
+    }
+
+    /* ============================================================
+       PATIENT DIGITAL PRESCRIPTION PREVIEW (A4 LETTERHEAD)
+       ============================================================ */
+    .page-patient-rx {
+      padding: 12px 16px 40px 16px;
+      background: #FFFFFF;
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+
+    .rx-paper-container.a4-paper {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 16px 14px;
+      box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.05), 0 1px 4px rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      width: 100%;
+      min-height: 480px;
+      box-sizing: border-box;
+      margin-top: 8px;
+    }
+
+    .rx-doc-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1.5px solid #052E28;
+    }
+
+    .rx-doc-profile {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+      min-width: 0;
+    }
+
+    .rx-doc-name {
+      font-family: var(--font-heading);
+      font-size: 14.5px;
+      font-weight: 800;
+      color: var(--color-primary-btn);
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+    }
+
+    .rx-doc-qualifications {
+      font-family: var(--font-body);
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #2D3748;
+      line-height: 1.2;
+    }
+
+    .rx-doc-institution {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      line-height: 1.2;
+    }
+
+    .rx-doc-bmdc {
+      font-family: var(--font-body);
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--color-primary-btn);
+      margin-top: 1px;
+    }
+
+    .rx-branding-block {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .rx-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: var(--color-card-sage);
+      color: var(--color-primary-btn);
+      padding: 2.5px 7px;
+      border-radius: 100px;
+      font-family: var(--font-heading);
+      font-size: 9.5px;
+      font-weight: 700;
+    }
+
+    .rx-brand-badge i {
+      font-size: 11px;
+    }
+
+    .rx-brand-sub {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      color: var(--color-text-secondary);
+    }
+
+    .rx-patient-strip {
+      background: #F6F9F8;
+      border: 1px solid #E4ECEB;
+      border-radius: 6px;
+      padding: 5px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .rx-patient-inline-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9.5px;
+      white-space: nowrap;
+    }
+
+    .rx-inline-label {
+      font-family: var(--font-body);
+      color: var(--color-text-secondary);
+      font-weight: 500;
+    }
+
+    .rx-inline-val {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+
+    .rx-two-column-body {
+      display: grid;
+      grid-template-columns: 88px 1px 1fr;
+      gap: 8px;
+      flex: 1;
+      min-height: 240px;
+    }
+
+    .rx-left-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .rx-section-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rx-mini-header {
+      font-family: var(--font-heading);
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--color-primary-btn);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .rx-bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rx-bullet-item {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      line-height: 1.25;
+      color: #333333;
+      position: relative;
+      padding-left: 6px;
+      word-break: break-word;
+    }
+
+    .rx-bullet-item::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--color-primary-btn);
+      font-weight: bold;
+    }
+
+    .rx-vitals-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5px;
+    }
+
+    .rx-vital-row {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      color: #333333;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .rx-col-divider {
+      background: #E8EEED;
+      width: 1px;
+      height: 100%;
+    }
+
+    .rx-right-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-left: 2px;
+    }
+
+    .rx-symbol-heading {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 20px;
+      font-weight: bold;
+      font-style: italic;
+      color: var(--color-primary-btn);
+      line-height: 1;
+      margin-bottom: -2px;
+    }
+
+    .rx-medicines-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .rx-med-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .rx-med-top {
+      font-family: var(--font-heading);
+      font-size: 10px;
+      font-weight: 700;
+      color: #000000;
+      line-height: 1.2;
+    }
+
+    .rx-med-dosage {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      font-weight: 600;
+      color: #052E28;
+      background: #EAF4F2;
+      display: inline-block;
+      padding: 1px 4px;
+      border-radius: 3px;
+      width: fit-content;
+    }
+
+    .rx-med-instruction {
+      font-family: var(--font-body);
+      font-size: 8px;
+      color: var(--color-text-secondary);
+    }
+
+    .rx-advice-box {
+      margin-top: 4px;
+      padding-top: 4px;
+      border-top: 1px dashed #E2ECE9;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rx-advice-text {
+      font-family: var(--font-body);
+      font-size: 8.5px;
+      color: #334155;
+      line-height: 1.35;
+    }
+
+    .rx-footer-row {
+      margin-top: 8px;
+      padding-top: 6px;
+      border-top: 1px solid #E2ECE9;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .rx-sig-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rx-sig-img {
+      font-family: 'Brush Script MT', cursive, sans-serif;
+      font-size: 16px;
+      color: #052E28;
+      line-height: 1;
+    }
+
+    .rx-sig-sub {
+      font-family: var(--font-body);
+      font-size: 8px;
+      color: #64748B;
+    }
+
+    /* Modal Backdrop */
+    .modal-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 120;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-backdrop.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Bottom Sheet Container */
+    .patient-bottom-sheet {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #FFFFFF;
+      border-radius: 28px 28px 0 0;
+      padding: 16px 20px 28px 20px;
+      z-index: 130;
+      transform: translateY(100%);
+      transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90%;
+      overflow-y: auto;
+      scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .patient-bottom-sheet.show {
+      transform: translateY(0);
+    }
+
+    .sheet-drag-handle {
+      width: 36px;
+      height: 4px;
+      background: #E2E8F0;
+      border-radius: 999px;
+      margin: 0 auto 2px auto;
+      flex-shrink: 0;
+    }
+
+    .sheet-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sheet-badge-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #EFF7F5;
+      color: #0E8070;
+      border: 1px solid rgba(14, 128, 112, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .sheet-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #0F172A;
+      letter-spacing: -0.01em;
+    }
+
+    .sheet-sub {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.35;
+    }
+
+    .sheet-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sheet-form-label {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .sheet-input-box {
+      width: 100%;
+      height: 44px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 12px;
+      padding: 0 14px;
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: #0F172A;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .sheet-input-box:focus {
+      border-color: #052E28;
+      background: #FFFFFF;
+    }
+
+    .sheet-textarea {
+      width: 100%;
+      height: 80px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #0F172A;
+      outline: none;
+      resize: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .sheet-textarea:focus {
+      border-color: #052E28;
+      background: #FFFFFF;
+    }
+
+    .duration-chips-strip {
+      display: flex;
+      gap: 6px;
+    }
+
+    .duration-chip {
+      flex: 1;
+      height: 34px;
+      border-radius: 8px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .duration-chip.active {
+      background: var(--color-card-sage) !important;
+      border-color: var(--color-border-selected) !important;
+      color: #052E28 !important;
+    }
+
+    .sheet-files-box {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sheet-file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: #F8FAF9;
+      border: 1px solid #E2ECE9;
+      border-radius: 10px;
+    }
+
+    .sheet-btn-add-file {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: #FFFFFF;
+      border: 1px dashed #CBD5E1;
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #052E28;
+      cursor: pointer;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .sheet-btn-add-file:hover {
+      border-color: #052E28;
+      background: #F8FAF9;
+    }
+
+    .sheet-action-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .btn-sheet-cancel {
+      flex: 1;
+      height: 46px;
+      border-radius: 12px;
+      background: #F1F5F9;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+    }
+
+    .btn-sheet-save {
+      flex: 2;
+      height: 46px;
+      border-radius: 12px;
+      background: #052E28;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      color: #FFFFFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 4px 14px rgba(5, 46, 40, 0.2);
+    }
+
+    /* Incoming Call & Video Consultation Simulation Overlay */
+    .incoming-call-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #0B1319;
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 24px 44px 24px;
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.96);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .incoming-call-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1);
+    }
+
+    .incoming-top-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+    }
+
+    .system-caller-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #A7F3D0;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .system-caller-pill .live-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 8px #34D399;
+    }
+
+    .incoming-caller-title {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: -0.01em;
+      margin-top: 6px;
+    }
+
+    .incoming-caller-sub {
+      font-family: var(--font-body);
+      font-size: 13.5px;
+      color: #94A3B8;
+      max-width: 260px;
+      line-height: 1.4;
+    }
+
+    .incoming-avatar-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .incoming-avatar-pulse-ring {
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      border: 2px solid rgba(52, 211, 153, 0.35);
+      animation: callRing 2s infinite ease-out;
+    }
+
+    .incoming-avatar-pulse-ring:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes callRing {
+      0% { transform: scale(0.85); opacity: 0.8; }
+      100% { transform: scale(1.4); opacity: 0; }
+    }
+
+    .incoming-avatar-img {
+      width: 104px;
+      height: 104px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #34D399;
+      box-shadow: 0 0 30px rgba(52, 211, 153, 0.3);
+      z-index: 2;
+    }
+
+    .incoming-actions-dock {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .incoming-action-buttons-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .btn-call-action-circle {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-call-action-circle:active {
+      transform: scale(0.92);
+    }
+
+    .btn-call-decline {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
+
+    .btn-call-accept {
+      background: #10B981;
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+      animation: acceptPulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes acceptPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    .call-btn-label {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #CBD5E1;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* Incoming Call Decline Confirmation Popup */
+    .incoming-decline-popup {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 50;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .incoming-decline-popup.show {
+      display: flex;
+    }
+
+    .decline-popup-content {
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 28px 28px 0 0;
+      padding: 24px 20px 42px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+    }
+
+    .decline-popup-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+    }
+
+    .decline-popup-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #FEE2E2;
+      color: #DC2626;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 2px;
+    }
+
+    .decline-popup-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0;
+    }
+
+    .decline-popup-sub {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: #64748B;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 290px;
+    }
+
+    .decline-popup-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn-decline-action {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: none;
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-decline-reschedule {
+      background: #052E28;
+      color: #FFFFFF;
+    }
+
+    .btn-decline-reschedule:hover {
+      background: #021B18;
+    }
+
+    .btn-decline-rebook {
+      background: #F1F5F9;
+      color: #0F172A;
+      border: 1px solid #E2E8F0;
+    }
+
+    .btn-decline-rebook:hover {
+      background: #E2E8F0;
+    }
+
+    .btn-decline-dismiss {
+      background: transparent;
+      border: none;
+      color: #64748B;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 0;
+      margin-top: 2px;
+      text-align: center;
+    }
+
+    .btn-decline-dismiss:hover {
+      color: #0F172A;
+    }
+
+    /* Video Room Active Simulation View */
+    .video-room-view {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #000000;
+      z-index: 160;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 44px 16px 28px 16px;
+    }
+
+    .video-room-view.active {
+      display: flex;
+    }
+
+    .video-room-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 10;
+    }
+
+    .video-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .video-feed-doctor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      opacity: 0.9;
+    }
+
+    .video-feed-patient-pip {
+      position: absolute;
+      top: 96px;
+      right: 16px;
+      width: 86px;
+      height: 124px;
+      border-radius: 14px;
+      background: #1E293B;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .video-feed-patient-pip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .video-controls-dock {
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(16px);
+      padding: 12px 20px;
+      border-radius: 999px;
+      align-self: center;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-video-ctrl {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #FFFFFF;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .btn-video-ctrl.btn-end-call {
+      background: #EF4444;
+      color: #FFFFFF;
+    }
   </style>
 </head>
 <body>
@@ -2249,6 +4603,22 @@
       <i class="ph ph-stethoscope"></i>
       <span>Switch to Doctor App</span>
     </a>
+  </div>
+
+  <!-- Auto-Call Simulation Control Bar (Outside Phone Screen) -->
+  <div class="external-sim-dock">
+    <span class="ext-sim-label"><i class="ph-bold ph-sliders"></i> AUTO-CALL SIMULATION</span>
+    <div class="ext-sim-buttons">
+      <button type="button" class="ext-sim-btn active" id="simBtnPending" onclick="setDemoSimulationState('pending')" title="Appointment booked, waiting for shift">
+        <i class="ph ph-clock"></i> 1. Booked (Waiting)
+      </button>
+      <button type="button" class="ext-sim-btn" id="simBtnActive" onclick="setDemoSimulationState('active')" title="Doctor confirmed active, consulting in order">
+        <span class="sim-dot-green"></span> 2. Doctor Active (#2)
+      </button>
+      <button type="button" class="ext-sim-btn" id="simBtnTurn" onclick="setDemoSimulationState('turn')" title="System auto-calls patient when it reaches serial #5">
+        <i class="ph-bold ph-phone-call"></i> 3. Auto-Call Rings (#5)
+      </button>
+    </div>
   </div>
 
   <!-- Device Mockup Shell -->
@@ -2517,34 +4887,34 @@
           <div class="book-section">
             <h3 class="book-section-title">Select Date</h3>
             <div class="date-scroll-strip" id="consultDateStrip">
-              <div class="consult-date-card active" onclick="selectConsultDate(this, 'TODAY', '14', 'OCT')">
+              <div class="consult-date-card active" onclick="selectConsultDate(this, 'TODAY', '29', 'SEP')">
                 <span class="date-card-day">TODAY</span>
-                <span class="date-card-num">14</span>
-                <span class="date-card-month">OCT</span>
+                <span class="date-card-num">29</span>
+                <span class="date-card-month">SEP</span>
               </div>
-              <div class="consult-date-card" onclick="selectConsultDate(this, 'WED', '15', 'OCT')">
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'WED', '30', 'SEP')">
                 <span class="date-card-day">WED</span>
-                <span class="date-card-num">15</span>
-                <span class="date-card-month">OCT</span>
+                <span class="date-card-num">30</span>
+                <span class="date-card-month">SEP</span>
               </div>
-              <div class="consult-date-card" onclick="selectConsultDate(this, 'THU', '16', 'OCT')">
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'THU', '1', 'OCT')">
                 <span class="date-card-day">THU</span>
-                <span class="date-card-num">16</span>
+                <span class="date-card-num">1</span>
                 <span class="date-card-month">OCT</span>
               </div>
-              <div class="consult-date-card" onclick="selectConsultDate(this, 'FRI', '17', 'OCT')">
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'FRI', '2', 'OCT')">
                 <span class="date-card-day">FRI</span>
-                <span class="date-card-num">17</span>
+                <span class="date-card-num">2</span>
                 <span class="date-card-month">OCT</span>
               </div>
-              <div class="consult-date-card" onclick="selectConsultDate(this, 'SAT', '18', 'OCT')">
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'SAT', '3', 'OCT')">
                 <span class="date-card-day">SAT</span>
-                <span class="date-card-num">18</span>
+                <span class="date-card-num">3</span>
                 <span class="date-card-month">OCT</span>
               </div>
-              <div class="consult-date-card" onclick="selectConsultDate(this, 'SUN', '19', 'OCT')">
+              <div class="consult-date-card" onclick="selectConsultDate(this, 'SUN', '4', 'OCT')">
                 <span class="date-card-day">SUN</span>
-                <span class="date-card-num">19</span>
+                <span class="date-card-num">4</span>
                 <span class="date-card-month">OCT</span>
               </div>
             </div>
@@ -2637,7 +5007,7 @@
             </div>
 
             <div class="confirm-meta-row">
-              <span class="confirm-meta-val" id="confirmedDateLabel">Tue, Oct 14</span>
+              <span class="confirm-meta-val" id="confirmedDateLabel">Tue, Sep 29</span>
               <span class="confirm-meta-val mode-highlight" id="confirmedModeLabel">Video Call</span>
             </div>
           </div>
@@ -2653,20 +5023,678 @@
         </div>
 
         <!-- =======================================================
+             VIEW 5: VISITS SCREEN (REVOLUTIONARY PATIENT QUEUE & VISITS)
+             ======================================================= -->
+        <div class="app-page page-visits page-right" id="pageVisits">
+          
+          <!-- Top Page Header -->
+          <div class="visits-top-header">
+            <div class="visits-title-col">
+              <h1 class="visits-page-title">My Visits</h1>
+              <p class="visits-page-subtitle">Manage appointments</p>
+            </div>
+          </div>
+
+          <!-- Segmented Tab Switcher (Wise / Uber standard) -->
+          <div class="visits-segment-tabs">
+            <button type="button" class="visits-segment-tab active" id="tabVisitsUpcoming" onclick="switchVisitsTab('upcoming')">
+              <span>Upcoming</span>
+              <span class="visits-tab-count-pill" id="upcomingCountBadge">1</span>
+            </button>
+            <button type="button" class="visits-segment-tab" id="tabVisitsCompleted" onclick="switchVisitsTab('completed')">
+              <span>Past Visits</span>
+              <span class="visits-tab-count-pill" id="completedCountBadge">2</span>
+            </button>
+          </div>
+
+          <!-- UPCOMING CONSULTATIONS FEED (OUTSIDE-DATE GROUPED, MINIMAL BREATHABLE CARDS) -->
+          <div class="visits-section-container" id="visitsUpcomingSection" style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- Date Group 1: Today, Tuesday, Sep 29 -->
+            <div class="visits-date-group">
+              <div class="visits-date-header">
+                <span class="visits-date-title">Tuesday, Sep 29 • Today</span>
+              </div>
+              
+              <div class="visits-date-cards-stack">
+                <!-- Consultation Card 1: Ast. Prof. Dr. Mahim Khan (Serial #5) -->
+                <div class="patient-visit-card" id="upcomingCard" onclick="openVisitDetailsPage('mahim-upcoming')">
+                  
+                  <!-- Top Row: Video Mode Icon + Doctor Name & Specialty/Time + Arrow -->
+                  <div class="patient-visit-main-row">
+                    <div class="patient-visit-info-cluster">
+                      <div class="patient-visit-mode-icon" title="Video Consultation">
+                        <i class="ph-fill ph-video-camera"></i>
+                      </div>
+                      <div class="patient-visit-text-col">
+                        <h3 class="patient-visit-doc-name" id="upcomingDocName">Ast. Prof. Dr. Mahim Khan</h3>
+                        <div class="patient-visit-meta-row">
+                          <span>Cardiology</span>
+                        </div>
+                      </div>
+                    </div>
+                    <i class="ph ph-caret-right patient-visit-arrow"></i>
+                  </div>
+
+                  <!-- Pre-Visit Intake Line (Initially empty, user clicks to add) -->
+                  <div class="patient-card-previsit-row" id="cardPreVisitContainer">
+                    <div class="patient-card-previsit-link" id="btnPreVisitAction" onclick="event.stopPropagation(); openPreVisitModal()" role="button" tabindex="0">
+                      <i class="ph-bold ph-plus" id="preVisitActionIcon"></i>
+                      <span id="preVisitActionText">Add pre-visit details</span>
+                    </div>
+                  </div>
+
+                  <!-- Hairline divider line under pre-visit details -->
+                  <div class="patient-card-divider"></div>
+
+                  <!-- Bottom Row: Serial on left | Live Status Plain Text on right (No Box) -->
+                  <div class="patient-card-bottom-row">
+                    <span class="patient-card-serial-num" id="upcomingSerialVal">Serial #5</span>
+                    <div class="patient-card-status-plain scheduled" id="upcomingStatusBadge">
+                      <span class="patient-status-dot" id="upcomingStatusDot"></span>
+                      <span class="patient-status-label" id="upcomingStatusText">Scheduled</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Date Group 2: Friday, Oct 2 -->
+            <div class="visits-date-group">
+              <div class="visits-date-header">
+                <span class="visits-date-title">Friday, Oct 2</span>
+              </div>
+              
+              <div class="visits-date-cards-stack">
+                <!-- Consultation Card 2: Dr. Mary Anne (Serial #3) -->
+                <div class="patient-visit-card" onclick="openVisitDetailsPage('mary-upcoming')">
+                  
+                  <div class="patient-visit-main-row">
+                    <div class="patient-visit-info-cluster">
+                      <div class="patient-visit-mode-icon" title="Video Consultation">
+                        <i class="ph-fill ph-video-camera"></i>
+                      </div>
+                      <div class="patient-visit-text-col">
+                        <h3 class="patient-visit-doc-name">Dr. Mary Anne</h3>
+                        <div class="patient-visit-meta-row">
+                          <span>Internal Medicine</span>
+                        </div>
+                      </div>
+                    </div>
+                    <i class="ph ph-caret-right patient-visit-arrow"></i>
+                  </div>
+
+                  <div class="patient-card-previsit-row">
+                    <div class="patient-card-previsit-link" onclick="event.stopPropagation(); openPreVisitModal()" role="button" tabindex="0">
+                      <i class="ph-bold ph-plus"></i>
+                      <span>Add pre-visit details</span>
+                    </div>
+                  </div>
+
+                  <div class="patient-card-divider"></div>
+
+                  <div class="patient-card-bottom-row">
+                    <span class="patient-card-serial-num">Serial #3</span>
+                    <div class="patient-card-status-plain scheduled">
+                      <span class="patient-status-dot"></span>
+                      <span class="patient-status-label">Scheduled</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- PAST / COMPLETED VISITS SECTION (OUTSIDE-DATE GROUPED, MINIMAL CARDS) -->
+          <div class="visits-section-container" id="visitsCompletedSection" style="display: none; flex-direction: column; gap: 16px;">
+            
+            <!-- Completed Date Group 1: Tuesday, Jun 09, 2026 -->
+            <div class="visits-date-group">
+              <div class="visits-date-header">
+                <span class="visits-date-title">Tuesday, Jun 09, 2026</span>
+              </div>
+              <div class="visits-date-cards-stack">
+                <div class="patient-visit-card" onclick="openVisitDetailsPage('mahim-completed')" role="button" tabindex="0">
+                  <div class="patient-visit-main-row">
+                    <div class="patient-visit-info-cluster">
+                      <div class="patient-visit-mode-icon completed-badge" title="Video Consultation">
+                        <i class="ph-fill ph-video-camera"></i>
+                      </div>
+                      <div class="patient-visit-text-col">
+                        <h3 class="patient-visit-doc-name">Ast. Prof. Dr. Mahim Khan</h3>
+                        <div class="patient-visit-meta-row">
+                          <span>Cardiology</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="completed-card-right-col">
+                      <span class="completed-rx-badge">
+                        <i class="ph-bold ph-check-circle"></i>
+                        <span>Rx Issued</span>
+                      </span>
+                      <i class="ph ph-caret-right patient-visit-arrow"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Completed Date Group 2: Saturday, Apr 18, 2026 -->
+            <div class="visits-date-group">
+              <div class="visits-date-header">
+                <span class="visits-date-title">Saturday, Apr 18, 2026</span>
+              </div>
+              <div class="visits-date-cards-stack">
+                <div class="patient-visit-card" onclick="openVisitDetailsPage('ayesha-completed')" role="button" tabindex="0">
+                  <div class="patient-visit-main-row">
+                    <div class="patient-visit-info-cluster">
+                      <div class="patient-visit-mode-icon completed-badge" title="Video Consultation">
+                        <i class="ph-fill ph-video-camera"></i>
+                      </div>
+                      <div class="patient-visit-text-col">
+                        <h3 class="patient-visit-doc-name">Prof. Dr. Ayesha Rahman</h3>
+                        <div class="patient-visit-meta-row">
+                          <span>General Medicine</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="completed-card-right-col">
+                      <span class="completed-rx-badge">
+                        <i class="ph-bold ph-check-circle"></i>
+                        <span>Rx Issued</span>
+                      </span>
+                      <i class="ph ph-caret-right patient-visit-arrow"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 6: VISIT & APPOINTMENT DETAILS SCREEN
+             Decluttered Minimal Standard (Matching Doctor App View 8 / Image 3)
+             ======================================================= -->
+        <div class="app-page page-visit-details page-right" id="pageVisitDetails">
+          
+          <!-- Sticky Top Bar (Back Arrow + Title) -->
+          <div class="details-top-bar" style="display: flex; align-items: center; justify-content: flex-start;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <button class="btn-circle-icon" onclick="returnFromVisitDetails()" aria-label="Back to Visits">
+                <i class="ph ph-arrow-left"></i>
+              </button>
+              <h1 class="page-top-title" id="visitDetailsPageTitle">Appointment Details</h1>
+            </div>
+          </div>
+
+          <!-- Plain-Text Doctor Header (Dynamically populated by renderVisitDetailsContent) -->
+          <div class="details-patient-plain-container" id="visDocPlainContainer">
+            <!-- Dynamically populated based on upcoming vs completed visit -->
+          </div>
+
+          <!-- Dynamic Decluttered Sections Container -->
+          <div class="details-content-sections" id="visDynamicSections">
+            <!-- Dynamically populated by renderVisitDetailsContent() based on active visit -->
+          </div>
+
+          <!-- Fixed Bottom Action Dock -->
+          <div class="details-bottom-dock" id="visBottomDock">
+            <!-- Dynamically updated based on status -->
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             VIEW 6: DIGITAL PRESCRIPTION PREVIEW (A4 LETTERHEAD)
+             ======================================================= -->
+        <div class="app-page page-patient-rx page-right" id="pagePatientRxPreview">
+          
+          <!-- Sticky Top Bar -->
+          <div class="page-top-bar" style="margin-top: 0; padding-top: 4px;">
+            <button class="btn-circle-icon" onclick="returnFromPrescriptionPreview()" aria-label="Back">
+              <i class="ph ph-arrow-left"></i>
+            </button>
+            <h1 class="page-top-title" style="flex: 1;">Prescription</h1>
+            <button class="btn-circle-icon" onclick="showToast('Downloading Prescription PDF...')" aria-label="Download PDF" title="Download PDF">
+              <i class="ph ph-download-simple"></i>
+            </button>
+          </div>
+
+          <!-- A4 Dimension Digital Paper Sheet (1 : 1.414 Aspect Ratio) -->
+          <div class="rx-paper-container a4-paper" id="patientRxPaper">
+            
+            <!-- 1. Doctor Header -->
+            <div class="rx-doc-header-row">
+              <div class="rx-doc-profile">
+                <h2 class="rx-doc-name" id="rxDocName">Ast. Prof. Dr. Mahim Khan</h2>
+                <span class="rx-doc-qualifications" id="rxDocQual">MBBS, FCPS (Cardiology), MD</span>
+                <span class="rx-doc-institution" id="rxDocHospital">BSMMU (PG Hospital) • Department of Cardiology</span>
+                <span class="rx-doc-bmdc" id="rxDocBmdc">BMDC Reg. No: A-74829</span>
+              </div>
+              <div class="rx-branding-block">
+                <div class="rx-brand-badge">
+                  <i class="ph-fill ph-seal-check"></i>
+                  <span>Onu Health</span>
+                </div>
+                <span class="rx-brand-sub">Verified Digital Rx</span>
+              </div>
+            </div>
+
+            <!-- 2. Patient Demographics Strip -->
+            <div class="rx-patient-strip">
+              <div class="rx-patient-inline-item">
+                <span class="rx-inline-label">Patient:</span>
+                <span class="rx-inline-val">Alif Khan</span>
+              </div>
+              <div class="rx-patient-inline-item">
+                <span class="rx-inline-label">Age/Sex:</span>
+                <span class="rx-inline-val">28 Y / Male</span>
+              </div>
+              <div class="rx-patient-inline-item">
+                <span class="rx-inline-label">Date:</span>
+                <span class="rx-inline-val" id="rxDateVal">09 Jun 2026</span>
+              </div>
+            </div>
+
+            <!-- 3. Two-Column Clinical Body -->
+            <div class="rx-two-column-body">
+              
+              <!-- Left Column: C/C, O/E, Tests -->
+              <div class="rx-left-pane">
+                
+                <div class="rx-section-group">
+                  <div class="rx-mini-header">C/C</div>
+                  <ul class="rx-bullet-list" id="rxComplaintsList">
+                    <li class="rx-bullet-item">Throat pain (3d)</li>
+                    <li class="rx-bullet-item">Difficulty swallowing</li>
+                    <li class="rx-bullet-item">Mild frontal headache</li>
+                  </ul>
+                </div>
+
+                <div class="rx-section-group">
+                  <div class="rx-mini-header">O/E (Vitals)</div>
+                  <div class="rx-vitals-grid">
+                    <div class="rx-vital-row">
+                      <span class="rx-vital-label">BP:</span>
+                      <span class="rx-vital-value">120/80</span>
+                    </div>
+                    <div class="rx-vital-row">
+                      <span class="rx-vital-label">Pulse:</span>
+                      <span class="rx-vital-value">74 bpm</span>
+                    </div>
+                    <div class="rx-vital-row">
+                      <span class="rx-vital-label">Temp:</span>
+                      <span class="rx-vital-value">99.1°F</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="rx-section-group">
+                  <div class="rx-mini-header">Advised Tests</div>
+                  <ul class="rx-bullet-list" id="rxTestsList">
+                    <li class="rx-bullet-item">CBC with ESR</li>
+                    <li class="rx-bullet-item">Serum Creatinine</li>
+                  </ul>
+                </div>
+
+              </div>
+
+              <!-- 1px Vertical Divider -->
+              <div class="rx-col-divider"></div>
+
+              <!-- Right Column: ℞ Medicines, Advice, Follow-Up -->
+              <div class="rx-right-pane">
+                <div class="rx-symbol-heading">℞</div>
+
+                <div class="rx-medicines-stack" id="rxMedicinesStack">
+                  <div class="rx-med-row">
+                    <span class="rx-med-top">1. Tab. Napa Extra (500mg + 65mg)</span>
+                    <span class="rx-med-dosage">1 + 0 + 1 • 5 Days</span>
+                    <span class="rx-med-instruction">Take after meals with water</span>
+                  </div>
+                  <div class="rx-med-row">
+                    <span class="rx-med-top">2. Tab. Fexo (120mg)</span>
+                    <span class="rx-med-dosage">0 + 0 + 1 • 7 Days</span>
+                    <span class="rx-med-instruction">Take at bedtime</span>
+                  </div>
+                  <div class="rx-med-row">
+                    <span class="rx-med-top">3. Warm Saline Gargle</span>
+                    <span class="rx-med-dosage">Thrice daily • 5 Days</span>
+                    <span class="rx-med-instruction">1/2 tsp salt in 1 cup warm water</span>
+                  </div>
+                </div>
+
+                <div class="rx-advice-box">
+                  <div class="rx-mini-header">Advice</div>
+                  <p class="rx-advice-text" id="rxAdviceText">
+                    Stay hydrated, drink plenty of warm liquids, maintain vocal rest, avoid cold drinks and exposure to dust.
+                  </p>
+                </div>
+
+                <div style="margin-top: 4px;">
+                  <span style="font-family: var(--font-heading); font-size: 8.5px; font-weight: 700; color: #052E28;">Next Follow-Up:</span>
+                  <span style="font-family: var(--font-body); font-size: 8.5px; color: #334155;">After 7 days if symptoms persist</span>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Footer & Signature -->
+            <div class="rx-footer-row">
+              <div class="rx-sig-col">
+                <span style="font-family: var(--font-body); font-size: 7.5px; color: #94A3B8;">Electronically signed &amp; verified via BMDC API</span>
+                <span class="rx-sig-img" id="rxSigDoctor">Dr. Mahim Khan</span>
+              </div>
+              <div style="text-align: right;">
+                <span class="rx-sig-sub">Valid Telemedicine Rx</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             MODAL: PRE-VISIT INTAKE SUBMISSION BOTTOM SHEET
+             ======================================================= -->
+        <div class="modal-backdrop" id="preVisitModalBackdrop" onclick="closePreVisitModal()"></div>
+        
+        <div class="patient-bottom-sheet" id="preVisitIntakeSheet">
+          <div class="sheet-drag-handle"></div>
+          
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon">
+              <i class="ph ph-clipboard-text"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closePreVisitModal()" aria-label="Close">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+
+          <div>
+            <h2 class="sheet-title">Pre-visit Clinical Intake</h2>
+            <p class="sheet-sub">Help Dr. Mahim Khan review your symptoms before the consultation call.</p>
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Primary Symptoms / Chief Complaints</label>
+            <input type="text" class="sheet-input-box" id="intakeSymptomsInput" placeholder="e.g. Chest tightness, sudden palpitations, shortness of breath..." value="Chest tightness &amp; occasional palpitations">
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Duration of Symptoms</label>
+            <div class="duration-chips-strip">
+              <div class="duration-chip" onclick="selectDurationChip(this, '< 3 Days')">&lt; 3 Days</div>
+              <div class="duration-chip active" onclick="selectDurationChip(this, '1-2 Weeks')">1-2 Weeks</div>
+              <div class="duration-chip" onclick="selectDurationChip(this, '1 Month+')">1 Month+</div>
+            </div>
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Clinical Notes / Triggers</label>
+            <textarea class="sheet-textarea" id="intakeNotesInput" placeholder="Describe when it happens, current medications, allergies...">Symptoms become more prominent during fast walking or climbing stairs. No history of smoking. Currently not taking any beta-blockers.</textarea>
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Attach Past Prescriptions / Lab Reports</label>
+            <div class="sheet-files-box" id="intakeFilesList">
+              <div class="sheet-file-item">
+                <div class="doc-file-left">
+                  <i class="ph-bold ph-file-pdf doc-file-icon"></i>
+                  <span class="doc-file-name">ECG_Report_Oct2026.pdf</span>
+                </div>
+                <button type="button" style="background: none; border: none; color: #94A3B8; cursor: pointer;" onclick="removeIntakeFile(this)">
+                  <i class="ph ph-x"></i>
+                </button>
+              </div>
+              <div class="sheet-file-item">
+                <div class="doc-file-left">
+                  <i class="ph-bold ph-image doc-file-icon"></i>
+                  <span class="doc-file-name">Lipid_Profile_BSMMU.jpg</span>
+                </div>
+                <button type="button" style="background: none; border: none; color: #94A3B8; cursor: pointer;" onclick="removeIntakeFile(this)">
+                  <i class="ph ph-x"></i>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="sheet-btn-add-file" onclick="addMockIntakeFile()">
+              <i class="ph-bold ph-plus"></i>
+              <span>Attach Another Document</span>
+            </button>
+          </div>
+
+          <div class="sheet-action-row">
+            <button type="button" class="btn-sheet-cancel" onclick="closePreVisitModal()">Cancel</button>
+            <button type="button" class="btn-sheet-save" onclick="savePreVisitIntake()">
+              <i class="ph-bold ph-check"></i>
+              <span>Save &amp; Submit Intake</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             MODAL: RESCHEDULE APPOINTMENT BOTTOM SHEET
+             ======================================================= -->
+        <div class="modal-backdrop" id="rescheduleModalBackdrop" onclick="closeRescheduleModal()"></div>
+        
+        <div class="patient-bottom-sheet" id="rescheduleSheet">
+          <div class="sheet-drag-handle"></div>
+          
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon">
+              <i class="ph ph-calendar"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeRescheduleModal()" aria-label="Close">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+
+          <div>
+            <h2 class="sheet-title">Reschedule Visit</h2>
+            <p class="sheet-sub">Select a new date and time for Ast. Prof. Dr. Mahim Khan (No extra fee charged).</p>
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Select Date</label>
+            <div class="duration-chips-strip" id="rescheduleDateStrip">
+              <div class="duration-chip active" onclick="selectRescheduleChip(this, 'date')">Wed, Sep 30</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'date')">Thu, Oct 1</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'date')">Fri, Oct 2</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'date')">Sat, Oct 3</div>
+            </div>
+          </div>
+
+          <div class="sheet-form-group">
+            <label class="sheet-form-label">Select Consultation Slot</label>
+            <div class="duration-chips-strip" id="rescheduleTimeStrip">
+              <div class="duration-chip active" onclick="selectRescheduleChip(this, 'time')">10:00 AM</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'time')">02:30 PM</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'time')">06:00 PM</div>
+              <div class="duration-chip" onclick="selectRescheduleChip(this, 'time')">08:30 PM</div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-confirm-pay" style="margin-top: 10px;" onclick="confirmRescheduleAppointment()">
+            <i class="ph-bold ph-check"></i>
+            <span>Confirm Reschedule</span>
+          </button>
+        </div>
+
+        <!-- =======================================================
+             MODAL: CANCEL & REBOOK (SWITCH DOCTOR) BOTTOM SHEET
+             ======================================================= -->
+        <div class="modal-backdrop" id="cancelRebookModalBackdrop" onclick="closeCancelAndRebookModal()"></div>
+        
+        <div class="patient-bottom-sheet" id="cancelRebookSheet">
+          <div class="sheet-drag-handle"></div>
+          
+          <div class="sheet-top-row">
+            <div class="sheet-badge-icon" style="background: #FFF1F2; color: #BE123C;">
+              <i class="ph-bold ph-arrows-clockwise"></i>
+            </div>
+            <button type="button" class="btn-circle-icon" onclick="closeCancelAndRebookModal()" aria-label="Close">
+              <i class="ph ph-x"></i>
+            </button>
+          </div>
+
+          <div>
+            <h2 class="sheet-title">Cancel &amp; Rebook Another Doctor</h2>
+            <p class="sheet-sub">Cancel your appointment with Ast. Prof. Dr. Mahim Khan and use the ৳1,200 fee credit to book any other doctor.</p>
+          </div>
+
+          <!-- Refund to Balance Banner -->
+          <div style="background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 14px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; margin-top: 6px;">
+            <div style="width: 38px; height: 38px; border-radius: 10px; background: #D1FAE5; color: #059669; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;">
+              <i class="ph-bold ph-wallet"></i>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 2px;">
+              <span style="font-family: var(--font-heading); font-size: 14.5px; font-weight: 700; color: #065F46;">৳1,200 Instant Balance Credit</span>
+              <span style="font-family: var(--font-body); font-size: 12px; color: #047857; line-height: 1.4;">Your full payment is credited back to your Onu Balance right away. You can use it instantly to book another specialist.</span>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 14px;">
+            <button type="button" class="btn-confirm-pay" onclick="confirmCancelAndRebook()">
+              <i class="ph-bold ph-magnifying-glass"></i>
+              <span>Cancel &amp; Choose Another Doctor</span>
+            </button>
+            <button type="button" class="btn-dock-action-secondary" style="height: 46px; border: none; background: #F1F5F9; color: #475569;" onclick="closeCancelAndRebookModal()">
+              <span>Keep Current Appointment</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- =======================================================
+             MODAL: AUTOMATED SYSTEM INCOMING CALL SIMULATION
+             ======================================================= -->
+        <div class="incoming-call-overlay" id="incomingCallOverlay">
+          
+          <div class="incoming-top-info">
+            <div class="system-caller-pill">
+              <span class="live-pulse-dot"></span>
+              <span>Onu Automated Health System</span>
+            </div>
+            <h2 class="incoming-caller-title">Incoming Consultation Call</h2>
+            <p class="incoming-caller-sub">Your turn has arrived! Connecting you to Ast. Prof. Dr. Mahim Khan (Serial #5).</p>
+          </div>
+
+          <div class="incoming-avatar-center">
+            <div class="incoming-avatar-pulse-ring"></div>
+            <div class="incoming-avatar-pulse-ring"></div>
+            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Doctor" class="incoming-avatar-img">
+          </div>
+
+          <div class="incoming-actions-dock">
+            <div class="incoming-action-buttons-row">
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <button type="button" class="btn-call-action-circle btn-call-decline" onclick="openDeclineConfirmationPopup()" aria-label="Decline Call">
+                  <i class="ph-bold ph-phone-disconnect"></i>
+                </button>
+                <span class="call-btn-label">Decline</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <button type="button" class="btn-call-action-circle btn-call-accept" onclick="acceptSystemCall()" aria-label="Accept Call">
+                  <i class="ph-bold ph-phone-call"></i>
+                </button>
+                <span class="call-btn-label" style="color: #A7F3D0;">Accept &amp; Join</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decline Confirmation & Rebooking Popup (Inside Call Overlay) -->
+          <div class="incoming-decline-popup" id="incomingDeclinePopup">
+            <div class="decline-popup-content">
+              <div class="decline-popup-header">
+                <div class="decline-popup-icon">
+                  <i class="ph-bold ph-calendar-x"></i>
+                </div>
+                <h3 class="decline-popup-title">Decline this call?</h3>
+                <p class="decline-popup-sub">You can reschedule with Dr. Mahim Khan for another time or rebook with another doctor.</p>
+              </div>
+              <div class="decline-popup-actions">
+                <button type="button" class="btn-decline-action btn-decline-reschedule" onclick="handleDeclineReschedule()">
+                  <i class="ph-bold ph-calendar"></i>
+                  <span>Reschedule with Dr. Mahim</span>
+                </button>
+                <button type="button" class="btn-decline-action btn-decline-rebook" onclick="handleDeclineRebook()">
+                  <i class="ph-bold ph-arrows-clockwise"></i>
+                  <span>Rebook with Another Doctor</span>
+                </button>
+                <button type="button" class="btn-decline-dismiss" onclick="dismissDeclinePopup()">
+                  Stay in Call
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
+             ACTIVE VIDEO CONSULTATION ROOM (CONNECTED SIMULATION)
+             ======================================================= -->
+        <div class="video-room-view" id="videoRoomView">
+          
+          <!-- Full Doctor Video Feed -->
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800&auto=format&fit=crop&q=80" alt="Doctor Video Feed" class="video-feed-doctor">
+
+          <!-- Patient PiP Camera Preview -->
+          <div class="video-feed-patient-pip">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" alt="Patient PiP">
+          </div>
+
+          <!-- Video Top Header -->
+          <div class="video-room-top-bar">
+            <div class="video-status-pill">
+              <span class="live-pulse-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></span>
+              <span>In Consultation • Dr. Mahim Khan</span>
+            </div>
+            <div class="video-status-pill" id="videoCallTimerPill">
+              <i class="ph ph-clock"></i>
+              <span id="videoCallTimerText">00:08</span>
+            </div>
+          </div>
+
+          <!-- Controls Dock -->
+          <div class="video-controls-dock">
+            <button type="button" class="btn-video-ctrl" onclick="showToast('Microphone toggled')" aria-label="Mute">
+              <i class="ph-bold ph-microphone"></i>
+            </button>
+            <button type="button" class="btn-video-ctrl" onclick="showToast('Camera toggled')" aria-label="Camera">
+              <i class="ph-bold ph-video-camera"></i>
+            </button>
+            <button type="button" class="btn-video-ctrl" onclick="showToast('Camera switched')" aria-label="Switch Camera">
+              <i class="ph-bold ph-arrows-clockwise"></i>
+            </button>
+            <button type="button" class="btn-video-ctrl btn-end-call" onclick="endVideoCall()" aria-label="End Call">
+              <i class="ph-bold ph-phone-disconnect"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- =======================================================
              UNIVERSAL 5-TAB BOTTOM NAVIGATION BAR
              Matches Doctor App layout exactly. Inactive tabs are disabled.
              ======================================================= -->
         <div class="bottom-nav-container" id="patientBottomNav">
           
-          <!-- Tab 1: Discover (Active) -->
+          <!-- Tab 1: Discover (Active by default) -->
           <div class="nav-item active" id="navItemDiscover" onclick="navigateToDiscover()">
             <div class="active-nav-pill">
               <i class="ph-fill ph-stethoscope"></i>
             </div>
           </div>
 
-          <!-- Tab 2: Visits (Disabled) -->
-          <div class="nav-item disabled" id="navItemVisits" title="Visits">
+          <!-- Tab 2: Visits (Interactive) -->
+          <div class="nav-item" id="navItemVisits" onclick="navigateToVisits()" title="Visits">
             <i class="ph ph-calendar-check"></i>
             <span class="nav-label">Visits</span>
           </div>
@@ -2832,29 +5860,99 @@
     // ============================================================
     // NAVIGATION CONTROLLER (FOOLPROOF & RELIABLE)
     // ============================================================
+    function updateBottomNavState(activeTab) {
+      const navDiscover = document.getElementById('navItemDiscover');
+      const navVisits = document.getElementById('navItemVisits');
+      if (!navDiscover || !navVisits) return;
+
+      if (activeTab === 'discover') {
+        navDiscover.className = 'nav-item active';
+        navDiscover.innerHTML = `
+          <div class="active-nav-pill">
+            <i class="ph-fill ph-stethoscope"></i>
+          </div>
+        `;
+        navVisits.className = 'nav-item';
+        navVisits.innerHTML = `
+          <i class="ph ph-calendar-check"></i>
+          <span class="nav-label">Visits</span>
+        `;
+      } else if (activeTab === 'visits') {
+        navDiscover.className = 'nav-item';
+        navDiscover.innerHTML = `
+          <i class="ph ph-stethoscope"></i>
+          <span class="nav-label">Discover</span>
+        `;
+        navVisits.className = 'nav-item active';
+        navVisits.innerHTML = `
+          <div class="active-nav-pill">
+            <i class="ph-fill ph-calendar-check"></i>
+          </div>
+        `;
+      }
+    }
+
     function navigateToDiscover() {
       const pageDiscover = document.getElementById('pageDiscover');
+      const pageVisits = document.getElementById('pageVisits');
+      const pageVisitDetails = document.getElementById('pageVisitDetails');
       const pageDoctors = document.getElementById('pageDoctorsList');
       const pageProfile = document.getElementById('pageDoctorProfile');
       const pageConsult = document.getElementById('pageBookConsultation');
+      const pageConfirmed = document.getElementById('pageBookingConfirmed');
+      const pageRx = document.getElementById('pagePatientRxPreview');
       const bottomNav = document.getElementById('patientBottomNav');
       const phoneScreen = document.querySelector('.phone-screen');
       
       if (phoneScreen) phoneScreen.classList.remove('hide-bottom-nav');
       if (bottomNav) bottomNav.classList.remove('nav-hidden');
 
-      if (pageConsult) {
-        pageConsult.className = 'app-page page-book-consultation page-right';
-      }
-      if (pageProfile) {
-        pageProfile.className = 'app-page page-doctor-profile page-right';
-      }
-      if (pageDoctors) {
-        pageDoctors.className = 'app-page page-doctors-list page-right';
-      }
+      if (pageRx) pageRx.className = 'app-page page-patient-rx page-right';
+      if (pageConfirmed) pageConfirmed.className = 'app-page page-booking-confirmed page-right';
+      if (pageConsult) pageConsult.className = 'app-page page-book-consultation page-right';
+      if (pageProfile) pageProfile.className = 'app-page page-doctor-profile page-right';
+      if (pageDoctors) pageDoctors.className = 'app-page page-doctors-list page-right';
+      if (pageVisitDetails) pageVisitDetails.className = 'app-page page-visit-details page-right';
+      if (pageVisits) pageVisits.className = 'app-page page-visits page-right';
+      
       if (pageDiscover) {
         pageDiscover.className = 'app-page page-discover active-page';
         pageDiscover.scrollTop = 0;
+      }
+      updateBottomNavState('discover');
+    }
+
+    function navigateToVisits() {
+      const pageDiscover = document.getElementById('pageDiscover');
+      const pageVisits = document.getElementById('pageVisits');
+      const pageVisitDetails = document.getElementById('pageVisitDetails');
+      const pageDoctors = document.getElementById('pageDoctorsList');
+      const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageConsult = document.getElementById('pageBookConsultation');
+      const pageConfirmed = document.getElementById('pageBookingConfirmed');
+      const pageRx = document.getElementById('pagePatientRxPreview');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+      
+      if (phoneScreen) phoneScreen.classList.remove('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.remove('nav-hidden');
+
+      if (pageRx) pageRx.className = 'app-page page-patient-rx page-right';
+      if (pageConfirmed) pageConfirmed.className = 'app-page page-booking-confirmed page-right';
+      if (pageConsult) pageConsult.className = 'app-page page-book-consultation page-right';
+      if (pageProfile) pageProfile.className = 'app-page page-doctor-profile page-right';
+      if (pageDoctors) pageDoctors.className = 'app-page page-doctors-list page-right';
+      if (pageDiscover) pageDiscover.className = 'app-page page-discover page-left';
+      if (pageVisitDetails) pageVisitDetails.className = 'app-page page-visit-details page-right';
+      
+      if (pageVisits) {
+        pageVisits.className = 'app-page page-visits active-page';
+        pageVisits.scrollTop = 0;
+      }
+      updateBottomNavState('visits');
+
+      if (activeBookingDoctor) {
+        syncUpcomingWithBookedDoctor(activeBookingDoctor);
       }
     }
 
@@ -3062,29 +6160,29 @@
     // Dynamic Multi-Shift Database by Date
     let activeConsultMode = 'video';
     let selectedConsultDay = 'TODAY';
-    let selectedConsultNum = '14';
-    let selectedConsultMonth = 'OCT';
+    let selectedConsultNum = '29';
+    let selectedConsultMonth = 'SEP';
     let activeShiftId = 1;
 
     const dateShiftsData = {
-      '14': [
+      '29': [
         { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#5', booked: '4 Patients', estTime: '~ 06:40 PM' }
       ],
-      '15': [
+      '30': [
         { id: 1, name: 'Shift 1', time: '10:00 AM - 01:00 PM', serial: '#3', booked: '2 Patients', estTime: '~ 10:30 AM' },
         { id: 2, name: 'Shift 2', time: '06:00 PM - 10:00 PM', serial: '#9', booked: '8 Patients', estTime: '~ 07:20 PM' }
       ],
-      '16': [
+      '1': [
         { id: 1, name: 'Shift 1', time: '05:00 PM - 09:00 PM', serial: '#2', booked: '1 Patient', estTime: '~ 05:15 PM' }
       ],
-      '17': [
+      '2': [
         { id: 1, name: 'Shift 1', time: '10:00 AM - 01:00 PM', serial: '#4', booked: '3 Patients', estTime: '~ 10:45 AM' },
         { id: 2, name: 'Shift 2', time: '06:00 PM - 10:00 PM', serial: '#7', booked: '6 Patients', estTime: '~ 07:00 PM' }
       ],
-      '18': [
+      '3': [
         { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#6', booked: '5 Patients', estTime: '~ 06:50 PM' }
       ],
-      '19': [
+      '4': [
         { id: 1, name: 'Shift 1', time: '06:00 PM - 10:00 PM', serial: '#1', booked: '0 Patients', estTime: '~ 06:00 PM' }
       ]
     };
@@ -3092,7 +6190,7 @@
     function renderDateShifts(num) {
       const container = document.getElementById('shiftsSelectionContainer');
       if (!container) return;
-      const shifts = dateShiftsData[num] || dateShiftsData['14'];
+      const shifts = dateShiftsData[num] || dateShiftsData['29'];
 
       // Ensure activeShiftId is valid for current shifts
       if (!shifts.some(s => s.id === activeShiftId)) {
@@ -3173,7 +6271,7 @@
 
     function confirmConsultationBooking() {
       const doc = activeBookingDoctor || doctorsDb[0];
-      const shifts = dateShiftsData[selectedConsultNum] || dateShiftsData['14'];
+      const shifts = dateShiftsData[selectedConsultNum] || dateShiftsData['29'];
       const currentShift = shifts.find(s => s.id === activeShiftId) || shifts[0];
 
       // Populate Confirmation Screen (media_1791977346242_bea94c17.png)
@@ -3237,8 +6335,840 @@
       if (pageConsult) {
         pageConsult.className = 'app-page page-book-consultation page-right';
       }
-      navigateToDiscover();
+      navigateToVisits();
       showToast('Appointment saved to your visits!');
+    }
+
+    // ============================================================
+    // VISITS CONTROLLER & ADVANCED QUEUE SIMULATION
+    // ============================================================
+    let activeVisitsTab = 'upcoming';
+    let currentSimulationState = 'pending'; // 'pending' | 'active' | 'turn'
+    let videoCallTimer = null;
+    let videoCallSeconds = 8;
+    let preVisitSubmitted = false;
+
+    function switchVisitsTab(tab) {
+      activeVisitsTab = tab;
+      const tabUpcoming = document.getElementById('tabVisitsUpcoming');
+      const tabCompleted = document.getElementById('tabVisitsCompleted');
+      const secUpcoming = document.getElementById('visitsUpcomingSection');
+      const secCompleted = document.getElementById('visitsCompletedSection');
+
+      if (tab === 'upcoming') {
+        tabUpcoming?.classList.add('active');
+        tabCompleted?.classList.remove('active');
+        if (secUpcoming) secUpcoming.style.display = 'flex';
+        if (secCompleted) secCompleted.style.display = 'none';
+      } else {
+        tabCompleted?.classList.add('active');
+        tabUpcoming?.classList.remove('active');
+        if (secUpcoming) secUpcoming.style.display = 'none';
+        if (secCompleted) secCompleted.style.display = 'flex';
+      }
+    }
+
+    let currentActiveVisitId = null;
+    let rxPreviewBackTarget = 'details';
+
+    const visitsDb = {
+      'mahim-upcoming': {
+        type: 'upcoming',
+        docName: 'Ast. Prof. Dr. Mahim Khan',
+        specialty: 'Cardiology',
+        docMeta: 'Cardiology',
+        dateText: 'Tuesday, Sep 29',
+        timeText: '06:00 PM',
+        mode: 'Video',
+        shift: 'Evening Shift',
+        serial: '#5',
+        startTime: '06:00 PM',
+        rxId: null,
+        intake: {
+          symptoms: 'Tension Headache & Neck Stiffness',
+          duration: '7 Days',
+          severity: 'Mild (3/10)',
+          quote: 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.'
+        },
+        docs: [
+          { name: 'Previous_Rx_Aug2026.pdf', size: '1.2 MB', type: 'Prescription', icon: 'ph-file-pdf' },
+          { name: 'Neck_XRay_Report.jpg', size: '3.4 MB', type: 'Investigation', icon: 'ph-image' }
+        ]
+      },
+      'mary-upcoming': {
+        type: 'upcoming',
+        docName: 'Dr. Mary Anne',
+        specialty: 'Internal Medicine',
+        docMeta: 'Internal Medicine',
+        dateText: 'Friday, Oct 2',
+        timeText: '10:00 AM',
+        mode: 'Video',
+        shift: 'Shift 2',
+        serial: '#3',
+        startTime: '10:00 AM',
+        rxId: null,
+        intake: {
+          symptoms: 'Seasonal Rhinitis & Sneezing',
+          duration: '4 Days',
+          severity: 'Mild',
+          quote: 'Persistent sneezing and morning nasal congestion.'
+        },
+        docs: [
+          { name: 'Previous_Prescription.pdf', size: '1.1 MB', type: 'Prescription', icon: 'ph-file-pdf' }
+        ]
+      },
+      'mahim-completed': {
+        type: 'completed',
+        docName: 'Ast. Prof. Dr. Mahim Khan',
+        specialty: 'Cardiology',
+        docMeta: 'Cardiology',
+        dateText: 'Jun 09, 2026',
+        timeText: '11:30 AM',
+        mode: 'Video',
+        shift: 'Shift 1',
+        serial: '#3',
+        duration: '14m 20s',
+        rxId: 'rx-mahim-01',
+        rxFileName: 'RX_Alif_Khan_Sep29.pdf',
+        notes: 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay well hydrated and follow up if symptoms persist beyond 5 days.',
+        callDuration: '25 Mins',
+        intake: {
+          symptoms: 'Tension Headache & Neck Stiffness',
+          duration: '7 Days',
+          severity: 'Mild (3/10)',
+          quote: 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.'
+        },
+        docs: [
+          { name: 'Previous_Rx_Aug2026.pdf', size: '1.2 MB', type: 'Prescription', icon: 'ph-file-pdf' },
+          { name: 'Neck_XRay_Report.jpg', size: '3.4 MB', type: 'Investigation', icon: 'ph-image' }
+        ]
+      },
+      'ayesha-completed': {
+        type: 'completed',
+        docName: 'Prof. Dr. Ayesha Rahman',
+        specialty: 'General Medicine',
+        docMeta: 'General Medicine',
+        dateText: 'Apr 18, 2026',
+        timeText: '07:15 PM',
+        mode: 'Video',
+        shift: 'Shift 2',
+        serial: '#8',
+        duration: '11m 45s',
+        rxId: 'rx-ayesha-02',
+        rxFileName: 'RX_Alif_Khan_Apr18.pdf',
+        notes: 'Routine checkup for seasonal allergic rhinitis. Nasal congestion and ocular pruritus managed with Second-generation antihistamine and saline nasal spray. Advised allergen avoidance and follow-up in 4 weeks.',
+        callDuration: '18 Mins',
+        intake: {
+          symptoms: 'Seasonal allergic rhinitis, sneezing',
+          duration: '2 Weeks',
+          severity: 'Mild',
+          quote: 'Sneezing and runny nose for 2 weeks outdoors.'
+        },
+        docs: [
+          { name: 'Allergy_Profile_Test.pdf', size: '2.1 MB', type: 'PDF', icon: 'ph-file-pdf' }
+        ]
+      }
+    };
+
+    function getUpcomingQueueDesc(state) {
+      if (state === 'pending') return "Scheduled";
+      if (state === 'active') return "Doctor consulting";
+      if (state === 'turn') return "Doctor ready";
+      return "Scheduled";
+    }
+
+    function openDeclineConfirmationPopup() {
+      const popup = document.getElementById('incomingDeclinePopup');
+      if (popup) popup.classList.add('show');
+    }
+
+    function dismissDeclinePopup() {
+      const popup = document.getElementById('incomingDeclinePopup');
+      if (popup) popup.classList.remove('show');
+    }
+
+    function handleDeclineReschedule() {
+      dismissDeclinePopup();
+      closeIncomingCallSimulation();
+      const doc = (typeof doctorsDb !== 'undefined' && doctorsDb.length > 0) ? (doctorsDb.find(d => d.id === 1) || doctorsDb[0]) : null;
+      if (doc) {
+        activeProfileDoctor = doc;
+        openBookConsultationPage();
+        showToast('Select a new date/time to reschedule');
+      }
+    }
+
+    function handleDeclineRebook() {
+      dismissDeclinePopup();
+      closeIncomingCallSimulation();
+      openDoctorsList();
+      showToast('Browse doctors to rebook');
+    }
+
+    function setDemoSimulationState(state) {
+      currentSimulationState = state;
+      const btnPending = document.getElementById('simBtnPending');
+      const btnActive = document.getElementById('simBtnActive');
+      const btnTurn = document.getElementById('simBtnTurn');
+
+      btnPending?.classList.remove('active');
+      btnActive?.classList.remove('active');
+      btnTurn?.classList.remove('active');
+
+      const badge = document.getElementById('upcomingStatusBadge');
+      const text = document.getElementById('upcomingStatusText');
+
+      if (state === 'pending') {
+        btnPending?.classList.add('active');
+        if (badge) badge.className = 'patient-card-status-plain scheduled';
+        if (text) text.textContent = getUpcomingQueueDesc('pending');
+        showToast('Status: Scheduled for shift');
+      } else if (state === 'active') {
+        btnActive?.classList.add('active');
+        if (badge) badge.className = 'patient-card-status-plain active';
+        if (text) text.textContent = getUpcomingQueueDesc('active');
+        showToast('Status: Doctor consulting in queue');
+      } else if (state === 'turn') {
+        btnTurn?.classList.add('active');
+        if (badge) badge.className = 'patient-card-status-plain turn';
+        if (text) text.textContent = getUpcomingQueueDesc('turn');
+        
+        setTimeout(() => {
+          openIncomingCallSimulation();
+        }, 400);
+      }
+
+      // Update bottom dock in details if open (No Answer CTA, keep Reschedule and Cancel & Rebook inactive buttons)
+      const dock = document.getElementById('visBottomDock');
+      if (dock && currentActiveVisitId && visitsDb[currentActiveVisitId]?.type === 'upcoming') {
+        dock.innerHTML = `
+          <button type="button" class="btn-dock-action-secondary" onclick="void(0)">
+            <i class="ph-bold ph-calendar"></i>
+            <span>Reschedule Visit</span>
+          </button>
+          <button type="button" class="btn-dock-action-secondary danger-tint" onclick="void(0)">
+            <i class="ph-bold ph-arrows-clockwise"></i>
+            <span>Cancel &amp; Rebook</span>
+          </button>
+        `;
+      }
+    }
+
+    function openIncomingCallSimulation() {
+      const overlay = document.getElementById('incomingCallOverlay');
+      if (overlay) overlay.classList.add('show');
+    }
+
+    function closeIncomingCallSimulation() {
+      const overlay = document.getElementById('incomingCallOverlay');
+      if (overlay) overlay.classList.remove('show');
+      dismissDeclinePopup();
+    }
+
+    function acceptSystemCall() {
+      closeIncomingCallSimulation();
+      const videoRoom = document.getElementById('videoRoomView');
+      if (videoRoom) videoRoom.classList.add('active');
+
+      videoCallSeconds = 1;
+      const timerText = document.getElementById('videoCallTimerText');
+      clearInterval(videoCallTimer);
+      videoCallTimer = setInterval(() => {
+        videoCallSeconds++;
+        const mins = Math.floor(videoCallSeconds / 60).toString().padStart(2, '0');
+        const secs = (videoCallSeconds % 60).toString().padStart(2, '0');
+        if (timerText) timerText.textContent = `${mins}:${secs}`;
+      }, 1000);
+
+      showToast('Connected with Dr. Mahim Khan');
+    }
+
+    function endVideoCall() {
+      clearInterval(videoCallTimer);
+      const videoRoom = document.getElementById('videoRoomView');
+      if (videoRoom) videoRoom.classList.remove('active');
+      showToast('Consultation ended. Doctor will issue prescription.');
+      setDemoSimulationState('active');
+    }
+
+    // ============================================================
+    // VISIT DETAILS PAGE CONTROLLER
+    // ============================================================
+    function openVisitDetailsPage(visitId) {
+      currentActiveVisitId = visitId;
+      renderVisitDetailsContent(visitId);
+
+      const pageVisits = document.getElementById('pageVisits');
+      const pageDetails = document.getElementById('pageVisitDetails');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (pageVisits) pageVisits.className = 'app-page page-visits page-left';
+      if (pageDetails) {
+        pageDetails.className = 'app-page page-visit-details active-page';
+        pageDetails.scrollTop = 0;
+      }
+    }
+
+    function returnFromVisitDetails() {
+      const pageVisits = document.getElementById('pageVisits');
+      const pageDetails = document.getElementById('pageVisitDetails');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (phoneScreen) phoneScreen.classList.remove('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.remove('nav-hidden');
+
+      if (pageDetails) pageDetails.className = 'app-page page-visit-details page-right';
+      if (pageVisits) {
+        pageVisits.className = 'app-page page-visits active-page';
+        pageVisits.scrollTop = 0;
+      }
+      updateBottomNavState('visits');
+    }
+
+    function renderVisitDetailsContent(visitId) {
+      const vis = visitsDb[visitId] || visitsDb['mahim-upcoming'];
+      const pageTitleEl = document.getElementById('visitDetailsPageTitle');
+      const plainContainer = document.getElementById('visDocPlainContainer');
+      const sectionsContainer = document.getElementById('visDynamicSections');
+      const bottomDock = document.getElementById('visBottomDock');
+
+      // Top Doctor Header (Strictly matching user requirements: No collapsed option!)
+      if (plainContainer) {
+        if (vis.type === 'completed') {
+          // Completed: Doctor name, specialty under name, on the right the date of visit (just the date)
+          plainContainer.innerHTML = `
+            <div class="details-doc-header-top">
+              <div class="details-doc-header-info">
+                <span class="details-patient-plain-name">${vis.docName}</span>
+                <span class="details-doc-specialty">${vis.specialty || 'Cardiology'}</span>
+              </div>
+              <span class="details-doc-visit-date">${vis.dateText}</span>
+            </div>
+          `;
+        } else {
+          // Upcoming: Doctor name, specialty under name, serial on right (NO divider line, NO date, time or video!)
+          plainContainer.innerHTML = `
+            <div class="details-doc-header-top">
+              <div class="details-doc-header-info">
+                <span class="details-patient-plain-name">${vis.docName}</span>
+                <span class="details-doc-specialty">${vis.specialty || 'Cardiology'}</span>
+              </div>
+              <span class="details-doc-serial-badge">${vis.serial || '#5'}</span>
+            </div>
+          `;
+        }
+      }
+
+      if (!sectionsContainer || !bottomDock) return;
+
+      const docsListHtml = (vis.docs || [
+        { name: 'Previous_Rx_Aug2026.pdf', size: '1.2 MB', type: 'Prescription', icon: 'ph-file-pdf' },
+        { name: 'Neck_XRay_Report.jpg', size: '3.4 MB', type: 'Investigation', icon: 'ph-image' }
+      ]).map(doc => `
+        <div class="details-file-row">
+          <div class="details-file-row-left">
+            <div class="details-file-row-icon">
+              <i class="ph-bold ${doc.icon || 'ph-file-pdf'}"></i>
+            </div>
+            <div class="details-file-row-meta">
+              <span class="details-file-row-name">${doc.name}</span>
+              <span class="details-file-row-sub">${doc.size} • ${doc.type}</span>
+            </div>
+          </div>
+          <button class="details-file-row-action" onclick="showToast('Viewing ${doc.name}')" aria-label="View Document">
+            <i class="ph ph-eye"></i>
+          </button>
+        </div>
+      `).join('');
+
+      if (vis.type === 'completed') {
+        if (pageTitleEl) pageTitleEl.textContent = 'Visit Details';
+
+        // 1. Issued Prescription Preview Tile (Sage #D6EAE6, eye icon on right, matching Image 4 & Doctor App)
+        const rxSectionHtml = `
+          <div class="details-clean-section">
+            <div class="details-clean-header">
+              <span class="details-clean-title">Issued Prescription</span>
+            </div>
+            <div class="details-rx-tile" onclick="viewPatientPrescription('${vis.rxId}', 'details')" role="button" tabindex="0">
+              <div class="details-rx-tile-left">
+                <div class="details-rx-tile-icon">
+                  <i class="ph-bold ph-file-pdf"></i>
+                </div>
+                <div class="details-rx-tile-meta">
+                  <span class="details-rx-tile-name">${vis.rxFileName || 'RX_Alif_Khan_Sep29.pdf'}</span>
+                  <span class="details-rx-tile-sub">Official Digital Rx</span>
+                </div>
+              </div>
+              <div class="details-rx-tile-action">
+                <i class="ph ph-eye"></i>
+              </div>
+            </div>
+          </div>
+        `;
+
+        // 2. Consultation Notes (Matching Image 4: AI Note tag, truncated note card, and Listen to Audio row)
+        const notesSectionHtml = `
+          <div class="details-clean-section no-border">
+            <div class="details-clean-header">
+              <span class="details-clean-title">Consultation Notes</span>
+              <span class="details-plain-tag tag-ai-note">AI Note</span>
+            </div>
+            <div class="details-notes-card is-collapsed" id="patientDetNotesCard" onclick="toggleDetailsNotesCollapse()" role="button" tabindex="0" title="Tap to expand notes">
+              <p class="details-notes-body" id="patientDetNotesBody">${vis.notes}</p>
+              <div class="details-notes-expand-hint">
+                <span id="patientDetNotesToggleLabel">Read full note</span>
+                <i class="ph ph-caret-down" id="patientDetNotesToggleIcon"></i>
+              </div>
+            </div>
+            <button type="button" class="btn-listen-audio-trigger" onclick="showToast('Playing consultation audio recording')">
+              <div class="btn-listen-audio-left">
+                <i class="ph-bold ph-waveform"></i>
+                <span>Listen to audio</span>
+              </div>
+              <span class="btn-listen-audio-duration">${vis.callDuration || '25 Mins'}</span>
+            </button>
+          </div>
+        `;
+
+        // 3. Collapsible "---- View More ----" Section (NO consultation info chips! Pre-visit details & attached docs only)
+        const collapsibleSectionHtml = `
+          <div class="details-intake-collapsible-wrap" id="patientDetCollapsibleWrap">
+            <div class="details-intake-divider-trigger" onclick="togglePatientDetCollapsible()" role="button" tabindex="0" aria-label="Toggle More Details">
+              <div class="details-intake-divider-line"></div>
+              <div class="details-intake-divider-content">
+                <span id="patientDetToggleText">View More</span>
+                <i class="ph ph-caret-down details-intake-divider-chevron" id="patientDetChevron"></i>
+              </div>
+              <div class="details-intake-divider-line"></div>
+            </div>
+            <div class="details-intake-collapsible-body" id="patientDetCollapsibleBody" style="display: none;">
+              
+              <!-- Pre-Visit Details Card (Warm soft neutral card, matching Image 1 & Doctor App) -->
+              <div class="details-clean-section">
+                <div class="details-clean-header">
+                  <span class="details-clean-title">Pre-visit Details</span>
+                  <span class="details-plain-tag tag-intake">Patient Intake</span>
+                </div>
+                <div class="details-previsit-card">
+                  <span class="details-symptom-title">${vis.intake ? vis.intake.symptoms : 'Tension Headache & Neck Stiffness'}</span>
+                  <div class="details-symptom-meta-row">
+                    <span>Duration: ${vis.intake ? vis.intake.duration : '7 Days'}</span>
+                    <span>•</span>
+                    <span>Severity: ${vis.intake ? vis.intake.severity : 'Mild (3/10)'}</span>
+                  </div>
+                  <div class="details-previsit-quote">“${vis.intake && vis.intake.quote ? vis.intake.quote : 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.'}”</div>
+                </div>
+              </div>
+
+              <!-- Attached Patient Documents -->
+              <div class="details-clean-section no-border">
+                <div class="details-clean-header">
+                  <span class="details-clean-title">Attached Medical Documents</span>
+                  <span class="details-plain-tag">${vis.docs ? vis.docs.length : 2} Files</span>
+                </div>
+                <div class="details-files-list">
+                  ${docsListHtml}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+
+        sectionsContainer.innerHTML = rxSectionHtml + notesSectionHtml + collapsibleSectionHtml;
+
+        bottomDock.innerHTML = `
+          <button type="button" class="btn-details-dock-main" onclick="viewPatientPrescription('${vis.rxId}', 'details')">
+            <i class="ph ph-file-text"></i>
+            <span>View Digital Prescription</span>
+          </button>
+        `;
+
+      } else {
+        // UPCOMING CONSULTATION VIEW (Matching Image 1: Pre-visit details card with edit button & documents)
+        if (pageTitleEl) pageTitleEl.textContent = 'Appointment Details';
+
+        let preVisitHtml = '';
+        let docsSectionHtml = '';
+
+        if (preVisitSubmitted) {
+          // Pre-visit details section after done: Pre-visit title on left, Edit button on right (NO "Patient Intake" tag)
+          preVisitHtml = `
+            <div class="details-clean-section">
+              <div class="details-clean-header">
+                <span class="details-clean-title">Pre-visit Details</span>
+                <button type="button" class="btn-clean-text-action" onclick="openPreVisitModal()">Edit</button>
+              </div>
+              <div class="details-previsit-card">
+                <span class="details-symptom-title">${vis.intake ? vis.intake.symptoms : 'Tension Headache & Neck Stiffness'}</span>
+                <div class="details-symptom-meta-row">
+                  <span>Duration: ${vis.intake ? vis.intake.duration : '7 Days'}</span>
+                  <span>•</span>
+                  <span>Severity: ${vis.intake ? vis.intake.severity : 'Mild (3/10)'}</span>
+                </div>
+                <div class="details-previsit-quote">“${vis.intake && vis.intake.quote ? vis.intake.quote : 'I have a moderate headache that has been present for about 1 week, located at the back of my head. It feels like tight pressure when working on computer.'}”</div>
+              </div>
+            </div>
+          `;
+
+          // Patient Documents section (Matching Image 1: 2 Files with icons, metadata, and preview eye icon)
+          docsSectionHtml = `
+            <div class="details-clean-section no-border">
+              <div class="details-clean-header">
+                <span class="details-clean-title">Patient Documents</span>
+                <span class="details-plain-tag">${vis.docs ? vis.docs.length : 2} Files</span>
+              </div>
+              <div class="details-files-list">
+                ${docsListHtml}
+              </div>
+            </div>
+          `;
+        } else {
+          // Empty State: Clean minimal action lines
+          preVisitHtml = `
+            <div class="details-clean-section">
+              <div class="details-clean-header">
+                <span class="details-clean-title">Pre-visit Details</span>
+              </div>
+              <button type="button" class="btn-clean-action-line" onclick="openPreVisitModal()">
+                <div class="clean-action-left">
+                  <i class="ph-bold ph-plus-circle"></i>
+                  <span>Add pre-visit details</span>
+                </div>
+                <i class="ph ph-caret-right clean-action-arrow"></i>
+              </button>
+            </div>
+          `;
+
+          docsSectionHtml = `
+            <div class="details-clean-section no-border">
+              <div class="details-clean-header">
+                <span class="details-clean-title">Patient Documents</span>
+              </div>
+              <button type="button" class="btn-clean-action-line doc-action" onclick="openPreVisitModal()">
+                <div class="clean-action-left">
+                  <i class="ph-bold ph-upload-simple"></i>
+                  <span>Upload medical documents</span>
+                </div>
+                <i class="ph ph-caret-right clean-action-arrow"></i>
+              </button>
+            </div>
+          `;
+        }
+
+        sectionsContainer.innerHTML = preVisitHtml + docsSectionHtml;
+
+        bottomDock.innerHTML = `
+          <button type="button" class="btn-dock-action-secondary" onclick="void(0)">
+            <i class="ph-bold ph-calendar"></i>
+            <span>Reschedule Visit</span>
+          </button>
+          <button type="button" class="btn-dock-action-secondary danger-tint" onclick="void(0)">
+            <i class="ph-bold ph-arrows-clockwise"></i>
+            <span>Cancel &amp; Rebook</span>
+          </button>
+        `;
+      }
+    }
+
+    function toggleDetailsNotesCollapse() {
+      const card = document.getElementById('patientDetNotesCard');
+      const label = document.getElementById('patientDetNotesToggleLabel');
+      if (!card) return;
+      card.classList.toggle('is-collapsed');
+      if (label) {
+        label.textContent = card.classList.contains('is-collapsed') ? 'Read full note' : 'Show less';
+      }
+    }
+
+    function togglePatientDetCollapsible() {
+      const wrap = document.getElementById('patientDetCollapsibleWrap');
+      const body = document.getElementById('patientDetCollapsibleBody');
+      const text = document.getElementById('patientDetToggleText');
+      if (!wrap || !body) return;
+      const isOpen = wrap.classList.toggle('is-open');
+      body.style.display = isOpen ? 'flex' : 'none';
+      if (text) text.textContent = isOpen ? 'View Less' : 'View More';
+    }
+
+    // Pre-visit Intake controller
+    function openPreVisitModal() {
+      const backdrop = document.getElementById('preVisitModalBackdrop');
+      const sheet = document.getElementById('preVisitIntakeSheet');
+      if (backdrop) backdrop.classList.add('show');
+      if (sheet) sheet.classList.add('show');
+    }
+
+    function closePreVisitModal() {
+      const backdrop = document.getElementById('preVisitModalBackdrop');
+      const sheet = document.getElementById('preVisitIntakeSheet');
+      if (backdrop) backdrop.classList.remove('show');
+      if (sheet) sheet.classList.remove('show');
+    }
+
+    function selectDurationChip(el, val) {
+      document.querySelectorAll('#preVisitIntakeSheet .duration-chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function removeIntakeFile(btn) {
+      const item = btn.closest('.sheet-file-item');
+      if (item) item.remove();
+      showToast('File removed');
+    }
+
+    function addMockIntakeFile() {
+      const list = document.getElementById('intakeFilesList');
+      if (!list) return;
+      const div = document.createElement('div');
+      div.className = 'sheet-file-item';
+      div.innerHTML = `
+        <div class="doc-file-left">
+          <i class="ph-bold ph-file-text doc-file-icon"></i>
+          <span class="doc-file-name">Fasting_Blood_Glucose.pdf</span>
+        </div>
+        <button type="button" style="background: none; border: none; color: #94A3B8; cursor: pointer;" onclick="removeIntakeFile(this)">
+          <i class="ph ph-x"></i>
+        </button>
+      `;
+      list.appendChild(div);
+      showToast('New lab document attached');
+    }
+
+    function savePreVisitIntake() {
+      preVisitSubmitted = true;
+      const btn = document.getElementById('btnPreVisitAction');
+      if (btn) {
+        btn.className = 'patient-card-previsit-done';
+        btn.onclick = null;
+        btn.removeAttribute('role');
+        btn.removeAttribute('tabindex');
+        btn.innerHTML = `
+          <i class="ph-bold ph-check" id="preVisitActionIcon"></i>
+          <span id="preVisitActionText">Pre-visit details submitted</span>
+        `;
+      }
+
+      closePreVisitModal();
+      showToast('Pre-visit intake submitted to doctor!');
+
+      if (currentActiveVisitId) {
+        renderVisitDetailsContent(currentActiveVisitId);
+      }
+    }
+
+    // ============================================================
+    // RESCHEDULE & CANCEL/REBOOK CONTROLLERS
+    // ============================================================
+    let selectedRescheduleDate = 'Wed, Sep 30';
+    let selectedRescheduleTime = '10:00 AM';
+
+    function openRescheduleModal() {
+      const backdrop = document.getElementById('rescheduleModalBackdrop');
+      const sheet = document.getElementById('rescheduleSheet');
+      if (backdrop) backdrop.classList.add('show');
+      if (sheet) sheet.classList.add('show');
+    }
+
+    function closeRescheduleModal() {
+      const backdrop = document.getElementById('rescheduleModalBackdrop');
+      const sheet = document.getElementById('rescheduleSheet');
+      if (backdrop) backdrop.classList.remove('show');
+      if (sheet) sheet.classList.remove('show');
+    }
+
+    function selectRescheduleChip(el, type) {
+      const containerId = type === 'date' ? 'rescheduleDateStrip' : 'rescheduleTimeStrip';
+      document.querySelectorAll(`#${containerId} .duration-chip`).forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      if (type === 'date') selectedRescheduleDate = el.textContent.trim();
+      else selectedRescheduleTime = el.textContent.trim();
+    }
+
+    function confirmRescheduleAppointment() {
+      closeRescheduleModal();
+      
+      if (visitsDb['mahim-upcoming']) {
+        visitsDb['mahim-upcoming'].dateText = selectedRescheduleDate;
+        visitsDb['mahim-upcoming'].timeText = selectedRescheduleTime;
+        visitsDb['mahim-upcoming'].startTime = selectedRescheduleTime;
+      }
+      
+      const timeVal = document.getElementById('upcomingStartTimeVal');
+      if (timeVal) timeVal.textContent = selectedRescheduleTime;
+      
+      const visDocDate = document.getElementById('visDocDate');
+      if (visDocDate) visDocDate.textContent = selectedRescheduleDate;
+      const visDocTime = document.getElementById('visDocTime');
+      if (visDocTime) visDocTime.textContent = selectedRescheduleTime;
+
+      showToast(`Appointment rescheduled to ${selectedRescheduleDate} • ${selectedRescheduleTime}!`);
+    }
+
+    function openCancelAndRebookModal() {
+      const backdrop = document.getElementById('cancelRebookModalBackdrop');
+      const modalSheet = document.getElementById('cancelRebookSheet');
+      if (backdrop) backdrop.classList.add('show');
+      if (modalSheet) modalSheet.classList.add('show');
+    }
+
+    function closeCancelAndRebookModal() {
+      const backdrop = document.getElementById('cancelRebookModalBackdrop');
+      const modalSheet = document.getElementById('cancelRebookSheet');
+      if (backdrop) backdrop.classList.remove('show');
+      if (modalSheet) modalSheet.classList.remove('show');
+    }
+
+    function confirmCancelAndRebook() {
+      closeCancelAndRebookModal();
+      returnFromVisitDetails();
+
+      // Hide the upcoming card to simulate cancellation
+      const card = document.getElementById('upcomingCard');
+      if (card) {
+        const group = card.closest('.visits-date-group');
+        if (group) group.style.display = 'none';
+      }
+
+      const countBadge = document.getElementById('upcomingCountBadge');
+      if (countBadge) countBadge.textContent = '1';
+
+      showToast('৳1,200 credited to Onu Balance! Choose a new doctor.');
+
+      setTimeout(() => {
+        openDoctorsList();
+      }, 700);
+    }
+
+    // Prescription Preview controller
+    const prescriptionsDb = {
+      'rx-mahim-01': {
+        docName: 'Ast. Prof. Dr. Mahim Khan',
+        docQual: 'MBBS, FCPS (Cardiology), MD',
+        docHospital: 'BSMMU (PG Hospital) • Department of Cardiology',
+        docBmdc: 'BMDC Reg. No: A-74829',
+        date: '09 Jun 2026',
+        complaints: ['Throat pain (3d)', 'Difficulty swallowing', 'Mild frontal headache'],
+        vitals: { bp: '120/80', pulse: '74 bpm', temp: '99.1°F' },
+        tests: ['CBC with ESR', 'Serum Creatinine'],
+        meds: [
+          { name: '1. Tab. Napa Extra (500mg + 65mg)', dose: '1 + 0 + 1 • 5 Days', inst: 'Take after meals with water' },
+          { name: '2. Tab. Fexo (120mg)', dose: '0 + 0 + 1 • 7 Days', inst: 'Take at bedtime' },
+          { name: '3. Warm Saline Gargle', dose: 'Thrice daily • 5 Days', inst: '1/2 tsp salt in 1 cup warm water' }
+        ],
+        advice: 'Stay hydrated, drink plenty of warm liquids, maintain vocal rest, avoid cold drinks and exposure to dust.',
+        followUp: 'After 7 days if symptoms persist',
+        sigDoctor: 'Dr. Mahim Khan'
+      },
+      'rx-ayesha-02': {
+        docName: 'Prof. Dr. Ayesha Rahman',
+        docQual: 'MBBS, BCS (Health), FCPS - General Medicine',
+        docHospital: 'Dhaka Medical College Hospital',
+        docBmdc: 'BMDC Reg. No: A-68412',
+        date: '18 Apr 2026',
+        complaints: ['Allergic rhinitis', 'Nasal pruritus & sneezing (2wk)', 'Watery eyes'],
+        vitals: { bp: '115/75', pulse: '70 bpm', temp: '98.6°F' },
+        tests: ['Total IgE', 'Absolute Eosinophil Count (AEC)'],
+        meds: [
+          { name: '1. Tab. Bilastine (20mg)', dose: '0 + 0 + 1 • 14 Days', inst: 'Take 1 hour before bedtime' },
+          { name: '2. Fluticasone Nasal Spray', dose: '1 spray each nostril twice daily • 2 Weeks', inst: 'Blow nose gently before use' }
+        ],
+        advice: 'Avoid dust mites, pet dander, and sudden thermal changes. Wear mask outdoors.',
+        followUp: 'After 4 weeks for seasonal review',
+        sigDoctor: 'Dr. Ayesha Rahman'
+      }
+    };
+
+    function viewPatientPrescription(rxId, fromTarget = 'details') {
+      rxPreviewBackTarget = fromTarget;
+      const rx = prescriptionsDb[rxId] || prescriptionsDb['rx-mahim-01'];
+
+      document.getElementById('rxDocName').textContent = rx.docName;
+      document.getElementById('rxDocQual').textContent = rx.docQual;
+      document.getElementById('rxDocHospital').textContent = rx.docHospital;
+      document.getElementById('rxDocBmdc').textContent = rx.docBmdc;
+      document.getElementById('rxDateVal').textContent = rx.date;
+      document.getElementById('rxSigDoctor').textContent = rx.sigDoctor;
+      document.getElementById('rxAdviceText').textContent = rx.advice;
+
+      // Complaints
+      const compList = document.getElementById('rxComplaintsList');
+      if (compList) {
+        compList.innerHTML = rx.complaints.map(c => `<li class="rx-bullet-item">${c}</li>`).join('');
+      }
+
+      // Tests
+      const testsList = document.getElementById('rxTestsList');
+      if (testsList) {
+        testsList.innerHTML = rx.tests.map(t => `<li class="rx-bullet-item">${t}</li>`).join('');
+      }
+
+      // Meds
+      const medsStack = document.getElementById('rxMedicinesStack');
+      if (medsStack) {
+        medsStack.innerHTML = rx.meds.map(m => `
+          <div class="rx-med-row">
+            <span class="rx-med-top">${m.name}</span>
+            <span class="rx-med-dosage">${m.dose}</span>
+            <span class="rx-med-instruction">${m.inst}</span>
+          </div>
+        `).join('');
+      }
+
+      const pageVisits = document.getElementById('pageVisits');
+      const pageDetails = document.getElementById('pageVisitDetails');
+      const pageRx = document.getElementById('pagePatientRxPreview');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (phoneScreen) phoneScreen.classList.add('hide-bottom-nav');
+      if (bottomNav) bottomNav.classList.add('nav-hidden');
+
+      if (fromTarget === 'details' && pageDetails) {
+        pageDetails.className = 'app-page page-visit-details page-left';
+      } else if (pageVisits) {
+        pageVisits.className = 'app-page page-visits page-left';
+      }
+
+      if (pageRx) {
+        pageRx.className = 'app-page page-patient-rx active-page';
+        pageRx.scrollTop = 0;
+      }
+    }
+
+    function returnFromPrescriptionPreview() {
+      const pageVisits = document.getElementById('pageVisits');
+      const pageDetails = document.getElementById('pageVisitDetails');
+      const pageRx = document.getElementById('pagePatientRxPreview');
+      const bottomNav = document.getElementById('patientBottomNav');
+      const phoneScreen = document.querySelector('.phone-screen');
+
+      if (pageRx) pageRx.className = 'app-page page-patient-rx page-right';
+
+      if (rxPreviewBackTarget === 'details' && pageDetails && currentActiveVisitId) {
+        pageDetails.className = 'app-page page-visit-details active-page';
+        pageDetails.scrollTop = 0;
+      } else {
+        if (phoneScreen) phoneScreen.classList.remove('hide-bottom-nav');
+        if (bottomNav) bottomNav.classList.remove('nav-hidden');
+        if (pageVisits) {
+          pageVisits.className = 'app-page page-visits active-page';
+          pageVisits.scrollTop = 0;
+        }
+        updateBottomNavState('visits');
+      }
+    }
+
+    function syncUpcomingWithBookedDoctor(doc) {
+      if (!doc) return;
+      const nameEl = document.getElementById('upcomingDocName');
+      if (nameEl) nameEl.textContent = doc.name;
     }
 
     // ============================================================

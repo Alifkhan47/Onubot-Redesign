@@ -15,6 +15,12 @@ The repository contains the complete interactive, high-fidelity prototypes for b
 
 Both apps feature a top ecosystem switcher bar enabling seamless switching between doctor and patient views.
 
+## Prototype Data Convention
+
+- **Fixed demo date:** Tuesday, September 29, 2026. `Today`, `Yesterday`, and future appointment labels use this shared reference date.
+- The apps are visual prototypes. Booking, queue, schedule, call, payment, and AI interactions use in-memory demo state; they do not connect to a backend or persist after refresh.
+- Historical prescription and clinical examples retain their earlier dates.
+
 ---
 
 ## 🚀 Patient App Highlights ([`patient-app.html`](./patient-app.html))
@@ -63,7 +69,7 @@ Both apps feature a top ecosystem switcher bar enabling seamless switching betwe
   - Specialist referral selector and follow-up chips.
   - Official PDF-like digital prescription preview with doctor credentials.
 - **📅 Calendar Strip & Shift Management**:
-  - 7-day horizontal calendar strip.
+  - Schedule date carousel spanning September 15–October 7, with Tuesday, September 29 marked as Today.
   - Shift editor modal with patient capacity controls and repeat settings.
   - Destructive action protection with confirmation bottom sheet modals.
 - **📋 All Appointments & Shift History**:
@@ -96,9 +102,9 @@ For AI pair programming context and architecture rules, see [`AI_INSTRUCTIONS.md
 ## 💻 How to Run
 
 1. Clone or download the repository.
-2. Open [`doctors-app.html`](./doctors-app.html) or [`patient-app.html`](./patient-app.html) directly in any modern web browser.
+2. Open [`doctors-app.html`](./doctors-app.html) or [`patient-app.html`](./patient-app.html) directly in any modern web browser. The fixed demo date is Tuesday, September 29, 2026.
 3. Use the top switcher button on either app to toggle between Doctor and Patient experiences.
-4. No build step, package manager, or server dependencies required!
+4. No build step, package manager, or server is required. Google Fonts and remote sample photography may need an internet connection.
 
 ---
 

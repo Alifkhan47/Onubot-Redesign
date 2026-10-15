@@ -12474,7 +12474,7 @@
               </div>
 
               <div class="date-carousel" id="scheduleDateCarousel">
-                <!-- Dynamically populated starting from Today (Sept 15) to Sept 30 & future dates -->
+                <!-- Dynamically populated from Sept 15 through Oct 7; Today is Tuesday, Sept 29, 2026 -->
               </div>
             </section>
 
@@ -12482,7 +12482,7 @@
             <section class="schedule-section shifts-manage-section">
               <!-- Selected Date Header -->
               <div class="schedule-day-header">
-                <h2 class="section-title" id="selectedDateTitle">Sunday, Sept 15</h2>
+                <h2 class="section-title" id="selectedDateTitle">Tuesday, Sept 29</h2>
                 <span class="today-badge-chip" id="todayChipBadge">Today</span>
               </div>
 
@@ -13978,7 +13978,7 @@
             <div style="display: flex; align-items: center; justify-content: space-between; padding: 2px 4px;">
               <div style="display: flex; align-items: center; gap: 8px; font-family: var(--font-heading); font-size: 14px; font-weight: 600; color: #0F172A;">
                 <i class="ph ph-calendar-blank" style="color: #64748B; font-size: 18px;"></i>
-                <span id="clearConfirmedDatesRange">Sept 15 (1 Day)</span>
+                <span id="clearConfirmedDatesRange">Sept 29 (1 Day)</span>
               </div>
               <span style="font-size: 12.5px; font-weight: 700; color: #DC2626; letter-spacing: 0.01em;">Cleared</span>
             </div>
@@ -14528,7 +14528,7 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title" id="cancelShiftModalTitle">Delete Shift 1?</h2>
-            <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Sunday, Sept 15 • 10:00 AM – 12:00 PM</p>
+            <p class="sheet-minimal-subtitle" id="cancelShiftModalSubtitle">Tuesday, Sept 29 • 10:00 AM – 12:00 PM</p>
           </div>
 
           <!-- Plain Text Impact Note (No box, plain text with color & icon) -->
@@ -14575,7 +14575,7 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Apply Changes</h2>
-            <p class="sheet-minimal-subtitle" id="editRecurringShiftSubtitle">Friday, Sept 24 • Shift 1 • Repeats weekly</p>
+            <p class="sheet-minimal-subtitle" id="editRecurringShiftSubtitle">Thursday, Sept 24 • Shift 1 • Repeats weekly</p>
           </div>
 
           <div class="recurring-scope-container">
@@ -16067,7 +16067,7 @@
       {
         id: 'hist7',
         dateKey: 'sept27',
-        dateLabel: 'Sat, Sept 27',
+        dateLabel: 'Sun, Sept 27',
         shiftId: 1,
         shiftName: 'Shift 1 • 9:00–11:00 AM',
         shiftType: 'Video Consultation',
@@ -16093,7 +16093,7 @@
       {
         id: 'hist8',
         dateKey: 'sept27',
-        dateLabel: 'Sat, Sept 27',
+        dateLabel: 'Sun, Sept 27',
         shiftId: 1,
         shiftName: 'Shift 1 • 9:00–11:00 AM',
         shiftType: 'Video Consultation',
@@ -16697,7 +16697,7 @@
         visits: [
           {
             id: 'v-601',
-            date: 'Sat, Sep 27, 2026',
+            date: 'Sun, Sep 27, 2026',
             time: '9:00 AM',
             type: 'Video Consultation',
             icon: 'ph-video-camera',
@@ -16737,7 +16737,7 @@
         visits: [
           {
             id: 'v-701',
-            date: 'Sat, Sep 27, 2026',
+            date: 'Sun, Sep 27, 2026',
             time: '9:30 AM',
             type: 'Video Consultation',
             icon: 'ph-video-camera',
@@ -16784,7 +16784,7 @@
         visits: [
           {
             id: 'v-801',
-            date: 'Thu, Sep 25, 2026',
+            date: 'Fri, Sep 25, 2026',
             time: '4:00 PM',
             type: 'In-Person Consultation',
             icon: 'ph-users',
@@ -23029,27 +23029,23 @@
     }
 
     // Full Month Schedule Data Model & State
-    let currentSelectedDate = 'Sunday, Sept 15';
+    let currentSelectedDate = 'Tuesday, Sept 29';
     let currentCalendarMonth = 8; // 8 = September, 9 = October
     let currentCalendarYear = 2026;
 
     const dateKeyToFullDate = {
-      'Sun 15': 'Sunday, Sept 15',
-      'Mon 16': 'Monday, Sept 16',
-      'Tue 17': 'Tuesday, Sept 17',
-      'Wed 18': 'Wednesday, Sept 18',
-      'Thu 19': 'Thursday, Sept 19',
-      'Fri 20': 'Friday, Sept 20',
-      'Sat 21': 'Saturday, Sept 21',
-      'Sun 22': 'Sunday, Sept 22',
-      'Mon 23': 'Monday, Sept 23',
-      'Tue 24': 'Tuesday, Sept 24',
-      'Wed 25': 'Wednesday, Sept 25',
-      'Thu 26': 'Thursday, Sept 26',
-      'Fri 27': 'Friday, Sept 27',
-      'Sat 28': 'Saturday, Sept 28',
-      'Sun 29': 'Sunday, Sept 29',
-      'Mon 30': 'Monday, Sept 30',
+      'Tue 15': 'Tuesday, Sept 15',
+      'Wed 16': 'Wednesday, Sept 16',
+      'Thu 17': 'Thursday, Sept 17',
+      'Fri 18': 'Friday, Sept 18',
+      'Sat 19': 'Saturday, Sept 19',
+      'Sun 20': 'Sunday, Sept 20',
+      'Mon 21': 'Monday, Sept 21',
+      'Tue 22': 'Tuesday, Sept 22',
+      'Wed 23': 'Wednesday, Sept 23',
+      'Thu 24': 'Thursday, Sept 24',
+      'Fri 25': 'Friday, Sept 25',
+      'Sat 26': 'Saturday, Sept 26',
       'Sun 27': 'Sunday, Sept 27',
       'Mon 28': 'Monday, Sept 28',
       'Tue 29': 'Tuesday, Sept 29',
@@ -23062,52 +23058,49 @@
     };
 
     let dateSchedules = {
-      'Wednesday, Sept 15': [
+      'Tuesday, Sept 15': [
         { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 4, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Sunday, Sept 15': [
-        { id: 'shiftCard1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '11:00 AM', booked: 4, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
-      ],
-      'Thursday, Sept 16': [
+      'Wednesday, Sept 16': [
         { id: 'shiftCard16_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] },
         { id: 'shiftCard16_2', name: 'Shift 2', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '04:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Friday, Sept 17': [
+      'Thursday, Sept 17': [
         { id: 'shiftCard17_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Saturday, Sept 18': [
+      'Friday, Sept 18': [
         { id: 'shiftCard18_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Sunday, Sept 19': [
+      'Saturday, Sept 19': [
         { id: 'shiftCard19_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Monday, Sept 20': [
+      'Sunday, Sept 20': [
         { id: 'shiftCard20_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Tuesday, Sept 21': [],
-      'Wednesday, Sept 22': [
+      'Monday, Sept 21': [],
+      'Tuesday, Sept 22': [
         { id: 'shiftCard22_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false, isRecurring: true, seriesId: 'series_morning_video', repeatDays: [3, 4] }
       ],
-      'Thursday, Sept 23': [],
-      'Friday, Sept 24': [
+      'Wednesday, Sept 23': [],
+      'Thursday, Sept 24': [
         { id: 'shiftCard24_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Saturday, Sept 25': [
+      'Friday, Sept 25': [
         { id: 'shiftCard25_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '02:00 PM', endTime: '06:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Sunday, Sept 26': [
+      'Saturday, Sept 26': [
         { id: 'shiftCard26_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Monday, Sept 27': [
+      'Sunday, Sept 27': [
         { id: 'shiftCard27_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '03:00 PM', endTime: '08:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Tuesday, Sept 28': [
+      'Monday, Sept 28': [
         { id: 'shiftCard28_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Wednesday, Sept 29': [
+      'Tuesday, Sept 29': [
         { id: 'shiftCard29_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '10:00 AM', endTime: '02:00 PM', booked: 0, max: 15, locked: false }
       ],
-      'Thursday, Sept 30': [
+      'Wednesday, Sept 30': [
         { id: 'shiftCard30_1', name: 'Shift 1', type: 'Video Consultation', typeIcon: 'ph-video-camera', startTime: '09:00 AM', endTime: '01:00 PM', booked: 0, max: 15, locked: false }
       ],
       'Thursday, Oct 1': [
@@ -23145,7 +23138,7 @@
     }
 
     function findDateScheduleKey(dateText) {
-      if (!dateText) return 'Wednesday, Sept 15';
+      if (!dateText) return 'Tuesday, Sept 29';
       if (dateSchedules[dateText]) return dateText;
       const dayMatch = dateText.match(/(Sept|Oct)\s+(\d+)/i);
       if (dayMatch) {
@@ -23175,16 +23168,16 @@
       const carousel = document.getElementById('scheduleDateCarousel');
       if (!carousel) return;
 
-      const dayAbbrs = ['WED', 'THU', 'FRI', 'SAT', 'SUN', 'MON', 'TUE'];
-      const fullDayNames = ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+      const dayAbbrs = ['TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN', 'MON'];
+      const fullDayNames = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
 
       let html = '';
       for (let day = 15; day <= 30; day++) {
         const dayOfWeekIdx = (day - 15) % 7;
         const dayAbbr = dayAbbrs[dayOfWeekIdx];
         const fullDate = `${fullDayNames[dayOfWeekIdx]}, Sept ${day}`;
-        const isToday = (day === 15);
-        const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
+        const isToday = (day === 29);
+        const isActive = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`));
         const todayClass = isToday ? 'is-today-pill' : '';
         const shifts = getShiftsForDay(8, day);
         const hasShifts = shifts && shifts.length > 0;
@@ -23214,11 +23207,12 @@
         const hasShifts = shifts && shifts.length > 0;
         const dotHtml = hasShifts ? `<span class="cal-dot"></span>` : '';
 
+        const isToday = false;
         html += `
-          <div class="date-pill ${isActive ? 'active' : ''}" 
+          <div class="date-pill ${isToday ? 'is-today-pill' : ''} ${isActive ? 'active' : ''}"
                data-date="${fullDate}" 
                id="datePill_Oct_${day}"
-               onclick="selectDate(this, '${fullDate}', false)">
+               onclick="selectDate(this, '${fullDate}', ${isToday})">
             <span class="date-day-name">${dayAbbr}</span>
             <span class="date-day-num">${day}</span>
             <div class="date-pill-dots">${dotHtml}</div>
@@ -23386,18 +23380,17 @@
       let html = '';
 
       if (currentCalendarMonth === 8) {
-        // September 2026:
-        // Day 15 is under WED -> 3 blank cells (SUN, MON, TUE)
-        for (let i = 0; i < 3; i++) {
+        // September 2026: Day 15 is Tuesday, so use two leading Sunday/Monday cells.
+        for (let i = 0; i < 2; i++) {
           html += `<div class="month-cal-cell empty"></div>`;
         }
 
-        const fullDayNames = ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday'];
+        const fullDayNames = ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday'];
         for (let day = 15; day <= 30; day++) {
           const dayOfWeekIdx = (day - 15) % 7;
           const fullDate = `${fullDayNames[dayOfWeekIdx]}, Sept ${day}`;
-          const isToday = (day === 15);
-          const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`) || (day === 15 && currentSelectedDate.includes('15')));
+          const isToday = (day === 29);
+          const isSelected = (fullDate === currentSelectedDate || currentSelectedDate.includes(`Sept ${day}`));
           const shifts = getShiftsForDay(8, day);
           const hasShifts = shifts && shifts.length > 0;
           const todayClass = isToday ? 'is-today-cell' : '';
@@ -24519,10 +24512,10 @@
       }
 
       // Check if this saved shift applies to Today
-      const isToday = currentSelectedDate.includes('Sept 15') || currentSelectedDate.includes('Sept 29') || currentSelectedDate.includes('Today');
+      const isToday = currentSelectedDate.includes('Sept 29') || currentSelectedDate.includes('Today');
       if (isToday) {
         for (const k of Object.keys(dateSchedules)) {
-          if ((k.includes('Sept 15') || k.includes('Sept 29')) && k !== currentSelectedDate) {
+          if (k.includes('Sept 29') && k !== currentSelectedDate) {
             dateSchedules[k] = [...dateSchedules[currentSelectedDate]];
           }
         }
@@ -24541,8 +24534,8 @@
     }
 
     function renderDeskHeroStateForToday() {
-      const todayShifts = getShiftsForDay(8, 15);
-      const altTodayShifts = (typeof dateSchedules !== 'undefined' && (dateSchedules['Sunday, Sept 15'] || dateSchedules['Wednesday, Sept 15'] || dateSchedules['Tuesday, Sept 29'] || dateSchedules[currentSelectedDate])) || [];
+      const todayShifts = getShiftsForDay(8, 29);
+      const altTodayShifts = (typeof dateSchedules !== 'undefined' && (dateSchedules['Tuesday, Sept 29'] || dateSchedules[currentSelectedDate])) || [];
       const activeShifts = (todayShifts && todayShifts.length > 0) ? todayShifts : altTodayShifts;
 
       if (!activeShifts || activeShifts.length === 0) {
@@ -25126,12 +25119,12 @@
       let html = '';
 
       if (clearScheduleViewMode === 'week') {
-        // Week View: 7 consecutive days starting from Sept 15 or Oct 1
+        // Week View: a fixed sample week from Sept 15 or Oct 1.
         const startDay = (clearScheduleCurrentMonth === 8) ? 15 : 1;
         const endDay = startDay + 6;
 
         for (let day = startDay; day <= endDay; day++) {
-          const isToday = (clearScheduleCurrentMonth === 8 && day === 15);
+          const isToday = (clearScheduleCurrentMonth === 8 && day === 29);
           const dayLabel = isToday ? 'Today' : getWeekdayName(day, clearScheduleCurrentMonth);
           const isSelected = selectedClearDays.includes(day);
           const shifts = getShiftsForDay(clearScheduleCurrentMonth, day);
@@ -25152,15 +25145,15 @@
           `;
         }
       } else {
-        // Month View: Full month grid starting from Today (omit past dates)
+        // Month View: Show the fixed sample date range for the selected month.
         if (clearScheduleCurrentMonth === 8) {
-          // Sept 2026: Today is Sept 15 (Wednesday) -> 3 empty cells (Sun, Mon, Tue)
-          for (let i = 0; i < 3; i++) {
+          // September 2026: Day 15 is Tuesday, so use two leading Sunday/Monday cells.
+          for (let i = 0; i < 2; i++) {
             html += `<div class="offline-date-card empty"></div>`;
           }
 
           for (let day = 15; day <= 30; day++) {
-            const isToday = (day === 15);
+            const isToday = (day === 29);
             const isSelected = selectedClearDays.includes(day);
             const shifts = getShiftsForDay(8, day);
             const hasShifts = shifts && shifts.length > 0;
@@ -25404,12 +25397,12 @@
         }
       });
 
-      // Check if Today's shifts (Sept 15 / Sept 29) are cleared
-      const isTodayCleared = (clearScheduleCurrentMonth === 8 && (selectedClearDays.includes(15) || selectedClearDays.includes(29)));
+      // Check whether today's shifts (Sept 29) were cleared.
+      const isTodayCleared = (clearScheduleCurrentMonth === 8 && selectedClearDays.includes(29));
 
       if (isTodayCleared) {
         for (const key of Object.keys(dateSchedules)) {
-          if (key.includes('Sept 15') || key.includes('Sept 29')) {
+          if (key.includes('Sept 29')) {
             dateSchedules[key] = [];
           }
         }

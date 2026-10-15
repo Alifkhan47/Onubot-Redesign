@@ -1,6 +1,10 @@
 # Onu App — UI/UX Design System & Autonomous Redesign SOP
 *European / Western Minimal Healthtech Standard (Inspired by Hims, Uber, Wise, Alan Health, Qonto)*
 
+## Prototype Date Convention
+
+Use **Tuesday, September 29, 2026** as the fixed demo date across the doctor and patient prototypes. Yesterday is September 28 and Tomorrow is September 30. Earlier dates on historical prescription and encounter examples are intentional.
+
 ---
 
 ## 1. Core Visual Foundations & Color Tokens
@@ -96,7 +100,7 @@ When the user uploads a legacy screen from the existing app, follow this **5-Ste
 * **Rule**: *Never drop a functional capability.* Instead, re-architect how it is presented.
 
 ### Step 2: Visual Weight & Hierarchy Calibration (Inspired by Hims / Uber / Wise)
-* **Section Header**: Left Title (`"Sept 29"` in `Urbanist 21px Bold`) + Right Meta (`"9:00 AM – 11:00 AM"` shift time window in `DM Sans 13.5px #717171`).
+* **Section Header**: Left Title (`"Sept 29"` in `Urbanist 21px Bold`) + Right Meta (`"9:00 AM – 11:00 AM"` shift time window in `DM Sans 13.5px #717171`). This is the fixed demo day (Tuesday, September 29, 2026).
 * **Primary Anchor (Tier 1 - Immediate Attention)**:
   * The single most important task on the screen.
   * **State 1: Pre-Shift Ready Card (`#D6EAE6`)**:
@@ -735,7 +739,7 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 * **Safety Bottom Sheet (`#cancelShiftModalSheet`)**:
   * Triggered via the trash delete button.
   * Clean Editorial Title: `Delete Shift 1?` (always human-readable shift names, never raw technical IDs) with `ph-trash` danger badge icon.
-  * Subtitle indicates recurrence context: e.g. `Wednesday, Sept 15 • 09:00 AM – 11:00 AM • Repeats weekly`.
+  * Subtitle indicates recurrence context: e.g. `Tuesday, Sept 29 • 09:00 AM – 11:00 AM • Repeats weekly`.
   * **Box-less Plain Text Warning**: Zero heavy pink alert boxes. Displays clean inline plain text:
     * When booked: `<i class="ph-fill ph-warning-circle"></i> <span>X patients' appointments will be cancelled & notified</span>`.
     * When empty: `<i class="ph-fill ph-warning-circle"></i> <span>No Booked Patients</span>`.
@@ -960,7 +964,7 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 
 ### 24.2 Dual-View Architecture (Week vs. Month View)
 * **Week View (Default 7-Day Rolling Strip)**:
-  * Shows exactly 7 consecutive days starting from today (e.g. `Today 15`, `WED 16`, `THU 17`, `FRI 18`, `SAT 19`, `SUN 20`, `MON 21`) in a single balanced horizontal row (`grid-template-columns: repeat(7, 1fr)`).
+  * For a 7-day view starting on the fixed demo day, show `Today 29`, `WED 30`, `THU 1`, `FRI 2`, `SAT 3`, `SUN 4`, `MON 5` in one balanced row (`grid-template-columns: repeat(7, 1fr)`).
   * **Header Rule**: The column table header (`SUN MON TUE...`) is **hidden** in Week View because each standalone card contains its own weekday label (`.off-card-day`) and date number (`.off-card-num`).
   * **Zero Empty Gaps**: No leading placeholder cells in week view, preventing awkward broken second lines.
 * **Month View (Standard Sunday-First Calendar Matrix)**:
@@ -1005,7 +1009,7 @@ Across all calendar views in the app, each date cell displays **at most one sing
   * If patients affected: Subtitle *"All shifts removed & patients notified."*
   * If 0 patients affected: Subtitle *"All shifts removed from your schedule."*
 * **Box-less Pixel-Perfect Layout (`.clear-confirmed-boxless-wrap`)**: Zero outer container boxes or card borders. Clean borderless key-value rows:
-  * Row 1: `[Calendar icon] Sept 15 (1 Day)` • `Cleared` in soft bold red (`#DC2626`).
+  * Row 1: `[Calendar icon] Sept 29 (1 Day)` • `Cleared` in soft bold red (`#DC2626`).
   * Row 2 (Shown only when patients affected): 1px hairline divider (`#F1F5F9`) + `[Users icon] 4 Patients` • `Notified` in subtle teal (`#0E8070`).
   * If 0 patients affected: Row 2 is completely hidden ("If none, then nothing").
 * **Primary CTA**: Full-width button `[✓ Done]` (`--color-primary-btn: #02241F`).
@@ -1015,7 +1019,7 @@ Across all calendar views in the app, each date cell displays **at most one sing
 * **Hero Visual**: 68×68px warm amber calendar-plus badge (`#FEF3C7` background, `1.5px solid #FDE68A`, `ph-bold ph-calendar-plus` in `#D97706`) with directional arrow sub-badge. Replaces harsh warning/error triangles with an actionable, clinical guide.
 * **Header**: `Add Shift to Go Offline` in `Urbanist 24px Bold #000000`.
 * **Minimal Context Tile**:
-  * Row 1: `[Calendar icon] Sept 15 – 21 (7 Days)` • `Pending` amber badge.
+  * Row 1: `[Calendar icon] Sept 29 – Oct 5 (7 Days)` • `Pending` amber badge.
   * 1px subtle divider (`#E2E8F0`).
   * Row 2: `[Amber arrows icon] X patients need a future shift to transfer to`.
 * **Action Group**:
