@@ -275,6 +275,254 @@
 
     /* Patient Onu chat */
     .page-onu { background: #fff; padding: 8px 18px 0; overflow: hidden; }
+    .patient-profile-page { padding: 18px 16px 112px; background: #fff; gap: 14px; }
+    .patient-profile-heading { margin: 3px 0 0; color: var(--color-text-primary); font: 700 25px/1.15 var(--font-heading); letter-spacing: -.02em; }
+    .patient-profile-subtitle { margin: -8px 0 2px; color: var(--color-text-secondary); font: 13px/1.4 var(--font-body); }
+    .patient-profile-hero { display: flex; align-items: center; gap: 13px; padding: 7px 0 14px; border-bottom: 1px solid #E9EFED; }
+    .patient-profile-avatar-wrap { position: relative; flex: 0 0 62px; width: 62px; height: 62px; }
+    .patient-profile-avatar { display: grid; place-items: center; width: 62px; height: 62px; overflow: hidden; border: 2px solid #DCECE7; border-radius: 50%; background: #E7F2EF; color: #087C70; font: 700 19px var(--font-heading); }
+    .patient-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .patient-profile-photo-action { position: absolute; right: -9px; bottom: -9px; display: grid; place-items: center; width: 44px; height: 44px; border: 2px solid #fff; border-radius: 50%; background: #087C70; color: #fff; font-size: 17px; cursor: pointer; }
+    .patient-profile-identity { flex: 1; min-width: 0; }
+    .patient-profile-name-button { display: flex; align-items: center; gap: 6px; max-width: 100%; min-height: 44px; border: 0; background: transparent; text-align: left; cursor: pointer; }
+    .patient-profile-name { overflow: hidden; color: var(--color-text-primary); font: 700 18px/1.25 var(--font-heading); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-profile-name-button i { flex: 0 0 auto; color: #8A9895; font-size: 13px; }
+    .patient-profile-contact { display: flex; align-items: center; gap: 6px; margin-top: 5px; overflow: hidden; color: var(--color-text-secondary); font: 12px/1.3 var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-profile-contact i { flex: 0 0 auto; color: #81918E; font-size: 14px; }
+    .patient-profile-section-title { display: flex; align-items: center; justify-content: space-between; margin: 1px 1px -5px; color: var(--color-text-primary); font: 700 17px/1.25 var(--font-heading); }
+    .patient-profile-section-meta { color: var(--color-text-secondary); font: 12px var(--font-body); }
+    .patient-profile-bmi { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 102px; overflow: hidden; padding: 17px 18px; border-radius: 18px; background: #052E28; color: #fff; }
+    .patient-profile-bmi::after { position: absolute; right: -26px; top: -42px; width: 138px; height: 138px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; content: ''; box-shadow: 0 0 0 16px rgba(255,255,255,.035),0 0 0 32px rgba(255,255,255,.025); }
+    .patient-profile-kicker { color: #C3D7D2; font: 600 10px/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase; }
+    .patient-profile-bmi-row { display: flex; align-items: baseline; gap: 10px; margin-top: 7px; }
+    .patient-profile-bmi-value { color: #fff; font: 700 31px/1 var(--font-heading); }
+    .patient-profile-bmi-status { color: #B9E4D3; font: 600 12px var(--font-body); }
+    .patient-profile-bmi-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,.2); border-radius: 14px; background: rgba(255,255,255,.08); color: #D5EFE6; font-size: 20px; }
+    .patient-profile-vitals { display: grid; gap: 0; overflow: hidden; border-top: 1px solid #E7EEEC; }
+    .patient-profile-vital { display: flex; align-items: center; gap: 11px; min-height: 58px; padding: 7px 4px; border-bottom: 1px solid #E7EEEC; background: #fff; text-align: left; cursor: pointer; }
+    .patient-profile-vital-icon { display: grid; place-items: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 11px; background: #F0F6F4; color: #147C6F; font-size: 16px; }
+    .patient-profile-vital-copy { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
+    .patient-profile-vital-label { color: var(--color-text-secondary); font: 12px var(--font-body); }
+    .patient-profile-vital-value { overflow: hidden; color: var(--color-text-primary); font: 650 13.5px var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-profile-vital-edit { color: #91A09D; font-size: 14px; }
+    .patient-profile-analysis { display: flex; align-items: center; gap: 12px; width: 100%; padding: 13px; border: 1px solid #E5ECEA; border-radius: 16px; background: #F7FAF9; text-align: left; cursor: pointer; }
+    .patient-profile-analysis-icon { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 42px; border-radius: 13px; background: #EAF4F1; color: #087C70; font-size: 20px; }
+    .patient-profile-analysis-copy { display: grid; flex: 1; gap: 3px; min-width: 0; }
+    .patient-profile-analysis-title { color: var(--color-text-primary); font: 700 14px/1.25 var(--font-heading); }
+    .patient-profile-analysis-subtitle { color: var(--color-text-secondary); font: 11.5px/1.35 var(--font-body); }
+    .patient-profile-analysis > .ph-caret-right { flex: 0 0 auto; color: #71827F; font-size: 17px; }
+    .patient-profile-options { overflow: hidden; border: 1px solid #E5ECEA; border-radius: 16px; background: #fff; }
+    .patient-profile-option { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 56px; padding: 0 13px; border: 0; background: #fff; color: var(--color-text-primary); text-align: left; font: 600 13.5px var(--font-body); cursor: pointer; }
+    .patient-profile-option + .patient-profile-option { border-top: 1px solid #EEF2F1; }
+    .patient-profile-option-icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #EFF6F4; color: #087C70; font-size: 17px; }
+    .patient-profile-option.logout { color: #B94B4B; }
+    .patient-profile-option.logout .patient-profile-option-icon { background: #FFF1EF; color: #C65D54; }
+    .patient-profile-option > .ph-caret-right { margin-left: auto; color: #8A9895; font-size: 16px; }
+    .patient-profile-photo-input { display: none; }
+    .patient-profile-editor { width: min(340px, calc(100% - 32px)); max-width: none; margin: auto; padding: 20px; border: 1px solid #DDE7E4; border-radius: 20px; background: #fff; color: var(--color-text-primary); box-shadow: 0 18px 55px rgba(3,24,20,.22); }
+    .patient-profile-editor::backdrop { background: rgba(4,18,16,.42); backdrop-filter: blur(3px); }
+    .patient-profile-editor h2 { margin: 0; font: 700 20px var(--font-heading); }
+    .patient-profile-editor p { margin: 5px 0 15px; color: var(--color-text-secondary); font: 12px/1.4 var(--font-body); }
+    .patient-profile-editor label { display: grid; gap: 6px; color: var(--color-text-secondary); font: 12px var(--font-body); }
+    .patient-profile-editor input, .patient-profile-editor select { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid #DDE7E4; border-radius: 12px; background: #fff; color: var(--color-text-primary); font: 14px var(--font-body); }
+    .patient-profile-editor-actions { display: flex; gap: 9px; margin-top: 17px; }
+    .patient-profile-editor-actions button { min-height: 44px; flex: 1; border: 1px solid #DDE7E4; border-radius: 12px; background: #F6F8F7; color: var(--color-text-primary); font: 600 13px var(--font-body); cursor: pointer; }
+    .patient-profile-editor-actions button:last-child { border-color: var(--color-primary-btn); background: var(--color-primary-btn); color: #fff; }
+    /* Profile refresh: lighter structure, consistent spacing, no nested cards. */
+    .patient-profile-page { gap: 15px; padding: 20px 18px 120px; }
+    .patient-profile-page > *:not(dialog) { flex: 0 0 auto; }
+    .patient-profile-intro { display: grid; gap: 5px; }
+    .patient-profile-heading { margin: 0; font-size: 26px; }
+    .patient-profile-subtitle { margin: 0; font-size: 13px; }
+    .patient-profile-top-card { display: grid; grid-template-columns: minmax(0,1fr) 78px; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: #F3F5F4; }
+    .patient-profile-hero { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 0; border: 0; text-align: left; }
+    .patient-profile-avatar-wrap, .patient-profile-avatar { width: 48px; height: 48px; flex-basis: 48px; }
+    .patient-profile-avatar { border: 0; background: #EAF3F0; }
+    .patient-profile-identity { display: grid; justify-items: start; flex: 1; width: auto; min-width: 0; }
+    .patient-profile-name-button { justify-content: flex-start; min-height: 28px; padding: 0; cursor: default; text-align: left; }
+    .patient-profile-name { font-size: 17px; }
+    .patient-profile-contact { justify-content: flex-start; max-width: 100%; margin-top: 1px; font-size: 11px; }
+    .patient-profile-contact span { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .patient-profile-change-photo { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 38px; margin-top: 2px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #087C70; font: 600 12px var(--font-body); cursor: pointer; }
+    .patient-profile-overview { min-width: 0; padding: 0; }
+    .patient-profile-section-title { margin: 0; font-size: 17px; }
+    .patient-profile-bmi { display: grid; align-content: center; justify-content: start; min-height: 76px; padding: 0 0 0 12px; border: 0; border-left: 1px solid #DCE4E1; border-radius: 0; background: transparent; color: var(--color-text-primary); }
+    .patient-profile-bmi::after, .patient-profile-bmi-icon, .patient-profile-bmi-art { display: none; }
+    .patient-profile-kicker { color: var(--color-text-secondary); font: 650 11px/1.2 var(--font-body); letter-spacing: .01em; text-transform: none; }
+    .patient-profile-bmi-row { display: grid; gap: 2px; margin-top: 5px; }
+    .patient-profile-bmi-value { color: var(--color-text-primary); font-size: 24px; }
+    .patient-profile-bmi-status { padding: 0; border-radius: 0; background: transparent; color: #52645F; font: 500 10px/1.25 var(--font-body); }
+    .patient-profile-bmi.is-healthy .patient-profile-bmi-value, .patient-profile-bmi.is-healthy .patient-profile-bmi-status { color: #18724F; }
+    .patient-profile-bmi.is-caution .patient-profile-bmi-value, .patient-profile-bmi.is-caution .patient-profile-bmi-status { color: #9A6700; }
+    .patient-profile-bmi.is-high .patient-profile-bmi-value, .patient-profile-bmi.is-high .patient-profile-bmi-status { color: #B54747; }
+    .patient-profile-bmi-track { display: none; }
+    .patient-profile-bmi-track span { display: block; width: 61.5%; height: 100%; border-radius: inherit; background: #16836F; }
+    .patient-profile-details, .patient-profile-account { display: grid; gap: 10px; padding-top: 0; }
+    .patient-profile-details-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .patient-profile-details-actions { display: flex; align-items: center; gap: 13px; }
+    .patient-profile-edit-details { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
+    .patient-profile-vitals { grid-template-columns: 1fr 1fr; gap: 0 18px; overflow: visible; border: 0; }
+    .patient-profile-vital { display: grid; grid-template-columns: minmax(0,1fr); gap: 4px; align-content: center; min-width: 0; min-height: 62px; padding: 9px 2px; border: 0; border-bottom: 1px solid #E9EFED; border-radius: 0; background: transparent; text-align: left; cursor: default; }
+    .patient-profile-vital:active { background: transparent; }
+    .patient-profile-vital-icon { display: none; }
+    .patient-profile-vital-copy { display: contents; }
+    .patient-profile-vital-label { grid-column: 1; color: var(--color-text-secondary); font-size: 11px; }
+    .patient-profile-vital-value { grid-column: 1; grid-row: 2; font-size: 14px; }
+    .patient-profile-vital-edit { display: none; }
+    .patient-profile-analysis { gap: 10px; min-height: 70px; padding: 13px 14px; border: 1px solid #E5ECEA; border-radius: 16px; background: #fff; }
+    .patient-profile-analysis-icon { width: 36px; height: 36px; flex-basis: 36px; border-radius: 11px; background: #F0F6F5; font-size: 18px; }
+    .patient-profile-analysis-copy { gap: 3px; }
+    .patient-profile-analysis-title { font-size: 14px; }
+    .patient-profile-analysis-subtitle { font-size: 11.5px; }
+
+    .patient-health-page { padding: 14px 18px 110px; gap: 14px; background: #fff; overflow-y: auto; }
+    .patient-health-header { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; min-height: 44px; }
+    .patient-health-header h1 { margin: 0; text-align: center; font: 700 18px/1.2 var(--font-heading); }
+    .patient-health-back { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #EEF3F2; color: #073B35; font-size: 20px; cursor: pointer; }
+    .patient-health-section { display: grid; gap: 10px; padding: 14px 0; border-bottom: 1px solid #E8EEEC; }
+    .patient-health-section:last-child { border-bottom: 0; }
+    .patient-health-section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; }
+    .patient-health-section-title { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 15px/1.3 var(--font-heading); }
+    .patient-health-section-title i { color: #087C70; font-size: 18px; }
+    .patient-health-count { color: #71827F; font: 500 12px var(--font-body); }
+    .patient-health-text-button { min-height: 44px; padding: 0 2px; border: 0; background: transparent; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
+    .patient-health-disclosure { width: 100%; min-height: 44px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
+    .patient-health-disclosure .ph-caret-down { transition: transform .18s ease; }
+    .patient-health-disclosure[aria-expanded="true"] .ph-caret-down { transform: rotate(180deg); }
+    .patient-health-med-list { display: grid; }
+    .patient-health-med-list[hidden] { display: none !important; }
+    .patient-health-med-row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-width: 0; min-height: 62px; padding: 10px 0; border-top: 1px solid #EEF1F0; touch-action: pan-y; transition: transform .16s ease; }
+    .patient-health-med-main { min-width: 0; flex: 1; }
+    .patient-health-med-name { overflow: hidden; color: #142521; font: 650 14px/1.3 var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-health-med-meta { margin-top: 3px; color: #687A76; font: 12px/1.4 var(--font-body); }
+    .patient-health-med-remove { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: #FCEFED; color: #B54747; font-size: 18px; cursor: pointer; }
+    .patient-health-empty { margin: 0; color: #687A76; font: 13px/1.5 var(--font-body); }
+    .patient-health-empty button { display: inline; min-height: 36px; padding: 0; border: 0; background: none; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
+    .patient-health-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .patient-health-tag { display: inline-flex; align-items: center; gap: 8px; max-width: 100%; min-height: 34px; padding: 5px 8px 5px 12px; border-radius: 999px; background: #F1F5F4; color: #17332E; font: 500 12px/1.25 var(--font-body); }
+    .patient-health-tag button { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 28px; border: 0; border-radius: 50%; background: transparent; color: #60716D; font-size: 15px; cursor: pointer; }
+    .patient-health-picker-backdrop { z-index: 160; }
+    .patient-health-picker { z-index: 170; gap: 12px; max-height: min(82%, 680px); padding-bottom: calc(20px + env(safe-area-inset-bottom)); }
+    .patient-health-picker .sheet-top-row { margin-bottom: 0; }
+    .patient-health-picker-title { margin: 0; font: 700 20px/1.25 var(--font-heading); }
+    .patient-health-picker-search { width: 100%; min-height: 46px; padding: 0 14px; border: 1px solid #DCE5E2; border-radius: 14px; outline: 0; color: #10211E; font: 14px var(--font-body); }
+    .patient-health-picker-search:focus { border-color: #087C70; }
+    .patient-health-picker-categories { display: flex; gap: 7px; overflow-x: auto; padding: 1px 0 4px; scrollbar-width: none; }
+    .patient-health-picker-category { flex: 0 0 auto; min-height: 36px; padding: 0 12px; border: 1px solid #E1E8E6; border-radius: 999px; background: #fff; color: #50625E; font: 500 12px var(--font-body); }
+    .patient-health-picker-category.is-active { border-color: #B8D8D1; background: #EAF4F1; color: #07574E; }
+    .patient-health-picker-list { display: grid; gap: 2px; min-height: 70px; max-height: 35vh; overflow: auto; }
+    .patient-health-option { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 4px 2px; border: 0; border-bottom: 1px solid #EFF2F1; background: #fff; color: #172723; text-align: left; font: 13px var(--font-body); }
+    .patient-health-option input { width: 19px; height: 19px; accent-color: #087C70; }
+    .patient-health-picker-custom { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 8px; }
+    .patient-health-picker-custom input { min-width: 0; min-height: 44px; padding: 0 12px; border: 1px solid #DCE5E2; border-radius: 12px; font: 13px var(--font-body); }
+    .patient-health-picker-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 2px; }
+    .patient-health-picker-actions button { min-height: 48px; border-radius: 14px; font: 650 14px var(--font-body); }
+    .patient-health-picker-empty { margin: 12px 0; color: #71827F; font: 13px var(--font-body); }
+    .patient-profile-options { display: grid; gap: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; }
+    .patient-profile-option { min-height: 48px; gap: 10px; padding: 0; border: 0; background: transparent; font-size: 13px; }
+    .patient-profile-option + .patient-profile-option { border-top: 1px solid #E9EFED; }
+    .patient-profile-option-icon { width: 28px; height: 28px; border-radius: 0; background: transparent; font-size: 16px; }
+    .patient-profile-option.logout .patient-profile-option-icon { background: transparent; }
+    .patient-profile-option > .ph-caret-right { font-size: 14px; }
+    .patient-profile-edit-backdrop { position: absolute; inset: 0; z-index: 180; background: rgba(15,23,42,.48); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .patient-profile-edit-backdrop.show { opacity: 1; pointer-events: auto; }
+    .patient-profile-edit-sheet { position: absolute; z-index: 190; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; gap: 13px; max-height: 88%; overflow-y: auto; padding: 12px 22px calc(24px + env(safe-area-inset-bottom)); border-radius: 30px 30px 0 0; background: #fff; box-shadow: 0 -12px 42px rgba(0,0,0,.16); transform: translateY(105%); visibility: hidden; transition: transform .3s cubic-bezier(.16,1,.3,1), visibility .3s; }
+    .patient-profile-edit-sheet.show { transform: translateY(0); visibility: visible; }
+    .patient-profile-edit-sheet .sheet-drag-handle { width: 38px; height: 4px; margin: 0 auto 2px; border-radius: 99px; background: #CBD5E1; }
+    .patient-profile-edit-sheet .sheet-top-row { display: flex; align-items: center; }
+    .patient-profile-edit-sheet .sheet-badge-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 14px; background: #D6EAE6; color: #052E28; font-size: 20px; }
+    .patient-profile-edit-sheet .sheet-hero-header { display: grid; gap: 4px; }
+    .patient-profile-edit-sheet .sheet-editorial-title { color: #1E293B; font: 700 24px/1.2 var(--font-heading); letter-spacing: -.02em; }
+    .patient-profile-edit-sheet .sheet-editorial-sub { color: var(--color-text-secondary); font: 13px/1.4 var(--font-body); }
+    .patient-profile-edit-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; }
+    .patient-profile-edit-field { display: grid; gap: 6px; min-width: 0; color: var(--color-text-secondary); font: 12px var(--font-body); }
+    .patient-profile-edit-field input, .patient-profile-edit-field select { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid #DDE7E4; border-radius: 12px; background: #fff; color: var(--color-text-primary); font: 14px var(--font-body); }
+    .patient-profile-edit-actions { display: flex; gap: 10px; margin-top: 4px; }
+    .patient-profile-edit-actions button { display: flex; align-items: center; justify-content: center; min-height: 52px; border: 0; border-radius: 999px; font: 700 15px var(--font-heading); cursor: pointer; }
+    .patient-profile-edit-actions .btn-sheet-cancel { flex: 1; background: #F6F8F9; color: #052E28; }
+    .patient-profile-edit-actions .btn-sheet-confirm { flex: 1.5; background: #052E28; color: #fff; box-shadow: 0 8px 24px rgba(5,46,40,.2); }
+    .patient-profile-identity-sheet .patient-profile-edit-fields { grid-template-columns: 1fr; }
+    .patient-profile-photo-choice { display: flex; align-items: center; gap: 12px; min-height: 62px; }
+    .patient-profile-photo-preview { display: grid; place-items: center; width: 54px; height: 54px; flex: 0 0 54px; overflow: hidden; border-radius: 50%; background: #EAF3F0; color: #087C70; font: 700 17px var(--font-heading); }
+    .patient-profile-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .patient-profile-photo-preview img[hidden] { display: none; }
+    .patient-profile-photo-choice button { min-height: 44px; padding: 0 13px; border: 1px solid #DDE7E4; border-radius: 12px; background: #fff; color: #052E28; font: 600 13px var(--font-body); cursor: pointer; }
+    .patient-rx-review { display: grid; gap: 10px; width: min(100%, 360px); margin-top: 9px; padding: 13px; border: 1px solid #DDE9E5; border-radius: 16px; background: #F3F8F6; box-shadow: 0 4px 16px rgba(15,35,30,.05); white-space: normal; }
+    .patient-rx-review-head { display: flex; align-items: flex-start; gap: 10px; }
+    .patient-rx-review-head i { margin-top: 2px; color: var(--color-accent-teal); font-size: 20px; }
+    .patient-rx-review-title { font: 700 14px/1.35 var(--font-body); }
+    .patient-rx-review-meta, .patient-rx-review-note { color: var(--color-text-secondary); font: 12px/1.4 var(--font-body); }
+    .patient-rx-review-note { padding-top: 9px; border-top: 1px solid #E6EEEB; }
+    .patient-rx-review-action { justify-self: start; min-height: 40px; padding: 0 12px; border: 1px solid #DDE9E5; border-radius: 11px; background: #fff; color: var(--color-accent-teal); font: 650 12px var(--font-body); cursor: pointer; }
+    .patient-rx-review-action:focus-visible, .patient-rx-viewer-close:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
+    .patient-rx-overlay { position: absolute; inset: 0; z-index: 100; display: flex; flex-direction: column; background: #fff; transform: translateX(100%); transition: transform .22s ease; }
+    .patient-rx-overlay.open { transform: translateX(0); }
+    .patient-rx-header { display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 8px 16px; border-bottom: 1px solid #E7EEEC; }
+    .patient-rx-header h2 { flex: 1; margin: 0; font: 700 18px/1.2 var(--font-heading); }
+    .patient-rx-save-header { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 10px; border: 1px solid #B9DCD4; border-radius: 10px; background: #EAF5F1; color: #087C70; white-space: nowrap; font: 650 11px var(--font-body); cursor: pointer; }
+    .patient-rx-back-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--color-text-primary); cursor: pointer; }
+    .patient-rx-content { flex: 1 1 auto; overflow: auto; padding: 15px 18px 22px; }
+    .patient-rx-section { margin: 0 0 9px; border-bottom: 1px solid #E7EEEC; }
+    .patient-rx-section > summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font: 700 14px/1.3 var(--font-heading); }
+    .patient-rx-section > summary::-webkit-details-marker, .patient-rx-medicine > summary::-webkit-details-marker { display: none; }
+    .patient-rx-section-chevron { color: var(--color-text-secondary); flex: 0 0 auto; transition: transform .16s ease; }
+    .patient-rx-section[open] .patient-rx-section-chevron { transform: rotate(180deg); }
+    .patient-rx-section > summary > span > i { color: var(--color-accent-teal); font-size: 16px; }
+    .patient-rx-section-body { padding: 0 0 12px; }
+    .patient-rx-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .patient-rx-field-grid.single { grid-template-columns: 1fr; }
+    .patient-rx-field.full { grid-column: 1 / -1; }
+    .patient-rx-field, .patient-rx-medicine-field { display: grid; gap: 5px; min-width: 0; color: var(--color-text-secondary); font: 11px/1.3 var(--font-body); }
+    .patient-rx-field input, .patient-rx-field select, .patient-rx-field textarea, .patient-rx-medicine-field input, .patient-rx-medicine-field textarea, .patient-rx-readonly { width: 100%; min-height: 42px; padding: 9px 10px; border: 1px solid #DDE7E4; border-radius: 10px; background: #fff; color: var(--color-text-primary); font: 13px/1.4 var(--font-body); }
+    .patient-rx-field textarea, .patient-rx-medicine-field textarea { resize: none; overflow: hidden; }
+    .patient-rx-readonly { display: flex; align-items: center; color: var(--color-text-secondary); background: #F6F8F7; }
+    .patient-rx-field input:focus, .patient-rx-field select:focus, .patient-rx-field textarea:focus, .patient-rx-medicine-field input:focus, .patient-rx-medicine-field textarea:focus { outline: 2px solid rgba(0,128,119,.25); border-color: var(--color-accent-teal); }
+    .patient-rx-medicine-wrap { position: relative; overflow: hidden; margin-bottom: 8px; border-radius: 13px; touch-action: pan-y; }
+    .patient-rx-medicine { position: relative; z-index: 1; margin: 0; padding: 0 12px; border: 1px solid #E2EBE8; border-radius: 13px; background: #fff; transition: transform .18s ease; }
+    .patient-rx-medicine.unverified { border-color: #EADBAF; background: #FFFCF3; }
+    .patient-rx-medicine.swipe-open { transform: translateX(-72px); }
+    .patient-rx-medicine > summary { display: flex; align-items: center; gap: 8px; min-height: 54px; cursor: pointer; list-style: none; }
+    .patient-rx-medicine-summary-name { display: flex; flex: 1; flex-direction: column; align-items: flex-start; min-width: 0; overflow: hidden; color: var(--color-text-primary); font: 650 13px/1.25 var(--font-body); }
+    .patient-rx-medicine-summary-status { display: inline-flex; align-items: center; justify-content: center; color: var(--color-accent-teal); font-size: 18px; }
+    .patient-rx-medicine-summary-unverified { display: inline-flex; align-items: center; justify-content: center; color: #B7791F; font-size: 17px; }
+    .patient-rx-verification-icon { display: inline-grid; place-items: center; width: 22px; height: 28px; flex: 0 0 22px; }
+    .patient-rx-section > summary > span { display: inline-flex; align-items: center; gap: 7px; }
+    .patient-rx-medicine-chevron { color: var(--color-text-secondary); transition: transform .16s ease; }
+    .patient-rx-medicine[open] .patient-rx-medicine-chevron { transform: rotate(180deg); }
+    .patient-rx-medicine-body { padding: 0 0 11px; }
+    .patient-rx-delete-swipe { position: absolute; inset: 0 0 0 auto; display: grid; place-items: center; width: 76px; border: 0; border-radius: 12px; background: #FBE9E8; color: #9D3330; font-size: 19px; cursor: pointer; }
+    .patient-rx-delete-swipe:focus-visible { outline: 2px solid #9D3330; outline-offset: -3px; }
+    .patient-rx-medicine-wrap:has(.patient-rx-delete-swipe:focus-visible) .patient-rx-medicine { transform: translateX(-72px); }
+    .patient-rx-section > summary::after { content: none; }
+    .patient-rx-medicine-fields { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+    .patient-rx-medicine-field.name { grid-column: 1 / -1; }
+    .patient-rx-medicine-field.instructions { grid-column: 1 / -1; }
+    .patient-rx-medicine-field.wide { grid-column: 1 / -1; }
+    .patient-rx-generic { display: block; margin-top: 2px; color: var(--color-text-secondary); font: 11px/1.35 var(--font-body); }
+    .patient-rx-generic[hidden] { display: none; }
+    .patient-rx-patient-more { grid-column: 1 / -1; }
+    .patient-rx-patient-more > summary { padding: 7px 0 2px; color: var(--color-accent-teal); font: 500 12px var(--font-body); cursor: pointer; list-style: none; }
+    .patient-rx-patient-more > summary::-webkit-details-marker { display: none; }
+    .patient-rx-patient-more-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 9px; }
+    @media (max-width: 370px) { .patient-rx-medicine-fields { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    .patient-rx-secondary-action { min-height: 42px; padding: 0 12px; border: 1px solid #DDE7E4; border-radius: 11px; background: #fff; color: var(--color-text-primary); font: 600 12px var(--font-body); cursor: pointer; }
+    .patient-rx-footer { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 14px calc(12px + env(safe-area-inset-bottom)); border-top: 1px solid #E7EEEC; background: #fff; }
+    .patient-rx-footer .btn-confirm-pay, .patient-rx-photo-footer { width: 100%; min-height: 44px; }
+    .patient-rx-photo-footer { display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 10px; border: 1px solid #DDE7E4; border-radius: 11px; background: #EAF4F1; color: #087C70; font: 650 12px var(--font-body); cursor: pointer; }
+    .patient-rx-save-header:disabled, .patient-rx-footer button:disabled { opacity: .5; cursor: not-allowed; }
+    .patient-rx-verify-spinner { color: var(--color-accent-teal); animation: patientRxSpin .75s linear infinite; }
+    @keyframes patientRxSpin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .patient-rx-verify-spinner { animation-duration: 2.5s; } }
+    .patient-rx-footer .btn-confirm-pay:disabled { opacity: .5; cursor: not-allowed; }
+    .patient-rx-processing { display: inline-flex; align-items: center; gap: 8px; color: var(--color-text-secondary); font: 13px/1.4 var(--font-body); }
+    .patient-rx-processing i { color: var(--color-accent-teal); animation: rxThinkPulse 1.1s ease-in-out infinite; }
+    @keyframes rxThinkPulse { 50% { opacity: .35; transform: scale(.88); } }
+    @media (prefers-reduced-motion: reduce) { .patient-rx-processing i { animation: none; } }
+    .patient-rx-viewer { position: absolute; inset: 0; z-index: 110; display: grid; place-items: center; padding: 16px; background: rgba(8,20,18,.88); }
+    .patient-rx-viewer[hidden] { display: none; }
+    .patient-rx-viewer img { max-width: 100%; max-height: 82%; object-fit: contain; border-radius: 10px; }
+    .patient-rx-viewer-close { position: absolute; top: 18px; right: 16px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fff; color: #10201D; font-size: 20px; }
+    .patient-rx-viewer-message { color: #fff; text-align: center; font: 14px/1.5 var(--font-body); }
     .page-onu [hidden] { display: none !important; }
     .onu-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; min-height: 52px; flex: 0 0 auto; }
     .onu-header-title { color: var(--color-text-primary); font: 700 21px/1.1 var(--font-heading); letter-spacing: -0.02em; }
@@ -284,24 +532,20 @@
     .onu-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: var(--color-bell-bg); color: var(--color-text-primary); font-size: 20px; cursor: pointer; }
     .onu-icon-button:hover { background: #E2E8F0; }
     .onu-icon-button:active { background: #CBD5E1; }
-    .onu-icon-button:focus-visible, .onu-composer button:focus-visible, .onu-action-card:focus-visible, .onu-thread-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
+    .onu-icon-button:focus-visible, .onu-composer button:focus-visible, .onu-thread-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
     .onu-header-actions .onu-icon-button { display: inline-flex; }
-    .onu-home-content { flex: 1 1 auto; justify-content: center; padding: 0 1px 142px; display: flex; flex-direction: column; gap: 20px; }
-    .onu-greeting { position: relative; padding: 20px 18px; text-align: left; overflow: hidden; border-radius: 22px; background: linear-gradient(135deg, #F0F7F4 0%, #F8FAF9 72%); }
-    .onu-greeting::after { content: ""; position: absolute; width: 116px; height: 116px; right: -36px; top: -44px; border-radius: 50%; background: rgba(10, 120, 103, .06); pointer-events: none; }
-    .onu-welcome-mark { display: grid; place-items: center; width: 42px; height: 42px; margin: 0 0 13px; border-radius: 14px; background: #fff; color: var(--color-primary-btn); font-size: 21px; box-shadow: 0 2px 8px rgba(10, 50, 43, .06); }
-    .onu-greeting .onu-greeting-kicker { margin: 0 0 5px; color: var(--color-accent-teal); font: 700 10px/1.2 var(--font-body); letter-spacing: .09em; text-transform: uppercase; }
-    .onu-greeting h2 { font: 700 24px/1.2 var(--font-heading); letter-spacing: -0.025em; }
-    .onu-greeting p { margin-top: 6px; color: var(--color-text-secondary); font: 13px/1.45 var(--font-body); }
-    .onu-action-heading { margin: 0 2px -10px; color: var(--color-text-secondary); font: 600 12px/1.3 var(--font-body); }
-    .onu-action-list { display: grid; gap: 10px; margin-top: 2px; }
-    .onu-action-card { width: 100%; min-height: 78px; padding: 14px; display: grid; grid-template-columns: 44px 1fr 20px; align-items: center; gap: 12px; text-align: left; background: #fff; border: 1px solid #E3ECE8; border-radius: 16px; color: var(--color-text-primary); box-shadow: 0 3px 12px rgba(15, 52, 44, .035); cursor: pointer; transition: border-color .16s ease, background .16s ease, transform .16s ease, box-shadow .16s ease; }
-    .onu-action-card:hover { border-color: #C8DDD6; background: #FCFEFD; box-shadow: 0 6px 16px rgba(15, 52, 44, .07); transform: translateY(-1px); }
-    .onu-action-card:active { background: #F4F8F6; transform: scale(.99); }
-    .onu-action-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #EFF7F4; color: var(--color-accent-teal); font-size: 21px; }
-    .onu-action-copy strong { display: block; font: 700 15px/1.2 var(--font-heading); }
-    .onu-action-copy span { display: block; margin-top: 4px; color: var(--color-text-secondary); font: 12.5px/1.35 var(--font-body); }
-    .onu-action-arrow { color: var(--color-accent-teal); font-size: 17px; }
+    .onu-home-content { flex: 1 1 auto; justify-content: center; align-items: center; padding: 0 1px 112px; display: flex; flex-direction: column; }
+    .onu-greeting { text-align: center; padding: 0 3px; }
+    .onu-greeting-mark { margin-bottom: 12px; color: var(--color-accent-teal); font-size: 30px; line-height: 1; }
+    .onu-greeting h2 { max-width: 320px; font: 700 25px/1.2 var(--font-heading); letter-spacing: -0.025em; }
+    .onu-home-suggestions { display: flex; align-items: center; gap: 8px; width: 100%; margin: 0 0 12px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: none; }
+    .onu-home-suggestions::-webkit-scrollbar { display: none; }
+    .onu-home-suggestions[hidden] { display: none; }
+    .onu-suggestion-button { display: inline-flex; align-items: center; gap: 7px; width: auto; min-height: 38px; flex: 0 0 auto; padding: 0 12px; border: 1px solid #E4ECE9; border-radius: 999px; background: #F8FAF9; color: var(--color-text-secondary); text-align: left; white-space: nowrap; font: 500 12.5px/1.3 var(--font-body); cursor: pointer; transition: background .16s ease, border-color .16s ease, transform .16s ease; }
+    .onu-suggestion-button:hover { background: #F1F6F4; border-color: #D5E5DF; }
+    .onu-suggestion-button:active { transform: scale(.985); }
+    .onu-suggestion-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
+    .onu-suggestion-button i { width: 16px; flex: 0 0 16px; color: var(--color-accent-teal); font-size: 15px; text-align: center; }
     .onu-conversation-stream { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 1px 130px; overscroll-behavior: contain; scrollbar-width: none; }
     .onu-conversation-stream::-webkit-scrollbar { display: none; }
     .onu-message { margin: 12px 0; max-width: 91%; font: 14px/1.5 var(--font-body); overflow-wrap: anywhere; white-space: pre-wrap; }
@@ -316,6 +560,7 @@
     .onu-attachment-type { color: var(--color-text-secondary); font-size: 11px; }
     .onu-composer-area { position: absolute; left: 12px; right: 12px; bottom: 82px; z-index: 15; }
     .phone-screen.onu-conversation-mode .onu-composer-area { bottom: 18px; }
+    .phone-screen.onu-conversation-mode #onuHomeSuggestions { display: none; }
     .onu-composer-dock { position: relative; inset: auto; z-index: auto; padding: 8px 9px; background: #fff; border: 1px solid #DDE6E3; border-radius: 24px; box-shadow: 0 4px 18px rgba(15,23,42,.08); display: flex; align-items: flex-end; gap: 5px; }
     .onu-attachment-menu { position: absolute; z-index: 20; left: 0; bottom: calc(100% + 10px); width: min(244px, calc(100vw - 64px)); padding: 7px; border: 1px solid #E1EAE6; border-radius: 17px; background: #fff; box-shadow: 0 12px 32px rgba(15, 35, 30, .16); }
     .onu-attachment-menu[hidden] { display: none; }
@@ -341,8 +586,8 @@
     .onu-thread-button:hover { background: #F1F6F4; }
     .onu-history-empty { padding: 10px; color: var(--color-text-secondary); font: 13px/1.45 var(--font-body); }
     .onu-live-region { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-    @media (max-height: 720px) { .onu-home-content { padding-bottom: 128px; gap: 12px; } .onu-greeting { padding: 15px 16px; } .onu-action-card { min-height: 70px; } }
-    @media (prefers-reduced-motion: reduce) { .onu-history-overlay, .onu-history-drawer, .onu-action-card { transition: none; } }
+    @media (max-height: 720px) { .onu-home-content { padding-bottom: 96px; } }
+    @media (prefers-reduced-motion: reduce) { .onu-history-overlay, .onu-history-drawer, .onu-suggestion-button { transition: none; } }
 
     /* ============================================================
        PAGE 1: DISCOVER SCREEN (WISE / UBER LUXURY REDESIGN)
@@ -2006,7 +2251,7 @@
     }
 
     /* Hide bottom navigation on pages with back button or sub-pages */
-    .phone-screen:has(.app-page.active-page:not(#pageDiscover):not(#pageVisits)) .bottom-nav-container,
+    .phone-screen:has(.app-page.active-page:not(#pageDiscover):not(#pageVisits):not(#pagePatientProfile)) .bottom-nav-container,
     .phone-screen:has(#pageDoctorsList.active-page) .bottom-nav-container,
     .phone-screen:has(#pageDoctorProfile.active-page) .bottom-nav-container,
     .phone-screen:has(#pageBookConsultation.active-page) .bottom-nav-container,
@@ -5163,28 +5408,17 @@
           <header class="onu-header" id="onuHeader"></header>
           <section class="onu-home-content" id="onuHomeContent">
             <div class="onu-greeting">
-              <div class="onu-welcome-mark" aria-hidden="true"><i class="ph ph-sparkle"></i></div>
-              <p class="onu-greeting-kicker">Your health companion</p>
-              <h2>Hi, Alif</h2>
-              <p>What can I help you with today?</p>
-            </div>
-            <p class="onu-action-heading">Get started</p>
-            <div class="onu-action-list">
-              <button type="button" class="onu-action-card" onclick="startPatientOnuPrescriptionChat()">
-                <span class="onu-action-icon" aria-hidden="true"><i class="ph ph-prescription"></i></span>
-                <span class="onu-action-copy"><strong>Upload prescription</strong><span>Add a prescription or report to your chat.</span></span>
-                <i class="ph ph-caret-right onu-action-arrow" aria-hidden="true"></i>
-              </button>
-              <button type="button" class="onu-action-card" onclick="openPatientOnuAppointmentBooking()">
-                <span class="onu-action-icon" aria-hidden="true"><i class="ph ph-calendar-plus"></i></span>
-                <span class="onu-action-copy"><strong>Book appointment</strong><span>Tell me what’s bothering you; I’ll suggest a specialty.</span></span>
-                <i class="ph ph-caret-right onu-action-arrow" aria-hidden="true"></i>
-              </button>
+              <div class="onu-greeting-mark" aria-hidden="true"><i class="ph ph-sparkle"></i></div>
+              <h2>Hey Alif, how can I help?</h2>
             </div>
           </section>
           <div class="onu-conversation-stream" id="onuConversationStream" role="region" aria-label="Conversation messages" hidden></div>
           <div class="onu-composer-area">
-            <p class="onu-disclaimer">Onu can make mistakes. Check important health information with a clinician.</p>
+            <p class="onu-disclaimer" id="onuDisclaimer" hidden>Onu can make mistakes. Check important health information with a clinician.</p>
+            <div class="onu-home-suggestions" id="onuHomeSuggestions" aria-label="Suggested actions">
+              <button type="button" class="onu-suggestion-button" onclick="startPatientOnuPrescriptionChat()"><i class="ph ph-file-plus" aria-hidden="true"></i><span>Upload prescription</span></button>
+              <button type="button" class="onu-suggestion-button" onclick="openPatientOnuAppointmentBooking()"><i class="ph ph-calendar-plus" aria-hidden="true"></i><span>Book appointment</span></button>
+            </div>
             <div class="onu-composer-dock">
               <div class="onu-attachment-menu" id="onuAttachmentMenu" role="menu" aria-label="Add to chat" onkeydown="handlePatientOnuAttachmentMenuKeydown(event)" hidden>
                 <button type="button" class="onu-attachment-option" role="menuitem" onclick="choosePatientOnuAttachment('photos')"><i class="ph ph-image" aria-hidden="true"></i><span>Photos</span></button>
@@ -5210,8 +5444,133 @@
               <div class="onu-history-list" id="onuHistoryList"></div>
             </aside>
           </div>
+          <section class="patient-rx-overlay" id="patientPrescriptionReview" role="dialog" aria-modal="true" aria-labelledby="patientRxTitle" aria-hidden="true" inert onkeydown="handlePatientPrescriptionReviewKeydown(event)">
+            <header class="patient-rx-header">
+              <h2 id="patientRxTitle">Review prescription</h2>
+              <button type="button" class="patient-rx-save-header" id="patientRxSaveButton" onclick="savePatientPrescriptionReview()"><i class="ph ph-floppy-disk" aria-hidden="true"></i> Save medications</button>
+            </header>
+            <div class="patient-rx-content" id="patientRxContent"></div>
+            <footer class="patient-rx-footer">
+              <button type="button" class="patient-rx-photo-footer" onclick="openPatientPrescriptionImage(patientCurrentPrescriptionReviewId)"><i class="ph ph-image" aria-hidden="true"></i> View prescription</button>
+              <button type="button" class="btn-confirm-pay" id="patientRxUseChatButton" onclick="usePatientPrescriptionInChat()">Use in chat</button>
+            </footer>
+            <div class="patient-rx-viewer" id="patientRxViewer" role="dialog" aria-modal="true" aria-label="Original prescription photo" hidden onclick="if(event.target===this)closePatientPrescriptionImage()">
+              <button type="button" class="patient-rx-viewer-close" aria-label="Close prescription image" onclick="closePatientPrescriptionImage()"><i class="ph ph-x" aria-hidden="true"></i></button>
+              <img id="patientRxImage" alt="Uploaded prescription photo" onerror="handlePatientPrescriptionImageError()">
+              <p class="patient-rx-viewer-message" id="patientRxViewerMessage" hidden></p>
+            </div>
+          </section>
           <div class="onu-live-region" id="onuAnnouncement" aria-live="polite" aria-atomic="true"></div>
         </div>
+
+        <div class="app-page patient-profile-page page-right" id="pagePatientProfile" aria-label="Patient profile">
+          <header class="patient-profile-intro">
+            <h1 class="patient-profile-heading">Profile</h1>
+            <p class="patient-profile-subtitle">Personal details and health at a glance</p>
+          </header>
+          <section class="patient-profile-top-card" aria-label="Profile and body mass index">
+            <section class="patient-profile-hero" aria-label="Personal details">
+              <div class="patient-profile-avatar-wrap">
+                <div class="patient-profile-avatar" aria-hidden="true"><span id="patientProfileInitials">AK</span><img id="patientProfilePhoto" alt="" hidden></div>
+                <input class="patient-profile-photo-input" id="patientProfilePhotoInput" type="file" accept="image/*" onchange="handlePatientProfilePhoto(event)">
+              </div>
+              <div class="patient-profile-identity">
+                <div class="patient-profile-name-button"><span class="patient-profile-name" id="patientProfileName">Alif Khan</span></div>
+                <div class="patient-profile-contact"><i class="ph ph-envelope-simple" aria-hidden="true"></i><span id="patientProfileEmail">shaycormac004700@gmail.com</span></div>
+                <div class="patient-profile-contact"><i class="ph ph-phone" aria-hidden="true"></i><span id="patientProfilePhone">+880 1789 946454</span></div>
+                <button type="button" class="patient-profile-change-photo" onclick="openPatientIdentityEditor()"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Edit profile</button>
+              </div>
+            </section>
+            <section class="patient-profile-overview" aria-label="Body mass index">
+              <div class="patient-profile-bmi" aria-label="Body mass index">
+                <div><div class="patient-profile-kicker">BMI</div><div class="patient-profile-bmi-row"><span class="patient-profile-bmi-value" id="patientProfileBmi">24.6</span><span class="patient-profile-bmi-status" id="patientProfileBmiStatus">Healthy range</span></div><div class="patient-profile-bmi-track" aria-hidden="true"><span></span></div></div>
+              </div>
+            </section>
+          </section>
+
+          <button type="button" class="patient-profile-analysis" onclick="openPatientHealthAnalysis()">
+            <span class="patient-profile-analysis-icon"><i class="ph ph-chart-line-up" aria-hidden="true"></i></span>
+            <span class="patient-profile-analysis-copy"><span class="patient-profile-analysis-title">Health analysis</span><span class="patient-profile-analysis-subtitle">Your health overview</span></span>
+            <i class="ph ph-caret-right" aria-hidden="true"></i>
+          </button>
+
+          <section class="patient-profile-details" aria-label="Editable health details">
+            <div class="patient-profile-details-head"><h2 class="patient-profile-section-title">Your details</h2><div class="patient-profile-details-actions"><button type="button" class="patient-profile-edit-details" onclick="openPatientProfileEditor()">Edit</button></div></div>
+            <div class="patient-profile-vitals" id="patientProfileVitals">
+              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Age</span><span class="patient-profile-vital-value" id="patientProfileAge">26 years</span></div>
+              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Gender</span><span class="patient-profile-vital-value" id="patientProfileGender">Male</span></div>
+              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Blood type</span><span class="patient-profile-vital-value" id="patientProfileBloodType">O-</span></div>
+              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Height</span><span class="patient-profile-vital-value" id="patientProfileHeight">168 cm</span></div>
+              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Weight</span><span class="patient-profile-vital-value" id="patientProfileWeight">69 kg</span></div>
+            </div>
+          </section>
+
+          <section class="patient-profile-account" aria-label="More options">
+            <h2 class="patient-profile-section-title">Account</h2>
+            <section class="patient-profile-options">
+            <button type="button" class="patient-profile-option" onclick="showToast('Settings are not available in this prototype yet.')"><span class="patient-profile-option-icon"><i class="ph ph-gear-six" aria-hidden="true"></i></span>Settings<i class="ph ph-caret-right" aria-hidden="true"></i></button>
+            <button type="button" class="patient-profile-option logout" onclick="showToast('You are signed in to this prototype.')"><span class="patient-profile-option-icon"><i class="ph ph-sign-out" aria-hidden="true"></i></span>Log out<i class="ph ph-caret-right" aria-hidden="true"></i></button>
+            </section>
+          </section>
+        </div>
+        <div class="app-page patient-health-page page-right" id="pagePatientHealthAnalysis" aria-label="Health analysis">
+          <header class="patient-health-header">
+            <button type="button" class="patient-health-back" aria-label="Back to profile" onclick="returnFromPatientHealthAnalysis()"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
+            <h1>Health Analysis</h1><span aria-hidden="true"></span>
+          </header>
+          <section class="patient-health-section" aria-labelledby="patientHealthMedicationTitle">
+            <button type="button" class="patient-health-section-head patient-health-disclosure" id="patientHealthMedicationToggle" aria-expanded="false" aria-controls="patientHealthMedicationList" onclick="togglePatientHealthMedications()">
+              <span class="patient-health-section-title" id="patientHealthMedicationTitle"><i class="ph ph-pill" aria-hidden="true"></i>Active medications</span>
+              <span style="display:flex;align-items:center;gap:8px"><span class="patient-health-count" id="patientHealthMedicationCount">0</span><i class="ph ph-caret-down" aria-hidden="true"></i></span>
+            </button>
+            <div class="patient-health-med-list" id="patientHealthMedicationList" hidden></div>
+          </section>
+          <section class="patient-health-section" aria-labelledby="patientHealthAllergiesTitle">
+            <div class="patient-health-section-head"><h2 class="patient-health-section-title" id="patientHealthAllergiesTitle"><i class="ph ph-warning-circle" aria-hidden="true"></i>Allergies</h2><button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('allergies')">Add</button></div>
+            <div class="patient-health-tags" id="patientHealthAllergies"></div>
+            <p class="patient-health-empty" id="patientHealthAllergiesEmpty">No allergies added.</p>
+          </section>
+          <section class="patient-health-section" aria-labelledby="patientHealthConditionsTitle">
+            <div class="patient-health-section-head"><h2 class="patient-health-section-title" id="patientHealthConditionsTitle"><i class="ph ph-heartbeat" aria-hidden="true"></i>Health conditions</h2><button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('conditions')">Add</button></div>
+            <div class="patient-health-tags" id="patientHealthConditions"></div>
+            <p class="patient-health-empty" id="patientHealthConditionsEmpty">No conditions added.</p>
+          </section>
+        </div>
+        <div class="modal-backdrop patient-health-picker-backdrop" id="patientHealthPickerBackdrop" onclick="closePatientHealthPicker()"></div>
+        <section class="patient-bottom-sheet patient-health-picker" id="patientHealthPicker" role="dialog" aria-modal="true" aria-labelledby="patientHealthPickerTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><span class="sheet-badge-icon"><i class="ph ph-list-checks" aria-hidden="true"></i></span></div>
+          <h2 class="patient-health-picker-title" id="patientHealthPickerTitle">Add health details</h2>
+          <input class="patient-health-picker-search" id="patientHealthPickerSearch" type="search" placeholder="Search" autocomplete="off" aria-label="Search options">
+          <div class="patient-health-picker-categories" id="patientHealthPickerCategories" role="group" aria-label="Filter by category"></div>
+          <div class="patient-health-picker-list" id="patientHealthPickerList"></div>
+          <div class="patient-health-picker-custom"><input id="patientHealthCustomInput" type="text" maxlength="80" placeholder="Add another" aria-label="Add a custom item"><button type="button" class="btn-outline" onclick="addPatientHealthCustomEntry()">Add</button></div>
+          <div class="patient-health-count" id="patientHealthPickerSelectedCount" aria-live="polite">0 selected</div>
+          <div class="patient-health-picker-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientHealthPicker()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientHealthSelections()">Save</button></div>
+        </section>
+        <div class="modal-backdrop patient-profile-edit-backdrop" id="patientProfileEditBackdrop" onclick="closePatientProfileEditor()"></div>
+        <section class="patient-profile-edit-sheet" id="patientProfileEditor" role="dialog" aria-modal="true" aria-labelledby="patientProfileEditorTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><div class="sheet-badge-icon"><i class="ph ph-user-circle" aria-hidden="true"></i></div></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientProfileEditorTitle">Your details</h2><p class="sheet-editorial-sub">Update your health information.</p></header>
+          <div class="patient-profile-edit-fields">
+            <label class="patient-profile-edit-field" for="patientProfileAgeInput">Age (years)<input id="patientProfileAgeInput" type="number" min="1" max="120" step="1" autocomplete="off"></label>
+            <label class="patient-profile-edit-field" for="patientProfileGenderInput">Gender<select id="patientProfileGenderInput"><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></label>
+            <label class="patient-profile-edit-field" for="patientProfileBloodTypeInput">Blood type<select id="patientProfileBloodTypeInput"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option><option>Unknown</option></select></label>
+            <label class="patient-profile-edit-field" for="patientProfileHeightInput">Height (cm)<input id="patientProfileHeightInput" type="number" min="50" max="250" step="0.1" autocomplete="off"></label>
+            <label class="patient-profile-edit-field" for="patientProfileWeightInput">Weight (kg)<input id="patientProfileWeightInput" type="number" min="1" max="500" step="0.1" autocomplete="off"></label>
+          </div>
+          <div class="patient-profile-edit-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientProfileEditor()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientProfileEdit()">Save details</button></div>
+        </section>
+        <div class="modal-backdrop patient-profile-edit-backdrop" id="patientIdentityEditBackdrop" onclick="closePatientIdentityEditor()"></div>
+        <section class="patient-profile-edit-sheet patient-profile-identity-sheet" id="patientIdentityEditor" role="dialog" aria-modal="true" aria-labelledby="patientIdentityEditorTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><div class="sheet-badge-icon"><i class="ph ph-identification-card" aria-hidden="true"></i></div></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientIdentityEditorTitle">Edit profile</h2><p class="sheet-editorial-sub">Update your name and profile photo.</p></header>
+          <div class="patient-profile-photo-choice"><div class="patient-profile-photo-preview"><span id="patientIdentityInitials">AK</span><img id="patientIdentityPhotoPreview" alt="" hidden></div><button type="button" onclick="document.getElementById('patientProfilePhotoInput').click()"><i class="ph ph-camera" aria-hidden="true"></i> Change photo</button></div>
+          <div class="patient-profile-edit-fields"><label class="patient-profile-edit-field" for="patientProfileNameInput">Full name<input id="patientProfileNameInput" type="text" maxlength="80" autocomplete="name"></label></div>
+          <div class="patient-profile-edit-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientIdentityEditor()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientIdentityEdit()">Save profile</button></div>
+        </section>
 
         <!-- =======================================================
              VIEW 2: FIND A DOCTOR SCREEN (BOXLESS LIST REDESIGN)
@@ -6201,8 +6560,8 @@
             <span class="nav-label">Onu</span>
           </div>
 
-          <!-- Tab 4: Profile (Disabled) -->
-          <div class="nav-item disabled" id="navItemProfile" title="Profile">
+          <!-- Tab 4: Profile -->
+          <div class="nav-item" id="navItemProfile" role="button" tabindex="0" aria-label="Open profile" title="Profile" onclick="navigateToPatientProfile()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();navigateToPatientProfile()}">
             <i class="ph ph-user"></i>
             <span class="nav-label">Profile</span>
           </div>
@@ -6361,6 +6720,7 @@
       const navDiscover = document.getElementById('navItemDiscover');
       const navVisits = document.getElementById('navItemVisits');
       const navOnu = document.getElementById('navItemAi');
+      const navProfile = document.getElementById('navItemProfile');
       if (!navDiscover || !navVisits) return;
 
       if (activeTab === 'discover') {
@@ -6392,6 +6752,11 @@
         navDiscover.innerHTML = `<i class="ph ph-stethoscope"></i><span class="nav-label">Discover</span>`;
         navVisits.className = 'nav-item';
         navVisits.innerHTML = `<i class="ph ph-calendar-check"></i><span class="nav-label">Visits</span>`;
+      } else if (activeTab === 'profile') {
+        navDiscover.className = 'nav-item';
+        navDiscover.innerHTML = `<i class="ph ph-stethoscope"></i><span class="nav-label">Discover</span>`;
+        navVisits.className = 'nav-item';
+        navVisits.innerHTML = `<i class="ph ph-calendar-check"></i><span class="nav-label">Visits</span>`;
       }
       if (navOnu) {
         navOnu.className = activeTab === 'onu' ? 'nav-item active' : 'nav-item';
@@ -6399,10 +6764,17 @@
           ? `<div class="active-nav-pill"><i class="ph-fill ph-sparkle"></i></div>`
           : `<i class="ph ph-sparkle"></i><span class="nav-label">Onu</span>`;
       }
+      if (navProfile) {
+        navProfile.className = activeTab === 'profile' ? 'nav-item active' : 'nav-item';
+        navProfile.innerHTML = activeTab === 'profile'
+          ? `<div class="active-nav-pill"><i class="ph-fill ph-user"></i></div>`
+          : `<i class="ph ph-user"></i><span class="nav-label">Profile</span>`;
+      }
     }
 
     function navigateToDiscover() {
       stopPatientOnuVoiceInput();
+      closePatientPrescriptionReview();
       const pageDiscover = document.getElementById('pageDiscover');
       const pageVisits = document.getElementById('pageVisits');
       const pageVisitDetails = document.getElementById('pageVisitDetails');
@@ -6413,6 +6785,7 @@
       const pageConfirmed = document.getElementById('pageBookingConfirmed');
       const pageRx = document.getElementById('pagePatientRxPreview');
       const pageOnu = document.getElementById('pageOnu');
+      const pagePatientProfile = document.getElementById('pagePatientProfile');
       const bottomNav = document.getElementById('patientBottomNav');
       const phoneScreen = document.querySelector('.phone-screen');
       
@@ -6420,6 +6793,9 @@
       if (bottomNav) bottomNav.classList.remove('nav-hidden');
 
       if (pageRx) pageRx.className = 'app-page page-patient-rx page-right';
+      if (pagePatientProfile) pagePatientProfile.className = 'app-page patient-profile-page page-right';
+      const healthPage = document.getElementById('pagePatientHealthAnalysis');
+      if (healthPage) healthPage.className = 'app-page patient-health-page page-right';
       if (pageConfirmed) pageConfirmed.className = 'app-page page-booking-confirmed page-right';
       if (pagePayment) pagePayment.className = 'app-page page-book-payment page-right';
       if (pageConsult) pageConsult.className = 'app-page page-book-consultation page-right';
@@ -6439,6 +6815,7 @@
 
     function navigateToVisits() {
       stopPatientOnuVoiceInput();
+      closePatientPrescriptionReview();
       const pageDiscover = document.getElementById('pageDiscover');
       const pageVisits = document.getElementById('pageVisits');
       const pageVisitDetails = document.getElementById('pageVisitDetails');
@@ -6449,6 +6826,7 @@
       const pageConfirmed = document.getElementById('pageBookingConfirmed');
       const pageRx = document.getElementById('pagePatientRxPreview');
       const pageOnu = document.getElementById('pageOnu');
+      const pagePatientProfile = document.getElementById('pagePatientProfile');
       const bottomNav = document.getElementById('patientBottomNav');
       const phoneScreen = document.querySelector('.phone-screen');
       
@@ -6456,6 +6834,9 @@
       if (bottomNav) bottomNav.classList.remove('nav-hidden');
 
       if (pageRx) pageRx.className = 'app-page page-patient-rx page-right';
+      if (pagePatientProfile) pagePatientProfile.className = 'app-page patient-profile-page page-right';
+      const healthPage = document.getElementById('pagePatientHealthAnalysis');
+      if (healthPage) healthPage.className = 'app-page patient-health-page page-right';
       if (pageConfirmed) pageConfirmed.className = 'app-page page-booking-confirmed page-right';
       if (pagePayment) pagePayment.className = 'app-page page-book-payment page-right';
       if (pageConsult) pageConsult.className = 'app-page page-book-consultation page-right';
@@ -6478,8 +6859,24 @@
     }
 
     const PATIENT_ONU_STORAGE_KEY = 'onuPatientThreads:v1';
+    const PATIENT_RX_STORAGE_KEY = 'onuPatientPrescriptionData:v1';
+    const PATIENT_HEALTH_CONTEXT_STORAGE_KEY = 'onuPatientHealthContext:v1';
+    const PATIENT_PROFILE_STORAGE_KEY = 'onuPatientProfile:v1';
+    const PATIENT_PROFILE_DEFAULTS = { name: 'Alif Khan', email: 'shaycormac004700@gmail.com', phone: '+880 1789 946454', age: '26', gender: 'Male', bloodType: 'O-', height: '167.5', weight: '69', bmi: '24.6', photo: '' };
+    let patientProfileData = { ...PATIENT_PROFILE_DEFAULTS };
+    let patientProfilePendingPhoto = null;
     const PATIENT_ONU_MAX_FILE_BYTES = 15 * 1024 * 1024;
     let patientOnuThreads = [];
+    let patientPrescriptionReviews = [];
+    let patientActiveMedications = [];
+    let patientPrescriptionPreviewUrls = new Map();
+    let patientCurrentPrescriptionReviewId = null;
+    let patientPrescriptionReturnFocus = null;
+    let patientPrescriptionEditTimers = new Map();
+    let patientPrescriptionSwipeStarts = new Map();
+    let patientPrescriptionSwipeClickSuppression = new Set();
+    let patientPrescriptionStorageUnavailable = false;
+    let patientPrescriptionStorageWarningShown = false;
     let patientOnuCurrentThreadId = null;
     let patientOnuView = 'home_empty';
     let patientOnuHistoryReturnFocus = null;
@@ -6489,11 +6886,342 @@
     let patientOnuFlow = null;
     let returnToOnuAfterDoctorList = false;
 
+    function normalizePatientPrescriptionData(value) {
+      const raw = value && typeof value === 'object' ? value : {};
+      const normalizeMedicine = medicine => ({
+        id: typeof medicine?.id === 'string' ? medicine.id : patientOnuMakeId(),
+        name: typeof medicine?.name === 'string' ? medicine.name.slice(0, 120) : '',
+        genericName: typeof medicine?.genericName === 'string' ? medicine.genericName.replace(/^Unable to resolve molecule$/i, 'Unable to find medicine').slice(0, 120) : '',
+        dose: typeof medicine?.dose === 'string' ? medicine.dose.slice(0, 120) : '',
+        frequency: typeof medicine?.frequency === 'string' ? medicine.frequency.slice(0, 120) : '',
+        duration: typeof medicine?.duration === 'string' ? medicine.duration.slice(0, 120) : '',
+        instructions: typeof medicine?.instructions === 'string' ? medicine.instructions.slice(0, 240) : '',
+        verificationStatus: ['verified','unverified','verifying'].includes(medicine?.verificationStatus) ? medicine.verificationStatus : medicine?.verified === true ? 'verified' : 'unverified'
+      });
+      return {
+        version: 1,
+        reviews: (Array.isArray(raw.reviews) ? raw.reviews : []).filter(review => review && typeof review.id === 'string' && typeof review.threadId === 'string').map(review => ({
+          id: review.id,
+          threadId: review.threadId,
+          attachmentName: typeof review.attachmentName === 'string' ? review.attachmentName.slice(0, 180) : 'Prescription photo',
+          attachmentType: typeof review.attachmentType === 'string' ? review.attachmentType.slice(0, 100) : 'image/*',
+          patient: review.patient === 'Demo patient' ? '' : typeof review.patient === 'string' ? review.patient.slice(0, 120) : '',
+          patientDetails: review.patientDetails === 'Sample-only patient details' ? '' : typeof review.patientDetails === 'string' ? review.patientDetails.slice(0, 240) : '',
+          prescriber: review.prescriber === 'Demo prescriber' ? '' : typeof review.prescriber === 'string' ? review.prescriber.slice(0, 120) : '',
+          prescriberDetails: review.prescriberDetails === 'Sample-only clinician details' ? '' : typeof review.prescriberDetails === 'string' ? review.prescriberDetails.slice(0, 240) : '',
+          patientAge: typeof review.patientAge === 'string' ? review.patientAge.slice(0, 40) : '',
+          patientSex: typeof review.patientSex === 'string' ? review.patientSex.slice(0, 40) : '',
+          patientWeight: typeof review.patientWeight === 'string' ? review.patientWeight.slice(0, 40) : '',
+          consultationDate: typeof review.consultationDate === 'string' ? review.consultationDate.slice(0, 60) : '',
+          clinicalNotes: typeof review.clinicalNotes === 'string' ? review.clinicalNotes.slice(0, 240) : '',
+          followUp: typeof review.followUp === 'string' ? review.followUp.slice(0, 160) : '',
+          diagnosis: typeof review.diagnosis === 'string' ? review.diagnosis.slice(0, 160) : '',
+          diagnosisNotes: typeof review.diagnosisNotes === 'string' ? review.diagnosisNotes.slice(0, 240) : '',
+          prescriberSpecialty: typeof review.prescriberSpecialty === 'string' ? review.prescriberSpecialty.slice(0, 120) : '',
+          prescriberHospital: typeof review.prescriberHospital === 'string' ? review.prescriberHospital.slice(0, 160) : '',
+          prescriberQualification: typeof review.prescriberQualification === 'string' ? review.prescriberQualification.slice(0, 160) : '',
+          prescriberRegistration: typeof review.prescriberRegistration === 'string' ? review.prescriberRegistration.slice(0, 80) : '',
+          medicines: (() => {
+            const legacyDemo = review.patient === 'Demo patient' && review.patientDetails === 'Sample-only patient details';
+            const rows = (Array.isArray(review.medicines) ? review.medicines : []).map(normalizeMedicine).map(medicine => legacyDemo && ['Napa','Maxpro'].includes(medicine.name) ? { ...medicine, name: '', genericName: '', dose: '', frequency: '', duration: '', instructions: '', verified: false } : medicine);
+            while (legacyDemo && rows.length < 6) rows.push({ id: patientOnuMakeId(), name: '', genericName: '', dose: '', frequency: '', duration: '', instructions: '', verified: false });
+            return rows;
+          })(),
+          updatedAt: Number(review.updatedAt) || Date.now(),
+          savedAt: Number(review.savedAt) || null
+        })),
+        medications: (Array.isArray(raw.medications) ? raw.medications : []).filter(item => item && typeof item.name === 'string').map(item => ({
+          id: typeof item.id === 'string' ? item.id : patientOnuMakeId(),
+          reviewId: typeof item.reviewId === 'string' ? item.reviewId : '',
+          name: item.name.slice(0, 120),
+          genericName: typeof item.genericName === 'string' ? item.genericName.slice(0, 120) : '',
+          dose: typeof item.dose === 'string' ? item.dose.slice(0, 120) : '',
+          frequency: typeof item.frequency === 'string' ? item.frequency.slice(0, 120) : '',
+          duration: typeof item.duration === 'string' ? item.duration.slice(0, 120) : '',
+          instructions: typeof item.instructions === 'string' ? item.instructions.slice(0, 240) : '',
+          savedAt: Number(item.savedAt) || Date.now()
+        }))
+      };
+    }
+
+    function loadPatientPrescriptionData() {
+      try {
+        const stored = localStorage.getItem(PATIENT_RX_STORAGE_KEY);
+        const data = normalizePatientPrescriptionData(stored ? JSON.parse(stored) : {});
+        data.reviews.forEach(review => review.medicines.forEach(medicine => { if (medicine.verificationStatus === 'verifying') medicine.verificationStatus = 'unverified'; }));
+        patientPrescriptionReviews = data.reviews;
+        patientActiveMedications = data.medications;
+        return data;
+      } catch (error) {
+        patientPrescriptionStorageUnavailable = true;
+        if (!patientPrescriptionStorageWarningShown) {
+          patientPrescriptionStorageWarningShown = true;
+          showToast('Saved medication data could not be loaded from this device.');
+        }
+        return { version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications, unavailable: true };
+      }
+    }
+
+    function savePatientPrescriptionData(data) {
+      try {
+        const normalized = normalizePatientPrescriptionData(data);
+        localStorage.setItem(PATIENT_RX_STORAGE_KEY, JSON.stringify(normalized));
+        patientPrescriptionStorageUnavailable = false;
+        patientPrescriptionReviews = normalized.reviews;
+        patientActiveMedications = normalized.medications;
+        return true;
+      } catch (error) { patientPrescriptionStorageUnavailable = true; return false; }
+    }
+
+    const PATIENT_ALLERGY_CATALOG = [
+      ['Medication','Penicillin'],['Medication','Amoxicillin'],['Medication','Cephalosporins'],['Medication','Sulfonamide antibiotics'],['Medication','Aspirin'],['Medication','Ibuprofen'],['Medication','NSAIDs'],['Medication','Acetaminophen'],['Medication','Codeine'],['Medication','Morphine'],['Medication','Local anesthetics'],['Medication','Iodinated contrast'],['Medication','Chemotherapy medicines'],['Medication','Other medication'],
+      ['Food','Peanuts'],['Food','Tree nuts'],['Food','Milk'],['Food','Eggs'],['Food','Wheat'],['Food','Soy'],['Food','Fish'],['Food','Shellfish'],['Food','Sesame'],['Food','Mustard'],['Food','Sulfites'],['Food','Other food'],
+      ['Environmental','Pollen'],['Environmental','Dust mites'],['Environmental','Mold'],['Environmental','Pet dander'],['Environmental','Grass'],['Environmental','Fragrances'],['Latex','Latex'],
+      ['Insect','Bee stings'],['Insect','Wasp stings'],['Insect','Ant stings'],['Insect','Mosquito bites']
+    ].map(([category,name]) => ({ id: `allergy-${name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`, name, category }));
+    const PATIENT_CONDITION_CATALOG = [
+      ['Heart & circulation','High blood pressure'],['Heart & circulation','Coronary artery disease'],['Heart & circulation','Heart failure'],['Heart & circulation','Arrhythmia'],['Heart & circulation','Atrial fibrillation'],['Heart & circulation','Previous heart attack'],['Heart & circulation','Stroke'],['Heart & circulation','High cholesterol'],['Heart & circulation','Peripheral artery disease'],
+      ['Tumors & cancers','Breast cancer'],['Tumors & cancers','Lung cancer'],['Tumors & cancers','Colorectal cancer'],['Tumors & cancers','Prostate cancer'],['Tumors & cancers','Blood cancer'],['Tumors & cancers','Brain tumor'],['Tumors & cancers','Other cancer'],
+      ['Respiratory','Asthma'],['Respiratory','COPD'],['Respiratory','Sleep apnea'],['Respiratory','Pulmonary fibrosis'],
+      ['Endocrine & metabolic','Diabetes type 1'],['Endocrine & metabolic','Diabetes type 2'],['Endocrine & metabolic','Thyroid disorder'],['Endocrine & metabolic','Obesity'],['Endocrine & metabolic','PCOS'],
+      ['Neurological','Epilepsy'],['Neurological','Migraine'],['Neurological','Parkinson disease'],['Neurological','Multiple sclerosis'],['Neurological','Dementia'],
+      ['Autoimmune','Rheumatoid arthritis'],['Autoimmune','Lupus'],['Autoimmune','Psoriasis'],['Autoimmune','Celiac disease'],['Autoimmune','Inflammatory bowel disease'],
+      ['Kidney, liver & digestive','Chronic kidney disease'],['Kidney, liver & digestive','Kidney stones'],['Kidney, liver & digestive','Chronic liver disease'],['Kidney, liver & digestive','Hepatitis'],['Kidney, liver & digestive','GERD'],['Kidney, liver & digestive','Crohn disease'],
+      ['Other','Anemia'],['Other','Osteoporosis'],['Other','Depression'],['Other','Anxiety disorder'],['Other','Other long-term condition']
+    ].map(([category,name]) => ({ id: `condition-${name.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`, name, category }));
+    let patientHealthContext = { version: 1, allergies: [], conditions: [] };
+    let patientHealthPickerType = null;
+    let patientHealthPickerSelection = [];
+    let patientHealthPickerCategory = 'All';
+    let patientHealthPickerReturnFocus = null;
+    let patientHealthProfileScrollTop = 0;
+    let patientHealthStorageWarningShown = false;
+
+    function normalizePatientHealthContext(raw) {
+      const normalizeList = items => {
+        const seen = new Set();
+        return (Array.isArray(items) ? items : []).reduce((out,item) => {
+          const name = String(item?.name || '').trim().slice(0,80);
+          const key = name.toLocaleLowerCase();
+          if (!name || seen.has(key)) return out;
+          seen.add(key);
+          out.push({ id: typeof item.id === 'string' ? item.id : patientOnuMakeId(), name, category: String(item.category || 'Custom').slice(0,50) });
+          return out;
+        }, []);
+      };
+      return { version: 1, allergies: normalizeList(raw?.allergies), conditions: normalizeList(raw?.conditions) };
+    }
+
+    function loadPatientHealthContext() {
+      try {
+        patientHealthContext = normalizePatientHealthContext(JSON.parse(localStorage.getItem(PATIENT_HEALTH_CONTEXT_STORAGE_KEY) || '{}'));
+      } catch (error) {
+        patientHealthContext = normalizePatientHealthContext(patientHealthContext);
+        if (!patientHealthStorageWarningShown) {
+          patientHealthStorageWarningShown = true;
+          showToast('Health details could not be loaded from this device.');
+        }
+      }
+      return patientHealthContext;
+    }
+
+    function savePatientHealthContext(data) {
+      const normalized = normalizePatientHealthContext(data);
+      try {
+        localStorage.setItem(PATIENT_HEALTH_CONTEXT_STORAGE_KEY, JSON.stringify(normalized));
+        patientHealthContext = normalized;
+        return true;
+      } catch (error) { showToast('Health details could not be saved on this device.'); return false; }
+    }
+
+    function openPatientHealthAnalysis() {
+      const profile = document.getElementById('pagePatientProfile');
+      patientHealthProfileScrollTop = profile?.scrollTop || 0;
+      document.querySelector('.phone-screen')?.classList.add('hide-bottom-nav');
+      document.getElementById('patientBottomNav')?.classList.add('nav-hidden');
+      if (profile) profile.className = 'app-page patient-profile-page page-left';
+      const page = document.getElementById('pagePatientHealthAnalysis');
+      if (page) { page.className = 'app-page patient-health-page active-page'; page.scrollTop = 0; }
+      loadPatientHealthContext();
+      loadPatientPrescriptionData();
+      renderPatientHealthAnalysis();
+    }
+
+    function returnFromPatientHealthAnalysis() {
+      const page = document.getElementById('pagePatientHealthAnalysis');
+      if (page) page.className = 'app-page patient-health-page page-right';
+      const profile = document.getElementById('pagePatientProfile');
+      if (profile) { profile.className = 'app-page patient-profile-page active-page'; profile.scrollTop = patientHealthProfileScrollTop; }
+      document.querySelector('.phone-screen')?.classList.remove('hide-bottom-nav');
+      document.getElementById('patientBottomNav')?.classList.remove('nav-hidden');
+      updateBottomNavState('profile');
+    }
+
+    function renderPatientHealthAnalysis() {
+      const context = loadPatientHealthContext();
+      loadPatientPrescriptionData();
+      const count = document.getElementById('patientHealthMedicationCount');
+      const list = document.getElementById('patientHealthMedicationList');
+      if (count) count.textContent = String(patientActiveMedications.length);
+      if (list) {
+        list.innerHTML = patientActiveMedications.length ? patientActiveMedications.map(medicine => {
+          const detail = [medicine.dose, medicine.frequency, medicine.duration].filter(Boolean).join(' · ');
+          return `<article class="patient-health-med-row" data-medicine-id="${escapePreVisitText(medicine.id)}"><div class="patient-health-med-main"><div class="patient-health-med-name">${escapePreVisitText(medicine.name)}</div>${medicine.genericName ? `<div class="patient-health-med-meta">${escapePreVisitText(medicine.genericName)}</div>` : ''}${detail ? `<div class="patient-health-med-meta">${escapePreVisitText(detail)}</div>` : ''}</div><button type="button" class="patient-health-med-remove" aria-label="Remove ${escapePreVisitText(medicine.name)} from active medications" onclick="removePatientHealthMedication('${escapePreVisitText(medicine.id)}')"><i class="ph ph-trash" aria-hidden="true"></i></button></article>`;
+        }).join('') : '<p class="patient-health-empty">No active medications. <button type="button" onclick="navigateToOnu()">Upload a prescription in Onu</button></p>';
+        list.querySelectorAll('.patient-health-med-row').forEach(row => {
+          let startX = 0;
+          row.addEventListener('touchstart', event => { startX = event.changedTouches[0].clientX; }, { passive: true });
+          row.addEventListener('touchend', event => { if (startX - event.changedTouches[0].clientX > 80) removePatientHealthMedication(row.dataset.medicineId); }, { passive: true });
+        });
+      }
+      renderPatientHealthEntries('allergies', context.allergies);
+      renderPatientHealthEntries('conditions', context.conditions);
+      const expanded = document.getElementById('patientHealthMedicationToggle')?.getAttribute('aria-expanded') === 'true';
+      if (list) list.hidden = !expanded;
+    }
+
+    function renderPatientHealthEntries(type, entries) {
+      const plural = type === 'allergies' ? 'Allergies' : 'Conditions';
+      const list = document.getElementById(type === 'allergies' ? 'patientHealthAllergies' : 'patientHealthConditions');
+      const empty = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesEmpty' : 'patientHealthConditionsEmpty');
+      if (!list || !empty) return;
+      list.innerHTML = entries.map(entry => `<span class="patient-health-tag">${escapePreVisitText(entry.name)}<button type="button" data-health-type="${type}" data-health-id="${escapePreVisitText(entry.id)}" aria-label="Remove ${escapePreVisitText(entry.name)} from ${plural.toLowerCase()}"><i class="ph ph-x" aria-hidden="true"></i></button></span>`).join('');
+      empty.hidden = entries.length > 0;
+      list.querySelectorAll('[data-health-id]').forEach(button => button.addEventListener('click', () => removePatientHealthEntry(button.dataset.healthType, button.dataset.healthId)));
+    }
+
+    function togglePatientHealthMedications() {
+      const toggle = document.getElementById('patientHealthMedicationToggle');
+      const list = document.getElementById('patientHealthMedicationList');
+      if (!toggle || !list) return;
+      const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(expanded));
+      list.hidden = !expanded;
+      if (expanded) renderPatientHealthAnalysis();
+    }
+
+    function removePatientHealthMedication(medicineId) {
+      loadPatientPrescriptionData();
+      const next = patientActiveMedications.filter(item => item.id !== medicineId);
+      if (next.length === patientActiveMedications.length) return;
+      if (savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: next })) {
+        renderPatientHealthAnalysis();
+        showToast('Medication removed from Active medications.');
+      } else showToast('Medication could not be removed.');
+    }
+
+    function openPatientHealthPicker(type) {
+      if (!['allergies','conditions'].includes(type)) return;
+      const context = loadPatientHealthContext();
+      patientHealthPickerType = type;
+      patientHealthPickerSelection = context[type].map(item => ({ ...item }));
+      patientHealthPickerCategory = 'All';
+      patientHealthPickerReturnFocus = document.activeElement;
+      const title = document.getElementById('patientHealthPickerTitle');
+      const search = document.getElementById('patientHealthPickerSearch');
+      if (title) title.textContent = type === 'allergies' ? 'Add allergies' : 'Add health conditions';
+      if (search) { search.value = ''; search.placeholder = type === 'allergies' ? 'Search allergies' : 'Search conditions'; search.oninput = renderPatientHealthPicker; }
+      document.getElementById('patientHealthCustomInput').value = '';
+      document.getElementById('patientHealthPickerBackdrop')?.classList.add('show');
+      const sheet = document.getElementById('patientHealthPicker');
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden','false');
+      renderPatientHealthPicker();
+      setTimeout(() => search?.focus(), 80);
+    }
+
+    function getPatientHealthPickerCatalog() {
+      const base = patientHealthPickerType === 'allergies' ? PATIENT_ALLERGY_CATALOG : PATIENT_CONDITION_CATALOG;
+      const existing = patientHealthPickerSelection.filter(entry => !base.some(item => item.name.toLocaleLowerCase() === entry.name.toLocaleLowerCase()));
+      return [...base, ...existing];
+    }
+
+    function renderPatientHealthPicker() {
+      const type = patientHealthPickerType;
+      if (!type) return;
+      const catalog = getPatientHealthPickerCatalog();
+      const categories = ['All', ...new Set(catalog.map(item => item.category))];
+      const categoryHost = document.getElementById('patientHealthPickerCategories');
+      if (categoryHost) categoryHost.innerHTML = categories.map(category => `<button type="button" class="patient-health-picker-category${category === patientHealthPickerCategory ? ' is-active' : ''}" aria-pressed="${category === patientHealthPickerCategory}" onclick="setPatientHealthPickerCategory('${escapePreVisitText(category)}')">${escapePreVisitText(category)}</button>`).join('');
+      const query = (document.getElementById('patientHealthPickerSearch')?.value || '').trim().toLocaleLowerCase();
+      const filtered = catalog.filter(item => (patientHealthPickerCategory === 'All' || item.category === patientHealthPickerCategory) && (!query || item.name.toLocaleLowerCase().includes(query)));
+      const host = document.getElementById('patientHealthPickerList');
+      if (host) {
+        host.innerHTML = filtered.length ? filtered.map(item => {
+          const checked = patientHealthPickerSelection.some(selected => selected.name.toLocaleLowerCase() === item.name.toLocaleLowerCase());
+          return `<label class="patient-health-option"><input type="checkbox" ${checked ? 'checked' : ''} data-option-id="${escapePreVisitText(item.id)}"><span>${escapePreVisitText(item.name)}</span></label>`;
+        }).join('') : '<p class="patient-health-picker-empty">No matches. Add a custom entry below.</p>';
+        host.querySelectorAll('[data-option-id]').forEach(input => input.addEventListener('change', () => togglePatientHealthPickerOption(input.dataset.optionId)));
+      }
+      const selectedCount = document.getElementById('patientHealthPickerSelectedCount');
+      if (selectedCount) selectedCount.textContent = `${patientHealthPickerSelection.length} selected`;
+    }
+
+    function setPatientHealthPickerCategory(category) {
+      patientHealthPickerCategory = category;
+      renderPatientHealthPicker();
+    }
+
+    function togglePatientHealthPickerOption(id) {
+      const entry = getPatientHealthPickerCatalog().find(item => item.id === id);
+      if (!entry) return;
+      const index = patientHealthPickerSelection.findIndex(item => item.name.toLocaleLowerCase() === entry.name.toLocaleLowerCase());
+      if (index >= 0) patientHealthPickerSelection.splice(index, 1);
+      else patientHealthPickerSelection.push({ ...entry });
+      renderPatientHealthPicker();
+    }
+
+    function addPatientHealthCustomEntry() {
+      const input = document.getElementById('patientHealthCustomInput');
+      const name = (input?.value || '').trim().slice(0,80);
+      if (!name) return;
+      if (!patientHealthPickerSelection.some(item => item.name.toLocaleLowerCase() === name.toLocaleLowerCase())) patientHealthPickerSelection.push({ id: patientOnuMakeId(), name, category: 'Custom' });
+      if (input) input.value = '';
+      patientHealthPickerCategory = 'All';
+      renderPatientHealthPicker();
+    }
+
+    function savePatientHealthSelections() {
+      if (!patientHealthPickerType) return;
+      const next = { ...loadPatientHealthContext(), [patientHealthPickerType]: patientHealthPickerSelection };
+      if (savePatientHealthContext(next)) {
+        closePatientHealthPicker();
+        renderPatientHealthAnalysis();
+      }
+    }
+
+    function closePatientHealthPicker() {
+      document.getElementById('patientHealthPickerBackdrop')?.classList.remove('show');
+      const sheet = document.getElementById('patientHealthPicker');
+      sheet?.classList.remove('show');
+      sheet?.setAttribute('aria-hidden','true');
+      patientHealthPickerType = null;
+      patientHealthPickerSelection = [];
+      if (patientHealthPickerReturnFocus?.isConnected) patientHealthPickerReturnFocus.focus();
+    }
+
+    function removePatientHealthEntry(type, id) {
+      if (!['allergies','conditions'].includes(type)) return;
+      const context = loadPatientHealthContext();
+      if (savePatientHealthContext({ ...context, [type]: context[type].filter(item => item.id !== id) })) renderPatientHealthAnalysis();
+    }
+
+    function getPatientOnuHealthContext() {
+      loadPatientPrescriptionData();
+      const health = loadPatientHealthContext();
+      return {
+        medications: patientActiveMedications.map(item => ({ name: item.name, genericName: item.genericName, dose: item.dose, frequency: item.frequency, duration: item.duration })).filter(item => item.name),
+        allergies: health.allergies.map(item => item.name),
+        conditions: health.conditions.map(item => item.name)
+      };
+    }
+
     function navigateToOnu() {
+      closePatientPrescriptionReview();
       const phone = document.querySelector('.phone-screen');
       phone?.classList.remove('hide-bottom-nav', 'onu-conversation-mode');
       document.getElementById('patientBottomNav')?.classList.remove('nav-hidden');
-      ['pageDiscover','pageVisits','pageVisitDetails','pageDoctorsList','pageDoctorProfile','pageBookConsultation','pageBookPayment','pageBookingConfirmed','pagePatientRxPreview'].forEach(id => {
+      ['pageDiscover','pageVisits','pageVisitDetails','pagePatientProfile','pagePatientHealthAnalysis','pageDoctorsList','pageDoctorProfile','pageBookConsultation','pageBookPayment','pageBookingConfirmed','pagePatientRxPreview'].forEach(id => {
         const otherPage = document.getElementById(id);
         if (otherPage) otherPage.className = otherPage.className.replace('active-page', 'page-left');
       });
@@ -6506,6 +7234,7 @@
       setPatientOnuView('home_empty');
       updateBottomNavState('onu');
       loadPatientOnuThreads();
+      loadPatientPrescriptionData();
     }
 
     function setPatientOnuView(view) {
@@ -6516,9 +7245,11 @@
       document.getElementById('patientBottomNav')?.classList.toggle('nav-hidden', isConversation);
       const home = document.getElementById('onuHomeContent');
       const stream = document.getElementById('onuConversationStream');
+      const disclaimer = document.getElementById('onuDisclaimer');
       const header = document.getElementById('onuHeader');
       if (home) home.hidden = isConversation;
       if (stream) stream.hidden = !isConversation;
+      if (disclaimer) disclaimer.hidden = !isConversation;
       if (!header) return;
       header.innerHTML = isConversation ? `
         <button type="button" class="btn-circle-icon onu-icon-button" aria-label="Back to Onu home" onclick="backToPatientOnuHome()"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
@@ -6539,6 +7270,16 @@
       catch (error) { raw = []; }
       patientOnuThreads = Array.isArray(raw) ? raw.filter(thread => thread && typeof thread.id === 'string' && typeof thread.title === 'string' && Array.isArray(thread.messages)).map(thread => ({
         id: thread.id, title: thread.title.slice(0, 120), updatedAt: Number(thread.updatedAt) || Date.now(),
+        contextMedications: Array.isArray(thread.contextMedications) ? thread.contextMedications.filter(item => item && typeof item.name === 'string').map(item => ({
+          id: typeof item.id === 'string' ? item.id : patientOnuMakeId(),
+          reviewId: typeof item.reviewId === 'string' ? item.reviewId : '',
+          name: item.name.slice(0, 120),
+          genericName: typeof item.genericName === 'string' ? item.genericName.slice(0, 120) : '',
+          dose: typeof item.dose === 'string' ? item.dose.slice(0, 120) : '',
+          frequency: typeof item.frequency === 'string' ? item.frequency.slice(0, 120) : '',
+          duration: typeof item.duration === 'string' ? item.duration.slice(0, 120) : '',
+          instructions: typeof item.instructions === 'string' ? item.instructions.slice(0, 240) : ''
+        })) : [],
         flow: thread.flow && ['booking','prescription'].includes(thread.flow.type) ? {
           type: thread.flow.type,
           step: ['reason','duration','additional','awaiting-file'].includes(thread.flow.step) ? thread.flow.step : 'complete',
@@ -6551,7 +7292,11 @@
         messages: thread.messages.filter(message => message && ['user','assistant'].includes(message.role) && typeof message.text === 'string').map(message => ({
           id: String(message.id || patientOnuMakeId()), role: message.role, text: message.text, createdAt: Number(message.createdAt) || Date.now(),
           attachments: Array.isArray(message.attachments) ? message.attachments.filter(file => file && typeof file.name === 'string').map(file => ({ name: file.name, type: String(file.type || ''), size: Number(file.size) || 0 })) : [],
-          action: message.action?.type === 'doctor-search' && ['Cardiology','Neurology','Dermatology','Pediatrics','Orthopedics','Gynecology','Medicine'].includes(message.action.specialty) ? { type: 'doctor-search', specialty: message.action.specialty } : null
+          action: message.action?.type === 'doctor-search' && ['Cardiology','Neurology','Dermatology','Pediatrics','Orthopedics','Gynecology','Medicine'].includes(message.action.specialty)
+            ? { type: 'doctor-search', specialty: message.action.specialty }
+            : message.action?.type === 'prescription-review' && typeof message.action.reviewId === 'string'
+              ? { type: 'prescription-review', reviewId: message.action.reviewId }
+              : null
         }))
       })).filter(thread => thread.messages.length) : [];
       if (activeUnsavedThread && !patientOnuThreads.some(thread => thread.id === activeUnsavedThread.id)) patientOnuThreads.unshift(activeUnsavedThread);
@@ -6577,15 +7322,87 @@
     function ensurePatientOnuThread(title) {
       let thread = patientOnuThreads.find(item => item.id === patientOnuCurrentThreadId);
       if (!thread) {
-        thread = { id: patientOnuMakeId(), title: String(title || 'New chat').slice(0, 120), updatedAt: Date.now(), messages: [], flow: patientOnuFlow };
+        thread = { id: patientOnuMakeId(), title: String(title || 'New chat').slice(0, 120), updatedAt: Date.now(), messages: [], flow: patientOnuFlow, contextMedications: [] };
         patientOnuThreads.unshift(thread);
         patientOnuCurrentThreadId = thread.id;
       }
       return thread;
     }
 
+    function createPatientPrescriptionReview(thread, file) {
+      const review = {
+        id: patientOnuMakeId(), threadId: thread.id, attachmentName: file.name || 'Prescription photo',
+        attachmentType: file.type || 'image/*', patient: 'Alif Khan', patientDetails: '28 yrs · Male',
+        patientAge: '28 yrs', patientSex: 'Male', patientWeight: '72 kg', consultationDate: '24 Aug 2026',
+        clinicalNotes: 'Mild fever, body ache. Suspected viral infection.', followUp: 'After 7 days or if symptoms persist',
+        diagnosis: 'Viral infection', diagnosisNotes: 'Throat irritation, seasonal flu symptoms.',
+        prescriber: 'Dr. John Don', prescriberDetails: '', prescriberSpecialty: 'General Medicine',
+        prescriberHospital: 'Evercare Hospital', prescriberQualification: 'MBBS, MD (Medicine)', prescriberRegistration: 'BMDC-A-48912',
+        medicines: [
+          { name: 'Cap. Maxpro', genericName: 'Esomeprazole', verificationStatus: 'verified', dose: '20 mg', frequency: '1 - 0 - 1', duration: '30 days', instructions: 'Before meal' },
+          { name: 'Tab. Tory', genericName: 'Unable to find medicine', verificationStatus: 'unverified', dose: '5 mg', frequency: '1 - 0 - 1', duration: '30 days', instructions: '30 mins before meal' },
+          { name: 'Cap. Napa Extra', genericName: 'Paracetamol + Caffeine', verificationStatus: 'verified', dose: '500 mg', frequency: '1 - 0 - 1', duration: '30 days', instructions: 'After meal' },
+          { name: 'Cap. Traxyl', genericName: 'Unable to find medicine', verificationStatus: 'unverified', dose: '500 mg', frequency: '1 - 1 - 1', duration: '3 days', instructions: 'After meal' },
+          { name: 'Tab. Cefotil Plus', genericName: 'Cefuroxime Axetil + Clavulanic', verificationStatus: 'verified', dose: '500 mg', frequency: '1 - 0 - 1', duration: '7 days', instructions: 'After meal' }
+        ].map(medicine => ({ id: patientOnuMakeId(), ...medicine })),
+        updatedAt: Date.now(), savedAt: null
+      };
+      patientPrescriptionReviews.unshift(review);
+      try { patientPrescriptionPreviewUrls.set(review.id, URL.createObjectURL(file)); } catch (error) {}
+      return review;
+    }
+
+    function processPatientOnuPrescriptionUpload(file, autoOpen = true) {
+      const thread = ensurePatientOnuThread('Prescription review');
+      patientOnuCurrentThreadId = thread.id;
+      if (thread.flow?.type === 'prescription') { thread.flow = null; patientOnuFlow = null; }
+      const now = Date.now();
+      const attachment = { name: file.name, type: file.type || 'image/*', size: file.size };
+      thread.messages.push({ id: patientOnuMakeId(), role: 'user', text: '', createdAt: now, attachments: [attachment] });
+      const processing = { id: patientOnuMakeId(), role: 'assistant', text: 'Thinking… scanning your prescription', createdAt: now + 1, attachments: [], action: { type: 'prescription-processing' } };
+      thread.messages.push(processing);
+      thread.updatedAt = now;
+      setPatientOnuView('conversation_new');
+      renderPatientOnuMessages();
+      const review = createPatientPrescriptionReview(thread, file);
+      setTimeout(() => {
+        const liveThread = patientOnuThreads.find(item => item.id === thread.id);
+        const liveMessage = liveThread?.messages.find(item => item.id === processing.id);
+        if (!liveMessage) return;
+        liveMessage.text = 'Your prescription photo is ready to review. Check each field against the original image.';
+        liveMessage.action = { type: 'prescription-review', reviewId: review.id };
+        liveThread.updatedAt = Date.now();
+        if (!savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications })) {
+          showToast('This review is available in this chat, but could not be saved on this device.');
+        }
+        savePatientOnuThreads();
+        if (patientOnuCurrentThreadId === thread.id) renderPatientOnuMessages();
+        const announcement = document.getElementById('onuAnnouncement');
+        if (announcement && patientOnuCurrentThreadId === thread.id) announcement.textContent = 'Prescription photo added. Review the details against your original image.';
+        renderPatientOnuHistory();
+        if (autoOpen && patientOnuCurrentThreadId === thread.id) openPatientPrescriptionReview(review.id);
+      }, 850);
+    }
+
     function getPatientOnuReply(thread, prompt, attachments) {
       const flow = thread.flow || patientOnuFlow;
+      const savedHealth = getPatientOnuHealthContext();
+      const promptLower = String(prompt || '').toLocaleLowerCase();
+      const medicationQuestion = /\b(medicine|medicines|medication|medications|prescription|drug|drugs|meds)\b/i.test(prompt) || savedHealth.medications.some(item => promptLower.includes(item.name.toLocaleLowerCase()));
+      const chatMedicines = Array.isArray(thread.contextMedications) ? thread.contextMedications : [];
+      const allMedicines = [...chatMedicines, ...savedHealth.medications].filter((item, index, rows) => rows.findIndex(other => other.name.toLowerCase() === item.name.toLowerCase()) === index);
+      const allergyQuestion = /\b(allerg(y|ies)|allergic|reaction)\b/i.test(prompt) || savedHealth.allergies.some(name => promptLower.includes(name.toLocaleLowerCase()));
+      const conditionQuestion = /\b(condition|conditions|health history|diagnos(ed|is)|illness|illnesses)\b/i.test(prompt) || savedHealth.conditions.some(name => promptLower.includes(name.toLocaleLowerCase()));
+      if (!flow && !attachments.length && medicationQuestion && allMedicines.length) {
+        const names = allMedicines.map(item => item.name).filter(Boolean).join(', ');
+        return { text: `I can see these medicines in your chat or local Active medications: ${names}. I can help organize questions, but this prototype does not check doses, interactions, or safety. Confirm medication decisions with your clinician or pharmacist.` };
+      }
+      if (!flow && !attachments.length && allergyQuestion && savedHealth.allergies.length) {
+        return { text: `Your Health Analysis lists these allergies: ${savedHealth.allergies.join(', ')}. I can help you organize questions, but this prototype cannot assess reactions or medical safety. Please confirm concerns with a clinician.` };
+      }
+      if (!flow && !attachments.length && conditionQuestion && savedHealth.conditions.length) {
+        return { text: `Your Health Analysis lists these conditions: ${savedHealth.conditions.join(', ')}. I can help organize questions, but this prototype does not provide medical advice or assess your conditions. Please confirm health decisions with a clinician.` };
+      }
       if (flow?.type === 'booking') {
         const answers = { ...(flow.answers || {}) };
         let nextFlow = { ...flow, answers };
@@ -6655,7 +7472,7 @@
     function beginPatientOnuAssistantFlow(type) {
       const prompts = {
         booking: 'What is the main reason you’d like to see a doctor? Tell me what you’re experiencing.',
-        prescription: 'Upload your prescription or report here. I can’t interpret documents in this prototype, but I can help you note questions for your clinician.'
+        prescription: 'Add a prescription photo here. Review the form and enter details from the image.'
       };
       patientOnuCurrentThreadId = null;
       patientOnuFlow = { type, step: type === 'booking' ? 'reason' : 'awaiting-file', answers: {} };
@@ -6839,8 +7656,11 @@
         const extension = String(file.name || '').split('.').pop().toLowerCase();
         return (file.type.startsWith('image/') || supportedExtensions.has(extension)) && file.size <= PATIENT_ONU_MAX_FILE_BYTES;
       });
-      if (valid.length !== files.length) showToast('Choose a photo or document up to 15 MB each.');
-      if (valid.length) appendPatientOnuTurn('', valid.map(file => ({ name: file.name, type: file.type || 'application/octet-stream', size: file.size })));
+      if (valid.length !== files.length) showToast('Unsupported file or over 15 MB. Choose a photo or supported document.');
+      const photos = valid.filter(file => getPatientOnuFileCategory(file) === 'image');
+      const documents = valid.filter(file => getPatientOnuFileCategory(file) !== 'image');
+      photos.forEach((photo, index) => processPatientOnuPrescriptionUpload(photo, index === 0));
+      if (documents.length) appendPatientOnuTurn('', documents.map(file => ({ name: file.name, type: file.type || 'application/octet-stream', size: file.size })));
       if (inputElement) inputElement.value = '';
     }
 
@@ -6852,7 +7672,10 @@
       stream.innerHTML = thread.messages.map(message => {
         const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map(file => { const category = getPatientOnuFileCategory(file); const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${details[1]}</span></span></div>`; }).join('')}</div>` : '';
         const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="btn-confirm-pay onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
-        return `<article class="onu-message ${message.role}" aria-label="${message.role === 'assistant' ? 'Onu reply' : 'Your message'}">${message.text ? escapePreVisitText(message.text) : ''}${files}${recommendation}</article>`;
+        const processing = message.action?.type === 'prescription-processing' ? `<div class="patient-rx-processing" role="status"><i class="ph ph-sparkle" aria-hidden="true"></i><span>Thinking… scanning your prescription</span></div>` : '';
+        const prescriptionReview = patientPrescriptionReviews.find(review => review.id === message.action?.reviewId);
+        const prescription = message.action?.type === 'prescription-review' ? `<section class="patient-rx-review" aria-label="Prescription review artifact"><div class="patient-rx-review-head"><i class="ph ph-prescription" aria-hidden="true"></i><div><div class="patient-rx-review-title">Prescription review</div><div class="patient-rx-review-meta">${prescriptionReview?.medicines.length || 0} medicines ready to review</div></div></div><button type="button" class="patient-rx-review-action" data-review-id="${escapePreVisitText(message.action.reviewId)}" onclick="openPatientPrescriptionReview(this.dataset.reviewId)">Review details <i class="ph ph-arrow-right" aria-hidden="true"></i></button></section>` : '';
+        return `<article class="onu-message ${message.role}" aria-label="${message.role === 'assistant' ? 'Onu reply' : 'Your message'}">${processing || (message.text ? escapePreVisitText(message.text) : '')}${files}${recommendation}${prescription}</article>`;
       }).join('');
       requestAnimationFrame(() => { stream.scrollTop = stream.scrollHeight; });
     }
@@ -6937,7 +7760,546 @@
       renderPatientOnuHistory();
     }
 
+    function getPatientPrescriptionReview(reviewId) {
+      return patientPrescriptionReviews.find(review => review.id === reviewId) || null;
+    }
+
+    function openPatientPrescriptionReview(reviewId) {
+      const review = getPatientPrescriptionReview(reviewId);
+      if (!review || review.threadId !== patientOnuCurrentThreadId) { showToast('This prescription review is not available in the current chat.'); return; }
+      patientCurrentPrescriptionReviewId = review.id;
+      patientPrescriptionReturnFocus = document.activeElement;
+      renderPatientPrescriptionReview(review);
+      const overlay = document.getElementById('patientPrescriptionReview');
+      overlay?.classList.add('open');
+      overlay?.setAttribute('aria-hidden', 'false');
+      overlay?.removeAttribute('inert');
+      requestAnimationFrame(() => document.querySelector('#patientRxSaveButton')?.focus());
+    }
+
+    function handlePatientPrescriptionReviewKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        if (!document.getElementById('patientRxViewer')?.hidden) closePatientPrescriptionImage();
+        else closePatientPrescriptionReview();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const overlay = document.getElementById('patientPrescriptionReview');
+      const focusable = Array.from(overlay?.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),details > summary') || []).filter(element => element.offsetParent !== null);
+      if (!focusable.length) { event.preventDefault(); overlay?.focus(); return; }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    }
+
+    function patientPrescriptionVerificationIcon(medicine) {
+      if (medicine.verificationStatus === 'verifying') return '<i class="ph ph-spinner-gap patient-rx-verify-spinner" role="status" aria-label="Verifying"></i>';
+      if (medicine.verificationStatus === 'verified') return '<i class="ph-fill ph-seal-check patient-rx-medicine-summary-status" role="img" aria-label="Verified"></i>';
+      return '<i class="ph-fill ph-warning-circle patient-rx-medicine-summary-unverified" role="img" aria-label="Unable to find medicine"></i>';
+    }
+
+    function reorderPatientPrescriptionMedicines(review) {
+      review.medicines.sort((a, b) => (a.verificationStatus === 'unverified' ? 0 : 1) - (b.verificationStatus === 'unverified' ? 0 : 1));
+      const list = document.querySelector('#patientRxContent [data-rx-medicine-list]');
+      if (!list) return;
+      review.medicines.forEach(medicine => {
+        const row = list.querySelector(`[data-medicine-wrap="${medicine.id}"]`);
+        if (row) list.appendChild(row);
+      });
+    }
+
+    function renderPatientPrescriptionReview(review) {
+      const content = document.getElementById('patientRxContent');
+      if (!content) return;
+      const fields = (label, key, value, placeholder, maxLength = 120, full = false) => `<label class="patient-rx-field${full ? ' full' : ''}">${label}<input type="text" maxlength="${maxLength}" placeholder="${placeholder}" value="${escapePreVisitText(value || '')}" data-field="${key}" oninput="updatePatientPrescriptionReviewField('${review.id}','${key}',this.value)"></label>`;
+      const longField = (label, key, value, placeholder, maxLength = 240) => `<label class="patient-rx-field full">${label}<textarea rows="1" maxlength="${maxLength}" placeholder="${placeholder}" data-field="${key}" oninput="autoGrowPatientRxField(this);updatePatientPrescriptionReviewField('${review.id}','${key}',this.value)">${escapePreVisitText(value || '')}</textarea></label>`;
+      const genderField = `<label class="patient-rx-field">Gender<select data-field="patientSex" onchange="updatePatientPrescriptionReviewField('${review.id}','patientSex',this.value)"><option value="" ${!review.patientSex ? 'selected' : ''}>Select gender</option><option value="Female" ${review.patientSex === 'Female' ? 'selected' : ''}>Female</option><option value="Male" ${review.patientSex === 'Male' ? 'selected' : ''}>Male</option><option value="Other" ${review.patientSex === 'Other' ? 'selected' : ''}>Other</option></select></label>`;
+      const medicineField = (medicine, label, field, value, placeholder, className = '', maxLength = 160) => `<label class="patient-rx-medicine-field${className ? ` ${className}` : ''}">${label}<input type="text" maxlength="${maxLength}" placeholder="${placeholder}" value="${escapePreVisitText(value || '')}" data-medicine-id="${medicine.id}" data-medicine-field="${field}" oninput="updatePatientPrescriptionMedicine('${review.id}','${medicine.id}','${field}',this.value)"></label>`;
+      const medicineInstructions = medicine => `<label class="patient-rx-medicine-field instructions">Instructions<textarea rows="1" maxlength="240" placeholder="Instructions" data-medicine-id="${medicine.id}" data-medicine-field="instructions" oninput="autoGrowPatientRxField(this);updatePatientPrescriptionMedicine('${review.id}','${medicine.id}','instructions',this.value)">${escapePreVisitText(medicine.instructions || '')}</textarea></label>`;
+      review.medicines.sort((a, b) => (a.verificationStatus === 'unverified' ? 0 : 1) - (b.verificationStatus === 'unverified' ? 0 : 1));
+      const medicineRows = review.medicines.map((medicine, index) => {
+        const summaryName = medicine.name.trim() || `Medicine ${index + 1}`;
+        return `<div class="patient-rx-medicine-wrap" data-medicine-wrap="${medicine.id}" onpointerdown="patientPrescriptionSwipeStart(event,'${medicine.id}')" onpointerup="patientPrescriptionSwipeEnd(event,'${medicine.id}')" onpointercancel="patientPrescriptionSwipeCancel('${medicine.id}')" onclick="patientPrescriptionSwipeClick(event,'${medicine.id}')">
+          <button type="button" class="patient-rx-delete-swipe" aria-label="Delete ${escapePreVisitText(summaryName)}" onclick="deletePatientPrescriptionMedicine('${review.id}','${medicine.id}')"><i class="ph ph-trash" aria-hidden="true"></i></button>
+          <details class="patient-rx-medicine${medicine.verificationStatus === 'unverified' ? ' unverified' : ''}" data-medicine-row="${medicine.id}" ontoggle="if(this.open)this.classList.remove('swipe-open')">
+            <summary><span class="patient-rx-medicine-summary-name"><span data-name-label="${medicine.id}">${escapePreVisitText(summaryName)}</span><span class="patient-rx-generic" data-generic-label="${medicine.id}">${escapePreVisitText(medicine.verificationStatus === 'unverified' ? 'Unable to find medicine' : medicine.verificationStatus === 'verifying' ? 'Checking medicine…' : medicine.genericName || 'Generic name')}</span></span><span class="patient-rx-verification-icon" data-verify-icon="${medicine.id}" aria-live="polite">${patientPrescriptionVerificationIcon(medicine)}</span><i class="ph ph-caret-down patient-rx-medicine-chevron" aria-hidden="true"></i></summary>
+            <div class="patient-rx-medicine-body">
+              <div class="patient-rx-medicine-fields">
+                ${medicineField(medicine,'Medicine name','name',medicine.name,'Medicine name','name')}
+                ${medicineField(medicine,'Dose','dose',medicine.dose,'Dose')}
+                ${medicineField(medicine,'Frequency','frequency',medicine.frequency,'Frequency')}
+                ${medicineField(medicine,'Duration','duration',medicine.duration,'Duration')}
+                ${medicineInstructions(medicine)}
+              </div>
+            </div>
+          </details>
+        </div>`;
+      }).join('');
+      content.innerHTML = `<details class="patient-rx-section patient-rx-patient-section" open><summary><span><i class="ph ph-user" aria-hidden="true"></i> Patient Information</span><i class="ph ph-caret-down patient-rx-section-chevron" aria-hidden="true"></i></summary><div class="patient-rx-section-body"><div class="patient-rx-field-grid patient-rx-patient-grid">
+          ${fields('Patient name','patient',review.patient,'Patient name',120,true)}
+          ${fields('Age','patientAge',review.patientAge,'28 yrs')}
+          ${fields('Weight','patientWeight',review.patientWeight,'72 kg')}
+          <details class="patient-rx-patient-more"><summary>Show more patient details</summary><div class="patient-rx-patient-more-grid">
+            ${genderField}
+            ${fields('Consultation date','consultationDate',review.consultationDate,'24 Aug 2026')}
+            ${longField('Clinical notes','clinicalNotes',review.clinicalNotes,'Symptoms and observations')}
+            ${longField('Follow-up','followUp',review.followUp,'Next follow-up',160)}
+          </div></details>
+        </div></div></details>
+        <details class="patient-rx-section" open><summary><span><i class="ph ph-prescription" aria-hidden="true"></i> Prescribed medications (${review.medicines.length})</span><i class="ph ph-caret-down patient-rx-section-chevron" aria-hidden="true"></i></summary><div class="patient-rx-section-body"><div data-rx-medicine-list>${medicineRows || '<p class="patient-medications-empty">No medicines yet.</p>'}</div><button type="button" class="patient-rx-secondary-action" onclick="addPatientPrescriptionMedicine(\'${review.id}\')"><i class="ph ph-plus" aria-hidden="true"></i> Add medicine</button></div></details>
+        <details class="patient-rx-section"><summary><span><i class="ph ph-activity" aria-hidden="true"></i> Diagnosis</span><i class="ph ph-caret-down patient-rx-section-chevron" aria-hidden="true"></i></summary><div class="patient-rx-section-body"><div class="patient-rx-field-grid single">${longField('Diagnosis','diagnosis',review.diagnosis,'Diagnosis',160)}${longField('Additional observations','diagnosisNotes',review.diagnosisNotes,'Clinical observations')}</div></div></details>
+        <details class="patient-rx-section"><summary><span><i class="ph ph-stethoscope" aria-hidden="true"></i> Prescriber details</span><i class="ph ph-caret-down patient-rx-section-chevron" aria-hidden="true"></i></summary><div class="patient-rx-section-body"><div class="patient-rx-field-grid single">${fields('Doctor name','prescriber',review.prescriber,'Prescriber name',120,true)}${fields('Qualification','prescriberQualification',review.prescriberQualification,'Qualification',160,true)}${fields('Hospital','prescriberHospital',review.prescriberHospital,'Hospital or clinic',160,true)}${fields('Registration number','prescriberRegistration',review.prescriberRegistration,'Registration number',80,true)}${longField('Additional details','prescriberDetails',review.prescriberDetails,'Additional prescriber details')}</div></div></details>`;
+      content.querySelectorAll('textarea').forEach(autoGrowPatientRxField);
+      const canUse = review.medicines.some(medicine => medicine.name.trim());
+      const useButton = document.getElementById('patientRxUseChatButton');
+      const saveButton = document.getElementById('patientRxSaveButton');
+      if (useButton) useButton.disabled = !canUse;
+      if (saveButton) saveButton.disabled = !canUse;
+    }
+
+    function updatePatientPrescriptionReviewField(reviewId, field, value) {
+      const review = getPatientPrescriptionReview(reviewId);
+      const allowed = ['patient','patientDetails','patientAge','patientSex','patientWeight','consultationDate','clinicalNotes','followUp','prescriber','prescriberDetails','prescriberSpecialty','prescriberHospital','prescriberQualification','prescriberRegistration','diagnosis','diagnosisNotes'];
+      if (!review || !allowed.includes(field)) return;
+      review[field] = String(value || '').slice(0, ['clinicalNotes','diagnosisNotes','patientDetails','prescriberDetails','prescriberQualification'].includes(field) ? 240 : 160);
+      review.updatedAt = Date.now();
+      savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+    }
+
+    function autoGrowPatientRxField(field) {
+      if (!field) return;
+      field.style.height = 'auto';
+      field.style.height = `${Math.max(field.scrollHeight, 42)}px`;
+    }
+
+    function updatePatientPrescriptionMedicine(reviewId, medicineId, field, value) {
+      const review = getPatientPrescriptionReview(reviewId);
+      const medicine = review?.medicines.find(row => row.id === medicineId);
+      if (!medicine || !['name','dose','frequency','duration','instructions'].includes(field)) return;
+      medicine[field] = String(value || '').slice(0, field === 'instructions' ? 240 : 160);
+      review.updatedAt = Date.now();
+      if (field === 'name') {
+        const nameLabel = document.querySelector(`[data-name-label="${medicineId}"]`);
+        if (nameLabel) nameLabel.textContent = medicine.name || `Medicine ${review.medicines.indexOf(medicine) + 1}`;
+        medicine.verificationStatus = 'verifying';
+        const generic = document.querySelector(`[data-generic-label="${medicineId}"]`);
+        if (generic) generic.textContent = 'Checking medicine…';
+        const card = document.querySelector(`[data-medicine-row="${medicineId}"]`);
+        if (card) card.classList.remove('unverified');
+        const icon = document.querySelector(`[data-verify-icon="${medicineId}"]`);
+        if (icon) icon.innerHTML = patientPrescriptionVerificationIcon(medicine);
+        const priorTimer = patientPrescriptionEditTimers.get(medicineId);
+        if (priorTimer) clearTimeout(priorTimer);
+        const timer = setTimeout(() => {
+          const currentReview = getPatientPrescriptionReview(reviewId);
+          const currentMedicine = currentReview?.medicines.find(row => row.id === medicineId);
+          if (!currentMedicine) { patientPrescriptionEditTimers.delete(medicineId); return; }
+          const resolved = resolvePatientPrescriptionMedicine(currentMedicine.name);
+          currentMedicine.verificationStatus = resolved.status;
+          currentMedicine.genericName = resolved.genericName;
+          const generic = document.querySelector(`[data-generic-label="${medicineId}"]`);
+          if (generic) generic.textContent = currentMedicine.verificationStatus === 'unverified' ? 'Unable to find medicine' : currentMedicine.genericName || 'Generic name';
+          const card = document.querySelector(`[data-medicine-row="${medicineId}"]`);
+          if (card) card.classList.toggle('unverified', currentMedicine.verificationStatus === 'unverified');
+          const statusIcon = document.querySelector(`[data-verify-icon="${medicineId}"]`);
+          if (statusIcon) statusIcon.innerHTML = patientPrescriptionVerificationIcon(currentMedicine);
+          patientPrescriptionEditTimers.delete(medicineId);
+          reorderPatientPrescriptionMedicines(currentReview);
+          savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+        }, 650);
+        patientPrescriptionEditTimers.set(medicineId, timer);
+      }
+      savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+    }
+
+    function resolvePatientPrescriptionMedicine(name) {
+      const normalized = String(name || '').trim().toLowerCase().replace(/^(cap\.|tab\.|syp\.)\s*/, '');
+      const known = [
+        { keys: ['maxpro','esomeprazole'], genericName: 'Esomeprazole' },
+        { keys: ['napa extra','paracetamol'], genericName: 'Paracetamol + Caffeine' },
+        { keys: ['cefotil plus','cefotil'], genericName: 'Cefuroxime Axetil + Clavulanic' },
+        { keys: ['tory'], genericName: 'Unable to find medicine', status: 'unverified' },
+        { keys: ['traxyl'], genericName: 'Unable to find medicine', status: 'unverified' }
+      ];
+      const match = known.find(item => item.keys.some(key => normalized === key || normalized.startsWith(`${key} `)));
+      if (match) return { status: match.status || 'verified', genericName: match.genericName };
+      return { status: 'unverified', genericName: 'Unable to find medicine' };
+    }
+
+    function settlePatientPrescriptionVerification(review) {
+      review.medicines.forEach(medicine => {
+        const timer = patientPrescriptionEditTimers.get(medicine.id);
+        if (timer) clearTimeout(timer);
+        patientPrescriptionEditTimers.delete(medicine.id);
+        if (medicine.verificationStatus === 'verifying') {
+          const resolved = resolvePatientPrescriptionMedicine(medicine.name);
+          medicine.verificationStatus = resolved.status;
+          medicine.genericName = resolved.genericName;
+        }
+      });
+      review.medicines.sort((a, b) => (a.verificationStatus === 'unverified' ? 0 : 1) - (b.verificationStatus === 'unverified' ? 0 : 1));
+    }
+
+    function addPatientPrescriptionMedicine(reviewId) {
+      const review = getPatientPrescriptionReview(reviewId);
+      if (!review) return;
+      const medicine = { id: patientOnuMakeId(), name: '', genericName: '', dose: '', frequency: '', duration: '', instructions: '', verificationStatus: 'unverified' };
+      review.medicines.push(medicine);
+      review.updatedAt = Date.now();
+      savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+      renderPatientPrescriptionReview(review);
+      document.querySelector(`[data-medicine-id="${medicine.id}"][data-medicine-field="name"]`)?.focus();
+    }
+
+    function patientPrescriptionSwipeStart(event, medicineId) {
+      const row = document.querySelector(`[data-medicine-row="${medicineId}"]`);
+      if (event.pointerType !== 'touch' || row?.open || !event.target.closest('summary')) return;
+      patientPrescriptionSwipeStarts.set(medicineId, { x: event.clientX, y: event.clientY });
+    }
+
+    function patientPrescriptionSwipeEnd(event, medicineId) {
+      const start = patientPrescriptionSwipeStarts.get(medicineId);
+      patientPrescriptionSwipeStarts.delete(medicineId);
+      if (!start) return;
+      const deltaX = event.clientX - start.x;
+      const deltaY = event.clientY - start.y;
+      if (Math.abs(deltaY) > 42 || Math.abs(deltaX) < 48) return;
+      const row = document.querySelector(`[data-medicine-row="${medicineId}"]`);
+      if (row?.open) return;
+      if (deltaX < 0) {
+        row?.classList.add('swipe-open');
+        patientPrescriptionSwipeClickSuppression.add(medicineId);
+        event.preventDefault();
+      } else if (deltaX > 0) {
+        row?.classList.remove('swipe-open');
+        patientPrescriptionSwipeClickSuppression.add(medicineId);
+        event.preventDefault();
+      }
+    }
+
+    function patientPrescriptionSwipeClick(event, medicineId) {
+      if (!patientPrescriptionSwipeClickSuppression.has(medicineId)) return;
+      patientPrescriptionSwipeClickSuppression.delete(medicineId);
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    function patientPrescriptionSwipeCancel(medicineId) { patientPrescriptionSwipeStarts.delete(medicineId); }
+
+    function deletePatientPrescriptionMedicine(reviewId, medicineId) {
+      const review = getPatientPrescriptionReview(reviewId);
+      if (!review) return;
+      review.medicines = review.medicines.filter(medicine => medicine.id !== medicineId);
+      const timer = patientPrescriptionEditTimers.get(medicineId);
+      if (timer) clearTimeout(timer);
+      patientPrescriptionEditTimers.delete(medicineId);
+      patientPrescriptionSwipeStarts.delete(medicineId);
+      review.updatedAt = Date.now();
+      savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+      renderPatientPrescriptionReview(review);
+    }
+
+    function openPatientPrescriptionImage(reviewId) {
+      const viewer = document.getElementById('patientRxViewer');
+      const image = document.getElementById('patientRxImage');
+      const message = document.getElementById('patientRxViewerMessage');
+      const url = patientPrescriptionPreviewUrls.get(reviewId);
+      if (!viewer || !image || !message) return;
+      viewer.hidden = false;
+      if (url) {
+        image.src = url;
+        image.hidden = false;
+        message.hidden = true;
+      } else {
+        image.hidden = true;
+        message.hidden = false;
+        message.textContent = 'The photo preview is no longer available in this browser session. Return to the chat and attach the image again to view it.';
+      }
+      viewer.querySelector('button')?.focus();
+    }
+
+    function closePatientPrescriptionImage() {
+      const viewer = document.getElementById('patientRxViewer');
+      const image = document.getElementById('patientRxImage');
+      if (viewer) viewer.hidden = true;
+      if (image) image.removeAttribute('src');
+      document.querySelector('#patientRxSaveButton')?.focus();
+    }
+
+    function handlePatientPrescriptionImageError() {
+      const image = document.getElementById('patientRxImage');
+      const message = document.getElementById('patientRxViewerMessage');
+      if (image) image.hidden = true;
+      if (message) {
+        message.hidden = false;
+        message.textContent = 'This browser cannot preview the uploaded image format. Return to chat and attach a JPG or PNG copy to view it.';
+      }
+    }
+
+    function closePatientPrescriptionReview() {
+      const overlay = document.getElementById('patientPrescriptionReview');
+      if (!overlay || !overlay.classList.contains('open')) return;
+      const reviewId = patientCurrentPrescriptionReviewId;
+      const returnFocus = patientPrescriptionReturnFocus;
+      closePatientPrescriptionImage();
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      overlay.setAttribute('inert', '');
+      patientCurrentPrescriptionReviewId = null;
+      renderPatientOnuMessages();
+      const reviewAction = reviewId ? document.querySelector(`.patient-rx-review-action[data-review-id="${reviewId}"]`) : null;
+      if (returnFocus?.isConnected) returnFocus.focus();
+      else if (reviewAction) reviewAction.focus();
+      else document.getElementById('onuComposerInput')?.focus();
+    }
+
+    function savePatientPrescriptionReview(reviewId = patientCurrentPrescriptionReviewId) {
+      const review = getPatientPrescriptionReview(reviewId);
+      if (!review || review.threadId !== patientOnuCurrentThreadId) return;
+      const medicines = review.medicines.filter(medicine => medicine.name.trim());
+      if (!medicines.length) { showToast('Add at least one medicine name before saving.'); return; }
+      settlePatientPrescriptionVerification(review);
+      const savedAt = Date.now();
+      const nextMedications = patientActiveMedications.filter(item => item.reviewId !== review.id);
+      medicines.forEach(medicine => nextMedications.push({ id: medicine.id, reviewId: review.id, name: medicine.name.trim(), genericName: medicine.genericName.trim(), dose: medicine.dose.trim(), frequency: medicine.frequency.trim(), duration: medicine.duration.trim(), instructions: medicine.instructions.trim(), savedAt }));
+      review.savedAt = savedAt;
+      if (!savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: nextMedications })) {
+        showToast('Could not save on this device. Your review is still here; try again or return to chat.');
+        return;
+      }
+      closePatientPrescriptionReview();
+      const thread = patientOnuThreads.find(item => item.id === review.threadId);
+      if (thread) {
+        thread.messages.push({ id: patientOnuMakeId(), role: 'assistant', text: `Saved ${medicines.length} ${medicines.length === 1 ? 'medicine' : 'medicines'} to Active medications on this device.`, createdAt: Date.now(), attachments: [] });
+        thread.updatedAt = Date.now();
+      }
+      savePatientOnuThreads();
+      renderPatientOnuMessages();
+      renderPatientActiveMedications();
+      showToast('Added to Active medications on this device.');
+    }
+
+    function usePatientPrescriptionInChat() {
+      const review = getPatientPrescriptionReview(patientCurrentPrescriptionReviewId);
+      const thread = review && patientOnuThreads.find(item => item.id === review.threadId);
+      const medicines = review?.medicines.filter(medicine => medicine.name.trim()) || [];
+      if (!review || !thread || thread.id !== patientOnuCurrentThreadId) return;
+      if (!medicines.length) { showToast('Add at least one medicine name first.'); return; }
+      settlePatientPrescriptionVerification(review);
+      thread.contextMedications = (thread.contextMedications || []).filter(item => item.reviewId !== review.id);
+      thread.contextMedications.push(...medicines.map(medicine => ({
+        id: medicine.id, reviewId: review.id, name: medicine.name.trim(), genericName: medicine.genericName.trim(), dose: medicine.dose.trim(),
+        frequency: medicine.frequency.trim(), duration: medicine.duration.trim(), instructions: medicine.instructions.trim()
+      })));
+      review.updatedAt = Date.now();
+      if (!savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications })) {
+        showToast('The medicine details are ready in this chat but could not be saved on this device.');
+      }
+      thread.messages.push({ id: patientOnuMakeId(), role: 'assistant', text: `I’ll use ${medicines.map(medicine => medicine.name.trim()).join(', ')} as context in this chat. They are not saved to Active medications.`, createdAt: Date.now(), attachments: [] });
+      thread.updatedAt = Date.now();
+      savePatientOnuThreads();
+      closePatientPrescriptionReview();
+      renderPatientOnuMessages();
+      showToast('Medicines added as context for this chat.');
+    }
+
+    function renderPatientActiveMedications() {
+      const list = document.getElementById('patientActiveMedicationList');
+      if (!list) return;
+      loadPatientPrescriptionData();
+      const count = document.getElementById('patientActiveMedicationCount');
+      if (count) count.textContent = `${patientActiveMedications.length} saved`;
+      if (!patientActiveMedications.length) {
+        list.innerHTML = '<p class="patient-medications-empty">Medicines you save from a prescription will appear here.</p>';
+        return;
+      }
+      list.innerHTML = patientActiveMedications.slice().sort((a,b) => b.savedAt - a.savedAt).map(medicine => `<article class="patient-medication-row"><div class="patient-medication-name">${escapePreVisitText(medicine.name)}</div>${medicine.genericName ? `<div class="patient-medication-instructions">${escapePreVisitText(medicine.genericName)}</div>` : ''}<div class="patient-medication-instructions">Dose: ${escapePreVisitText(medicine.dose || 'Not provided')} · ${escapePreVisitText(medicine.frequency || 'Frequency not provided')} · ${escapePreVisitText(medicine.duration || 'Duration not provided')}</div><div class="patient-medication-instructions">${escapePreVisitText(medicine.instructions || 'No instructions added')}</div><div class="patient-medication-date">Saved ${new Date(medicine.savedAt).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div></article>`).join('');
+    }
+
+    function loadPatientProfileData() {
+      try {
+        const stored = localStorage.getItem(PATIENT_PROFILE_STORAGE_KEY);
+        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS, ...(stored ? JSON.parse(stored) : {}) };
+        if (/^shaycormac004700@g\.\.\.$/i.test(patientProfileData.email || '')) patientProfileData.email = PATIENT_PROFILE_DEFAULTS.email;
+      } catch (error) {
+        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS };
+      }
+      return patientProfileData;
+    }
+
+    function savePatientProfileData() {
+      try {
+        localStorage.setItem(PATIENT_PROFILE_STORAGE_KEY, JSON.stringify(patientProfileData));
+        return true;
+      } catch (error) {
+        showToast('Profile could not be saved on this device.');
+        return false;
+      }
+    }
+
+    function renderPatientProfile() {
+      const data = loadPatientProfileData();
+      const initials = String(data.name || 'Patient').trim().split(/\s+/).slice(0, 2).map(part => part[0]).join('').toUpperCase();
+      const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+      setText('patientProfileInitials', initials || 'P');
+      setText('patientProfileName', data.name || 'Patient');
+      setText('patientProfileEmail', data.email || 'Add email address');
+      setText('patientProfilePhone', data.phone || 'Add phone number');
+      setText('patientProfileAge', data.age ? `${data.age} years` : 'Add age');
+      setText('patientProfileGender', data.gender || 'Add gender');
+      setText('patientProfileBloodType', data.bloodType || 'Not added');
+      setText('patientProfileHeight', data.height ? `${Math.round(Number(data.height))} cm` : 'Not added');
+      setText('patientProfileWeight', data.weight ? `${data.weight} kg` : 'Not added');
+      const photo = document.getElementById('patientProfilePhoto');
+      if (photo) { photo.src = data.photo || ''; photo.hidden = !data.photo; }
+      const initialsNode = document.getElementById('patientProfileInitials');
+      if (initialsNode) initialsNode.hidden = Boolean(data.photo);
+      const identityInitials = document.getElementById('patientIdentityInitials');
+      if (identityInitials) { identityInitials.textContent = initials || 'P'; identityInitials.hidden = Boolean(data.photo); }
+      const identityPhoto = document.getElementById('patientIdentityPhotoPreview');
+      if (identityPhoto) { identityPhoto.src = data.photo || ''; identityPhoto.hidden = !data.photo; }
+      const h = Number.parseFloat(data.height);
+      const w = Number.parseFloat(data.weight);
+      const bmi = h > 0 && w > 0 ? w / ((h / 100) ** 2) : Number.parseFloat(data.bmi);
+      const bmiValue = Number.isFinite(bmi) ? bmi.toFixed(1) : '—';
+      setText('patientProfileBmi', bmiValue);
+      const bmiCard = document.querySelector('.patient-profile-bmi');
+      bmiCard?.classList.remove('is-healthy', 'is-caution', 'is-high');
+      if (Number.isFinite(bmi)) bmiCard?.classList.add(bmi < 18.5 ? 'is-caution' : bmi < 25 ? 'is-healthy' : bmi < 30 ? 'is-caution' : 'is-high');
+      setText('patientProfileBmiStatus', !Number.isFinite(bmi) ? 'Add measurements' : bmi < 18.5 ? 'Below healthy range' : bmi < 25 ? 'Healthy range' : bmi < 30 ? 'Above healthy range' : 'High range');
+    }
+
+    function openPatientProfileEditor() {
+      loadPatientProfileData();
+      const fields = {
+        age: document.getElementById('patientProfileAgeInput'),
+        gender: document.getElementById('patientProfileGenderInput'),
+        bloodType: document.getElementById('patientProfileBloodTypeInput'),
+        height: document.getElementById('patientProfileHeightInput'),
+        weight: document.getElementById('patientProfileWeightInput')
+      };
+      Object.entries(fields).forEach(([key, input]) => { if (input) input.value = patientProfileData[key] || ''; });
+      const sheet = document.getElementById('patientProfileEditor');
+      const backdrop = document.getElementById('patientProfileEditBackdrop');
+      backdrop?.classList.add('show');
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => fields.age?.focus({ preventScroll: true }));
+    }
+
+    function openPatientIdentityEditor() {
+      loadPatientProfileData();
+      patientProfilePendingPhoto = patientProfileData.photo || '';
+      const nameInput = document.getElementById('patientProfileNameInput');
+      if (nameInput) nameInput.value = patientProfileData.name || '';
+      renderPatientProfile();
+      document.getElementById('patientIdentityEditBackdrop')?.classList.add('show');
+      const sheet = document.getElementById('patientIdentityEditor');
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => nameInput?.focus({ preventScroll: true }));
+    }
+
+    function closePatientIdentityEditor() {
+      const sheet = document.getElementById('patientIdentityEditor');
+      sheet?.classList.remove('show');
+      sheet?.setAttribute('aria-hidden', 'true');
+      document.getElementById('patientIdentityEditBackdrop')?.classList.remove('show');
+      patientProfilePendingPhoto = null;
+      renderPatientProfile();
+    }
+
+    function savePatientIdentityEdit() {
+      const name = String(document.getElementById('patientProfileNameInput')?.value || '').trim();
+      if (!name) { showToast('Enter your name before saving.'); document.getElementById('patientProfileNameInput')?.focus(); return; }
+      patientProfileData.name = name;
+      if (patientProfilePendingPhoto !== null) patientProfileData.photo = patientProfilePendingPhoto;
+      if (!savePatientProfileData()) return;
+      renderPatientProfile();
+      closePatientIdentityEditor();
+      showToast('Profile updated.');
+    }
+
+    function closePatientProfileEditor() {
+      const sheet = document.getElementById('patientProfileEditor');
+      sheet?.classList.remove('show');
+      sheet?.setAttribute('aria-hidden', 'true');
+      document.getElementById('patientProfileEditBackdrop')?.classList.remove('show');
+    }
+
+    function savePatientProfileEdit() {
+      const values = {
+        age: String(document.getElementById('patientProfileAgeInput')?.value || '').trim(),
+        gender: String(document.getElementById('patientProfileGenderInput')?.value || '').trim(),
+        bloodType: String(document.getElementById('patientProfileBloodTypeInput')?.value || '').trim(),
+        height: String(document.getElementById('patientProfileHeightInput')?.value || '').trim(),
+        weight: String(document.getElementById('patientProfileWeightInput')?.value || '').trim()
+      };
+      const limits = { age: [1,120], height: [50,250], weight: [1,500] };
+      for (const [key, [min, max]] of Object.entries(limits)) {
+        if (!values[key]) continue;
+        const number = Number(values[key]);
+        if (!Number.isFinite(number) || number < min || number > max) {
+          showToast(`Enter a valid ${key} between ${min} and ${max}.`);
+          document.getElementById(`patientProfile${key[0].toUpperCase()}${key.slice(1)}Input`)?.focus();
+          return;
+        }
+      }
+      Object.assign(patientProfileData, values);
+      const height = Number.parseFloat(patientProfileData.height);
+      const weight = Number.parseFloat(patientProfileData.weight);
+      if (height > 0 && weight > 0) patientProfileData.bmi = (weight / ((height / 100) ** 2)).toFixed(1);
+      if (!savePatientProfileData()) return;
+      renderPatientProfile();
+      closePatientProfileEditor();
+      showToast('Profile details updated.');
+    }
+
+    function handlePatientProfilePhoto(event) {
+      const file = event.target.files?.[0];
+      event.target.value = '';
+      if (!file) return;
+      if (!file.type.startsWith('image/')) { showToast('Choose an image for your profile photo.'); return; }
+      if (file.size > 4 * 1024 * 1024) { showToast('Choose a photo smaller than 4 MB.'); return; }
+      const reader = new FileReader();
+      reader.onload = () => {
+        const photo = String(reader.result || '');
+        if (document.getElementById('patientIdentityEditor')?.classList.contains('show')) {
+          patientProfilePendingPhoto = photo;
+          const preview = document.getElementById('patientIdentityPhotoPreview');
+          if (preview) { preview.src = photo; preview.hidden = false; }
+          const initials = document.getElementById('patientIdentityInitials');
+          if (initials) initials.hidden = true;
+        } else {
+          patientProfileData.photo = photo;
+          if (savePatientProfileData()) renderPatientProfile();
+        }
+      };
+      reader.onerror = () => showToast('That photo could not be opened. Try another image.');
+      reader.readAsDataURL(file);
+    }
+
+    function navigateToPatientProfile() {
+      stopPatientOnuVoiceInput();
+      closePatientPrescriptionReview();
+      document.querySelector('.phone-screen')?.classList.remove('hide-bottom-nav','onu-conversation-mode');
+      document.getElementById('patientBottomNav')?.classList.remove('nav-hidden');
+      ['pageDiscover','pageVisits','pageVisitDetails','pageOnu','pagePatientHealthAnalysis','pageDoctorsList','pageDoctorProfile','pageBookConsultation','pageBookPayment','pageBookingConfirmed','pagePatientRxPreview'].forEach(id => {
+        const page = document.getElementById(id);
+        if (page) page.className = page.className.replace('active-page','page-right');
+      });
+      const page = document.getElementById('pagePatientProfile');
+      if (page) { page.className = 'app-page patient-profile-page active-page'; page.scrollTop = 0; }
+      renderPatientProfile();
+      updateBottomNavState('profile');
+    }
+
     document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && document.getElementById('patientProfileEditor')?.classList.contains('show')) closePatientProfileEditor();
+      if (event.key === 'Escape' && document.getElementById('patientIdentityEditor')?.classList.contains('show')) closePatientIdentityEditor();
+      if (event.key === 'Escape' && document.getElementById('patientHealthPicker')?.classList.contains('show')) closePatientHealthPicker();
       if (event.key === 'Escape' && document.getElementById('onuHistoryOverlay')?.classList.contains('open')) closePatientOnuHistory();
     });
 
