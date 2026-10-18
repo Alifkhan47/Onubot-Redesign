@@ -35,6 +35,7 @@
       --color-nav-inactive: #717171;
       --color-accent-teal: #0E8070;
       --color-bell-bg: #EEF2F6;
+      --page-gutter: 20px;
       
       /* Typography System */
       --font-heading: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -211,24 +212,12 @@
       letter-spacing: -0.01em;
     }
 
-    .dynamic-island-notch {
-      position: absolute;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 108px;
-      height: 24px;
-      background: #000000;
-      border-radius: 20px;
-      z-index: 60;
-    }
-
     .status-icons {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 7px;
       color: var(--color-text-primary);
-      font-size: 13px;
+      font-size: 17px;
     }
 
     /* Views Layout & Slide Transitions */
@@ -274,7 +263,11 @@
     }
 
     /* Patient Onu chat */
-    .page-onu { background: #fff; padding: 8px 18px 0; overflow: hidden; }
+    /* Onu is a fixed feature surface. It never participates in app-page slides. */
+    .app-page.page-onu { position: absolute; inset: 44px 0 0; z-index: 10; display: none; padding: 8px var(--page-gutter) 0; overflow: hidden; background: #fff; transform: none !important; opacity: 1; transition: none; }
+    .app-page.page-onu.active-page { display: flex; transform: none !important; opacity: 1; z-index: 10; }
+    .app-page.page-onu:not(.active-page) { display: none !important; }
+    .phone-screen.onu-panel-open #pageOnu { z-index: 70; }
     .patient-profile-page { padding: 18px 16px 112px; background: #fff; gap: 14px; }
     .patient-profile-heading { margin: 3px 0 0; color: var(--color-text-primary); font: 700 25px/1.15 var(--font-heading); letter-spacing: -.02em; }
     .patient-profile-subtitle { margin: -8px 0 2px; color: var(--color-text-secondary); font: 13px/1.4 var(--font-body); }
@@ -328,74 +321,100 @@
     .patient-profile-editor-actions { display: flex; gap: 9px; margin-top: 17px; }
     .patient-profile-editor-actions button { min-height: 44px; flex: 1; border: 1px solid #DDE7E4; border-radius: 12px; background: #F6F8F7; color: var(--color-text-primary); font: 600 13px var(--font-body); cursor: pointer; }
     .patient-profile-editor-actions button:last-child { border-color: var(--color-primary-btn); background: var(--color-primary-btn); color: #fff; }
-    /* Profile refresh: lighter structure, consistent spacing, no nested cards. */
-    .patient-profile-page { gap: 15px; padding: 20px 18px 120px; }
+    /* Profile refresh: clear identity, health snapshot, and account sections. */
+    .patient-profile-page { gap: 18px; padding: 20px 18px 120px; }
     .patient-profile-page > *:not(dialog) { flex: 0 0 auto; }
-    .patient-profile-intro { display: grid; gap: 5px; }
+    .patient-profile-intro { display: grid; gap: 4px; }
     .patient-profile-heading { margin: 0; font-size: 26px; }
     .patient-profile-subtitle { margin: 0; font-size: 13px; }
-    .patient-profile-top-card { display: grid; grid-template-columns: minmax(0,1fr) 78px; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; background: #F3F5F4; }
-    .patient-profile-hero { display: flex; align-items: center; gap: 10px; min-width: 0; padding: 0; border: 0; text-align: left; }
-    .patient-profile-avatar-wrap, .patient-profile-avatar { width: 48px; height: 48px; flex-basis: 48px; }
-    .patient-profile-avatar { border: 0; background: #EAF3F0; }
-    .patient-profile-identity { display: grid; justify-items: start; flex: 1; width: auto; min-width: 0; }
-    .patient-profile-name-button { justify-content: flex-start; min-height: 28px; padding: 0; cursor: default; text-align: left; }
-    .patient-profile-name { font-size: 17px; }
-    .patient-profile-contact { justify-content: flex-start; max-width: 100%; margin-top: 1px; font-size: 11px; }
-    .patient-profile-contact span { display: block; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .patient-profile-change-photo { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 38px; margin-top: 2px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #087C70; font: 600 12px var(--font-body); cursor: pointer; }
-    .patient-profile-overview { min-width: 0; padding: 0; }
+    .patient-profile-top-card { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: center; }
+    .patient-profile-hero { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; min-width: 0; padding: 0; border: 0; text-align: center; }
+    .patient-profile-avatar-wrap, .patient-profile-avatar { width: 64px; height: 64px; flex-basis: 64px; }
+    .patient-profile-avatar { border: 2px solid #DCECE7; background: #EAF3F0; }
+    .patient-profile-identity { display: grid; justify-items: center; flex: 1; width: 100%; min-width: 0; }
+    .patient-profile-name-button { justify-content: center; min-height: 30px; padding: 0; cursor: default; text-align: center; }
+    .patient-profile-name { font-size: 20px; white-space: normal; }
+    .patient-profile-contact { justify-content: center; max-width: 100%; margin-top: 4px; font-size: 12px; }
+    .patient-profile-contact span { display: block; min-width: 0; overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+    .patient-profile-change-photo { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; align-self: center; margin: 0; padding: 0 2px; border: 0; background: transparent; color: #087C70; font: 600 13px var(--font-body); cursor: pointer; }
+    .patient-profile-health-summary { display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; min-height: 94px; padding: 16px 18px; border: 0; border-radius: 18px; background: #F3F7F6; color: var(--color-text-primary); text-align: left; cursor: pointer; }
+    .patient-profile-health-summary:focus-visible { outline: 2px solid #087C70; outline-offset: 3px; }
+    .patient-profile-summary-copy { display: grid; min-width: 0; gap: 4px; }
     .patient-profile-section-title { margin: 0; font-size: 17px; }
-    .patient-profile-bmi { display: grid; align-content: center; justify-content: start; min-height: 76px; padding: 0 0 0 12px; border: 0; border-left: 1px solid #DCE4E1; border-radius: 0; background: transparent; color: var(--color-text-primary); }
-    .patient-profile-bmi::after, .patient-profile-bmi-icon, .patient-profile-bmi-art { display: none; }
-    .patient-profile-kicker { color: var(--color-text-secondary); font: 650 11px/1.2 var(--font-body); letter-spacing: .01em; text-transform: none; }
-    .patient-profile-bmi-row { display: grid; gap: 2px; margin-top: 5px; }
-    .patient-profile-bmi-value { color: var(--color-text-primary); font-size: 24px; }
-    .patient-profile-bmi-status { padding: 0; border-radius: 0; background: transparent; color: #52645F; font: 500 10px/1.25 var(--font-body); }
-    .patient-profile-bmi.is-healthy .patient-profile-bmi-value, .patient-profile-bmi.is-healthy .patient-profile-bmi-status { color: #18724F; }
-    .patient-profile-bmi.is-caution .patient-profile-bmi-value, .patient-profile-bmi.is-caution .patient-profile-bmi-status { color: #9A6700; }
-    .patient-profile-bmi.is-high .patient-profile-bmi-value, .patient-profile-bmi.is-high .patient-profile-bmi-status { color: #B54747; }
+    .patient-profile-bmi { display: flex; align-items: center; gap: 9px; }
+    .patient-profile-bmi-row { display: flex; align-items: baseline; gap: 9px; margin: 0; }
+    .patient-profile-bmi-value { color: #052E28; font: 750 27px/1 var(--font-heading); }
+    .patient-profile-health-link { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; color: #087C70; font: 650 12px/1.25 var(--font-body); white-space: nowrap; }
+    .patient-profile-health-link i { font-size: 14px; }
+    .patient-profile-overview { display: none; }
+    .patient-profile-bmi::after { display: none; }
+    .patient-profile-kicker { color: #52645F; font: 650 11px/1.2 var(--font-body); letter-spacing: .04em; text-transform: uppercase; }
+    .patient-profile-health-summary.is-healthy .patient-profile-bmi-value { color: #087C70; }
+    .patient-profile-health-summary.is-caution .patient-profile-bmi-value { color: #8A5A00; }
+    .patient-profile-health-summary.is-high .patient-profile-bmi-value { color: #A43F3F; }
+    .patient-profile-bmi-icon { display: none; }
     .patient-profile-bmi-track { display: none; }
     .patient-profile-bmi-track span { display: block; width: 61.5%; height: 100%; border-radius: inherit; background: #16836F; }
     .patient-profile-details, .patient-profile-account { display: grid; gap: 10px; padding-top: 0; }
     .patient-profile-details-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .patient-profile-details-actions { display: flex; align-items: center; gap: 13px; }
-    .patient-profile-edit-details { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
-    .patient-profile-vitals { grid-template-columns: 1fr 1fr; gap: 0 18px; overflow: visible; border: 0; }
-    .patient-profile-vital { display: grid; grid-template-columns: minmax(0,1fr); gap: 4px; align-content: center; min-width: 0; min-height: 62px; padding: 9px 2px; border: 0; border-bottom: 1px solid #E9EFED; border-radius: 0; background: transparent; text-align: left; cursor: default; }
+    .patient-profile-edit-details { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 40px; padding: 0 2px; border: 0; background: transparent; color: #087C70; font: 650 12px var(--font-body); cursor: pointer; }
+    .patient-profile-vitals { display: none; }
+    .patient-profile-vital { display: grid; grid-template-columns: minmax(0,1fr); gap: 4px; align-content: center; min-width: 0; min-height: 58px; padding: 8px 2px; border: 0; border-radius: 0; background: transparent; text-align: left; cursor: default; }
     .patient-profile-vital:active { background: transparent; }
     .patient-profile-vital-icon { display: none; }
     .patient-profile-vital-copy { display: contents; }
-    .patient-profile-vital-label { grid-column: 1; color: var(--color-text-secondary); font-size: 11px; }
-    .patient-profile-vital-value { grid-column: 1; grid-row: 2; font-size: 14px; }
+    .patient-profile-vital-label { grid-column: 1; color: #64736F; font-size: 11px; }
+    .patient-profile-vital-value { grid-column: 1; grid-row: 2; font-size: 15px; }
     .patient-profile-vital-edit { display: none; }
-    .patient-profile-analysis { gap: 10px; min-height: 70px; padding: 13px 14px; border: 1px solid #E5ECEA; border-radius: 16px; background: #fff; }
-    .patient-profile-analysis-icon { width: 36px; height: 36px; flex-basis: 36px; border-radius: 11px; background: #F0F6F5; font-size: 18px; }
-    .patient-profile-analysis-copy { gap: 3px; }
-    .patient-profile-analysis-title { font-size: 14px; }
-    .patient-profile-analysis-subtitle { font-size: 11.5px; }
+    .patient-profile-analysis { gap: 11px; min-height: 52px; padding: 0; border: 0; border-radius: 0; background: transparent; }
+    .patient-profile-analysis-icon { width: 22px; height: 22px; flex-basis: 22px; border-radius: 0; background: transparent; color: #52645F; font-size: 18px; }
+    .patient-profile-analysis-copy { gap: 0; }
+    .patient-profile-analysis-title { font-size: 13px; font-weight: 600; }
+    .patient-profile-analysis-subtitle { display: none; }
+    .patient-profile-analysis > .ph-arrow-right { margin-left: auto; color: #8A9895; font-size: 15px; }
+    .patient-profile-account { gap: 7px; padding-top: 4px; }
+    .patient-profile-more { display: none; }
+    .patient-profile-action-heading { margin: 3px 0 0; color: #64736F; font: 650 11px/1.3 var(--font-body); letter-spacing: .07em; text-transform: uppercase; }
 
-    .patient-health-page { padding: 14px 18px 110px; gap: 14px; background: #fff; overflow-y: auto; }
-    .patient-health-header { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; min-height: 44px; }
-    .patient-health-header h1 { margin: 0; text-align: center; font: 700 18px/1.2 var(--font-heading); }
+    .patient-health-page { padding: 14px 20px 110px; gap: 12px; background: #fff; overflow-y: auto; }
+    .patient-health-header { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 10px; min-height: 48px; }
+    .patient-health-heading-group { display: grid; gap: 2px; min-width: 0; }
+    .patient-health-header h1 { margin: 0; text-align: left; font: 700 21px/1.15 var(--font-heading); }
+    .patient-health-subtitle { color: #71827F; font: 12px/1.35 var(--font-body); }
+    .patient-health-bmi-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 104px; padding: 17px; border-radius: 18px; background: #F3F7F6; }
+    .patient-health-bmi-kicker { color: #52645F; font: 650 11px/1.2 var(--font-body); letter-spacing: .05em; text-transform: uppercase; }
+    .patient-health-bmi-row { display: flex; align-items: baseline; gap: 10px; margin-top: 6px; }
+    .patient-health-bmi-value { color: #052E28; font: 750 32px/1 var(--font-heading); }
+    .patient-health-bmi-card.is-healthy .patient-health-bmi-value { color: #087C70; }
+    .patient-health-bmi-card.is-caution .patient-health-bmi-value { color: #8A5A00; }
+    .patient-health-bmi-card.is-high .patient-health-bmi-value { color: #A43F3F; }
+    .patient-health-bmi-note { margin-top: 5px; color: #64736F; font: 11px/1.35 var(--font-body); }
+    .patient-health-bmi-mark { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 42px; border-radius: 14px; background: rgba(255,255,255,.74); color: #087C70; font-size: 20px; }
     .patient-health-back { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #EEF3F2; color: #073B35; font-size: 20px; cursor: pointer; }
-    .patient-health-section { display: grid; gap: 10px; padding: 14px 0; border-bottom: 1px solid #E8EEEC; }
+    .patient-health-section { display: grid; gap: 7px; padding: 7px 0 9px; border: 0; }
     .patient-health-section:last-child { border-bottom: 0; }
     .patient-health-section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; }
-    .patient-health-section-title { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 15px/1.3 var(--font-heading); }
+    .patient-health-section-title { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 16px/1.3 var(--font-heading); }
     .patient-health-section-title i { color: #087C70; font-size: 18px; }
     .patient-health-count { color: #71827F; font: 500 12px var(--font-body); }
     .patient-health-text-button { min-height: 44px; padding: 0 2px; border: 0; background: transparent; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
+    .patient-health-section-toggle { display: flex; align-items: center; gap: 10px; min-width: 0; min-height: 44px; flex: 1; padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+    .patient-health-section-toggle .patient-health-section-title { flex: 1; }
+    .patient-health-section-toggle > .ph-caret-down { color: #758580; font-size: 14px; transition: transform .18s ease; }
+    .patient-health-section-toggle[aria-expanded="true"] > .ph-caret-down { transform: rotate(180deg); }
+    .patient-health-collapsible-content[hidden] { display: none !important; }
+    .patient-health-collapsible-content { display: grid; gap: 8px; padding: 2px 0 5px; }
     .patient-health-disclosure { width: 100%; min-height: 44px; padding: 0; border: 0; background: transparent; text-align: left; cursor: pointer; }
     .patient-health-disclosure .ph-caret-down { transition: transform .18s ease; }
     .patient-health-disclosure[aria-expanded="true"] .ph-caret-down { transform: rotate(180deg); }
     .patient-health-med-list { display: grid; }
     .patient-health-med-list[hidden] { display: none !important; }
-    .patient-health-med-row { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-width: 0; min-height: 62px; padding: 10px 0; border-top: 1px solid #EEF1F0; touch-action: pan-y; transition: transform .16s ease; }
+    .patient-health-med-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-width: 0; min-height: 58px; padding: 10px 0; border: 0; border-bottom: 1px solid #EDF1F0; border-radius: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
     .patient-health-med-main { min-width: 0; flex: 1; }
-    .patient-health-med-name { overflow: hidden; color: #142521; font: 650 14px/1.3 var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
-    .patient-health-med-meta { margin-top: 3px; color: #687A76; font: 12px/1.4 var(--font-body); }
-    .patient-health-med-remove { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: #FCEFED; color: #B54747; font-size: 18px; cursor: pointer; }
+    .patient-health-med-name { display: block; overflow: hidden; color: #142521; font: 650 14px/1.3 var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-health-med-meta { display: block; overflow: hidden; margin-top: 3px; color: #687A76; font: 12px/1.35 var(--font-body); text-overflow: ellipsis; white-space: nowrap; }
+    .patient-health-med-row-icon { display: grid; place-items: center; width: 32px; height: 36px; flex: 0 0 32px; color: #8A9895; font-size: 17px; }
     .patient-health-empty { margin: 0; color: #687A76; font: 13px/1.5 var(--font-body); }
     .patient-health-empty button { display: inline; min-height: 36px; padding: 0; border: 0; background: none; color: #087C70; font: 650 13px var(--font-body); cursor: pointer; }
     .patient-health-tags { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -418,11 +437,29 @@
     .patient-health-picker-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 2px; }
     .patient-health-picker-actions button { min-height: 48px; border-radius: 14px; font: 650 14px var(--font-body); }
     .patient-health-picker-empty { margin: 12px 0; color: #71827F; font: 13px var(--font-body); }
+    .patient-health-med-backdrop { z-index: 180; }
+    .patient-health-med-editor { z-index: 190; gap: 12px; max-height: 90%; padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
+    .patient-health-med-editor .sheet-top-row { margin-bottom: -2px; }
+    .patient-health-med-editor .sheet-hero-header, .patient-health-delete-sheet .sheet-hero-header { display: grid; gap: 4px; }
+    .patient-health-med-editor .patient-health-sheet-actions, .patient-health-delete-sheet .patient-health-sheet-actions { display: grid; grid-template-columns: 1fr 1.5fr; gap: 10px; }
+    .patient-health-sheet-actions button { min-height: 52px; border: 0; border-radius: 999px; font: 700 15px var(--font-heading); cursor: pointer; }
+    .patient-health-sheet-actions .btn-sheet-cancel { background: #F6F8F9; color: #052E28; }
+    .patient-health-sheet-actions .btn-sheet-confirm { background: #052E28; color: #fff; box-shadow: 0 8px 24px rgba(5,46,40,.2); }
+    .patient-health-med-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px 10px; }
+    .patient-health-med-field { display: grid; gap: 6px; min-width: 0; color: #64736F; font: 12px var(--font-body); }
+    .patient-health-med-field-wide { grid-column: 1 / -1; }
+    .patient-health-med-field input { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid #DDE7E4; border-radius: 12px; outline: 0; background: #fff; color: #142521; font: 14px var(--font-body); }
+    .patient-health-med-field input:focus { border-color: #7EB8AE; }
+    .patient-health-med-delete-link { display: inline-flex; align-items: center; align-self: flex-start; gap: 7px; min-height: 40px; padding: 0 2px; border: 0; background: transparent; color: #B54747; font: 600 13px var(--font-body); cursor: pointer; }
+    .patient-health-delete-backdrop { z-index: 200; }
+    .patient-health-delete-sheet { z-index: 210; gap: 13px; padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
+    .patient-health-delete-icon { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 13px; background: #FDF1EF; color: #B54747; font-size: 20px; }
+    .patient-health-sheet-actions .patient-health-delete-confirm { background: #B54747; box-shadow: 0 8px 24px rgba(181,71,71,.16); }
     .patient-profile-options { display: grid; gap: 0; overflow: visible; border: 0; border-radius: 0; background: transparent; }
-    .patient-profile-option { min-height: 48px; gap: 10px; padding: 0; border: 0; background: transparent; font-size: 13px; }
+    .patient-profile-option { min-height: 52px; gap: 11px; padding: 0 3px; border: 0; background: transparent; font-size: 13px; }
     .patient-profile-option + .patient-profile-option { border-top: 1px solid #E9EFED; }
-    .patient-profile-option-icon { width: 28px; height: 28px; border-radius: 0; background: transparent; font-size: 16px; }
-    .patient-profile-option.logout .patient-profile-option-icon { background: transparent; }
+    .patient-profile-option-icon { width: 22px; height: 22px; border-radius: 0; background: transparent; color: #52645F; font-size: 17px; }
+    .patient-profile-option.logout .patient-profile-option-icon { background: transparent; color: #C65D54; }
     .patient-profile-option > .ph-caret-right { font-size: 14px; }
     .patient-profile-edit-backdrop { position: absolute; inset: 0; z-index: 180; background: rgba(15,23,42,.48); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); opacity: 0; pointer-events: none; transition: opacity .25s ease; }
     .patient-profile-edit-backdrop.show { opacity: 1; pointer-events: auto; }
@@ -441,7 +478,9 @@
     .patient-profile-edit-actions button { display: flex; align-items: center; justify-content: center; min-height: 52px; border: 0; border-radius: 999px; font: 700 15px var(--font-heading); cursor: pointer; }
     .patient-profile-edit-actions .btn-sheet-cancel { flex: 1; background: #F6F8F9; color: #052E28; }
     .patient-profile-edit-actions .btn-sheet-confirm { flex: 1.5; background: #052E28; color: #fff; box-shadow: 0 8px 24px rgba(5,46,40,.2); }
-    .patient-profile-identity-sheet .patient-profile-edit-fields { grid-template-columns: 1fr; }
+    .patient-profile-identity-sheet .sheet-badge-icon { background: #F3F7F6; color: #52645F; }
+    .patient-profile-identity-sheet .patient-profile-edit-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .patient-profile-identity-sheet .patient-profile-edit-name { grid-column: 1 / -1; }
     .patient-profile-photo-choice { display: flex; align-items: center; gap: 12px; min-height: 62px; }
     .patient-profile-photo-preview { display: grid; place-items: center; width: 54px; height: 54px; flex: 0 0 54px; overflow: hidden; border-radius: 50%; background: #EAF3F0; color: #087C70; font: 700 17px var(--font-heading); }
     .patient-profile-photo-preview img { width: 100%; height: 100%; object-fit: cover; }
@@ -455,12 +494,12 @@
     .patient-rx-review-note { padding-top: 9px; border-top: 1px solid #E6EEEB; }
     .patient-rx-review-action { justify-self: start; min-height: 40px; padding: 0 12px; border: 1px solid #DDE9E5; border-radius: 11px; background: #fff; color: var(--color-accent-teal); font: 650 12px var(--font-body); cursor: pointer; }
     .patient-rx-review-action:focus-visible, .patient-rx-viewer-close:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
-    .patient-rx-overlay { position: absolute; inset: 0; z-index: 100; display: flex; flex-direction: column; background: #fff; transform: translateX(100%); transition: transform .22s ease; }
-    .patient-rx-overlay.open { transform: translateX(0); }
+    /* Prescription review is an internal Onu screen, hidden until the controller opens it. */
+    .patient-rx-overlay { position: absolute; inset: 0; z-index: 40; display: none; flex-direction: column; min-width: 0; width: 100%; overflow: hidden; background: #fff; }
+    .patient-rx-overlay.open { display: flex; }
     .patient-rx-header { display: flex; align-items: center; gap: 10px; min-height: 60px; padding: 8px 16px; border-bottom: 1px solid #E7EEEC; }
     .patient-rx-header h2 { flex: 1; margin: 0; font: 700 18px/1.2 var(--font-heading); }
     .patient-rx-save-header { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 10px; border: 1px solid #B9DCD4; border-radius: 10px; background: #EAF5F1; color: #087C70; white-space: nowrap; font: 650 11px var(--font-body); cursor: pointer; }
-    .patient-rx-back-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--color-text-primary); cursor: pointer; }
     .patient-rx-content { flex: 1 1 auto; overflow: auto; padding: 15px 18px 22px; }
     .patient-rx-section { margin: 0 0 9px; border-bottom: 1px solid #E7EEEC; }
     .patient-rx-section > summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font: 700 14px/1.3 var(--font-heading); }
@@ -526,7 +565,7 @@
     .page-onu [hidden] { display: none !important; }
     .onu-header { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; min-height: 52px; flex: 0 0 auto; }
     .onu-header-title { color: var(--color-text-primary); font: 700 21px/1.1 var(--font-heading); letter-spacing: -0.02em; }
-    .onu-header-actions { display: flex; justify-content: flex-end; gap: 4px; }
+    .onu-header-actions { display: flex; justify-content: flex-end; gap: 4px; margin-right: -8px; }
     .onu-header:has(.onu-header-actions) { position: relative; grid-template-columns: 44px 1fr auto; }
     .onu-header:has(.onu-header-actions) .onu-header-title { position: absolute; left: 50%; transform: translateX(-50%); }
     .onu-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: var(--color-bell-bg); color: var(--color-text-primary); font-size: 20px; cursor: pointer; }
@@ -558,7 +597,9 @@
     .onu-attachment-copy { display: flex; flex-direction: column; min-width: 0; gap: 2px; }
     .onu-attachment-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .onu-attachment-type { color: var(--color-text-secondary); font-size: 11px; }
-    .onu-composer-area { position: absolute; left: 12px; right: 12px; bottom: 82px; z-index: 15; }
+    .onu-attachment-photo { display: block; width: min(100%, 250px); max-height: 240px; object-fit: cover; border: 1px solid #DDE9E5; border-radius: 13px; background: #F8FAF9; }
+    .onu-attachment-photo-caption { display: block; max-width: 250px; margin-top: 5px; overflow: hidden; color: var(--color-text-secondary); font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+    .onu-composer-area { position: absolute; left: var(--page-gutter); right: var(--page-gutter); bottom: 82px; z-index: 15; }
     .phone-screen.onu-conversation-mode .onu-composer-area { bottom: 18px; }
     .phone-screen.onu-conversation-mode #onuHomeSuggestions { display: none; }
     .onu-composer-dock { position: relative; inset: auto; z-index: auto; padding: 8px 9px; background: #fff; border: 1px solid #DDE6E3; border-radius: 24px; box-shadow: 0 4px 18px rgba(15,23,42,.08); display: flex; align-items: flex-end; gap: 5px; }
@@ -574,20 +615,43 @@
     .onu-composer textarea::placeholder { color: #83909C; }
     .onu-composer .onu-send-button { background: var(--color-primary-btn); color: #fff; font-size: 18px; }
     .onu-disclaimer { margin: 0 4px 8px; text-align: center; color: var(--color-text-secondary); font: 11px/1.3 var(--font-body); }
-    .onu-history-overlay { position: absolute; inset: 0; z-index: 90; background: rgba(15,23,42,.34); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease; }
+    .onu-history-overlay { position: absolute; inset: 0; z-index: 30; background: rgba(15,23,42,.34); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .32s cubic-bezier(.2,.75,.25,1), visibility 0s linear .32s; }
     .onu-history-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
-    .onu-history-drawer { position: absolute; inset: 0 auto 0 0; width: min(82%, 310px); padding: 12px 14px 24px; background: #fff; box-shadow: 12px 0 32px rgba(15,23,42,.16); transform: translateX(-102%); transition: transform .24s cubic-bezier(.2,.8,.2,1); display: flex; flex-direction: column; }
-    .onu-history-overlay.open .onu-history-drawer { transform: translateX(0); }
+    .onu-history-overlay.open { transition-delay: 0s; }
+    .onu-history-drawer { position: absolute; inset: 0 0 0 auto; width: min(82%, 310px); padding: 12px 14px 24px; background: #fff; box-shadow: -12px 0 32px rgba(15,23,42,.16); transform: translate3d(102%,0,0); transition: transform .32s cubic-bezier(.2,.75,.25,1); will-change: transform; display: flex; flex-direction: column; }
+    .onu-history-overlay.from-left .onu-history-drawer { inset: 0 auto 0 0; box-shadow: 12px 0 32px rgba(15,23,42,.16); transform: translate3d(-102%,0,0); }
+    .onu-history-overlay.open .onu-history-drawer { transform: translate3d(0,0,0); }
+    .onu-history-overlay.no-motion, .onu-history-overlay.no-motion .onu-history-drawer { transition: none !important; }
     .onu-history-heading { display: flex; align-items: center; justify-content: space-between; min-height: 48px; font: 700 17px var(--font-heading); }
     .onu-history-new { display: flex; align-items: center; gap: 9px; width: 100%; min-height: 46px; margin: 10px 0 16px; padding: 0 12px; border: 1px solid #E2ECE9; border-radius: 13px; background: #F8FAF9; color: var(--color-text-primary); font: 600 13px var(--font-body); cursor: pointer; }
     .onu-history-list { overflow-y: auto; }
     .onu-history-group { margin: 12px 0 6px; color: var(--color-text-secondary); font: 600 11px var(--font-body); text-transform: uppercase; letter-spacing: .06em; }
-    .onu-thread-button { display: block; width: 100%; min-height: 46px; padding: 11px 10px; overflow: hidden; border: 0; border-radius: 10px; background: transparent; text-align: left; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-primary); font: 13px var(--font-body); cursor: pointer; }
+    .onu-thread-row { display: flex; align-items: center; min-height: 48px; border-radius: 12px; user-select: none; -webkit-user-select: none; }
+    .onu-thread-button { display: block; flex: 1 1 auto; min-width: 0; min-height: 46px; padding: 11px 10px; overflow: hidden; border: 0; border-radius: 10px; background: transparent; text-align: left; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-primary); font: 13px var(--font-body); cursor: pointer; touch-action: pan-y; }
+    .onu-thread-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: -2px; }
     .onu-thread-button:hover { background: #F1F6F4; }
+    .onu-thread-row:active { background: #F1F6F4; }
     .onu-history-empty { padding: 10px; color: var(--color-text-secondary); font: 13px/1.45 var(--font-body); }
+    .onu-thread-action-overlay, .onu-thread-modal-overlay { position: absolute; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(15,23,42,.38); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility 0s linear .2s; }
+    .onu-thread-action-overlay.open, .onu-thread-modal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; transition-delay: 0s; }
+    .onu-thread-actions-dialog, .onu-thread-modal { width: min(100%, 360px); padding: 20px; border: 1px solid #E2ECE9; border-radius: 22px; background: #fff; box-shadow: 0 18px 55px rgba(5,46,40,.2); }
+    .onu-thread-actions-title, .onu-thread-modal-title { margin: 0 0 14px; color: var(--color-text-primary); font: 700 19px/1.25 var(--font-heading); }
+    .onu-thread-action-choice { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 0 12px; border: 0; border-radius: 13px; background: transparent; color: var(--color-text-primary); text-align: left; font: 600 14px var(--font-body); cursor: pointer; }
+    .onu-thread-action-choice:hover, .onu-thread-action-choice:focus-visible { background: #F1F7F4; outline: none; }
+    .onu-thread-action-choice i { color: var(--color-accent-teal); font-size: 18px; }
+    .onu-thread-action-choice.delete { color: #A33A35; }
+    .onu-thread-action-choice.delete i { color: #A33A35; }
+    .onu-thread-modal-label { display: block; margin-bottom: 7px; color: var(--color-text-secondary); font: 12px var(--font-body); }
+    .onu-thread-modal-input { width: 100%; min-height: 50px; padding: 0 14px; border: 1px solid #C8DCD5; border-radius: 13px; background: #F8FBF9; color: var(--color-text-primary); font: 15px var(--font-body); }
+    .onu-thread-modal-input:focus { outline: 2px solid rgba(0,128,119,.24); border-color: var(--color-accent-teal); }
+    .onu-thread-modal-copy { margin: -4px 0 18px; color: var(--color-text-secondary); font: 13px/1.45 var(--font-body); }
+    .onu-thread-modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 18px; }
+    .onu-thread-modal-actions button { min-width: 94px; min-height: 44px; padding: 0 14px; border: 1px solid #DDE9E5; border-radius: 12px; background: #F7FAF8; color: var(--color-text-primary); font: 650 13px var(--font-body); cursor: pointer; }
+    .onu-thread-modal-actions .confirm { border-color: var(--color-primary-btn); background: var(--color-primary-btn); color: #fff; }
+    .onu-thread-modal-actions .danger { border-color: #A33A35; background: #A33A35; color: #fff; }
     .onu-live-region { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     @media (max-height: 720px) { .onu-home-content { padding-bottom: 96px; } }
-    @media (prefers-reduced-motion: reduce) { .onu-history-overlay, .onu-history-drawer, .onu-suggestion-button { transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .onu-history-overlay, .onu-history-drawer, .onu-suggestion-button, .onu-thread-action-overlay, .onu-thread-modal-overlay { transition: none; will-change: auto; } }
 
     /* ============================================================
        PAGE 1: DISCOVER SCREEN (WISE / UBER LUXURY REDESIGN)
@@ -625,28 +689,31 @@
       margin: 0;
     }
 
-    /* Hero Showcase Card: Discover Doctors (Minimal & Streamlined) */
+    /* Find a doctor hero card: flat pastel surface with no outline */
     .discover-hero-card {
-      background: #FFFFFF;
-      border: 1px solid #E2ECE9;
+      background: #EFF7F5;
+      border: 0;
       border-radius: 20px;
       padding: 20px;
-      box-shadow: 0 2px 12px rgba(5, 46, 40, 0.04);
+      box-shadow: none;
       display: flex;
       flex-direction: column;
       gap: 16px;
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: background-color 0.18s ease, opacity 0.18s ease;
     }
 
     .discover-hero-card:hover {
-      border-color: #7EB8AE;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(5, 46, 40, 0.08);
+      background: #EAF4F1;
     }
 
     .discover-hero-card:active {
-      transform: scale(0.99);
+      opacity: 0.88;
+    }
+
+    .discover-hero-card:focus-visible {
+      outline: 3px solid var(--color-border-selected);
+      outline-offset: 3px;
     }
 
     .hero-card-header {
@@ -659,8 +726,8 @@
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: #EFF7F5;
-      border: 1px solid rgba(14, 128, 112, 0.18);
+      background: rgba(255, 255, 255, 0.58);
+      border: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -683,25 +750,6 @@
       color: #0F172A;
       letter-spacing: -0.02em;
       margin: 0;
-    }
-
-    /* Text button with arrow - sleek and minimal */
-    .hero-text-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 700;
-      color: #0E8070;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      width: fit-content;
-    }
-
-    .discover-hero-card:hover .hero-text-btn {
-      color: #052E28;
-      gap: 9px;
     }
 
     /* Discover Streamlined Layout */
@@ -920,7 +968,7 @@
       color: #64748B;
     }
 
-    /* Subtle doctor result cards */
+    /* Soft, high-contrast doctor result cards */
     .doctors-directory-list {
       display: flex;
       flex-direction: column;
@@ -929,34 +977,36 @@
     }
 
     .doctor-result-card {
-      background: #FFFFFF;
-      border: 1px solid #E3ECE9;
-      border-radius: 16px;
-      padding: 14px;
+      position: relative;
+      background: #F0F7F4;
+      border: 1px solid transparent;
+      border-radius: 20px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 14px;
+      gap: 16px;
       cursor: pointer;
-      transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+      transition: background-color 0.15s ease, box-shadow 0.15s ease;
       width: 100%;
       box-sizing: border-box;
     }
 
-    .doctor-result-card:hover {
-      background: #FFFFFF;
-      border-color: #C9DDD7;
-      box-shadow: 0 3px 12px rgba(5, 46, 40, 0.045);
-    }
-
     .doctor-result-card:active {
-      transform: scale(0.99);
+      background: #E2EFEA;
     }
 
-    .doctor-result-card:focus-visible {
-      outline: 3px solid rgba(14, 128, 112, 0.24);
-      outline-offset: 2px;
-      border-color: #0E8070;
+    .doctor-card-profile-link {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: inherit;
+      cursor: pointer;
+    }
+
+    .doctor-card-profile-link:focus-visible {
+      outline: 3px solid #087E70;
+      outline-offset: 3px;
     }
 
     .doctor-result-identity {
@@ -969,19 +1019,20 @@
 
     .doctor-avatar-wrap {
       position: relative;
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       flex-shrink: 0;
-      margin-top: 0;
+      margin: 0 0 0 2px;
     }
 
     .doctor-avatar-img {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       object-fit: cover;
-      background: #E8F4F1;
-      border: 1px solid #D1E5E1;
+      background: #DCECE6;
+      border: 0;
+      box-shadow: none;
       display: block;
     }
 
@@ -1022,8 +1073,8 @@
 
     .doctor-degree-specialty {
       font-family: var(--font-body);
-      font-size: 13px;
-      color: #64748B;
+      font-size: 13.5px;
+      color: #526274;
       font-weight: 400;
       line-height: 1.35;
       white-space: normal;
@@ -1034,47 +1085,72 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
       margin-top: 0;
       width: 100%;
-      min-height: 44px;
-      padding-top: 12px;
-      border-top: 1px solid #EEF2F1;
+      min-height: 52px;
+      padding-top: 14px;
+    }
+
+    .doctor-price-block {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
     }
 
     .doctor-price-val {
       font-family: var(--font-heading);
-      font-size: 18px;
+      font-size: 19px;
       font-weight: 700;
       color: #0F172A;
       letter-spacing: -0.01em;
       line-height: 1;
     }
 
+    .doctor-price-caption {
+      font-family: var(--font-body);
+      font-size: 11.5px;
+      font-weight: 500;
+      line-height: 1.3;
+      color: #526274;
+    }
+
     .doctor-text-btn {
-      min-height: 44px;
-      min-width: 138px;
+      position: relative;
+      z-index: 2;
+      min-height: 48px;
+      min-width: 144px;
       box-sizing: border-box;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 4px;
+      gap: 7px;
       font-family: var(--font-heading);
       font-size: 13px;
-      font-weight: 600;
-      color: #0E8070;
+      font-weight: 700;
+      color: #052E28;
       cursor: pointer;
-      background: transparent;
+      background: #DCECE6;
       border: none;
-      padding: 0 8px;
-      border-radius: 10px;
-      background: #F2F6F5;
-      transition: all 0.15s ease;
+      padding: 0 14px;
+      border-radius: 14px;
+      transition: background-color 0.15s ease;
       white-space: nowrap;
     }
 
-    .doctor-result-card:hover .doctor-text-btn {
-      color: #052E28;
-      background: #EAF2F0;
+    .doctor-text-btn:active {
+      background: #CADFD6;
+    }
+
+    .doctor-text-btn:focus-visible {
+      outline: 3px solid #087E70;
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .doctor-result-card,
+      .doctor-text-btn { transition: none; }
     }
 
 
@@ -1251,16 +1327,13 @@
     }
 
     .profile-info-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #F8FAF9;
-      border: 1px solid #EAEFEF;
+      width: 24px;
+      height: 24px;
       color: #0E8070;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 19px;
+      font-size: 21px;
       flex-shrink: 0;
     }
 
@@ -1901,12 +1974,8 @@
       transition: all 0.15s ease;
     }
 
-    .btn-confirm-pay:hover {
-      background: var(--color-primary-btn-hover);
-      transform: translateY(-1px);
-    }
-
     .btn-confirm-pay:active {
+      background: var(--color-primary-btn-hover);
       transform: scale(0.98);
     }
 
@@ -1985,7 +2054,7 @@
        VIEW 5: BOOKING CONFIRMATION SCREEN (HIGH FIDELITY REDESIGN)
        ============================================================ */
     .page-booking-confirmed {
-      padding: 16px 20px 0;
+      padding: 18px 20px 0;
       display: flex;
       flex-direction: column;
       min-height: 100%;
@@ -1994,35 +2063,68 @@
       overflow-y: auto;
     }
 
+    .confirm-content-group {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      width: 100%;
+      max-width: 430px;
+      margin: 24px auto auto;
+    }
+
     .confirm-hero-section {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      padding: 14px 10px 2px;
+      padding: 0 10px;
       gap: 9px;
     }
 
     .confirm-success-seal {
-      width: 62px;
-      height: 62px;
+      position: relative;
+      width: 66px;
+      height: 66px;
       display: grid;
       place-items: center;
-      border-radius: 19px;
+      border-radius: 21px;
       background: #EAF1EF;
-      font-size: 37px;
+      font-size: 38px;
       color: var(--color-primary-btn);
-      animation: sealPop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    @keyframes sealPop {
-      0% { transform: scale(0.6); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
+    .confirm-success-seal::after {
+      content: '';
+      position: absolute;
+      inset: -7px;
+      border: 2px solid #A8D2C8;
+      border-radius: 25px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .page-booking-confirmed.active-page .confirm-success-seal {
+      animation: confirmSuccessPop 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    }
+
+    .page-booking-confirmed.active-page .confirm-success-seal::after {
+      animation: confirmSuccessRing 650ms ease-out 100ms both;
+    }
+
+    @keyframes confirmSuccessPop {
+      0% { transform: scale(0.68) rotate(-10deg); opacity: 0; }
+      70% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    @keyframes confirmSuccessRing {
+      0% { transform: scale(0.76); opacity: 0.65; }
+      100% { transform: scale(1.22); opacity: 0; }
     }
 
     .confirm-hero-title {
       font-family: var(--font-heading);
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 800;
       color: #0F172A;
       letter-spacing: -0.02em;
@@ -2032,136 +2134,49 @@
     .confirm-hero-sub {
       font-family: var(--font-body);
       font-size: 13.5px;
-      color: #64748B;
+      color: #526274;
       line-height: 1.5;
-      max-width: 290px;
+      max-width: 300px;
       margin: 0;
     }
 
-    .confirm-content-group {
+    .confirm-receipt-card {
       display: flex;
       flex-direction: column;
-      margin-top: 38px;
-      margin-bottom: auto;
-    }
-
-    /* Appointment timing and queue number */
-    .confirm-serial-card {
-      background: #F4F7F6;
-      border: 0;
-      border-radius: 18px;
-      padding: 19px 17px 15px;
-      margin: 20px 0 17px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .confirm-card-main-row {
-      display: flex;
-      align-items: stretch;
-      justify-content: space-between;
       gap: 16px;
+      padding: 18px;
+      border-radius: 20px;
+      background: #F5F8F6;
+      color: var(--color-text-primary);
     }
 
-    .confirm-start-col {
+    .confirm-receipt-total {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex: 1 1 0;
-      min-width: 0;
-      gap: 6px;
+      gap: 4px;
     }
 
-    .confirm-start-label-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .confirm-stat-label {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      color: #64748B;
-      letter-spacing: 0.05em;
+    .confirm-receipt-label,
+    .confirm-fact-label {
+      color: #526274;
+      font: 600 11px/1.3 var(--font-body);
+      letter-spacing: 0.045em;
       text-transform: uppercase;
     }
 
-    .confirm-start-val {
-      font-family: var(--font-heading);
-      font-size: 23px;
-      font-weight: 800;
-      color: #0F172A;
-      line-height: 1.1;
-      letter-spacing: -0.01em;
-    }
-
-    .confirm-serial-col {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: space-between;
-      flex: 1 1 0;
-      min-width: 0;
-      gap: 4px;
-      text-align: right;
-    }
-
-    .confirm-serial-col .confirm-stat-label {
-      color: #0E8070;
-    }
-
-    .confirm-serial-num {
-      font-family: var(--font-heading);
-      font-size: 38px;
-      font-weight: 800;
-      color: var(--color-primary-btn);
-      line-height: 1;
+    .confirm-receipt-amount {
+      color: #052E28;
+      font: 800 30px/1.1 var(--font-heading);
       letter-spacing: -0.02em;
-    }
-
-    .confirm-card-divider {
-      height: 1px;
-      background: #EAEFEF;
-    }
-
-    .confirm-note-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-body);
-      font-size: 12.5px;
-      color: #64748B;
-      line-height: 1.35;
-    }
-
-    .confirm-note-row i {
-      font-size: 16px;
-      color: #0E8070;
-      flex-shrink: 0;
-    }
-
-    .confirm-details-group {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      margin-top: 18px;
-    }
-
-    /* Doctor and visit details */
-    .confirm-doc-section {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-      padding: 0 2px 10px;
     }
 
     .confirm-doc-header {
       display: flex;
       align-items: center;
       gap: 12px;
+      padding: 14px 0;
+      border-top: 1px solid #DFEAE5;
+      border-bottom: 1px solid #DFEAE5;
     }
 
     .confirm-doc-avatar {
@@ -2181,48 +2196,56 @@
     }
 
     .confirm-doc-name {
-      font-family: var(--font-heading);
-      font-size: 16px;
-      font-weight: 800;
       color: #0F172A;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font: 700 15px/1.3 var(--font-heading);
+      overflow-wrap: anywhere;
     }
 
     .confirm-doc-spec {
-      font-family: var(--font-body);
-      font-size: 12.5px;
-      color: #64748B;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      color: #526274;
+      font: 13px/1.35 var(--font-body);
+      overflow-wrap: anywhere;
     }
 
-    .confirm-meta-row {
+    .confirm-booking-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px 12px;
+    }
+
+    .confirm-booking-fact {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding-top: 12px;
-      border-top: 1px solid #EEF2F1;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      min-width: 0;
     }
 
-    .confirm-meta-val {
-      font-family: var(--font-heading);
-      font-size: 15px;
-      font-weight: 700;
+    .confirm-booking-fact:nth-child(even) {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .confirm-fact-value {
       color: #0F172A;
+      font: 700 14px/1.35 var(--font-heading);
+      overflow-wrap: anywhere;
     }
 
-    .confirm-meta-val.mode-highlight {
-      color: var(--color-primary-btn);
+    .confirm-fact-value.mode-highlight {
+      color: #087E70;
     }
 
-    /* Reuse the profile page's proven sticky action dock spacing. */
     .confirm-fixed-bottom-dock .btn-confirm-pay {
       min-height: 52px;
       flex-shrink: 0;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .page-booking-confirmed.active-page .confirm-success-seal,
+      .page-booking-confirmed.active-page .confirm-success-seal::after {
+        animation: none;
+      }
     }
 
     /* ============================================================
@@ -2941,10 +2964,11 @@
 
     .visits-date-title {
       font-family: var(--font-heading);
-      font-size: 14px;
+      font-size: 15.5px;
       font-weight: 700;
       color: #0F172A;
       letter-spacing: -0.01em;
+      line-height: 1.25;
     }
 
     .visits-date-subtitle {
@@ -2961,18 +2985,48 @@
       width: 100%;
     }
 
-    /* Patient Visit Item Card (Minimal, Cardless Aesthetic, Breathable) */
-    .patient-visit-card {
-      background: #FFFFFF;
-      border: 1px solid #E8ECEF;
-      border-radius: 16px;
-      padding: 16px;
+    .visits-future-groups {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
+    }
+
+    .visits-view-more-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      min-height: 44px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #64748B;
+      font: 600 13.5px var(--font-heading);
+      cursor: pointer;
+      transition: color 0.15s ease;
+    }
+
+    .visits-view-more-button:hover {
+      color: #475569;
+    }
+
+    .visits-view-more-button i {
+      font-size: 16px;
+    }
+
+    /* Clickable appointment cards grouped by date */
+    .patient-visit-card {
+      background: #FFFFFF;
+      border: 1px solid #E2ECEA;
+      border-radius: 16px;
+      padding: 16px 16px 11px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       box-shadow: none;
       cursor: pointer;
-      transition: all 0.16s ease;
+      transition: border-color 0.16s ease, background-color 0.16s ease;
       position: relative;
     }
 
@@ -2981,10 +3035,31 @@
       background: #FFFFFF;
     }
 
+    .patient-visit-card:active {
+      background: #F8FAF9;
+    }
+
+    #visitsCompletedSection .visits-date-cards-stack {
+      gap: 0;
+    }
+
+    #visitsCompletedSection .patient-visit-card {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 12px 0;
+    }
+
+    #visitsCompletedSection .patient-visit-card:hover,
+    #visitsCompletedSection .patient-visit-card:active {
+      background: transparent;
+      border-color: transparent;
+    }
+
     .patient-visit-detail-area {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
       cursor: pointer;
     }
 
@@ -3004,7 +3079,8 @@
     }
 
     .patient-visit-detail-area:focus-visible,
-    .patient-card-previsit-button:focus-visible {
+    .patient-card-previsit-button:focus-visible,
+    .patient-visit-card:focus-visible {
       outline: 3px solid rgba(14, 128, 112, 0.35);
       outline-offset: 3px;
       border-radius: 8px;
@@ -3013,29 +3089,28 @@
     .patient-visit-info-cluster {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       flex: 1;
       min-width: 0;
       overflow: hidden;
     }
 
     .patient-visit-mode-icon {
-      width: 36px;
+      width: 24px;
       height: 36px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 1px solid #DCE8E4;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: #0E8070;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 16px;
       flex-shrink: 0;
     }
 
     .patient-visit-mode-icon.completed-badge {
-      background: #FFFFFF;
-      border-color: #DCE8E4;
+      background: transparent;
       color: #0E8070;
     }
 
@@ -3150,30 +3225,30 @@
     .patient-card-previsit-button {
       min-height: 44px;
       width: 100%;
+      max-width: 100%;
       box-sizing: border-box;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 9px;
       font-family: var(--font-heading);
       font-size: 13.5px;
       font-weight: 700;
       color: #28685F;
-      background: #F8FAF9;
-      border: 1px solid #EEF3F2;
-      border-radius: 10px;
-      padding: 0 12px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
       cursor: pointer;
       text-align: left;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      transition: color 0.15s ease;
     }
 
     .patient-card-previsit-button:hover {
-      background: #F0F6F4;
-      border-color: #D6EAE6;
+      color: var(--color-primary-btn);
     }
 
     .patient-card-previsit-button i:last-child {
-      margin-left: auto;
       font-size: 16px;
     }
 
@@ -3196,8 +3271,7 @@
       gap: 12px;
       width: 100%;
       padding: 0;
-      border-top: 1px solid #E8ECEF;
-      padding-top: 10px;
+      border: 0;
     }
 
     .patient-card-bottom-row.is-ongoing {
@@ -3227,15 +3301,12 @@
     .patient-card-rejoin-button:hover { background: #DCEFEA; border-color: #A8D2C8; }
     .patient-card-rejoin-button i { font-size: 16px; }
 
-    .patient-visit-card:focus-within {
-      border-color: #7EB8AE;
-    }
-
     .patient-card-serial-num {
-      font-family: var(--font-heading);
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #0F172A;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text-secondary);
+      letter-spacing: 0;
       flex-shrink: 0;
     }
 
@@ -3338,8 +3409,6 @@
       font: 700 13px var(--font-heading); transition: background .15s ease, border-color .15s ease;
     }
     .details-prep-action:hover { background: #E9ECEB; border-color: transparent; }
-    .details-prep-action-label { display: flex; align-items: center; gap: 9px; min-width: 0; }
-    .details-prep-action-label i { color: var(--color-primary-btn); font-size: 17px; }
     .details-document-empty {
       display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 4px 2px;
       color: #76817D; font: 12px/1.4 var(--font-body);
@@ -3577,7 +3646,7 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 18px;
       padding: 0 0 2px;
       flex-shrink: 0;
     }
@@ -3586,16 +3655,12 @@
       width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center;
       border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE8E4; color: #087E70; font-size: 19px;
     }
-    .details-visit-summary .details-doc-header-info { gap: 4px; }
+    .details-visit-summary .details-doc-header-info { gap: 4px; flex: 1; }
     .details-visit-summary .details-patient-plain-name { font-size: 17px; line-height: 1.3; }
-    .details-visit-context { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px; color: #64748B; font: 500 12.5px var(--font-body); padding-left: 2px; }
-    .details-visit-context-upcoming { display: grid; grid-template-columns: minmax(0, 1.4fr) auto auto; align-items: center; gap: 8px 14px; }
-    .details-visit-date { display: inline-flex; align-items: center; gap: 7px; color: #475569; white-space: nowrap; }
-    .details-visit-date i { color: #087E70; font-size: 15px; }
+    .details-visit-context { display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: nowrap; gap: 8px; color: #64748B; font: 500 12.5px var(--font-body); padding-left: 2px; white-space: nowrap; }
+    .details-visit-date { display: inline-flex; align-items: center; gap: 6px; color: #64748B; font: 500 12.5px var(--font-body); white-space: nowrap; flex-shrink: 0; }
     .details-visit-context-divider { display: none; }
-    .details-visit-mode-label { color: #64748B; }
-    .details-visit-context-upcoming .details-visit-mode-label { white-space: nowrap; }
-    .details-visit-context-video .details-visit-mode-label { display: none; }
+    .details-visit-mode-label { color: #64748B; white-space: nowrap; }
 
     .details-doc-header-info {
       display: flex;
@@ -4006,12 +4071,6 @@
       opacity: 0.75;
     }
 
-    .details-intake-divider-line {
-      flex: 1;
-      height: 1px;
-      background: #E2E8F0;
-    }
-
     .details-intake-divider-content {
       display: flex;
       align-items: center;
@@ -4056,11 +4115,22 @@
       box-shadow: none !important;
     }
 
+    .details-previsit-card.is-submitted {
+      background: #FAF7F3 !important;
+      border: 0 !important;
+    }
+
     .details-symptom-title {
       font-family: var(--font-heading);
       font-size: 15px;
       font-weight: 700;
       color: #1E293B;
+    }
+
+    .details-symptom-title.is-submitted {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.4;
     }
 
     .details-symptom-meta-row {
@@ -4458,7 +4528,7 @@
     .rx-med-top {
       font-family: var(--font-heading);
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 600;
       color: #000000;
       line-height: 1.2;
     }
@@ -4498,31 +4568,20 @@
     }
 
     .rx-footer-row {
-      margin-top: 8px;
-      padding-top: 6px;
-      border-top: 1px solid #E2ECE9;
+      margin-top: auto;
+      padding-top: 0;
+      border-top: 0;
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      justify-content: center;
+      align-items: center;
     }
 
-    .rx-sig-col {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
+    .rx-powered-by { color: #64748B; font: 8px/1.2 'DM Sans', sans-serif; text-align: center; }
 
-    .rx-sig-img {
-      font-family: 'Brush Script MT', cursive, sans-serif;
-      font-size: 16px;
-      color: #052E28;
-      line-height: 1;
-    }
-
-    .rx-sig-sub {
-      font-family: var(--font-body);
-      font-size: 8px;
-      color: #64748B;
+    /* The prescription is a single-family clinical document, including inline labels. */
+    #pagePatientRxPreview,
+    #pagePatientRxPreview :not(i) {
+      font-family: 'DM Sans', sans-serif !important;
     }
 
     /* Modal Backdrop */
@@ -4825,14 +4884,14 @@
       border-radius: 17px 17px 5px 17px; background: #F2F4F3; color: #18211F;
       overflow-wrap: anywhere;
     }
-    .previsit-assistant-mark { color: var(--color-primary-btn); font-size: 15px; margin: 0 0 7px 1px; }
     .previsit-answer-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
     .previsit-choice {
       min-height: 42px; padding: 9px 14px; border-radius: 999px;
       border: 1px solid #D8E4E0; background: #FFFFFF; color: #052E28;
       font: 600 13px var(--font-heading); cursor: pointer;
     }
-    .previsit-choice:hover, .previsit-choice:focus-visible { border-color: var(--color-border-selected); background: #F5F9F7; outline: none; }
+    .previsit-choice:active { border-color: var(--color-border-selected); background: #F5F9F7; }
+    .previsit-choice:focus-visible { outline: 3px solid #087E70; outline-offset: 2px; }
     .previsit-choice.selected { border-color: var(--color-border-selected); background: var(--color-card-sage); color: var(--color-primary-btn); }
     .previsit-upload-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
     .previsit-upload-item {
@@ -4842,7 +4901,7 @@
     .previsit-upload-item > i { color: var(--color-primary-btn); font-size: 18px; }
     .previsit-upload-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 13px var(--font-body); }
     .previsit-upload-remove { width: 36px; height: 36px; border: 0; background: transparent; color: #7C8985; font-size: 16px; cursor: pointer; }
-    .previsit-upload-actions { display: flex; flex-direction: column; gap: 5px; margin-top: 14px; width: 100%; }
+    .previsit-upload-actions { display: flex; flex-direction: column; gap: 5px; margin-top: 0; width: 100%; }
     .previsit-upload-actions.has-files { flex-direction: row; gap: 9px; }
     .previsit-upload-actions.no-files { flex-direction: row; align-items: center; gap: 8px; }
     .previsit-upload-action {
@@ -4871,7 +4930,7 @@
     .previsit-review-files-add { min-height: 38px; margin-top: 9px; padding: 0 12px; border: 1px solid #D8E4E0; border-radius: 11px; background: #FFFFFF; color: var(--color-primary-btn); font: 600 12px var(--font-heading); cursor: pointer; }
     .previsit-chat-composer-wrap { padding: 10px 14px max(14px, env(safe-area-inset-bottom)); border-top: 1px solid #E9EEEC; background: rgba(255,255,255,.98); flex-shrink: 0; }
     .previsit-composer-hint { display: none; }
-    .previsit-skip-answer { display: block; margin: 7px auto 0; min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: #64748B; font: 600 12px var(--font-heading); cursor: pointer; }
+    .previsit-skip-answer { display: block; margin: 0 auto 7px; min-height: 36px; padding: 0 12px; border: 0; background: transparent; color: #64748B; font: 600 12px var(--font-heading); cursor: pointer; }
     .previsit-chat-composer { display: flex; align-items: flex-end; gap: 8px; padding: 7px; border: 1px solid #E2E9E6; border-radius: 22px; background: #F8FAF9; }
     .previsit-chat-input { flex: 1; min-width: 0; min-height: 42px; max-height: 100px; overflow-y: auto; resize: none; border: 0; outline: none; background: transparent; padding: 11px 8px; color: #17211E; font: 14px/1.4 var(--font-body); }
     .previsit-send-button { width: 42px; height: 42px; flex: 0 0 42px; border: 0; border-radius: 50%; background: var(--color-primary-btn); color: white; font-size: 18px; cursor: pointer; }
@@ -5347,7 +5406,6 @@
         <!-- iOS / Android Status Bar with Real Clock -->
         <div class="status-bar">
           <span class="status-time" id="realTimeClock">9:41</span>
-          <div class="dynamic-island-notch"></div>
           <div class="status-icons">
             <i class="ph-bold ph-cell-signal-full"></i>
             <i class="ph-bold ph-wifi-high"></i>
@@ -5384,21 +5442,16 @@
             <p class="discover-subtitle">Book Doctors Appointment</p>
           </div>
 
-          <!-- Discover Doctors Hero Showcase (Clean, Minimal, Text Link) -->
-          <div class="discover-hero-card" onclick="openDoctorsList()" role="button" tabindex="0">
+          <!-- Find a Doctor Hero Card -->
+          <div class="discover-hero-card" onclick="openDoctorsList()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDoctorsList(); }" role="button" tabindex="0" aria-label="Find a doctor. 100+ doctors available.">
             <div class="hero-card-header">
-              <div class="hero-icon-pill">
+              <div class="hero-icon-pill" aria-hidden="true">
                 <i class="ph ph-stethoscope"></i>
               </div>
               <span class="hero-doctors-count">100+ doctors</span>
             </div>
 
-            <h2 class="hero-card-title">Discover Doctors</h2>
-
-            <div class="hero-text-btn">
-              <span>Find a Doctor</span>
-              <i class="ph ph-arrow-right"></i>
-            </div>
+            <h2 class="hero-card-title">Find a doctor</h2>
           </div>
 
         </div>
@@ -5437,29 +5490,52 @@
           <input type="file" id="onuPhotoInput" accept="image/*" multiple hidden onchange="handlePatientOnuAttachments(this.files, this)">
           <input type="file" id="onuCameraInput" accept="image/*" capture="environment" hidden onchange="handlePatientOnuAttachments(this.files, this)">
           <input type="file" id="onuDocumentInput" accept=".pdf,.doc,.docx,.txt,.csv,.xls,.xlsx,.ppt,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" multiple hidden onchange="handlePatientOnuAttachments(this.files, this)">
-          <div class="onu-history-overlay" id="onuHistoryOverlay" onclick="handlePatientOnuHistoryBackdrop(event)" aria-hidden="true">
-            <aside class="onu-history-drawer" id="onuHistoryDrawer" role="dialog" aria-modal="true" aria-label="Chat history" tabindex="-1" onkeydown="handlePatientOnuHistoryKeydown(event)">
-              <div class="onu-history-heading"><span>Chats</span><button type="button" class="btn-circle-icon onu-icon-button" aria-label="Close chat history" onclick="closePatientOnuHistory()"><i class="ph ph-x" aria-hidden="true"></i></button></div>
-              <button type="button" class="onu-history-new" onclick="startNewPatientOnuChat()"><i class="ph ph-pencil-simple-line" aria-hidden="true"></i> New chat</button>
-              <div class="onu-history-list" id="onuHistoryList"></div>
-            </aside>
-          </div>
-          <section class="patient-rx-overlay" id="patientPrescriptionReview" role="dialog" aria-modal="true" aria-labelledby="patientRxTitle" aria-hidden="true" inert onkeydown="handlePatientPrescriptionReviewKeydown(event)">
-            <header class="patient-rx-header">
-              <h2 id="patientRxTitle">Review prescription</h2>
-              <button type="button" class="patient-rx-save-header" id="patientRxSaveButton" onclick="savePatientPrescriptionReview()"><i class="ph ph-floppy-disk" aria-hidden="true"></i> Save medications</button>
-            </header>
-            <div class="patient-rx-content" id="patientRxContent"></div>
-            <footer class="patient-rx-footer">
-              <button type="button" class="patient-rx-photo-footer" onclick="openPatientPrescriptionImage(patientCurrentPrescriptionReviewId)"><i class="ph ph-image" aria-hidden="true"></i> View prescription</button>
-              <button type="button" class="btn-confirm-pay" id="patientRxUseChatButton" onclick="usePatientPrescriptionInChat()">Use in chat</button>
-            </footer>
-            <div class="patient-rx-viewer" id="patientRxViewer" role="dialog" aria-modal="true" aria-label="Original prescription photo" hidden onclick="if(event.target===this)closePatientPrescriptionImage()">
-              <button type="button" class="patient-rx-viewer-close" aria-label="Close prescription image" onclick="closePatientPrescriptionImage()"><i class="ph ph-x" aria-hidden="true"></i></button>
-              <img id="patientRxImage" alt="Uploaded prescription photo" onerror="handlePatientPrescriptionImageError()">
-              <p class="patient-rx-viewer-message" id="patientRxViewerMessage" hidden></p>
-            </div>
+        <div class="onu-history-overlay" id="onuHistoryOverlay" onclick="handlePatientOnuHistoryBackdrop(event)" aria-hidden="true">
+          <aside class="onu-history-drawer" id="onuHistoryDrawer" role="dialog" aria-modal="true" aria-label="Chat history" tabindex="-1" onkeydown="handlePatientOnuHistoryKeydown(event)">
+            <div class="onu-history-heading"><span>Chats</span><button type="button" class="btn-circle-icon onu-icon-button" aria-label="Close chat history" onclick="closePatientOnuHistory()"><i class="ph ph-x" aria-hidden="true"></i></button></div>
+            <button type="button" class="onu-history-new" onclick="startNewPatientOnuChat()"><i class="ph ph-pencil-simple-line" aria-hidden="true"></i> New chat</button>
+            <div class="onu-history-list" id="onuHistoryList"></div>
+          </aside>
+        </div>
+        <div class="onu-thread-action-overlay" id="onuThreadActionOverlay" aria-hidden="true" onclick="if(event.target===this)closePatientOnuThreadActions()">
+          <section class="onu-thread-actions-dialog" id="onuThreadActionsDialog" role="dialog" aria-modal="true" aria-labelledby="onuThreadActionsTitle" tabindex="-1" onkeydown="handlePatientOnuThreadDialogKeydown(event)">
+            <h2 class="onu-thread-actions-title" id="onuThreadActionsTitle">Chat options</h2>
+            <button type="button" class="onu-thread-action-choice" id="onuThreadRenameChoice" onclick="openPatientOnuThreadRename()"><i class="ph ph-pencil-simple" aria-hidden="true"></i>Rename chat</button>
+            <button type="button" class="onu-thread-action-choice delete" onclick="openPatientOnuThreadDelete()"><i class="ph ph-trash" aria-hidden="true"></i>Delete chat</button>
           </section>
+        </div>
+        <div class="onu-thread-modal-overlay" id="onuThreadRenameOverlay" aria-hidden="true" onclick="if(event.target===this)closePatientOnuThreadRename()">
+          <form class="onu-thread-modal" id="onuThreadRenameDialog" role="dialog" aria-modal="true" aria-labelledby="onuThreadRenameTitle" onsubmit="savePatientOnuThreadRename(event)" onkeydown="handlePatientOnuThreadDialogKeydown(event)">
+            <h2 class="onu-thread-modal-title" id="onuThreadRenameTitle">Rename chat</h2>
+            <label class="onu-thread-modal-label" for="onuThreadRenameInput">New name</label>
+            <input class="onu-thread-modal-input" id="onuThreadRenameInput" type="text" maxlength="120" autocomplete="off" required>
+            <div class="onu-thread-modal-actions"><button type="button" onclick="closePatientOnuThreadRename()">Cancel</button><button type="submit" class="confirm">Rename</button></div>
+          </form>
+        </div>
+        <div class="onu-thread-modal-overlay" id="onuThreadDeleteOverlay" aria-hidden="true" onclick="if(event.target===this)closePatientOnuThreadDelete()">
+          <section class="onu-thread-modal" id="onuThreadDeleteDialog" role="dialog" aria-modal="true" aria-labelledby="onuThreadDeleteTitle" tabindex="-1" onkeydown="handlePatientOnuThreadDialogKeydown(event)">
+            <h2 class="onu-thread-modal-title" id="onuThreadDeleteTitle">Delete this chat?</h2>
+            <p class="onu-thread-modal-copy">This removes the conversation and its prescription review from this device.</p>
+            <div class="onu-thread-modal-actions"><button type="button" onclick="closePatientOnuThreadDelete()">Cancel</button><button type="button" class="danger" onclick="confirmPatientOnuThreadDelete()">Delete</button></div>
+          </section>
+        </div>
+        <section class="patient-rx-overlay" id="patientPrescriptionReview" role="dialog" aria-modal="true" aria-labelledby="patientRxTitle" aria-hidden="true" inert onkeydown="handlePatientPrescriptionReviewKeydown(event)">
+          <header class="patient-rx-header">
+            <h2 id="patientRxTitle">Review prescription</h2>
+            <button type="button" class="patient-rx-save-header" id="patientRxSaveButton" onclick="savePatientPrescriptionReview()"><i class="ph ph-floppy-disk" aria-hidden="true"></i> Save medications</button>
+          </header>
+          <div class="patient-rx-content" id="patientRxContent"></div>
+          <footer class="patient-rx-footer">
+            <button type="button" class="patient-rx-photo-footer" onclick="openPatientPrescriptionImage(patientCurrentPrescriptionReviewId)"><i class="ph ph-image" aria-hidden="true"></i> View prescription</button>
+            <button type="button" class="btn-confirm-pay" id="patientRxUseChatButton" onclick="usePatientPrescriptionInChat()">Use in chat</button>
+          </footer>
+          <div class="patient-rx-viewer" id="patientRxViewer" role="dialog" aria-modal="true" aria-label="Original prescription photo" hidden onclick="if(event.target===this)closePatientPrescriptionImage()">
+            <button type="button" class="patient-rx-viewer-close" aria-label="Close prescription image" onclick="closePatientPrescriptionImage()"><i class="ph ph-x" aria-hidden="true"></i></button>
+            <img id="patientRxImage" alt="Uploaded prescription photo" onerror="handlePatientPrescriptionImageError()">
+            <p class="patient-rx-viewer-message" id="patientRxViewerMessage" hidden></p>
+          </div>
+        </section>
+
           <div class="onu-live-region" id="onuAnnouncement" aria-live="polite" aria-atomic="true"></div>
         </div>
 
@@ -5468,8 +5544,8 @@
             <h1 class="patient-profile-heading">Profile</h1>
             <p class="patient-profile-subtitle">Personal details and health at a glance</p>
           </header>
-          <section class="patient-profile-top-card" aria-label="Profile and body mass index">
-            <section class="patient-profile-hero" aria-label="Personal details">
+          <section class="patient-profile-top-card" aria-label="Personal profile">
+            <div class="patient-profile-hero">
               <div class="patient-profile-avatar-wrap">
                 <div class="patient-profile-avatar" aria-hidden="true"><span id="patientProfileInitials">AK</span><img id="patientProfilePhoto" alt="" hidden></div>
                 <input class="patient-profile-photo-input" id="patientProfilePhotoInput" type="file" accept="image/*" onchange="handlePatientProfilePhoto(event)">
@@ -5478,35 +5554,21 @@
                 <div class="patient-profile-name-button"><span class="patient-profile-name" id="patientProfileName">Alif Khan</span></div>
                 <div class="patient-profile-contact"><i class="ph ph-envelope-simple" aria-hidden="true"></i><span id="patientProfileEmail">shaycormac004700@gmail.com</span></div>
                 <div class="patient-profile-contact"><i class="ph ph-phone" aria-hidden="true"></i><span id="patientProfilePhone">+880 1789 946454</span></div>
-                <button type="button" class="patient-profile-change-photo" onclick="openPatientIdentityEditor()"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Edit profile</button>
               </div>
-            </section>
-            <section class="patient-profile-overview" aria-label="Body mass index">
-              <div class="patient-profile-bmi" aria-label="Body mass index">
-                <div><div class="patient-profile-kicker">BMI</div><div class="patient-profile-bmi-row"><span class="patient-profile-bmi-value" id="patientProfileBmi">24.6</span><span class="patient-profile-bmi-status" id="patientProfileBmiStatus">Healthy range</span></div><div class="patient-profile-bmi-track" aria-hidden="true"><span></span></div></div>
-              </div>
-            </section>
+            </div>
+            <button type="button" class="patient-profile-change-photo" onclick="openPatientIdentityEditor()"><i class="ph ph-pencil-simple" aria-hidden="true"></i> Edit profile</button>
           </section>
 
-          <button type="button" class="patient-profile-analysis" onclick="openPatientHealthAnalysis()">
-            <span class="patient-profile-analysis-icon"><i class="ph ph-chart-line-up" aria-hidden="true"></i></span>
-            <span class="patient-profile-analysis-copy"><span class="patient-profile-analysis-title">Health analysis</span><span class="patient-profile-analysis-subtitle">Your health overview</span></span>
-            <i class="ph ph-caret-right" aria-hidden="true"></i>
+          <button type="button" class="patient-profile-health-summary" onclick="openPatientHealthAnalysis()" aria-label="Open Health Analysis">
+            <span class="patient-profile-summary-copy">
+              <span class="patient-profile-kicker">Body mass index</span>
+              <span class="patient-profile-bmi-row"><span class="patient-profile-bmi-value" id="patientProfileBmi">—</span></span>
+            </span>
+            <span class="patient-profile-health-link">Health Analysis <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
           </button>
 
-          <section class="patient-profile-details" aria-label="Editable health details">
-            <div class="patient-profile-details-head"><h2 class="patient-profile-section-title">Your details</h2><div class="patient-profile-details-actions"><button type="button" class="patient-profile-edit-details" onclick="openPatientProfileEditor()">Edit</button></div></div>
-            <div class="patient-profile-vitals" id="patientProfileVitals">
-              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Age</span><span class="patient-profile-vital-value" id="patientProfileAge">26 years</span></div>
-              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Gender</span><span class="patient-profile-vital-value" id="patientProfileGender">Male</span></div>
-              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Blood type</span><span class="patient-profile-vital-value" id="patientProfileBloodType">O-</span></div>
-              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Height</span><span class="patient-profile-vital-value" id="patientProfileHeight">168 cm</span></div>
-              <div class="patient-profile-vital"><span class="patient-profile-vital-label">Weight</span><span class="patient-profile-vital-value" id="patientProfileWeight">69 kg</span></div>
-            </div>
-          </section>
-
-          <section class="patient-profile-account" aria-label="More options">
-            <h2 class="patient-profile-section-title">Account</h2>
+          <section class="patient-profile-account" aria-label="Account">
+            <h2 class="patient-profile-action-heading">Account</h2>
             <section class="patient-profile-options">
             <button type="button" class="patient-profile-option" onclick="showToast('Settings are not available in this prototype yet.')"><span class="patient-profile-option-icon"><i class="ph ph-gear-six" aria-hidden="true"></i></span>Settings<i class="ph ph-caret-right" aria-hidden="true"></i></button>
             <button type="button" class="patient-profile-option logout" onclick="showToast('You are signed in to this prototype.')"><span class="patient-profile-option-icon"><i class="ph ph-sign-out" aria-hidden="true"></i></span>Log out<i class="ph ph-caret-right" aria-hidden="true"></i></button>
@@ -5516,8 +5578,12 @@
         <div class="app-page patient-health-page page-right" id="pagePatientHealthAnalysis" aria-label="Health analysis">
           <header class="patient-health-header">
             <button type="button" class="patient-health-back" aria-label="Back to profile" onclick="returnFromPatientHealthAnalysis()"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
-            <h1>Health Analysis</h1><span aria-hidden="true"></span>
+            <div class="patient-health-heading-group"><h1>Health Analysis</h1><span class="patient-health-subtitle">Your health details in one place</span></div>
           </header>
+          <section class="patient-health-bmi-card" aria-label="Body mass index">
+            <div><div class="patient-health-bmi-kicker">Body mass index</div><div class="patient-health-bmi-row"><span class="patient-health-bmi-value" id="patientHealthBmiValue">—</span></div><div class="patient-health-bmi-note">Based on your latest saved measurements</div></div>
+            <span class="patient-health-bmi-mark" aria-hidden="true"><i class="ph ph-chart-line-up"></i></span>
+          </section>
           <section class="patient-health-section" aria-labelledby="patientHealthMedicationTitle">
             <button type="button" class="patient-health-section-head patient-health-disclosure" id="patientHealthMedicationToggle" aria-expanded="false" aria-controls="patientHealthMedicationList" onclick="togglePatientHealthMedications()">
               <span class="patient-health-section-title" id="patientHealthMedicationTitle"><i class="ph ph-pill" aria-hidden="true"></i>Active medications</span>
@@ -5526,14 +5592,18 @@
             <div class="patient-health-med-list" id="patientHealthMedicationList" hidden></div>
           </section>
           <section class="patient-health-section" aria-labelledby="patientHealthAllergiesTitle">
-            <div class="patient-health-section-head"><h2 class="patient-health-section-title" id="patientHealthAllergiesTitle"><i class="ph ph-warning-circle" aria-hidden="true"></i>Allergies</h2><button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('allergies')">Add</button></div>
-            <div class="patient-health-tags" id="patientHealthAllergies"></div>
-            <p class="patient-health-empty" id="patientHealthAllergiesEmpty">No allergies added.</p>
+            <div class="patient-health-section-head">
+              <button type="button" class="patient-health-section-toggle" id="patientHealthAllergiesToggle" aria-expanded="false" aria-controls="patientHealthAllergiesPanel" onclick="togglePatientHealthSection('allergies')"><span class="patient-health-section-title" id="patientHealthAllergiesTitle"><i class="ph ph-warning-circle" aria-hidden="true"></i>Allergies</span><span class="patient-health-count" id="patientHealthAllergiesCount">0</span><i class="ph ph-caret-down" aria-hidden="true"></i></button>
+              <button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('allergies')">Add</button>
+            </div>
+            <div class="patient-health-collapsible-content" id="patientHealthAllergiesPanel" hidden><div class="patient-health-tags" id="patientHealthAllergies"></div><p class="patient-health-empty" id="patientHealthAllergiesEmpty">No allergies added.</p></div>
           </section>
           <section class="patient-health-section" aria-labelledby="patientHealthConditionsTitle">
-            <div class="patient-health-section-head"><h2 class="patient-health-section-title" id="patientHealthConditionsTitle"><i class="ph ph-heartbeat" aria-hidden="true"></i>Health conditions</h2><button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('conditions')">Add</button></div>
-            <div class="patient-health-tags" id="patientHealthConditions"></div>
-            <p class="patient-health-empty" id="patientHealthConditionsEmpty">No conditions added.</p>
+            <div class="patient-health-section-head">
+              <button type="button" class="patient-health-section-toggle" id="patientHealthConditionsToggle" aria-expanded="false" aria-controls="patientHealthConditionsPanel" onclick="togglePatientHealthSection('conditions')"><span class="patient-health-section-title" id="patientHealthConditionsTitle"><i class="ph ph-heartbeat" aria-hidden="true"></i>Health conditions</span><span class="patient-health-count" id="patientHealthConditionsCount">0</span><i class="ph ph-caret-down" aria-hidden="true"></i></button>
+              <button type="button" class="patient-health-text-button" onclick="openPatientHealthPicker('conditions')">Add</button>
+            </div>
+            <div class="patient-health-collapsible-content" id="patientHealthConditionsPanel" hidden><div class="patient-health-tags" id="patientHealthConditions"></div><p class="patient-health-empty" id="patientHealthConditionsEmpty">No conditions added.</p></div>
           </section>
         </div>
         <div class="modal-backdrop patient-health-picker-backdrop" id="patientHealthPickerBackdrop" onclick="closePatientHealthPicker()"></div>
@@ -5548,27 +5618,43 @@
           <div class="patient-health-count" id="patientHealthPickerSelectedCount" aria-live="polite">0 selected</div>
           <div class="patient-health-picker-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientHealthPicker()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientHealthSelections()">Save</button></div>
         </section>
-        <div class="modal-backdrop patient-profile-edit-backdrop" id="patientProfileEditBackdrop" onclick="closePatientProfileEditor()"></div>
-        <section class="patient-profile-edit-sheet" id="patientProfileEditor" role="dialog" aria-modal="true" aria-labelledby="patientProfileEditorTitle" aria-hidden="true">
+        <div class="modal-backdrop patient-health-med-backdrop" id="patientHealthMedicationBackdrop" onclick="closePatientHealthMedicationEditor()"></div>
+        <section class="patient-bottom-sheet patient-health-med-editor" id="patientHealthMedicationEditor" role="dialog" aria-modal="true" aria-labelledby="patientHealthMedicationEditorTitle" aria-hidden="true">
           <div class="sheet-drag-handle" aria-hidden="true"></div>
-          <div class="sheet-top-row"><div class="sheet-badge-icon"><i class="ph ph-user-circle" aria-hidden="true"></i></div></div>
-          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientProfileEditorTitle">Your details</h2><p class="sheet-editorial-sub">Update your health information.</p></header>
+          <div class="sheet-top-row"><span class="sheet-badge-icon"><i class="ph ph-pill" aria-hidden="true"></i></span></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientHealthMedicationEditorTitle">Edit medication</h2><p class="sheet-editorial-sub">Keep the details in your medication list up to date.</p></header>
+          <div class="patient-health-med-fields">
+            <label class="patient-health-med-field patient-health-med-field-wide" for="patientHealthMedName">Medication name<input id="patientHealthMedName" type="text" maxlength="120" autocomplete="off"></label>
+            <label class="patient-health-med-field patient-health-med-field-wide" for="patientHealthMedGeneric">Generic name<input id="patientHealthMedGeneric" type="text" maxlength="120" autocomplete="off"></label>
+            <label class="patient-health-med-field" for="patientHealthMedDose">Dose<input id="patientHealthMedDose" type="text" maxlength="120" autocomplete="off" placeholder="e.g. 500 mg"></label>
+            <label class="patient-health-med-field" for="patientHealthMedFrequency">Frequency<input id="patientHealthMedFrequency" type="text" maxlength="120" autocomplete="off" placeholder="e.g. 1–0–1"></label>
+            <label class="patient-health-med-field patient-health-med-field-wide" for="patientHealthMedDuration">Duration<input id="patientHealthMedDuration" type="text" maxlength="120" autocomplete="off" placeholder="e.g. 7 days"></label>
+            <label class="patient-health-med-field patient-health-med-field-wide" for="patientHealthMedInstructions">Instructions<input id="patientHealthMedInstructions" type="text" maxlength="240" autocomplete="off" placeholder="Optional"></label>
+          </div>
+          <button type="button" class="patient-health-med-delete-link" onclick="requestPatientHealthMedicationDelete()"><i class="ph ph-trash" aria-hidden="true"></i> Delete medication</button>
+          <div class="patient-health-picker-actions patient-health-sheet-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientHealthMedicationEditor()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientHealthMedicationEdit()">Save changes</button></div>
+        </section>
+        <div class="modal-backdrop patient-health-delete-backdrop" id="patientHealthDeleteBackdrop" onclick="closePatientHealthMedicationDelete()"></div>
+        <section class="patient-bottom-sheet patient-health-delete-sheet" id="patientHealthDeleteSheet" role="alertdialog" aria-modal="true" aria-labelledby="patientHealthDeleteTitle" aria-describedby="patientHealthDeleteMessage" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><span class="patient-health-delete-icon"><i class="ph ph-trash" aria-hidden="true"></i></span></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientHealthDeleteTitle">Delete medication?</h2><p class="sheet-editorial-sub" id="patientHealthDeleteMessage">This medication will be removed from your active list.</p></header>
+          <div class="patient-health-picker-actions patient-health-sheet-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientHealthMedicationDelete()">Cancel</button><button type="button" class="btn-sheet-confirm patient-health-delete-confirm" onclick="confirmPatientHealthMedicationDelete()">Delete medication</button></div>
+        </section>
+        <div class="modal-backdrop patient-profile-edit-backdrop" id="patientIdentityEditBackdrop" onclick="closePatientIdentityEditor()"></div>
+        <section class="patient-profile-edit-sheet patient-profile-identity-sheet" id="patientIdentityEditor" role="dialog" aria-modal="true" aria-labelledby="patientIdentityEditorTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><div class="sheet-badge-icon"><i class="ph ph-identification-card" aria-hidden="true"></i></div></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientIdentityEditorTitle">Edit profile</h2><p class="sheet-editorial-sub">Update your personal and health details.</p></header>
+          <div class="patient-profile-photo-choice"><div class="patient-profile-photo-preview"><span id="patientIdentityInitials">AK</span><img id="patientIdentityPhotoPreview" alt="" hidden></div><button type="button" onclick="document.getElementById('patientProfilePhotoInput').click()"><i class="ph ph-camera" aria-hidden="true"></i> Change photo</button></div>
           <div class="patient-profile-edit-fields">
+            <label class="patient-profile-edit-field patient-profile-edit-name" for="patientProfileNameInput">Full name<input id="patientProfileNameInput" type="text" maxlength="80" autocomplete="name"></label>
             <label class="patient-profile-edit-field" for="patientProfileAgeInput">Age (years)<input id="patientProfileAgeInput" type="number" min="1" max="120" step="1" autocomplete="off"></label>
             <label class="patient-profile-edit-field" for="patientProfileGenderInput">Gender<select id="patientProfileGenderInput"><option>Male</option><option>Female</option><option>Other</option><option>Prefer not to say</option></select></label>
             <label class="patient-profile-edit-field" for="patientProfileBloodTypeInput">Blood type<select id="patientProfileBloodTypeInput"><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option><option>Unknown</option></select></label>
             <label class="patient-profile-edit-field" for="patientProfileHeightInput">Height (cm)<input id="patientProfileHeightInput" type="number" min="50" max="250" step="0.1" autocomplete="off"></label>
             <label class="patient-profile-edit-field" for="patientProfileWeightInput">Weight (kg)<input id="patientProfileWeightInput" type="number" min="1" max="500" step="0.1" autocomplete="off"></label>
           </div>
-          <div class="patient-profile-edit-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientProfileEditor()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientProfileEdit()">Save details</button></div>
-        </section>
-        <div class="modal-backdrop patient-profile-edit-backdrop" id="patientIdentityEditBackdrop" onclick="closePatientIdentityEditor()"></div>
-        <section class="patient-profile-edit-sheet patient-profile-identity-sheet" id="patientIdentityEditor" role="dialog" aria-modal="true" aria-labelledby="patientIdentityEditorTitle" aria-hidden="true">
-          <div class="sheet-drag-handle" aria-hidden="true"></div>
-          <div class="sheet-top-row"><div class="sheet-badge-icon"><i class="ph ph-identification-card" aria-hidden="true"></i></div></div>
-          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientIdentityEditorTitle">Edit profile</h2><p class="sheet-editorial-sub">Update your name and profile photo.</p></header>
-          <div class="patient-profile-photo-choice"><div class="patient-profile-photo-preview"><span id="patientIdentityInitials">AK</span><img id="patientIdentityPhotoPreview" alt="" hidden></div><button type="button" onclick="document.getElementById('patientProfilePhotoInput').click()"><i class="ph ph-camera" aria-hidden="true"></i> Change photo</button></div>
-          <div class="patient-profile-edit-fields"><label class="patient-profile-edit-field" for="patientProfileNameInput">Full name<input id="patientProfileNameInput" type="text" maxlength="80" autocomplete="name"></label></div>
           <div class="patient-profile-edit-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientIdentityEditor()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="savePatientIdentityEdit()">Save profile</button></div>
         </section>
 
@@ -5668,9 +5754,7 @@
             <!-- Fee -->
             <div class="profile-info-row">
               <div class="profile-info-left">
-                <div class="profile-info-icon">
-                  <i class="ph ph-receipt"></i>
-                </div>
+                <i class="ph-fill ph-receipt profile-info-icon" aria-hidden="true"></i>
                 <div class="profile-info-content">
                   <span class="profile-info-label">Consultation Fee</span>
                   <span class="profile-info-val fee-highlight" id="profileDocFee">&#2547; 1,200</span>
@@ -5683,9 +5767,7 @@
             <!-- BMDC Number -->
             <div class="profile-info-row">
               <div class="profile-info-left">
-                <div class="profile-info-icon">
-                  <i class="ph ph-shield-check"></i>
-                </div>
+                <i class="ph-fill ph-shield-check profile-info-icon" aria-hidden="true"></i>
                 <div class="profile-info-content">
                   <span class="profile-info-label">BMDC Registration</span>
                   <div class="profile-bmdc-row">
@@ -5701,9 +5783,7 @@
             <!-- Chamber Address -->
             <div class="profile-info-row">
               <div class="profile-info-left">
-                <div class="profile-info-icon">
-                  <i class="ph ph-map-pin"></i>
-                </div>
+                <i class="ph-fill ph-map-pin profile-info-icon" aria-hidden="true"></i>
                 <div class="profile-info-content">
                   <span class="profile-info-label">Chamber Address</span>
                   <span class="profile-info-val" id="profileDocChamber">BSMMU (PG Hospital), Shahbag, Dhaka</span>
@@ -5716,9 +5796,7 @@
             <!-- About Doctor (Bio) -->
             <div class="profile-info-row is-bio">
               <div class="profile-info-left">
-                <div class="profile-info-icon">
-                  <i class="ph ph-article"></i>
-                </div>
+                <i class="ph-fill ph-article profile-info-icon" aria-hidden="true"></i>
                 <div class="profile-info-content">
                   <span class="profile-info-label">About Doctor</span>
                   <div class="profile-bio-wrap">
@@ -5903,67 +5981,54 @@
           </div>
         </div>
 
-        <!-- =======================================================
-             VIEW 5: BOOKING CONFIRMATION SCREEN (PIXEL-PERFECT REDESIGN)
-             Reference: media_1791977346242_bea94c17.png
-             ======================================================= -->
+        <!-- Booking receipt and confirmation -->
         <div class="app-page page-booking-confirmed page-right" id="pageBookingConfirmed">
-          
           <div class="confirm-content-group">
-          <!-- Hero Success Section (Top bar and X removed as requested) -->
-          <div class="confirm-hero-section">
-            <i class="ph-fill ph-seal-check confirm-success-seal"></i>
-            <h1 class="confirm-hero-title">Booking Confirmed!</h1>
-            <p class="confirm-hero-sub">Your <span id="confirmedModeText">video</span> consultation appointment has been successfully booked &amp; paid</p>
-          </div>
+            <div class="confirm-hero-section">
+              <i class="ph-fill ph-seal-check confirm-success-seal" aria-hidden="true"></i>
+              <h1 class="confirm-hero-title" id="confirmedTitle" tabindex="-1">Booking Confirmed!</h1>
+              <p class="confirm-hero-sub">Your appointment is booked and payment is complete.</p>
+            </div>
 
-          <div class="confirm-details-group">
-          <!-- Queue details: start time on left, serial on right -->
-          <div class="confirm-serial-card">
-            <div class="confirm-card-main-row">
-              <div class="confirm-start-col">
-                <div class="confirm-start-label-row">
-                  <span class="confirm-stat-label">START TIME</span>
+            <section class="confirm-receipt-card" aria-label="Appointment receipt">
+              <div class="confirm-receipt-total">
+                <span class="confirm-receipt-label">Appointment total</span>
+                <strong class="confirm-receipt-amount" id="confirmedTotal">&#2547; 1,230</strong>
+              </div>
+
+              <div class="confirm-doc-header">
+                <img src="" alt="" class="confirm-doc-avatar" id="confirmedDocAvatar">
+                <div class="confirm-doc-meta">
+                  <span class="confirm-doc-name" id="confirmedDocName">Ast. Prof. Dr. Mahim Khan</span>
+                  <span class="confirm-doc-spec" id="confirmedDocSub">MBBS, FCPS - Cardiology</span>
                 </div>
-                <span class="confirm-start-val" id="confirmedStartTimeVal">06:00 PM</span>
               </div>
 
-              <div class="confirm-serial-col">
-                <span class="confirm-stat-label">SERIAL NUMBER</span>
-                <span class="confirm-serial-num" id="confirmedSerialVal">#5</span>
+              <div class="confirm-booking-facts">
+                <div class="confirm-booking-fact">
+                  <span class="confirm-fact-label">Date</span>
+                  <span class="confirm-fact-value" id="confirmedDateLabel">Tue, Sep 29</span>
+                </div>
+                <div class="confirm-booking-fact">
+                  <span class="confirm-fact-label">Time</span>
+                  <span class="confirm-fact-value" id="confirmedStartTimeVal">06:00 PM</span>
+                </div>
+                <div class="confirm-booking-fact">
+                  <span class="confirm-fact-label">Serial number</span>
+                  <span class="confirm-fact-value" id="confirmedSerialVal">#5</span>
+                </div>
+                <div class="confirm-booking-fact">
+                  <span class="confirm-fact-label">Consultation</span>
+                  <span class="confirm-fact-value mode-highlight" id="confirmedModeLabel">Video call</span>
+                </div>
               </div>
-            </div>
 
-            <div class="confirm-card-divider"></div>
-
-            <div class="confirm-note-row">
-              <i class="ph ph-bell"></i>
-              <span>You will be called when it's your turn.</span>
-            </div>
+            </section>
           </div>
 
-          <!-- Doctor & Appointment Info (Completely Boxless) -->
-          <div class="confirm-doc-section">
-            <div class="confirm-doc-header">
-              <img src="" alt="" class="confirm-doc-avatar" id="confirmedDocAvatar">
-              <div class="confirm-doc-meta">
-                <span class="confirm-doc-name" id="confirmedDocName">Ast. Prof. Dr. Mahim Khan</span>
-                <span class="confirm-doc-spec" id="confirmedDocSub">MBBS, FCPS - Cardiology</span>
-              </div>
-            </div>
-
-            <div class="confirm-meta-row">
-              <span class="confirm-meta-val" id="confirmedDateLabel">Tue, Sep 29</span>
-              <span class="confirm-meta-val mode-highlight" id="confirmedModeLabel">Video Call</span>
-            </div>
-          </div>
-          </div>
-          </div>
-
-          <!-- Fixed Sticky Bottom Action Dock -->
           <div class="profile-fixed-bottom-dock confirm-fixed-bottom-dock">
             <button type="button" class="btn-confirm-pay" onclick="dismissBookingConfirmation()">
-              <i class="ph ph-calendar-check"></i>
+              <i class="ph ph-calendar-check" aria-hidden="true"></i>
               <span>Go To My Visits</span>
             </button>
           </div>
@@ -5993,7 +6058,7 @@
             </button>
           </div>
 
-          <!-- UPCOMING CONSULTATIONS FEED (OUTSIDE-DATE GROUPED, MINIMAL BREATHABLE CARDS) -->
+          <!-- UPCOMING CONSULTATIONS FEED: TODAY SHOWN BY DEFAULT -->
           <div class="visits-section-container" id="visitsUpcomingSection" style="display: flex; flex-direction: column; gap: 16px;">
             
             <!-- Date Group 1: Today, Tuesday, Sep 29 -->
@@ -6011,7 +6076,7 @@
                   <div class="patient-visit-main-row">
                     <div class="patient-visit-info-cluster">
                       <span class="patient-visit-mode-icon" id="upcomingModeIcon" title="Video consultation" aria-hidden="true">
-                        <i class="ph ph-video-camera" aria-hidden="true"></i>
+                        <i class="ph-fill ph-video-camera" aria-hidden="true"></i>
                       </span>
                       <div class="patient-visit-text-col">
                         <h3 class="patient-visit-doc-name" id="upcomingDocName">Ast. Prof. Dr. Mahim Khan</h3>
@@ -6034,7 +6099,6 @@
                   </div>
                   </div>
                   <button type="button" class="patient-card-previsit-button" id="btnPreVisitAction" onclick="openPreVisitModal()">
-                      <i class="ph ph-notepad" id="preVisitActionIcon" aria-hidden="true"></i>
                       <span id="preVisitActionText">Add pre-visit details</span>
                       <i class="ph ph-arrow-right" aria-hidden="true"></i>
                   </button>
@@ -6043,21 +6107,27 @@
               </div>
             </div>
 
-            <!-- Date Group 2: Friday, Oct 2 -->
-            <div class="visits-date-group">
-              <div class="visits-date-header">
-                <span class="visits-date-title">Oct 2</span>
-              </div>
+            <button type="button" class="visits-view-more-button" id="visitsViewMoreButton" aria-expanded="false" aria-controls="visitsFutureGroups" onclick="toggleUpcomingVisits()">
+              <span>View more</span>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>
+
+            <div class="visits-future-groups" id="visitsFutureGroups" style="display: none;">
+              <!-- Date Group 2: Friday, Oct 2 -->
+              <div class="visits-date-group">
+                <div class="visits-date-header">
+                  <span class="visits-date-title">Oct 2</span>
+                </div>
               
-              <div class="visits-date-cards-stack">
-                <!-- Consultation Card 2: Dr. Mary Anne (Serial #3) -->
-                <article class="patient-visit-card" onclick="if (!event.target.closest('button,[role=button]')) openVisitDetailsPage('mary-upcoming')">
+                <div class="visits-date-cards-stack">
+                  <!-- Consultation Card 2: Dr. Mary Anne (Serial #3) -->
+                  <article class="patient-visit-card" onclick="if (!event.target.closest('button,[role=button]')) openVisitDetailsPage('mary-upcoming')">
                   
                   <div class="patient-visit-detail-area" role="button" tabindex="0" onclick="openVisitDetailsPage('mary-upcoming')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVisitDetailsPage('mary-upcoming')}" aria-label="Open video appointment with Dr. Mary Anne">
                   <div class="patient-visit-main-row">
                     <div class="patient-visit-info-cluster">
                       <span class="patient-visit-mode-icon" title="Video consultation" aria-hidden="true">
-                        <i class="ph ph-video-camera" aria-hidden="true"></i>
+                        <i class="ph-fill ph-video-camera" aria-hidden="true"></i>
                       </span>
                       <div class="patient-visit-text-col">
                         <h3 class="patient-visit-doc-name">Dr. Mary Anne</h3>
@@ -6080,12 +6150,12 @@
                   </div>
                   </div>
                   <button type="button" class="patient-card-previsit-button" onclick="openPreVisitModal()">
-                      <i class="ph ph-notepad" aria-hidden="true"></i>
                       <span>Add pre-visit details</span>
                       <i class="ph ph-arrow-right" aria-hidden="true"></i>
                   </button>
 
-                </article>
+                  </article>
+                </div>
               </div>
             </div>
 
@@ -6104,7 +6174,7 @@
                   <div class="patient-visit-main-row">
                     <div class="patient-visit-info-cluster">
                       <div class="patient-visit-mode-icon completed-badge" title="Video Consultation">
-                        <i class="ph ph-video-camera" aria-hidden="true"></i>
+                        <i class="ph-fill ph-video-camera" aria-hidden="true"></i>
                       </div>
                       <div class="patient-visit-text-col">
                         <h3 class="patient-visit-doc-name">Ast. Prof. Dr. Mahim Khan</h3>
@@ -6135,7 +6205,7 @@
                   <div class="patient-visit-main-row">
                     <div class="patient-visit-info-cluster">
                       <div class="patient-visit-mode-icon completed-badge" title="Video Consultation">
-                        <i class="ph ph-video-camera" aria-hidden="true"></i>
+                        <i class="ph-fill ph-video-camera" aria-hidden="true"></i>
                       </div>
                       <div class="patient-visit-text-col">
                         <h3 class="patient-visit-doc-name">Prof. Dr. Ayesha Rahman</h3>
@@ -6204,7 +6274,7 @@
               <i class="ph ph-arrow-left"></i>
             </button>
             <h1 class="page-top-title" style="flex: 1;">Prescription</h1>
-            <button class="btn-circle-icon" onclick="showToast('Downloading Prescription PDF...')" aria-label="Download PDF" title="Download PDF">
+            <button class="btn-circle-icon" onclick="downloadPatientPrescriptionPng(this)" aria-label="Download prescription PNG" title="Download PNG">
               <i class="ph ph-download-simple"></i>
             </button>
           </div>
@@ -6329,15 +6399,9 @@
 
             </div>
 
-            <!-- Footer & Signature -->
+            <!-- Minimal prescription footer -->
             <div class="rx-footer-row">
-              <div class="rx-sig-col">
-                <span style="font-family: var(--font-body); font-size: 7.5px; color: #94A3B8;">Electronically signed &amp; verified via BMDC API</span>
-                <span class="rx-sig-img" id="rxSigDoctor">Dr. Mahim Khan</span>
-              </div>
-              <div style="text-align: right;">
-                <span class="rx-sig-sub">Valid Telemedicine Rx</span>
-              </div>
+              <span class="rx-powered-by">Powered By Onubot</span>
             </div>
 
           </div>
@@ -6359,11 +6423,12 @@
           <div class="previsit-progress" aria-hidden="true"><div class="previsit-progress-fill" id="preVisitProgressFill"></div></div>
           <div class="previsit-chat-scroll" id="preVisitChatMessages" aria-live="polite"></div>
           <div class="previsit-chat-composer-wrap" id="preVisitComposerWrap">
+            <div class="previsit-upload-dock" id="preVisitUploadDock" hidden></div>
+            <button type="button" class="previsit-skip-answer" id="preVisitSkipAnswer" onclick="skipPreVisitAnswer()" style="display:none">Skip this question</button>
             <form class="previsit-chat-composer" id="preVisitComposer" onsubmit="submitPreVisitAnswer(event)">
               <textarea class="previsit-chat-input" id="preVisitChatInput" rows="1" aria-label="Your answer" placeholder="Type your answer" oninput="updatePreVisitSendButton()"></textarea>
               <button class="previsit-send-button" id="preVisitSendButton" type="submit" aria-label="Send answer"><i class="ph-bold ph-arrow-up" aria-hidden="true"></i></button>
             </form>
-            <button type="button" class="previsit-skip-answer" id="preVisitSkipAnswer" onclick="skipPreVisitAnswer()" style="display:none">Skip this question</button>
           </div>
           <input type="file" id="preVisitFileInput" accept="image/*,.pdf" multiple hidden onchange="handlePreVisitFiles(this.files)">
         </section>
@@ -6583,6 +6648,7 @@
   </div><!-- /.prototype-workspace -->
 
   <!-- Interactive Application Controller -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     // Live Clock Display
     function updateClock() {
@@ -6711,6 +6777,7 @@
     // Active Profile & Booking Doctor
     let activeProfileDoctor = null;
     let activeBookingDoctor = null;
+    let bookingReturnPage = 'profile';
     let isBioExpanded = false;
 
     // ============================================================
@@ -6774,6 +6841,7 @@
 
     function navigateToDiscover() {
       stopPatientOnuVoiceInput();
+      closePatientOnuHistory();
       closePatientPrescriptionReview();
       const pageDiscover = document.getElementById('pageDiscover');
       const pageVisits = document.getElementById('pageVisits');
@@ -6815,6 +6883,7 @@
 
     function navigateToVisits() {
       stopPatientOnuVoiceInput();
+      closePatientOnuHistory();
       closePatientPrescriptionReview();
       const pageDiscover = document.getElementById('pageDiscover');
       const pageVisits = document.getElementById('pageVisits');
@@ -6870,6 +6939,7 @@
     let patientPrescriptionReviews = [];
     let patientActiveMedications = [];
     let patientPrescriptionPreviewUrls = new Map();
+    let patientOnuAttachmentPreviewUrls = new Map();
     let patientCurrentPrescriptionReviewId = null;
     let patientPrescriptionReturnFocus = null;
     let patientPrescriptionEditTimers = new Map();
@@ -6882,6 +6952,14 @@
     let patientOnuHistoryReturnFocus = null;
     let patientOnuStorageAvailable = true;
     let patientOnuStorageWarningShown = false;
+    let patientOnuThreadHoldTimer = null;
+    let patientOnuThreadHoldStart = null;
+    let patientOnuLongPressConsumed = false;
+    let patientOnuLongPressConsumedThreadId = null;
+    let patientOnuLongPressResetTimer = null;
+    let patientOnuActionThreadId = null;
+    let patientOnuDeleteThreadId = null;
+    let patientOnuActionReturnFocus = null;
     let patientOnuSpeechRecognition = null;
     let patientOnuFlow = null;
     let returnToOnuAfterDoctorList = false;
@@ -6994,6 +7072,8 @@
     let patientHealthPickerSelection = [];
     let patientHealthPickerCategory = 'All';
     let patientHealthPickerReturnFocus = null;
+    let patientHealthEditingMedicationId = null;
+    let patientHealthDeleteMedicationId = null;
     let patientHealthProfileScrollTop = 0;
     let patientHealthStorageWarningShown = false;
 
@@ -7042,6 +7122,10 @@
       if (profile) profile.className = 'app-page patient-profile-page page-left';
       const page = document.getElementById('pagePatientHealthAnalysis');
       if (page) { page.className = 'app-page patient-health-page active-page'; page.scrollTop = 0; }
+      const medicationToggle = document.getElementById('patientHealthMedicationToggle');
+      const medicationList = document.getElementById('patientHealthMedicationList');
+      medicationToggle?.setAttribute('aria-expanded', 'false');
+      if (medicationList) medicationList.hidden = true;
       loadPatientHealthContext();
       loadPatientPrescriptionData();
       renderPatientHealthAnalysis();
@@ -7060,19 +7144,24 @@
     function renderPatientHealthAnalysis() {
       const context = loadPatientHealthContext();
       loadPatientPrescriptionData();
+      const profileData = loadPatientProfileData();
+      const height = Number.parseFloat(profileData.height);
+      const weight = Number.parseFloat(profileData.weight);
+      const bmi = height > 0 && weight > 0 ? weight / ((height / 100) ** 2) : Number.parseFloat(profileData.bmi);
+      const bmiCard = document.querySelector('.patient-health-bmi-card');
+      bmiCard?.classList.remove('is-healthy', 'is-caution', 'is-high');
+      if (Number.isFinite(bmi)) bmiCard?.classList.add(bmi < 18.5 ? 'is-caution' : bmi < 25 ? 'is-healthy' : bmi < 30 ? 'is-caution' : 'is-high');
+      const bmiValue = document.getElementById('patientHealthBmiValue');
+      if (bmiValue) bmiValue.textContent = Number.isFinite(bmi) ? bmi.toFixed(1) : '—';
       const count = document.getElementById('patientHealthMedicationCount');
       const list = document.getElementById('patientHealthMedicationList');
-      if (count) count.textContent = String(patientActiveMedications.length);
+      const visibleMedications = patientActiveMedications.slice(0, 6);
+      if (count) count.textContent = String(visibleMedications.length);
       if (list) {
-        list.innerHTML = patientActiveMedications.length ? patientActiveMedications.map(medicine => {
+        list.innerHTML = visibleMedications.length ? visibleMedications.map(medicine => {
           const detail = [medicine.dose, medicine.frequency, medicine.duration].filter(Boolean).join(' · ');
-          return `<article class="patient-health-med-row" data-medicine-id="${escapePreVisitText(medicine.id)}"><div class="patient-health-med-main"><div class="patient-health-med-name">${escapePreVisitText(medicine.name)}</div>${medicine.genericName ? `<div class="patient-health-med-meta">${escapePreVisitText(medicine.genericName)}</div>` : ''}${detail ? `<div class="patient-health-med-meta">${escapePreVisitText(detail)}</div>` : ''}</div><button type="button" class="patient-health-med-remove" aria-label="Remove ${escapePreVisitText(medicine.name)} from active medications" onclick="removePatientHealthMedication('${escapePreVisitText(medicine.id)}')"><i class="ph ph-trash" aria-hidden="true"></i></button></article>`;
+          return `<button type="button" class="patient-health-med-row" aria-label="Edit ${escapePreVisitText(medicine.name)}" onclick="openPatientHealthMedicationEditor('${escapePreVisitText(medicine.id)}')"><span class="patient-health-med-main"><span class="patient-health-med-name">${escapePreVisitText(medicine.name)}</span>${detail ? `<span class="patient-health-med-meta">${escapePreVisitText(detail)}</span>` : ''}</span><i class="ph ph-pencil-simple patient-health-med-row-icon" aria-hidden="true"></i></button>`;
         }).join('') : '<p class="patient-health-empty">No active medications. <button type="button" onclick="navigateToOnu()">Upload a prescription in Onu</button></p>';
-        list.querySelectorAll('.patient-health-med-row').forEach(row => {
-          let startX = 0;
-          row.addEventListener('touchstart', event => { startX = event.changedTouches[0].clientX; }, { passive: true });
-          row.addEventListener('touchend', event => { if (startX - event.changedTouches[0].clientX > 80) removePatientHealthMedication(row.dataset.medicineId); }, { passive: true });
-        });
       }
       renderPatientHealthEntries('allergies', context.allergies);
       renderPatientHealthEntries('conditions', context.conditions);
@@ -7085,6 +7174,11 @@
       const list = document.getElementById(type === 'allergies' ? 'patientHealthAllergies' : 'patientHealthConditions');
       const empty = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesEmpty' : 'patientHealthConditionsEmpty');
       if (!list || !empty) return;
+      const count = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesCount' : 'patientHealthConditionsCount');
+      const toggle = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesToggle' : 'patientHealthConditionsToggle');
+      const panel = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesPanel' : 'patientHealthConditionsPanel');
+      if (count) count.textContent = String(entries.length);
+      if (panel && toggle) panel.hidden = toggle.getAttribute('aria-expanded') !== 'true';
       list.innerHTML = entries.map(entry => `<span class="patient-health-tag">${escapePreVisitText(entry.name)}<button type="button" data-health-type="${type}" data-health-id="${escapePreVisitText(entry.id)}" aria-label="Remove ${escapePreVisitText(entry.name)} from ${plural.toLowerCase()}"><i class="ph ph-x" aria-hidden="true"></i></button></span>`).join('');
       empty.hidden = entries.length > 0;
       list.querySelectorAll('[data-health-id]').forEach(button => button.addEventListener('click', () => removePatientHealthEntry(button.dataset.healthType, button.dataset.healthId)));
@@ -7100,14 +7194,102 @@
       if (expanded) renderPatientHealthAnalysis();
     }
 
+    function togglePatientHealthSection(type) {
+      if (!['allergies', 'conditions'].includes(type)) return;
+      const toggle = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesToggle' : 'patientHealthConditionsToggle');
+      const panel = document.getElementById(type === 'allergies' ? 'patientHealthAllergiesPanel' : 'patientHealthConditionsPanel');
+      if (!toggle || !panel) return;
+      const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+      toggle.setAttribute('aria-expanded', String(expanded));
+      panel.hidden = !expanded;
+    }
+
+    function openPatientHealthMedicationEditor(medicineId) {
+      loadPatientPrescriptionData();
+      const medicine = patientActiveMedications.find(item => item.id === medicineId);
+      if (!medicine) return;
+      patientHealthEditingMedicationId = medicine.id;
+      const fields = { name: 'patientHealthMedName', genericName: 'patientHealthMedGeneric', dose: 'patientHealthMedDose', frequency: 'patientHealthMedFrequency', duration: 'patientHealthMedDuration', instructions: 'patientHealthMedInstructions' };
+      Object.entries(fields).forEach(([key, id]) => { const input = document.getElementById(id); if (input) input.value = medicine[key] || ''; });
+      document.getElementById('patientHealthMedicationBackdrop')?.classList.add('show');
+      const sheet = document.getElementById('patientHealthMedicationEditor');
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => document.getElementById('patientHealthMedName')?.focus({ preventScroll: true }));
+    }
+
+    function closePatientHealthMedicationEditor() {
+      document.getElementById('patientHealthMedicationBackdrop')?.classList.remove('show');
+      const sheet = document.getElementById('patientHealthMedicationEditor');
+      sheet?.classList.remove('show');
+      sheet?.setAttribute('aria-hidden', 'true');
+      patientHealthEditingMedicationId = null;
+    }
+
+    function savePatientHealthMedicationEdit() {
+      if (!patientHealthEditingMedicationId) return;
+      loadPatientPrescriptionData();
+      const index = patientActiveMedications.findIndex(item => item.id === patientHealthEditingMedicationId);
+      if (index < 0) { closePatientHealthMedicationEditor(); return; }
+      const values = {
+        name: String(document.getElementById('patientHealthMedName')?.value || '').trim(),
+        genericName: String(document.getElementById('patientHealthMedGeneric')?.value || '').trim(),
+        dose: String(document.getElementById('patientHealthMedDose')?.value || '').trim(),
+        frequency: String(document.getElementById('patientHealthMedFrequency')?.value || '').trim(),
+        duration: String(document.getElementById('patientHealthMedDuration')?.value || '').trim(),
+        instructions: String(document.getElementById('patientHealthMedInstructions')?.value || '').trim()
+      };
+      if (!values.name) { showToast('Enter a medication name.'); document.getElementById('patientHealthMedName')?.focus(); return; }
+      const next = patientActiveMedications.slice();
+      next[index] = { ...next[index], ...values };
+      if (!savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: next })) { showToast('Medication could not be saved.'); return; }
+      closePatientHealthMedicationEditor();
+      renderPatientHealthAnalysis();
+      showToast('Medication updated.');
+    }
+
+    function requestPatientHealthMedicationDelete() {
+      if (!patientHealthEditingMedicationId) return;
+      loadPatientPrescriptionData();
+      const medicine = patientActiveMedications.find(item => item.id === patientHealthEditingMedicationId);
+      if (!medicine) return;
+      patientHealthDeleteMedicationId = medicine.id;
+      const message = document.getElementById('patientHealthDeleteMessage');
+      if (message) message.textContent = `${medicine.name} will be removed from your active medications.`;
+      document.getElementById('patientHealthDeleteBackdrop')?.classList.add('show');
+      const sheet = document.getElementById('patientHealthDeleteSheet');
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePatientHealthMedicationDelete() {
+      document.getElementById('patientHealthDeleteBackdrop')?.classList.remove('show');
+      const sheet = document.getElementById('patientHealthDeleteSheet');
+      sheet?.classList.remove('show');
+      sheet?.setAttribute('aria-hidden', 'true');
+      patientHealthDeleteMedicationId = null;
+    }
+
+    function confirmPatientHealthMedicationDelete() {
+      if (!patientHealthDeleteMedicationId) return;
+      const medicineId = patientHealthDeleteMedicationId;
+      if (removePatientHealthMedication(medicineId)) {
+        closePatientHealthMedicationDelete();
+        closePatientHealthMedicationEditor();
+      }
+    }
+
     function removePatientHealthMedication(medicineId) {
       loadPatientPrescriptionData();
       const next = patientActiveMedications.filter(item => item.id !== medicineId);
-      if (next.length === patientActiveMedications.length) return;
+      if (next.length === patientActiveMedications.length) return false;
       if (savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: next })) {
         renderPatientHealthAnalysis();
         showToast('Medication removed from Active medications.');
-      } else showToast('Medication could not be removed.');
+        return true;
+      }
+      showToast('Medication could not be removed.');
+      return false;
     }
 
     function openPatientHealthPicker(type) {
@@ -7217,9 +7399,10 @@
     }
 
     function navigateToOnu() {
+      closePatientOnuHistory();
       closePatientPrescriptionReview();
       const phone = document.querySelector('.phone-screen');
-      phone?.classList.remove('hide-bottom-nav', 'onu-conversation-mode');
+      phone?.classList.remove('hide-bottom-nav', 'onu-conversation-mode', 'onu-panel-open');
       document.getElementById('patientBottomNav')?.classList.remove('nav-hidden');
       ['pageDiscover','pageVisits','pageVisitDetails','pagePatientProfile','pagePatientHealthAnalysis','pageDoctorsList','pageDoctorProfile','pageBookConsultation','pageBookPayment','pageBookingConfirmed','pagePatientRxPreview'].forEach(id => {
         const otherPage = document.getElementById(id);
@@ -7358,7 +7541,9 @@
       if (thread.flow?.type === 'prescription') { thread.flow = null; patientOnuFlow = null; }
       const now = Date.now();
       const attachment = { name: file.name, type: file.type || 'image/*', size: file.size };
-      thread.messages.push({ id: patientOnuMakeId(), role: 'user', text: '', createdAt: now, attachments: [attachment] });
+      const userMessage = { id: patientOnuMakeId(), role: 'user', text: '', createdAt: now, attachments: [attachment] };
+      thread.messages.push(userMessage);
+      try { patientOnuAttachmentPreviewUrls.set(userMessage.id + ':0', URL.createObjectURL(file)); } catch (error) {}
       const processing = { id: patientOnuMakeId(), role: 'assistant', text: 'Thinking… scanning your prescription', createdAt: now + 1, attachments: [], action: { type: 'prescription-processing' } };
       thread.messages.push(processing);
       thread.updatedAt = now;
@@ -7380,7 +7565,12 @@
         const announcement = document.getElementById('onuAnnouncement');
         if (announcement && patientOnuCurrentThreadId === thread.id) announcement.textContent = 'Prescription photo added. Review the details against your original image.';
         renderPatientOnuHistory();
-        if (autoOpen && patientOnuCurrentThreadId === thread.id) openPatientPrescriptionReview(review.id);
+        const onuIsActive = document.getElementById('pageOnu')?.classList.contains('active-page');
+        const historyIsOpen = document.getElementById('onuHistoryOverlay')?.classList.contains('open');
+        const isInConversation = patientOnuView === 'conversation_new' || patientOnuView === 'conversation_saved';
+        if (autoOpen && patientOnuCurrentThreadId === thread.id && onuIsActive && isInConversation && !historyIsOpen) {
+          openPatientPrescriptionReview(review.id);
+        }
       }, 850);
     }
 
@@ -7669,8 +7859,13 @@
       if (!stream) return;
       const thread = patientOnuThreads.find(item => item.id === patientOnuCurrentThreadId);
       if (!thread) { stream.innerHTML = ''; return; }
-      stream.innerHTML = thread.messages.map(message => {
-        const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map(file => { const category = getPatientOnuFileCategory(file); const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${details[1]}</span></span></div>`; }).join('')}</div>` : '';
+      stream.innerHTML = thread.messages.filter(message => {
+        if (message.role !== 'assistant') return true;
+        const text = String(message.text || '').trim();
+        return !/^Saved \d+ medicines? to Active medications on this device\.$/i.test(text)
+          && !/^I.{1,3}ll use .+ as context in this chat\. They are not saved to Active medications\.$/i.test(text);
+      }).map(message => {
+        const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map((file, index) => { const category = getPatientOnuFileCategory(file); const imageUrl = category === 'image' ? patientOnuAttachmentPreviewUrls.get(message.id + ':' + index) : null; if (imageUrl) return `<figure><img class="onu-attachment-photo" src="${imageUrl}" alt="Uploaded photo: ${escapePreVisitText(file.name)}"><figcaption class="onu-attachment-photo-caption">${escapePreVisitText(file.name)}</figcaption></figure>`; const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${details[1]}</span></span></div>`; }).join('')}</div>` : '';
         const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="btn-confirm-pay onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
         const processing = message.action?.type === 'prescription-processing' ? `<div class="patient-rx-processing" role="status"><i class="ph ph-sparkle" aria-hidden="true"></i><span>Thinking… scanning your prescription</span></div>` : '';
         const prescriptionReview = patientPrescriptionReviews.find(review => review.id === message.action?.reviewId);
@@ -7706,20 +7901,219 @@
       const groups = [['Today', thread => now - thread.updatedAt < 86400000], ['Previous 7 days', thread => now - thread.updatedAt >= 86400000 && now - thread.updatedAt < 8 * 86400000], ['Older', thread => now - thread.updatedAt >= 8 * 86400000]];
       list.innerHTML = groups.map(([label, predicate]) => {
         const threads = savedThreads.filter(predicate).sort((a, b) => b.updatedAt - a.updatedAt);
-        return threads.length ? `<h2 class="onu-history-group">${label}</h2>${threads.map(thread => `<button type="button" class="onu-thread-button" data-thread-id="${escapePreVisitText(thread.id)}" aria-current="${thread.id === patientOnuCurrentThreadId ? 'true' : 'false'}" onclick="openPatientOnuThread(this.dataset.threadId)">${escapePreVisitText(thread.title)}</button>`).join('')}` : '';
+        return threads.length ? `<h2 class="onu-history-group">${label}</h2>${threads.map(thread => `<div class="onu-thread-row" data-thread-id="${escapePreVisitText(thread.id)}" onpointerdown="startPatientOnuThreadHold(event,this.dataset.threadId)" onpointermove="movePatientOnuThreadHold(event)" onpointerup="cancelPatientOnuThreadHold()" onpointercancel="cancelPatientOnuThreadHold()" onpointerleave="cancelPatientOnuThreadHold()"><button type="button" class="onu-thread-button" id="onu-thread-${escapePreVisitText(thread.id)}" data-thread-id="${escapePreVisitText(thread.id)}" aria-current="${thread.id === patientOnuCurrentThreadId ? 'true' : 'false'}" aria-description="Press and hold to rename or delete. Press Shift+F10 for chat options." onkeydown="handlePatientOnuThreadOptionsKeydown(event,this.dataset.threadId)" onclick="openPatientOnuThreadFromRow(event,this.dataset.threadId)">${escapePreVisitText(thread.title)}</button></div>`).join('')}` : '';
       }).join('');
+    }
+
+    function startPatientOnuThreadHold(event, threadId) {
+      if (event.button !== undefined && event.button !== 0) return;
+      cancelPatientOnuThreadHold();
+      patientOnuThreadHoldStart = { threadId, x: event.clientX, y: event.clientY };
+      patientOnuThreadHoldTimer = window.setTimeout(() => {
+        const heldThreadId = patientOnuThreadHoldStart?.threadId;
+        patientOnuThreadHoldTimer = null;
+        patientOnuThreadHoldStart = null;
+        if (!heldThreadId) return;
+        patientOnuLongPressConsumed = true;
+        patientOnuLongPressConsumedThreadId = heldThreadId;
+        window.clearTimeout(patientOnuLongPressResetTimer);
+        patientOnuLongPressResetTimer = window.setTimeout(() => {
+          patientOnuLongPressConsumed = false;
+          patientOnuLongPressConsumedThreadId = null;
+        }, 1200);
+        openPatientOnuThreadActions(null, heldThreadId);
+      }, 550);
+    }
+
+    function movePatientOnuThreadHold(event) {
+      if (!patientOnuThreadHoldStart) return;
+      const movedX = Math.abs(event.clientX - patientOnuThreadHoldStart.x);
+      const movedY = Math.abs(event.clientY - patientOnuThreadHoldStart.y);
+      if (movedX > 10 || movedY > 10) cancelPatientOnuThreadHold();
+    }
+
+    function cancelPatientOnuThreadHold() {
+      if (patientOnuThreadHoldTimer) window.clearTimeout(patientOnuThreadHoldTimer);
+      patientOnuThreadHoldTimer = null;
+      patientOnuThreadHoldStart = null;
+    }
+
+    function handlePatientOnuThreadOptionsKeydown(event, threadId) {
+      if ((event.shiftKey && event.key === 'F10') || event.key === 'ContextMenu') {
+        event.preventDefault();
+        openPatientOnuThreadActions(event, threadId);
+      }
+    }
+
+    function openPatientOnuThreadFromRow(event, threadId) {
+      if (patientOnuLongPressConsumed && patientOnuLongPressConsumedThreadId === threadId) {
+        event.preventDefault();
+        event.stopPropagation();
+        patientOnuLongPressConsumed = false;
+        patientOnuLongPressConsumedThreadId = null;
+        window.clearTimeout(patientOnuLongPressResetTimer);
+        return;
+      }
+      openPatientOnuThread(threadId);
+    }
+
+    function openPatientOnuThreadActions(event, threadId) {
+      const thread = patientOnuThreads.find(item => item.id === threadId);
+      const overlay = document.getElementById('onuThreadActionOverlay');
+      if (!thread || !overlay) return;
+      event?.preventDefault();
+      event?.stopPropagation();
+      patientOnuActionThreadId = thread.id;
+      patientOnuActionReturnFocus = document.getElementById(`onu-thread-${thread.id}`);
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => document.getElementById('onuThreadRenameChoice')?.focus());
+    }
+
+    function closePatientOnuThreadActions(restoreFocus = true, keepThread = false) {
+      const overlay = document.getElementById('onuThreadActionOverlay');
+      if (!overlay) return;
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      if (restoreFocus && patientOnuActionReturnFocus?.isConnected) patientOnuActionReturnFocus.focus();
+      if (!keepThread) patientOnuActionThreadId = null;
+    }
+
+    function openPatientOnuThreadRename() {
+      const thread = patientOnuThreads.find(item => item.id === patientOnuActionThreadId);
+      const overlay = document.getElementById('onuThreadRenameOverlay');
+      const input = document.getElementById('onuThreadRenameInput');
+      if (!thread || !overlay || !input) return;
+      closePatientOnuThreadActions(false, true);
+      input.value = thread.title;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => { input.focus(); input.select(); });
+    }
+
+    function closePatientOnuThreadRename(restoreFocus = true) {
+      const overlay = document.getElementById('onuThreadRenameOverlay');
+      overlay?.classList.remove('open');
+      overlay?.setAttribute('aria-hidden', 'true');
+      const threadId = patientOnuActionThreadId;
+      patientOnuActionThreadId = null;
+      if (restoreFocus && threadId) (document.getElementById(`onu-thread-${threadId}`) || document.getElementById('onuHistoryDrawer'))?.focus();
+    }
+
+    function savePatientOnuThreadRename(event) {
+      event.preventDefault();
+      const thread = patientOnuThreads.find(item => item.id === patientOnuActionThreadId);
+      const input = document.getElementById('onuThreadRenameInput');
+      const title = String(input?.value || '').trim().slice(0, 120);
+      if (!thread || !title) { input?.focus(); return; }
+      thread.title = title;
+      savePatientOnuThreads();
+      renderPatientOnuHistory();
+      const threadId = thread.id;
+      closePatientOnuThreadRename(false);
+      document.getElementById(`onu-thread-${threadId}`)?.focus();
+      showToast('Chat renamed.');
+    }
+
+    function openPatientOnuThreadDelete() {
+      const thread = patientOnuThreads.find(item => item.id === patientOnuActionThreadId);
+      const overlay = document.getElementById('onuThreadDeleteOverlay');
+      if (!thread || !overlay) return;
+      patientOnuDeleteThreadId = thread.id;
+      closePatientOnuThreadActions(false, true);
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      requestAnimationFrame(() => document.querySelector('#onuThreadDeleteDialog button:last-child')?.focus());
+    }
+
+    function closePatientOnuThreadDelete(restoreFocus = true) {
+      const overlay = document.getElementById('onuThreadDeleteOverlay');
+      overlay?.classList.remove('open');
+      overlay?.setAttribute('aria-hidden', 'true');
+      const threadId = patientOnuDeleteThreadId;
+      patientOnuDeleteThreadId = null;
+      patientOnuActionThreadId = null;
+      if (restoreFocus && threadId) (document.getElementById(`onu-thread-${threadId}`) || document.getElementById('onuHistoryDrawer'))?.focus();
+    }
+
+    function confirmPatientOnuThreadDelete() {
+      const threadId = patientOnuDeleteThreadId;
+      const thread = patientOnuThreads.find(item => item.id === threadId);
+      if (!thread) { closePatientOnuThreadDelete(false); return; }
+      thread.messages.forEach(message => (message.attachments || []).forEach((file, index) => {
+        const key = message.id + ':' + index;
+        const previewUrl = patientOnuAttachmentPreviewUrls.get(key);
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        patientOnuAttachmentPreviewUrls.delete(key);
+      }));
+      patientOnuThreads = patientOnuThreads.filter(item => item.id !== threadId);
+      const removedReviews = patientPrescriptionReviews.filter(review => review.threadId === threadId);
+      removedReviews.forEach(review => {
+        const previewUrl = patientPrescriptionPreviewUrls.get(review.id);
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
+        patientPrescriptionPreviewUrls.delete(review.id);
+      });
+      patientPrescriptionReviews = patientPrescriptionReviews.filter(review => review.threadId !== threadId);
+      savePatientOnuThreads();
+      savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications });
+      const wasCurrentThread = patientOnuCurrentThreadId === threadId;
+      closePatientOnuThreadDelete(false);
+      if (wasCurrentThread) {
+        patientOnuCurrentThreadId = null;
+        patientOnuFlow = null;
+        setPatientOnuView('home_empty');
+        renderPatientOnuMessages();
+      }
+      renderPatientOnuHistory();
+      document.getElementById('onuHistoryDrawer')?.focus();
+      showToast('Chat deleted.');
+    }
+
+    function handlePatientOnuThreadDialogKeydown(event) {
+      const dialog = event.currentTarget;
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        if (dialog.id === 'onuThreadRenameDialog') closePatientOnuThreadRename();
+        else if (dialog.id === 'onuThreadDeleteDialog') closePatientOnuThreadDelete();
+        else closePatientOnuThreadActions();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(dialog.querySelectorAll('button:not([disabled]),input:not([disabled])')).filter(element => element.offsetParent !== null);
+      if (!focusable.length) { event.preventDefault(); dialog.focus(); return; }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
     }
 
     function openPatientOnuHistory(trigger) {
       const overlay = document.getElementById('onuHistoryOverlay');
       const drawer = document.getElementById('onuHistoryDrawer');
       if (!overlay || !drawer) return;
-      patientOnuHistoryReturnFocus = trigger || document.activeElement;
+      if (document.getElementById('patientPrescriptionReview')?.classList.contains('open')) closePatientPrescriptionReview();
+      const opener = trigger || document.activeElement;
+      const pageBounds = document.getElementById('pageOnu')?.getBoundingClientRect();
+      const openerBounds = opener?.getBoundingClientRect?.();
+      const opensFromLeft = openerBounds && pageBounds
+        ? openerBounds.left + openerBounds.width / 2 < pageBounds.left + pageBounds.width / 2
+        : false;
+      overlay.classList.add('no-motion');
+      overlay.classList.remove('open');
+      overlay.classList.toggle('from-left', Boolean(opensFromLeft));
+      overlay.classList.toggle('from-right', !opensFromLeft);
+      void drawer.offsetWidth;
+      patientOnuHistoryReturnFocus = opener;
       loadPatientOnuThreads();
-      overlay.classList.add('open');
       overlay.setAttribute('aria-hidden', 'false');
+      document.querySelector('.phone-screen')?.classList.add('onu-panel-open');
       document.querySelectorAll('#onuHeader [aria-label="Open chat history"]').forEach(button => button.setAttribute('aria-expanded', 'true'));
-      requestAnimationFrame(() => drawer.focus());
+      requestAnimationFrame(() => {
+        overlay.classList.remove('no-motion');
+        overlay.classList.add('open');
+        requestAnimationFrame(() => drawer.focus());
+      });
     }
 
     function closePatientOnuHistory() {
@@ -7727,6 +8121,11 @@
       if (!overlay?.classList.contains('open')) return;
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
+      window.setTimeout(() => {
+        if (!overlay.classList.contains('open') && !document.getElementById('patientPrescriptionReview')?.classList.contains('open')) {
+          document.querySelector('.phone-screen')?.classList.remove('onu-panel-open');
+        }
+      }, 340);
       document.querySelectorAll('#onuHeader [aria-label="Open chat history"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
       if (patientOnuHistoryReturnFocus?.isConnected) patientOnuHistoryReturnFocus.focus();
     }
@@ -7767,6 +8166,7 @@
     function openPatientPrescriptionReview(reviewId) {
       const review = getPatientPrescriptionReview(reviewId);
       if (!review || review.threadId !== patientOnuCurrentThreadId) { showToast('This prescription review is not available in the current chat.'); return; }
+      closePatientOnuHistory();
       patientCurrentPrescriptionReviewId = review.id;
       patientPrescriptionReturnFocus = document.activeElement;
       renderPatientPrescriptionReview(review);
@@ -7774,6 +8174,7 @@
       overlay?.classList.add('open');
       overlay?.setAttribute('aria-hidden', 'false');
       overlay?.removeAttribute('inert');
+      document.querySelector('.phone-screen')?.classList.add('onu-panel-open');
       requestAnimationFrame(() => document.querySelector('#patientRxSaveButton')?.focus());
     }
 
@@ -8047,10 +8448,11 @@
       overlay.classList.remove('open');
       overlay.setAttribute('aria-hidden', 'true');
       overlay.setAttribute('inert', '');
+      if (!document.getElementById('onuHistoryOverlay')?.classList.contains('open')) document.querySelector('.phone-screen')?.classList.remove('onu-panel-open');
       patientCurrentPrescriptionReviewId = null;
       renderPatientOnuMessages();
       const reviewAction = reviewId ? document.querySelector(`.patient-rx-review-action[data-review-id="${reviewId}"]`) : null;
-      if (returnFocus?.isConnected) returnFocus.focus();
+      if (returnFocus?.isConnected && !returnFocus.hidden) returnFocus.focus();
       else if (reviewAction) reviewAction.focus();
       else document.getElementById('onuComposerInput')?.focus();
     }
@@ -8071,10 +8473,7 @@
       }
       closePatientPrescriptionReview();
       const thread = patientOnuThreads.find(item => item.id === review.threadId);
-      if (thread) {
-        thread.messages.push({ id: patientOnuMakeId(), role: 'assistant', text: `Saved ${medicines.length} ${medicines.length === 1 ? 'medicine' : 'medicines'} to Active medications on this device.`, createdAt: Date.now(), attachments: [] });
-        thread.updatedAt = Date.now();
-      }
+      if (thread) thread.updatedAt = Date.now();
       savePatientOnuThreads();
       renderPatientOnuMessages();
       renderPatientActiveMedications();
@@ -8097,7 +8496,6 @@
       if (!savePatientPrescriptionData({ version: 1, reviews: patientPrescriptionReviews, medications: patientActiveMedications })) {
         showToast('The medicine details are ready in this chat but could not be saved on this device.');
       }
-      thread.messages.push({ id: patientOnuMakeId(), role: 'assistant', text: `I’ll use ${medicines.map(medicine => medicine.name.trim()).join(', ')} as context in this chat. They are not saved to Active medications.`, createdAt: Date.now(), attachments: [] });
       thread.updatedAt = Date.now();
       savePatientOnuThreads();
       closePatientPrescriptionReview();
@@ -8147,11 +8545,6 @@
       setText('patientProfileName', data.name || 'Patient');
       setText('patientProfileEmail', data.email || 'Add email address');
       setText('patientProfilePhone', data.phone || 'Add phone number');
-      setText('patientProfileAge', data.age ? `${data.age} years` : 'Add age');
-      setText('patientProfileGender', data.gender || 'Add gender');
-      setText('patientProfileBloodType', data.bloodType || 'Not added');
-      setText('patientProfileHeight', data.height ? `${Math.round(Number(data.height))} cm` : 'Not added');
-      setText('patientProfileWeight', data.weight ? `${data.weight} kg` : 'Not added');
       const photo = document.getElementById('patientProfilePhoto');
       if (photo) { photo.src = data.photo || ''; photo.hidden = !data.photo; }
       const initialsNode = document.getElementById('patientProfileInitials');
@@ -8165,28 +8558,9 @@
       const bmi = h > 0 && w > 0 ? w / ((h / 100) ** 2) : Number.parseFloat(data.bmi);
       const bmiValue = Number.isFinite(bmi) ? bmi.toFixed(1) : '—';
       setText('patientProfileBmi', bmiValue);
-      const bmiCard = document.querySelector('.patient-profile-bmi');
+      const bmiCard = document.querySelector('.patient-profile-health-summary');
       bmiCard?.classList.remove('is-healthy', 'is-caution', 'is-high');
       if (Number.isFinite(bmi)) bmiCard?.classList.add(bmi < 18.5 ? 'is-caution' : bmi < 25 ? 'is-healthy' : bmi < 30 ? 'is-caution' : 'is-high');
-      setText('patientProfileBmiStatus', !Number.isFinite(bmi) ? 'Add measurements' : bmi < 18.5 ? 'Below healthy range' : bmi < 25 ? 'Healthy range' : bmi < 30 ? 'Above healthy range' : 'High range');
-    }
-
-    function openPatientProfileEditor() {
-      loadPatientProfileData();
-      const fields = {
-        age: document.getElementById('patientProfileAgeInput'),
-        gender: document.getElementById('patientProfileGenderInput'),
-        bloodType: document.getElementById('patientProfileBloodTypeInput'),
-        height: document.getElementById('patientProfileHeightInput'),
-        weight: document.getElementById('patientProfileWeightInput')
-      };
-      Object.entries(fields).forEach(([key, input]) => { if (input) input.value = patientProfileData[key] || ''; });
-      const sheet = document.getElementById('patientProfileEditor');
-      const backdrop = document.getElementById('patientProfileEditBackdrop');
-      backdrop?.classList.add('show');
-      sheet?.classList.add('show');
-      sheet?.setAttribute('aria-hidden', 'false');
-      requestAnimationFrame(() => fields.age?.focus({ preventScroll: true }));
     }
 
     function openPatientIdentityEditor() {
@@ -8194,6 +8568,8 @@
       patientProfilePendingPhoto = patientProfileData.photo || '';
       const nameInput = document.getElementById('patientProfileNameInput');
       if (nameInput) nameInput.value = patientProfileData.name || '';
+      const fields = { age: 'patientProfileAgeInput', gender: 'patientProfileGenderInput', bloodType: 'patientProfileBloodTypeInput', height: 'patientProfileHeightInput', weight: 'patientProfileWeightInput' };
+      Object.entries(fields).forEach(([key, id]) => { const input = document.getElementById(id); if (input) input.value = patientProfileData[key] || ''; });
       renderPatientProfile();
       document.getElementById('patientIdentityEditBackdrop')?.classList.add('show');
       const sheet = document.getElementById('patientIdentityEditor');
@@ -8214,22 +8590,6 @@
     function savePatientIdentityEdit() {
       const name = String(document.getElementById('patientProfileNameInput')?.value || '').trim();
       if (!name) { showToast('Enter your name before saving.'); document.getElementById('patientProfileNameInput')?.focus(); return; }
-      patientProfileData.name = name;
-      if (patientProfilePendingPhoto !== null) patientProfileData.photo = patientProfilePendingPhoto;
-      if (!savePatientProfileData()) return;
-      renderPatientProfile();
-      closePatientIdentityEditor();
-      showToast('Profile updated.');
-    }
-
-    function closePatientProfileEditor() {
-      const sheet = document.getElementById('patientProfileEditor');
-      sheet?.classList.remove('show');
-      sheet?.setAttribute('aria-hidden', 'true');
-      document.getElementById('patientProfileEditBackdrop')?.classList.remove('show');
-    }
-
-    function savePatientProfileEdit() {
       const values = {
         age: String(document.getElementById('patientProfileAgeInput')?.value || '').trim(),
         gender: String(document.getElementById('patientProfileGenderInput')?.value || '').trim(),
@@ -8247,14 +8607,15 @@
           return;
         }
       }
-      Object.assign(patientProfileData, values);
+      Object.assign(patientProfileData, values, { name });
+      if (patientProfilePendingPhoto !== null) patientProfileData.photo = patientProfilePendingPhoto;
       const height = Number.parseFloat(patientProfileData.height);
       const weight = Number.parseFloat(patientProfileData.weight);
       if (height > 0 && weight > 0) patientProfileData.bmi = (weight / ((height / 100) ** 2)).toFixed(1);
       if (!savePatientProfileData()) return;
       renderPatientProfile();
-      closePatientProfileEditor();
-      showToast('Profile details updated.');
+      closePatientIdentityEditor();
+      showToast('Profile and health details updated.');
     }
 
     function handlePatientProfilePhoto(event) {
@@ -8283,6 +8644,7 @@
 
     function navigateToPatientProfile() {
       stopPatientOnuVoiceInput();
+      closePatientOnuHistory();
       closePatientPrescriptionReview();
       document.querySelector('.phone-screen')?.classList.remove('hide-bottom-nav','onu-conversation-mode');
       document.getElementById('patientBottomNav')?.classList.remove('nav-hidden');
@@ -8297,7 +8659,8 @@
     }
 
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && document.getElementById('patientProfileEditor')?.classList.contains('show')) closePatientProfileEditor();
+      if (event.key === 'Escape' && document.getElementById('patientHealthDeleteSheet')?.classList.contains('show')) closePatientHealthMedicationDelete();
+      else if (event.key === 'Escape' && document.getElementById('patientHealthMedicationEditor')?.classList.contains('show')) closePatientHealthMedicationEditor();
       if (event.key === 'Escape' && document.getElementById('patientIdentityEditor')?.classList.contains('show')) closePatientIdentityEditor();
       if (event.key === 'Escape' && document.getElementById('patientHealthPicker')?.classList.contains('show')) closePatientHealthPicker();
       if (event.key === 'Escape' && document.getElementById('onuHistoryOverlay')?.classList.contains('open')) closePatientOnuHistory();
@@ -8408,6 +8771,13 @@
       }
     }
 
+    function bookDoctorFromDirectory(docId) {
+      const doc = doctorsDb.find(doctor => doctor.id === docId);
+      if (!doc) return;
+      activeProfileDoctor = doc;
+      openBookConsultationPage('directory');
+    }
+
     function toggleBioExpand() {
       const bioEl = document.getElementById('profileDocBio');
       const textEl = document.getElementById('bioToggleText');
@@ -8448,10 +8818,11 @@
     // ============================================================
     // BOOK CONSULTATION SCREEN CONTROLLER (PAGE 4)
     // ============================================================
-    function openBookConsultationPage() {
+    function openBookConsultationPage(returnTo = 'profile') {
       if (!activeProfileDoctor) return;
       const doc = activeProfileDoctor;
       activeBookingDoctor = doc;
+      bookingReturnPage = returnTo;
 
       // Populate doctor snippet in Book Consultation page
       const avatarEl = document.getElementById('bookConsultDocAvatar');
@@ -8477,6 +8848,7 @@
 
       // Transition pages
       const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageDoctors = document.getElementById('pageDoctorsList');
       const pageConsult = document.getElementById('pageBookConsultation');
       const bottomNav = document.getElementById('patientBottomNav');
       const phoneScreen = document.querySelector('.phone-screen');
@@ -8485,7 +8857,10 @@
       if (bottomNav) bottomNav.classList.add('nav-hidden');
 
       if (pageProfile) {
-        pageProfile.className = 'app-page page-doctor-profile page-left';
+        pageProfile.className = `app-page page-doctor-profile ${returnTo === 'profile' ? 'page-left' : 'page-right'}`;
+      }
+      if (pageDoctors) {
+        pageDoctors.className = 'app-page page-doctors-list page-left';
       }
       if (pageConsult) {
         pageConsult.className = 'app-page page-book-consultation active-page';
@@ -8495,6 +8870,7 @@
 
     function returnFromBookConsultation() {
       const pageProfile = document.getElementById('pageDoctorProfile');
+      const pageDoctors = document.getElementById('pageDoctorsList');
       const pageConsult = document.getElementById('pageBookConsultation');
       const bottomNav = document.getElementById('patientBottomNav');
       const phoneScreen = document.querySelector('.phone-screen');
@@ -8505,6 +8881,11 @@
 
       if (pageConsult) {
         pageConsult.className = 'app-page page-book-consultation page-right';
+      }
+      if (bookingReturnPage === 'directory') {
+        if (pageProfile) pageProfile.className = 'app-page page-doctor-profile page-right';
+        if (pageDoctors) pageDoctors.className = 'app-page page-doctors-list active-page';
+        return;
       }
       if (pageProfile) {
         pageProfile.className = 'app-page page-doctor-profile active-page';
@@ -8681,12 +9062,14 @@
     function updatePaymentAmounts() {
       const creditRow = document.getElementById('paymentCreditRow');
       const discountEl = document.getElementById('paymentCreditDiscount');
+      const totalEl = document.getElementById('paymentTotal');
       const dueEl = document.getElementById('paymentDueTotal');
       const buttonLabel = document.getElementById('paymentButtonLabel');
       const due = Math.max(0, activePaymentTotal - (onuCreditEnabled ? onuCreditBalance : 0));
       activeCreditApplied = activePaymentTotal - due;
       if (creditRow) creditRow.hidden = activeCreditApplied <= 0;
       if (discountEl) discountEl.textContent = `−৳ ${activeCreditApplied.toLocaleString()}`;
+      if (totalEl) totalEl.textContent = `৳ ${due.toLocaleString()}`;
       if (dueEl) dueEl.textContent = `৳ ${due.toLocaleString()}`;
       if (buttonLabel) buttonLabel.textContent = due > 0 ? `Pay ৳ ${due.toLocaleString()}` : 'Confirm booking';
       document.querySelectorAll('#paymentMethodList .payment-method-option').forEach(option => {
@@ -8716,8 +9099,8 @@
       const docAvatar = document.getElementById('confirmedDocAvatar');
       const docName = document.getElementById('confirmedDocName');
       const docSub = document.getElementById('confirmedDocSub');
-      const modeText = document.getElementById('confirmedModeText');
       const modeLabel = document.getElementById('confirmedModeLabel');
+      const totalAmount = document.getElementById('confirmedTotal');
       const dateLabel = document.getElementById('confirmedDateLabel');
       const serialVal = document.getElementById('confirmedSerialVal');
       const startTimeVal = document.getElementById('confirmedStartTimeVal');
@@ -8731,8 +9114,9 @@
       }
       if (docName) docName.textContent = doc.name;
       if (docSub) docSub.textContent = doc.degreeSpecialty;
-      if (modeText) modeText.textContent = (activeConsultMode === 'video' ? 'video' : 'in-person');
       if (modeLabel) modeLabel.textContent = (activeConsultMode === 'video' ? 'Video Call' : 'In Person');
+
+      if (totalAmount) totalAmount.innerHTML = `&#2547; ${activePaymentTotal.toLocaleString()}`;
       
       const dayFormatted = (selectedConsultDay === 'TODAY' ? 'Tue' : selectedConsultDay.charAt(0) + selectedConsultDay.slice(1).toLowerCase());
       const monthFormatted = selectedConsultMonth.charAt(0) + selectedConsultMonth.slice(1).toLowerCase();
@@ -8758,6 +9142,7 @@
       if (pageConfirmed) {
         pageConfirmed.className = 'app-page page-booking-confirmed active-page';
         pageConfirmed.scrollTop = 0;
+        requestAnimationFrame(() => document.getElementById('confirmedTitle')?.focus({ preventScroll: true }));
       }
     }
 
@@ -8811,6 +9196,20 @@
         if (secUpcoming) secUpcoming.style.display = 'none';
         if (secCompleted) secCompleted.style.display = 'flex';
       }
+    }
+
+    function toggleUpcomingVisits() {
+      const futureGroups = document.getElementById('visitsFutureGroups');
+      const button = document.getElementById('visitsViewMoreButton');
+      const label = button?.querySelector('span');
+      const icon = button?.querySelector('i');
+      if (!futureGroups || !button) return;
+
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      futureGroups.style.display = expanded ? 'none' : 'flex';
+      button.setAttribute('aria-expanded', String(!expanded));
+      if (label) label.textContent = expanded ? 'View more' : 'View less';
+      if (icon) icon.className = `ph ${expanded ? 'ph-caret-down' : 'ph-caret-up'}`;
     }
 
     let currentActiveVisitId = null;
@@ -8874,7 +9273,7 @@
         serial: '#3',
         duration: '14m 20s',
         rxId: 'rx-mahim-01',
-        rxFileName: 'RX_Alif_Khan_Sep29.pdf',
+        rxFileName: 'Alif Khan Prescription - Jun 9',
         notes: 'Patient presented with acute viral pharyngitis, throat irritation, and mild frontal cephalalgia for 3 days. Throat examination shows mild erythema without tonsillar exudate. Prescribed Paracetamol 500mg, warm saline gargles thrice daily, and vocal rest. Advised to stay well hydrated and follow up if symptoms persist beyond 5 days.',
         callDuration: '25 Mins',
         intake: {
@@ -8900,7 +9299,7 @@
         serial: '#8',
         duration: '11m 45s',
         rxId: 'rx-ayesha-02',
-        rxFileName: 'RX_Alif_Khan_Apr18.pdf',
+        rxFileName: 'Alif Khan Prescription - Apr 18',
         notes: 'Routine checkup for seasonal allergic rhinitis. Nasal congestion and ocular pruritus managed with Second-generation antihistamine and saline nasal spray. Advised allergen avoidance and follow-up in 4 weeks.',
         callDuration: '18 Mins',
         intake: {
@@ -9166,7 +9565,7 @@
       const visit = visitsDb['mahim-upcoming'];
       visit.type = 'completed';
       visit.rxId = 'rx-mahim-01';
-      visit.rxFileName = 'RX_Alif_Khan_Sep29.pdf';
+      visit.rxFileName = 'Alif Khan Prescription - Sep 29';
       visit.notes = 'Patient reports intermittent tension headaches over the past week with mild neck stiffness after extended screen use. Symptoms ease with rest and hydration. No visual changes, nausea, weakness, or other neurological symptoms reported. Discussed regular screen breaks, posture adjustments, hydration, and the prescribed treatment. Follow up if symptoms worsen or do not improve.';
       const upcomingCard = document.getElementById('upcomingCard');
       if (upcomingCard) upcomingCard.style.display = 'none';
@@ -9185,7 +9584,7 @@
               <div class="patient-visit-main-row">
                 <div class="patient-visit-info-cluster">
                   <span class="patient-visit-mode-icon completed-badge" id="simulatedCompletedModeIcon" title="Video consultation">
-                    <i class="ph ph-video-camera" aria-hidden="true"></i>
+                    <i class="ph-fill ph-video-camera" aria-hidden="true"></i>
                   </span>
                   <div class="patient-visit-text-col">
                     <h3 class="patient-visit-doc-name" id="simulatedCompletedDocName"></h3>
@@ -9207,7 +9606,7 @@
       if (icon) {
         const video = visit.mode === 'Video';
         icon.title = video ? 'Video consultation' : 'In-person appointment';
-        icon.innerHTML = `<i class="ph ${video ? 'ph-video-camera' : 'ph-map-pin'}" aria-hidden="true"></i>`;
+        icon.innerHTML = `<i class="${video ? 'ph-fill ph-video-camera' : 'ph ph-map-pin'}" aria-hidden="true"></i>`;
       }
       renderPatientVisitCardState();
       switchVisitsTab('completed');
@@ -9322,13 +9721,15 @@
       const sectionsContainer = document.getElementById('visDynamicSections');
       const bottomDock = document.getElementById('visBottomDock');
 
-      // Compact doctor identity, then appointment context on its own aligned row.
+      // Keep the appointment date and time together on one compact line.
       if (plainContainer) {
         const isVideoVisit = vis.mode === 'Video';
         const visitModeLabel = isVideoVisit ? 'Video consultation' : 'In-person visit';
-        const visitContext = vis.type === 'completed'
-          ? `<span class="details-visit-date"><i class="ph ph-calendar-blank" aria-hidden="true"></i>${vis.dateText}</span><span class="details-visit-context-divider" aria-hidden="true">·</span><span class="details-visit-mode-label">${visitModeLabel}</span>`
-          : `<span class="details-visit-date"><i class="ph ph-calendar-blank" aria-hidden="true"></i>${vis.dateText}</span><span class="details-visit-context-divider" aria-hidden="true">·</span><span class="details-visit-mode-label">${vis.timeText || ''}</span><span class="details-visit-context-divider" aria-hidden="true">·</span><span class="details-visit-mode-label">Serial ${vis.serial || '#5'}</span>`;
+        const shortVisitDate = (vis.dateText || '').replace(/^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s*/i, '');
+        const visitContext = `
+          <span class="details-visit-date">${shortVisitDate}</span>
+          <span class="details-visit-mode-label">${vis.timeText || ''}</span>
+          <span class="details-visit-mode-label">Serial ${vis.serial || '#5'}</span>`;
         plainContainer.innerHTML = `
           <div class="details-visit-summary">
             <div class="details-completed-identity">
@@ -9340,7 +9741,7 @@
                 <span class="details-doc-specialty">${vis.specialty || 'Cardiology'}</span>
               </div>
             </div>
-            <div class="details-visit-context${vis.type === 'completed' ? (isVideoVisit ? ' details-visit-context-video' : '') : ' details-visit-context-upcoming'}">${visitContext}</div>
+            <div class="details-visit-context">${visitContext}</div>
           </div>
         `;
       }
@@ -9384,7 +9785,7 @@
                   <i class="ph-bold ph-file-pdf"></i>
                 </div>
                 <div class="details-rx-tile-meta">
-                  <span class="details-rx-tile-name">${vis.rxFileName || 'RX_Alif_Khan_Sep29.pdf'}</span>
+                  <span class="details-rx-tile-name">${vis.rxFileName || 'Alif Khan Prescription - Sep 29'}</span>
                   <span class="details-rx-tile-sub">Official Digital Rx</span>
                 </div>
               </div>
@@ -9416,12 +9817,10 @@
         const collapsibleSectionHtml = `
           <div class="details-intake-collapsible-wrap" id="patientDetCollapsibleWrap">
             <div class="details-intake-divider-trigger" onclick="togglePatientDetCollapsible()" role="button" tabindex="0" aria-label="Toggle More Details">
-              <div class="details-intake-divider-line"></div>
               <div class="details-intake-divider-content">
                 <span id="patientDetToggleText">View More</span>
                 <i class="ph ph-caret-down details-intake-divider-chevron" id="patientDetChevron"></i>
               </div>
-              <div class="details-intake-divider-line"></div>
             </div>
             <div class="details-intake-collapsible-body" id="patientDetCollapsibleBody" style="display: none;">
               
@@ -9477,8 +9876,8 @@
               <span class="details-clean-title">Pre-visit Details</span>
               <button type="button" class="btn-clean-text-action" onclick="openPreVisitModal()">Edit</button>
             </div>
-            <div class="details-previsit-card">
-              <span class="details-symptom-title">${escapePreVisitText(buildPreVisitHeadline(vis.intake))}</span>
+            <div class="details-previsit-card is-submitted">
+              <span class="details-symptom-title is-submitted">${escapePreVisitText(buildPreVisitHeadline(vis.intake))}</span>
               <div class="details-symptom-meta-row">
                 ${vis.intake?.duration ? `<span>${escapePreVisitText(vis.intake.duration)}</span>` : ''}
                 ${vis.intake?.duration && vis.intake?.severity ? '<span aria-hidden="true">·</span>' : ''}
@@ -9493,8 +9892,7 @@
               <span class="details-clean-title">Pre-visit Details</span>
             </div>
             <button type="button" class="details-prep-action" onclick="openPreVisitModal()">
-              <span class="details-prep-action-label"><i class="ph ph-notepad" aria-hidden="true"></i>Add pre-visit details</span>
-              <i class="ph ph-arrow-right" aria-hidden="true"></i>
+              Add pre-visit details
             </button>
           </div>
         `;
@@ -9514,7 +9912,7 @@
                 </div>
                 <button type="button" class="details-file-row-action" onclick="showToast('Document is attached to this visit')" aria-label="${escapePreVisitText(doc.name)} attached"><i class="ph ph-check" aria-hidden="true"></i></button>
               </div>`).join('')}</div>` : hasPreVisitSubmission ? '<div class="details-document-empty"><i class="ph ph-files" aria-hidden="true"></i><span>No documents</span></div>' : ''}
-            ${hasPreVisitSubmission ? '' : `<button type="button" class="details-prep-action" onclick="document.getElementById('patientDocumentsFileInput').click()"><span class="details-prep-action-label"><i class="ph ph-upload-simple" aria-hidden="true"></i>Upload documents here</span><i class="ph ph-arrow-right" aria-hidden="true"></i></button>`}
+            ${hasPreVisitSubmission ? '' : `<button type="button" class="details-prep-action" onclick="document.getElementById('patientDocumentsFileInput').click()">Upload documents here</button>`}
           </div>
         `;
 
@@ -9621,14 +10019,17 @@
     function renderPreVisitChat() {
       const messages = document.getElementById('preVisitChatMessages');
       const composerWrap = document.getElementById('preVisitComposerWrap');
+      const composer = document.getElementById('preVisitComposer');
+      const uploadDock = document.getElementById('preVisitUploadDock');
       const input = document.getElementById('preVisitChatInput');
       const progress = document.getElementById('preVisitProgressFill');
       if (!messages) return;
       const steps = ['reason', 'duration', 'symptoms', 'severity', 'upload', 'review'];
       const stepIndex = steps.indexOf(preVisitStep);
       if (progress) progress.style.width = `${Math.max(5, ((stepIndex + (preVisitStep === 'review' ? 1 : 0)) / steps.length) * 100)}%`;
-      const assistant = text => `<div class="previsit-message assistant"><div class="previsit-assistant-mark"><i class="ph-fill ph-sparkle" aria-hidden="true"></i></div>${escapePreVisitText(text)}</div>`;
+      const assistant = text => `<div class="previsit-message assistant">${escapePreVisitText(text)}</div>`;
       const user = text => `<div class="previsit-message user">${escapePreVisitText(text)}</div>`;
+      let uploadActionsHtml = '';
       let html = assistant(`A few quick questions to help ${getPreVisitDoctorContext().split(' · ')[0]} prepare.`);
       for (const question of preVisitQuestions) {
         html += assistant(question.prompt);
@@ -9647,7 +10048,8 @@
       }
       if (preVisitStep === 'upload') {
         html += assistant('Add prescriptions or reports for your doctor.');
-        html += `<div class="previsit-message assistant previsit-upload-message"><div class="previsit-upload-list">${preVisitDraft.files.map((file, index) => `<div class="previsit-upload-item"><i class="ph ${file.type.includes('pdf') ? 'ph-file-pdf' : 'ph-image'}" aria-hidden="true"></i><span class="previsit-upload-name">${escapePreVisitText(file.name)}</span><button type="button" class="previsit-upload-remove" aria-label="Remove ${escapePreVisitText(file.name)}" onclick="removePreVisitFile(${index})"><i class="ph ph-x" aria-hidden="true"></i></button></div>`).join('')}</div><div class="previsit-upload-actions${preVisitDraft.files.length ? ' has-files' : ' no-files'}">${preVisitDraft.files.length ? `<button type="button" class="previsit-upload-action" onclick="document.getElementById('preVisitFileInput').click()"><i class="ph ph-paperclip" aria-hidden="true"></i> Add more files</button><button type="button" class="previsit-upload-action primary" onclick="continuePreVisitUpload()">Continue</button>` : `<button type="button" class="previsit-upload-action primary" onclick="document.getElementById('preVisitFileInput').click()"><i class="ph ph-paperclip" aria-hidden="true"></i> Upload Documents</button><button type="button" class="previsit-upload-action quiet" onclick="continuePreVisitUpload()">Skip for now</button>`}</div></div>`;
+        html += `<div class="previsit-message assistant previsit-upload-message"><div class="previsit-upload-list">${preVisitDraft.files.map((file, index) => `<div class="previsit-upload-item"><i class="ph ${file.type.includes('pdf') ? 'ph-file-pdf' : 'ph-image'}" aria-hidden="true"></i><span class="previsit-upload-name">${escapePreVisitText(file.name)}</span><button type="button" class="previsit-upload-remove" aria-label="Remove ${escapePreVisitText(file.name)}" onclick="removePreVisitFile(${index})"><i class="ph ph-x" aria-hidden="true"></i></button></div>`).join('')}</div></div>`;
+        uploadActionsHtml = `<div class="previsit-upload-actions${preVisitDraft.files.length ? ' has-files' : ' no-files'}">${preVisitDraft.files.length ? `<button type="button" class="previsit-upload-action" onclick="document.getElementById('preVisitFileInput').click()"><i class="ph ph-paperclip" aria-hidden="true"></i> Add more files</button><button type="button" class="previsit-upload-action primary" onclick="continuePreVisitUpload()">Continue</button>` : `<button type="button" class="previsit-upload-action primary" onclick="document.getElementById('preVisitFileInput').click()"><i class="ph ph-paperclip" aria-hidden="true"></i> Upload Documents</button><button type="button" class="previsit-upload-action quiet" onclick="continuePreVisitUpload()">Skip for now</button>`}</div>`;
       } else if (preVisitStep === 'review') {
         html += assistant('Check your answers before sending.');
         const rows = [
@@ -9670,7 +10072,13 @@
         }).join('')}</div><div class="previsit-review-actions"><button type="button" class="previsit-review-edit-all" onclick="togglePreVisitReviewEditing()">${preVisitReviewEditing ? 'Done editing' : 'Edit answers'}</button><button type="button" class="previsit-review-submit" onclick="savePreVisitIntake()">Save &amp; send</button></div></div>`;
       }
       messages.innerHTML = html;
-      if (composerWrap) composerWrap.style.display = ['reason', 'duration', 'symptoms'].includes(preVisitStep) ? 'block' : 'none';
+      const showComposerDock = ['reason', 'duration', 'symptoms', 'upload'].includes(preVisitStep);
+      if (composerWrap) composerWrap.style.display = showComposerDock ? 'block' : 'none';
+      if (composer) composer.style.display = preVisitStep === 'upload' ? 'none' : '';
+      if (uploadDock) {
+        uploadDock.innerHTML = uploadActionsHtml;
+        uploadDock.hidden = preVisitStep !== 'upload';
+      }
       const skipAnswer = document.getElementById('preVisitSkipAnswer');
       if (skipAnswer) skipAnswer.style.display = preVisitStep === 'symptoms' ? 'block' : 'none';
       if (input) {
@@ -9793,9 +10201,7 @@
         btn.disabled = true;
         btn.onclick = null;
         btn.innerHTML = `
-          <i class="ph-bold ph-check" id="preVisitActionIcon" aria-hidden="true"></i>
           <span id="preVisitActionText">Pre-visit details submitted</span>
-          <i class="ph ph-arrow-right" aria-hidden="true"></i>
         `;
       }
 
@@ -9890,6 +10296,53 @@
     }
 
     // Prescription Preview controller
+    async function downloadPatientPrescriptionPng(button) {
+      const paper = document.getElementById('patientRxPaper');
+      if (!paper || typeof window.html2canvas !== 'function') {
+        showToast('Could not prepare the prescription image. Please try again.');
+        return;
+      }
+
+      if (button) {
+        button.disabled = true;
+        button.setAttribute('aria-busy', 'true');
+      }
+
+      try {
+        if (document.fonts?.ready) await document.fonts.ready;
+        const canvas = await window.html2canvas(paper, {
+          scale: 3,
+          backgroundColor: '#FFFFFF',
+          useCORS: true,
+          logging: false,
+          scrollX: 0,
+          scrollY: 0
+        });
+        const pngBlob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        if (!pngBlob) throw new Error('Prescription PNG encoding failed.');
+
+        const doctorName = document.getElementById('rxDocName')?.textContent || 'Onubot';
+        const fileStem = doctorName.trim().replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '') || 'Onubot';
+        const objectUrl = URL.createObjectURL(pngBlob);
+        const downloadLink = document.createElement('a');
+        downloadLink.href = objectUrl;
+        downloadLink.download = `Prescription-${fileStem}.png`;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        downloadLink.remove();
+        setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+        showToast('Prescription PNG downloaded.');
+      } catch (error) {
+        console.error('Prescription PNG download failed:', error);
+        showToast('Could not download the prescription image. Please try again.');
+      } finally {
+        if (button) {
+          button.disabled = false;
+          button.removeAttribute('aria-busy');
+        }
+      }
+    }
+
     const prescriptionsDb = {
       'rx-mahim-01': {
         docName: 'Ast. Prof. Dr. Mahim Khan',
@@ -9906,8 +10359,7 @@
           { name: '3. Warm Saline Gargle', dose: 'Thrice daily • 5 Days', inst: '1/2 tsp salt in 1 cup warm water' }
         ],
         advice: 'Stay hydrated, drink plenty of warm liquids, maintain vocal rest, avoid cold drinks and exposure to dust.',
-        followUp: 'After 7 days if symptoms persist',
-        sigDoctor: 'Dr. Mahim Khan'
+        followUp: 'After 7 days if symptoms persist'
       },
       'rx-ayesha-02': {
         docName: 'Prof. Dr. Ayesha Rahman',
@@ -9923,8 +10375,7 @@
           { name: '2. Fluticasone Nasal Spray', dose: '1 spray each nostril twice daily • 2 Weeks', inst: 'Blow nose gently before use' }
         ],
         advice: 'Avoid dust mites, pet dander, and sudden thermal changes. Wear mask outdoors.',
-        followUp: 'After 4 weeks for seasonal review',
-        sigDoctor: 'Dr. Ayesha Rahman'
+        followUp: 'After 4 weeks for seasonal review'
       }
     };
 
@@ -9937,7 +10388,6 @@
       document.getElementById('rxDocHospital').textContent = rx.docHospital;
       document.getElementById('rxDocBmdc').textContent = rx.docBmdc;
       document.getElementById('rxDateVal').textContent = rx.date;
-      document.getElementById('rxSigDoctor').textContent = rx.sigDoctor;
       document.getElementById('rxAdviceText').textContent = rx.advice;
 
       // Complaints
@@ -10019,7 +10469,7 @@
         const isVideo = visit.mode === 'Video';
         if (modeIcon) {
           modeIcon.title = isVideo ? 'Video consultation' : 'In-person appointment';
-          modeIcon.innerHTML = `<i class="ph ${isVideo ? 'ph-video-camera' : 'ph-map-pin'}" aria-hidden="true"></i>`;
+          modeIcon.innerHTML = `<i class="${isVideo ? 'ph-fill ph-video-camera' : 'ph ph-map-pin'}" aria-hidden="true"></i>`;
         }
         const detailButton = document.querySelector('#upcomingCard .patient-visit-detail-area');
         if (detailButton) detailButton.setAttribute('aria-label', `Open ${isVideo ? 'video' : 'in-person'} appointment with ${doc.name}`);
@@ -10062,13 +10512,13 @@
 
       if (emptyEl) emptyEl.classList.remove('show');
 
-      // Accessible, lightly bordered cards keep doctor credentials and fees easy to scan.
+      // The whole card links to the profile; the booking button opens appointment booking directly.
       listEl.innerHTML = filtered.map(doc => `
-        <div class="doctor-result-card" role="button" tabindex="0"
-          aria-label="Open verified doctor profile for ${doc.name}. ${doc.degreeSpecialty}. Consultation fee ${doc.fee.toLocaleString()} taka."
-          onclick="openDoctorProfile(${doc.id})"
-          onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openDoctorProfile(${doc.id})}">
-          <div class="doctor-result-identity">
+        <article class="doctor-result-card">
+          <a class="doctor-card-profile-link" href="#pageDoctorProfile"
+            aria-label="View profile for ${doc.name}, verified specialist. ${doc.degreeSpecialty}. Consultation fee ${doc.fee.toLocaleString()} taka."
+            onclick="event.preventDefault(); openDoctorProfile(${doc.id})"></a>
+          <div class="doctor-result-identity" aria-hidden="true">
             <div class="doctor-avatar-wrap">
               <img src="${doc.avatar}" alt="" class="doctor-avatar-img" loading="lazy" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=160&auto=format&fit=crop&q=80';">
             </div>
@@ -10076,7 +10526,7 @@
             <div class="doctor-info-col">
               <div class="doctor-name-line">
                 <h3 class="doctor-name">${doc.name}</h3>
-                <i class="ph-fill ph-seal-check verified-icon" title="BMDC Verified Specialist"></i>
+                <i class="ph-fill ph-seal-check verified-icon" aria-hidden="true" title="BMDC Verified Specialist"></i>
               </div>
 
               <span class="doctor-degree-specialty">${doc.degreeSpecialty}</span>
@@ -10084,13 +10534,18 @@
           </div>
 
           <div class="doctor-price-action-row">
-            <span class="doctor-price-val">&#2547; ${doc.fee.toLocaleString()}</span>
-            <span class="doctor-text-btn">
+            <span class="doctor-price-block" aria-hidden="true">
+              <span class="doctor-price-caption">Consultation fee</span>
+              <span class="doctor-price-val">&#2547; ${doc.fee.toLocaleString()}</span>
+            </span>
+            <button type="button" class="doctor-text-btn"
+              aria-label="Book an appointment with ${doc.name}"
+              onclick="bookDoctorFromDirectory(${doc.id})">
               <span>Book Doctor</span>
               <i class="ph ph-arrow-right" aria-hidden="true"></i>
-            </span>
+            </button>
           </div>
-        </div>
+        </article>
       `).join('');
     }
 
