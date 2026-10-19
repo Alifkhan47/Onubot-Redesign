@@ -62,12 +62,74 @@
         radial-gradient(circle at 50% 50%, #11181d 0%, #080a0c 100%);
       font-family: var(--font-body);
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 32px;
       padding: 24px 16px;
+    }
+
+    .top-ecosystem-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 400px;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+
+    .app-brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-heading);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #D6EAE6;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .app-brand-pill .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 8px #34D399;
+    }
+
+    .app-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #94A3B8;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 6px 12px;
+      border-radius: 999px;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .app-switch-btn:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .prototype-workspace {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      width: min(100%, 760px);
+      margin: 0 auto;
     }
 
     /* Device Mockup Wrapper */
@@ -1413,44 +1475,60 @@
       color: #FFFFFF;
     }
 
-    /* Simulation Controls Column List (Outside Phone Frame) */
+    /* Simulation Control Dock (Outside Phone Frame) */
     .sim-controls-bar {
       display: flex;
       flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-      width: 220px;
+      gap: 12px;
+      width: 250px;
+      flex: 0 0 250px;
       margin: 0;
-      flex-shrink: 0;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-sizing: border-box;
+    }
+
+    .sim-controls-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: #A7F3D0;
+      font-family: var(--font-heading);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .btn-sim-trigger {
-      background: rgba(18, 36, 43, 0.85);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border: 1px solid rgba(126, 184, 174, 0.25);
-      color: #E2ECE9;
-      font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 14px;
-      border-radius: 14px;
-      cursor: pointer;
-      display: flex;
+      min-height: 42px;
+      box-sizing: border-box;
+      display: inline-flex;
       align-items: center;
       justify-content: flex-start;
-      gap: 8px;
+      gap: 9px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      color: #CBD5E1;
+      cursor: pointer;
       width: 100%;
-      box-sizing: border-box;
       transition: all 0.15s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      text-align: left;
     }
 
     .btn-sim-trigger:hover {
-      background: #052E28;
-      border-color: #34D399;
-      color: #34D399;
-      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.15);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .btn-sim-trigger:active {
@@ -1465,6 +1543,24 @@
       background: #0D7A5F;
       border-color: #34D399;
       color: #FFFFFF;
+    }
+
+    .mockup-container {
+      flex: 0 0 400px;
+    }
+
+    @media (max-width: 760px) {
+      body { justify-content: flex-start; }
+      .prototype-workspace {
+        flex-direction: column;
+        gap: 14px;
+        width: min(100%, 400px);
+      }
+      .sim-controls-bar {
+        width: 100%;
+        flex: none;
+      }
+      .mockup-container { flex: none; }
     }
 
     .offline-empty-state {
@@ -6780,7 +6876,7 @@
     .details-patient-plain-container {
       width: 100%;
       padding: 2px 0 14px 0;
-      border-bottom: 1px solid #F1F5F9;
+      border-bottom: 0;
       display: flex;
       flex-direction: column;
       gap: 3px;
@@ -7046,7 +7142,7 @@
       gap: 12px;
       width: 100%;
       padding-bottom: 20px;
-      border-bottom: 1px solid #F1F5F9;
+      border-bottom: 0;
       flex-shrink: 0;
     }
 
@@ -7255,7 +7351,7 @@
     /* Pre-Visit Details: Single Card (Soft Warm Neutral Tint for Visual Hierarchy) */
     .details-previsit-card {
       background: #FAF8F5 !important;
-      border: 1px solid #EFE5D6 !important;
+      border: 0 !important;
       border-radius: 16px !important;
       padding: 16px 18px !important;
       display: flex;
@@ -12156,33 +12252,35 @@
 </head>
 <body>
 
-  <!-- Simulation Controls Outside Mockup -->
-  <div class="sim-controls-bar">
-    <button type="button" class="btn-sim-trigger accent" onclick="simulateDoctorShiftCall()" title="Simulate shift readiness call to doctor">
-      <i class="ph-bold ph-phone-call"></i> Start Shift Call
-    </button>
-    <button type="button" class="btn-sim-trigger" onclick="simulatePatientJoined()" title="Simulate current patient answering call">
-      <i class="ph-bold ph-user-check"></i> Patient Joined (In Call)
-    </button>
-    <button type="button" class="btn-sim-trigger" onclick="simulateNextPatient()" title="Swipe/switch to next patient">
-      <i class="ph-bold ph-caret-right"></i> Next Patient
-    </button>
-    <button type="button" class="btn-sim-trigger" onclick="resetDemoQueue()" title="Reset patient queue to initial">
-      <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset
-    </button>
-  </div>
-
   <!-- Top Ecosystem Switcher Bar -->
-  <div class="top-ecosystem-bar" style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:400px; margin-bottom:14px; padding:0 4px;">
-    <div style="display:inline-flex; align-items:center; gap:7px; font-family:var(--font-heading); font-size:13.5px; font-weight:700; color:#D6EAE6; background:rgba(255,255,255,0.08); backdrop-filter:blur(8px); padding:6px 14px; border-radius:999px; border:1px solid rgba(255,255,255,0.12);">
-      <span style="width:6px; height:6px; border-radius:50%; background:#34D399; box-shadow:0 0 8px #34D399;"></span>
+  <div class="top-ecosystem-bar">
+    <div class="app-brand-pill">
+      <span class="live-dot"></span>
       <span>Onu Doctor App</span>
     </div>
-    <a href="patient-app.html" style="display:inline-flex; align-items:center; gap:6px; font-family:var(--font-body); font-size:12px; font-weight:600; color:#94A3B8; background:rgba(255,255,255,0.05); padding:6px 12px; border-radius:999px; text-decoration:none; border:1px solid rgba(255,255,255,0.08);" title="Open Patient Discovery App">
+    <a href="patient-app.html" class="app-switch-btn" title="Open Patient Discovery App">
       <i class="ph ph-user"></i>
       <span>Switch to Patient App</span>
     </a>
   </div>
+
+  <div class="prototype-workspace">
+    <!-- Simulation Controls Outside Mockup -->
+    <div class="sim-controls-bar">
+      <span class="sim-controls-label"><i class="ph-bold ph-sliders"></i> DOCTOR SIMULATION</span>
+      <button type="button" class="btn-sim-trigger accent" onclick="simulateDoctorShiftCall()" title="Simulate shift readiness call to doctor">
+        <i class="ph-bold ph-phone-call"></i> Start Shift Call
+      </button>
+      <button type="button" class="btn-sim-trigger" onclick="simulatePatientJoined()" title="Simulate current patient answering call">
+        <i class="ph-bold ph-user-check"></i> Patient Joined (In Call)
+      </button>
+      <button type="button" class="btn-sim-trigger" onclick="simulateNextPatient()" title="Swipe/switch to next patient">
+        <i class="ph-bold ph-caret-right"></i> Next Patient
+      </button>
+      <button type="button" class="btn-sim-trigger" onclick="resetDemoQueue()" title="Reset patient queue to initial">
+        <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset
+      </button>
+    </div>
 
   <!-- Mockup Phone Container -->
   <div class="mockup-container">
@@ -15571,6 +15669,7 @@
       </div>
     </div>
   </div>
+  </div><!-- /.prototype-workspace -->
 
   <script>
     let toastTimeout;
