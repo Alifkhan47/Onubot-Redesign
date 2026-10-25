@@ -365,17 +365,6 @@
       background: #E2E8F0;
     }
 
-    .btn-circle-icon.has-dot::after {
-      content: '';
-      position: absolute;
-      top: 11px;
-      right: 12px;
-      width: 6px;
-      height: 6px;
-      background: #0F172A;
-      border-radius: 50%;
-    }
-
     .desk-top-group {
       display: flex;
       flex-direction: column;
@@ -1762,10 +1751,11 @@
 
     .page-top-title {
       font-family: var(--font-heading);
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--color-text-primary);
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
 
     /* 1-Week Date Strip Carousel Starting Today */
@@ -6372,37 +6362,40 @@
 
     .appointments-segmented-bar {
       display: flex;
-      background: var(--color-card-neutral);
-      border: 1.5px solid #edf2f1;
-      border-radius: 100px;
-      padding: 4px;
-      gap: 4px;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #E8ECEF;
+      border-radius: 0;
+      padding: 0;
+      gap: 24px;
       width: 100%;
       flex-shrink: 0;
     }
 
     .appts-segment-btn {
       flex: 1;
-      height: 38px;
-      border: none;
+      height: 42px;
+      border: 0;
+      border-bottom: 2px solid transparent;
       background: transparent;
-      border-radius: 100px;
+      border-radius: 0;
       font-family: var(--font-heading);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-text-secondary);
+      font-size: 13px;
+      font-weight: 700;
+      color: #717171;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: color 0.16s ease, border-color 0.16s ease;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .appts-segment-btn.active {
-      background: #ffffff;
-      color: var(--color-primary-btn);
+      background: transparent;
+      color: #052E28;
+      border-bottom-color: #052E28;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      box-shadow: none;
     }
 
     .appts-date-chips-scroll {
@@ -6650,7 +6643,6 @@
     .appointment-item-card {
       background: transparent !important;
       border: none !important;
-      border-bottom: 1px solid #F1F5F9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       padding: 15px 4px !important;
@@ -6667,13 +6659,9 @@
       background: #F8FAFC !important;
     }
 
-    .appointment-item-card:last-child {
-      border-bottom: none !important;
-    }
-
     .appointment-item-card.is-current-turn {
       background: transparent !important;
-      border-bottom: 1px solid #F1F5F9 !important;
+      border: none !important;
       box-shadow: none !important;
     }
 
@@ -7984,7 +7972,6 @@
     .patient-directory-tile {
       background: transparent !important;
       border: none !important;
-      border-bottom: 1px solid #F1F5F9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       padding: 14px 2px !important;
@@ -8000,10 +7987,6 @@
 
     .patient-directory-tile:hover {
       background: #F8FAFC !important;
-    }
-
-    .patient-directory-tile:last-child {
-      border-bottom: none !important;
     }
 
     .patient-tile-left {
@@ -8187,30 +8170,30 @@
     .profile-vitals-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px 14px;
+      gap: 18px 26px;
       width: 100%;
       box-sizing: border-box;
-      padding-bottom: 2px;
+      padding: 2px 0 6px;
     }
 
     .profile-vital-item {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       min-width: 0;
     }
 
     .vital-icon-circle {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
+      width: 18px;
+      height: 18px;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      color: #0F172A;
+      font-size: 17px;
+      color: #5B6B73;
       flex-shrink: 0;
     }
 
@@ -8251,7 +8234,6 @@
     .profile-visit-tile {
       background: transparent !important;
       border: none !important;
-      border-bottom: 1px solid #F1F5F9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       padding: 14px 2px !important;
@@ -8269,10 +8251,6 @@
       background: #F8FAFC !important;
     }
 
-    .profile-visit-tile:last-child {
-      border-bottom: none !important;
-    }
-
     .profile-visit-left {
       display: flex;
       align-items: center;
@@ -8284,8 +8262,8 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #EFF7F5;
-      border: 1px solid #B8E2DC;
+      background: #F1F3F4;
+      border: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -8295,14 +8273,14 @@
     }
 
     .profile-visit-icon-circle.type-video {
-      background: #EFF7F5;
-      border: 1px solid #B8E2DC;
+      background: #F1F3F4;
+      border: 0;
       color: #0E8070;
     }
 
     .profile-visit-icon-circle.type-inperson {
-      background: #EEF2FF;
-      border: 1px solid #C7D2FE;
+      background: #F1F3F4;
+      border: 0;
       color: #4F46E5;
     }
 
@@ -8728,6 +8706,7 @@
     .page-onu {
       display: flex;
       flex-direction: column;
+      gap: 0;
       height: 100%;
       background: #FFFFFF !important;
       position: absolute;
@@ -8754,6 +8733,45 @@
       border: 1px solid #D6EAE6;
       box-shadow: 0 2px 8px rgba(5, 46, 40, 0.04);
     }
+
+    .page-onu [hidden] { display: none !important; }
+    .onu-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 52px; flex: 0 0 auto; }
+    .onu-brand-lockup { display: flex; align-items: center; gap: 8px; min-width: 0; }
+    .onu-header .onu-brand-mark { display: grid; place-items: center; width: 30px; height: 30px; flex: 0 0 30px; border: 0; border-radius: 50%; background: linear-gradient(135deg, #087E70 0%, #3EAA91 52%, #D6EAE6 100%); color: #fff; box-shadow: 0 3px 9px rgba(8,126,112,.2); }
+    .onu-header-title { margin: 0; color: var(--color-text-primary); font: 700 21px/1.1 var(--font-heading); letter-spacing: -.02em; }
+    .onu-header-actions { display: flex; justify-content: flex-end; gap: 4px; margin-right: -8px; }
+    .phone-screen.onu-conversation-mode .onu-header { position: relative; }
+    .phone-screen.onu-conversation-mode .onu-header-title { position: absolute; left: 50%; transform: translateX(-50%); }
+    .page-onu .onu-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: #F1F5F9; color: var(--color-text-primary); font-size: 20px; cursor: pointer; box-shadow: none; }
+    .page-onu .onu-icon-button:hover { background: #E2E8F0; }
+    .page-onu .onu-icon-button:focus-visible, .page-onu .onu-composer button:focus-visible { outline: 2px solid #0D7A5F; outline-offset: 2px; }
+    .onu-home-content { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; padding: 0 1px 112px; }
+    .onu-greeting { padding: 0 3px; text-align: center; }
+    .onu-greeting-mark { margin-bottom: 12px; color: #087E70; font-size: 30px; line-height: 1; }
+    .onu-greeting h2 { max-width: 320px; margin: 0; color: #0F172A; font: 600 25px/1.2 var(--font-heading); letter-spacing: -.025em; }
+    .onu-conversation-stream { display: flex; flex: 1 1 auto; width: 100%; min-height: 0; flex-direction: column; gap: 22px; overflow-y: auto; padding: 12px 1px 130px; overscroll-behavior: contain; scrollbar-width: none; }
+    .onu-conversation-stream::-webkit-scrollbar { display: none; }
+    .onu-composer-area { position: absolute; right: 16px; bottom: 82px; left: 16px; z-index: 25; }
+    .phone-screen.onu-conversation-mode .onu-composer-area { bottom: 18px; }
+    .onu-composer-dock { position: relative; padding: 8px 9px; border: 1px solid #DDE6E3; border-radius: 24px; background: #fff; box-shadow: 0 4px 18px rgba(15,23,42,.08); }
+    .onu-attachment-menu { position: absolute; z-index: 20; bottom: calc(100% + 10px); left: 0; width: min(244px, calc(100vw - 64px)); padding: 7px; border: 1px solid #E1EAE6; border-radius: 17px; background: #fff; box-shadow: 0 12px 32px rgba(15,35,30,.16); }
+    .onu-attachment-menu[hidden] { display: none; }
+    .onu-attachment-option { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 48px; padding: 0 10px; border: 0; border-radius: 12px; background: #fff; color: var(--color-text-primary); text-align: left; font: 600 13px/1.2 var(--font-body); cursor: pointer; }
+    .onu-attachment-option:hover, .onu-attachment-option:focus-visible { background: #F2F7F5; outline: none; }
+    .onu-attachment-option i { display: grid; place-items: center; width: 32px; height: 32px; flex: 0 0 32px; border-radius: 10px; background: #EFF7F4; color: #087E70; font-size: 17px; }
+    .onu-composer { display: flex; align-items: flex-end; gap: 8px; width: 100%; }
+    .onu-composer button { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: transparent; color: #52616D; font-size: 20px; cursor: pointer; }
+    .onu-composer button:active { background: #EFF4F2; }
+    .onu-composer textarea { flex: 1 1 auto; min-width: 0; min-height: 44px; max-height: 112px; padding: 11px 4px 8px; border: 0; outline: 0; resize: none; background: transparent; color: var(--color-text-primary); font: 14px/1.45 var(--font-body); }
+    .onu-composer textarea::placeholder { color: #83909C; }
+    .onu-composer .onu-send-button { background: #052E28; color: #fff; font-size: 18px; }
+    .onu-composer .onu-send-button:active { background: #0D5C51; }
+    .onu-composer .btn-onu-action-morph { width: 44px; height: 44px; flex-basis: 44px; border: 1px solid transparent; }
+    .onu-composer .btn-onu-action-morph.voice-mode { background: #EAF7F3; border-color: #D6ECE5; color: #087E70; }
+    .onu-composer .btn-onu-action-morph.send-mode { background: #052E28; color: #fff; box-shadow: none; }
+    .onu-composer .btn-onu-action-morph.send-mode i { color: #fff !important; }
+    .onu-composer .btn-onu-mic.is-listening { background: #FEE2E2; color: #DC2626; }
+    .page-onu .onu-disclaimer { margin: 0 4px 8px; color: #71827F; text-align: center; font: 11px/1.3 var(--font-body); }
 
     /* Scrollable Content Stream */
     .onu-content-area {
@@ -10176,9 +10194,10 @@
       display: grid;
       grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      padding: 12px 6px;
-      border-top: 1px solid #E8F0EE;
-      border-bottom: 1px solid #E8F0EE;
+      padding: 14px 12px;
+      border: 0;
+      border-radius: 14px;
+      background: #F3F6F5;
     }
 
     .wallet-stat-tile {
@@ -10216,7 +10235,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* 3. Recent Transactions Section (Unified Plain Text List with Line Dividers & Generous Spacing) */
+    /* 3. Recent Transactions Section (Unified Plain Text List with Generous Spacing) */
     .wallet-transactions-section {
       margin-top: 36px;
       display: flex;
@@ -10267,7 +10286,6 @@
     .transaction-item-card {
       background: transparent !important;
       border: none !important;
-      border-bottom: 1px solid #F1F5F9 !important;
       border-radius: 0 !important;
       box-shadow: none !important;
       padding: 13px 2px !important;
@@ -10283,10 +10301,6 @@
 
     .transaction-item-card:hover {
       background: #F8FAFC !important;
-    }
-
-    .transaction-item-card:last-child {
-      border-bottom: none !important;
     }
 
     .tx-item-left {
@@ -10311,25 +10325,25 @@
 
     .tx-icon-box.inflow {
       background: #EFF7F5;
-      border: 1px solid #B8E2DC;
+      border: 0;
       color: #0E8070;
     }
 
     .tx-icon-box.audio {
       background: #EFF6FF;
-      border: 1px solid #BFDBFE;
+      border: 0;
       color: #2563EB;
     }
 
     .tx-icon-box.inperson {
       background: #EEF2FF;
-      border: 1px solid #C7D2FE;
+      border: 0;
       color: #4F46E5;
     }
 
     .tx-icon-box.outflow {
       background: #F1F5F9;
-      border: 1px solid #E2E8F0;
+      border: 0;
       color: #475569;
     }
 
@@ -11274,15 +11288,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 32px;
       padding: 6px 0;
       width: 100%;
     }
 
     .doctor-stat-inline-item {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 5px;
+      gap: 2px;
     }
 
     .doctor-stat-inline-val {
@@ -11298,14 +11313,9 @@
       color: #64748B;
     }
 
-    .doctor-stat-inline-dot {
-      color: #CBD5E1;
-      font-size: 11px;
-    }
-
     /* Boxless Group Sections - Spacious & Generous Sizing */
     .profile-boxless-group {
-      margin-top: 24px;
+      margin-top: 18px;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -11362,11 +11372,11 @@
     }
 
     .profile-boxless-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #F8FAFC;
-      border: 1px solid #EDF2F1;
+      width: 22px;
+      height: 22px;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: #334155;
       display: flex;
       align-items: center;
@@ -11437,6 +11447,29 @@
       height: 1px;
       background: #F1F5F9;
       width: 100%;
+    }
+
+    .page-doctor-profile .profile-boxless-group {
+      margin-top: 32px;
+      gap: 14px;
+    }
+
+    .page-doctor-profile .profile-boxless-list {
+      gap: 8px;
+    }
+
+    .page-doctor-profile .profile-boxless-divider {
+      display: none;
+    }
+
+    .page-doctor-profile .profile-boxless-row:hover,
+    .page-doctor-profile .profile-boxless-menu-row:hover {
+      background: transparent;
+    }
+
+    .page-doctor-profile .profile-boxless-edit-btn:hover {
+      background: transparent;
+      color: #64748B;
     }
 
     .profile-boxless-cred-label {
@@ -11529,6 +11562,7 @@
       margin-top: 4px;
       border-bottom: 1px solid #F1F5F9;
     }
+    #helpSupportModalSheet .support-channels-grid { margin-top: 8px; }
 
     .support-channel-card {
       background: transparent;
@@ -12047,6 +12081,97 @@
       font-size: 15px;
     }
 
+    /* Match the patient Settings page: open rows, quiet section labels, and no nested cards. */
+    .page-settings {
+      gap: 34px;
+      padding: 12px 20px 108px;
+    }
+
+    .page-settings .profile-group-section {
+      display: grid;
+      gap: 14px;
+    }
+
+    .page-settings .profile-section-header {
+      margin: 0 2px;
+    }
+
+    .page-settings .profile-section-title {
+      margin: 0;
+      color: #718096;
+      font: 700 17px/1.25 var(--font-heading);
+      letter-spacing: -.01em;
+    }
+
+    .page-settings .settings-highlight-card,
+    .page-settings .settings-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .page-settings .settings-row {
+      min-height: 48px;
+      padding: 8px 2px;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+
+    .page-settings .settings-row:focus-visible {
+      outline: 2px solid #087C70;
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    .page-settings .settings-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #F8FAF9;
+      color: #334155;
+      font-size: 17px;
+    }
+
+    .page-settings .settings-row-icon.danger-icon {
+      background: #FEF2F2;
+      color: #DC2626;
+    }
+
+    .page-settings .settings-row-icon.accent-icon {
+      background: #F8FAF9;
+      color: #334155;
+    }
+
+    .page-settings .settings-row-title {
+      color: #142B26;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .page-settings .settings-row-title.danger-text {
+      color: #142B26;
+    }
+
+    .page-settings .settings-row-sub {
+      color: #71827F;
+      font-size: 12px;
+    }
+
+    .page-settings .settings-arrow {
+      color: #8A9895;
+      font-size: 17px;
+    }
+
+    .page-settings .dossier-divider {
+      display: none;
+    }
+
     /* ============================================================
        VIEW 14: NOTIFICATIONS SUB-PAGE (REDESIGNED MINIMAL HEALTHCARE)
        ============================================================ */
@@ -12101,28 +12226,10 @@
       letter-spacing: -0.02em;
     }
 
-    .btn-mark-all-read {
-      background: transparent;
-      border: none;
-      font-family: var(--font-heading);
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #0D7A5F;
-      cursor: pointer;
-      padding: 6px 8px;
-      border-radius: 8px;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-
-    .btn-mark-all-read:hover {
-      background: #EFF7F5;
-      color: #052E28;
-    }
-
     .notifications-group {
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 12px;
       margin-bottom: 24px;
     }
 
@@ -12133,16 +12240,15 @@
       color: #94A3B8;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-bottom: 4px;
-      padding-left: 2px;
+      margin-bottom: 0;
+      padding-left: 4px;
     }
 
     .notification-item-card {
       background: transparent;
       border: none;
-      border-bottom: 1px solid #F1F5F9;
       border-radius: 0;
-      padding: 14px 4px;
+      padding: 11px 4px;
       display: flex;
       gap: 14px;
       align-items: flex-start;
@@ -12152,42 +12258,21 @@
       position: relative;
     }
 
-    .notifications-group .notification-item-card:last-child {
-      border-bottom: none;
-    }
-
     .notification-item-card:hover {
       background: #F8FAFC;
-      border-radius: 12px;
+      border-radius: 10px;
       transform: none;
       box-shadow: none;
     }
 
-    .notification-item-card.is-unread {
-      background: transparent;
-    }
-
-    .notification-item-card.is-unread::before {
-      content: '';
-      position: absolute;
-      top: 18px;
-      right: 4px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10B981;
-      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
-    }
-
     .notif-icon-box {
+      display: grid;
+      place-items: center;
       width: 40px;
       height: 40px;
+      flex: 0 0 40px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 19px;
-      flex-shrink: 0;
+      font-size: 18px;
     }
 
     .notif-icon-box.booking {
@@ -12196,8 +12281,8 @@
     }
 
     .notif-icon-box.payout {
-      background: #F0FDF4;
-      color: #16A34A;
+      background: #EFF7F5;
+      color: #087C70;
     }
 
     .notif-icon-box.system {
@@ -12211,11 +12296,10 @@
     }
 
     .notif-content-block {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
+      display: grid;
       flex: 1;
-      padding-right: 14px;
+      min-width: 0;
+      gap: 4px;
     }
 
     .notif-top-meta {
@@ -12223,13 +12307,17 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
+      min-width: 0;
     }
 
     .notif-title {
+      overflow: hidden;
       font-family: var(--font-heading);
-      font-size: 14.5px;
+      font-size: 14px;
       font-weight: 700;
       color: #0F172A;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .notif-time {
@@ -12242,7 +12330,7 @@
 
     .notif-body {
       font-family: var(--font-body);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
       color: #64748B;
       line-height: 1.45;
@@ -12370,57 +12458,35 @@
           <!-- =======================================================
                VIEW 0: ONU CLINICAL AI COPILOT (CHAT HOME SCREEN)
                ======================================================= -->
-          <div class="app-page page-onu active-page" id="pageOnu">
-            
-            <!-- Unified Universal App Header (Consistent with Desk & Patients, Right-Hand Reach) -->
-            <div class="app-header">
-              <div class="header-text">
-                <h1 class="header-title">Onu</h1>
-                <p class="header-subtitle">Your Clinical AI Assistant</p>
+          <div class="app-page page-onu active-page" id="pageOnu" aria-label="Onu clinical assistant">
+            <header class="onu-header" id="onuHeader">
+              <div class="onu-brand-lockup"><span class="onu-brand-mark" aria-hidden="true"></span><h1 class="onu-header-title">Onu</h1></div>
+              <div class="onu-header-actions"><button type="button" class="btn-circle-icon onu-icon-button" aria-label="Open chat history" aria-expanded="false" onclick="openOnuHistoryDrawer(this)"><i class="ph ph-list" aria-hidden="true"></i></button></div>
+            </header>
+            <section class="onu-home-content" id="onuWelcomeView">
+              <div class="onu-greeting">
+                <div class="onu-greeting-mark" aria-hidden="true"><i class="ph ph-sparkle"></i></div>
+                <h2>Hey Doctor John,<br>How can I help you today?</h2>
               </div>
-              <button class="btn-circle-icon" onclick="openOnuHistoryDrawer()" title="Chat History" aria-label="Open History Drawer">
-                <i class="ph ph-clock-counter-clockwise"></i>
-              </button>
-            </div>
-
-            <!-- Scrollable Content Area -->
-            <div class="onu-content-area" id="onuChatScrollArea">
-              
-              <!-- Welcome State View (Minimal Clean Standard) -->
-              <div class="onu-welcome-container" id="onuWelcomeView">
-                <div class="onu-brand-mark">
-                  <i class="ph-fill ph-sparkle"></i>
+            </section>
+            <div class="onu-conversation-stream" id="onuMessagesStream" role="region" aria-label="Conversation messages" hidden></div>
+            <div class="onu-composer-area">
+              <p class="onu-disclaimer" id="onuDisclaimer" hidden>Onu can make mistakes. Verify clinical decisions.</p>
+              <div class="onu-composer-dock">
+                <div class="onu-attachment-menu" id="doctorOnuAttachmentMenu" role="menu" aria-label="Add to chat" onkeydown="handleOnuAttachmentMenuKeydown(event)" hidden>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('tag_patient')"><i class="ph ph-user" aria-hidden="true"></i><span>Tag Farzana Khan</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('lab_report')"><i class="ph ph-file-text" aria-hidden="true"></i><span>Attach lab report</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('shift_queue')"><i class="ph ph-calendar-check" aria-hidden="true"></i><span>Attach shift queue</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('rx_protocol')"><i class="ph ph-prescription" aria-hidden="true"></i><span>Rx protocol</span></button>
                 </div>
-                <div class="onu-hero-greeting">
-                  <h2 class="onu-greeting-name">Where should we begin, Dr. Sifat?</h2>
-                  <p class="onu-greeting-sub">Your clinical AI copilot for patients, protocols & practice</p>
-                </div>
+                <form class="onu-composer" id="doctorOnuComposerForm" onsubmit="submitDoctorOnuMessage(event)">
+                  <button type="button" id="btnOnuAttach" aria-label="Attach clinical context" title="Attach clinical context" aria-haspopup="menu" aria-expanded="false" onclick="toggleOnuAttachMenu(this)"><i class="ph ph-plus" aria-hidden="true"></i></button>
+                  <textarea id="inputOnuChat" rows="1" aria-label="Message Onu" placeholder="Message Onu..." oninput="handleOnuInputChange(this)" onkeydown="handleOnuInputKey(event)"></textarea>
+                  <button type="button" id="btnOnuMic" aria-label="Start voice input" aria-pressed="false" title="Voice input" onclick="toggleOnuVoiceListening()"><i class="ph ph-microphone" aria-hidden="true"></i></button>
+                  <button type="button" id="btnOnuActionMorph" class="btn-onu-action-morph voice-mode" aria-label="Start voice assistant" title="Start voice assistant" onclick="handleOnuMorphAction()"><i class="ph ph-waveform" aria-hidden="true"></i></button>
+                </form>
               </div>
-
-              <!-- Active Chat Stream (Hidden initially until first message) -->
-              <div class="onu-messages-stream" id="onuMessagesStream" style="display: none;">
-                <!-- Dynamically populated by JS -->
-              </div>
-
             </div>
-
-            <!-- Floating Input Dock with Unified Morphing Voice/Send Button -->
-            <div class="onu-floating-input-dock">
-              <div class="onu-input-pill-box">
-                <button type="button" class="btn-onu-attach" onclick="openOnuAttachMenu()" title="Attach patient file or tag patient" aria-label="Attach">
-                  <i class="ph ph-plus"></i>
-                </button>
-                <input type="text" id="inputOnuChat" class="input-onu-field" placeholder="Message Onu..." onkeydown="handleOnuInputKey(event)" oninput="handleOnuInputChange(this)" />
-                <button type="button" class="btn-onu-mic" id="btnOnuMic" onclick="toggleOnuVoiceListening()" title="Voice dictation (speech-to-text)" aria-label="Voice Mic">
-                  <i class="ph ph-microphone"></i>
-                </button>
-                <button type="button" class="btn-onu-action-morph voice-mode" id="btnOnuActionMorph" onclick="handleOnuMorphAction()" title="Open Onu Live AI Voice Assistant" aria-label="Voice / Send">
-                  <i class="ph ph-waveform" id="onuMorphIcon"></i>
-                </button>
-              </div>
-              <p class="onu-disclaimer">Onu can make mistakes. Verify clinical decisions.</p>
-            </div>
-
           </div>
 
           <!-- =======================================================
@@ -12434,9 +12500,8 @@
               <div class="app-header">
                 <div class="header-text">
                   <h1 class="header-title">My Desk</h1>
-                  <p class="header-subtitle">Your day at a glance</p>
                 </div>
-                <button class="btn-circle-icon has-dot" onclick="openNotificationsPage('desk')" aria-label="Notifications">
+                <button class="btn-circle-icon" onclick="openNotificationsPage('desk')" aria-label="Notifications">
                   <i class="ph ph-bell"></i>
                 </button>
               </div>
@@ -12525,7 +12590,7 @@
                           </div>
                           <div class="details-file-row-meta">
                             <span class="details-file-row-name">Previous_Rx_Aug2026.pdf</span>
-                            <span class="details-file-row-sub">1.2 MB • Patient Uploaded Rx</span>
+                            <span class="details-file-row-sub">PDF</span>
                           </div>
                         </div>
                         <button type="button" class="details-file-row-action" title="Preview Prescription">
@@ -13015,7 +13080,7 @@
                   <h2 class="rx-doc-name">Dr. Tanvir Ahmed</h2>
                   <span class="rx-doc-qualifications">MBBS, FCPS (Medicine), MD (Cardiology)</span>
                   <span class="rx-doc-institution">Senior Consultant • Dhaka Medical College Hospital</span>
-                  <span class="rx-doc-bmdc">BMDC Reg. No: A-74829</span>
+                  <span class="rx-doc-bmdc">BMDC Reg. No: A-437193</span>
                 </div>
                 <div class="rx-branding-block">
                   <div class="rx-brand-badge">
@@ -13234,7 +13299,6 @@
             <div class="app-header">
               <div class="header-text">
                 <h1 class="header-title">My Patients</h1>
-                <p class="header-subtitle" id="patientsHeaderSubtitle">Total 8 patients</p>
               </div>
             </div>
 
@@ -13363,7 +13427,6 @@
             <div class="app-header">
               <div class="header-text">
                 <h1 class="header-title">My Wallet</h1>
-                <p class="header-subtitle">Balance & payouts</p>
               </div>
               <button class="btn-circle-icon" onclick="openEarningsSettingsModal()" aria-label="Payout Accounts" title="Payout Accounts">
                 <i class="ph ph-bank"></i>
@@ -13374,10 +13437,6 @@
             <div class="wallet-balance-container" id="walletBalanceHeroCard">
               <div class="wallet-balance-header">
                 <span class="wallet-balance-label">Available Balance</span>
-                <span class="wallet-payout-status-chip">
-                  <span class="status-live-dot"></span>
-                  <span>Ready to withdraw</span>
-                </span>
               </div>
               <h2 class="wallet-hero-val" id="walletAvailableBalanceText">&#2547; 12,400</h2>
 
@@ -13465,7 +13524,7 @@
               <div class="header-text">
                 <h1 class="header-title">Doctor Profile</h1>
               </div>
-              <button class="btn-circle-icon has-dot" onclick="openNotificationsPage('profile')" aria-label="Notifications">
+                <button class="btn-circle-icon" onclick="openNotificationsPage('profile')" aria-label="Notifications">
                 <i class="ph ph-bell"></i>
               </button>
             </div>
@@ -13495,10 +13554,9 @@
               <!-- Boxless Inline Stats -->
               <div class="doctor-stats-inline">
                 <div class="doctor-stat-inline-item">
-                  <span class="doctor-stat-inline-val">1,420+</span>
+                  <span class="doctor-stat-inline-val">120+</span>
                   <span class="doctor-stat-inline-label">Patients</span>
                 </div>
-                <div class="doctor-stat-inline-dot">•</div>
                 <div class="doctor-stat-inline-item">
                   <span class="doctor-stat-inline-val">5+ Years</span>
                   <span class="doctor-stat-inline-label">Experience</span>
@@ -13576,7 +13634,7 @@
               <div class="profile-boxless-list">
                 <div class="profile-boxless-row">
                   <span class="profile-boxless-cred-label">BMDC Registration</span>
-                  <span class="profile-boxless-cred-val"><i class="ph-bold ph-shield-check" style="color: #0E8070; margin-right: 4px;"></i>437193172</span>
+                  <span class="profile-boxless-cred-val"><i class="ph-bold ph-shield-check" style="color: #0E8070; margin-right: 4px;"></i>A-437193</span>
                 </div>
                 <div class="profile-boxless-divider"></div>
                 <div class="profile-boxless-row">
@@ -13790,14 +13848,13 @@
                 </button>
                 <h1 class="notifications-title">Notifications</h1>
               </div>
-              <button type="button" class="btn-mark-all-read" onclick="markAllNotificationsRead()">Mark Read</button>
             </div>
 
             <!-- Group: Today -->
             <div class="notifications-group">
               <span class="notifications-group-label">Today</span>
 
-              <div class="notification-item-card is-unread" onclick="handleNotificationClick('apt1')">
+              <div class="notification-item-card" onclick="handleNotificationClick('apt1')">
                 <div class="notif-icon-box booking">
                   <i class="ph ph-video-camera"></i>
                 </div>
@@ -13810,7 +13867,7 @@
                 </div>
               </div>
 
-              <div class="notification-item-card is-unread" onclick="handleNotificationClick('pat1')">
+              <div class="notification-item-card" onclick="handleNotificationClick('pat1')">
                 <div class="notif-icon-box system">
                   <i class="ph ph-user-check"></i>
                 </div>
@@ -14863,47 +14920,6 @@
 
 
         <!-- =======================================================
-             12E. ONU ATTACHMENT BOTTOM SHEET (CLAUDE / CHATGPT MOBILE)
-             ======================================================= -->
-        <div class="bottom-sheet" id="onuAttachModalSheet" style="z-index: 155;">
-          <div class="sheet-drag-handle"></div>
-          <div class="sheet-top-row">
-            <div class="sheet-badge-icon">
-              <i class="ph ph-paperclip"></i>
-            </div>
-            <button type="button" class="btn-circle-icon" onclick="closeOnuAttachMenu()" aria-label="Close Attachment Menu">
-              <i class="ph ph-x"></i>
-            </button>
-          </div>
-          <div class="sheet-hero-header">
-            <h2 class="sheet-editorial-title" style="font-size: 20px;">Attach to Query</h2>
-            <p class="sheet-minimal-subtitle">Include clinical records or tag a patient file</p>
-          </div>
-          <div class="attach-menu-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px;">
-            <div class="attach-card" onclick="selectAttachOption('tag_patient')">
-              <div class="attach-card-icon" style="background: #E8F5F1; color: #0D7A5F;"><i class="ph ph-user"></i></div>
-              <span class="attach-card-title">Tag Patient</span>
-              <span class="attach-card-sub">@Farzana Khan</span>
-            </div>
-            <div class="attach-card" onclick="selectAttachOption('lab_report')">
-              <div class="attach-card-icon" style="background: #EEF2F6; color: #1E293B;"><i class="ph ph-file-text"></i></div>
-              <span class="attach-card-title">Lab / CBC Report</span>
-              <span class="attach-card-sub">Attach test panel</span>
-            </div>
-            <div class="attach-card" onclick="selectAttachOption('shift_queue')">
-              <div class="attach-card-icon" style="background: #FEF3C7; color: #D97706;"><i class="ph ph-calendar-check"></i></div>
-              <span class="attach-card-title">Shift Queue</span>
-              <span class="attach-card-sub">Attach 6 queued files</span>
-            </div>
-            <div class="attach-card" onclick="selectAttachOption('rx_protocol')">
-              <div class="attach-card-icon" style="background: #F3E8FF; color: #9333EA;"><i class="ph ph-prescription"></i></div>
-              <span class="attach-card-title">Rx Protocol</span>
-              <span class="attach-card-sub">Drug guidelines</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- =======================================================
              12F. CLAUDE ARTIFACT FULL VIEW BOTTOM SHEET
              ======================================================= -->
         <div class="bottom-sheet" id="onuArtifactModalSheet" style="z-index: 160; max-height: 90vh;">
@@ -15272,12 +15288,10 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Change Phone</h2>
-            <p class="sheet-editorial-sub">Update your contact phone number for clinical notifications and SMS alerts.</p>
           </div>
 
           <div class="payout-input-group" style="margin-top: 14px;">
-            <label class="payout-form-label">Contact Phone Number</label>
-            <input type="tel" class="payout-form-input" id="inputEditPhoneVal" value="+880 1572 829231" placeholder="+880 1XXXXXXXXX">
+            <input type="tel" class="payout-form-input" id="inputEditPhoneVal" value="+880 1572 829231" placeholder="+880 1XXXXXXXXX" aria-label="Phone number">
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 20px;">
@@ -15299,12 +15313,10 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Chamber Address</h2>
-            <p class="sheet-editorial-sub">Update your primary clinic or hospital chamber address for patient reference.</p>
           </div>
 
           <div class="payout-input-group" style="margin-top: 14px;">
-            <label class="payout-form-label">Chamber / Hospital Address</label>
-            <input type="text" class="payout-form-input" id="inputEditChamberVal" value="BSMMU (PG Hospital), Shahbag, Dhaka" placeholder="e.g. BSMMU (PG Hospital), Shahbag, Dhaka">
+            <input type="text" class="payout-form-input" id="inputEditChamberVal" value="BSMMU (PG Hospital), Shahbag, Dhaka" placeholder="e.g. BSMMU (PG Hospital), Shahbag, Dhaka" aria-label="Chamber address">
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 20px;">
@@ -15326,15 +15338,12 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">About You</h2>
-            <p class="sheet-editorial-sub">Write a brief professional summary about yourself for patients.</p>
           </div>
 
           <div class="payout-input-group" style="margin-top: 14px;">
-            <label class="payout-form-label">Professional Summary</label>
-            <textarea class="profile-bio-textarea" id="inputEditBioVal" rows="4" maxlength="300" oninput="handleModalBioInput(this)" placeholder="Write a brief professional summary about yourself for patients..."></textarea>
+            <textarea class="profile-bio-textarea" id="inputEditBioVal" rows="4" maxlength="300" oninput="handleModalBioInput(this)" placeholder="Write a brief professional summary about yourself for patients..." aria-label="Professional summary"></textarea>
             <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11.5px; color: #64748B; font-family: var(--font-body);">
               <span id="modalBioCharCount">136 / 300</span>
-              <span><i class="ph ph-eye"></i> Visible to patients</span>
             </div>
           </div>
 
@@ -15385,7 +15394,7 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Clear Chat History?</h2>
-            <p class="sheet-editorial-sub">This will permanently delete all your AI assistant conversation threads and clinical inquiry records.</p>
+            <p class="sheet-editorial-sub">Delete all chat history?</p>
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 24px;">
@@ -15407,7 +15416,7 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Clear Downloaded Files?</h2>
-            <p class="sheet-editorial-sub">Free up 14.2 MB of local storage by clearing offline image previews and investigation attachments. Files will re-download when opened.</p>
+            <p class="sheet-editorial-sub">Clear downloaded files?</p>
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 24px;">
@@ -15498,7 +15507,6 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Help & Support</h2>
-            <p class="sheet-editorial-sub">Reach out directly to our 24/7 doctor care team or submit your issue.</p>
           </div>
 
           <!-- 4 Quick Contact Channels -->
@@ -16915,7 +16923,7 @@
     // ONU CLINICAL AI ASSISTANT CONTROLLER
     // ==========================================
     let isListeningVoice = false;
-    let voiceRecognitionTimer = null;
+    let onuSpeechRecognition = null;
     let onuChatHistory = [];
 
     // =======================================================
@@ -16991,6 +16999,7 @@
         pageOnu.className = 'app-page page-onu active-page';
       }
       document.querySelector('.phone-screen').classList.remove('in-call-mode');
+      setDoctorOnuView(false);
       setActiveNavTab('onu');
       if (typeof updateBottomNavVisibility === 'function') updateBottomNavVisibility();
     }
@@ -17021,17 +17030,43 @@
 
     // Attachment Menu Handlers
     function openOnuAttachMenu() {
-      const backdrop = document.getElementById('modalBackdrop');
-      const sheet = document.getElementById('onuAttachModalSheet');
-      if (backdrop) backdrop.classList.add('active');
-      if (sheet) sheet.classList.add('active');
+      toggleOnuAttachMenu(document.getElementById('btnOnuAttach'));
     }
 
     function closeOnuAttachMenu() {
-      const sheet = document.getElementById('onuAttachModalSheet');
-      if (sheet) sheet.classList.remove('active');
-      const backdrop = document.getElementById('modalBackdrop');
-      if (backdrop) backdrop.classList.remove('active');
+      const menu = document.getElementById('doctorOnuAttachmentMenu');
+      const button = document.getElementById('btnOnuAttach');
+      if (menu) menu.hidden = true;
+      button?.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleOnuAttachMenu(button) {
+      const menu = document.getElementById('doctorOnuAttachmentMenu');
+      if (!menu) return;
+      const willOpen = menu.hidden;
+      menu.hidden = !willOpen;
+      button?.setAttribute('aria-expanded', String(willOpen));
+      if (willOpen) requestAnimationFrame(() => menu.querySelector('[role="menuitem"]')?.focus());
+    }
+
+    function handleOnuAttachmentMenuKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        event.stopPropagation();
+        closeOnuAttachMenu();
+        document.getElementById('btnOnuAttach')?.focus();
+        return;
+      }
+      const items = Array.from(document.querySelectorAll('#doctorOnuAttachmentMenu [role="menuitem"]'));
+      const currentIndex = items.indexOf(document.activeElement);
+      let nextIndex = currentIndex;
+      if (event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % items.length;
+      else if (event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + items.length) % items.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = items.length - 1;
+      else return;
+      event.preventDefault();
+      items[nextIndex]?.focus();
     }
 
     function selectAttachOption(type) {
@@ -17229,6 +17264,7 @@
       const backdrop = document.getElementById('onuDrawerBackdrop');
       if (drawer) drawer.classList.add('active');
       if (backdrop) backdrop.classList.add('active');
+      document.querySelectorAll('#onuHeader [aria-label="Open chat history"]').forEach(button => button.setAttribute('aria-expanded', 'true'));
     }
 
     function closeOnuHistoryDrawer() {
@@ -17236,6 +17272,7 @@
       const backdrop = document.getElementById('onuDrawerBackdrop');
       if (drawer) drawer.classList.remove('active');
       if (backdrop) backdrop.classList.remove('active');
+      document.querySelectorAll('#onuHeader [aria-label="Open chat history"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
     }
 
     function loadOnuChatThread(queryText) {
@@ -17245,16 +17282,52 @@
       sendOnuMessage();
     }
 
-    function startNewOnuChat() {
+    function setDoctorOnuView(isConversation) {
+      const pageOnu = document.getElementById('pageOnu');
       const welcomeView = document.getElementById('onuWelcomeView');
       const streamView = document.getElementById('onuMessagesStream');
-      const inputField = document.getElementById('inputOnuChat');
-      const pageOnu = document.getElementById('pageOnu');
+      const disclaimer = document.getElementById('onuDisclaimer');
+      const header = document.getElementById('onuHeader');
+      const phoneScreen = document.querySelector('.phone-screen');
 
-      if (pageOnu) pageOnu.classList.remove('chat-active');
-      if (welcomeView) welcomeView.style.display = 'flex';
+      pageOnu?.classList.toggle('chat-active', isConversation);
+      welcomeView?.toggleAttribute('hidden', isConversation);
+      streamView?.toggleAttribute('hidden', !isConversation);
+      disclaimer?.toggleAttribute('hidden', !isConversation);
+      phoneScreen?.classList.toggle('onu-conversation-mode', isConversation);
+
+      if (header) {
+        header.innerHTML = isConversation ? `
+          <button type="button" class="btn-circle-icon onu-icon-button" aria-label="Back to Onu home" onclick="backToDoctorOnuHome()"><i class="ph ph-arrow-left" aria-hidden="true"></i></button>
+          <h1 class="onu-header-title">Onu</h1>
+          <div class="onu-header-actions">
+            <button type="button" class="btn-circle-icon onu-icon-button" aria-label="Start a new chat" title="New Chat" onclick="startNewOnuChat()"><i class="ph ph-pencil-simple-line" aria-hidden="true"></i></button>
+            <button type="button" class="btn-circle-icon onu-icon-button" aria-label="Open chat history" aria-expanded="false" onclick="openOnuHistoryDrawer(this)"><i class="ph ph-list" aria-hidden="true"></i></button>
+          </div>` : `
+          <div class="onu-brand-lockup"><span class="onu-brand-mark" aria-hidden="true"></span><h1 class="onu-header-title">Onu</h1></div>
+          <div class="onu-header-actions"><button type="button" class="btn-circle-icon onu-icon-button" aria-label="Open chat history" aria-expanded="false" onclick="openOnuHistoryDrawer(this)"><i class="ph ph-list" aria-hidden="true"></i></button></div>`;
+      }
+      updateBottomNavVisibility();
+    }
+
+    document.addEventListener('pointerdown', event => {
+      const dock = document.querySelector('#pageOnu .onu-composer-dock');
+      const menu = document.getElementById('doctorOnuAttachmentMenu');
+      if (menu && !menu.hidden && dock && !dock.contains(event.target)) closeOnuAttachMenu();
+    });
+
+    function backToDoctorOnuHome() {
+      startNewOnuChat();
+    }
+
+    function startNewOnuChat() {
+      const streamView = document.getElementById('onuMessagesStream');
+      const inputField = document.getElementById('inputOnuChat');
+
+      if (onuSpeechRecognition) { try { onuSpeechRecognition.stop(); } catch (error) {} }
+      closeOnuAttachMenu();
+      closeOnuHistoryDrawer();
       if (streamView) {
-        streamView.style.display = 'none';
         streamView.innerHTML = '';
       }
       if (inputField) {
@@ -17262,6 +17335,8 @@
         handleOnuInputChange(inputField);
       }
       lastUserQuery = '';
+      setDoctorOnuView(false);
+      document.getElementById('inputOnuChat')?.focus();
     }
 
     function askOnuPreset(promptText) {
@@ -17271,27 +17346,29 @@
     }
 
     function handleOnuInputKey(e) {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) {
         e.preventDefault();
         sendOnuMessage();
       }
     }
 
     function handleOnuInputChange(inputEl) {
-      const text = inputEl ? inputEl.value.trim() : '';
-      const morphBtn = document.getElementById('btnOnuActionMorph');
-      const morphIcon = document.getElementById('onuMorphIcon');
-      if (morphBtn && morphIcon) {
-        if (text.length > 0) {
-          morphBtn.className = 'btn-onu-action-morph send-mode';
-          morphBtn.setAttribute('title', 'Send message');
-          morphIcon.className = 'ph-bold ph-arrow-up';
-        } else {
-          morphBtn.className = 'btn-onu-action-morph voice-mode';
-          morphBtn.setAttribute('title', 'Open Onu Live AI Voice Assistant');
-          morphIcon.className = 'ph ph-waveform';
-        }
-      }
+      if (!inputEl) return;
+      inputEl.style.height = 'auto';
+      inputEl.style.height = `${Math.min(inputEl.scrollHeight, 112)}px`;
+      const actionButton = document.getElementById('btnOnuActionMorph');
+      const hasText = inputEl.value.trim().length > 0;
+      actionButton?.classList.toggle('send-mode', hasText);
+      actionButton?.classList.toggle('voice-mode', !hasText);
+      actionButton?.setAttribute('aria-label', hasText ? 'Send message' : 'Start voice assistant');
+      actionButton?.setAttribute('title', hasText ? 'Send message' : 'Start voice assistant');
+      const icon = actionButton?.querySelector('i');
+      if (icon) icon.className = `ph ${hasText ? 'ph-arrow-up' : 'ph-waveform'}`;
+    }
+
+    function submitDoctorOnuMessage(event) {
+      event?.preventDefault();
+      sendOnuMessage();
     }
 
     function handleOnuMorphAction() {
@@ -17483,7 +17560,7 @@
         return;
       }
       const streamView = document.getElementById('onuMessagesStream');
-      const scrollArea = document.getElementById('onuChatScrollArea');
+      const scrollArea = document.getElementById('onuMessagesStream');
       if (!streamView) return;
 
       // Remove last AI response if present
@@ -17529,14 +17606,9 @@
       if (!text) return;
 
       lastUserQuery = text;
-      const welcomeView = document.getElementById('onuWelcomeView');
       const streamView = document.getElementById('onuMessagesStream');
-      const scrollArea = document.getElementById('onuChatScrollArea');
-      const pageOnu = document.getElementById('pageOnu');
-
-      if (pageOnu) pageOnu.classList.add('chat-active');
-      if (welcomeView) welcomeView.style.display = 'none';
-      if (streamView) streamView.style.display = 'flex';
+      const scrollArea = streamView;
+      setDoctorOnuView(true);
 
       // 1. Render User Bubble with Copy/Edit Actions
       const userBubbleHtml = `
@@ -17555,6 +17627,7 @@
       streamView.insertAdjacentHTML('beforeend', userBubbleHtml);
       inputField.value = '';
       handleOnuInputChange(inputField);
+      inputField.focus();
 
       // Save to recent threads if novel
       if (!recentChatThreads.some(t => t.query.toLowerCase() === text.toLowerCase())) {
@@ -18129,27 +18202,45 @@
       const micBtn = document.getElementById('btnOnuMic');
       const inputField = document.getElementById('inputOnuChat');
       if (!micBtn) return;
+      if (onuSpeechRecognition) { try { onuSpeechRecognition.stop(); } catch (error) {} return; }
+      const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognitionAPI) { showToast('Voice input is not supported in this browser.'); return; }
 
-      if (isListeningVoice) {
-        // Stop listening
-        isListeningVoice = false;
-        micBtn.classList.remove('is-listening');
-        if (voiceRecognitionTimer) clearTimeout(voiceRecognitionTimer);
-      } else {
-        // Start listening simulation
+      const recognition = new SpeechRecognitionAPI();
+      onuSpeechRecognition = recognition;
+      recognition.lang = navigator.language || 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      recognition.onstart = () => {
         isListeningVoice = true;
         micBtn.classList.add('is-listening');
-        if (inputField) inputField.placeholder = "Listening...";
-
-        voiceRecognitionTimer = setTimeout(() => {
-          isListeningVoice = false;
-          micBtn.classList.remove('is-listening');
-          if (inputField) {
-            inputField.placeholder = "Message Onu...";
-            inputField.value = "Check my patients";
-          }
-          sendOnuMessage();
-        }, 2200);
+        micBtn.setAttribute('aria-pressed', 'true');
+        micBtn.setAttribute('aria-label', 'Stop voice input');
+        if (inputField) inputField.placeholder = 'Listening...';
+      };
+      recognition.onresult = event => {
+        const transcript = event.results?.[0]?.[0]?.transcript || '';
+        if (!inputField || !transcript) return;
+        inputField.value = `${inputField.value.trim()}${inputField.value.trim() ? ' ' : ''}${transcript}`;
+        handleOnuInputChange(inputField);
+        inputField.focus();
+      };
+      recognition.onerror = () => showToast('Voice input could not start. Check microphone access.');
+      recognition.onend = () => {
+        if (onuSpeechRecognition === recognition) onuSpeechRecognition = null;
+        isListeningVoice = false;
+        micBtn.classList.remove('is-listening');
+        micBtn.setAttribute('aria-pressed', 'false');
+        micBtn.setAttribute('aria-label', 'Start voice input');
+        if (inputField) inputField.placeholder = 'Ask about a patient or your practice';
+      };
+      try { recognition.start(); }
+      catch (error) {
+        onuSpeechRecognition = null;
+        isListeningVoice = false;
+        micBtn.classList.remove('is-listening');
+        micBtn.setAttribute('aria-pressed', 'false');
+        showToast('Voice input could not start.');
       }
     }
 
@@ -18164,7 +18255,9 @@
       if (!phoneScreen) return;
       const activePage = document.querySelector('.app-page.active-page');
       const rootTabs = ['pageDesk', 'pagePatientsList', 'pageOnu', 'pageWallet', 'pageDoctorProfile'];
-      if (activePage && !rootTabs.includes(activePage.id)) {
+      const isOnuConversation = activePage?.id === 'pageOnu' && activePage.classList.contains('chat-active');
+      phoneScreen.classList.toggle('onu-conversation-mode', isOnuConversation);
+      if (activePage && (!rootTabs.includes(activePage.id) || isOnuConversation)) {
         phoneScreen.classList.add('hide-bottom-nav');
       } else {
         phoneScreen.classList.remove('hide-bottom-nav');
@@ -18319,9 +18412,9 @@
       title: "General Medicine • MBBS, FCPS",
       email: "sifat@pghospital.com",
       phone: "+880 1572 829231",
-      bmdcReg: "437193172",
+      bmdcReg: "A-437193",
       experience: "5+ Years",
-      totalPatients: "1,420+",
+      totalPatients: "120+",
       fee: "1,200 BDT",
       chamber: "BSMMU (PG Hospital), Shahbag, Dhaka",
       avatarUrl: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80",
@@ -18493,13 +18586,9 @@
     function confirmClearChatHistory() {
       recentChatThreads = [];
       renderRecentHistoryDrawer();
-      const chatContainer = document.getElementById('onuChatScrollArea');
-      const welcomeView = document.getElementById('onuWelcomeView');
-      if (chatContainer && welcomeView) {
-        const messages = chatContainer.querySelectorAll('.onu-chat-bubble-user, .onu-chat-bubble-ai, .onu-message-user-wrap, .onu-message-ai-wrap');
-        messages.forEach(m => m.remove());
-        welcomeView.style.display = 'flex';
-      }
+      const chatContainer = document.getElementById('onuMessagesStream');
+      if (chatContainer) chatContainer.innerHTML = '';
+      setDoctorOnuView(false);
       closeClearChatModal();
       showToast('AI chat history cleared successfully');
     }
@@ -18871,7 +18960,7 @@
       const groupEl = document.querySelector('#pageNotifications .notifications-group');
       if (groupEl) {
         const card = document.createElement('div');
-        card.className = 'notification-item-card is-unread';
+        card.className = 'notification-item-card';
         card.onclick = () => handleNotificationClick(notif.target || 'apt2');
         card.innerHTML = `
           <div class="notif-icon-box system" style="background:#FEF2F2; color:#EF4444;">
@@ -18892,11 +18981,6 @@
           groupEl.appendChild(card);
         }
       }
-      document.querySelectorAll('.btn-circle-icon').forEach(btn => {
-        if (btn.getAttribute('onclick')?.includes('openNotificationsPage')) {
-          btn.classList.add('has-dot');
-        }
-      });
     }
 
     function openNotificationsPage(fromTarget = 'desk') {
@@ -18941,16 +19025,6 @@
       } else {
         navigateToDesk();
       }
-    }
-
-    function markAllNotificationsRead() {
-      document.querySelectorAll('.notification-item-card.is-unread').forEach(el => {
-        el.classList.remove('is-unread');
-      });
-      document.querySelectorAll('.btn-circle-icon.has-dot').forEach(el => {
-        el.classList.remove('has-dot');
-      });
-      showToast('All notifications marked as read');
     }
 
     function handleNotificationClick(target) {
@@ -19942,11 +20016,6 @@
       if (countEl) {
         countEl.textContent = `${list.length} Patients`;
       }
-      const headerSubtitleEl = document.getElementById('patientsHeaderSubtitle');
-      if (headerSubtitleEl) {
-        headerSubtitleEl.textContent = query ? `${list.length} patients found` : `Total ${patientsDirectoryData.length} patients`;
-      }
-
       if (list.length === 0) {
         container.innerHTML = `
           <div class="patients-empty-state">
@@ -20069,11 +20138,11 @@
               <div class="profile-visit-tile" onclick="openVisitDetailsFromProfile('${v.id}')">
                 <div class="profile-visit-left">
                   <div class="profile-visit-icon-circle ${typeClass}">
-                    <i class="ph ${iconClass}"></i>
+                    <i class="ph-fill ${iconClass}"></i>
                   </div>
                   <div class="profile-visit-meta">
                     <span class="profile-visit-date">${v.date}</span>
-                    <span class="profile-visit-type">${v.type} • ${v.time}</span>
+                    <span class="profile-visit-type">${v.time}</span>
                   </div>
                 </div>
                 <i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>
@@ -20944,6 +21013,18 @@
       }
     }
 
+    function getUploadedDocumentFormatLabel(file = {}) {
+      const name = String(file.name || '');
+      const extension = name.match(/\.([a-z0-9]{1,10})$/i)?.[1]?.toLowerCase();
+      const mime = String(file.mimeType || file.fileType || file.type || '').toLowerCase();
+      const mimeSubtype = mime.includes('/') ? mime.split('/').pop().split(/[;+]/)[0].replace(/^\*$/, '') : '';
+      const format = extension || mimeSubtype;
+      if (!format) return 'File';
+      if (format === 'jpeg' || format === 'jpg') return 'JPG';
+      if (format === 'tif') return 'TIFF';
+      return format.toUpperCase();
+    }
+
     function renderAppointmentDetailsSections(appt, effectiveStatus) {
       const container = document.getElementById('detDynamicSections');
       if (!container) return;
@@ -21035,7 +21116,7 @@
         `;
       }
 
-      // 4. Patient Uploaded Documents: List View with Subtle Dividers
+      // 4. Patient Uploaded Documents
       let docsListHtml = '';
       if (docs.length > 0) {
         docsListHtml = docs.map(doc => `
@@ -21046,7 +21127,7 @@
               </div>
               <div class="details-file-row-meta">
                 <span class="details-file-row-name">${doc.name}</span>
-                <span class="details-file-row-sub">${doc.size} • ${doc.type}</span>
+                <span class="details-file-row-sub">${getUploadedDocumentFormatLabel(doc)}</span>
               </div>
             </div>
             <button class="details-file-row-action" onclick="showToast('Viewing ${doc.name}')" aria-label="View Document">
@@ -21077,16 +21158,6 @@
       // Order dynamically by patient status!
       if (effectiveStatus === 'prescribed') {
         // TOP HIERARCHY: Issued Prescription -> Consultation Notes (Truncated, no bottom border) -> Collapsible More Details at Bottom
-        const metaChipsHtml = getAppointmentMetaChipsHtml(appt, effectiveStatus);
-        const metaSectionHtml = `
-          <div class="details-clean-section">
-            <div class="details-clean-header">
-              <span class="details-clean-title">Consultation Info</span>
-            </div>
-            ${metaChipsHtml}
-          </div>
-        `;
-
         // Consultation Notes without bottom divider border (since View More divider line directly follows)
         const notesSectionNoBorderHtml = `
           <div class="details-clean-section no-border">
@@ -21122,7 +21193,6 @@
               <div class="details-intake-divider-line"></div>
             </div>
             <div class="details-intake-collapsible-body" id="detIntakeCollapsibleBody" style="display: none;">
-              ${metaSectionHtml}
               ${preVisitHtml}
               ${docsSectionHtml}
             </div>
@@ -21460,7 +21530,7 @@
                   </div>
                   <div class="details-file-row-meta">
                     <span class="details-file-row-name">${rxDoc.name}</span>
-                    <span class="details-file-row-sub">${rxDoc.size || '1.2 MB'} • Patient Uploaded Rx</span>
+                    <span class="details-file-row-sub">${getUploadedDocumentFormatLabel(rxDoc)}</span>
                   </div>
                 </div>
                 <button type="button" class="details-file-row-action" title="Preview Prescription">
