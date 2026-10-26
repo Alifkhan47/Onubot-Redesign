@@ -9118,17 +9118,23 @@
     }
 
     .onu-msg-user-bubble {
-      background: #F1F5F9;
+      width: fit-content;
+      background: #EFF7F4;
       color: #0F172A;
       font-family: var(--font-body);
       font-size: 14.5px;
       font-weight: 500;
       line-height: 1.45;
       padding: 11px 16px;
-      border-radius: 18px 18px 4px 18px;
+      border-radius: 18px;
       max-width: 82%;
       word-wrap: break-word;
     }
+
+    .onu-msg-user-files { display: grid; gap: 7px; margin-top: 8px; }
+    .onu-msg-user-file { display: flex; align-items: center; gap: 8px; max-width: 100%; padding: 7px 9px; border-radius: 10px; background: rgba(255,255,255,.72); color: #475569; font: 12px/1.3 var(--font-body); }
+    .onu-msg-user-file i { flex: 0 0 auto; color: #0E8070; font-size: 16px; }
+    .onu-msg-user-file span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     .onu-msg-user-actions {
       display: flex;
@@ -9241,6 +9247,8 @@
     .onu-msg-ai-text li {
       margin-bottom: 5px;
     }
+
+    .onu-msg-ai-text.is-plain-text { white-space: pre-wrap; overflow-wrap: anywhere; }
 
     /* ============================================================
        CLAUDE MOBILE STYLE ARTIFACTS IN CHAT
@@ -9491,6 +9499,11 @@
 
     .onu-typing-dot:nth-child(2) { animation-delay: 0.2s; }
     .onu-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    .onu-progress-line { display: inline-flex; align-items: center; gap: 6px; min-height: 24px; color: #71827D; font: 12px/1.4 var(--font-body); }
+    .onu-progress-sparkle { color: #0E8070; font-size: 13px; animation: onuProgressPulse 1.4s ease-in-out infinite; }
+    @keyframes onuProgressPulse { 50% { opacity: .5; transform: scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) { .onu-progress-sparkle { animation: none; } }
 
     @keyframes typingBlink {
       0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
@@ -9908,6 +9921,37 @@
       background: #F1F5F9;
       transform: scale(1.05);
     }
+
+    .modal-voice-bot { background: #FBFCFD; color: #17212B; padding: calc(18px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom)); transform: none; }
+    .modal-voice-bot.active { transform: none; }
+    .voice-bot-top-bar { min-height: 44px; justify-content: center; padding-top: 12px; }
+    .voice-bot-brand-lockup { display: inline-flex; align-items: center; gap: 8px; }
+    .voice-bot-brand-mark { display: block; width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; background: linear-gradient(135deg, #087E70 0%, #3EAA91 52%, #D6EAE6 100%); box-shadow: 0 3px 9px rgba(8,126,112,.2); }
+    .voice-bot-brand { color: #15211F; font: 700 21px/1.1 var(--font-heading); letter-spacing: -.02em; }
+    .voice-bot-center { flex: 1; min-height: 0; justify-content: center; gap: 14px; width: 100%; }
+    .voice-bot-visualizer { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 82px; flex: 0 0 82px; }
+    .voice-bot-wave-bar { width: 3px; height: var(--wave-height, 20px); flex: 0 0 3px; border-radius: 99px; background: var(--wave-gradient, linear-gradient(90deg,#0E8070,#56C6A5,#0E8070)); background-size: 300px 100%; background-position: var(--wave-position,0px) 50%; opacity: .86; transform: scaleY(.26); }
+    .voice-bot-visualizer.is-active .voice-bot-wave-bar { animation: voiceBotWave .72s ease-in-out var(--wave-delay, 0s) infinite alternate, voiceBotGradient 1.8s linear var(--wave-delay, 0s) infinite; }
+    .voice-bot-visualizer.is-user { --wave-gradient: linear-gradient(90deg,#3976E8,#9B5DE5,#56A7FF,#3976E8); }
+    .voice-bot-visualizer.is-onu { --wave-gradient: linear-gradient(90deg,#0E8070,#58C7A4,#B0E7D0,#0E8070); }
+    @keyframes voiceBotWave { to { transform: scaleY(1); opacity: 1; } }
+    @keyframes voiceBotGradient { to { background-position: calc(var(--wave-position,0px) - 220px) 50%; } }
+    .voice-bot-status-text { min-height: 21px; flex: 0 0 21px; color: #24332F; font: 600 14px/1.35 var(--font-heading); letter-spacing: 0; text-align: center; white-space: nowrap; }
+    .voice-bot-transcript { display: flex; flex: 0 0 220px; flex-direction: column; gap: 20px; width: 100%; max-width: 340px; height: 220px; overflow-y: auto; padding: 12px 2px; scrollbar-width: thin; }
+    .voice-bot-transcript-entry { display: grid; gap: 3px; color: #39464D; font: 15px/1.5 var(--font-body); }
+    .voice-bot-transcript-speaker { font: 700 12px/1.3 var(--font-body); }
+    .voice-bot-transcript-entry.is-user .voice-bot-transcript-speaker { color: #3976E8; }
+    .voice-bot-transcript-entry.is-onu .voice-bot-transcript-speaker { color: #0E8070; }
+    .voice-bot-transcript-text { margin: 0; }
+    .voice-bot-controls-dock { min-height: 70px; gap: 24px; }
+    .voice-bot-mic-btn, .voice-bot-end-btn { width: 60px; height: 60px; min-width: 48px; min-height: 48px; box-shadow: 0 5px 18px rgba(15, 23, 42, .09); }
+    .voice-bot-mic-btn { background: #EAF1FF; border-color: #D7E3FF; color: #315EC2; }
+    .voice-bot-mic-btn:hover { background: #DCE8FF; }
+    .voice-bot-mic-btn[aria-pressed="true"] { background: #FDECEC; border-color: #F4CACA; color: #B42318; }
+    .voice-bot-end-btn { border: 1px solid #C8D6D0; background: #E7EFEB; color: #1E342D; }
+    .voice-bot-end-btn:hover { background: #DCE7E2; transform: scale(1.04); }
+    @media (prefers-reduced-motion: reduce) { .voice-bot-visualizer.is-active .voice-bot-wave-bar, .voice-bot-live-dot { animation: none; } }
+    @media (max-height: 640px) { .modal-voice-bot { padding-top: 10px; padding-bottom: 10px; } .voice-bot-center { gap: 8px; } .voice-bot-visualizer { height: 58px; flex-basis: 58px; } .voice-bot-transcript { height: 130px; flex-basis: 130px; padding: 6px 2px; } .voice-bot-controls-dock { min-height: 56px; } .voice-bot-mic-btn, .voice-bot-end-btn { width: 52px; height: 52px; } }
 
     .onu-disclaimer {
       font-family: var(--font-body);
@@ -12474,20 +12518,22 @@
               <p class="onu-disclaimer" id="onuDisclaimer" hidden>Onu can make mistakes. Verify clinical decisions.</p>
               <div class="onu-composer-dock">
                 <div class="onu-attachment-menu" id="doctorOnuAttachmentMenu" role="menu" aria-label="Add to chat" onkeydown="handleOnuAttachmentMenuKeydown(event)" hidden>
-                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('tag_patient')"><i class="ph ph-user" aria-hidden="true"></i><span>Tag Farzana Khan</span></button>
-                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('lab_report')"><i class="ph ph-file-text" aria-hidden="true"></i><span>Attach lab report</span></button>
-                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('shift_queue')"><i class="ph ph-calendar-check" aria-hidden="true"></i><span>Attach shift queue</span></button>
-                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('rx_protocol')"><i class="ph ph-prescription" aria-hidden="true"></i><span>Rx protocol</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('photos')"><i class="ph ph-image" aria-hidden="true"></i><span>Photos</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('camera')"><i class="ph ph-camera" aria-hidden="true"></i><span>Take a photo</span></button>
+                  <button type="button" class="onu-attachment-option" role="menuitem" onclick="selectAttachOption('documents')"><i class="ph ph-file-text" aria-hidden="true"></i><span>Documents</span></button>
                 </div>
                 <form class="onu-composer" id="doctorOnuComposerForm" onsubmit="submitDoctorOnuMessage(event)">
-                  <button type="button" id="btnOnuAttach" aria-label="Attach clinical context" title="Attach clinical context" aria-haspopup="menu" aria-expanded="false" onclick="toggleOnuAttachMenu(this)"><i class="ph ph-plus" aria-hidden="true"></i></button>
-                  <textarea id="inputOnuChat" rows="1" aria-label="Message Onu" placeholder="Message Onu..." oninput="handleOnuInputChange(this)" onkeydown="handleOnuInputKey(event)"></textarea>
+                  <button type="button" id="btnOnuAttach" aria-label="Add photos or documents" title="Add photos or documents" aria-haspopup="menu" aria-expanded="false" onclick="toggleOnuAttachMenu(this)"><i class="ph ph-plus" aria-hidden="true"></i></button>
+                  <textarea id="inputOnuChat" rows="1" aria-label="Message Onu" placeholder="Ask anything" oninput="handleOnuInputChange(this)" onkeydown="handleOnuInputKey(event)"></textarea>
                   <button type="button" id="btnOnuMic" aria-label="Start voice input" aria-pressed="false" title="Voice input" onclick="toggleOnuVoiceListening()"><i class="ph ph-microphone" aria-hidden="true"></i></button>
                   <button type="button" id="btnOnuActionMorph" class="btn-onu-action-morph voice-mode" aria-label="Start voice assistant" title="Start voice assistant" onclick="handleOnuMorphAction()"><i class="ph ph-waveform" aria-hidden="true"></i></button>
                 </form>
               </div>
             </div>
           </div>
+          <input type="file" id="doctorOnuPhotoInput" accept="image/*" multiple hidden onchange="handleDoctorOnuAttachments(this.files, this)">
+          <input type="file" id="doctorOnuCameraInput" accept="image/*" capture="environment" hidden onchange="handleDoctorOnuAttachments(this.files, this)">
+          <input type="file" id="doctorOnuDocumentInput" accept=".pdf,.doc,.docx,.odt,.rtf,.txt,.csv,.xls,.xlsx,.ppt,.pptx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" multiple hidden onchange="handleDoctorOnuAttachments(this.files, this)">
 
           <!-- =======================================================
                VIEW 1: MY DESK (HOME)
@@ -15241,35 +15287,20 @@
         <!-- =======================================================
              12. LIVE AI VOICE BOT FULL-SCREEN MODAL (Match Reference)
              ======================================================= -->
-        <div class="modal-voice-bot" id="modalLiveVoiceBot">
-          <!-- Top Bar: Close Button + Pulsing Live Badge -->
-          <div class="voice-bot-top-bar">
-            <button type="button" class="voice-bot-close-btn" onclick="closeLiveVoiceBotModal()" aria-label="Close Live Voice">
-              <i class="ph ph-x"></i>
-            </button>
-            <span class="voice-bot-live-pill">
-              <span class="voice-bot-live-dot"></span>
-              Live
-            </span>
-          </div>
+        <div class="modal-voice-bot" id="modalLiveVoiceBot" role="dialog" aria-modal="true" aria-label="Onu live voice chat" onkeydown="handleDoctorVoiceBotKeydown(event)">
+          <div class="voice-bot-top-bar"><span class="voice-bot-brand-lockup"><span class="voice-bot-brand-mark" aria-hidden="true"></span><span class="voice-bot-brand">Onu</span></span></div>
 
-          <!-- Center Visual: Glowing Orb with Doctor Icon & Listening Text -->
           <div class="voice-bot-center">
-            <div class="voice-bot-orb-container">
-              <div class="voice-bot-orb-glow"></div>
-              <div class="voice-bot-orb-circle">
-                <i class="ph ph-stethoscope" style="font-size: 68px; color: #072B38;"></i>
-              </div>
-            </div>
-            <span class="voice-bot-status-text" id="voiceBotStatusText">Listening...</span>
+            <div class="voice-bot-visualizer" id="voiceBotVisualizer" aria-hidden="true"></div>
+            <span class="voice-bot-status-text" id="voiceBotStatusText">Starting demo…</span>
+            <div class="voice-bot-transcript" id="voiceBotTranscript" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Live transcript"></div>
           </div>
 
-          <!-- Bottom Actions: Mic Mute + End Button -->
           <div class="voice-bot-controls-dock">
-            <button type="button" class="voice-bot-mic-btn" id="btnVoiceBotMic" onclick="toggleVoiceBotMute()" aria-label="Mute Microphone">
+            <button type="button" class="voice-bot-mic-btn" id="btnVoiceBotMic" onclick="toggleVoiceBotMute()" aria-label="Mute microphone" aria-pressed="false" title="Mute microphone">
               <i class="ph ph-microphone"></i>
             </button>
-            <button type="button" class="voice-bot-end-btn" onclick="closeLiveVoiceBotModal()" aria-label="End Voice Session">
+            <button type="button" class="voice-bot-end-btn" onclick="closeLiveVoiceBotModal()" aria-label="End voice session" title="End voice session">
               <i class="ph ph-x"></i>
             </button>
           </div>
@@ -17008,6 +17039,7 @@
     // ONU CLINICAL AI COPILOT CONTROLLER (CHATGPT & CLAUDE MOBILE SPEC)
     // =======================================================
     let lastUserQuery = '';
+    let activeOnuThreadId = null;
     let currentActiveArtifactId = null;
 
     // Claude Artifacts Registry Store
@@ -17070,28 +17102,24 @@
     }
 
     function selectAttachOption(type) {
-      const inputField = document.getElementById('inputOnuChat');
+      const inputIds = { photos: 'doctorOnuPhotoInput', camera: 'doctorOnuCameraInput', documents: 'doctorOnuDocumentInput' };
+      const input = document.getElementById(inputIds[type]);
       closeOnuAttachMenu();
-      if (!inputField) return;
+      if (!input) return;
+      input.value = '';
+      input.click();
+    }
 
-      if (type === 'tag_patient') {
-        inputField.value = '@Farzana Khan ';
-        inputField.focus();
-        showToast('Tagged patient Farzana Khan');
-      } else if (type === 'lab_report') {
-        inputField.value = 'Review CBC & Lipid Panel: ';
-        inputField.focus();
-        showToast('Attached lab panel template');
-      } else if (type === 'shift_queue') {
-        inputField.value = 'Summarize today\'s Shift 1 patient queue: ';
-        inputField.focus();
-        showToast('Shift queue attached');
-      } else if (type === 'rx_protocol') {
-        inputField.value = 'Recommend clinical dosage guidelines for: ';
-        inputField.focus();
-        showToast('Rx protocol template added');
-      }
-      handleOnuInputChange(inputField);
+    function handleDoctorOnuAttachments(fileList, inputElement) {
+      const files = Array.from(fileList || []);
+      const supportedExtensions = new Set(['jpg','jpeg','png','gif','webp','heic','heif','bmp','pdf','doc','docx','odt','rtf','txt','csv','xls','xlsx','ppt','pptx']);
+      const valid = files.filter(file => {
+        const extension = String(file.name || '').split('.').pop().toLowerCase();
+        return (String(file.type || '').startsWith('image/') || supportedExtensions.has(extension)) && file.size <= 15 * 1024 * 1024;
+      });
+      if (valid.length !== files.length) showToast('Unsupported file or over 15 MB. Choose a photo or supported document.');
+      if (valid.length) sendOnuMessage(valid);
+      if (inputElement) inputElement.value = '';
     }
 
     // Categorized Chat History Drawer (ChatGPT & Claude Mobile Standard)
@@ -17125,7 +17153,8 @@
                    ontouchend="handleThreadTouchEnd('${thread.id}', event)"
                    ontouchcancel="handleThreadMouseLeave()"
                    oncontextmenu="handleThreadContextMenu('${thread.id}', event)"
-                   onclick="handleThreadItemClick('${thread.id}', '${thread.query.replace(/'/g, "\\'")}')">
+                   data-query="${escapeHtml(thread.query || '')}"
+                   onclick="handleThreadItemClick(this.dataset.id, this.dataset.query)">
                 <span class="onu-drawer-item-title">${escapeHtml(thread.title)}</span>
                 <i class="ph ph-dots-three-vertical onu-drawer-item-dots" onclick="event.stopPropagation(); openThreadContextMenu('${thread.id}')"></i>
               </div>
@@ -17179,7 +17208,7 @@
         isLongPressTriggered = false;
         return;
       }
-      loadOnuChatThread(query);
+      loadOnuChatThread(threadId, query);
       closeOnuHistoryDrawer();
     }
 
@@ -17275,11 +17304,62 @@
       document.querySelectorAll('#onuHeader [aria-label="Open chat history"]').forEach(button => button.setAttribute('aria-expanded', 'false'));
     }
 
-    function loadOnuChatThread(queryText) {
+    function renderDoctorOnuThreadMessages(thread) {
+      const streamView = document.getElementById('onuMessagesStream');
+      if (!streamView || !thread) return;
+      streamView.innerHTML = (thread.messages || []).map(message => {
+        if (message.role === 'user') {
+          const files = (message.attachments || []).map(file => {
+            const isImage = String(file.type || '').startsWith('image/');
+            return `<div class="onu-msg-user-file"><i class="ph ${isImage ? 'ph-image' : 'ph-file-text'}" aria-hidden="true"></i><span>${escapeHtml(file.name || 'Attachment')}</span></div>`;
+          }).join('');
+          return `<div class="onu-message-user-wrap"><div class="onu-msg-user-bubble">${message.text ? escapeHtml(message.text) : ''}${files ? `<div class="onu-msg-user-files">${files}</div>` : ''}</div></div>`;
+        }
+        return `<div class="onu-message-ai-wrap"><div class="onu-msg-ai-text is-plain-text">${escapeHtml(message.text || '')}</div></div>`;
+      }).join('');
+      streamView.scrollTop = streamView.scrollHeight;
+      lastUserQuery = [...(thread.messages || [])].reverse().find(message => message.role === 'user')?.text || thread.query || '';
+      const inputField = document.getElementById('inputOnuChat');
+      if (inputField) {
+        inputField.value = '';
+        handleOnuInputChange(inputField);
+      }
+      activeOnuThreadId = thread.id;
+      setDoctorOnuView(true);
+    }
+
+    function loadOnuChatThread(threadId, queryText) {
+      const thread = recentChatThreads.find(item => item.id === threadId);
       startNewOnuChat();
+      if (thread?.messages?.length) {
+        renderDoctorOnuThreadMessages(thread);
+        return;
+      }
+      activeOnuThreadId = thread?.id || null;
       const inputField = document.getElementById('inputOnuChat');
       if (inputField) inputField.value = queryText;
       sendOnuMessage();
+    }
+
+    function ensureDoctorOnuThread(queryText, preferredThreadId = activeOnuThreadId) {
+      let thread = recentChatThreads.find(item => item.id === preferredThreadId);
+      if (!thread) {
+        const title = String(queryText || 'Voice conversation').trim() || 'Voice conversation';
+        thread = {
+          id: `thread_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+          title: title.length > 32 ? `${title.substring(0, 32)}...` : title,
+          query: title,
+          category: 'Today',
+          messages: [],
+          updatedAt: Date.now()
+        };
+        recentChatThreads.unshift(thread);
+      }
+      if (!Array.isArray(thread.messages)) thread.messages = [];
+      if (!thread.query) thread.query = queryText;
+      thread.updatedAt = Date.now();
+      activeOnuThreadId = thread.id;
+      return thread;
     }
 
     function setDoctorOnuView(isConversation) {
@@ -17335,6 +17415,7 @@
         handleOnuInputChange(inputField);
       }
       lastUserQuery = '';
+      activeOnuThreadId = null;
       setDoctorOnuView(false);
       document.getElementById('inputOnuChat')?.focus();
     }
@@ -17569,51 +17650,121 @@
         allAiWraps[allAiWraps.length - 1].remove();
       }
 
-      // Render Typing Indicator
-      const typingId = 'onuTyping_' + Date.now();
-      const typingHtml = `
-        <div class="onu-message-ai-wrap" id="${typingId}">
-          <div class="onu-thought-pill">
-            <span class="onu-thought-dot"></span>
-            <span>Thinking...</span>
-          </div>
-          <div class="onu-typing-indicator">
-            <span class="onu-typing-dot"></span>
-            <span class="onu-typing-dot"></span>
-            <span class="onu-typing-dot"></span>
-          </div>
-        </div>
-      `;
-      streamView.insertAdjacentHTML('beforeend', typingHtml);
-      if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
-
-      setTimeout(() => {
-        const typingEl = document.getElementById(typingId);
-        if (typingEl) typingEl.remove();
-
-        const aiResponse = generateOnuClinicalResponse(lastUserQuery);
-        streamView.insertAdjacentHTML('beforeend', aiResponse);
+      const query = lastUserQuery;
+      runDoctorOnuResponse(streamView, query, () => {
+        streamView.insertAdjacentHTML('beforeend', generateOnuPlainTextResponse(query));
         if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
         showToast('Regenerated clinical response');
-      }, 550);
+      });
+    }
+
+    function getDoctorOnuProgressSteps(query) {
+      const q = String(query || '').toLowerCase();
+      if (/patient|directory|recap|last visit|alif/.test(q)) return ['Finding the relevant patient details…', 'Reviewing the encounter summary…', 'Organizing the key points…', 'Preparing your response…'];
+      if (/queue|shift|today|turn|schedule/.test(q)) return ["Reviewing today's schedule…", 'Organizing the queue details…', 'Checking the important updates…', 'Preparing your response…'];
+      if (/money|earn|income|balance|wallet|taka|payout/.test(q)) return ['Gathering the payout details…', 'Reviewing the totals…', 'Organizing the financial summary…', 'Preparing your response…'];
+      if (/fever|infection|temperature|bp|hypertension|pressure|diabetes|sugar|glucose|hba1c|headache|migraine/.test(q)) return ['Gathering the relevant clinical context…', 'Organizing the key considerations…', 'Checking the response structure…', 'Preparing your response…'];
+      return ['Reviewing your question…', 'Picking out the relevant details…', 'Organizing a concise answer…', 'Preparing your response…'];
+    }
+
+    function runDoctorOnuResponse(streamView, query, onComplete) {
+      const progressId = 'onuProgress_' + Date.now() + '_' + Math.random().toString(36).slice(2, 6);
+      const steps = getDoctorOnuProgressSteps(query);
+      const progress = document.createElement('div');
+      progress.className = 'onu-message-ai-wrap';
+      progress.id = progressId;
+      progress.innerHTML = `<div class="onu-progress-line" role="status" aria-live="polite"><i class="ph ph-sparkle onu-progress-sparkle" aria-hidden="true"></i><span class="onu-progress-label"></span></div>`;
+      streamView.appendChild(progress);
+      const label = progress.querySelector('.onu-progress-label');
+      let stage = 0;
+      label.textContent = steps[stage];
+      streamView.scrollTop = streamView.scrollHeight;
+
+      const timer = window.setInterval(() => {
+        stage += 1;
+        if (stage < steps.length) {
+          label.textContent = steps[stage];
+          streamView.scrollTop = streamView.scrollHeight;
+          return;
+        }
+        window.clearInterval(timer);
+        progress.remove();
+        onComplete();
+      }, 1100);
+    }
+
+    function doctorHtmlToPlainText(html) {
+      const content = document.createElement('div');
+      content.innerHTML = html || '';
+      const flatten = node => {
+        if (node.nodeType === Node.TEXT_NODE) return node.nodeValue.replace(/\s+/g, ' ');
+        if (node.nodeType !== Node.ELEMENT_NODE) return Array.from(node.childNodes || []).map(flatten).join('');
+        const tag = node.tagName.toLowerCase();
+        if (tag === 'br') return '\n';
+        const body = Array.from(node.childNodes).map(flatten).join('').trim();
+        if (!body) return '';
+        if (tag === 'li') return `• ${body}\n`;
+        if (['p','h1','h2','h3','h4','blockquote'].includes(tag)) return `${body}\n\n`;
+        if (['div','ul','ol'].includes(tag)) return `${body}\n`;
+        return body;
+      };
+      return Array.from(content.childNodes).map(flatten).join('')
+        .replace(/\u00a0/g, ' ')
+        .replace(/[ \t]+/g, ' ')
+        .replace(/ *\n */g, '\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+    }
+
+    function generateOnuPlainTextResponse(query, attachmentFiles = []) {
+      if (attachmentFiles.length) {
+        const count = attachmentFiles.length;
+        const attachmentReply = `I received ${count === 1 ? 'the attached file' : `${count} attached files`}, but this demo does not inspect file contents yet.${query ? ` Your message: ${query}` : ''}`;
+        return `<div class="onu-message-ai-wrap"><div class="onu-msg-ai-text is-plain-text">${escapeHtml(attachmentReply)}</div></div>`;
+      }
+      const responseHtml = generateOnuClinicalResponse(query);
+      const parsedResponse = document.createElement('div');
+      parsedResponse.innerHTML = responseHtml;
+      const introHtml = parsedResponse.querySelector('.onu-msg-ai-text')?.innerHTML || '';
+      const artifactCard = parsedResponse.querySelector('.onu-artifact-card[id]');
+      const artifactId = artifactCard?.id.replace(/^artifactCard_/, '');
+      const artifact = artifactId ? claudeArtifactsStore[artifactId] : null;
+      const plainParts = [doctorHtmlToPlainText(introHtml)];
+      if (artifact) {
+        plainParts.push(doctorHtmlToPlainText(artifact.fullContentHtml || artifact.summaryHtml));
+      }
+      if (!plainParts.some(Boolean)) plainParts.push(doctorHtmlToPlainText(responseHtml));
+      const plainText = plainParts.filter(Boolean).join('\n\n');
+      const actionsHtml = parsedResponse.querySelector('.onu-msg-ai-actions')?.outerHTML || '';
+      return `<div class="onu-message-ai-wrap"><div class="onu-msg-ai-text is-plain-text">${escapeHtml(plainText)}</div>${actionsHtml}</div>`;
     }
 
     // Main Send Message Function
-    function sendOnuMessage() {
+    function sendOnuMessage(attachments = []) {
       const inputField = document.getElementById('inputOnuChat');
       if (!inputField) return;
       const text = inputField.value.trim();
-      if (!text) return;
+      if (!text && !attachments.length) return;
+      const responseQuery = text || (attachments.some(file => String(file.type || '').startsWith('image/')) ? 'Review the attached photo' : 'Review the attached document');
 
-      lastUserQuery = text;
+      lastUserQuery = responseQuery;
+      const thread = ensureDoctorOnuThread(responseQuery);
+      thread.messages.push({
+        role: 'user',
+        text,
+        attachments: attachments.map(file => ({ name: file.name || 'Attachment', type: file.type || '', size: Number(file.size) || 0 })),
+        createdAt: Date.now()
+      });
       const streamView = document.getElementById('onuMessagesStream');
       const scrollArea = streamView;
       setDoctorOnuView(true);
 
       // 1. Render User Bubble with Copy/Edit Actions
-      const userBubbleHtml = `
-        <div class="onu-message-user-wrap">
-          <div class="onu-msg-user-bubble">${escapeHtml(text)}</div>
+      const attachmentHtml = attachments.length ? `<div class="onu-msg-user-files">${attachments.map(file => {
+        const isImage = String(file.type || '').startsWith('image/');
+        return `<div class="onu-msg-user-file"><i class="ph ${isImage ? 'ph-image' : 'ph-file-text'}" aria-hidden="true"></i><span>${escapeHtml(file.name || (isImage ? 'Photo' : 'Document'))}</span></div>`;
+      }).join('')}</div>` : '';
+      const userActionsHtml = text ? `
           <div class="onu-msg-user-actions">
             <button class="onu-msg-user-action-btn" onclick="copyUserMessage('${escapeHtml(text)}')" title="Copy message">
               <i class="ph ph-copy"></i>
@@ -17621,7 +17772,11 @@
             <button class="onu-msg-user-action-btn" onclick="editUserMessage('${escapeHtml(text)}')" title="Edit query">
               <i class="ph ph-pencil-simple"></i>
             </button>
-          </div>
+          </div>` : '';
+      const userBubbleHtml = `
+        <div class="onu-message-user-wrap">
+          <div class="onu-msg-user-bubble">${text ? escapeHtml(text) : ''}${attachmentHtml}</div>
+          ${userActionsHtml}
         </div>
       `;
       streamView.insertAdjacentHTML('beforeend', userBubbleHtml);
@@ -17629,83 +17784,210 @@
       handleOnuInputChange(inputField);
       inputField.focus();
 
-      // Save to recent threads if novel
-      if (!recentChatThreads.some(t => t.query.toLowerCase() === text.toLowerCase())) {
-        recentChatThreads.unshift({
-          id: 'thread_' + Date.now(),
-          title: text.length > 32 ? text.substring(0, 32) + '...' : text,
-          query: text,
-          category: 'Today'
-        });
-      }
-
-      // 2. Render Typing / Thought Indicator
-      const typingId = 'onuTyping_' + Date.now();
-      const typingHtml = `
-        <div class="onu-message-ai-wrap" id="${typingId}">
-          <div class="onu-thought-pill">
-            <span class="onu-thought-dot"></span>
-            <span>Thinking...</span>
-          </div>
-          <div class="onu-typing-indicator">
-            <span class="onu-typing-dot"></span>
-            <span class="onu-typing-dot"></span>
-            <span class="onu-typing-dot"></span>
-          </div>
-        </div>
-      `;
-      streamView.insertAdjacentHTML('beforeend', typingHtml);
-      if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
-
-      // 3. Generate Contextual Clinical AI Response
-      setTimeout(() => {
-        const typingEl = document.getElementById(typingId);
-        if (typingEl) typingEl.remove();
-
-        const aiResponse = generateOnuClinicalResponse(text);
-        streamView.insertAdjacentHTML('beforeend', aiResponse);
-        if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
-      }, 550);
+      runDoctorOnuResponse(streamView, responseQuery, () => {
+        const responseMarkup = generateOnuPlainTextResponse(text, attachments);
+        const parsedResponse = document.createElement('div');
+        parsedResponse.innerHTML = responseMarkup;
+        const responseText = parsedResponse.querySelector('.onu-msg-ai-text')?.textContent || '';
+        thread.messages.push({ role: 'assistant', text: responseText, attachments: [], createdAt: Date.now() });
+        thread.updatedAt = Date.now();
+        renderOnuRecentsList();
+        if (activeOnuThreadId === thread.id) {
+          streamView.insertAdjacentHTML('beforeend', responseMarkup);
+          if (scrollArea) scrollArea.scrollTop = scrollArea.scrollHeight;
+        }
+      });
     }
 
     // Live AI Voice Bot Modal Handlers
     let isVoiceBotMuted = false;
+    let doctorVoiceDemoSession = 0;
+    let doctorVoiceDemoReturnFocus = null;
+    let doctorVoiceThreadId = null;
+    let doctorVoiceBotMessages = [];
+
+    function handleDoctorVoiceBotKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closeLiveVoiceBotModal();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(document.querySelectorAll('#modalLiveVoiceBot button:not(:disabled)'));
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
 
     function openLiveVoiceBotModal() {
       const modal = document.getElementById('modalLiveVoiceBot');
-      if (modal) {
-        modal.classList.add('active');
-        const statusText = document.getElementById('voiceBotStatusText');
-        if (statusText) statusText.innerText = 'Listening...';
-        isVoiceBotMuted = false;
-        const micBtn = document.getElementById('btnVoiceBotMic');
-        if (micBtn) {
-          micBtn.innerHTML = '<i class="ph ph-microphone"></i>';
-          micBtn.style.background = 'rgba(255, 255, 255, 0.15)';
-        }
-      }
+      if (!modal) return;
+      doctorVoiceDemoReturnFocus = document.activeElement;
+      doctorVoiceThreadId = activeOnuThreadId;
+      modal.classList.add('active');
+      isVoiceBotMuted = false;
+      const transcript = document.getElementById('voiceBotTranscript');
+      if (transcript) transcript.replaceChildren();
+      doctorVoiceBotMessages = [];
+      updateDoctorVoiceBotMic();
+      buildVoiceBotWaveform('voiceBotVisualizer');
+      document.getElementById('btnVoiceBotMic')?.focus();
+      startDoctorVoiceDemo();
     }
 
     function closeLiveVoiceBotModal() {
       const modal = document.getElementById('modalLiveVoiceBot');
+      doctorVoiceDemoSession += 1;
+      saveDoctorVoiceTranscriptToChat();
       if (modal) modal.classList.remove('active');
+      document.getElementById('voiceBotVisualizer')?.classList.remove('is-active');
+      if (doctorVoiceDemoReturnFocus?.isConnected) doctorVoiceDemoReturnFocus.focus();
+      doctorVoiceDemoReturnFocus = null;
+      doctorVoiceThreadId = null;
+    }
+
+    function saveDoctorVoiceTranscriptToChat() {
+      const voiceMessages = doctorVoiceBotMessages.filter(message => message.text.trim());
+      if (!voiceMessages.length) return;
+
+      const firstUserMessage = voiceMessages.find(message => message.role === 'user')?.text || 'Voice conversation';
+      const thread = ensureDoctorOnuThread(firstUserMessage, doctorVoiceThreadId);
+      const timestamp = Date.now();
+      voiceMessages.forEach((message, index) => thread.messages.push({
+        role: message.role, text: message.text, attachments: [], createdAt: timestamp + index
+      }));
+      thread.updatedAt = Date.now();
+      activeOnuThreadId = thread.id;
+      lastUserQuery = [...voiceMessages].reverse().find(message => message.role === 'user')?.text || firstUserMessage;
+      setDoctorOnuView(true);
+      renderDoctorOnuThreadMessages(thread);
+      renderOnuRecentsList();
     }
 
     function toggleVoiceBotMute() {
       isVoiceBotMuted = !isVoiceBotMuted;
-      const micBtn = document.getElementById('btnVoiceBotMic');
+      doctorVoiceDemoSession += 1;
+      updateDoctorVoiceBotMic();
       const statusText = document.getElementById('voiceBotStatusText');
-      if (micBtn) {
-        if (isVoiceBotMuted) {
-          micBtn.innerHTML = '<i class="ph ph-microphone-slash"></i>';
-          micBtn.style.background = '#DC2626';
-          if (statusText) statusText.innerText = 'Microphone Muted';
-        } else {
-          micBtn.innerHTML = '<i class="ph ph-microphone"></i>';
-          micBtn.style.background = 'rgba(255, 255, 255, 0.15)';
-          if (statusText) statusText.innerText = 'Listening...';
-        }
+      const visualizer = document.getElementById('voiceBotVisualizer');
+      if (isVoiceBotMuted) {
+        if (statusText) statusText.textContent = 'Microphone muted';
+        visualizer?.classList.remove('is-active');
+      } else {
+        startDoctorVoiceDemo();
       }
+    }
+
+    function updateDoctorVoiceBotMic() {
+      const micBtn = document.getElementById('btnVoiceBotMic');
+      if (!micBtn) return;
+      micBtn.innerHTML = `<i class="ph ${isVoiceBotMuted ? 'ph-microphone-slash' : 'ph-microphone'}" aria-hidden="true"></i>`;
+      micBtn.setAttribute('aria-pressed', String(isVoiceBotMuted));
+      micBtn.setAttribute('aria-label', isVoiceBotMuted ? 'Unmute microphone' : 'Mute microphone');
+      micBtn.title = isVoiceBotMuted ? 'Unmute microphone' : 'Mute microphone';
+    }
+
+    function buildVoiceBotWaveform(id) {
+      const visualizer = document.getElementById(id);
+      if (!visualizer || visualizer.childElementCount) return;
+      visualizer.innerHTML = Array.from({ length: 37 }, (_, index) => {
+        const height = 15 + Math.round(Math.abs(Math.sin(index * 1.17)) * 50);
+        const delay = -((index % 9) * 0.09).toFixed(2);
+        const position = Math.round(index * 300 / 37);
+        return `<span class="voice-bot-wave-bar" style="--wave-height:${height}px;--wave-delay:${delay}s;--wave-position:${position}px"></span>`;
+      }).join('');
+    }
+
+    function addVoiceBotTranscriptLine(speaker, text) {
+      const transcript = document.getElementById('voiceBotTranscript');
+      if (!transcript) return null;
+      const entry = document.createElement('div');
+      const isUser = speaker === 'You';
+      entry.className = `voice-bot-transcript-entry ${isUser ? 'is-user' : 'is-onu'}`;
+      const speakerLabel = document.createElement('span');
+      speakerLabel.className = 'voice-bot-transcript-speaker';
+      speakerLabel.textContent = speaker;
+      const spokenText = document.createElement('p');
+      spokenText.className = 'voice-bot-transcript-text';
+      spokenText.setAttribute('data-full-text', text);
+      entry.append(speakerLabel, spokenText);
+      const speakerClass = isUser ? 'is-user' : 'is-onu';
+      transcript.querySelectorAll(`.voice-bot-transcript-entry.${speakerClass}`).forEach(previous => previous.remove());
+      transcript.appendChild(entry);
+      const message = { role: isUser ? 'user' : 'assistant', text: '' };
+      doctorVoiceBotMessages.push(message);
+      spokenText.voiceDemoMessage = message;
+      transcript.scrollTop = transcript.scrollHeight;
+      return spokenText;
+    }
+
+    function playDoctorVoiceDemoLine(speaker, text, session, onComplete) {
+      if (session !== doctorVoiceDemoSession || isVoiceBotMuted) return;
+      const isUser = speaker === 'You';
+      const visualizer = document.getElementById('voiceBotVisualizer');
+      const statusText = document.getElementById('voiceBotStatusText');
+      if (visualizer) {
+        visualizer.classList.toggle('is-user', isUser);
+        visualizer.classList.toggle('is-onu', !isUser);
+        visualizer.classList.add('is-active');
+      }
+      if (statusText) statusText.textContent = isUser ? 'Listening…' : 'Onu is responding…';
+      const transcriptText = addVoiceBotTranscriptLine(speaker, text);
+      const words = text.split(/\s+/);
+      let wordIndex = 0;
+      const revealWord = () => {
+        if (session !== doctorVoiceDemoSession || isVoiceBotMuted || !transcriptText) return;
+        if (wordIndex >= words.length) {
+          window.setTimeout(onComplete, 450);
+          return;
+        }
+        transcriptText.textContent += `${wordIndex ? ' ' : ''}${words[wordIndex++]}`;
+        if (transcriptText.voiceDemoMessage) transcriptText.voiceDemoMessage.text = transcriptText.textContent;
+        const transcript = document.getElementById('voiceBotTranscript');
+        if (transcript) transcript.scrollTop = transcript.scrollHeight;
+        window.setTimeout(revealWord, 155);
+      };
+      revealWord();
+    }
+
+    function startDoctorVoiceDemo() {
+      const modal = document.getElementById('modalLiveVoiceBot');
+      if (!modal?.classList.contains('active') || isVoiceBotMuted) return;
+      const session = ++doctorVoiceDemoSession;
+      const conversations = [
+        [
+          ['You', 'Farzana Khan, 31, has had a fever for three days. I’m considering an antibiotic. Is that a good idea?'],
+          ['Onu', 'Fever alone does not tell us whether an antibiotic is needed. Before choosing one, can you share her temperature, other symptoms, vital signs, and any exam findings?'],
+          ['You', 'Her temperature is 38.5°C. She has a headache, but no cough, urinary symptoms, rash, or breathing difficulty. She is drinking fluids.'],
+          ['Onu', 'I would assess the cause and check local guidance before starting an antibiotic. For fever discomfort, paracetamol may be a more suitable option if she has no contraindications; confirm the dose and her medication history. If she worsens or develops red flags, arrange prompt assessment.']
+        ],
+        [
+          ['You', 'A patient has a sore throat and asks for antibiotics. What should I check first?'],
+          ['Onu', 'I would assess the symptoms and exam findings against your local sore-throat guidance before deciding. How long has it been going on, and are there any urgent features such as difficulty breathing or swallowing?'],
+          ['You', 'It started yesterday. They can swallow fluids and have no breathing difficulty.'],
+          ['Onu', 'That helps frame the assessment, but it is not enough to choose treatment remotely. Use the relevant clinical criteria and local protocol; offer supportive care where appropriate and safety-net for worsening symptoms.']
+        ]
+      ];
+      const nextConversation = () => {
+        if (session !== doctorVoiceDemoSession || !modal.classList.contains('active') || isVoiceBotMuted) return;
+        const dialogue = conversations[Math.floor(Math.random() * conversations.length)];
+        const playTurn = index => {
+          if (index >= dialogue.length) {
+            window.setTimeout(nextConversation, 900);
+            return;
+          }
+          const [speaker, text] = dialogue[index];
+          playDoctorVoiceDemoLine(speaker, text, session, () => playTurn(index + 1));
+        };
+        playTurn(0);
+      };
+      nextConversation();
     }
 
     function copyUserMessage(txt) {

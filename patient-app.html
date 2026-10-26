@@ -648,6 +648,10 @@
     .patient-rx-processing i { color: var(--color-accent-teal); animation: rxThinkPulse 1.1s ease-in-out infinite; }
     @keyframes rxThinkPulse { 50% { opacity: .35; transform: scale(.88); } }
     @media (prefers-reduced-motion: reduce) { .patient-rx-processing i { animation: none; } }
+    .onu-reply-progress { display: flex; align-items: center; gap: 6px; width: fit-content; max-width: 91%; margin: 10px 0 14px; color: #71827D; font: 12px/1.4 var(--font-body); }
+    .onu-reply-progress-icon { flex: 0 0 auto; color: #0E8070; font-size: 13px; animation: onuProgressFloat 1.4s ease-in-out infinite; }
+    @keyframes onuProgressFloat { 50% { transform: scale(1.12); opacity: .55; } }
+    @media (prefers-reduced-motion: reduce) { .onu-reply-progress-icon { animation: none; } }
     .patient-rx-viewer { position: absolute; inset: 0; z-index: 110; display: grid; place-items: center; padding: 16px; background: rgba(8,20,18,.88); }
     .patient-rx-viewer[hidden] { display: none; }
     .patient-rx-viewer img { max-width: 100%; max-height: 82%; object-fit: contain; border-radius: 10px; }
@@ -681,7 +685,7 @@
     .onu-conversation-stream { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 1px 130px; overscroll-behavior: contain; scrollbar-width: none; }
     .onu-conversation-stream::-webkit-scrollbar { display: none; }
     .onu-message { margin: 12px 0; max-width: 91%; font: 14px/1.5 var(--font-body); overflow-wrap: anywhere; white-space: pre-wrap; }
-    .onu-message.user { margin-left: auto; padding: 11px 14px; background: #EFF7F4; border-radius: 18px 18px 5px 18px; color: var(--color-text-primary); }
+    .onu-message.user { width: fit-content; max-width: 91%; margin-left: auto; padding: 11px 14px; background: #EFF7F4; border-radius: 18px; color: var(--color-text-primary); }
     .onu-message.assistant { color: var(--color-text-primary); padding: 4px 2px; }
     .onu-recommendation-button { max-width: 100%; min-height: 48px; margin-top: 12px; padding: 0 14px; font-size: 13px; }
     .onu-attachment-list { display: grid; gap: 7px; margin-top: 8px; }
@@ -710,7 +714,35 @@
     .onu-composer textarea::placeholder { color: #83909C; }
     .onu-composer .onu-send-button { background: var(--color-primary-btn); color: #fff; font-size: 18px; }
     .onu-composer .onu-send-button.voice-mode { border: 1px solid #D6ECE5; background: #EAF7F3; color: #087E70; }
-    .onu-disclaimer { margin: 0 4px 8px; text-align: center; color: var(--color-text-secondary); font: 11px/1.3 var(--font-body); }
+    .onu-disclaimer { margin: 0 0 8px; padding: 4px 8px; border-radius: 10px; background: rgba(255,255,255,.78); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); text-align: center; color: var(--color-text-secondary); font: 9px/1.2 var(--font-body); white-space: nowrap; }
+    .patient-voice-bot { position: absolute; inset: 0; z-index: 125; display: flex; flex-direction: column; justify-content: space-between; padding: calc(18px + env(safe-area-inset-top)) 20px calc(20px + env(safe-area-inset-bottom)); box-sizing: border-box; background: #FBFCFD; opacity: 0; visibility: hidden; transform: scale(.985); transition: opacity .24s ease, visibility .24s ease, transform .24s ease; }
+    .patient-voice-bot.active { opacity: 1; visibility: visible; transform: scale(1); }
+    .patient-voice-bot-top { display: flex; align-items: center; justify-content: center; min-height: 44px; padding-top: 12px; }
+    .patient-voice-bot-brand { display: inline-flex; align-items: center; gap: 8px; }
+    .patient-voice-bot-brand-mark { display: block; width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%; background: linear-gradient(135deg, #087E70 0%, #3EAA91 52%, #D6EAE6 100%); box-shadow: 0 3px 9px rgba(8,126,112,.2); }
+    .patient-voice-bot-name { color: #15211F; font: 700 21px/1.1 var(--font-heading); letter-spacing: -.02em; }
+    .patient-voice-bot-center { display: flex; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: 14px; min-height: 0; width: 100%; }
+    .patient-voice-bot-wave { display: flex; align-items: center; justify-content: center; gap: 4px; width: 100%; height: 82px; flex: 0 0 82px; }
+    .patient-voice-wave-bar { width: 3px; height: var(--wave-height, 20px); flex: 0 0 3px; border-radius: 99px; background: var(--wave-gradient, linear-gradient(90deg,#0E8070,#56C6A5,#0E8070)); background-size: 300px 100%; background-position: var(--wave-position,0px) 50%; opacity: .86; transform: scaleY(.26); }
+    .patient-voice-bot-wave.is-active .patient-voice-wave-bar { animation: patientVoiceWave .72s ease-in-out var(--wave-delay, 0s) infinite alternate, patientVoiceGradient 1.8s linear var(--wave-delay, 0s) infinite; }
+    .patient-voice-bot-wave.is-user { --wave-gradient: linear-gradient(90deg,#3976E8,#9B5DE5,#56A7FF,#3976E8); }
+    .patient-voice-bot-wave.is-onu { --wave-gradient: linear-gradient(90deg,#0E8070,#58C7A4,#B0E7D0,#0E8070); }
+    @keyframes patientVoiceWave { to { transform: scaleY(1); opacity: 1; } }
+    @keyframes patientVoiceGradient { to { background-position: calc(var(--wave-position,0px) - 220px) 50%; } }
+    .patient-voice-bot-status { min-height: 21px; flex: 0 0 21px; color: #24332F; font: 600 14px/1.35 var(--font-heading); text-align: center; white-space: nowrap; }
+    .patient-voice-bot-transcript { display: flex; flex: 0 0 220px; flex-direction: column; gap: 20px; width: 100%; max-width: 340px; height: 220px; overflow-y: auto; padding: 12px 2px; scrollbar-width: thin; }
+    .patient-voice-transcript-entry { display: grid; gap: 3px; color: #39464D; font: 15px/1.5 var(--font-body); }
+    .patient-voice-transcript-speaker { font: 700 12px/1.3 var(--font-body); }
+    .patient-voice-transcript-entry.is-user .patient-voice-transcript-speaker { color: #3976E8; }
+    .patient-voice-transcript-entry.is-onu .patient-voice-transcript-speaker { color: #0E8070; }
+    .patient-voice-transcript-text { margin: 0; }
+    .patient-voice-bot-controls { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; min-height: 70px; }
+    .patient-voice-bot-controls button { display: grid; place-items: center; width: 60px; height: 60px; min-width: 48px; min-height: 48px; border: 1px solid #D7E3FF; border-radius: 50%; background: #EAF1FF; color: #315EC2; font-size: 24px; box-shadow: 0 5px 18px rgba(15,23,42,.09); cursor: pointer; }
+    .patient-voice-bot-controls button[aria-pressed="true"] { border-color: #F4CACA; background: #FDECEC; color: #B42318; }
+    .patient-voice-bot-controls .patient-voice-bot-end { border-color: #C8D6D0; background: #E7EFEB; color: #1E342D; }
+    .patient-voice-bot-controls button:focus-visible { outline: 2px solid #0E8070; outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .patient-voice-bot, .patient-voice-bot-wave.is-active .patient-voice-wave-bar { animation: none; transition: none; } }
+    @media (max-height: 640px) { .patient-voice-bot { padding-top: 10px; padding-bottom: 10px; } .patient-voice-bot-center { gap: 8px; } .patient-voice-bot-wave { height: 58px; flex-basis: 58px; } .patient-voice-bot-transcript { height: 130px; flex-basis: 130px; padding: 6px 2px; } .patient-voice-bot-controls { min-height: 56px; } .patient-voice-bot-controls button { width: 52px; height: 52px; } }
     .onu-history-overlay { position: absolute; inset: 0; z-index: 30; background: rgba(15,23,42,.34); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .32s cubic-bezier(.2,.75,.25,1), visibility 0s linear .32s; }
     .onu-history-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
     .onu-history-overlay.open { transition-delay: 0s; }
@@ -5726,7 +5758,7 @@
           </section>
           <div class="onu-conversation-stream" id="onuConversationStream" role="region" aria-label="Conversation messages" hidden></div>
           <div class="onu-composer-area">
-            <p class="onu-disclaimer" id="onuDisclaimer" hidden>Onu can make mistakes. Check important health information with a clinician.</p>
+            <p class="onu-disclaimer" id="onuDisclaimer" hidden>Onu can make mistakes. Check important health info.</p>
             <div class="onu-home-suggestions" id="onuHomeSuggestions" aria-label="Suggested actions">
               <button type="button" class="onu-suggestion-button" onclick="startPatientOnuPrescriptionChat()"><i class="ph ph-file-plus" aria-hidden="true"></i><span>Upload prescription</span></button>
               <button type="button" class="onu-suggestion-button" onclick="openPatientOnuAppointmentBooking()"><i class="ph ph-calendar-plus" aria-hidden="true"></i><span>Book appointment</span></button>
@@ -6906,6 +6938,19 @@
              UNIVERSAL 5-TAB BOTTOM NAVIGATION BAR
              Matches the patient app's five-tab navigation.
              ======================================================= -->
+        <section class="patient-voice-bot" id="patientVoiceBot" role="dialog" aria-modal="true" aria-label="Onu live voice chat" onkeydown="handlePatientVoiceBotKeydown(event)">
+          <div class="patient-voice-bot-top"><span class="patient-voice-bot-brand"><span class="patient-voice-bot-brand-mark" aria-hidden="true"></span><span class="patient-voice-bot-name">Onu</span></span></div>
+          <div class="patient-voice-bot-center">
+            <div class="patient-voice-bot-wave" id="patientVoiceBotWave" aria-hidden="true"></div>
+            <span class="patient-voice-bot-status" id="patientVoiceBotStatus">Starting demo…</span>
+            <div class="patient-voice-bot-transcript" id="patientVoiceBotTranscript" role="log" aria-live="polite" aria-relevant="additions text" aria-label="Live transcript"></div>
+          </div>
+          <div class="patient-voice-bot-controls">
+            <button type="button" id="patientVoiceBotMic" onclick="togglePatientVoiceBotMute()" aria-label="Mute microphone" aria-pressed="false" title="Mute microphone"><i class="ph ph-microphone" aria-hidden="true"></i></button>
+            <button type="button" class="patient-voice-bot-end" onclick="closePatientVoiceBot()" aria-label="End voice session" title="End voice session"><i class="ph ph-x" aria-hidden="true"></i></button>
+          </div>
+        </section>
+
         <div class="bottom-nav-container" id="patientBottomNav">
           
           <!-- Tab 1: Discover -->
@@ -8152,7 +8197,11 @@
 
     function savePatientOnuThreads() {
       if (!patientOnuStorageAvailable) return;
-      try { localStorage.setItem(PATIENT_ONU_STORAGE_KEY, JSON.stringify(patientOnuThreads)); }
+      const savedThreads = patientOnuThreads.map(thread => ({
+        ...thread,
+        messages: thread.messages.filter(message => !['reply-processing','prescription-processing'].includes(message.action?.type))
+      }));
+      try { localStorage.setItem(PATIENT_ONU_STORAGE_KEY, JSON.stringify(savedThreads)); }
       catch (error) {
         patientOnuStorageAvailable = false;
         if (!patientOnuStorageWarningShown) {
@@ -8206,13 +8255,28 @@
       const userMessage = { id: patientOnuMakeId(), role: 'user', text: '', createdAt: now, attachments: [attachment] };
       thread.messages.push(userMessage);
       try { patientOnuAttachmentPreviewUrls.set(userMessage.id + ':0', URL.createObjectURL(file)); } catch (error) {}
-      const processing = { id: patientOnuMakeId(), role: 'assistant', text: 'Thinking… scanning your prescription', createdAt: now + 1, attachments: [], action: { type: 'prescription-processing' } };
+      const prescriptionSteps = [
+        'Scanning your prescription photo…',
+        'Detecting medicine names…',
+        'Organizing dose and frequency details…',
+        'Preparing your review…'
+      ];
+      const processing = { id: patientOnuMakeId(), role: 'assistant', text: prescriptionSteps[0], createdAt: now + 1, attachments: [], action: { type: 'prescription-processing', stage: 0 } };
       thread.messages.push(processing);
       thread.updatedAt = now;
       setPatientOnuView('conversation_new');
       renderPatientOnuMessages();
       const review = createPatientPrescriptionReview(thread, file);
-      setTimeout(() => {
+      let prescriptionStage = 0;
+      const advancePrescriptionReview = () => {
+        prescriptionStage += 1;
+        if (prescriptionStage < prescriptionSteps.length) {
+          processing.action.stage = prescriptionStage;
+          processing.text = prescriptionSteps[prescriptionStage];
+          if (patientOnuCurrentThreadId === thread.id) renderPatientOnuMessages();
+          window.setTimeout(advancePrescriptionReview, 1150);
+          return;
+        }
         const liveThread = patientOnuThreads.find(item => item.id === thread.id);
         const liveMessage = liveThread?.messages.find(item => item.id === processing.id);
         if (!liveMessage) return;
@@ -8233,7 +8297,8 @@
         if (autoOpen && patientOnuCurrentThreadId === thread.id && onuIsActive && isInConversation && !historyIsOpen) {
           openPatientPrescriptionReview(review.id);
         }
-      }, 850);
+      };
+      window.setTimeout(advancePrescriptionReview, 1150);
     }
 
     function getPatientOnuReply(thread, prompt, attachments) {
@@ -8357,6 +8422,20 @@
       openDoctorsList({ specialty: safeSpecialty, returnToOnu: true });
     }
 
+    function getPatientOnuReplyProgressSteps(prompt) {
+      const query = String(prompt || '').toLowerCase();
+      if (/medicine|medication|prescription|drug|dose|pill/.test(query)) return [
+        'Picking out the medication details…', 'Organizing your question…', 'Preparing a clear reply…', 'Almost ready…'
+      ];
+      if (/symptom|fever|pain|rash|cough|headache|sick|feel|hurt/.test(query)) return [
+        'Picking out the details you shared…', 'Organizing your question for a clinician…', 'Preparing a clear reply…', 'Almost ready…'
+      ];
+      if (/doctor|appointment|book|specialist|clinic/.test(query)) return [
+        'Looking at what you need help with…', 'Organizing the visit details…', 'Preparing a helpful next step…', 'Almost ready…'
+      ];
+      return ['Reviewing your question…', 'Organizing the key details…', 'Preparing a clear reply…', 'Almost ready…'];
+    }
+
     function appendPatientOnuTurn(text, attachments = []) {
       const prompt = String(text || '').trim();
       if (!prompt && !attachments.length) return;
@@ -8365,15 +8444,36 @@
       const now = Date.now();
       thread.messages.push({ id: patientOnuMakeId(), role: 'user', text: prompt, createdAt: now, attachments });
       const reply = getPatientOnuReply(thread, prompt, attachments);
-      thread.messages.push({ id: patientOnuMakeId(), role: 'assistant', text: reply.text, createdAt: now + 1, attachments: [], action: reply.action || null });
+      const replyMessage = { id: patientOnuMakeId(), role: 'assistant', text: '', createdAt: now + 1, attachments: [], action: { type: 'reply-processing', stage: 0 } };
+      thread.messages.push(replyMessage);
       thread.updatedAt = now;
       savePatientOnuThreads();
       setPatientOnuView('conversation_new');
       renderPatientOnuMessages();
       renderPatientOnuHistory();
-      const announcement = document.getElementById('onuAnnouncement');
-      const latest = thread.messages.slice(-2);
-      if (announcement) announcement.textContent = latest.map(message => `${message.role === 'user' ? 'You' : 'Onu'}: ${message.text || message.attachments.map(file => file.name).join(', ')}`).join('. ');
+      const progressSteps = getPatientOnuReplyProgressSteps(prompt);
+      let progressStage = 0;
+      const advanceReplyProgress = () => {
+        progressStage += 1;
+        if (progressStage < progressSteps.length) {
+          replyMessage.action.stage = progressStage;
+          replyMessage.text = progressSteps[progressStage];
+          if (patientOnuCurrentThreadId === thread.id) renderPatientOnuMessages();
+          window.setTimeout(advanceReplyProgress, 1050);
+          return;
+        }
+        replyMessage.text = reply.text;
+        replyMessage.action = reply.action || null;
+        thread.updatedAt = Date.now();
+        savePatientOnuThreads();
+        if (patientOnuCurrentThreadId === thread.id) {
+          renderPatientOnuMessages();
+          const announcement = document.getElementById('onuAnnouncement');
+          if (announcement) announcement.textContent = `Onu: ${reply.text}`;
+        }
+        renderPatientOnuHistory();
+      };
+      window.setTimeout(advanceReplyProgress, 1050);
     }
 
     function submitPatientOnuMessage(event) {
@@ -8413,7 +8513,203 @@
         document.getElementById('onuComposerForm')?.requestSubmit();
         return;
       }
-      togglePatientOnuVoiceInput(document.getElementById('onuVoiceButton'));
+      openPatientVoiceBot();
+    }
+
+    let patientVoiceBotSession = 0;
+    let isPatientVoiceBotMuted = false;
+    let patientVoiceBotReturnFocus = null;
+    let patientVoiceBotThreadId = null;
+    let patientVoiceBotMessages = [];
+
+    function handlePatientVoiceBotKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        closePatientVoiceBot();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(document.querySelectorAll('#patientVoiceBot button:not(:disabled)'));
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+
+    function openPatientVoiceBot() {
+      const modal = document.getElementById('patientVoiceBot');
+      if (!modal) return;
+      patientVoiceBotReturnFocus = document.activeElement;
+      patientVoiceBotThreadId = patientOnuCurrentThreadId;
+      modal.classList.add('active');
+      isPatientVoiceBotMuted = false;
+      patientVoiceBotMessages = [];
+      document.getElementById('patientVoiceBotTranscript')?.replaceChildren();
+      updatePatientVoiceBotMic();
+      buildPatientVoiceBotWaveform();
+      document.getElementById('patientVoiceBotMic')?.focus();
+      startPatientVoiceDemo();
+    }
+
+    function closePatientVoiceBot() {
+      patientVoiceBotSession += 1;
+      savePatientVoiceTranscriptToChat();
+      document.getElementById('patientVoiceBot')?.classList.remove('active');
+      document.getElementById('patientVoiceBotWave')?.classList.remove('is-active');
+      if (patientVoiceBotReturnFocus?.isConnected) patientVoiceBotReturnFocus.focus();
+      patientVoiceBotReturnFocus = null;
+      patientVoiceBotThreadId = null;
+    }
+
+    function savePatientVoiceTranscriptToChat() {
+      const voiceMessages = patientVoiceBotMessages.filter(message => message.text.trim());
+      if (!voiceMessages.length) return;
+
+      let thread = patientOnuThreads.find(item => item.id === patientVoiceBotThreadId);
+      if (!thread) {
+        patientOnuCurrentThreadId = null;
+        thread = ensurePatientOnuThread(voiceMessages.find(message => message.role === 'user')?.text || 'Voice conversation');
+        thread.title = (voiceMessages.find(message => message.role === 'user')?.text || 'Voice conversation').slice(0, 120);
+      }
+      patientOnuCurrentThreadId = thread.id;
+      patientOnuFlow = thread.flow || null;
+      const timestamp = Date.now();
+      voiceMessages.forEach((message, index) => thread.messages.push({
+        id: patientOnuMakeId(), role: message.role, text: message.text, createdAt: timestamp + index,
+        attachments: [], action: null
+      }));
+      thread.updatedAt = Date.now();
+      savePatientOnuThreads();
+      setPatientOnuView('conversation_saved');
+      renderPatientOnuMessages();
+      renderPatientOnuHistory();
+    }
+
+    function updatePatientVoiceBotMic() {
+      const button = document.getElementById('patientVoiceBotMic');
+      if (!button) return;
+      button.innerHTML = `<i class="ph ${isPatientVoiceBotMuted ? 'ph-microphone-slash' : 'ph-microphone'}" aria-hidden="true"></i>`;
+      button.setAttribute('aria-pressed', String(isPatientVoiceBotMuted));
+      button.setAttribute('aria-label', isPatientVoiceBotMuted ? 'Unmute microphone' : 'Mute microphone');
+      button.title = isPatientVoiceBotMuted ? 'Unmute microphone' : 'Mute microphone';
+    }
+
+    function togglePatientVoiceBotMute() {
+      isPatientVoiceBotMuted = !isPatientVoiceBotMuted;
+      patientVoiceBotSession += 1;
+      updatePatientVoiceBotMic();
+      const statusText = document.getElementById('patientVoiceBotStatus');
+      if (isPatientVoiceBotMuted) {
+        if (statusText) statusText.textContent = 'Microphone muted';
+        document.getElementById('patientVoiceBotWave')?.classList.remove('is-active');
+      } else {
+        startPatientVoiceDemo();
+      }
+    }
+
+    function buildPatientVoiceBotWaveform() {
+      const visualizer = document.getElementById('patientVoiceBotWave');
+      if (!visualizer || visualizer.childElementCount) return;
+      visualizer.innerHTML = Array.from({ length: 37 }, (_, index) => {
+        const height = 15 + Math.round(Math.abs(Math.sin(index * 1.17)) * 50);
+        const delay = -((index % 9) * 0.09).toFixed(2);
+        const position = Math.round(index * 300 / 37);
+        return `<span class="patient-voice-wave-bar" style="--wave-height:${height}px;--wave-delay:${delay}s;--wave-position:${position}px"></span>`;
+      }).join('');
+    }
+
+    function addPatientVoiceTranscriptLine(speaker, text) {
+      const transcript = document.getElementById('patientVoiceBotTranscript');
+      if (!transcript) return null;
+      const entry = document.createElement('div');
+      const isUser = speaker === 'You';
+      entry.className = `patient-voice-transcript-entry ${isUser ? 'is-user' : 'is-onu'}`;
+      const label = document.createElement('span');
+      label.className = 'patient-voice-transcript-speaker';
+      label.textContent = speaker;
+      const spokenText = document.createElement('p');
+      spokenText.className = 'patient-voice-transcript-text';
+      entry.append(label, spokenText);
+      const speakerClass = isUser ? 'is-user' : 'is-onu';
+      transcript.querySelectorAll(`.patient-voice-transcript-entry.${speakerClass}`).forEach(previous => previous.remove());
+      transcript.appendChild(entry);
+      const message = { role: isUser ? 'user' : 'assistant', text: '' };
+      patientVoiceBotMessages.push(message);
+      spokenText.voiceDemoMessage = message;
+      transcript.scrollTop = transcript.scrollHeight;
+      return spokenText;
+    }
+
+    function playPatientVoiceDemoLine(speaker, text, session, onComplete) {
+      if (session !== patientVoiceBotSession || isPatientVoiceBotMuted) return;
+      const isUser = speaker === 'You';
+      const visualizer = document.getElementById('patientVoiceBotWave');
+      const statusText = document.getElementById('patientVoiceBotStatus');
+      if (visualizer) {
+        visualizer.classList.toggle('is-user', isUser);
+        visualizer.classList.toggle('is-onu', !isUser);
+        visualizer.classList.add('is-active');
+      }
+      if (statusText) statusText.textContent = isUser ? 'Listening…' : 'Onu is responding…';
+      const transcriptText = addPatientVoiceTranscriptLine(speaker, text);
+      const words = text.split(/\s+/);
+      let wordIndex = 0;
+      const revealWord = () => {
+        if (session !== patientVoiceBotSession || isPatientVoiceBotMuted || !transcriptText) return;
+        if (wordIndex >= words.length) {
+          window.setTimeout(onComplete, 450);
+          return;
+        }
+        transcriptText.textContent += `${wordIndex ? ' ' : ''}${words[wordIndex++]}`;
+        if (transcriptText.voiceDemoMessage) transcriptText.voiceDemoMessage.text = transcriptText.textContent;
+        const transcript = document.getElementById('patientVoiceBotTranscript');
+        if (transcript) transcript.scrollTop = transcript.scrollHeight;
+        window.setTimeout(revealWord, 165);
+      };
+      revealWord();
+    }
+
+    function startPatientVoiceDemo() {
+      const modal = document.getElementById('patientVoiceBot');
+      if (!modal?.classList.contains('active') || isPatientVoiceBotMuted) return;
+      const session = ++patientVoiceBotSession;
+      const conversations = [
+        [
+          ['You', 'I have had a fever and headache since yesterday. Should I be worried?'],
+          ['Onu', 'I can ask a few questions to help you decide what to share with a clinician. Have you checked your temperature, and are you having trouble breathing, confusion, a severe headache, or a rash?'],
+          ['You', 'It is 38.5°C. I feel tired, but I do not have those other symptoms.'],
+          ['Onu', 'Thanks. Can you keep fluids down? Do you have a long-term health condition, could you be pregnant, or are you taking regular medicines?'],
+          ['You', 'I can drink water. I do not have a long-term condition and I am not pregnant.'],
+          ['Onu', 'I cannot diagnose you here. Rest, drink fluids, and keep track of how you feel. Please contact a clinician if the fever worsens, does not improve, or you become concerned. Seek urgent help for breathing trouble, confusion, a severe headache, or a new rash.']
+        ],
+        [
+          ['You', 'I have had a headache and nausea today. What should I do?'],
+          ['Onu', 'I can help you think through what to tell a clinician. Did the headache start suddenly, and do you have weakness, confusion, vision changes, a fever, or a recent head injury?'],
+          ['You', 'It came on gradually. I do not have weakness or vision changes, and I have not hit my head.'],
+          ['Onu', 'Are you able to drink fluids, and is this headache unusual or more severe than headaches you have had before?'],
+          ['You', 'I can drink, and it is mild.'],
+          ['Onu', 'Thanks for clarifying. I cannot tell what is causing it, but you can rest and keep sipping fluids while you monitor it. Contact a clinician if it persists or gets worse; seek urgent help if it becomes sudden and severe or you develop weakness, confusion, or vision changes.']
+        ]
+      ];
+      const nextConversation = () => {
+        if (session !== patientVoiceBotSession || !modal.classList.contains('active') || isPatientVoiceBotMuted) return;
+        const dialogue = conversations[Math.floor(Math.random() * conversations.length)];
+        const playTurn = index => {
+          if (index >= dialogue.length) {
+            window.setTimeout(nextConversation, 900);
+            return;
+          }
+          const [speaker, text] = dialogue[index];
+          playPatientVoiceDemoLine(speaker, text, session, () => playTurn(index + 1));
+        };
+        playTurn(0);
+      };
+      nextConversation();
     }
 
     function togglePatientOnuVoiceInput(button) {
@@ -8545,7 +8841,14 @@
       }).map(message => {
         const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map((file, index) => { const category = getPatientOnuFileCategory(file); const imageUrl = category === 'image' ? patientOnuAttachmentPreviewUrls.get(message.id + ':' + index) : null; const fileFormat = escapePreVisitText(getPatientDocumentFormatLabel(file)); if (imageUrl) return `<figure><img class="onu-attachment-photo" src="${imageUrl}" alt="Uploaded photo: ${escapePreVisitText(file.name)}"><figcaption class="onu-attachment-photo-caption"><span>${escapePreVisitText(file.name)}</span><small>${fileFormat}</small></figcaption></figure>`; const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${fileFormat}</span></span></div>`; }).join('')}</div>` : '';
         const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="btn-confirm-pay onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
-        const processing = message.action?.type === 'prescription-processing' ? `<div class="patient-rx-processing" role="status"><i class="ph ph-sparkle" aria-hidden="true"></i><span>Thinking… scanning your prescription</span></div>` : '';
+        const prescriptionSteps = ['Scanning your prescription photo…', 'Detecting medicine names…', 'Organizing dose and frequency details…', 'Preparing your review…'];
+        const isPrescriptionProcessing = message.action?.type === 'prescription-processing';
+        const isReplyProcessing = message.action?.type === 'reply-processing';
+        const processing = isPrescriptionProcessing
+          ? `<div class="onu-reply-progress" role="status" aria-live="polite"><i class="ph ph-sparkle onu-reply-progress-icon" aria-hidden="true"></i><span>${escapePreVisitText(prescriptionSteps[message.action.stage] || prescriptionSteps[0])}</span></div>`
+          : isReplyProcessing
+            ? `<div class="onu-reply-progress" role="status" aria-live="polite"><i class="ph ph-sparkle onu-reply-progress-icon" aria-hidden="true"></i><span>${escapePreVisitText(message.text || 'Preparing a clear reply…')}</span></div>`
+            : '';
         const prescriptionReview = patientPrescriptionReviews.find(review => review.id === message.action?.reviewId);
         const prescription = message.action?.type === 'prescription-review' ? `<section class="patient-rx-review" aria-label="Prescription review artifact"><div class="patient-rx-review-head"><i class="ph ph-prescription" aria-hidden="true"></i><div><div class="patient-rx-review-title">Prescription review</div><div class="patient-rx-review-meta">${prescriptionReview?.medicines.length || 0} medicines ready to review</div></div></div><button type="button" class="patient-rx-review-action" data-review-id="${escapePreVisitText(message.action.reviewId)}" onclick="openPatientPrescriptionReview(this.dataset.reviewId)">Review details <i class="ph ph-arrow-right" aria-hidden="true"></i></button></section>` : '';
         return `<article class="onu-message ${message.role}" aria-label="${message.role === 'assistant' ? 'Onu reply' : 'Your message'}">${processing || (message.text ? escapePreVisitText(message.text) : '')}${files}${recommendation}${prescription}</article>`;
