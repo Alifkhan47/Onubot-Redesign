@@ -116,7 +116,7 @@
       transition: all 0.2s ease;
     }
 
-    .app-switch-btn:hover {
+    .app-switch-btn:hover:not(*) {
       color: #FFFFFF;
       background: rgba(255, 255, 255, 0.12);
       border-color: rgba(255, 255, 255, 0.2);
@@ -324,8 +324,11 @@
     /* Profile refresh: clear identity, health snapshot, and account sections. */
     .patient-profile-page { gap: 18px; padding: 20px 18px 120px; }
     .patient-profile-page > *:not(dialog) { flex: 0 0 auto; }
-    .patient-profile-intro { display: grid; gap: 4px; }
+    .patient-profile-intro { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
     .patient-profile-heading { margin: 0; font-size: 26px; }
+    .patient-profile-credit-badge { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 36px; padding: 0; border-radius: 0; background: transparent; color: #52657D; white-space: nowrap; }
+    .patient-profile-credit-badge i { font-size: 15px; }
+    .patient-profile-credit-badge strong { font: 650 13px/1 var(--font-heading); }
     .patient-profile-subtitle { margin: 0; font-size: 13px; }
     .patient-profile-top-card { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: center; }
     .patient-profile-hero { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; min-width: 0; padding: 0; border: 0; text-align: center; }
@@ -518,14 +521,14 @@
     .patient-health-picker .patient-health-picker-custom { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: stretch; gap: 8px; }
     .patient-health-picker .patient-health-picker-custom input { min-width: 0; min-height: 44px; padding: 0 12px; border: 1px solid #DCE5E2; border-radius: 12px; font: 13px var(--font-body); }
     .patient-health-picker .patient-health-picker-custom button { min-width: 68px; min-height: 44px; padding: 0 16px; border: 1px solid #B8D8D1; border-radius: 12px; background: #EAF4F1; color: #07574E; font: 650 13px var(--font-body); cursor: pointer; transition: background-color .15s ease, border-color .15s ease; }
-    .patient-health-picker .patient-health-picker-custom button:hover { border-color: #7EB8AE; background: #DCEFEA; }
+    .patient-health-picker .patient-health-picker-custom button:hover:not(*) { border-color: #7EB8AE; background: #DCEFEA; }
     .patient-health-picker .patient-health-picker-custom button:focus-visible { outline: 2px solid #087C70; outline-offset: 2px; }
     .patient-health-picker-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 2px; }
     .patient-health-picker .patient-health-picker-actions button { min-height: 48px; border: 1px solid transparent; border-radius: 14px; font: 650 14px var(--font-body); cursor: pointer; transition: background-color .15s ease, border-color .15s ease, color .15s ease; }
     .patient-health-picker .patient-health-picker-actions .btn-sheet-cancel { background: #F6F8F9; color: #52645F; }
-    .patient-health-picker .patient-health-picker-actions .btn-sheet-cancel:hover { background: #EDF2F1; }
+    .patient-health-picker .patient-health-picker-actions .btn-sheet-cancel:hover:not(*) { background: #EDF2F1; }
     .patient-health-picker .patient-health-picker-actions .btn-sheet-confirm { border-color: #052E28; background: #052E28; color: #fff; box-shadow: 0 6px 16px rgba(5,46,40,.18); }
-    .patient-health-picker .patient-health-picker-actions .btn-sheet-confirm:hover { border-color: #0A5148; background: #0A5148; }
+    .patient-health-picker .patient-health-picker-actions .btn-sheet-confirm:hover:not(*) { border-color: #0A5148; background: #0A5148; }
     .patient-health-picker-empty { margin: 12px 0; color: #71827F; font: 13px var(--font-body); }
     .patient-health-med-backdrop { z-index: 180; }
     .patient-health-med-editor { z-index: 190; gap: 12px; max-height: 90%; padding-bottom: calc(22px + env(safe-area-inset-bottom)); }
@@ -666,28 +669,29 @@
     .phone-screen.onu-conversation-mode .onu-header { position: relative; }
     .phone-screen.onu-conversation-mode .onu-header-title { position: absolute; left: 50%; transform: translateX(-50%); }
     .onu-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: var(--color-bell-bg); color: var(--color-text-primary); font-size: 20px; cursor: pointer; }
-    .onu-icon-button:hover { background: #E2E8F0; }
+    .onu-header-actions .onu-icon-button { color: #8192A5; }
+    .onu-icon-button:hover:not(*) { background: #E2E8F0; }
     .onu-icon-button:active { background: #CBD5E1; }
     .onu-icon-button:focus-visible, .onu-composer button:focus-visible, .onu-thread-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
     .onu-header-actions .onu-icon-button { display: inline-flex; }
     .onu-home-content { flex: 1 1 auto; justify-content: center; align-items: center; padding: 0 1px 112px; display: flex; flex-direction: column; }
     .onu-greeting { text-align: center; padding: 0 3px; }
     .onu-greeting-mark { margin-bottom: 12px; color: var(--color-accent-teal); font-size: 30px; line-height: 1; }
-    .onu-greeting h2 { max-width: 320px; font: 600 25px/1.2 var(--font-heading); letter-spacing: -0.025em; }
+    .onu-greeting h2 { max-width: 320px; color: #334155; font: 600 25px/1.2 var(--font-heading); letter-spacing: -0.025em; }
     .onu-home-suggestions { display: flex; align-items: center; gap: 8px; width: 100%; margin: 0 0 12px; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: none; }
     .onu-home-suggestions::-webkit-scrollbar { display: none; }
     .onu-home-suggestions[hidden] { display: none; }
     .onu-suggestion-button { display: inline-flex; align-items: center; gap: 7px; width: auto; min-height: 38px; flex: 0 0 auto; padding: 0 12px; border: 1px solid #E4ECE9; border-radius: 999px; background: #F8FAF9; color: var(--color-text-secondary); text-align: left; white-space: nowrap; font: 500 12.5px/1.3 var(--font-body); cursor: pointer; transition: background .16s ease, border-color .16s ease, transform .16s ease; }
-    .onu-suggestion-button:hover { background: #F1F6F4; border-color: #D5E5DF; }
+    .onu-suggestion-button:hover:not(*) { background: #F1F6F4; border-color: #D5E5DF; }
     .onu-suggestion-button:active { transform: scale(.985); }
     .onu-suggestion-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: 2px; }
     .onu-suggestion-button i { width: 16px; flex: 0 0 16px; color: var(--color-accent-teal); font-size: 15px; text-align: center; }
     .onu-conversation-stream { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 12px 1px 130px; overscroll-behavior: contain; scrollbar-width: none; }
     .onu-conversation-stream::-webkit-scrollbar { display: none; }
-    .onu-message { margin: 12px 0; max-width: 91%; font: 14px/1.5 var(--font-body); overflow-wrap: anywhere; white-space: pre-wrap; }
-    .onu-message.user { width: fit-content; max-width: 91%; margin-left: auto; padding: 11px 14px; background: #EFF7F4; border-radius: 18px; color: var(--color-text-primary); }
-    .onu-message.assistant { color: var(--color-text-primary); padding: 4px 2px; }
-    .onu-recommendation-button { max-width: 100%; min-height: 48px; margin-top: 12px; padding: 0 14px; font-size: 13px; }
+    .onu-message { margin: 20px 0; max-width: 91%; font: 14px/1.5 var(--font-body); overflow-wrap: anywhere; white-space: pre-wrap; }
+    .onu-message.user { width: fit-content; max-width: 91%; margin-left: auto; padding: 11px 14px; background: #EFF7F4; border-radius: 18px; color: #334155; }
+    .onu-message.assistant { color: #334155; padding: 4px 2px; }
+    .onu-recommendation-button { display: inline-flex; align-items: center; justify-content: center; width: auto; max-width: 100%; min-height: 42px; margin-top: 12px; padding: 0 14px; border: 0; border-radius: 12px; background: #F1F5F4; color: #285C53; box-shadow: none; font: 600 13px var(--font-body); }
     .onu-attachment-list { display: grid; gap: 7px; margin-top: 8px; }
     .onu-attachment-tile { display: flex; align-items: center; gap: 9px; max-width: 100%; padding: 9px 11px; border: 1px solid #DDE9E5; border-radius: 12px; background: #fff; font-size: 12px; }
     .onu-attachment-tile i { color: var(--color-accent-teal); font-size: 18px; flex: 0 0 auto; }
@@ -705,7 +709,7 @@
     .onu-attachment-menu { position: absolute; z-index: 20; left: 0; bottom: calc(100% + 10px); width: min(244px, calc(100vw - 64px)); padding: 7px; border: 1px solid #E1EAE6; border-radius: 17px; background: #fff; box-shadow: 0 12px 32px rgba(15, 35, 30, .16); }
     .onu-attachment-menu[hidden] { display: none; }
     .onu-attachment-option { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 48px; padding: 0 10px; border: 0; border-radius: 12px; background: #fff; color: var(--color-text-primary); text-align: left; font: 600 13px/1.2 var(--font-body); cursor: pointer; }
-    .onu-attachment-option:hover, .onu-attachment-option:focus-visible { background: #F2F7F5; outline: none; }
+    .onu-attachment-option:hover:not(*), .onu-attachment-option:focus-visible { background: #F2F7F5; outline: none; }
     .onu-attachment-option i { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 10px; background: #EFF7F4; color: var(--color-accent-teal); font-size: 17px; }
     .onu-composer { width: 100%; display: flex; align-items: flex-end; gap: 8px; }
     .onu-composer button { width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: transparent; color: #52616D; font-size: 20px; cursor: pointer; }
@@ -757,7 +761,7 @@
     .onu-thread-row { display: flex; align-items: center; min-height: 48px; border-radius: 12px; user-select: none; -webkit-user-select: none; }
     .onu-thread-button { display: block; flex: 1 1 auto; min-width: 0; min-height: 46px; padding: 11px 10px; overflow: hidden; border: 0; border-radius: 10px; background: transparent; text-align: left; text-overflow: ellipsis; white-space: nowrap; color: var(--color-text-primary); font: 13px var(--font-body); cursor: pointer; touch-action: pan-y; }
     .onu-thread-button:focus-visible { outline: 2px solid var(--color-accent-teal); outline-offset: -2px; }
-    .onu-thread-button:hover { background: #F1F6F4; }
+    .onu-thread-button:hover:not(*) { background: #F1F6F4; }
     .onu-thread-row:active { background: #F1F6F4; }
     .onu-history-empty { padding: 10px; color: var(--color-text-secondary); font: 13px/1.45 var(--font-body); }
     .onu-thread-action-overlay, .onu-thread-modal-overlay { position: absolute; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(15,23,42,.38); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility 0s linear .2s; }
@@ -765,10 +769,10 @@
     .onu-thread-actions-dialog, .onu-thread-modal { width: min(100%, 360px); padding: 20px; border: 1px solid #E2ECE9; border-radius: 22px; background: #fff; box-shadow: 0 18px 55px rgba(5,46,40,.2); }
     .onu-thread-actions-title, .onu-thread-modal-title { margin: 0 0 14px; color: var(--color-text-primary); font: 700 19px/1.25 var(--font-heading); }
     .onu-thread-action-choice { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 52px; padding: 0 12px; border: 0; border-radius: 13px; background: transparent; color: var(--color-text-primary); text-align: left; font: 600 14px var(--font-body); cursor: pointer; }
-    .onu-thread-action-choice:hover, .onu-thread-action-choice:focus-visible { background: #F1F7F4; outline: none; }
-    .onu-thread-action-choice i { color: var(--color-accent-teal); font-size: 18px; }
+    .onu-thread-action-choice:hover:not(*), .onu-thread-action-choice:focus-visible { background: #F1F7F4; outline: none; }
+    .onu-thread-action-choice i { color: #94A3B8; font-size: 18px; }
     .onu-thread-action-choice.delete { color: #A33A35; }
-    .onu-thread-action-choice.delete i { color: #A33A35; }
+    .onu-thread-action-choice.delete i { color: #94A3B8; }
     .onu-thread-modal-label { display: block; margin-bottom: 7px; color: var(--color-text-secondary); font: 12px var(--font-body); }
     .onu-thread-modal-input { width: 100%; min-height: 50px; padding: 0 14px; border: 1px solid #C8DCD5; border-radius: 13px; background: #F8FBF9; color: var(--color-text-primary); font: 15px var(--font-body); }
     .onu-thread-modal-input:focus { outline: 2px solid rgba(0,128,119,.24); border-color: var(--color-accent-teal); }
@@ -819,19 +823,21 @@
 
     /* Find a doctor hero card: flat pastel surface with no outline */
     .discover-hero-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 122px;
+      box-sizing: border-box;
       background: #EFF7F5;
       border: 0;
-      border-radius: 20px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 0;
       box-shadow: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      display: block;
       cursor: pointer;
       transition: background-color 0.18s ease, opacity 0.18s ease;
     }
 
-    .discover-hero-card:hover {
+    .discover-hero-card:hover:not(*) {
       background: #EAF4F1;
     }
 
@@ -844,40 +850,34 @@
       outline-offset: 3px;
     }
 
-    .hero-card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-
-    .hero-icon-pill {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.58);
-      border: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: #0E8070;
-    }
-
-    /* Boxless 100+ Doctors count */
-    .hero-doctors-count {
-      font-family: var(--font-body);
-      font-size: 13.5px;
-      font-weight: 500;
-      color: var(--color-text-secondary);
-    }
-
+    .hero-card-copy { position: absolute; z-index: 2; left: 18px; top: 19px; width: 58%; }
     .hero-card-title {
       font-family: var(--font-heading);
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 650;
       color: #0F172A;
       letter-spacing: -0.02em;
       margin: 0;
+      line-height: 1.25;
+    }
+
+    .hero-card-subtitle {
+      display: block;
+      margin-top: 4px;
+      color: var(--color-text-secondary);
+      font: 13px/1.35 var(--font-body);
+    }
+
+    .hero-card-illustration {
+      position: absolute;
+      z-index: 1;
+      right: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      pointer-events: none;
     }
 
     /* Discover Streamlined Layout */
@@ -937,7 +937,7 @@
       flex-shrink: 0;
     }
 
-    .btn-circle-icon:hover {
+    .btn-circle-icon:hover:not(*) {
       background: #E2E8F0;
     }
 
@@ -1031,7 +1031,7 @@
       flex-shrink: 0;
     }
 
-    .doctors-filter-btn:hover,
+    .doctors-filter-btn:hover:not(*),
     .doctors-filter-btn:active {
       background: #F8FAFC !important;
       border-color: #CBD5E1 !important;
@@ -1067,7 +1067,7 @@
       flex-shrink: 0;
     }
 
-    .filter-chip:hover {
+    .filter-chip:hover:not(*) {
       background: #EEF2F6;
       color: #0F172A;
     }
@@ -1106,7 +1106,7 @@
 
     .doctor-result-card {
       position: relative;
-      background: #F0F7F4;
+      background: #F4F5F6;
       border: 1px solid transparent;
       border-radius: 20px;
       padding: 16px;
@@ -1121,7 +1121,7 @@
     }
 
     .doctor-result-card:active {
-      background: #E2EFEA;
+      background: #E9EBED;
     }
 
     .doctor-card-profile-link {
@@ -1447,7 +1447,7 @@
     .profile-info-icon {
       width: 24px;
       height: 24px;
-      color: #0E8070;
+      color: #7B8794;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1480,9 +1480,9 @@
     }
 
     .profile-info-val.fee-highlight {
-      font-size: 17.5px;
-      font-weight: 700;
-      color: #052E28;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #2E64C8;
     }
 
     .profile-bmdc-row {
@@ -1545,7 +1545,7 @@
       align-self: flex-start;
     }
 
-    .btn-bio-toggle:hover {
+    .btn-bio-toggle:hover:not(*) {
       color: #052E28;
     }
 
@@ -1585,7 +1585,7 @@
       transition: all 0.15s ease;
     }
 
-    .btn-profile-book-cta:hover {
+    .btn-profile-book-cta:hover:not(*) {
       background: #011714;
       transform: translateY(-1px);
     }
@@ -1772,7 +1772,7 @@
       appearance: none;
     }
 
-    .consult-date-card:hover {
+    .consult-date-card:hover:not(*) {
       border-color: var(--color-border-selected);
     }
 
@@ -1848,7 +1848,7 @@
       appearance: none;
     }
 
-    .shift-slot-card:hover {
+    .shift-slot-card:hover:not(*) {
       border-color: #7EB8AE;
     }
 
@@ -2138,7 +2138,7 @@
     .onu-credit-toggle[aria-checked="true"] .onu-credit-toggle-thumb { transform:translateX(19px); }
     .payment-method-list { display:flex; flex-direction:column; gap:8px; }
     .payment-method-option { width:100%; min-height:54px; display:flex; align-items:center; gap:11px; padding:8px 12px; border:1px solid #E2EAE7; border-radius:13px; background:#fff; color:#0F172A; text-align:left; cursor:pointer; font:inherit; transition:border-color .16s ease, background .16s ease, box-shadow .16s ease; }
-    .payment-method-option:hover { background:#F8FAF9; border-color:#C9DDD7; }
+    .payment-method-option:hover:not(*) { background:#F8FAF9; border-color:#C9DDD7; }
     .payment-method-option.selected { border-color:#0D7A5F; background:#F2F8F6; box-shadow:0 0 0 1px rgba(13,122,95,.08); }
     .payment-method-option:focus-visible { outline:3px solid rgba(14,128,112,.2); outline-offset:2px; }
     .payment-method-icon { width:34px; height:34px; flex:0 0 34px; display:grid; place-items:center; border-radius:10px; background:#F3F6F5; color:#0D7A5F; font-size:18px; }
@@ -2772,7 +2772,7 @@
       transition: all 0.15s ease;
     }
 
-    .btn-confirm-booking:hover {
+    .btn-confirm-booking:hover:not(*) {
       background: #011714;
       transform: translateY(-0.5px);
     }
@@ -2850,7 +2850,7 @@
     .rx-push-title { font: 700 14px var(--font-heading); line-height: 1.25; }
     .rx-push-message { color: #46515E; font: 400 12px/1.4 var(--font-body); }
     .rx-push-dismiss { width: 44px; height: 44px; flex: 0 0 44px; border: 0; border-radius: 50%; background: transparent; color: #606B76; font-size: 18px; cursor: pointer; }
-    .rx-push-dismiss:hover { background: rgba(15,23,42,.07); }
+    .rx-push-dismiss:hover:not(*) { background: rgba(15,23,42,.07); }
 
     /* ============================================================
        PAGE 5: MY VISITS SCREEN (WISE & UBER MINIMAL STANDARD)
@@ -2997,7 +2997,7 @@
       text-align: left;
     }
 
-    .ext-sim-btn:hover {
+    .ext-sim-btn:hover:not(*) {
       background: rgba(255, 255, 255, 0.15);
       color: #FFFFFF;
       border-color: rgba(255, 255, 255, 0.25);
@@ -3118,7 +3118,7 @@
       transition: color 0.15s ease;
     }
 
-    .visits-view-more-button:hover {
+    .visits-view-more-button:hover:not(*) {
       color: #475569;
     }
 
@@ -3164,7 +3164,7 @@
     #visitsCompletedSection .patient-visit-meta-row { margin-top: 1px; font-size: 12.5px; }
     #visitsCompletedSection .completed-card-right-col { gap: 7px; margin-left: 8px; }
 
-    #visitsCompletedSection .patient-visit-card:hover,
+    #visitsCompletedSection .patient-visit-card:hover:not(*),
     #visitsCompletedSection .patient-visit-card:active {
       background: transparent;
       border-color: transparent;
@@ -3312,7 +3312,7 @@
       transition: transform 0.15s ease;
     }
 
-    .patient-visit-card:hover .patient-visit-arrow {
+    .patient-visit-card:hover:not(*) .patient-visit-arrow {
       transform: translateX(2px);
       color: #0F172A;
     }
@@ -3381,7 +3381,7 @@
       transition: color 0.15s ease, background-color 0.15s ease;
     }
 
-    .patient-card-previsit-button:hover {
+    .patient-card-previsit-button:hover:not(*) {
       color: #075F54;
       background: #FAFCFB;
     }
@@ -3427,7 +3427,7 @@
       cursor: pointer;
       transition: background .15s ease, border-color .15s ease;
     }
-    .patient-card-rejoin-button:hover { background: #0A685D; }
+    .patient-card-rejoin-button:hover:not(*) { background: #0A685D; }
     .patient-card-rejoin-button i { font-size: 16px; }
 
     .patient-card-serial-num {
@@ -3499,7 +3499,7 @@
       transition: opacity 0.15s ease;
     }
 
-    .btn-clean-action-line:hover {
+    .btn-clean-action-line:hover:not(*) {
       opacity: 0.8;
     }
 
@@ -3537,7 +3537,7 @@
       background: #F1F3F2; color: #123D35; text-align: left; cursor: pointer;
       font: 700 13px var(--font-heading); transition: background .15s ease, border-color .15s ease;
     }
-    .details-prep-action:hover { background: #E9ECEB; border-color: transparent; }
+    .details-prep-action:hover:not(*) { background: #E9ECEB; border-color: transparent; }
     .details-document-empty {
       display: flex; align-items: center; gap: 10px; min-height: 54px; padding: 4px 2px;
       color: #76817D; font: 12px/1.4 var(--font-body);
@@ -3561,7 +3561,7 @@
       transition: opacity 0.15s ease;
     }
 
-    .btn-clean-text-action:hover {
+    .btn-clean-text-action:hover:not(*) {
       text-decoration: underline;
     }
 
@@ -3602,9 +3602,9 @@
     .btn-dock-action-secondary {
       flex: 1;
       height: 48px;
-      background: #FFFFFF;
+      background: #F1F5F4;
       color: #0F172A;
-      border: 1px solid #CBD5E1;
+      border: 0;
       border-radius: 14px;
       font-family: var(--font-heading);
       font-size: 13.5px;
@@ -3615,10 +3615,10 @@
       gap: 7px;
       cursor: pointer;
       transition: all 0.15s ease;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+      box-shadow: none;
     }
 
-    .btn-dock-action-secondary:hover {
+    .btn-dock-action-secondary:hover:not(*) {
       background: #F8FAFC;
       border-color: #94A3B8;
     }
@@ -3629,11 +3629,11 @@
 
     .btn-dock-action-secondary.danger-tint {
       color: #BE123C;
-      border-color: #FECDD3;
+      border: 0;
       background: #FFF1F2;
     }
 
-    .btn-dock-action-secondary.danger-tint:hover {
+    .btn-dock-action-secondary.danger-tint:hover:not(*) {
       background: #FFE4E6;
       border-color: #FDA4AF;
     }
@@ -3662,7 +3662,7 @@
       transition: all 0.18s ease;
     }
 
-    .completed-visit-card.minimal-card:hover {
+    .completed-visit-card.minimal-card:hover:not(*) {
       border-color: #CBD5E1;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
       transform: translateY(-1px);
@@ -3715,7 +3715,7 @@
       transition: transform 0.15s ease;
     }
 
-    .completed-visit-card.minimal-card:hover .completed-arrow-icon {
+    .completed-visit-card.minimal-card:hover:not(*) .completed-arrow-icon {
       transform: translateX(2px);
       color: #052E28;
     }
@@ -3776,14 +3776,12 @@
       flex-shrink: 0;
     }
     .details-completed-identity { display: flex; align-items: center; gap: 12px; min-width: 0; }
-    .details-visit-mode-icon {
-      width: 42px; height: 42px; flex: 0 0 42px; display: grid; place-items: center;
-      border-radius: 14px; background: #FFFFFF; border: 1px solid #DCE8E4; color: #087E70; font-size: 19px;
-    }
+    .details-doctor-avatar { display: block; width: 52px; height: 52px; flex: 0 0 52px; border-radius: 50%; object-fit: cover; background: #E8F4F1; }
     .details-visit-summary .details-doc-header-info { gap: 4px; flex: 1; }
     .details-visit-summary .details-patient-plain-name { font-size: 17px; line-height: 1.3; }
     .details-visit-context { display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: nowrap; gap: 8px; color: #64748B; font: 500 12.5px var(--font-body); padding-left: 2px; white-space: nowrap; }
     .details-visit-date { display: inline-flex; align-items: center; gap: 6px; color: #64748B; font: 500 12.5px var(--font-body); white-space: nowrap; flex-shrink: 0; }
+    .details-visit-date-icon { color: #087E70; font-size: 14px; }
     .details-visit-context-divider { display: none; }
     .details-visit-mode-label { color: #64748B; white-space: nowrap; }
 
@@ -3861,7 +3859,7 @@
       transition: opacity 0.15s ease;
     }
 
-    .details-plain-collapse-trigger:hover {
+    .details-plain-collapse-trigger:hover:not(*) {
       text-decoration: underline;
     }
 
@@ -4015,7 +4013,7 @@
       box-shadow: none !important;
     }
 
-    .details-rx-tile:hover {
+    .details-rx-tile:hover:not(*) {
       background: #DFECE8;
     }
 
@@ -4086,7 +4084,7 @@
       transition: all 0.15s ease;
     }
 
-    .btn-clean-rx-view:hover {
+    .btn-clean-rx-view:hover:not(*) {
       background: var(--color-primary-btn-hover);
     }
 
@@ -4101,7 +4099,7 @@
       transition: transform 0.15s ease;
     }
 
-    .details-rx-tile:hover .details-rx-tile-action {
+    .details-rx-tile:hover:not(*) .details-rx-tile-action {
       transform: scale(1.08);
     }
 
@@ -4131,7 +4129,7 @@
       user-select: none;
     }
 
-    .details-notes-card:hover {
+    .details-notes-card:hover:not(*) {
       background: #EEF2F5 !important;
     }
 
@@ -4192,7 +4190,7 @@
       transition: opacity 0.15s ease;
     }
 
-    .details-intake-divider-trigger:hover {
+    .details-intake-divider-trigger:hover:not(*) {
       opacity: 0.75;
     }
 
@@ -4363,7 +4361,7 @@
       transition: all 0.15s ease;
     }
 
-    .details-file-row-action:hover {
+    .details-file-row-action:hover:not(*) {
       background: #F1F5F9;
       color: #0F172A;
     }
@@ -4404,7 +4402,7 @@
       transition: all 0.15s ease;
     }
 
-    .btn-details-dock-main:hover {
+    .btn-details-dock-main:hover:not(*) {
       background: var(--color-primary-btn-hover);
     }
 
@@ -4914,7 +4912,7 @@
       transition: all 0.15s ease;
     }
 
-    .sheet-btn-add-file:hover {
+    .sheet-btn-add-file:hover:not(*) {
       border-color: #052E28;
       background: #F8FAF9;
     }
@@ -5346,7 +5344,7 @@
       color: #FFFFFF;
     }
 
-    .btn-decline-reschedule:hover {
+    .btn-decline-reschedule:hover:not(*) {
       background: #021B18;
     }
 
@@ -5356,7 +5354,7 @@
       border: 1px solid #E2E8F0;
     }
 
-    .btn-decline-rebook:hover {
+    .btn-decline-rebook:hover:not(*) {
       background: #E2E8F0;
     }
 
@@ -5373,7 +5371,7 @@
       text-align: center;
     }
 
-    .btn-decline-dismiss:hover {
+    .btn-decline-dismiss:hover:not(*) {
       color: #0F172A;
     }
 
@@ -5522,17 +5520,11 @@
       gap: 16px;
       padding-bottom: 40px;
     }
-    .patient-profile-credit { display: flex; align-items: center; gap: 10px; min-height: 62px; padding: 9px 0; border-radius: 0; background: transparent; }
-    .patient-profile-credit-icon { display: grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 0; background: transparent; color: #087C70; font-size: 19px; }
-    .patient-profile-credit-copy { display: grid; flex: 1; gap: 2px; min-width: 0; }
-    .patient-profile-credit-title { color: #263A34; font: 650 13px/1.25 var(--font-heading); }
-    .patient-profile-credit-note { color: #71827F; font: 400 11.5px/1.3 var(--font-body); }
-    .patient-profile-credit-amount { color: #087C70; font: 700 15px/1.2 var(--font-heading); white-space: nowrap; }
     .patient-profile-account { gap: 6px; margin-top: 14px; padding-top: 0; }
     .patient-profile-action-heading { margin: 0; padding: 0 4px 6px; color: #64748B; font: 700 13px/1.25 var(--font-heading); letter-spacing: .05em; text-transform: uppercase; }
     .patient-profile-options { display: grid; gap: 6px; overflow: visible; border: 0; border-radius: 0; background: transparent; }
     .patient-profile-option { box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; gap: 14px; width: 100%; min-height: 52px; padding: 16px 4px; border: 0; background: transparent; color: #1E293B; text-align: left; font: 600 15px/1.25 var(--font-heading); transition: background .12s ease; }
-    .patient-profile-option:hover { background: #F8FAFC; }
+    .patient-profile-option:hover:not(*) { background: #F8FAFC; }
     .patient-profile-option:focus-visible { outline: 2px solid #087C70; outline-offset: 2px; border-radius: 8px; }
     .patient-profile-option + .patient-profile-option { border-top: 0; }
     .patient-profile-option-icon { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border-radius: 0; background: transparent; color: #64748B; font-size: 20px; }
@@ -5547,9 +5539,9 @@
     .patient-settings-section-title { margin: 0 2px; color: #718096; font: 700 17px/1.25 var(--font-heading); letter-spacing: -.01em; }
     .patient-settings-card { display: grid; gap: 10px; padding: 0; border: 0; border-radius: 0; background: transparent; }
     .patient-settings-row { display: flex; align-items: center; gap: 14px; width: 100%; min-height: 48px; padding: 8px 2px; border: 0; border-radius: 0; background: transparent; color: #142B26; text-align: left; cursor: pointer; }
-    .patient-settings-row:hover { color: #087C70; }
+    .patient-settings-row:hover:not(*) { color: #087C70; }
     .patient-settings-row:disabled { opacity: 1; cursor: default; }
-    .patient-settings-row:disabled:hover { color: #142B26; }
+    .patient-settings-row:disabled:hover:not(*) { color: #142B26; }
     .patient-settings-row:focus-visible { outline: 2px solid #087C70; outline-offset: 2px; border-radius: 6px; }
     .patient-settings-row-icon { display: grid; place-items: center; width: 36px; height: 36px; flex: 0 0 36px; border-radius: 10px; background: #F8FAF9; color: #334155; font-size: 17px; }
     .patient-settings-row-icon.is-danger { background: #FEF2F2; color: #DC2626; }
@@ -5734,15 +5726,12 @@
           </div>
 
           <!-- Find a Doctor Hero Card -->
-          <div class="discover-hero-card" onclick="openDoctorsList()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDoctorsList(); }" role="button" tabindex="0" aria-label="Find a doctor. 100+ doctors available.">
-            <div class="hero-card-header">
-              <div class="hero-icon-pill" aria-hidden="true">
-                <i class="ph ph-stethoscope"></i>
-              </div>
-              <span class="hero-doctors-count">100+ doctors</span>
+          <div class="discover-hero-card" onclick="openDoctorsList()" onkeydown="if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDoctorsList(); }" role="button" tabindex="0" aria-label="Find a doctor. 100+ verified doctors.">
+            <div class="hero-card-copy">
+              <h2 class="hero-card-title">Find a doctor</h2>
+              <span class="hero-card-subtitle">100+ Verified Doctors</span>
             </div>
-
-            <h2 class="hero-card-title">Find a doctor</h2>
+            <img class="hero-card-illustration" src="assets/doctor-discovery.svg" alt="" aria-hidden="true">
           </div>
 
         </div>
@@ -5791,8 +5780,8 @@
         <div class="onu-thread-action-overlay" id="onuThreadActionOverlay" aria-hidden="true" onclick="if(event.target===this)closePatientOnuThreadActions()">
           <section class="onu-thread-actions-dialog" id="onuThreadActionsDialog" role="dialog" aria-modal="true" aria-labelledby="onuThreadActionsTitle" tabindex="-1" onkeydown="handlePatientOnuThreadDialogKeydown(event)">
             <h2 class="onu-thread-actions-title" id="onuThreadActionsTitle">Chat Options</h2>
-            <button type="button" class="onu-thread-action-choice" id="onuThreadRenameChoice" onclick="openPatientOnuThreadRename()"><i class="ph ph-pencil-simple" aria-hidden="true"></i>Rename Chat</button>
-            <button type="button" class="onu-thread-action-choice delete" onclick="openPatientOnuThreadDelete()"><i class="ph ph-trash" aria-hidden="true"></i>Delete Chat</button>
+            <button type="button" class="onu-thread-action-choice" id="onuThreadRenameChoice" onclick="openPatientOnuThreadRename()"><i class="ph ph-pencil-simple" aria-hidden="true"></i>Rename</button>
+            <button type="button" class="onu-thread-action-choice delete" onclick="openPatientOnuThreadDelete()"><i class="ph ph-trash" aria-hidden="true"></i>Delete</button>
           </section>
         </div>
         <div class="onu-thread-modal-overlay" id="onuThreadRenameOverlay" aria-hidden="true" onclick="if(event.target===this)closePatientOnuThreadRename()">
@@ -5840,6 +5829,10 @@
         <div class="app-page patient-profile-page page-right" id="pagePatientProfile" aria-label="Patient profile">
           <header class="patient-profile-intro">
             <h1 class="patient-profile-heading">Profile</h1>
+            <span class="patient-profile-credit-badge" aria-label="Available credits">
+              <i class="ph-fill ph-wallet" aria-hidden="true"></i>
+              <strong id="patientProfileCreditAmount">৳1,000</strong>
+            </span>
           </header>
           <section class="patient-profile-top-card" aria-label="Personal profile">
             <div class="patient-profile-hero">
@@ -5863,15 +5856,6 @@
             </span>
             <span class="patient-profile-health-link">Health Profile <i class="ph ph-arrow-up-right" aria-hidden="true"></i></span>
           </button>
-
-          <section class="patient-profile-credit" aria-label="Available credits">
-            <span class="patient-profile-credit-icon" aria-hidden="true"><i class="ph-fill ph-wallet"></i></span>
-            <span class="patient-profile-credit-copy">
-              <strong class="patient-profile-credit-title">Available credits</strong>
-              <span class="patient-profile-credit-note">Use toward any booking</span>
-            </span>
-            <strong class="patient-profile-credit-amount" id="patientProfileCreditAmount">৳1,000</strong>
-          </section>
 
           <section class="patient-profile-account" aria-label="Account">
             <h2 class="patient-profile-action-heading">Account</h2>
@@ -6207,7 +6191,7 @@
             <!-- Fee -->
             <div class="profile-info-row">
               <div class="profile-info-left">
-                <i class="ph-fill ph-receipt profile-info-icon" aria-hidden="true"></i>
+                <svg class="profile-info-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 256 256" aria-hidden="true"><path d="M168,128a40,40,0,1,1-40-40A40,40,0,0,1,168,128Zm80-64V192a8,8,0,0,1-8,8H16a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H240A8,8,0,0,1,248,64Zm-16,46.35A56.78,56.78,0,0,1,193.65,72H62.35A56.78,56.78,0,0,1,24,110.35v35.3A56.78,56.78,0,0,1,62.35,184h131.3A56.78,56.78,0,0,1,232,145.65Z"></path></svg>
                 <div class="profile-info-content">
                   <span class="profile-info-label">Consultation Fee</span>
                   <span class="profile-info-val fee-highlight" id="profileDocFee">&#2547; 1,200</span>
@@ -6221,10 +6205,18 @@
                 <i class="ph-fill ph-shield-check profile-info-icon" aria-hidden="true"></i>
                 <div class="profile-info-content">
                   <span class="profile-info-label">BMDC Registration</span>
-                  <div class="profile-bmdc-row">
-                    <span class="profile-info-val" id="profileDocBmdc">A-74829</span>
-                    <span class="bmdc-verified-badge"><i class="ph-bold ph-check"></i> Verified</span>
-                  </div>
+                  <span class="profile-info-val" id="profileDocBmdc">A-74829</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Years of Experience -->
+            <div class="profile-info-row">
+              <div class="profile-info-left">
+                <i class="ph-fill ph-briefcase profile-info-icon" aria-hidden="true"></i>
+                <div class="profile-info-content">
+                  <span class="profile-info-label">Experience</span>
+                  <span class="profile-info-val" id="profileDocExperience">8 years</span>
                 </div>
               </div>
             </div>
@@ -7013,6 +7005,7 @@
         id: 1,
         name: "Ast. Prof. Dr. Mahim Khan",
         degreeSpecialty: "MBBS, FCPS - Cardiology",
+        experienceYears: 8,
         specialty: "Cardiology",
         hospital: "BSMMU (PG Hospital), Shahbag",
         bmdc: "A-74829",
@@ -7026,6 +7019,7 @@
         id: 2,
         name: "Prof. Dr. Ayesha Rahman",
         degreeSpecialty: "MBBS, BCS (Health), FCPS - General Medicine",
+        experienceYears: 12,
         specialty: "Medicine",
         hospital: "Dhaka Medical College Hospital",
         bmdc: "A-68412",
@@ -7039,6 +7033,7 @@
         id: 3,
         name: "Ast. Prof. Dr. Mark Alister",
         degreeSpecialty: "MBBS, MD - Neurology",
+        experienceYears: 9,
         specialty: "Neurology",
         hospital: "Evercare Hospital, Bashundhara",
         bmdc: "A-82154",
@@ -7052,6 +7047,7 @@
         id: 4,
         name: "Dr. Mary Anne",
         degreeSpecialty: "MBBS, DCH, FCPS - Pediatrics",
+        experienceYears: 10,
         specialty: "Pediatrics",
         hospital: "Dhaka Shishu (Children) Hospital",
         bmdc: "A-59123",
@@ -7065,6 +7061,7 @@
         id: 5,
         name: "Ast. Prof. Dr. Tanvir Ahmed",
         degreeSpecialty: "MBBS, MS - Orthopedics",
+        experienceYears: 8,
         specialty: "Orthopedics",
         hospital: "National Institute of Traumatology",
         bmdc: "A-71935",
@@ -7078,6 +7075,7 @@
         id: 6,
         name: "Dr. Nusrat Jahan",
         degreeSpecialty: "MBBS, DDV, FCPS - Dermatology",
+        experienceYears: 7,
         specialty: "Dermatology",
         hospital: "BIRDEM General Hospital, Shahbag",
         bmdc: "A-84291",
@@ -7091,6 +7089,7 @@
         id: 7,
         name: "Assoc. Prof. Dr. Farhan Kabir",
         degreeSpecialty: "MBBS, MD, FCPS - Cardiology",
+        experienceYears: 14,
         specialty: "Cardiology",
         hospital: "National Institute of Cardiovascular Diseases",
         bmdc: "A-63048",
@@ -7104,6 +7103,7 @@
         id: 8,
         name: "Dr. Samira Haque",
         degreeSpecialty: "MBBS, FCPS, MS - Gynecology",
+        experienceYears: 11,
         specialty: "Gynecology",
         hospital: "Sir Salimullah Medical College",
         bmdc: "A-77319",
@@ -8840,7 +8840,7 @@
           && !/^I.{1,3}ll use .+ as context in this chat\. They are not saved to Active medications\.$/i.test(text);
       }).map(message => {
         const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map((file, index) => { const category = getPatientOnuFileCategory(file); const imageUrl = category === 'image' ? patientOnuAttachmentPreviewUrls.get(message.id + ':' + index) : null; const fileFormat = escapePreVisitText(getPatientDocumentFormatLabel(file)); if (imageUrl) return `<figure><img class="onu-attachment-photo" src="${imageUrl}" alt="Uploaded photo: ${escapePreVisitText(file.name)}"><figcaption class="onu-attachment-photo-caption"><span>${escapePreVisitText(file.name)}</span><small>${fileFormat}</small></figcaption></figure>`; const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${fileFormat}</span></span></div>`; }).join('')}</div>` : '';
-        const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="btn-confirm-pay onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
+        const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
         const prescriptionSteps = ['Scanning your prescription photo…', 'Detecting medicine names…', 'Organizing dose and frequency details…', 'Preparing your review…'];
         const isPrescriptionProcessing = message.action?.type === 'prescription-processing';
         const isReplyProcessing = message.action?.type === 'reply-processing';
@@ -9776,6 +9776,7 @@
       document.getElementById('profileDocQual').textContent = doc.degreeSpecialty;
       document.getElementById('profileDocFee').innerHTML = `&#2547; ${doc.fee.toLocaleString()}`;
       document.getElementById('profileDocBmdc').textContent = doc.bmdc;
+      document.getElementById('profileDocExperience').textContent = `${doc.experienceYears} years`;
       document.getElementById('profileDocChamber').textContent = doc.chamber;
       
       // Bio handling with clamp & toggle
@@ -11096,14 +11097,14 @@
       if (plainContainer) {
         const isVideoVisit = vis.mode === 'Video';
         const visitModeLabel = isVideoVisit ? 'Video consultation' : 'In-person visit';
+        const visitDoctor = doctorsDb.find(doctor => doctor.id === Number(vis.docId));
+        const visitDoctorPhoto = visitDoctor?.avatar || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=160&auto=format&fit=crop&q=80';
         const shortVisitDate = (vis.dateText || '').replace(/^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday),\s*/i, '');
-        const visitContext = `<span class="details-visit-date">${shortVisitDate}</span>`;
+        const visitContext = `<span class="details-visit-date"><i class="ph-fill ${isVideoVisit ? 'ph-video-camera' : 'ph-map-pin'} details-visit-date-icon" title="${visitModeLabel}" aria-hidden="true"></i>${shortVisitDate}</span>`;
         plainContainer.innerHTML = `
           <div class="details-visit-summary">
             <div class="details-completed-identity">
-              <span class="details-visit-mode-icon" title="${visitModeLabel}" aria-hidden="true">
-                <i class="ph ${isVideoVisit ? 'ph-video-camera' : 'ph-map-pin'}" aria-hidden="true"></i>
-              </span>
+              <img class="details-doctor-avatar" src="${escapePreVisitText(visitDoctorPhoto)}" alt="" aria-hidden="true" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=160&auto=format&fit=crop&q=80'">
               <div class="details-doc-header-info">
                 <span class="details-patient-plain-name">${vis.docName}</span>
                 <span class="details-doc-specialty">${vis.specialty || 'Cardiology'}</span>
@@ -11330,11 +11331,9 @@
 
         bottomDock.innerHTML = `
           <button type="button" class="btn-dock-action-secondary" onclick="openRescheduleBookingForCurrentVisit()">
-            <i class="ph-bold ph-calendar"></i>
             <span>Reschedule</span>
           </button>
           <button type="button" class="btn-dock-action-secondary danger-tint" onclick="openCancelAndRebookModal()">
-            <i class="ph-bold ph-calendar-x"></i>
             <span>Cancel</span>
           </button>
         `;

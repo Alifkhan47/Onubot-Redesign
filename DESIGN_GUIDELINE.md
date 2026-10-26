@@ -1,6 +1,23 @@
 # Onu App — UI/UX Design System & Autonomous Redesign SOP
 *European / Western Minimal Healthtech Standard (Inspired by Hims, Uber, Wise, Alan Health, Qonto)*
 
+## Current Cross-App Decisions (Authoritative)
+
+These decisions reflect the current patient and doctor prototypes. They override older screen-specific examples below wherever the older wording conflicts with the live HTML/CSS.
+
+- **Mobile interaction:** Treat both prototypes as touch-first mobile apps. Do not add hover-only visual effects. Keep tap feedback (`:active`) and keyboard focus-visible states.
+- **Canvas and surfaces:** Keep the app canvas white. Prefer quiet filled surfaces over outlines and shadows. Remove unnecessary borders from icon holders and cards when a soft background can separate the content. Avoid nested containers.
+- **App-scoped colors:** The two files use slightly different primary and text tokens. Patient app primary CTA is `#052E28`; doctor app primary CTA is `#02241F`. Patient primary text is generally `#0F172A`; doctor headings often use `#000000`. Patient secondary text is generally `#64748B`; doctor secondary text often uses `#717171`. Check the app's `:root` tokens before hard-coding a shared value.
+- **Color use:** Sage `#D6EAE6` is a soft selection/surface color, not a universal fill. Teal `#0E8070` is the main patient accent. Use blue sparingly: `#2E64C8` for the patient doctor-profile consultation fee and `#89A7CE` for the Find a Doctor illustration.
+- **Chat text and actions:** Keep Onu responses in plain text. Use comfortable vertical separation between user and assistant turns and a dark slate text color around `#334155`. In-chat actions are secondary controls with quiet neutral fills; do not use the app's dark primary CTA style for them.
+- **Chat loading and voice:** Demo AI loading should use a small, context-aware changing status line, not a large card. The voice demo uses distinct user/Onu transcript turns and a steady waveform position; retain conversational content and ordering.
+- **Patient Discover card:** The Find a Doctor card uses a soft mint surface, title and supporting count on the left, and `assets/doctor-discovery.svg` on the right. The artwork accent is `#89A7CE`; keep the SVG vertically centered and preserve the card's tap target.
+- **Patient profile details:** Show patient credits as an unboxed wallet icon plus amount in the top-right of the Profile heading; do not retain a separate Available Credits row. On the patient-side doctor profile, the consultation fee matches other value text in size/weight and uses `#2E64C8`; BMDC registration has no Verified badge; show years of experience.
+- **Appointment details:** Use the doctor's photo beside their name and put the visit-type icon inline before the date. Keep Reschedule and Cancel actions icon-free and borderless; Reschedule uses a subtle neutral fill, Cancel keeps its soft red fill.
+- **Doctor-side patient profile:** Leave a clear gap between the patient identity header and the vitals grid. Initials avatars have a soft fill and no stroke.
+- **Doctor wallet:** Transaction icon holders use the Settings neutral fill (`#F8FAF9`) while keeping their semantic icon colors. Transaction amounts use restrained 14px/600 typography. Saved-account rows use a subtle filled surface without a border; bank/mobile icons remain colored but have no tiles behind them.
+- **Language picker:** Show English and Bengali as non-interactive demo options with a radio-style selection indicator on the right. Keep the options subtly filled and borderless.
+
 ## Prototype Date Convention
 
 Use **Tuesday, September 29, 2026** as the fixed demo date across the doctor and patient prototypes. Yesterday is September 28 and Tomorrow is September 30. Earlier dates on historical prescription and encounter examples are intentional.
@@ -9,18 +26,18 @@ Use **Tuesday, September 29, 2026** as the fixed demo date across the doctor and
 
 ## 1. Core Visual Foundations & Color Tokens
 
-Every screen in the Onu App prototype **MUST strictly** use these exact color codes and typography rules.
+Use the target app's root tokens and the shared typography scale below. Patient and doctor roots intentionally use different text and primary-action colors; do not force one app's values into the other.
 
 ### 1.1 Strict Color Tokens & Action vs. Selection Hierarchy
 
 | Token | Exact Hex | Role & Application |
 | :--- | :--- | :--- |
-| `--color-primary-btn` | **`#052E28`** | **Primary Action Buttons ONLY**: High-focus CTAs (`Save Shift`, `Start Shift`, `Join Video Call`, `+ Add Shift`, `Go Offline`). **DO NOT** use as a solid fill for multi-selection chips, segment controls, or active calendar date pills. |
+| `--color-primary-btn` | Patient: **`#052E28`**; Doctor: **`#02241F`** | **Primary Action Buttons ONLY**: High-focus CTAs. Do not use a solid primary fill for multi-selection chips, segmented controls, or active calendar date pills. |
 | `--color-card-sage` | **`#D6EAE6`** | **Active Selection States & Hero Cards**: Active calendar date pills, selected segmented buttons, selected day chips, modal duration pills, hero cards (`#052E28` text on `#D6EAE6` fill). |
 | `--color-border-selected`| **`#7EB8AE`** | **Soft Selection Border**: Calming, noticeable soft-sage outline for selected/active chips, date pills, segmented buttons, and duration items. Replaces hard `#052E28` borders for gentle visual ergonomics. |
-| `--color-text-primary` | **`#000000`** | **Primary Text**: Screen titles, section headers, entity names, large numeric values (`৳`). |
-| `--color-text-secondary`| **`#717171`** | **Secondary Text**: Subtitles, metadata, timestamps, queue counts, metric labels. |
-| `--color-card-neutral` | **`#F6F8F9`** | **Secondary Cards & Inactive Selectors**: Neutral surfaces (Toggle cards, Financial overview, unselected date/day pills, List tiles). |
+| `--color-text-primary` | Patient: **`#0F172A`**; Doctor: **`#000000`** | **Primary Text**: Screen titles, section headers, entity names, key values. Follow the active app's root token. |
+| `--color-text-secondary`| Patient: **`#64748B`**; Doctor: **`#717171`** | **Secondary Text**: Subtitles, labels, metadata, timestamps, queue counts, metric labels. Follow the active app's root token. |
+| `--color-card-neutral` | Patient: **`#F8FAF9`**; Doctor: **`#F6F8F9`** | **Neutral Surfaces**: Use a quiet fill for settings icons and secondary cards; check the local component token before applying across apps. |
 | `--color-app-bg` | **`#FFFFFF`** | **App Screen Canvas**: Clean, crisp white background. |
 | `--color-badge-bg` | **`#FFFFFF`** | **Pill Badges**: White tags placed inside sage/colored cards. |
 | `--color-bell-bg` | **`#F0F6F5`** | **Circular Button BG**: Notification bell and top icon containers. |
@@ -46,17 +63,17 @@ Fonts are loaded from Google Fonts:
 
 | UI Role | Font Family | Size | Weight | Color | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Screen Title** | Urbanist | `25px` | 700 (Bold) | `#000000` | Letter-spacing `-0.02em`, line-height `1.15` |
-| **Subtitle / Slogan** | DM Sans | `13.5px` | 400 (Regular)| `#717171` | Directly below screen title |
-| **Section Header** | Urbanist | `21px` | 700 (Bold) | `#000000` | Left-aligned section start |
-| **Section Right Meta** | DM Sans | `13.5px` | 500 (Medium) | `#717171` | E.g. `"12 Patient In Queue"` |
-| **Entity / Card Title** | Urbanist | `20px` | 700 (Bold) | `#000000` | Patient name, Doctor name, service title |
-| **Entity Subtitle / Meta**| DM Sans | `13px` | 400 (Regular)| `#717171` | Separated by subtle `•` dot |
+| **Screen Title** | Urbanist | `25px` | 700 (Bold) | App `--color-text-primary` | Letter-spacing `-0.02em`, line-height `1.15` |
+| **Subtitle / Slogan** | DM Sans | `13.5px` | 400 (Regular)| App `--color-text-secondary` | Directly below screen title |
+| **Section Header** | Urbanist | `21px` | 700 (Bold) | App `--color-text-primary` | Left-aligned section start |
+| **Section Right Meta** | DM Sans | `13.5px` | 500 (Medium) | App `--color-text-secondary` | E.g. `"12 Patient In Queue"` |
+| **Entity / Card Title** | Urbanist | `20px` | 700 (Bold) | App `--color-text-primary` | Patient name, Doctor name, service title |
+| **Entity Subtitle / Meta**| DM Sans | `13px` | 400 (Regular)| App `--color-text-secondary` | Separated by subtle `•` dot |
 | **Pill Badge Text** | Urbanist / DM | `12.5px` | 600/700 | `#052E28` | Text inside white badge |
 | **Primary Button** | Urbanist / DM | `15px` | 600 (SemiBold)| `#FFFFFF` | Centered with Phosphor icon |
 | **Dashed Button** | DM Sans | `14.5px` | 600 (SemiBold)| `#052E28` | Dashed border container |
-| **Metric Value (৳ / $)** | Urbanist | `24px` | 700 (Bold) | `#052E28` | Rich deep forest brand accent numbers |
-| **Metric Label** | DM Sans | `13px` | 400 (Regular)| `#717171` | Above/below numeric value |
+| **Metric Value (৳ / $)** | Urbanist | `24px` | 700 (Bold) | Contextual semantic accent or app text token | Use emphasis without over-weighting repeated list amounts |
+| **Metric Label** | DM Sans | `13px` | 400 (Regular)| App `--color-text-secondary` | Above/below numeric value |
 | **Bottom Nav Label** | DM Sans | `11.5px` | 500 (Medium) | Active: `#052E28`, Inactive: `#8E9F9D` |
 
 ---
@@ -778,7 +795,7 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * Follows the exact universal typography standard used by top headers (Urbanist Title + DM Sans Subtext in `#717171`), scaled contextually for secondary section headers.
 * **Patient Directory List Items**:
   * Flat, clean neutral surface `#F6F8F9` with `1.5px solid #EDF2F1` border and `16px` radius.
-  * Initials Avatar: `44px × 44px` circular pastel sage badge (`#E8F4F1`, `1px solid #D1E5E1`) with bold initials in `#052E28`.
+  * Initials Avatar: `44px × 44px` circular pastel sage badge (`#E8F4F1`) with bold initials in `#052E28`; do not add an outline stroke.
   * Minimalist Subtext: Strictly formatted as `[X] Visits` (e.g. `4 Visits` or `1 Visit`) in `DM Sans 12px #717171`. Ultra-clean, zero visual clutter, no patient IDs or dates.
   * Trailing Chevron: `<i class="ph ph-caret-right" style="color: #94a3b8; font-size: 16px;"></i>`.
 
@@ -797,6 +814,7 @@ Sections are dynamically rendered based on the patient's lifecycle state:
   * Header: `Patient Info` (`Urbanist 19px Bold #000000`).
   * Vitals Container (`.profile-vitals-card`): Neutral card `#F6F8F9` with 2-column grid (`Age`, `Gender`, `Visits`, `Blood`, `Weight`, `Height`).
   * Each vital item features a crisp white circular icon bubble (`36px × 36px`, `1px solid #E2ECEA`), uppercase 10px label (`DM Sans 10px Bold #717171`), and bold value (`Urbanist 14px Bold #000000`).
+  * Keep a clear vertical gap (currently 24px) between the identity header and the expanded vitals grid.
 * **Visits Log Section (Max 3 Default + Inline "See All" Expansion)**:
   * Header: `Visits Log` + count subtitle (e.g. `4 visits`).
   * Default View: Displays at most the 3 most recent visits.
@@ -848,8 +866,9 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 * **Zero Box / Prompt Tab Clutter**: Clean negative space without prompt cards or suggestion tabs, creating an uncluttered, focus-driven conversation interface.
 
 ### 22.3 Conversational Feed, Collapsible Reasoning & Action Toolbar
-* **User Messages (`.onu-msg-user-bubble`)**: Right-aligned smooth rounded bubble (`#F1F5F9` background, `#0F172A` text, `18px 18px 4px 18px` radius) with micro-actions for Copy and Edit.
-* **Assistant Typography**: Left-aligned pure canvas markdown typography (`14.5px`, line-height `1.6`, `#1E293B`) with formatted bullet lists.
+* **User Messages (`.onu-msg-user-bubble`)**: Right-aligned smooth rounded bubble (`#EFF7F4` background, dark slate `#334155` text, 18px radius) with micro-actions for Copy and Edit.
+* **Assistant Typography**: Left-aligned plain text on the canvas, around `14–14.5px`, with dark slate `#334155` color and comfortable line-height. Avoid decorative cards and forced bullet formatting for ordinary answers.
+* **Turn Spacing**: Give user and assistant turns generous vertical separation so one speaker's message does not visually run into the next.
 * **Collapsible Thought / Reasoning Pill (`.onu-thought-pill`)**:
   * Claude 3.7 & ChatGPT o1/o3 style: `Thought for 3 seconds ▾` with animated green dot and rotating chevron.
   * Tapping smoothly toggles the disclosure panel (`.onu-thought-details`) revealing retrieved clinical records, ontological rules, and guideline verification steps.
@@ -860,6 +879,7 @@ Sections are dynamically rendered based on the patient's lifecycle state:
     * **Thumbs Down** (`ph-thumbs-down`) — Flags response for review.
     * **Read Aloud** (`ph-speaker-high`) — Browser speech synthesis reads the clinical answer aloud.
     * **Regenerate** (`ph-arrows-clockwise`) — Reruns the clinical query with fresh reasoning steps.
+* **Embedded Actions**: Any action inside the conversation is secondary: use a quiet neutral fill and no dark primary CTA treatment. Preserve the screen-level composer send button's existing behavior.
 
 ### 22.4 Claude Mobile Style Artifacts in Chat (`.onu-artifact-card`)
 * **Core Concept**: Complex, structured deliverables (patient dossiers, financial summaries, guideline checklists, queue rosters) render as Claude-style Artifact cards inside the chat stream rather than unorganized plain text.
@@ -916,10 +936,9 @@ Sections are dynamically rendered based on the patient's lifecycle state:
 * **Cognitive Decluttering Rule**: No noisy percentage chips (+15%), no "Lifetime" redundancies, no visit counters inside these metric tiles.
 
 ### 23.4 Recent Transactions List (`.transaction-item-card`)
-* **Section Gap**: Strict `14px` between section header and cards, `10px` between transaction items.
-* **Item Card**: Pure white `#FFFFFF` surface with `1.5px solid #EEF3F2`, `14px` radius, padding `14px 16px`.
-* **Left Cluster**: Circular pastel icon container (`40px × 40px`, `#E8F4F1` with `#052E28` icon for income, `#FEE4E2` with `#D92D20` icon for payout), transaction title (`Urbanist 15px Bold #000000`), and timestamp subtitle (`DM Sans 12px #717171`).
-* **Right Cluster**: Clean amount (`+৳ 1,000` in `#0D7A48` bold / `-৳ 1,000` in `#000000` bold).
+* **List Rows**: Keep transactions as clean, borderless rows rather than individual outlined cards.
+* **Icon Holders**: Use a neutral `#F8FAF9` circular background for all transaction types, while preserving the semantic foreground color of each icon.
+* **Amounts**: Use restrained `14px`, weight `600` typography. Preserve incoming/outgoing semantic colors without making the amount heavier than the transaction name.
 
 ### 23.5 Editorial Bottom Sheet Modals for Wallet Flow
 1. **Withdraw Funds Bottom Sheet (`#withdrawFundsModalSheet`)**:
@@ -930,9 +949,8 @@ Sections are dynamically rendered based on the patient's lifecycle state:
    - Dual actions: `Cancel` (neutral) + **`Withdraw`** primary `#052E28` CTA with `<i class="ph ph-arrow-up-right"></i>`.
 2. **Saved Accounts Bottom Sheet (`#earningsSettingsModalSheet`)**:
    - Editorial header: `Saved Accounts` (`Urbanist 32px Bold`) + `Manage payout methods & bank accounts` (`DM Sans 14px #717171`).
-   - Dynamic list of saved accounts with clean titles (no redundant "Primary" tag):
-     - **Bank Accounts**: Soft eucalyptus icon container (`#E8F7F0` fill, `1px solid #D2EFE2`, `#0D7A48` bank icon).
-     - **bKash / MFS Accounts**: Soft pastel pink icon container (`#FDF2F4` fill, `1px solid #FCE1E7`, `#D82269` mobile icon).
+   - Dynamic list of saved accounts with clean titles (no redundant "Primary" tag). Rows use a subtle neutral fill (`#F6F8F7`) with no border or shadow.
+   - Keep bank and mobile-wallet icons green/pink respectively, but remove the colored square icon tiles behind them.
    - Dashed action button `+ Add New Method` triggering the add sheet.
    - Clean empty state when 0 accounts are configured.
 3. **Add Payout Method Bottom Sheet (`#addPayoutMethodModalSheet`)**:

@@ -5,8 +5,8 @@
 
 ## ⚠️ ZERO-TOLERANCE DESIGN & ENGINEERING GUARDRAILS (NEVER VIOLATE)
 
-1. **PRIMARY BUTTON vs. SELECTION STATE COLOR RULE (ABSOLUTE LAW)**:
-   - **Solid Forest Green `#052E28` with `#FFFFFF` text is EXCLUSIVELY for Primary Action CTA Buttons** (`Start Shift`, `Save Shift`, `+ Add Shift`, `Confirm Break`, `Join Call`, `Withdraw Funds`, `Save Account`).
+1. **PRIMARY BUTTON vs. SELECTION STATE COLOR RULE**:
+   - Use each app's root token for primary actions: patient `#052E28`, doctor `#02241F`, with white text.
    - **ALL Selection States** (Segmented control buttons, Active calendar date pills, Multi-select day pills, Filter chips, Duration selector cards) **MUST ALWAYS** use:
      - `background: var(--color-card-sage)` (`#D6EAE6`)
      - `border: 1px / 1.5px solid var(--color-border-selected)` (`#7EB8AE`)
@@ -44,6 +44,34 @@
    - Keep labels, metrics, and fraction counters ultra-minimal.
    - **Zero Card/Box Fatigue ("No Boxes Inside Boxes")**: Lists and feeds (Notifications, Activity, Clear Schedule summaries, Recurrence scope options) **must be box-less**—use clean borderless list rows, subtle hairline dividers (`border-bottom: 1px solid #F1F5F9`), and circular icon avatars instead of wrapping every row in a floating card box.
    - **Plain Text Warnings**: Use inline colored text with icons for warnings (e.g., `⚠️ No Booked Patients`, `⚠️ X patients' appointments will be cancelled & notified`) rather than heavy tinted alert boxes.
+8. **MOBILE-ONLY INTERACTION**:
+   - Both prototypes model mobile apps. Do not add hover-only behavior or hover visual states. Use tap/`:active` feedback and retain visible keyboard `:focus-visible` feedback.
+9. **CHAT ACTIONS STAY SECONDARY**:
+   - Buttons embedded in either Onu conversation must not use the app's solid primary CTA fill. Prefer quiet, borderless neutral fills; keep icon-only message tools understated.
+10. **APP-SCOPED DESIGN TOKENS**:
+   - The patient and doctor `:root` tokens intentionally differ for primary buttons and text. Read the target file's root tokens before making shared color assumptions.
+
+## Current Design Decisions (Updated 2026-10-26)
+
+These recent decisions are authoritative when older screen descriptions below conflict with the live prototypes.
+
+### Shared Onu Chat
+- Keep assistant replies plain text and use dark slate text near `#334155` for welcome prompts and conversation turns.
+- Give user and assistant turns clear vertical separation. Doctor chat uses short conversational medicine guidance; patient chat asks symptom follow-up questions. Keep conversation actions secondary rather than primary CTAs.
+- Show demo response progress as a small, changing, context-aware status line. Avoid a progress card or boxed loader. Prescription review may show short scan, medicine-detection, and detail-organization steps.
+- Preserve the voice demo's alternating user/Onu transcript, distinct speaker colors, role-specific content, stable waveform position, and separate stop/microphone controls.
+
+### Patient App
+- The Discover Find a Doctor card uses a light mint surface, title and `100+ Verified Doctors` copy on the left, and the centered `assets/doctor-discovery.svg` illustration on the right. Its blue accent is `#89A7CE`.
+- The profile header shows the wallet icon and credit amount at top-right without a pill/container or a separate Available Credits section.
+- Patient-side doctor profiles show experience in years, omit the BMDC Verified badge, and keep the consultation-fee amount the same size and weight as other profile values, using clear blue `#2E64C8`.
+- Appointment detail summaries show the doctor's photo and place the visit-mode icon beside the date. Reschedule and Cancel are icon-free secondary actions; Reschedule has a quiet neutral fill and Cancel retains a subtle red fill.
+
+### Doctor App
+- My Patients initials circles have a soft fill and no outline. In patient profiles, leave more space between the identity header and vitals grid.
+- Transaction icons use the Settings neutral background `#F8FAF9` while retaining their semantic foreground colors. Transaction amounts use 14px/600 text.
+- Saved Accounts use soft-filled, borderless rows. Keep bank/mobile icons in their semantic colors without colored icon tiles.
+- Language choices are static demo rows with the selection indicator on the right; they do not change the app language.
 
 ---
 
@@ -387,7 +415,7 @@ The doctor prototype is a single HTML document containing its page styles, marku
 When you are prompted by the user to add a feature, fix a bug, or redesign a screen:
 
 ### Step 1: Read and Align
-1. Read both [`DESIGN_GUIDELINE.md`](file:///c:/Alif/Onu%20App%20Prototype/DESIGN_GUIDELINE.md) and this file ([`AI_INSTRUCTIONS.md`](file:///c:/Alif/Onu%20App%20Prototype/AI_INSTRUCTIONS.md)).
+1. Read both [`DESIGN_GUIDELINE.md`](./DESIGN_GUIDELINE.md) and this file ([`AI_INSTRUCTIONS.md`](./AI_INSTRUCTIONS.md)).
 2. Confirm you understand the user's intent within the Wise/Uber minimalist healthtech framework.
 
 ### Step 2: Enforce Inviolable Rules
@@ -399,6 +427,6 @@ When you are prompted by the user to add a feature, fix a bug, or redesign a scr
 
 ### Step 3: Implement & Keep Context Synchronized
 - Modify `doctors-app.html` or `patient-app.html` cleanly using single contiguous replacements.
-- Test and verify state changes, DOM IDs, and transition classes.
+- Inspect the affected markup and styles after each change. Do not add or run tests unless the user asks for testing.
 - Always update [`DESIGN_GUIDELINE.md`](./DESIGN_GUIDELINE.md) and [`AI_INSTRUCTIONS.md`](./AI_INSTRUCTIONS.md) after modifying or expanding screens.
 - **MANDATORY**: After making any significant structural, behavioral, or feature changes, update both `DESIGN_GUIDELINE.md` and `AI_INSTRUCTIONS.md` to reflect the latest modifications.
