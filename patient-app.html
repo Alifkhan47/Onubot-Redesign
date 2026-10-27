@@ -5644,19 +5644,29 @@
     #cancelRebookModalBackdrop[hidden], #cancelRebookSheet[hidden] { display: none !important; }
     #rescheduleModalBackdrop[hidden], #rescheduleSheet[hidden] { display: none !important; }
   </style>
+<style>
+  .top-ecosystem-bar{width:min(100%,948px);max-width:948px;justify-content:center;margin-bottom:14px}
+  .prototype-workspace{display:grid;grid-template-columns:250px 400px 250px;align-items:center;justify-content:center;gap:24px;width:min(100%,948px)}
+  .external-sim-dock{width:250px;flex:0 0 250px}
+  .mockup-container{width:400px;max-width:400px;flex:0 0 400px}
+  .app-switcher-panel{width:250px;align-self:center;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .app-switcher-label{display:block;margin:0 0 9px 2px;color:#A7F3D0;font:800 10px var(--font-heading);letter-spacing:.06em;text-transform:uppercase}
+  .app-switcher-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.2)}
+  .app-switcher-tab{min-height:42px;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;border:1px solid rgba(255,255,255,.08);border-radius:9px;color:#CBD5E1;background:rgba(255,255,255,.05);text-decoration:none;font:600 11px var(--font-body);white-space:nowrap;transition:background .18s ease,color .18s ease,border-color .18s ease}
+  .app-switcher-tab i{font-size:15px}
+  .app-switcher-tab:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.18)}
+  @media(max-width:1000px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,400px)}.mockup-container{order:1;flex:none}.external-sim-dock{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,400px)}}
+  @media(max-width:520px){.top-ecosystem-bar .app-brand-pill{padding:6px 10px;font-size:12px}.app-switcher-panel{padding:12px}.app-switcher-tab{font-size:11px}}
+</style>
 </head>
 <body>
 
-  <!-- Top Ecosystem Switcher Bar -->
+  <!-- App identity stays separate from the switch controls. -->
   <div class="top-ecosystem-bar">
     <div class="app-brand-pill">
       <span class="live-dot"></span>
       <span>Onu Patient App</span>
     </div>
-    <a href="doctors-app.html" class="app-switch-btn" title="Open Doctor Desk App">
-      <i class="ph ph-stethoscope"></i>
-      <span>Switch to Doctor App</span>
-    </a>
   </div>
 
   <div class="prototype-workspace">
@@ -6982,6 +6992,14 @@
       </div>
     </div>
   </div>
+
+  <nav class="app-switcher-panel" aria-label="Switch app">
+    <span class="app-switcher-label">Switch app</span>
+    <div class="app-switcher-tabs">
+      <a href="doctors-app.html" class="app-switcher-tab" title="Open Doctor App"><i class="ph ph-stethoscope" aria-hidden="true"></i><span>Doctor App</span></a>
+      <a href="onubot-app.html" class="app-switcher-tab" title="Return to Login"><i class="ph ph-sign-in" aria-hidden="true"></i><span>Login</span></a>
+    </div>
+  </nav>
   </div><!-- /.prototype-workspace -->
 
   <!-- Interactive Application Controller -->

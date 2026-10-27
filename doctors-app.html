@@ -377,6 +377,14 @@
       gap: 10px;
     }
 
+    #pageDesk > .quick-status-row {
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    #pageDesk.is-no-schedule { gap: 12px; }
+    #pageDesk.is-no-schedule > .quick-status-row { margin-top: 0; }
+
     /* Schedule Action Card + Clear Schedule Button (White Background & Stroke) */
     .schedule-action-card {
       flex: 1;
@@ -1050,7 +1058,7 @@
       gap: 8px;
       font-size: 12.5px;
       color: #64748B;
-      margin-top: 4px;
+      margin-top: 8px;
       margin-bottom: 14px;
     }
 
@@ -1105,7 +1113,7 @@
       font-family: var(--font-heading);
       font-size: 13.5px;
       font-weight: 600;
-      color: #0F172A;
+      color: var(--color-primary-btn);
       cursor: pointer;
       align-self: flex-start;
       margin-top: 6px;
@@ -1113,7 +1121,7 @@
     }
 
     .btn-see-full-details:hover:not(*) {
-      color: #475569;
+      color: var(--color-primary-btn-hover);
       transform: translateX(2px);
     }
 
@@ -1532,6 +1540,22 @@
       background: #0D7A5F;
       border-color: #34D399;
       color: #FFFFFF;
+    }
+
+    .desk-empty-state {
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      border: 0;
+      border-radius: 18px;
+      color: #64748B;
+      background: #F6F8F9;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     .mockup-container {
@@ -5270,16 +5294,16 @@
 
     /* Review Empty Tiles (No Medicines / No Tests Given) */
     .review-empty-tile {
-      background: #FFFFFF;
-      border: 1px solid #E2E8F0;
-      border-radius: 14px;
-      padding: 16px 14px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
-      gap: 12px;
-      text-align: center;
+      gap: 4px;
+      text-align: left;
       width: 100%;
       box-sizing: border-box;
     }
@@ -5333,8 +5357,8 @@
     .lab-item-card {
       background: var(--color-card-neutral);
       border-radius: 14px;
-      border: 1.5px solid #edf2f1;
-      padding: 12px 14px;
+      border: 0;
+      padding: 12px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -5355,16 +5379,16 @@
     }
 
     .item-icon-bubble {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: #ffffff;
-      border: 1px solid #e2ecea;
+      width: 24px;
+      height: 24px;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--color-primary-btn);
-      font-size: 18px;
+      font-size: 21px;
       flex-shrink: 0;
     }
 
@@ -5378,7 +5402,7 @@
     .item-main-name {
       font-family: var(--font-heading);
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 650;
       color: var(--color-text-primary);
       white-space: nowrap;
       overflow: hidden;
@@ -5395,59 +5419,61 @@
     .item-actions-cluster {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-shrink: 0;
     }
 
     .btn-item-action-edit {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #dce5e3;
+      width: 44px;
+      height: 44px;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: var(--color-primary-btn);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 18px;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .btn-item-action-edit:hover:not(*) {
-      background: #f0f6f5;
+      color: #0E8070;
     }
 
     .btn-item-action-delete {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid #fee4e2;
+      width: 44px;
+      height: 44px;
+      border-radius: 0;
+      background: transparent;
+      border: 0;
       color: #d92d20;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
+      font-size: 18px;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
     .btn-item-action-delete:hover:not(*) {
-      background: #fef3f2;
+      color: #B42318;
     }
 
     .btn-dashed-add-action {
-      width: 100%;
-      height: 44px;
+      width: auto;
+      height: auto;
       min-height: 44px;
-      border: 1.5px dashed var(--color-dashed-border);
-      background: #ffffff;
-      border-radius: 12px;
+      border: 0;
+      background: transparent;
+      border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      margin: 2px 0 8px;
+      padding: 8px 0;
       font-family: var(--font-body);
       font-size: 14px;
       font-weight: 600;
@@ -5457,19 +5483,18 @@
     }
 
     .btn-dashed-add-action:hover:not(*) {
-      background: #fafcfb;
-      border-color: #a4bdb8;
+      color: #0E8070;
     }
 
     .referral-empty-tile {
-      background: var(--color-card-neutral);
-      border-radius: 16px;
-      border: 1.5px solid #edf2f1;
-      padding: 16px;
+      background: transparent;
+      border-radius: 0;
+      border: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      align-items: center;
+      gap: 4px;
+      align-items: flex-start;
       justify-content: center;
     }
 
@@ -10107,17 +10132,16 @@
 
     /* 1. Elevated Available Balance Hero Card */
     .wallet-balance-container {
-      background: #FFFFFF;
-      border: 1.5px solid #E2ECE9;
+      background: #F6F8F9;
+      border: 0;
       border-radius: 20px;
       padding: 18px 20px 20px 20px;
-      box-shadow: 0 4px 16px -2px rgba(5, 46, 40, 0.04);
+      box-shadow: none;
       flex-shrink: 0;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-
     .wallet-balance-header {
       display: flex;
       align-items: center;
@@ -10232,17 +10256,15 @@
       font-family: var(--font-heading);
       font-size: 13.5px;
       font-weight: 600;
-      color: #0E8070;
+      color: #64748B;
       letter-spacing: -0.01em;
     }
 
     .wallet-earnings-trigger i {
       font-size: 14px;
-      color: #0E8070;
+      color: #64748B;
       transition: transform 0.25s ease;
-    }
-
-    .wallet-earnings-body {
+    }    .wallet-earnings-body {
       max-height: 0;
       overflow: hidden;
       opacity: 0;
@@ -12413,19 +12435,29 @@
       margin: 0;
     }
   </style>
+<style>
+  .top-ecosystem-bar{width:min(100%,948px);max-width:948px;justify-content:center;margin-bottom:14px}
+  .prototype-workspace{display:grid;grid-template-columns:250px 400px 250px;align-items:center;justify-content:center;gap:24px;width:min(100%,948px)}
+  .sim-controls-bar{width:250px;flex:0 0 250px}
+  .mockup-container{width:400px;max-width:400px;flex:0 0 400px}
+  .app-switcher-panel{width:250px;align-self:center;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  .app-switcher-label{display:block;margin:0 0 9px 2px;color:#A7F3D0;font:800 10px var(--font-heading);letter-spacing:.06em;text-transform:uppercase}
+  .app-switcher-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.2)}
+  .app-switcher-tab{min-height:42px;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;border:1px solid rgba(255,255,255,.08);border-radius:9px;color:#CBD5E1;background:rgba(255,255,255,.05);text-decoration:none;font:600 11px var(--font-body);white-space:nowrap;transition:background .18s ease,color .18s ease,border-color .18s ease}
+  .app-switcher-tab i{font-size:15px}
+  .app-switcher-tab:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.18)}
+  @media(max-width:1000px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,400px)}.mockup-container{order:1;flex:none}.sim-controls-bar{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,400px)}}
+  @media(max-width:520px){.top-ecosystem-bar .app-brand-pill{padding:6px 10px;font-size:12px}.app-switcher-panel{padding:12px}.app-switcher-tab{font-size:11px}}
+</style>
 </head>
 <body>
 
-  <!-- Top Ecosystem Switcher Bar -->
+  <!-- App identity stays separate from the switch controls. -->
   <div class="top-ecosystem-bar">
     <div class="app-brand-pill">
       <span class="live-dot"></span>
       <span>Onu Doctor App</span>
     </div>
-    <a href="patient-app.html" class="app-switch-btn" title="Open Patient Discovery App">
-      <i class="ph ph-user"></i>
-      <span>Switch to Patient App</span>
-    </a>
   </div>
 
   <div class="prototype-workspace">
@@ -12441,7 +12473,13 @@
       <button type="button" class="btn-sim-trigger" onclick="simulateNextPatient()" title="Swipe/switch to next patient">
         <i class="ph-bold ph-caret-right"></i> Next Patient
       </button>
-      <button type="button" class="btn-sim-trigger" onclick="resetDemoQueue()" title="Reset patient queue to initial">
+      <button type="button" class="btn-sim-trigger" id="simBtnNoAppointments" aria-pressed="false" onclick="setDeskDemoEmptyState('no-appointments')" title="Show no patient bookings">
+        <i class="ph ph-users"></i> No patient booked
+      </button>
+      <button type="button" class="btn-sim-trigger" id="simBtnNoSchedule" aria-pressed="false" onclick="setDeskDemoEmptyState('no-schedule')" title="Show no schedule today">
+        <i class="ph ph-calendar-x"></i> No schedule today
+      </button>
+      <button type="button" class="btn-sim-trigger accent" id="simBtnResetQueue" onclick="resetDemoQueue()" title="Reset patient queue to initial">
         <i class="ph-bold ph-arrow-counter-clockwise"></i> Reset
       </button>
     </div>
@@ -12584,16 +12622,6 @@
                 </button>
               </div>
 
-              <!-- Top Desk Action Row: Schedule Action Card + Clear Schedule Button -->
-              <div class="quick-status-row">
-                <div class="schedule-action-card" onclick="navigateToSchedule()" role="button" tabindex="0" aria-label="Schedule">
-                  <span class="schedule-action-title">Schedule</span>
-                  <i class="ph ph-caret-right schedule-action-caret"></i>
-                </div>
-                <button type="button" class="btn-clear-schedule-action" id="btnClearScheduleAction" onclick="openClearScheduleModal()" aria-label="Clear Schedule">
-                  <i class="ph ph-calendar-x"></i>
-                </button>
-              </div>
             </div>
 
             <!-- Active Queue Section (Clean Elevation Directly Under Date Header) -->
@@ -12686,6 +12714,17 @@
               </div>
 
             </section>
+
+            <!-- Schedule actions sit at the bottom of My Desk, clear of the patient card. -->
+            <div class="quick-status-row">
+              <div class="schedule-action-card" onclick="navigateToSchedule()" role="button" tabindex="0" aria-label="Schedule">
+                <span class="schedule-action-title" id="scheduleActionLabel">Edit Shift</span>
+                <i class="ph ph-caret-right schedule-action-caret"></i>
+              </div>
+              <button type="button" class="btn-clear-schedule-action" id="btnClearScheduleAction" onclick="openClearScheduleModal()" aria-label="Clear Schedule">
+                <i class="ph ph-calendar-x"></i>
+              </button>
+            </div>
 
           </div>
 
@@ -13010,7 +13049,7 @@
                 <div class="medicine-item-card" id="medCard1">
                   <div class="item-left-cluster">
                     <div class="item-icon-bubble">
-                      <i class="ph ph-pill"></i>
+                      <i class="ph-fill ph-pill"></i>
                     </div>
                     <div class="item-text-block">
                       <span class="item-main-name">Napa Extra 500mg</span>
@@ -13031,7 +13070,7 @@
                 <div class="medicine-item-card" id="medCard2">
                   <div class="item-left-cluster">
                     <div class="item-icon-bubble">
-                      <i class="ph ph-pill"></i>
+                      <i class="ph-fill ph-pill"></i>
                     </div>
                     <div class="item-text-block">
                       <span class="item-main-name">Vergon 5</span>
@@ -13599,7 +13638,7 @@
             <!-- Top App Header -->
             <div class="app-header">
               <div class="header-text">
-                <h1 class="header-title">Doctor Profile</h1>
+                <h1 class="header-title">Profile</h1>
               </div>
                 <button class="btn-circle-icon" onclick="openNotificationsPage('profile')" aria-label="Notifications">
                 <i class="ph ph-bell"></i>
@@ -14407,7 +14446,7 @@
           <div class="sheet-drag-handle"></div>
           <div class="sheet-top-row">
             <div class="sheet-badge-icon">
-              <i class="ph ph-pill"></i>
+              <i class="ph-fill ph-pill"></i>
             </div>
           </div>
 
@@ -15695,6 +15734,14 @@
       </div>
     </div>
   </div>
+
+  <nav class="app-switcher-panel" aria-label="Switch app">
+    <span class="app-switcher-label">Switch app</span>
+    <div class="app-switcher-tabs">
+      <a href="patient-app.html" class="app-switcher-tab" title="Open Patient App"><i class="ph ph-user" aria-hidden="true"></i><span>Patient App</span></a>
+      <a href="onubot-app.html" class="app-switcher-tab" title="Return to Login"><i class="ph ph-sign-in" aria-hidden="true"></i><span>Login</span></a>
+    </div>
+  </nav>
   </div><!-- /.prototype-workspace -->
 
   <script>
@@ -18445,6 +18492,7 @@
       if (pageOnu) pageOnu.className = 'app-page page-onu page-left';
 
       pageDesk.className = 'app-page active-page';
+      updateDeskDemoEmptyStateControls();
       document.querySelector('.phone-screen').classList.remove('in-call-mode');
 
       // Universal Bottom Navigation Sync
@@ -19752,6 +19800,7 @@
       const newTx = {
         id: 'tx_wd_' + Date.now(),
         type: 'outflow',
+        period: 'today',
         title: selectedAcc.type === 'bank' ? 'Bank Withdrawal' : 'MFS Withdrawal',
         subtitle: destName,
         method: selectedAcc.name,
@@ -20385,6 +20434,7 @@
         pageDesk.scrollTop = 0;
         pageAppts.className = 'app-page page-appointments page-right';
         pageDesk.className = 'app-page active-page';
+        updateDeskDemoEmptyStateControls();
       }
     }
 
@@ -21707,7 +21757,52 @@
       }
     }
 
+    let deskDemoEmptyState = null;
+
+    function updateDeskDemoEmptyStateControls() {
+      const noSchedule = deskDemoEmptyState === 'no-schedule';
+      const deskPage = document.getElementById('pageDesk');
+      const scheduleLabel = document.getElementById('scheduleActionLabel');
+      if (deskPage) deskPage.classList.toggle('is-no-schedule', noSchedule);
+      if (scheduleLabel) scheduleLabel.textContent = noSchedule ? 'Create Shift' : 'Edit Shift';
+
+      const states = [
+        ['simBtnNoAppointments', 'no-appointments'],
+        ['simBtnNoSchedule', 'no-schedule']
+      ];
+      states.forEach(([id, state]) => {
+        const button = document.getElementById(id);
+        if (!button) return;
+        const active = deskDemoEmptyState === state;
+        button.classList.toggle('accent', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+      const resetButton = document.getElementById('simBtnResetQueue');
+      if (resetButton) resetButton.classList.toggle('accent', !deskDemoEmptyState);
+    }
+
+    function renderDeskDemoEmptyState(state) {
+      const outer = document.getElementById('heroCardOuter');
+      if (!outer) return;
+      if (state === 'no-schedule') {
+        outer.innerHTML = '<div class="desk-empty-state" role="status">No shift created today</div>';
+        return;
+      }
+      outer.innerHTML = '<div class="desk-empty-state" role="status">No patients booked</div>';
+    }
+
+    function setDeskDemoEmptyState(state) {
+      deskDemoEmptyState = state;
+      updateDeskDemoEmptyStateControls();
+      if (state) renderDeskDemoEmptyState(state);
+      else renderDeskPatientCard(0);
+    }
+
     function renderDeskPatientCard(index = 0) {
+      if (deskDemoEmptyState) {
+        renderDeskDemoEmptyState(deskDemoEmptyState);
+        return;
+      }
       const outer = document.getElementById('heroCardOuter');
       if (!queuePatients || queuePatients.length === 0) {
         if (outer) {
@@ -21940,6 +22035,8 @@
     }
 
     function resetDemoQueue() {
+      deskDemoEmptyState = null;
+      updateDeskDemoEmptyStateControls();
       queuePatients = JSON.parse(JSON.stringify(initialShift1Patients));
       currentPatientIndex = 0;
       appointmentsData.forEach(a => {
@@ -22393,7 +22490,7 @@
         card.innerHTML = `
           <div class="item-left-cluster">
             <div class="item-icon-bubble">
-              <i class="ph ph-pill"></i>
+              <i class="ph-fill ph-pill"></i>
             </div>
             <div class="item-text-block">
               <span class="item-main-name">${name}</span>
@@ -23149,7 +23246,7 @@
             <div class="medicine-item-card" id="medCard1">
               <div class="item-left-cluster">
                 <div class="item-icon-bubble">
-                  <i class="ph ph-pill"></i>
+                  <i class="ph-fill ph-pill"></i>
                 </div>
                 <div class="item-text-block">
                   <span class="item-main-name">Fexofenadine 120mg</span>
@@ -23169,7 +23266,7 @@
             <div class="medicine-item-card" id="medCard2">
               <div class="item-left-cluster">
                 <div class="item-icon-bubble">
-                  <i class="ph ph-pill"></i>
+                  <i class="ph-fill ph-pill"></i>
                 </div>
                 <div class="item-text-block">
                   <span class="item-main-name">Hydrocortisone 1% Cream</span>
@@ -24861,7 +24958,7 @@
       const activeShifts = (todayShifts && todayShifts.length > 0) ? todayShifts : altTodayShifts;
 
       if (!activeShifts || activeShifts.length === 0) {
-        renderDeskHeroNoShiftState();
+        setDeskDemoEmptyState('no-schedule');
         return;
       }
 
@@ -25731,7 +25828,7 @@
         isShiftActive = false;
         isShiftLocked = false;
         isDoctorOffline = false;
-        renderDeskHeroNoShiftState();
+        setDeskDemoEmptyState('no-appointments');
       }
 
       // Re-render schedule view for currently selected date (removes shifts from edit shift pages)
@@ -25774,28 +25871,11 @@
       showToast(toastMsg);
     }
 
-    // Clean Minimal No-Shift State on Desk Hero Card
+    // Compact no-schedule state shown on the desk when today has no shifts.
     function renderDeskHeroNoShiftState() {
-      const heroCard = document.getElementById('heroCard');
-      const heroContainer = document.getElementById('heroCardInner');
       const headerMeta = document.getElementById('headerTimeMeta');
       if (headerMeta) headerMeta.textContent = '';
-      if (!heroContainer) return;
-      if (heroCard) heroCard.className = 'patient-hero-card no-shift-card';
-
-      heroContainer.innerHTML = `
-        <div class="patient-details" style="margin-bottom: 14px;">
-          <h3 class="patient-name" style="font-size: 19px; font-weight: 700; color: #0F172A; margin-bottom: 2px;">No Shift Today</h3>
-          <div class="patient-info" style="font-size: 13px; color: #64748B;">
-            <span>Create a shift to start accepting appointments.</span>
-          </div>
-        </div>
-
-        <button class="btn-hero-action" style="background: var(--color-primary-btn, #02241F); color: #ffffff;" onclick="navigateToSchedule()">
-          <i class="ph-bold ph-plus"></i>
-          <span>Add Shift</span>
-        </button>
-      `;
+      setDeskDemoEmptyState('no-schedule');
     }
 
     // Ensure pristine viewport and prevent browser scroll restoration on refresh
