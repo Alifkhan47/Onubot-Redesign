@@ -14092,7 +14092,7 @@
 
           <div class="nav-item active" id="navItemOnu" onclick="navigateToOnu()">
             <div class="active-nav-pill">
-              <i class="ph-fill ph-chat-centered-text"></i>
+              <i class="ph-fill ph-sparkle"></i>
             </div>
           </div>
 
@@ -18507,7 +18507,7 @@
       const tabs = [
         { id: 'navItemDesk', tab: 'desk', label: 'Desk', iconOutline: 'ph ph-house', iconFill: 'ph-fill ph-house', action: 'navigateToDesk()' },
         { id: 'navItemPatients', tab: 'patients', label: 'Patients', iconOutline: 'ph ph-users', iconFill: 'ph-fill ph-users', action: 'navigateToPatientsList()' },
-        { id: 'navItemOnu', tab: 'onu', label: 'Onu', iconOutline: 'ph ph-chat-centered-text', iconFill: 'ph-fill ph-chat-centered-text', action: 'navigateToOnu()' },
+        { id: 'navItemOnu', tab: 'onu', label: 'Onu', iconOutline: 'ph ph-sparkle', iconFill: 'ph-fill ph-sparkle', action: 'navigateToOnu()' },
         { id: 'navItemWallet', tab: 'wallet', label: 'Wallet', iconOutline: 'ph ph-wallet', iconFill: 'ph-fill ph-wallet', action: 'navigateToWallet()' },
         { id: 'navItemProfile', tab: 'profile', label: 'Profile', iconOutline: 'ph ph-user-circle', iconFill: 'ph-fill ph-user-circle', action: 'navigateToDoctorProfile()' }
       ];
@@ -19234,7 +19234,7 @@
       if (target === 'wallet') {
         navigateToWallet();
       } else if (target === 'apt1' || target === 'apt2' || target === 'apt3' || target === 'apt4') {
-        openAppointmentDetails('apt1');
+        openAppointmentDetails('apt1', 'notifications');
       } else {
         showToast('Notification details opened');
       }
@@ -21129,12 +21129,18 @@
       }
 
       // Slide Page Transition
+      const sourcePageId = appointmentDetailsBackTarget === 'notifications' ? 'pageNotifications'
+        : appointmentDetailsBackTarget === 'desk' ? 'pageDesk'
+        : appointmentDetailsBackTarget === 'profile' ? 'pagePatientProfile' : 'pageAppointments';
+      const sourcePage = document.getElementById(sourcePageId);
       const pageAppts = document.getElementById('pageAppointments');
       const pageDetails = document.getElementById('pageAppointmentDetails');
-      if (pageAppts && pageDetails) {
+      if (sourcePage && pageDetails) {
         pageDetails.scrollTop = 0;
-        pageAppts.className = 'app-page page-appointments page-left';
+        sourcePage.className = sourcePage.className.replace('active-page', 'page-left');
+        if (pageAppts && sourcePage !== pageAppts) pageAppts.className = 'app-page page-appointments page-right';
         pageDetails.className = 'app-page page-appointment-details active-page';
+        updateBottomNavVisibility();
       }
     }
 

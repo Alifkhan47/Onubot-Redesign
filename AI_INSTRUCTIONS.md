@@ -55,14 +55,22 @@
 
 These recent decisions are authoritative when older screen descriptions below conflict with the live prototypes.
 
+### Onu Login
+- Keep a clear gap between the “Are you a doctor? Join the network” prompt and the legal consent copy; maintain this spacing on short mobile screens as well.
+- Match Verify details inputs and field titles to Basic information: borderless soft-gray fill, consistent field height, subtle focus ring, 10px/600 muted uppercase labels, and even vertical spacing. Keep required asterisks red.
+
 ### Shared Onu Chat
 - Keep assistant replies plain text and use dark slate text near `#334155` for welcome prompts and conversation turns.
 - Give user and assistant turns clear vertical separation. Doctor chat uses short conversational medicine guidance; patient chat asks symptom follow-up questions. Keep conversation actions secondary rather than primary CTAs.
+- Patient specialty suggestion copy stays in the normal assistant chat; the artifact-style card contains only a short title and doctor-search action.
 - Show demo response progress as a small, changing, context-aware status line. Avoid a progress card or boxed loader. Prescription review may show short scan, medicine-detection, and detail-organization steps.
 - Preserve the voice demo's alternating user/Onu transcript, distinct speaker colors, role-specific content, stable waveform position, and separate stop/microphone controls.
 
 ### Patient App
 - The Discover Find a Doctor card uses a light mint surface, title and `100+ Verified Doctors` copy on the left, and the centered `assets/doctor-discovery.svg` illustration on the right. Its blue accent is `#89A7CE`.
+- The Find a Doctor directory omits a results-count line; leave consistent spacing between specialty filters and soft-gray doctor cards. Search placeholder: “Search by name, specialty”.
+- The patient booking screen omits the “Initial consultation” badge and the shift card’s turn-call helper line. Keep shift time beside the shift badge and retain the existing subtle selected card fill, outline, and check indicator.
+- On booking confirmation, show “You’ll get a call when it’s your turn.” as the video-call subtitle and keep a booking-complete message for in-person visits. Add clear space between the success icon and heading and below the subtitle; rotate the badge tile and frame together while keeping the check seal still, and use spacing instead of divider lines within the receipt.
 - The profile header shows the wallet icon and credit amount at top-right without a pill/container or a separate Available Credits section.
 - Patient-side doctor profiles show experience in years, omit the BMDC Verified badge, and keep the consultation-fee amount the same size and weight as other profile values, using clear blue `#2E64C8`.
 - Appointment detail summaries show the doctor's photo and place the visit-mode icon beside the date. Reschedule and Cancel are icon-free secondary actions; Reschedule has a quiet neutral fill and Cancel retains a subtle red fill.
@@ -326,6 +334,7 @@ The doctor prototype is a single HTML document containing its page styles, marku
 * **No Redundant Bottom Dock on Completed Visits**:
   * The bottom dock button is hidden for completed visits because the **Issued Prescription** card on top already contains the primary `View Rx` action. Bottom dock is active only for pending tasks (`Review & Finalize Rx`, `Re-join Active Call`, or In-Person actions).
 * **Contextual Back Navigation**: Back arrow returns to `#pagePatientProfile` if opened from a patient visit log, `#pageAppointments` if opened from the appointments list, or `#pageDesk` if opened from desk.
+* **Demo Source-Preserving Back Navigation**: Page-level back actions in both prototypes must return to the page that launched the current page. Keep the source page, its scroll position, and bottom-navigation visibility when opening contextual destinations such as Find a Doctor or booking from cancelled visit details. Notification-opened appointment details return to Notifications. Avoid fixed legacy/root destinations when a demo source page exists.
 
 ### Screen 9: My Patients Directory (`#pagePatientsList`)
 * **Purpose**: Complete patient directory containing every patient ever consulted by the doctor once or multiple times.

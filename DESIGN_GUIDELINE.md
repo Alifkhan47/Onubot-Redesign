@@ -5,6 +5,9 @@
 
 These decisions reflect the current patient and doctor prototypes. They override older screen-specific examples below wherever the older wording conflicts with the live HTML/CSS.
 
+- **Onu login:** Keep clear space between the doctor-network prompt and legal consent copy, including on short mobile screens.
+- **Doctor verification form:** Match Verify details fields and titles to Basic information with a borderless soft-gray fill, 10px/600 muted uppercase labels, a clear focus ring, and consistent spacing. Keep required asterisks red.
+
 - **Mobile interaction:** Treat both prototypes as touch-first mobile apps. Do not add hover-only visual effects. Keep tap feedback (`:active`) and keyboard focus-visible states.
 - **Canvas and surfaces:** Keep the app canvas white. Prefer quiet filled surfaces over outlines and shadows. Remove unnecessary borders from icon holders and cards when a soft background can separate the content. Avoid nested containers.
 - **App-scoped colors:** The two files use slightly different primary and text tokens. Patient app primary CTA is `#052E28`; doctor app primary CTA is `#02241F`. Patient primary text is generally `#0F172A`; doctor headings often use `#000000`. Patient secondary text is generally `#64748B`; doctor secondary text often uses `#717171`. Check the app's `:root` tokens before hard-coding a shared value.
@@ -12,7 +15,13 @@ These decisions reflect the current patient and doctor prototypes. They override
 - **Chat text and actions:** Keep Onu responses in plain text. Use comfortable vertical separation between user and assistant turns and a dark slate text color around `#334155`. In-chat actions are secondary controls with quiet neutral fills; do not use the app's dark primary CTA style for them.
 - **Chat loading and voice:** Demo AI loading should use a small, context-aware changing status line, not a large card. The voice demo uses distinct user/Onu transcript turns and a steady waveform position; retain conversational content and ordering.
 - **Patient Discover card:** The Find a Doctor card uses a soft mint surface, title and supporting count on the left, and `assets/doctor-discovery.svg` on the right. The artwork accent is `#89A7CE`; keep the SVG vertically centered and preserve the card's tap target.
-- **Patient profile details:** Show patient credits as an unboxed wallet icon plus amount in the top-right of the Profile heading; do not retain a separate Available Credits row. On the patient-side doctor profile, the consultation fee matches other value text in size/weight and uses `#2E64C8`; BMDC registration has no Verified badge; show years of experience.
+- **Patient doctor directory:** Show soft-gray doctor cards directly below the specialty filters with consistent spacing; omit the “Showing N doctors” count. Search placeholder: “Search by name, specialty”.
+- **Patient booking screen:** Omit the “Initial consultation” badge. Keep the shift time beside its badge and use the existing subtle selected card fill, outline, and check indicator. Keep generous vertical breathing room around the serial/booked row and omit the turn-call helper line.
+- **Patient booking confirmation:** For video consultations, use “You’ll get a call when it’s your turn.” as the confirmation subtitle; keep a booking-complete message for in-person visits. Give the success icon and heading clear separation. Animate the full badge tile and frame together while keeping the check seal upright and still. Leave a generous gap before the receipt and separate its sections with spacing instead of rules.
+- **Patient profile details:** Show patient credits as an unboxed wallet icon plus amount in the top-right of the Profile heading; do not retain a separate Available Credits row. On the patient-side doctor profile, use subtle green icons for the left-aligned detail rows, keep the consultation fee the same size/weight as other value text in `#2E64C8`, omit the BMDC Verified badge, and show years of experience.
+- **Patient Onu specialty suggestion:** Keep the explanation in the normal assistant chat. The artifact-style card contains a clear icon and short title plus the direct doctor-search action, without repeating the explanation inside.
+- **Pre-visit summary:** Use a borderless soft-sage surface, clear heading treatment, readable concern emphasis, and even spacing for the summary fields.
+- **Patient prescription medicine rows:** Remove outlines and use very subtle status-tinted backgrounds, with a soft green neutral for verified rows and a soft warm tint for unverified rows.
 - **Appointment details:** Use the doctor's photo beside their name and put the visit-type icon inline before the date. Keep Reschedule and Cancel actions icon-free and borderless; Reschedule uses a subtle neutral fill, Cancel keeps its soft red fill.
 - **Doctor-side patient profile:** Leave a clear gap between the patient identity header and the vitals grid. Initials avatars have a soft fill and no stroke.
 - **Doctor wallet:** Transaction icon holders use the Settings neutral fill (`#F8FAF9`) while keeping their semantic icon colors. Transaction amounts use restrained 14px/600 typography. Saved-account rows use a subtle filled surface without a border; bank/mobile icons remain colored but have no tiles behind them.
@@ -91,7 +100,7 @@ All icons across the application use **Phosphor Icons** in the **`Regular`** wei
 * Status / Calendar: `<i class="ph ph-calendar-blank"></i>`, `<i class="ph ph-clock"></i>`
 * Primary CTAs: `<i class="ph ph-video-camera"></i>`, `<i class="ph ph-phone-call"></i>`, `<i class="ph ph-chat-teardrop"></i>`
 * Navigation Arrows: `<i class="ph ph-arrow-right"></i>`, `<i class="ph ph-caret-right"></i>`
-* Bottom Navigation: `<i class="ph-fill ph-house"></i>`, `<i class="ph ph-users"></i>`, `<i class="ph ph-chat-centered-text"></i>`, `<i class="ph ph-wallet"></i>`, `<i class="ph ph-user-circle"></i>`
+* Bottom Navigation: Doctor and patient Onu tabs use the sparkle icon (`ph ph-sparkle` inactive, `ph-fill ph-sparkle` active); retain each app's existing icon family and weights for the remaining tabs.
 
 ---
 
@@ -212,6 +221,7 @@ The schedule configuration screens transform clinical timetable settings into a 
 ### 6.1 Universal Sticky Top Navigation & 1-Week Date Strip
 * **Universal Sticky Navigation**: All top navigation panels (back button, screen title, actions) MUST remain **permanently pinned/sticky at the top** (`position: sticky; top: -12px; z-index: 20; background: var(--color-app-bg);`) so the user can always navigate back instantly regardless of scroll position.
 * **Back Button**: Circular icon container (`44px × 44px`, background `#F0F6F5`, icon `ph ph-arrow-left` in `#052E28`).
+* **Demo Back Routing**: In both the patient and doctor prototypes, a page-level back button returns to the page that opened the current screen and restores its prior scroll position and navigation visibility. Do not send demo flows to a legacy/root page when the source screen is still available.
 * **Screen Title**: `Urbanist 24px Bold` (`#000000`).
 * **Horizontal 1-Week Date Strip (Starting Today)**:
   * Inactive Day: `#F6F8F9` background, `border: 1.5px solid #EDF2F1`, sleek `10px` radius (not overly circular/bubbly), `DM Sans 11px` day name (`#717171`), `Urbanist 17px Bold` date number (`#000000`).

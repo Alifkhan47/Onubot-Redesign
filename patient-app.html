@@ -611,8 +611,8 @@
     .patient-rx-readonly { display: flex; align-items: center; color: var(--color-text-secondary); background: #F6F8F7; }
     .patient-rx-field input:focus, .patient-rx-field select:focus, .patient-rx-field textarea:focus, .patient-rx-medicine-field input:focus, .patient-rx-medicine-field textarea:focus { outline: 2px solid rgba(0,128,119,.25); border-color: var(--color-accent-teal); }
     .patient-rx-medicine-wrap { position: relative; overflow: hidden; margin-bottom: 8px; border-radius: 13px; touch-action: pan-y; }
-    .patient-rx-medicine { position: relative; z-index: 1; margin: 0; padding: 0 12px; border: 1px solid #E2EBE8; border-radius: 13px; background: #fff; transition: transform .18s ease; }
-    .patient-rx-medicine.unverified { border-color: #EADBAF; background: #FFFCF3; }
+    .patient-rx-medicine { position: relative; z-index: 1; margin: 0; padding: 0 12px; border: 0; border-radius: 13px; background: #F4F8F6; transition: transform .18s ease, background-color .18s ease; }
+    .patient-rx-medicine.unverified { background: #FFFAF0; }
     .patient-rx-medicine.swipe-open { transform: translateX(-72px); }
     .patient-rx-medicine > summary { display: flex; align-items: center; gap: 8px; min-height: 54px; cursor: pointer; list-style: none; }
     .patient-rx-medicine-summary-name { display: flex; flex: 1; flex-direction: column; align-items: flex-start; min-width: 0; overflow: hidden; color: var(--color-text-primary); font: 650 13px/1.25 var(--font-body); }
@@ -691,7 +691,6 @@
     .onu-message { margin: 20px 0; max-width: 91%; font: 14px/1.5 var(--font-body); overflow-wrap: anywhere; white-space: pre-wrap; }
     .onu-message.user { width: fit-content; max-width: 91%; margin-left: auto; padding: 11px 14px; background: #EFF7F4; border-radius: 18px; color: #334155; }
     .onu-message.assistant { color: #334155; padding: 4px 2px; }
-    .onu-recommendation-button { display: inline-flex; align-items: center; justify-content: center; width: auto; max-width: 100%; min-height: 42px; margin-top: 12px; padding: 0 14px; border: 0; border-radius: 12px; background: #F1F5F4; color: #285C53; box-shadow: none; font: 600 13px var(--font-body); }
     .onu-attachment-list { display: grid; gap: 7px; margin-top: 8px; }
     .onu-attachment-tile { display: flex; align-items: center; gap: 9px; max-width: 100%; padding: 9px 11px; border: 1px solid #DDE9E5; border-radius: 12px; background: #fff; font-size: 12px; }
     .onu-attachment-tile i { color: var(--color-accent-teal); font-size: 18px; flex: 0 0 auto; }
@@ -1080,22 +1079,6 @@
       font-weight: 700 !important;
     }
 
-    /* Meta Count & Sort */
-    .results-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 2px;
-      flex-shrink: 0;
-    }
-
-    .results-count-text {
-      font-family: var(--font-body);
-      font-size: 12px;
-      font-weight: 600;
-      color: #64748B;
-    }
-
     /* Soft, high-contrast doctor result cards */
     .doctors-directory-list {
       display: flex;
@@ -1447,7 +1430,7 @@
     .profile-info-icon {
       width: 24px;
       height: 24px;
-      color: #7B8794;
+      color: #8AA9A2;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1658,21 +1641,6 @@
       font-weight: 500;
     }
 
-    .consult-badge-pill {
-      display: inline-flex;
-      align-self: flex-start;
-      margin-top: 3px;
-      background: #E8F7F4;
-      border: 1px solid rgba(13, 122, 95, 0.25);
-      border-radius: 6px;
-      padding: 2.5px 8px;
-      font-family: var(--font-heading);
-      font-size: 10.5px;
-      font-weight: 700;
-      color: #0D7A5F;
-      letter-spacing: 0.04em;
-    }
-
     /* Consultation mode tabs, matching the visits tab row */
     .consult-mode-switch {
       display: flex;
@@ -1833,10 +1801,10 @@
       background: #FFFFFF;
       border: 1px solid #E2ECE9;
       border-radius: 16px;
-      padding: 14px 16px;
+      padding: 16px 16px 22px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 0;
       cursor: pointer;
       transition: all 0.18s ease;
       position: relative;
@@ -1920,7 +1888,8 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      padding: 2px 0;
+      margin-top: 20px;
+      padding: 0;
     }
 
     .serial-col, .booked-col {
@@ -1963,27 +1932,6 @@
       font-weight: 700;
       color: #0F172A;
       margin-top: 2px;
-    }
-
-    .shift-card-divider {
-      height: 1px;
-      background: rgba(167, 243, 208, 0.7);
-    }
-
-    .shift-footer-note {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-family: var(--font-body);
-      font-size: 12px;
-      color: #475569;
-      line-height: 1.4;
-    }
-
-    .shift-footer-note i {
-      font-size: 15px;
-      color: #0D7A5F;
-      flex-shrink: 0;
     }
 
     /* Billing Summary Card */
@@ -2172,10 +2120,10 @@
     .confirm-content-group {
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 30px;
       width: 100%;
       max-width: 430px;
-      margin: 24px auto auto;
+      margin: 34px auto auto;
     }
 
     .confirm-hero-section {
@@ -2187,45 +2135,61 @@
       gap: 9px;
     }
 
-    .confirm-success-seal {
+    .confirm-success-container {
       position: relative;
       width: 66px;
       height: 66px;
       display: grid;
       place-items: center;
+      isolation: isolate;
+      margin-bottom: 12px;
+    }
+
+    .confirm-success-frame {
+      position: absolute;
+      inset: 0;
       border-radius: 21px;
       background: #EAF1EF;
+    }
+
+    .confirm-success-frame::after {
+      content: '';
+      position: absolute;
+      inset: -7px;
+      border: 2px solid transparent;
+      border-top-color: #A8D2C8;
+      border-right-color: #A8D2C8;
+      border-radius: 25px;
+      pointer-events: none;
+    }
+
+    .confirm-success-seal {
+      position: relative;
+      z-index: 1;
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
       font-size: 38px;
       color: var(--color-primary-btn);
     }
 
-    .confirm-success-seal::after {
-      content: '';
-      position: absolute;
-      inset: -7px;
-      border: 2px solid #A8D2C8;
-      border-radius: 25px;
-      opacity: 0;
-      pointer-events: none;
+    .page-booking-confirmed.active-page .confirm-success-frame {
+      animation: confirmFrameRotate 6s linear infinite;
     }
 
     .page-booking-confirmed.active-page .confirm-success-seal {
       animation: confirmSuccessPop 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
     }
 
-    .page-booking-confirmed.active-page .confirm-success-seal::after {
-      animation: confirmSuccessRing 650ms ease-out 100ms both;
-    }
-
     @keyframes confirmSuccessPop {
-      0% { transform: scale(0.68) rotate(-10deg); opacity: 0; }
-      70% { transform: scale(1.08) rotate(2deg); opacity: 1; }
-      100% { transform: scale(1) rotate(0); opacity: 1; }
+      0% { transform: scale(0.68); opacity: 0; }
+      70% { transform: scale(1.08); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
-    @keyframes confirmSuccessRing {
-      0% { transform: scale(0.76); opacity: 0.65; }
-      100% { transform: scale(1.22); opacity: 0; }
+    @keyframes confirmFrameRotate {
+      to { transform: rotate(360deg); }
     }
 
     .confirm-hero-title {
@@ -2249,7 +2213,7 @@
     .confirm-receipt-card {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
       padding: 18px;
       border-radius: 20px;
       background: #F5F8F6;
@@ -2280,9 +2244,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 14px 0;
-      border-top: 1px solid #DFEAE5;
-      border-bottom: 1px solid #DFEAE5;
+      padding: 4px 0;
     }
 
     .confirm-doc-avatar {
@@ -2348,8 +2310,9 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
+      .page-booking-confirmed.active-page .confirm-success-frame,
       .page-booking-confirmed.active-page .confirm-success-seal,
-      .page-booking-confirmed.active-page .confirm-success-seal::after {
+      .page-booking-confirmed.active-page .confirm-success-frame::after {
         animation: none;
       }
     }
@@ -5041,15 +5004,16 @@
     .previsit-upload-actions.no-files .previsit-upload-action.quiet { width: auto; flex: 0 0 auto; padding: 0 12px; }
     .previsit-review {
       width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
-      margin-top: 8px; padding: 0 11px 12px; border: 1px solid #E6ECE9; border-radius: 16px; background: #F7F9F8;
+      margin-top: 8px; padding: 4px 13px 13px; border: 0; border-radius: 16px; background: #F4F8F6;
     }
-    .previsit-review-heading { grid-column: 1 / -1; display: flex; align-items: center; gap: 8px; padding: 14px 1px 4px; font: 700 15px var(--font-heading); color: #10221E; }
-    .previsit-review-heading i { color: #087C70; font-size: 17px; }
-    .previsit-review-row { display: flex; align-items: flex-start; min-width: 0; padding: 10px 11px; border: 0; border-radius: 11px; background: transparent; }
+    .previsit-review-heading { grid-column: 1 / -1; display: flex; align-items: center; gap: 9px; padding: 10px 0 5px; font: 700 15px var(--font-heading); color: #10221E; }
+    .previsit-review-heading i { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: #DDEFEA; color: #087C70; font-size: 16px; }
+    .previsit-review-row { display: flex; align-items: flex-start; min-width: 0; padding: 8px 0; border: 0; border-radius: 0; background: transparent; }
     .previsit-review-row-reason, .previsit-review-row-symptoms { grid-column: 1 / -1; }
-    .previsit-review-copy { display: grid; flex: 1; min-width: 0; gap: 4px; }
-    .previsit-review-label { color: #78847F; font: 11px/1.3 var(--font-body); margin: 0; }
+    .previsit-review-copy { display: grid; flex: 1; min-width: 0; gap: 3px; }
+    .previsit-review-label { color: #75837E; font: 10px/1.3 var(--font-body); letter-spacing: .035em; margin: 0; }
     .previsit-review-value { color: #202B27; font: 600 13px/1.45 var(--font-body); overflow-wrap: anywhere; }
+    .previsit-review-row-reason .previsit-review-value { color: #10221E; font-size: 15px; font-weight: 700; }
     .previsit-review.is-editing { grid-template-columns: minmax(0, 1fr); gap: 13px; }
     .previsit-review.is-editing .previsit-review-row { grid-column: 1; padding: 0; background: transparent; }
     .previsit-review.is-editing .previsit-review-copy { gap: 6px; }
@@ -6126,7 +6090,7 @@
           <div class="doctors-search-row">
             <div class="doctors-search-box">
               <i class="ph ph-magnifying-glass"></i>
-              <input type="text" class="doctors-search-input" id="doctorSearchInput" placeholder="Search by name, ID or phone..." oninput="onDoctorSearchInput(this.value)">
+              <input type="text" class="doctors-search-input" id="doctorSearchInput" placeholder="Search by name, specialty" oninput="onDoctorSearchInput(this.value)">
               <button class="btn-clear-search" id="btnClearSearch" onclick="clearDoctorSearch()" aria-label="Clear Search">
                 <i class="ph ph-x-circle"></i>
               </button>
@@ -6146,11 +6110,6 @@
             <div class="filter-chip" onclick="setDoctorFilter('Dermatology', this)">Dermatology</div>
             <div class="filter-chip" onclick="setDoctorFilter('Gynecology', this)">Gynecology</div>
             <div class="filter-chip" onclick="setDoctorFilter('Orthopedics', this)">Orthopedics</div>
-          </div>
-
-          <!-- Meta Count -->
-          <div class="results-meta-row">
-            <span class="results-count-text" id="doctorResultsCount">Showing 8 doctors</span>
           </div>
 
           <!-- The Redesigned Doctor Directory List -->
@@ -6296,7 +6255,6 @@
                 <i class="ph-fill ph-seal-check verified-icon" aria-hidden="true" title="Verified doctor"></i>
               </div>
               <span class="book-doc-spec" id="bookConsultDocSpec">Cardiology</span>
-              <span class="consult-badge-pill">Initial consultation</span>
             </div>
           </div>
 
@@ -6437,9 +6395,12 @@
         <div class="app-page page-booking-confirmed page-right" id="pageBookingConfirmed">
           <div class="confirm-content-group">
             <div class="confirm-hero-section">
-              <i class="ph-fill ph-seal-check confirm-success-seal" aria-hidden="true"></i>
+              <span class="confirm-success-container" aria-hidden="true">
+                <span class="confirm-success-frame"></span>
+                <i class="ph-fill ph-seal-check confirm-success-seal"></i>
+              </span>
               <h1 class="confirm-hero-title" id="confirmedTitle" tabindex="-1">Booking Confirmed!</h1>
-              <p class="confirm-hero-sub">Your appointment is booked and payment is complete.</p>
+              <p class="confirm-hero-sub" id="confirmedSubtext">You’ll get a call when it’s your turn.</p>
             </div>
 
             <section class="confirm-receipt-card" aria-label="Appointment receipt">
@@ -7394,6 +7355,11 @@
     let patientOnuSpeechRecognition = null;
     let patientOnuFlow = null;
     let returnToOnuAfterDoctorList = false;
+    let doctorDirectoryReturnPageId = 'pageDiscover';
+    let doctorDirectoryReturnPageClass = 'app-page page-discover active-page';
+    let doctorDirectoryReturnScrollTop = 0;
+    let doctorDirectoryReturnHadHiddenNav = false;
+    let doctorDirectoryReturnTab = 'discover';
 
     function normalizePatientPrescriptionData(value) {
       const raw = value && typeof value === 'object' ? value : {};
@@ -8861,7 +8827,8 @@
           && !/^I.{1,3}ll use .+ as context in this chat\. They are not saved to Active medications\.$/i.test(text);
       }).map(message => {
         const files = message.attachments?.length ? `<div class="onu-attachment-list">${message.attachments.map((file, index) => { const category = getPatientOnuFileCategory(file); const imageUrl = category === 'image' ? patientOnuAttachmentPreviewUrls.get(message.id + ':' + index) : null; const fileFormat = escapePreVisitText(getPatientDocumentFormatLabel(file)); if (imageUrl) return `<figure><img class="onu-attachment-photo" src="${imageUrl}" alt="Uploaded photo: ${escapePreVisitText(file.name)}"><figcaption class="onu-attachment-photo-caption"><span>${escapePreVisitText(file.name)}</span><small>${fileFormat}</small></figcaption></figure>`; const details = { image: ['ph-image', 'Image'], pdf: ['ph-file-pdf', 'PDF document'], document: ['ph-file-doc', 'Word document'], text: ['ph-file-text', 'Text document'], spreadsheet: ['ph-file-xls', 'Spreadsheet'], presentation: ['ph-file-ppt', 'Presentation'] }[category] || ['ph-file', 'Document']; return `<div class="onu-attachment-tile"><i class="ph ${details[0]}" aria-hidden="true"></i><span class="onu-attachment-copy"><span class="onu-attachment-name" title="${escapePreVisitText(file.name)}">${escapePreVisitText(file.name)}</span><span class="onu-attachment-type">${fileFormat}</span></span></div>`; }).join('')}</div>` : '';
-        const recommendation = message.action?.type === 'doctor-search' ? `<button type="button" class="onu-recommendation-button" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors</button>` : '';
+        const isSpecialtyRecommendation = message.action?.type === 'doctor-search';
+        const recommendation = isSpecialtyRecommendation ? `<section class="patient-rx-review onu-specialty-recommendation" aria-label="Specialty suggestion"><div class="patient-rx-review-head"><i class="ph ph-stethoscope" aria-hidden="true"></i><div class="patient-rx-review-title">Specialty suggestion</div></div><button type="button" class="patient-rx-review-action" data-specialty="${escapePreVisitText(message.action.specialty)}" onclick="openPatientOnuRecommendedDoctors(this.dataset.specialty)">Find ${escapePreVisitText(message.action.specialty)} doctors <i class="ph ph-arrow-right" aria-hidden="true"></i></button></section>` : '';
         const prescriptionSteps = ['Scanning your prescription photo…', 'Detecting medicine names…', 'Organizing dose and frequency details…', 'Preparing your review…'];
         const isPrescriptionProcessing = message.action?.type === 'prescription-processing';
         const isReplyProcessing = message.action?.type === 'reply-processing';
@@ -9728,11 +9695,23 @@
     });
 
     function returnFromDoctorDirectory() {
-      if (!returnToOnuAfterDoctorList) { navigateToDiscover(); return; }
+      const directory = document.getElementById('pageDoctorsList');
+      const source = document.getElementById(doctorDirectoryReturnPageId);
+      if (directory) directory.className = 'app-page page-doctors-list page-right';
+      if (source) {
+        source.className = doctorDirectoryReturnPageClass;
+        source.scrollTop = doctorDirectoryReturnScrollTop;
+      }
+      const phoneScreen = document.querySelector('.phone-screen');
+      const bottomNav = document.getElementById('patientBottomNav');
+      phoneScreen?.classList.toggle('hide-bottom-nav', doctorDirectoryReturnHadHiddenNav);
+      bottomNav?.classList.toggle('nav-hidden', doctorDirectoryReturnHadHiddenNav);
+      if (!returnToOnuAfterDoctorList) {
+        updateBottomNavState(doctorDirectoryReturnTab);
+        return;
+      }
       returnToOnuAfterDoctorList = false;
       const page = document.getElementById('pageOnu');
-      const directory = document.getElementById('pageDoctorsList');
-      if (directory) directory.className = 'app-page page-doctors-list page-right';
       if (page) page.className = 'app-page page-onu active-page';
       const currentThread = patientOnuThreads.find(thread => thread.id === patientOnuCurrentThreadId);
       setPatientOnuView(currentThread?.messages.some(message => message.role === 'user') ? 'conversation_saved' : 'conversation_new');
@@ -9741,6 +9720,19 @@
 
     function openDoctorsList(options = {}) {
       returnToOnuAfterDoctorList = Boolean(options.returnToOnu);
+      const sourcePage = document.querySelector('.app-page.active-page:not(#pageDoctorsList)');
+      if (sourcePage) {
+        doctorDirectoryReturnPageId = sourcePage.id;
+        doctorDirectoryReturnPageClass = sourcePage.className;
+        doctorDirectoryReturnScrollTop = sourcePage.scrollTop;
+        doctorDirectoryReturnHadHiddenNav = document.querySelector('.phone-screen')?.classList.contains('hide-bottom-nav') || false;
+        const activeNavId = document.querySelector('#patientBottomNav .nav-item.active')?.id;
+        doctorDirectoryReturnTab = activeNavId === 'navItemAlerts' ? 'alerts'
+          : activeNavId === 'navItemVisits' ? 'visits'
+          : activeNavId === 'navItemProfile' ? 'profile'
+          : activeNavId === 'navItemAi' ? 'onu' : 'discover';
+        sourcePage.className = sourcePage.className.replace('active-page', 'page-left');
+      }
       stopPatientOnuVoiceInput();
       const pageDiscover = document.getElementById('pageDiscover');
       const pageDoctors = document.getElementById('pageDoctorsList');
@@ -9848,16 +9840,13 @@
     }
 
     function bookOtherDatesForCancelledAppointment(docId) {
-      const pageDetails = document.getElementById('pageVisitDetails');
-      if (pageDetails) pageDetails.className = 'app-page page-visit-details page-right';
-      bookDoctorFromDirectory(docId);
+      const doc = doctorsDb.find(doctor => doctor.id === docId);
+      if (!doc) return;
+      activeProfileDoctor = doc;
+      openBookConsultationPage('cancelled-visit-details');
     }
 
     function openDoctorDirectoryFromCancelledAppointment() {
-      const pageDetails = document.getElementById('pageVisitDetails');
-      const pageAlerts = document.getElementById('pagePatientAlerts');
-      if (pageDetails) pageDetails.className = 'app-page page-visit-details page-right';
-      if (pageAlerts) pageAlerts.className = 'app-page patient-alerts-page page-right';
       openDoctorsList();
     }
 
@@ -9956,6 +9945,10 @@
         const pageVisitDetails = document.getElementById('pageVisitDetails');
         if (pageVisitDetails) pageVisitDetails.className = 'app-page page-visit-details page-left';
       }
+      if (returnTo === 'cancelled-visit-details') {
+        const pageVisitDetails = document.getElementById('pageVisitDetails');
+        if (pageVisitDetails) pageVisitDetails.className = 'app-page page-visit-details page-left';
+      }
       const actionLabel = document.getElementById('bookConsultActionLabel');
       if (actionLabel) actionLabel.textContent = isReschedulingAppointment ? 'Confirm reschedule' : 'Continue to payment';
       if (isReschedulingAppointment) {
@@ -9978,7 +9971,7 @@
       if (pageConsult) {
         pageConsult.className = 'app-page page-book-consultation page-right';
       }
-      if (bookingReturnPage === 'visit-details') {
+      if (bookingReturnPage === 'visit-details' || bookingReturnPage === 'cancelled-visit-details') {
         const visitDetailsPage = document.getElementById('pageVisitDetails');
         if (visitDetailsPage) visitDetailsPage.className = 'app-page page-visit-details active-page';
         pageProfile && (pageProfile.className = 'app-page page-doctor-profile page-right');
@@ -10072,12 +10065,6 @@
               </div>
             </div>
 
-            <div class="shift-card-divider"></div>
-
-            <div class="shift-footer-note">
-              <i class="ph ph-info"></i>
-              <span>We’ll call you when it’s your turn.</span>
-            </div>
           </button>
         `;
       }).join('');
@@ -10246,6 +10233,7 @@
       const docName = document.getElementById('confirmedDocName');
       const docSub = document.getElementById('confirmedDocSub');
       const modeLabel = document.getElementById('confirmedModeLabel');
+      const confirmationSubtext = document.getElementById('confirmedSubtext');
       const totalAmount = document.getElementById('confirmedTotal');
       const dateLabel = document.getElementById('confirmedDateLabel');
       const serialVal = document.getElementById('confirmedSerialVal');
@@ -10261,6 +10249,11 @@
       if (docName) docName.textContent = doc.name;
       if (docSub) docSub.textContent = doc.degreeSpecialty;
       if (modeLabel) modeLabel.textContent = (activeConsultMode === 'video' ? 'Video Call' : 'In Person');
+      if (confirmationSubtext) {
+        confirmationSubtext.textContent = activeConsultMode === 'video'
+          ? 'You’ll get a call when it’s your turn.'
+          : 'Your in-person consultation is booked and payment is complete.';
+      }
 
       if (totalAmount) totalAmount.innerHTML = `&#2547; ${activePaymentTotal.toLocaleString()}`;
       
@@ -12023,7 +12016,6 @@
     // ============================================================
     function renderDoctorsDirectory() {
       const listEl = document.getElementById('doctorsDirectoryList');
-      const countEl = document.getElementById('doctorResultsCount');
       const emptyEl = document.getElementById('emptyDoctorState');
       if (!listEl) return;
 
@@ -12040,11 +12032,6 @@
           (doc.bio && doc.bio.toLowerCase().includes(query));
         return matchesCategory && matchesQuery;
       });
-
-      // Update counter
-      if (countEl) {
-        countEl.textContent = `Showing ${filtered.length} doctor${filtered.length === 1 ? '' : 's'}`;
-      }
 
       if (filtered.length === 0) {
         listEl.innerHTML = '';

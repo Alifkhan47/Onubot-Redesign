@@ -1,121 +1,62 @@
-# Onu Telemedicine Ecosystem — Doctor & Patient Web Prototypes
-> **Modern Minimalist Healthtech Platform for Doctors and Patients**  
-> *Inspired by Western / European design standards: Wise, Uber, Hims, Alan Health, and Qonto.*
+﻿# Onu App Prototypes
 
----
+A set of three interactive, mobile-first HTML demos for exploring the Onu experience—from sign-in and onboarding to patient care and the doctor workspace.
 
-## 🌟 Overview & Dual-App Architecture
+## Start here
 
-The repository contains the complete interactive, high-fidelity prototypes for both sides of the Onu Telemedicine ecosystem:
+**To review login and onboarding, open [`onubot-app.html`](./onubot-app.html) first.** It begins with the sign-in experience and includes the doctor network onboarding flow.
 
-1. **🩺 Doctor App ([`doctors-app.html`](./doctors-app.html))**:
-   - Clinical desk management, patient queue conveyor belt, ambient AI notes, shift scheduling, live video consultations, and digital prescription issuance.
-2. **👤 Patient App ([`patient-app.html`](./patient-app.html))**:
-   - Care discovery, instant universal search, boxless specialist directory, interactive appointment booking (Video Call vs Chamber Visit), live visits tracker, alerts, and Onu AI triage assistant.
+You can open any demo directly in a modern browser, or serve the project folder locally:
 
-Both apps feature a top ecosystem switcher bar enabling seamless switching between doctor and patient views.
-
-## Prototype Data Convention
-
-- **Fixed demo date:** Tuesday, September 29, 2026. `Today`, `Yesterday`, and future appointment labels use this shared reference date.
-- The apps are visual prototypes. Booking, queue, schedule, call, payment, and AI interactions use in-memory demo state; they do not connect to a backend or persist after refresh.
-- Historical prescription and clinical examples retain their earlier dates.
-
----
-
-## 🚀 Patient App Highlights ([`patient-app.html`](./patient-app.html))
-
-- **🧭 Redesigned Discover Page**:
-  - Crisp header with location chip (`Dhaka, BD`).
-  - Instant universal search bar with quick focus.
-  - Hero Care Category: **Specialist Doctors** (2,300+ verified doctors with instant video and chamber visits).
-  - Specialty fast-browse horizontal strip (Cardiology, Medicine, Pediatrics, Neurology, Dermatology, Gynecology, Orthopedics).
-  - Live "Available Today" spotlight doctor card with quick booking.
-  - Future Care preview (Hospitals & Diagnostics) with subtle "Coming Soon" badges.
-- **🔍 Redesigned "Find a Doctor" Directory (Zero Card Fatigue)**:
-  - Box-less list rows with subtle hairline dividers (Uber/Wise standard).
-  - Doctor avatar with online/offline live status dot.
-  - BMDC verified seal, qualifications, chamber hospital, and rating score.
-  - Bold consultation fee (`৳ 1,200`) and next available slot pill.
-  - Live search filtering by doctor name, specialty, hospital, or symptoms.
-  - Horizontal filter chips with strict selection tokens (`#D6EAE6` + `#7EB8AE` border).
-- **📅 Interactive Doctor Booking Sheet**:
-  - Mode selection: `Video Call (Online)` vs `Chamber Visit (In-Person)`.
-  - Date pills and available slot grid (`03:30 PM`, `04:00 PM`, etc.).
-  - One-tap booking confirmation with animated toast and instant slotting into the Visits tab.
-- **✨ Onu AI Health Triage**:
-  - Center bottom nav sparkle action opening an interactive AI symptom matcher that matches patients with the right specialist in one tap.
-- **📱 Master 5-Tab Navigation**:
-  - `Discover`, `Visits`, center `Onu AI`, `Alerts`, and `Profile`.
-
----
-
-## 🩺 Doctor App Highlights ([`doctors-app.html`](./doctors-app.html))
-
-- **🏠 My Desk (Operational Dashboard)**:
-  - Real-time shift status with locked state protection (`Shift Locked Until 8:58 AM`) and 2-minute auto-unlock protocol before shift start.
-  - Interactive demo time simulation (tap status bar clock to toggle between Locked `8:22 AM` and Ready `8:58 AM`).
-  - Online/Offline availability toggle with subtle red alert feedback and auto-cancellation handling.
-  - Financial overview showing total income and available balance.
-- **📹 Live Video Consultation & Ambient AI**:
-  - Fullscreen video consultation interface with Picture-in-Picture (PiP) doctor tile.
-  - In-call patient pre-visit intake drawer.
-  - One-tap patient skipping (with automated return re-queuing 3 turns ahead).
-  - Ambient AI audio transcription transition into structured clinical notes.
-- **📝 Consultation Review & Rx Finalization**:
-  - Editable AI-generated Chief Complaint summary.
-  - Medication stack builder with dosage, frequency, and duration.
-  - Diagnostic lab tests with priority tagging (`Routine` / `Urgent`).
-  - Specialist referral selector and follow-up chips.
-  - Official PDF-like digital prescription preview with doctor credentials.
-- **📅 Calendar Strip & Shift Management**:
-  - Schedule date carousel spanning September 15–October 7, with Tuesday, September 29 marked as Today.
-  - Shift editor modal with patient capacity controls and repeat settings.
-  - Destructive action protection with confirmation bottom sheet modals.
-- **📋 All Appointments & Shift History**:
-  - **Upcoming Tab**: Live shift queues from Today through future dates with active turn highlights.
-  - **History Tab**: Completed consultations and past records chronologically sorted.
-  - Multi-parameter filter sheet (Status, Consultation Type, Shift).
-  - Appointment Clinical Details with dynamic relevance sorting and empty intake states.
-- **💰 My Wallet & Payout System**:
-  - Elevated Available Balance card with live "Ready to withdraw" chip and primary Withdraw CTA.
-  - Symmetrically aligned two-column collapsible breakdown for Today and Total earnings.
-- **👤 Doctor Profile & Practice Details**:
-  - Spacious boxless layout with prominent credentials, chamber address, phone, bio, and settings.
-
----
-
-## 🎨 Unified Design System
-
-- **Canvas**: Pure White (`#FFFFFF`)
-- **Surface Cards**: Soft Neutral (`#F6F8F9` with `1.5px solid #EDF2F1`)
-- **Hero / Active Elements**: Soft Sage (`#D6EAE6` with `1.5px solid #7EB8AE`)
-- **Primary CTAs**: Deep Forest Green (`#052E28`)
-- **Typography**: `Urbanist` (Headings & Metrics) & `DM Sans` (Body/Meta)
-- **Icons**: Phosphor Icons (Regular weight)
-
-For comprehensive design system guidelines, see [`DESIGN_GUIDELINE.md`](./DESIGN_GUIDELINE.md).  
-For AI pair programming context and architecture rules, see [`AI_INSTRUCTIONS.md`](./AI_INSTRUCTIONS.md).
-
----
-
-## 💻 How to Run
-
-1. Clone or download the repository.
-2. Open [`doctors-app.html`](./doctors-app.html) or [`patient-app.html`](./patient-app.html) directly in any modern web browser. The fixed demo date is Tuesday, September 29, 2026.
-3. Use the top switcher button on either app to toggle between Doctor and Patient experiences.
-4. No build step, package manager, or server is required. Google Fonts and remote sample photography may need an internet connection.
-
----
-
-## 📁 Project Structure
-
+```sh
+python -m http.server 8000
 ```
-.
-├── doctors-app.html        # Doctor Desk & Shift Management SPA Prototype
-├── patient-app.html        # Patient Care Discovery & Booking SPA Prototype
-├── phosphor-embedded.css   # Embedded Phosphor icons stylesheet
-├── DESIGN_GUIDELINE.md     # Visual design system, tokens, and UI SOPs
-├── AI_INSTRUCTIONS.md      # AI context, state machine specifications, and developer guides
-└── README.md               # Project overview and documentation
-```
+
+Then visit [localhost:8000](http://localhost:8000) and open the HTML file you want to explore. No package installation or build step is required. Some fonts, icons, and sample imagery load from external services and may need an internet connection.
+
+## The three demos
+
+| File | What it contains | Open it when… |
+| --- | --- | --- |
+| [`onubot-app.html`](./onubot-app.html) | Login, sign-in choices, and doctor network onboarding/profile setup. | You want to start with login or onboarding. |
+| [`patient-app.html`](./patient-app.html) | Patient discovery, doctor search, booking, visits, Onu chat, prescription review, health information, and profile. | You want to explore the patient journey. |
+| [`doctors-app.html`](./doctors-app.html) | Doctor Onu assistant, desk and queue, schedule, consultation, notes and prescription, appointments, patient records, wallet, and profile. | You want to explore the doctor workflow. |
+
+## Feature guide
+
+### Login and onboarding — `onubot-app.html`
+
+- Patient sign-in entry and doctor network entry.
+- Doctor onboarding and profile setup.
+- Onboarding preview and progress flow.
+
+### Patient app — `patient-app.html`
+
+- Discover and search for doctors by name or specialty.
+- View doctor profiles and choose a consultation type, date, and time.
+- Review booking details and explore the Visits and appointment detail flows.
+- Use Onu chat for a demo specialty suggestion or prescription review.
+- Explore alerts, health information, documents, and profile settings.
+
+### Doctor app — `doctors-app.html`
+
+- Use the Onu clinical assistant and doctor desk.
+- Review the patient queue and schedule shifts.
+- Explore the consultation, pre-visit information, AI notes, and prescription workflow.
+- Browse appointments, patient records, wallet, and profile screens.
+
+## Using and editing the project
+
+- The HTML files are standalone prototypes. Their page markup, CSS, and JavaScript are currently kept in each file.
+- There is no backend. Sign-in, booking, payments, video calls, AI responses, and clinical workflows are demonstrations, not real services.
+- Most interaction state is temporary. The patient app saves selected information in browser storage; the onboarding demo keeps some preview state for the current browser session.
+- Edit the HTML file for the app or flow you are changing. Check related element IDs and inline event handlers when changing navigation or interactions.
+- Preview changes at a mobile viewport and follow the affected flow from beginning to end.
+- The prototypes use the fixed demo date **Tuesday, September 29, 2026**.
+
+## Project reference
+
+- [`DESIGN_GUIDELINE.md`](./DESIGN_GUIDELINE.md) — visual styles and interface conventions.
+- [`AI_INSTRUCTIONS.md`](./AI_INSTRUCTIONS.md) — project behavior and implementation guidance.
+- `assets/` — local images and illustrations.
+- `phosphor-embedded.css` — local Phosphor icon styles.
