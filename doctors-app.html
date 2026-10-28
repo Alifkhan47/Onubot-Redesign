@@ -776,7 +776,7 @@
       background: linear-gradient(135deg, rgba(239, 247, 245, 0.95) 0%, rgba(214, 234, 230, 0.8) 100%) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid rgba(126, 184, 174, 0.4) !important;
+      border: 0 !important;
       border-radius: 20px !important;
       padding: 20px 20px;
       min-height: 108px;
@@ -786,7 +786,7 @@
       cursor: grab;
       user-select: none;
       -webkit-user-select: none;
-      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.95) !important;
+      box-shadow: 0 4px 20px -2px rgba(5, 46, 40, 0.06) !important;
       transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease, background 0.15s ease, border-color 0.15s ease;
       position: relative;
       box-sizing: border-box;
@@ -794,7 +794,6 @@
 
     .patient-swipe-card:hover:not(*) {
       background: linear-gradient(135deg, rgba(232, 244, 241, 0.98) 0%, rgba(206, 230, 225, 0.88) 100%) !important;
-      border-color: rgba(126, 184, 174, 0.55) !important;
     }
 
     .patient-swipe-card:active {
@@ -1006,7 +1005,7 @@
       gap: 12px;
       margin-top: 26px;
       padding-top: 20px;
-      border-top: 1px solid #F1F5F9;
+      border-top: 0;
       font-family: var(--font-body);
     }
 
@@ -1021,7 +1020,7 @@
       font-family: var(--font-heading);
       font-size: 16px;
       font-weight: 700;
-      color: #0F172A;
+      color: #475569;
       letter-spacing: -0.01em;
     }
 
@@ -12492,6 +12491,16 @@
   .phone-frame{width:100%;padding:0;border:8px solid #080b0c;border-radius:49px;background:#080b0c;box-shadow:0 0 0 2px #39403f,0 24px 72px #0009}
   .phone-frame::before,.phone-frame::after{display:none}
   .phone-screen{width:100%;height:800px;border-radius:41px}
+  #goingOfflineSheet{gap:10px;overflow:hidden;padding:18px 22px 18px}
+  #goingOfflineSheet .sheet-drag-handle{margin:0 auto 10px!important}
+  #goingOfflineSheet .sheet-top-row{margin-bottom:12px!important}
+  #goingOfflineSheet .sheet-hero-header{margin-bottom:10px!important}
+  #goingOfflineSheet .offline-month-row{margin:0 0 12px!important}
+  #goingOfflineSheet .offline-cal-weekdays{margin-bottom:6px;padding-bottom:4px}
+  #goingOfflineSheet .offline-dates-container{row-gap:8px;column-gap:6px;margin-bottom:10px}
+  #goingOfflineSheet .offline-cal-legend{margin-top:-2px;padding-bottom:8px}
+  #goingOfflineSheet .offline-summary-bar{margin-bottom:12px;padding:5px 2px}
+  #goingOfflineSheet .offline-actions-row button{height:48px;flex:1 1 0;min-height:48px}
   .app-switcher-panel{width:250px;align-self:center;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(255,255,255,.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .app-switcher-label{display:block;margin:0 0 9px 2px;color:#A7F3D0;font:800 10px var(--font-heading);letter-spacing:.06em;text-transform:uppercase}
   .app-switcher-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:12px;background:rgba(0,0,0,.2)}
@@ -14197,7 +14206,7 @@
              ======================================================= -->
         <div class="modal-backdrop" id="modalBackdrop" onclick="closeAllModals()"></div>
         
-        <div class="bottom-sheet" id="goingOfflineSheet" style="max-height: 92%; overflow-y: auto; scrollbar-width: none; border-radius: 32px 32px 0 0; padding: 22px 22px 30px; z-index: 140;">
+        <div class="bottom-sheet" id="goingOfflineSheet" style="max-height: 92%; border-radius: 32px 32px 0 0; padding: 18px 22px 18px; z-index: 140;">
           <div class="sheet-drag-handle" style="margin-bottom: 4px;"></div>
           
           <!-- Top Row: Badge Icon + Circular Close Button -->
@@ -14213,7 +14222,7 @@
           <!-- Hero Editorial Header -->
           <div class="sheet-hero-header" style="margin-bottom: 8px;">
             <h2 class="sheet-editorial-title">Clear Schedule</h2>
-            <p class="sheet-minimal-subtitle" style="font-size: 13px; color: #64748B; margin-top: 2px;">Select dates to clear. Booked patients will be cancelled & notified.</p>
+            <p class="sheet-minimal-subtitle" style="font-size: 13px; color: #64748B; margin-top: 2px;">Choose dates to clear. Booked patients will be notified.</p>
           </div>
 
           <!-- Month & View Toggle Row -->
