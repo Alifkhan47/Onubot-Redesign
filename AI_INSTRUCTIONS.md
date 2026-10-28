@@ -58,6 +58,7 @@ These recent decisions are authoritative when older screen descriptions below co
 ### Onu Login
 - Keep a clear gap between the “Are you a doctor? Join the network” prompt and the legal consent copy; maintain this spacing on short mobile screens as well.
 - Match Verify details inputs and field titles to Basic information: borderless soft-gray fill, consistent field height, subtle focus ring, 10px/600 muted uppercase labels, and even vertical spacing. Keep required asterisks red.
+- First-time patient sign-up shows a minimal Basic information page in `onubot-app.html` before opening the patient app. Prefill an editable required name; require phone; keep age, gender, blood type, height, weight, and photo optional. Continue hands the saved profile to `patient-app.html`.
 
 ### Shared Onu Chat
 - Keep assistant replies plain text and use dark slate text near `#334155` for welcome prompts and conversation turns.
@@ -69,6 +70,8 @@ These recent decisions are authoritative when older screen descriptions below co
 ### Patient App
 - The Discover Find a Doctor card uses a light mint surface, title and `100+ Verified Doctors` copy on the left, and the centered `assets/doctor-discovery.svg` illustration on the right. Its blue accent is `#89A7CE`.
 - The Find a Doctor directory omits a results-count line; leave consistent spacing between specialty filters and soft-gray doctor cards. Search placeholder: “Search by name, specialty”.
+- Patient Settings: Clear Chat History confirms, removes saved Onu threads and active chat, and clears their temporary image previews. Clear Downloaded Files confirms, releases temporary file preview URLs, and shows the same cache-cleared feedback as the doctor app. Language opens an English/Bengali picker matching the doctor app and updates the selected language label.
+- In both apps, Clear Chat History and Clear Downloaded Files confirmation sheets use the patient settings typography and button treatment and omit redundant explanatory subtitles.
 - The patient booking screen omits the “Initial consultation” badge and the shift card’s turn-call helper line. Keep shift time beside the shift badge and retain the existing subtle selected card fill, outline, and check indicator.
 - On booking confirmation, show “You’ll get a call when it’s your turn.” as the video-call subtitle and keep a booking-complete message for in-person visits. Add clear space between the success icon and heading and below the subtitle; rotate the badge tile and frame together while keeping the check seal still, and use spacing instead of divider lines within the receipt.
 - The profile header shows the wallet icon and credit amount at top-right without a pill/container or a separate Available Credits section.

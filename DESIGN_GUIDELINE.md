@@ -6,6 +6,7 @@
 These decisions reflect the current patient and doctor prototypes. They override older screen-specific examples below wherever the older wording conflicts with the live HTML/CSS.
 
 - **Onu login:** Keep clear space between the doctor-network prompt and legal consent copy, including on short mobile screens.
+- **First-time patient onboarding:** Use a minimal white form page with borderless soft-gray inputs, a prefilled editable required name, required phone, optional health details, optional profile photo, and a clear Continue action.
 - **Doctor verification form:** Match Verify details fields and titles to Basic information with a borderless soft-gray fill, 10px/600 muted uppercase labels, a clear focus ring, and consistent spacing. Keep required asterisks red.
 
 - **Mobile interaction:** Treat both prototypes as touch-first mobile apps. Do not add hover-only visual effects. Keep tap feedback (`:active`) and keyboard focus-visible states.
@@ -21,11 +22,13 @@ These decisions reflect the current patient and doctor prototypes. They override
 - **Patient profile details:** Show patient credits as an unboxed wallet icon plus amount in the top-right of the Profile heading; do not retain a separate Available Credits row. On the patient-side doctor profile, use subtle green icons for the left-aligned detail rows, keep the consultation fee the same size/weight as other value text in `#2E64C8`, omit the BMDC Verified badge, and show years of experience.
 - **Patient Onu specialty suggestion:** Keep the explanation in the normal assistant chat. The artifact-style card contains a clear icon and short title plus the direct doctor-search action, without repeating the explanation inside.
 - **Pre-visit summary:** Use a borderless soft-sage surface, clear heading treatment, readable concern emphasis, and even spacing for the summary fields.
+- **Patient settings:** Match the doctor app's editorial confirmation sheets for clearing chat and downloaded file previews, plus its two-option English/Bengali language picker and selected-state treatment.
 - **Patient prescription medicine rows:** Remove outlines and use very subtle status-tinted backgrounds, with a soft green neutral for verified rows and a soft warm tint for unverified rows.
 - **Appointment details:** Use the doctor's photo beside their name and put the visit-type icon inline before the date. Keep Reschedule and Cancel actions icon-free and borderless; Reschedule uses a subtle neutral fill, Cancel keeps its soft red fill.
 - **Doctor-side patient profile:** Leave a clear gap between the patient identity header and the vitals grid. Initials avatars have a soft fill and no stroke.
 - **Doctor wallet:** Transaction icon holders use the Settings neutral fill (`#F8FAF9`) while keeping their semantic icon colors. Transaction amounts use restrained 14px/600 typography. Saved-account rows use a subtle filled surface without a border; bank/mobile icons remain colored but have no tiles behind them.
-- **Language picker:** Show English and Bengali as non-interactive demo options with a radio-style selection indicator on the right. Keep the options subtly filled and borderless.
+- **Language picker:** Show English and Bengali as selectable demo options with a radio-style selection indicator on the right. Keep the options subtly filled and borderless; reflect the current selection in Settings.
+- **Clear-data confirmations:** Keep the patient and doctor clear-history and clear-files sheets visually consistent: editorial title typography, no repeated subtitle, quiet Cancel action, and a flat semantic confirmation action.
 
 ## Prototype Date Convention
 

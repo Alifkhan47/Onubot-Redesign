@@ -27,6 +27,7 @@ Then visit [localhost:8000](http://localhost:8000) and open the HTML file you wa
 ### Login and onboarding — `onubot-app.html`
 
 - Patient sign-in entry and doctor network entry.
+- First-time patient basic information page before opening the patient app.
 - Doctor onboarding and profile setup.
 - Onboarding preview and progress flow.
 

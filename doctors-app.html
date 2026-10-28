@@ -55,11 +55,7 @@
 
     body {
       min-height: 100vh;
-      background: #0c1013;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(5, 46, 40, 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(5, 46, 40, 0.45) 0px, transparent 50%),
-        radial-gradient(circle at 50% 50%, #11181d 0%, #080a0c 100%);
+      background: radial-gradient(ellipse at 50% 8%, #2f3947 0%, #121823 62%, #080c13 100%);
       font-family: var(--font-body);
       display: flex;
       flex-direction: column;
@@ -4912,6 +4908,59 @@
     .btn-sheet-danger-confirm:active {
       transform: scale(0.97);
     }
+
+    /* Keep the Settings confirmation sheets consistent with the patient app. */
+    .bottom-sheet#clearChatConfirmSheet,
+    .bottom-sheet#clearCacheConfirmSheet {
+      max-height: 80%;
+      padding: 16px 20px 28px;
+      gap: 14px;
+      border-radius: 28px 28px 0 0;
+    }
+    .bottom-sheet#clearChatConfirmSheet .sheet-drag-handle,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-drag-handle {
+      width: 36px;
+      height: 4px;
+      margin: 0 auto 2px;
+    }
+    .bottom-sheet#clearChatConfirmSheet .sheet-top-row,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-top-row { margin-bottom: 0; }
+    .bottom-sheet#clearChatConfirmSheet .sheet-badge-icon,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-badge-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(14, 128, 112, .2);
+      border-radius: 12px;
+      background: #EFF7F5;
+      color: #0E8070;
+    }
+    .bottom-sheet#clearChatConfirmSheet .sheet-badge-icon { border-color: transparent; background: #FEF2F2; color: #DC2626; }
+    .bottom-sheet#clearChatConfirmSheet .sheet-hero-header,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-hero-header { display: grid; gap: 4px; }
+    .bottom-sheet#clearChatConfirmSheet .sheet-editorial-title,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-editorial-title {
+      margin: 0;
+      color: #1E293B;
+      font: 700 24px/1.2 var(--font-heading);
+      letter-spacing: -.02em;
+    }
+    .bottom-sheet#clearChatConfirmSheet .sheet-actions-group,
+    .bottom-sheet#clearCacheConfirmSheet .sheet-actions-group { width: 100%; gap: 10px; margin-top: 24px; }
+    .bottom-sheet#clearChatConfirmSheet .btn-sheet-cancel,
+    .bottom-sheet#clearCacheConfirmSheet .btn-sheet-cancel,
+    .bottom-sheet#clearChatConfirmSheet .btn-sheet-danger-confirm,
+    .bottom-sheet#clearCacheConfirmSheet .btn-sheet-confirm {
+      flex: 1;
+      height: 48px;
+      border-radius: 12px;
+      box-shadow: none;
+      font: 700 14px var(--font-heading);
+      letter-spacing: 0;
+    }
+    .bottom-sheet#clearChatConfirmSheet .btn-sheet-cancel,
+    .bottom-sheet#clearCacheConfirmSheet .btn-sheet-cancel { border: 1px solid #DDE7E4; background: #F6F8F9; color: #475569; }
+    .bottom-sheet#clearChatConfirmSheet .btn-sheet-danger-confirm { border: 1px solid #DC2626; background: #DC2626; color: #FFFFFF; }
+    .bottom-sheet#clearCacheConfirmSheet .btn-sheet-confirm { border: 1px solid #052E28; background: #052E28; color: #FFFFFF; }
 
     /* Skip Confirmation Bottom Sheet Styles */
     .sheet-badge-icon.warning-badge {
@@ -12436,8 +12485,8 @@
     }
   </style>
 <style>
-  .top-ecosystem-bar{width:min(100%,924px);max-width:924px;justify-content:center;margin-bottom:14px}
-  .prototype-workspace{display:grid;grid-template-columns:250px 376px 250px;align-items:center;justify-content:center;gap:24px;width:min(100%,924px)}
+  .top-ecosystem-bar{width:min(100%,1052px);max-width:1052px;justify-content:center;margin-bottom:14px}
+  .prototype-workspace{display:grid;grid-template-columns:250px 376px 250px;align-items:center;justify-content:center;gap:88px;width:min(100%,1052px)}
   .sim-controls-bar{width:250px;flex:0 0 250px}
   .mockup-container{width:min(100%,376px);max-width:376px;flex:0 0 376px}
   .phone-frame{width:100%;padding:0;border:8px solid #080b0c;border-radius:49px;background:#080b0c;box-shadow:0 0 0 2px #39403f,0 24px 72px #0009}
@@ -12449,7 +12498,7 @@
   .app-switcher-tab{min-height:42px;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;border:1px solid rgba(255,255,255,.08);border-radius:9px;color:#CBD5E1;background:rgba(255,255,255,.05);text-decoration:none;font:600 11px var(--font-body);white-space:nowrap;transition:background .18s ease,color .18s ease,border-color .18s ease}
   .app-switcher-tab i{font-size:15px}
   .app-switcher-tab:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.18)}
-  @media(max-width:1000px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,376px)}.mockup-container{order:1;width:min(100%,376px);flex:none}.sim-controls-bar{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,376px)}}
+  @media(max-width:1120px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,376px)}.mockup-container{order:1;width:min(100%,376px);flex:none}.sim-controls-bar{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,376px)}}
   @media(max-width:520px){.top-ecosystem-bar .app-brand-pill{padding:6px 10px;font-size:12px}.app-switcher-panel{padding:12px}.app-switcher-tab{font-size:11px}}
 </style>
 </head>
@@ -15464,7 +15513,6 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Clear Chat History?</h2>
-            <p class="sheet-editorial-sub">Delete all chat history?</p>
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 24px;">
@@ -15486,7 +15534,6 @@
           
           <div class="sheet-hero-header">
             <h2 class="sheet-editorial-title">Clear Downloaded Files?</h2>
-            <p class="sheet-editorial-sub">Clear downloaded files?</p>
           </div>
 
           <div class="sheet-actions-group" style="margin-top: 24px;">

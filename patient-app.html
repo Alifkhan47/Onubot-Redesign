@@ -52,11 +52,7 @@
 
     body {
       min-height: 100vh;
-      background: #0c1013;
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(5, 46, 40, 0.4) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(5, 46, 40, 0.45) 0px, transparent 50%),
-        radial-gradient(circle at 50% 50%, #11181d 0%, #080a0c 100%);
+      background: radial-gradient(ellipse at 50% 8%, #2a3532 0%, #0d1514 62%, #080d0c 100%);
       font-family: var(--font-body);
       display: flex;
       flex-direction: column;
@@ -5513,6 +5509,31 @@
     .patient-settings-row-title { color: #142B26; font: 600 14px/1.25 var(--font-heading); }
     .patient-settings-row-note { color: #71827F; font: 400 12px/1.35 var(--font-body); }
     .patient-settings-row-arrow { flex: 0 0 auto; color: #8A9895; font-size: 17px; }
+    .patient-settings-modal-backdrop { z-index: 220; }
+    .patient-settings-action-sheet { z-index: 230; max-height: 80%; overflow-y: auto; scrollbar-width: none; }
+    .patient-settings-action-sheet .sheet-hero-header { display: grid; gap: 4px; }
+    .patient-settings-action-sheet .sheet-editorial-title { margin: 0; color: #1E293B; font: 700 24px/1.2 var(--font-heading); letter-spacing: -.02em; }
+    .patient-settings-action-sheet .sheet-editorial-sub { margin: 0; color: #64748B; font: 13px/1.4 var(--font-body); }
+    .patient-settings-sheet-actions { display: flex; gap: 10px; width: 100%; margin-top: 24px; }
+    .patient-settings-sheet-actions .btn-sheet-cancel,
+    .patient-settings-sheet-actions .btn-sheet-confirm,
+    .patient-settings-sheet-actions .btn-sheet-danger-confirm { flex: 1; min-height: 48px; border-radius: 12px; font: 700 14px var(--font-heading); cursor: pointer; }
+    .patient-settings-sheet-actions .btn-sheet-cancel { border: 1px solid #DDE7E4; background: #F6F8F9; color: #475569; }
+    .patient-settings-sheet-actions .btn-sheet-confirm { border: 1px solid #052E28; background: #052E28; color: #fff; }
+    .patient-settings-sheet-actions .btn-sheet-danger-confirm { border: 1px solid #DC2626; background: #DC2626; color: #fff; }
+    .patient-settings-action-sheet .sheet-badge-icon.danger-badge { border-color: transparent; background: #FEF2F2; color: #DC2626; }
+    .patient-language-options { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 0; }
+    .patient-language-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 68px; padding: 11px 14px; border: 0; border-radius: 14px; background: #F7F9F8; text-align: left; box-sizing: border-box; cursor: pointer; }
+    .patient-language-option.is-selected { background: #EFF7F4; }
+    .patient-language-option:focus-visible { outline: 2px solid #0E8070; outline-offset: 2px; }
+    .patient-language-option-main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .patient-language-option-flag { flex: 0 0 auto; font-size: 22px; line-height: 1; }
+    .patient-language-option-copy { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+    .patient-language-option-title { color: #0F172A; font: 600 14px/1.3 var(--font-body); }
+    .patient-language-option-subtitle { color: #64748B; font: 12px/1.3 var(--font-body); }
+    .patient-language-radio { display: grid; place-items: center; width: 20px; height: 20px; flex: 0 0 20px; border: 1.5px solid #B8C5C2; border-radius: 50%; box-sizing: border-box; }
+    .patient-language-radio.is-selected { border-color: #0E8070; }
+    .patient-language-radio.is-selected span { width: 10px; height: 10px; border-radius: 50%; background: #0E8070; }
     .patient-account-page,
     .patient-contact-page,
     .patient-refund-page,
@@ -5609,8 +5630,8 @@
     #rescheduleModalBackdrop[hidden], #rescheduleSheet[hidden] { display: none !important; }
   </style>
 <style>
-  .top-ecosystem-bar{width:min(100%,924px);max-width:924px;justify-content:center;margin-bottom:14px}
-  .prototype-workspace{display:grid;grid-template-columns:250px 376px 250px;align-items:center;justify-content:center;gap:24px;width:min(100%,924px)}
+  .top-ecosystem-bar{width:min(100%,1052px);max-width:1052px;justify-content:center;margin-bottom:14px}
+  .prototype-workspace{display:grid;grid-template-columns:250px 376px 250px;align-items:center;justify-content:center;gap:88px;width:min(100%,1052px)}
   .external-sim-dock{width:250px;flex:0 0 250px}
   .mockup-container{width:min(100%,376px);max-width:376px;flex:0 0 376px}
   .phone-frame{width:100%;padding:0;border:8px solid #080b0c;border-radius:49px;background:#080b0c;box-shadow:0 0 0 2px #39403f,0 24px 72px #0009}
@@ -5622,7 +5643,7 @@
   .app-switcher-tab{min-height:42px;display:flex;align-items:center;justify-content:center;gap:6px;padding:0 8px;border:1px solid rgba(255,255,255,.08);border-radius:9px;color:#CBD5E1;background:rgba(255,255,255,.05);text-decoration:none;font:600 11px var(--font-body);white-space:nowrap;transition:background .18s ease,color .18s ease,border-color .18s ease}
   .app-switcher-tab i{font-size:15px}
   .app-switcher-tab:hover{color:#fff;background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.18)}
-  @media(max-width:1000px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,376px)}.mockup-container{order:1;width:min(100%,376px);flex:none}.external-sim-dock{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,376px)}}
+  @media(max-width:1120px){.prototype-workspace{display:flex;flex-direction:column;gap:14px;width:min(100%,376px)}.mockup-container{order:1;width:min(100%,376px);flex:none}.external-sim-dock{order:2;width:100%;flex:none}.app-switcher-panel{order:3;width:100%}.top-ecosystem-bar{width:min(100%,376px)}}
   @media(max-width:520px){.top-ecosystem-bar .app-brand-pill{padding:6px 10px;font-size:12px}.app-switcher-panel{padding:12px}.app-switcher-tab{font-size:11px}}
 </style>
 </head>
@@ -5852,12 +5873,12 @@
           <section class="patient-settings-group" aria-labelledby="patientSettingsDataTitle">
             <h2 class="patient-settings-section-title" id="patientSettingsDataTitle">Data &amp; Storage</h2>
             <div class="patient-settings-card">
-              <button type="button" class="patient-settings-row" disabled aria-disabled="true">
+              <button type="button" class="patient-settings-row" onclick="openPatientClearChatHistoryConfirm()">
                 <span class="patient-settings-row-icon is-danger" aria-hidden="true"><i class="ph ph-trash"></i></span>
                 <span class="patient-settings-row-copy"><span class="patient-settings-row-title">Clear Chat History</span></span>
                 <i class="ph ph-caret-right patient-settings-row-arrow" aria-hidden="true"></i>
               </button>
-              <button type="button" class="patient-settings-row" disabled aria-disabled="true">
+              <button type="button" class="patient-settings-row" onclick="openPatientClearFilesConfirm()">
                 <span class="patient-settings-row-icon" aria-hidden="true"><i class="ph ph-file-arrow-down"></i></span>
                 <span class="patient-settings-row-copy"><span class="patient-settings-row-title">Clear Downloaded Files</span></span>
                 <i class="ph ph-caret-right patient-settings-row-arrow" aria-hidden="true"></i>
@@ -5873,9 +5894,9 @@
                 <span class="patient-settings-row-copy"><span class="patient-settings-row-title">Dark Mode</span></span>
                 <span class="patient-settings-toggle" role="switch" aria-checked="false" aria-label="Dark Mode is not available yet" aria-disabled="true"></span>
               </div>
-              <button type="button" class="patient-settings-row" onclick="showToast('Language options are coming soon.')">
+              <button type="button" class="patient-settings-row" onclick="openPatientLanguagePicker()">
                 <span class="patient-settings-row-icon" aria-hidden="true"><i class="ph ph-globe"></i></span>
-                <span class="patient-settings-row-copy"><span class="patient-settings-row-title">Language</span><span class="patient-settings-row-note">English</span></span>
+                <span class="patient-settings-row-copy"><span class="patient-settings-row-title">Language</span><span class="patient-settings-row-note" id="patientCurrentLanguageDisplay">English</span></span>
                 <i class="ph ph-caret-right patient-settings-row-arrow" aria-hidden="true"></i>
               </button>
             </div>
@@ -6021,6 +6042,36 @@
             <div class="patient-health-collapsible-content" id="patientHealthConditionsPanel" role="region" aria-labelledby="patientHealthConditionsTitle" hidden><div class="patient-health-tags" id="patientHealthConditions"></div><p class="patient-health-empty" id="patientHealthConditionsEmpty">No conditions added.</p><button type="button" class="patient-health-add-button" onclick="openPatientHealthPicker('conditions')"><i class="ph ph-plus" aria-hidden="true"></i>Add condition</button></div>
           </section>
         </div>
+        <div class="modal-backdrop patient-settings-modal-backdrop" id="patientSettingsModalBackdrop" onclick="closePatientSettingsActionSheet()"></div>
+        <section class="patient-bottom-sheet patient-settings-action-sheet" id="patientClearChatConfirmSheet" role="alertdialog" aria-modal="true" aria-labelledby="patientClearChatTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><span class="sheet-badge-icon danger-badge"><i class="ph ph-trash" aria-hidden="true"></i></span></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientClearChatTitle">Clear Chat History?</h2></header>
+          <div class="patient-settings-sheet-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientSettingsActionSheet()">Cancel</button><button type="button" class="btn-sheet-danger-confirm" onclick="confirmClearPatientChatHistory()">Clear History</button></div>
+        </section>
+        <section class="patient-bottom-sheet patient-settings-action-sheet" id="patientClearFilesConfirmSheet" role="alertdialog" aria-modal="true" aria-labelledby="patientClearFilesTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><span class="sheet-badge-icon"><i class="ph ph-file-arrow-down" aria-hidden="true"></i></span></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientClearFilesTitle">Clear Downloaded Files?</h2></header>
+          <div class="patient-settings-sheet-actions"><button type="button" class="btn-sheet-cancel" onclick="closePatientSettingsActionSheet()">Cancel</button><button type="button" class="btn-sheet-confirm" onclick="confirmClearPatientDownloadedFiles()">Clear Files</button></div>
+        </section>
+        <section class="patient-bottom-sheet patient-settings-action-sheet" id="patientLanguagePickerSheet" role="dialog" aria-modal="true" aria-labelledby="patientLanguagePickerTitle" aria-hidden="true">
+          <div class="sheet-drag-handle" aria-hidden="true"></div>
+          <div class="sheet-top-row"><span class="sheet-badge-icon"><i class="ph ph-globe" aria-hidden="true"></i></span></div>
+          <header class="sheet-hero-header"><h2 class="sheet-editorial-title" id="patientLanguagePickerTitle">Select Language</h2><p class="sheet-editorial-sub">Choose your preferred display language for the patient app.</p></header>
+          <div class="patient-language-options" role="group" aria-label="Available languages">
+            <button type="button" class="patient-language-option is-selected" id="patientLanguageEnglishOption" aria-pressed="true" onclick="selectPatientLanguage('English')">
+              <span class="patient-language-option-main"><span class="patient-language-option-flag" aria-hidden="true">🇺🇸</span><span class="patient-language-option-copy"><span class="patient-language-option-title">English</span><span class="patient-language-option-subtitle">Default (US)</span></span></span>
+              <span class="patient-language-radio is-selected" id="patientLanguageEnglishRadio" aria-hidden="true"><span></span></span>
+            </button>
+            <button type="button" class="patient-language-option" id="patientLanguageBengaliOption" aria-pressed="false" onclick="selectPatientLanguage('বাংলা')">
+              <span class="patient-language-option-main"><span class="patient-language-option-flag" aria-hidden="true">🇧🇩</span><span class="patient-language-option-copy"><span class="patient-language-option-title">বাংলা</span><span class="patient-language-option-subtitle">Bengali</span></span></span>
+              <span class="patient-language-radio" id="patientLanguageBengaliRadio" aria-hidden="true"><span></span></span>
+            </button>
+          </div>
+          <div class="patient-settings-sheet-actions"><button type="button" class="btn-sheet-confirm" onclick="closePatientSettingsActionSheet()">Done</button></div>
+        </section>
+
         <div class="modal-backdrop patient-health-picker-backdrop" id="patientHealthPickerBackdrop" onclick="closePatientHealthPicker()"></div>
         <section class="patient-bottom-sheet patient-health-picker" id="patientHealthPicker" role="dialog" aria-modal="true" aria-labelledby="patientHealthPickerTitle" aria-hidden="true">
           <div class="sheet-drag-handle" aria-hidden="true"></div>
@@ -7324,7 +7375,34 @@
     const PATIENT_HEALTH_CONTEXT_STORAGE_KEY = 'onuPatientHealthContext:v1';
     const PATIENT_PROFILE_STORAGE_KEY = 'onuPatientProfile:v1';
     const PATIENT_PROFILE_DEFAULTS = { name: 'Alif Khan', email: 'shaycormac004700@gmail.com', phone: '+880 1789 946454', age: '26', gender: 'Male', bloodType: 'O-', height: '167.5', weight: '69', bmi: '24.6', photo: '' };
-    let patientProfileData = { ...PATIENT_PROFILE_DEFAULTS };
+    const PATIENT_SIGNUP_HANDOFF_PREFIX = 'onu-patient-signup:v1:';
+    let patientProfileSignupHandoff = null;
+    if (window.name.startsWith(PATIENT_SIGNUP_HANDOFF_PREFIX)) {
+      const handoffJson = window.name.slice(PATIENT_SIGNUP_HANDOFF_PREFIX.length);
+      window.name = '';
+      try {
+        const handoff = JSON.parse(handoffJson);
+        if (handoff && typeof handoff.name === 'string' && handoff.name.trim() && typeof handoff.phone === 'string' && handoff.phone.trim()) {
+          patientProfileSignupHandoff = {
+            name: handoff.name.trim().slice(0, 80),
+            email: PATIENT_PROFILE_DEFAULTS.email,
+            phone: handoff.phone.trim().slice(0, 24),
+            age: typeof handoff.age === 'string' ? handoff.age.slice(0, 3) : '',
+            gender: typeof handoff.gender === 'string' ? handoff.gender.slice(0, 40) : '',
+            bloodType: typeof handoff.bloodType === 'string' ? handoff.bloodType.slice(0, 12) : '',
+            height: typeof handoff.height === 'string' ? handoff.height.slice(0, 8) : '',
+            weight: typeof handoff.weight === 'string' ? handoff.weight.slice(0, 8) : '',
+            bmi: typeof handoff.bmi === 'string' ? handoff.bmi.slice(0, 8) : '',
+            photo: typeof handoff.photo === 'string' && handoff.photo.startsWith('data:image/') ? handoff.photo.slice(0, 3 * 1024 * 1024) : ''
+          };
+          try {
+            localStorage.setItem(PATIENT_PROFILE_STORAGE_KEY, JSON.stringify(patientProfileSignupHandoff));
+            localStorage.setItem('onuPatientOnboardingComplete:v1', 'true');
+          } catch (error) {}
+        }
+      } catch (error) {}
+    }
+    let patientProfileData = { ...PATIENT_PROFILE_DEFAULTS, ...(patientProfileSignupHandoff || {}) };
     let patientProfilePendingPhoto = null;
     const PATIENT_ONU_MAX_FILE_BYTES = 15 * 1024 * 1024;
     let patientOnuThreads = [];
@@ -7500,6 +7578,96 @@
     let patientDocumentsActiveTab = 'issued';
     let patientSettingsProfileScrollTop = 0;
     let patientHealthStorageWarningShown = false;
+    let patientSettingsModalReturnFocus = null;
+
+    const patientSettingsModalIds = [
+      'patientClearChatConfirmSheet',
+      'patientClearFilesConfirmSheet',
+      'patientLanguagePickerSheet'
+    ];
+
+    function openPatientSettingsActionSheet(sheetId) {
+      if (!patientSettingsModalIds.includes(sheetId)) return;
+      patientSettingsModalReturnFocus = document.activeElement;
+      document.getElementById('patientSettingsModalBackdrop')?.classList.add('show');
+      const sheet = document.getElementById(sheetId);
+      sheet?.classList.add('show');
+      sheet?.setAttribute('aria-hidden', 'false');
+    }
+
+    function closePatientSettingsActionSheet() {
+      document.getElementById('patientSettingsModalBackdrop')?.classList.remove('show');
+      patientSettingsModalIds.forEach(id => {
+        const sheet = document.getElementById(id);
+        sheet?.classList.remove('show');
+        sheet?.setAttribute('aria-hidden', 'true');
+      });
+      if (patientSettingsModalReturnFocus?.isConnected) patientSettingsModalReturnFocus.focus();
+      patientSettingsModalReturnFocus = null;
+    }
+
+    function openPatientClearChatHistoryConfirm() {
+      openPatientSettingsActionSheet('patientClearChatConfirmSheet');
+    }
+
+    function confirmClearPatientChatHistory() {
+      patientOnuThreads = [];
+      patientOnuCurrentThreadId = null;
+      patientOnuFlow = null;
+      cancelPatientOnuThreadHold();
+      if (patientOnuLongPressResetTimer) window.clearTimeout(patientOnuLongPressResetTimer);
+      patientOnuLongPressResetTimer = null;
+      patientOnuLongPressConsumed = false;
+      patientOnuLongPressConsumedThreadId = null;
+      patientOnuAttachmentPreviewUrls.forEach(url => URL.revokeObjectURL(url));
+      patientOnuAttachmentPreviewUrls.clear();
+      try { localStorage.removeItem(PATIENT_ONU_STORAGE_KEY); }
+      catch (error) { patientOnuStorageAvailable = false; }
+      const input = document.getElementById('onuComposerInput');
+      if (input) { input.value = ''; resizePatientOnuComposer(input); }
+      setPatientOnuView('home_empty');
+      renderPatientOnuMessages();
+      renderPatientOnuHistory();
+      closePatientSettingsActionSheet();
+      showToast('AI chat history cleared successfully');
+    }
+
+    function openPatientClearFilesConfirm() {
+      openPatientSettingsActionSheet('patientClearFilesConfirmSheet');
+    }
+
+    function confirmClearPatientDownloadedFiles() {
+      [patientOnuAttachmentPreviewUrls, patientPrescriptionPreviewUrls].forEach(urlMap => {
+        urlMap.forEach(url => URL.revokeObjectURL(url));
+        urlMap.clear();
+      });
+      renderPatientOnuMessages();
+      closePatientSettingsActionSheet();
+      showToast('14.2 MB downloaded files & cache cleared');
+    }
+
+    function openPatientLanguagePicker() {
+      openPatientSettingsActionSheet('patientLanguagePickerSheet');
+    }
+
+    function selectPatientLanguage(lang) {
+      if (!['English', 'বাংলা'].includes(lang)) return;
+      const display = document.getElementById('patientCurrentLanguageDisplay');
+      if (display) display.textContent = lang;
+      const isEnglish = lang === 'English';
+      const englishOption = document.getElementById('patientLanguageEnglishOption');
+      const bengaliOption = document.getElementById('patientLanguageBengaliOption');
+      const englishRadio = document.getElementById('patientLanguageEnglishRadio');
+      const bengaliRadio = document.getElementById('patientLanguageBengaliRadio');
+      englishOption?.classList.toggle('is-selected', isEnglish);
+      englishOption?.setAttribute('aria-pressed', String(isEnglish));
+      englishRadio?.classList.toggle('is-selected', isEnglish);
+      bengaliOption?.classList.toggle('is-selected', !isEnglish);
+      bengaliOption?.setAttribute('aria-pressed', String(!isEnglish));
+      bengaliRadio?.classList.toggle('is-selected', !isEnglish);
+      closePatientSettingsActionSheet();
+      showToast(`Language set to ${lang}`);
+    }
 
     function normalizePatientHealthContext(raw) {
       const normalizeList = items => {
@@ -9488,10 +9656,12 @@
     function loadPatientProfileData() {
       try {
         const stored = localStorage.getItem(PATIENT_PROFILE_STORAGE_KEY);
-        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS, ...(stored ? JSON.parse(stored) : {}) };
+        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS, ...(stored ? JSON.parse(stored) : {}), ...(patientProfileSignupHandoff || {}) };
         if (/^shaycormac004700@g\.\.\.$/i.test(patientProfileData.email || '')) patientProfileData.email = PATIENT_PROFILE_DEFAULTS.email;
+        patientProfileSignupHandoff = null;
       } catch (error) {
-        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS };
+        patientProfileData = { ...PATIENT_PROFILE_DEFAULTS, ...(patientProfileSignupHandoff || {}) };
+        patientProfileSignupHandoff = null;
       }
       return patientProfileData;
     }

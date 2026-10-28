@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
-  <title>Onubot App — Doctor Onboarding</title>
+  <title>Onu App — Login &amp; Onboarding</title>
   
   <!-- Google Fonts: Urbanist (Headings & Metrics) and DM Sans (Body & Meta) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26377,7 +26377,7 @@
       --white: #fff;
     
   position: fixed; inset: 0; z-index: 9999; display: block; overflow: auto;
-  background: radial-gradient(ellipse at 50% 8%, #344642, #111b1a 62%, #0c1312);
+  background: radial-gradient(ellipse at 50% 8%, #2a3532, #0d1514 62%, #080d0c);
   color: #fff; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased;
 
     
@@ -26386,9 +26386,9 @@
     
     .stage { min-height: 100svh; display: grid; place-items: center; padding: 25px; }
     .phone {
-      width: min(100%, 392px);
-      height: min(852px, calc(100svh - 50px));
-      min-height: 680px;
+      width: min(100%, 376px);
+      height: 816px;
+      min-height: 0;
       overflow: hidden;
       position: relative;
       border: 8px solid #080b0c;
@@ -26638,6 +26638,39 @@
     .doctor-form-view { display: none; flex: 1 0 auto; flex-direction: column; min-height: 0; color: #0f172a; background: #fff; }
     .doctor-form-view[hidden] { display: none !important; }
     .screen.is-doctor-form .doctor-form-view { display: flex; }
+    .screen.is-patient-onboarding { background: #fff; animation: none; }
+    .screen.is-patient-onboarding .status-bar { color: #0f172a; text-shadow: none; }
+    .screen.is-patient-onboarding .content,
+    .screen.is-patient-onboarding .doctor-view,
+    .screen.is-patient-onboarding .doctor-form-view { display: none; }
+    .patient-onboarding-view { display: none; flex: 1 1 auto; flex-direction: column; min-height: 0; color: #0f172a; background: #fff; }
+    .patient-onboarding-view[hidden] { display: none !important; }
+    .screen.is-patient-onboarding .patient-onboarding-view { display: flex; }
+    .patient-onboarding-scroll { padding-top: 12px; }
+    .patient-onboarding-card { padding-bottom: 8px; }
+    .patient-onboarding-field { margin-top: 14px; }
+    .patient-onboarding-card > .patient-onboarding-field:first-of-type { margin-top: 0; }
+    .patient-onboarding-name-label { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    .patient-onboarding-auto-fill { color: #84918E; font: 500 9px "DM Sans", sans-serif; letter-spacing: .04em; text-transform: none; }
+    .patient-onboarding-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; }
+    .patient-onboarding-grid .patient-onboarding-field { min-width: 0; }
+    .patient-onboarding-photo-row { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; }
+    .patient-onboarding-avatar { display: grid; place-items: center; width: 54px; height: 54px; flex: 0 0 54px; overflow: hidden; border-radius: 50%; background: #EAF3F0; color: #087C70; font: 700 17px "Urbanist", sans-serif; }
+    .patient-onboarding-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .patient-onboarding-avatar img[hidden] { display: none; }
+    .patient-onboarding-photo-copy { display: grid; justify-items: start; gap: 4px; }
+    .patient-onboarding-photo-button { display: inline-flex; align-items: center; gap: 7px; min-height: 40px; padding: 0; border: 0; border-radius: 0; background: transparent; color: #0F172A; font: 600 12px "DM Sans", sans-serif; cursor: pointer; }
+    .patient-onboarding-photo-button i { color: #087C70; font-size: 15px; }
+    .patient-onboarding-field input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+    .patient-onboarding-field input[type="number"]::-webkit-inner-spin-button,
+    .patient-onboarding-field input[type="number"]::-webkit-outer-spin-button { margin: 0; -webkit-appearance: none; }
+    .patient-onboarding-feedback { margin: 12px 0 0; color: #B42318; font: 500 12px/1.4 "DM Sans", sans-serif; }
+    .patient-onboarding-footer { padding-bottom: max(18px, env(safe-area-inset-bottom)); }
+    .patient-onboarding-footer .doctor-form-submit { min-height: 48px; border-radius: 12px; font: 700 14px "DM Sans", sans-serif; }
+    .screen.is-patient-onboarding .home-indicator { background: #10182835; }
+    .screen.is-patient-onboarding button:focus-visible,
+    .screen.is-patient-onboarding input:focus-visible,
+    .screen.is-patient-onboarding select:focus-visible { outline: 2px solid #0E8070; outline-offset: 2px; }
     .doctor-form-view-content { min-height: 0; flex: 1 1 auto; display: flex; flex-direction: column; }
     .doctor-form-header { min-height: 66px; flex: 0 0 66px; display: flex; align-items: center; gap: 14px; padding: 10px 20px 12px; background: #fff; }
     .doctor-form-back { width: 44px; height: 44px; display: grid; place-items: center; flex: 0 0 44px; border: 0; border-radius: 50%; color: #183c37; background: #eef3f7; cursor: pointer; }
@@ -26660,6 +26693,8 @@
     .doctor-field select { appearance: none; -webkit-appearance: none; padding-right: 38px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23172a2d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px; }
     .doctor-field input:focus, .doctor-field select:focus { box-shadow: 0 0 0 2px #0e80704d; background-color: #f8faf9; }
     .doctor-field input::placeholder { color: #94a3a0; }
+    .patient-onboarding-card .patient-onboarding-name-label { display: flex; }
+    .patient-onboarding-grid > .patient-onboarding-field:first-of-type { margin-top: 14px; }
     .doctor-form-footer { flex: 0 0 auto; padding: 12px 20px max(18px, env(safe-area-inset-bottom)); background: #fff; }
     .doctor-form-submit { width: 100%; min-height: 52px; border: 0; border-radius: 13px; color: #fff; background: var(--forest); font: 600 14px "DM Sans", sans-serif; cursor: pointer; -webkit-tap-highlight-color: transparent; }
     .screen.is-doctor-form button:focus-visible { outline-color: #0e8070; }
@@ -26682,8 +26717,8 @@
 
     @media (max-width: 480px) {
       body { background: #052e28; }
-      .stage { display: block; min-height: 100svh; padding: 0; }
-      .phone { width: 100%; height: 100svh; min-height: 650px; border: 0; border-radius: 0; box-shadow: none; }
+      .stage { display: grid; min-height: 100svh; padding: 10px 12px 12px; }
+      .phone { width: min(100%, 376px); height: 816px; min-height: 0; border: 8px solid #080b0c; border-radius: 49px; box-shadow: 0 0 0 2px #39403f, 0 24px 72px #0009; }
       .status-bar { height: calc(48px + env(safe-area-inset-top)); flex-basis: calc(48px + env(safe-area-inset-top)); padding-top: env(safe-area-inset-top); }
       .content { padding-top: 20px; padding-bottom: max(30px, env(safe-area-inset-bottom)); }
       .doctor-form-scroll { padding: 20px 20px 12px; }
@@ -26704,7 +26739,11 @@
 }
 #onubotEntry .screen { background: linear-gradient(158deg, #3a8a7d 0%, #236d63 28%, #15564d 57%, #0a4039 78%, #02241f 100%) !important; }
 #onubotEntry .status-bar { background: transparent !important; color: #fff !important; text-shadow: 0 1px 8px #073b3330 !important; box-shadow: none !important; border: 0 !important; }
-#onubotEntry .screen:not(.is-doctor-view):not(.is-doctor-form) .status-bar .status-icons,#onubotEntry .screen:not(.is-doctor-view):not(.is-doctor-form) .status-bar .status-icons svg{color:#fff!important}
+#onubotEntry .screen:not(.is-doctor-view):not(.is-doctor-form):not(.is-patient-onboarding) .status-bar .status-icons,#onubotEntry .screen:not(.is-doctor-view):not(.is-doctor-form):not(.is-patient-onboarding) .status-bar .status-icons svg{color:#fff!important}
+#onubotEntry .screen.is-patient-onboarding { background: #fff !important; animation: none !important; }
+#onubotEntry .screen.is-patient-onboarding .status-bar,
+#onubotEntry .screen.is-patient-onboarding .status-bar .status-icons,
+#onubotEntry .screen.is-patient-onboarding .status-bar .status-icons svg { background: #fff !important; color: #0f172a !important; text-shadow: none !important; }
 #onubotEntry[hidden] { display: none !important; }
 .entry-app-switcher{position:fixed;left:24px;top:50%;z-index:10001;width:250px;padding:14px;border:1px solid #ffffff24;border-radius:18px;background:#222a2d;box-shadow:0 18px 42px #0005;transform:translateY(-50%);color:#e8eeee;font-family:'DM Sans',sans-serif}
 .entry-app-switcher-label{display:flex;align-items:center;gap:7px;margin:0 0 10px 2px;color:#b7e8d9;font-size:10px;font-weight:800;letter-spacing:.07em}
@@ -26712,7 +26751,7 @@
 .entry-app-switch-option i{font-size:16px}
 .entry-app-switch-option:hover{background:#ffffff14;color:#fff}
 .entry-app-switch-option.is-current{border-color:#a9dacf;background:#d6eae6;color:#052e28}
-@media(max-width:760px){#onubotEntry .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;align-content:stretch;gap:8px;min-height:100svh;padding:10px 12px 12px}#onubotEntry .phone{height:min(852px,calc(100svh - 96px));min-height:min(620px,calc(100svh - 96px))}.entry-app-switcher{position:static;transform:none;width:min(100%,392px);justify-self:center;display:flex;align-items:center;gap:6px;padding:7px;border-radius:14px}.entry-app-switcher-label{display:none}.entry-app-switch-option{flex:1;min-width:0;justify-content:center;gap:5px;min-height:36px;margin:0;padding:0 6px;font-size:10px}.entry-app-switch-option i{font-size:14px}}
+@media(max-width:760px){#onubotEntry .stage{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;align-content:stretch;gap:8px;min-height:100svh;padding:10px 12px 12px}#onubotEntry .phone{width:min(100%,376px);height:816px;min-height:0;border:8px solid #080b0c;border-radius:49px;box-shadow:0 0 0 2px #39403f,0 24px 72px #0009}.entry-app-switcher{position:static;transform:none;width:min(100%,376px);justify-self:center;display:flex;align-items:center;gap:6px;padding:7px;border-radius:14px}.entry-app-switcher-label{display:none}.entry-app-switch-option{flex:1;min-width:0;justify-content:center;gap:5px;min-height:36px;margin:0;padding:0 6px;font-size:10px}.entry-app-switch-option i{font-size:14px}}
 @media(max-height:720px) and (max-width:760px){#onubotEntry .phone{min-height:0}}
 </style>
 <style>
@@ -26823,7 +26862,7 @@
           <p class="description">Sign in to keep your health information and visits together.</p>
 
           <div class="actions" aria-label="Sign in options">
-            <button class="action google-action" type="button" onclick="window.location.assign('patient-app.html')"><svg class="google-mark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.1v5h6.6c3.9-3.6 6.1-8.8 6.1-14.8Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.8l-6.6-5c-1.8 1.2-4.1 2-6.9 2-5.3 0-9.8-3.6-11.4-8.5H5.8v5.2A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.7a12 12 0 0 1 0-7.4v-5.2H5.8a20 20 0 0 0 0 17.8l6.8-5.2Z"/><path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8A19.4 19.4 0 0 0 24 4 20 20 0 0 0 5.8 15.1l6.8 5.2c1.6-4.9 6.1-8.2 11.4-8.2Z"/></svg><span>Continue with Google</span></button>
+            <button class="action google-action" type="button" onclick="beginPatientSignup()"><svg class="google-mark" viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M43.6 24.5c0-1.4-.1-2.8-.4-4.1H24v7.8h11a9.4 9.4 0 0 1-4.1 6.1v5h6.6c3.9-3.6 6.1-8.8 6.1-14.8Z"/><path fill="#34A853" d="M24 44c5.5 0 10.1-1.8 13.5-4.8l-6.6-5c-1.8 1.2-4.1 2-6.9 2-5.3 0-9.8-3.6-11.4-8.5H5.8v5.2A20 20 0 0 0 24 44Z"/><path fill="#FBBC05" d="M12.6 27.7a12 12 0 0 1 0-7.4v-5.2H5.8a20 20 0 0 0 0 17.8l6.8-5.2Z"/><path fill="#EA4335" d="M24 12.1c3 0 5.7 1 7.8 3.1l5.8-5.8A19.4 19.4 0 0 0 24 4 20 20 0 0 0 5.8 15.1l6.8 5.2c1.6-4.9 6.1-8.2 11.4-8.2Z"/></svg><span>Continue with Google</span></button>
           </div>
           <button class="doctor-entry" type="button" aria-label="Are you a doctor? Join the network" onclick="showDoctorWelcome()"><span>Are you a doctor?</span><strong>Join the network</strong></button>
 
@@ -26871,6 +26910,60 @@
             <footer class="doctor-form-footer"><button class="doctor-form-submit" type="submit">Continue to Onu</button></footer>
           </form>
         </section>
+        <section class="patient-onboarding-view" id="patientOnboardingView" aria-label="Patient basic information" hidden>
+          <header class="doctor-form-header patient-onboarding-header">
+            <button class="doctor-form-back" type="button" onclick="showLogin()" aria-label="Back to sign in"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></button>
+            <h1 tabindex="-1">Basic information</h1>
+          </header>
+          <form class="doctor-form-view-content" id="patientOnboardingForm" onsubmit="continuePatientOnboarding(event)">
+            <div class="doctor-form-scroll patient-onboarding-scroll">
+              <section class="doctor-form-card patient-onboarding-card" aria-label="Your basic information">
+                <div class="patient-onboarding-photo-row">
+                  <div class="patient-onboarding-avatar" aria-label="Profile photo preview">
+                    <span id="patientOnboardingInitials" aria-hidden="true">AK</span>
+                    <img id="patientOnboardingPhotoPreview" alt="" hidden>
+                  </div>
+                  <div class="patient-onboarding-photo-copy">
+                    <button type="button" class="patient-onboarding-photo-button" onclick="document.getElementById('patientOnboardingPhotoInput').click()"><i class="ph ph-camera" aria-hidden="true"></i><span id="patientOnboardingPhotoActionLabel">Add photo</span></button>
+                  </div>
+                  <input type="file" id="patientOnboardingPhotoInput" accept="image/*" hidden onchange="handlePatientOnboardingPhoto(event)">
+                </div>
+                <label class="doctor-field patient-onboarding-field">
+                  <span class="doctor-field-label patient-onboarding-name-label"><span>Full name <em>*</em></span></span>
+                  <input id="patientOnboardingName" name="fullName" type="text" autocomplete="name" required minlength="2" maxlength="80" value="Alif Khan">
+                </label>
+                <label class="doctor-field patient-onboarding-field">
+                  <span class="doctor-field-label">Phone number <em>*</em></span>
+                  <input id="patientOnboardingPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+880 1XXX-XXXXXX" required minlength="8" maxlength="24" pattern="[+0-9][0-9+() -]{6,19}" title="Enter a valid phone number">
+                </label>
+                <div class="patient-onboarding-grid">
+                  <label class="doctor-field patient-onboarding-field">
+                    <span class="doctor-field-label">Age (years)</span>
+                    <input id="patientOnboardingAge" name="age" type="number" min="1" max="120" inputmode="numeric" placeholder="e.g. 26">
+                  </label>
+                  <label class="doctor-field patient-onboarding-field">
+                    <span class="doctor-field-label">Gender</span>
+                    <select id="patientOnboardingGender" name="gender"><option value="" selected>Select gender</option><option>Female</option><option>Male</option><option>Other</option><option>Prefer not to say</option></select>
+                  </label>
+                  <label class="doctor-field patient-onboarding-field">
+                    <span class="doctor-field-label">Blood type</span>
+                    <select id="patientOnboardingBloodType" name="bloodType"><option value="" selected>Select blood type</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option><option>Unknown</option></select>
+                  </label>
+                  <label class="doctor-field patient-onboarding-field">
+                    <span class="doctor-field-label">Height (ft.in)</span>
+                    <input id="patientOnboardingHeight" name="height" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 5.6" oninput="this.setCustomValidity('')">
+                  </label>
+                  <label class="doctor-field patient-onboarding-field">
+                    <span class="doctor-field-label">Weight (kg)</span>
+                    <input id="patientOnboardingWeight" name="weight" type="number" min="1" max="500" step="0.1" inputmode="decimal" placeholder="e.g. 69">
+                  </label>
+                </div>
+                <p class="patient-onboarding-feedback" id="patientOnboardingFeedback" role="alert" hidden></p>
+              </section>
+            </div>
+            <footer class="doctor-form-footer patient-onboarding-footer"><button class="doctor-form-submit" type="submit">Continue</button></footer>
+          </form>
+        </section>
         <div class="home-indicator" aria-hidden="true"></div>
       </div>
     </section>
@@ -26887,7 +26980,11 @@
     const appScreen = document.querySelector('.screen');
     const doctorWelcomeView = document.getElementById('doctorWelcomeView');
     const doctorProfileFormView = document.getElementById('doctorProfileFormView');
+    const patientOnboardingView = document.getElementById('patientOnboardingView');
     const loginSplash = document.getElementById('loginSplash');
+    let patientOnboardingPhotoDataUrl = '';
+    const PATIENT_PROFILE_STORAGE_KEY = 'onuPatientProfile:v1';
+    const PATIENT_SIGNUP_HANDOFF_PREFIX = 'onu-patient-signup:v1:';
 
     if (loginSplash) {
       let splashFinished = false;
@@ -26904,7 +27001,117 @@
       window.setTimeout(finishLoginSplash, reducedMotion ? 80 : 3500);
     }
 
+    function beginPatientSignup() {
+      showPatientOnboarding();
+    }
+
+    function showPatientOnboarding() {
+      doctorWelcomeView.hidden = true;
+      doctorProfileFormView.hidden = true;
+      patientOnboardingView.hidden = false;
+      appScreen.classList.remove('is-doctor-view', 'is-doctor-form');
+      appScreen.classList.add('is-patient-onboarding');
+      patientOnboardingPhotoDataUrl = '';
+      const form = document.getElementById('patientOnboardingForm');
+      form?.reset();
+      const detectedName = document.getElementById('patientOnboardingName');
+      if (detectedName) detectedName.value = 'Alif Khan';
+      const photoPreview = document.getElementById('patientOnboardingPhotoPreview');
+      if (photoPreview) { photoPreview.removeAttribute('src'); photoPreview.hidden = true; }
+      const initials = document.getElementById('patientOnboardingInitials');
+      if (initials) { initials.textContent = 'AK'; initials.hidden = false; }
+      const photoActionLabel = document.getElementById('patientOnboardingPhotoActionLabel');
+      if (photoActionLabel) photoActionLabel.textContent = 'Add photo';
+      const feedback = document.getElementById('patientOnboardingFeedback');
+      if (feedback) { feedback.textContent = ''; feedback.hidden = true; }
+      appScreen.scrollTop = 0;
+      patientOnboardingView.querySelector('.patient-onboarding-header h1')?.focus({ preventScroll: true });
+    }
+
+    function handlePatientOnboardingPhoto(event) {
+      const file = event.target.files?.[0];
+      event.target.value = '';
+      if (!file) return;
+      const feedback = document.getElementById('patientOnboardingFeedback');
+      if (!file.type.startsWith('image/')) {
+        if (feedback) { feedback.textContent = 'Choose an image for your profile photo.'; feedback.hidden = false; }
+        return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        if (feedback) { feedback.textContent = 'Choose a photo smaller than 2 MB.'; feedback.hidden = false; }
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = () => {
+        patientOnboardingPhotoDataUrl = String(reader.result || '');
+        const preview = document.getElementById('patientOnboardingPhotoPreview');
+        if (preview) { preview.src = patientOnboardingPhotoDataUrl; preview.hidden = !patientOnboardingPhotoDataUrl; }
+        const initials = document.getElementById('patientOnboardingInitials');
+        if (initials) initials.hidden = Boolean(patientOnboardingPhotoDataUrl);
+        const actionLabel = document.getElementById('patientOnboardingPhotoActionLabel');
+        if (actionLabel) actionLabel.textContent = 'Change photo';
+        if (feedback) { feedback.textContent = ''; feedback.hidden = true; }
+      };
+      reader.onerror = () => {
+        if (feedback) { feedback.textContent = 'The photo could not be opened. Try another image.'; feedback.hidden = false; }
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function patientOnboardingHeightToCm(value) {
+      const match = String(value || '').trim().match(/^(\d{1,2})\.(\d{1,2})$/);
+      if (!match) return null;
+      const feet = Number(match[1]);
+      const inches = Number(match[2]);
+      if (inches > 11) return null;
+      const centimeters = (feet * 12 + inches) * 2.54;
+      return centimeters >= 50 && centimeters <= 250 ? Number(centimeters.toFixed(1)) : null;
+    }
+
+    function continuePatientOnboarding(event) {
+      event.preventDefault();
+      const form = event.currentTarget;
+      const heightInput = document.getElementById('patientOnboardingHeight');
+      const heightText = String(heightInput?.value || '').trim();
+      let heightCm = '';
+      heightInput?.setCustomValidity('');
+      if (heightText) {
+        const convertedHeight = patientOnboardingHeightToCm(heightText);
+        if (convertedHeight === null) {
+          heightInput.setCustomValidity('Enter height as feet.inches, such as 5.6.');
+          heightInput.reportValidity();
+          heightInput.focus();
+          return;
+        }
+        heightInput.setCustomValidity('');
+        heightCm = String(convertedHeight);
+      }
+      const formData = new FormData(form);
+      const age = String(formData.get('age') || '').trim();
+      const gender = String(formData.get('gender') || '');
+      const bloodType = String(formData.get('bloodType') || '');
+      const weight = String(formData.get('weight') || '').trim();
+      const heightNumber = Number(heightCm);
+      const weightNumber = Number(weight);
+      const bmi = heightNumber > 0 && weightNumber > 0 ? (weightNumber / ((heightNumber / 100) ** 2)).toFixed(1) : '';
+      const profile = {
+        name: String(formData.get('fullName') || '').trim(),
+        email: 'shaycormac004700@gmail.com',
+        phone: String(formData.get('phone') || '').trim(),
+        age, gender, bloodType, height: heightCm, weight, bmi,
+        photo: patientOnboardingPhotoDataUrl
+      };
+      const handoff = `${PATIENT_SIGNUP_HANDOFF_PREFIX}${JSON.stringify(profile)}`;
+      window.name = handoff;
+      try {
+        localStorage.setItem(PATIENT_PROFILE_STORAGE_KEY, JSON.stringify(profile));
+      } catch (error) {}
+      window.location.assign('patient-app.html');
+    }
+
     function showDoctorWelcome() {
+      patientOnboardingView.hidden = true;
+      appScreen.classList.remove('is-patient-onboarding');
       appScreen.classList.add('is-doctor-view');
       appScreen.classList.remove('is-doctor-form');
       doctorProfileFormView.hidden = true;
@@ -26915,6 +27122,8 @@
 
     function showDoctorProfileForm() {
       doctorWelcomeView.hidden = true;
+      patientOnboardingView.hidden = true;
+      appScreen.classList.remove('is-patient-onboarding');
       appScreen.classList.remove('is-doctor-view');
       appScreen.classList.add('is-doctor-form');
       doctorProfileFormView.hidden = false;
@@ -26964,8 +27173,10 @@
     function showLogin() {
       doctorWelcomeView.hidden = true;
       doctorProfileFormView.hidden = true;
+      patientOnboardingView.hidden = true;
       appScreen.classList.remove('is-doctor-view');
       appScreen.classList.remove('is-doctor-form');
+      appScreen.classList.remove('is-patient-onboarding');
       appScreen.scrollTop = 0;
       document.querySelector('.doctor-entry').focus({ preventScroll: true });
     }
