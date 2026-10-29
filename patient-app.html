@@ -591,8 +591,8 @@
     .patient-rx-header h2 { flex: 1; margin: 0; font: 700 18px/1.2 var(--font-heading); }
     .patient-rx-save-header { display: inline-flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 10px; border: 1px solid #B9DCD4; border-radius: 10px; background: #EAF5F1; color: #087C70; white-space: nowrap; font: 650 11px var(--font-body); cursor: pointer; }
     .patient-rx-content { flex: 1 1 auto; overflow: auto; padding: 15px 18px 22px; }
-    .patient-rx-section { margin: 0 0 9px; border-bottom: 1px solid #E7EEEC; }
-    .patient-rx-section > summary { display: flex; align-items: center; justify-content: space-between; min-height: 44px; cursor: pointer; list-style: none; font: 700 14px/1.3 var(--font-heading); }
+    .patient-rx-section { margin: 0 0 12px; }
+    .patient-rx-section > summary { display: flex; align-items: center; justify-content: space-between; min-height: 48px; cursor: pointer; list-style: none; font: 700 14px/1.3 var(--font-heading); }
     .patient-rx-section > summary::-webkit-details-marker, .patient-rx-medicine > summary::-webkit-details-marker { display: none; }
     .patient-rx-section-chevron { color: var(--color-text-secondary); flex: 0 0 auto; transition: transform .16s ease; }
     .patient-rx-section[open] .patient-rx-section-chevron { transform: rotate(180deg); }
@@ -5051,7 +5051,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 56px 24px 44px 24px;
+      padding: 56px 24px 44px;
       opacity: 0;
       pointer-events: none;
       transform: scale(0.96);
@@ -5069,8 +5069,12 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      gap: 8px;
+      gap: 10px;
     }
+
+    .incoming-onubot-brand { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 10px; color: #FFFFFF; font: 700 16px var(--font-heading); }
+    .incoming-onubot-mark { width: 24px; height: 24px; flex: 0 0 24px; border-radius: 50%; background: linear-gradient(135deg, #D6EAE6 0%, #41C7AA 38%, #087E70 70%, #D6EAE6 100%); background-size: 240% 240%; box-shadow: 0 0 18px rgba(52,211,153,.35); animation: onubotGradientShift 3.2s ease-in-out infinite; }
+    @keyframes onubotGradientShift { 0%,100% { background-position: 0% 50%; transform: rotate(0deg); } 50% { background-position: 100% 50%; transform: rotate(180deg); } }
 
     .system-caller-pill {
       display: inline-flex;
@@ -5098,20 +5102,27 @@
 
     .incoming-caller-title {
       font-family: var(--font-heading);
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: #FFFFFF;
       letter-spacing: -0.01em;
-      margin-top: 6px;
+      margin: 0;
     }
 
     .incoming-caller-sub {
       font-family: var(--font-body);
       font-size: 13.5px;
-      color: #94A3B8;
+      color: #AAB7C4;
       max-width: 260px;
-      line-height: 1.4;
+      line-height: 1.5;
+      margin: 0;
     }
+
+    .incoming-doctor-photo-wrap { position: relative; display: grid; place-items: center; width: 116px; height: 116px; margin-top: 30px; border-radius: 50%; }
+    .incoming-doctor-photo-wrap::before, .incoming-doctor-photo-wrap::after { content: ''; position: absolute; inset: 0; border: 1px solid rgba(52,211,153,.44); border-radius: 50%; animation: doctorPhotoGlow 2.8s ease-out infinite; }
+    .incoming-doctor-photo-wrap::after { animation-delay: 1.4s; }
+    .incoming-doctor-photo { position: relative; z-index: 1; width: 96px; height: 96px; border: 3px solid #34D399; border-radius: 50%; object-fit: cover; box-shadow: 0 0 26px rgba(52,211,153,.32); }
+    @keyframes doctorPhotoGlow { 0% { transform: scale(.84); opacity: .75; } 100% { transform: scale(1.42); opacity: 0; } }
 
     .incoming-avatar-center {
       display: flex;
@@ -5342,24 +5353,46 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: #000000;
+      background: #0B1319;
       z-index: 160;
       display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 44px 16px 28px 16px;
+      padding: 0;
+      overflow: hidden;
+      cursor: pointer;
     }
 
     .video-room-view.active {
       display: flex;
     }
 
+    .video-call-stage { position: absolute; inset: 0; display: grid; place-items: center; overflow: hidden; background: #0B1319; }
+    .video-call-doctor-heading { position: absolute; z-index: 2; top: 32px; left: 22px; display: flex; align-items: center; gap: 10px; color: #FFFFFF; font: 700 14px var(--font-heading); transition: opacity .2s ease, visibility .2s ease; }
+    .video-call-doctor-avatar { width: 40px; height: 40px; flex: 0 0 40px; border-radius: 12px; object-fit: cover; border: 1px solid rgba(255,255,255,.18); }
+    .video-call-doctor-copy { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .video-call-patient-preview { position: absolute; z-index: 2; top: 30px; right: 20px; width: 82px; height: 112px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; object-fit: cover; background: #1E293B; }
+    .video-call-patient-off { position: absolute; z-index: 2; top: 30px; right: 20px; display: grid; place-items: center; width: 82px; height: 112px; border: 1px solid rgba(255,255,255,.24); border-radius: 12px; background: #1E293B; color: #AAB7C4; font-size: 26px; }
+    .video-call-patient-off[hidden] { display: none; }
+    .video-call-waiting { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px; color: #AAB7C4; text-align: center; font: 12px/1.4 var(--font-body); transition: opacity .2s ease, visibility .2s ease; }
+    .video-call-waiting-spinner { width: 22px; height: 22px; border: 2px solid rgba(214,234,230,.22); border-top-color: #70D9C0; border-radius: 50%; animation: callSpin .9s linear infinite; }
+    .video-call-timer { color: #AAB7C4; font: 11px/1.2 var(--font-body); font-variant-numeric: tabular-nums; }
+
     @keyframes callSpin { to { transform: rotate(360deg); } }
+    .video-controls-dock { position: absolute; z-index: 3; right: 0; bottom: max(24px, env(safe-area-inset-bottom)); left: 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 20px; transition: opacity .2s ease, visibility .2s ease; }
+    .video-call-media-controls { display: flex; align-items: center; gap: 10px; }
+    .video-call-media-button { display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid rgba(203,213,225,.28); border-radius: 50%; background: rgba(30,41,59,.92); color: #F1F5F9; font-size: 19px; cursor: pointer; box-shadow: 0 6px 18px rgba(0,0,0,.2); transition: background .16s ease, transform .16s ease; }
+    .video-call-media-button:hover { background: #26364D; }
+    .video-call-media-button:active { transform: scale(.96); }
+    .video-call-media-button[aria-pressed="true"] { background: #7F3037; border-color: rgba(248,113,113,.6); }
+    .video-call-media-button:focus-visible, .video-controls-dock .btn-back-visits:focus-visible { outline: 3px solid #D6EAE6; outline-offset: 3px; }
     .video-controls-dock .btn-back-visits {
-      min-height: 44px; padding: 0 20px; border: 1px solid rgba(255,255,255,.24);
-      border-radius: 999px; background: rgba(15,23,42,.84); color: #fff;
-      font: 700 14px var(--font-heading); display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      min-height: 48px; padding: 0 24px;
+      border: 1px solid rgba(203,213,225,.28); border-radius: 999px; background: rgba(30,41,59,.9); color: #F1F5F9;
+      font: 650 14px var(--font-heading); display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      box-shadow: 0 6px 18px rgba(0,0,0,.2); transition: background .16s ease, border-color .16s ease, transform .16s ease;
     }
+    .video-controls-dock .btn-back-visits:hover { background: #26364D; border-color: rgba(214,234,230,.5); }
+    .video-controls-dock .btn-back-visits:active { transform: scale(.97); }
+    .btn-call-action-circle:focus-visible { outline: 3px solid #D6EAE6; outline-offset: 3px; }
     .visit-summary-progress {
       display: flex; align-items: center; gap: 10px; width: 100%; box-sizing: border-box;
       margin-top: 12px; padding: 13px 14px; border-radius: 12px;
@@ -5373,7 +5406,7 @@
     .video-room-top-bar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       z-index: 10;
     }
 
@@ -5392,19 +5425,10 @@
       font-weight: 700;
     }
 
-    .video-feed-doctor {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      opacity: 0.9;
-    }
+    .video-feed-doctor { display: none; }
 
     .video-feed-patient-pip {
+      display: none;
       position: absolute;
       top: 96px;
       right: 16px;
@@ -5424,19 +5448,10 @@
       object-fit: cover;
     }
 
-    .video-controls-dock {
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(16px);
-      padding: 12px 20px;
-      border-radius: 999px;
-      align-self: center;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
+    .video-room-view.controls-hidden .video-call-doctor-heading,
+    .video-room-view.controls-hidden .video-call-waiting,
+    .video-room-view.controls-hidden .video-controls-dock { opacity: 0; visibility: hidden; pointer-events: none; }
+    @media (prefers-reduced-motion: reduce) { .video-call-waiting-spinner { animation: none; } .video-call-doctor-heading, .video-call-waiting, .video-controls-dock { transition: none; } }
 
     .btn-video-ctrl {
       width: 44px;
@@ -6872,15 +6887,12 @@
         <!-- Automated system incoming call with patient response options -->
         <div class="incoming-call-overlay" id="incomingCallOverlay" aria-live="polite">
           <div class="incoming-top-info">
-            <div class="system-caller-pill"><span class="live-pulse-dot"></span><span>Onu Automated Health System</span></div>
-            <h2 class="incoming-caller-title">Your doctor is ready</h2>
-            <p class="incoming-caller-sub">Your turn has arrived. Join your consultation with Ast. Prof. Dr. Mahim Khan (Serial #5).</p>
+            <div class="incoming-onubot-brand"><span class="incoming-onubot-mark" aria-hidden="true"></span><span>Onubot</span></div>
+            <h2 class="incoming-caller-title">Dr. Mahim Khan is ready for you</h2>
+            <p class="incoming-caller-sub">It's your turn. Please join the call.</p>
+            <div class="incoming-doctor-photo-wrap"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Dr. Mahim Khan" class="incoming-doctor-photo"></div>
           </div>
-          <div class="incoming-avatar-center">
-            <div class="incoming-avatar-pulse-ring"></div>
-            <div class="incoming-avatar-pulse-ring"></div>
-            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=300&auto=format&fit=crop&q=80" alt="Dr. Mahim Khan" class="incoming-avatar-img">
-          </div>
+          <div class="incoming-avatar-center" aria-hidden="true"></div>
           <div class="incoming-actions-dock">
             <div class="incoming-action-buttons-row">
               <div style="display:flex;flex-direction:column;align-items:center;">
@@ -6920,35 +6932,25 @@
         <!-- =======================================================
              ACTIVE VIDEO CONSULTATION ROOM
              ======================================================= -->
-        <div class="video-room-view" id="videoRoomView">
-          
-          <!-- Full Doctor Video Feed -->
-          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800&auto=format&fit=crop&q=80" alt="Doctor Video Feed" class="video-feed-doctor">
-
-          <!-- Patient PiP Camera Preview -->
-          <div class="video-feed-patient-pip">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" alt="Patient PiP">
-          </div>
-
-          <!-- Video Top Header -->
-          <div class="video-room-top-bar">
-            <div class="video-status-pill">
-              <span class="live-pulse-dot" style="width: 7px; height: 7px; border-radius: 50%; background: #34D399; box-shadow: 0 0 8px #34D399;"></span>
-              <span>In Consultation &middot; Dr. Mahim Khan</span>
+        <div class="video-room-view" id="videoRoomView" role="group" aria-label="Video call. Tap the screen to hide or show call details and controls." tabindex="0" onclick="togglePatientCallControls(event)" onkeydown="handlePatientCallControlsKeydown(event)">
+          <div class="video-call-stage">
+            <div class="video-call-doctor-heading">
+              <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=160&auto=format&fit=crop&q=80" alt="" class="video-call-doctor-avatar" aria-hidden="true">
+              <span class="video-call-doctor-copy"><span>Dr. Mahim Khan</span><span class="video-call-timer" id="videoCallTimerText">00:00</span></span>
             </div>
-            <div class="video-status-pill" id="videoCallTimerPill">
-              <i class="ph ph-clock"></i>
-              <span id="videoCallTimerText">00:00</span>
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&auto=format&fit=crop&q=80" alt="Your camera preview" class="video-call-patient-preview">
+            <div class="video-call-patient-off" id="videoCallPatientOff" hidden aria-label="Camera off"><i class="ph ph-video-camera-slash" aria-hidden="true"></i></div>
+            <div class="video-call-waiting"><span class="video-call-waiting-spinner" aria-hidden="true"></span><span>Waiting for the doctor to join…</span></div>
+            <div class="video-controls-dock">
+              <div class="video-call-media-controls">
+                <button type="button" class="video-call-media-button" id="videoCallMuteButton" aria-label="Mute microphone" aria-pressed="false" title="Mute microphone" onclick="togglePatientCallMute()"><i class="ph ph-microphone" aria-hidden="true"></i></button>
+                <button type="button" class="video-call-media-button" id="videoCallCameraButton" aria-label="Turn camera off" aria-pressed="false" title="Turn camera off" onclick="togglePatientCallCamera()"><i class="ph ph-video-camera" aria-hidden="true"></i></button>
+              </div>
+              <button type="button" class="btn-back-visits" onclick="backToVisitsFromCall()">
+                <i class="ph ph-arrow-left" aria-hidden="true"></i><span>Back to Visits</span>
+              </button>
             </div>
           </div>
-
-          <!-- Controls Dock -->
-          <div class="video-controls-dock">
-            <button type="button" class="btn-back-visits" onclick="backToVisitsFromCall()">
-              <i class="ph ph-arrow-left" aria-hidden="true"></i><span>Back to Visits</span>
-            </button>
-          </div>
-
         </div>
 
         <!-- =======================================================
@@ -7368,11 +7370,15 @@
     const PATIENT_HEALTH_SAMPLE_MEDICATIONS = [
       { name: 'Napa', genericName: 'Paracetamol', dose: '500 mg', frequency: '1 · 0 · 1', duration: '7 days' },
       { name: 'Fexo', genericName: 'Fexofenadine', dose: '120 mg', frequency: '0 · 0 · 1', duration: '7 days' },
-      { name: 'Seclo', genericName: 'Omeprazole', dose: '20 mg', frequency: '1 · 0 · 0', duration: '7 days' },
-      { name: 'Monas', genericName: 'Montelukast', dose: '10 mg', frequency: '0 · 0 · 1', duration: '7 days' },
-      { name: 'Ceevit', genericName: 'Vitamin C', dose: '250 mg', frequency: '1 · 0 · 0', duration: '7 days' }
+      { name: 'Seclo', genericName: 'Omeprazole', dose: '20 mg', frequency: '1 · 0 · 0', duration: '7 days' }
     ];
     const PATIENT_HEALTH_CONTEXT_STORAGE_KEY = 'onuPatientHealthContext:v1';
+    const PATIENT_HEALTH_CONTEXT_SEEDED_KEY = 'onuPatientHealthContextSample:v1';
+    const PATIENT_HEALTH_DEFAULTS_MIGRATED_KEY = 'onuPatientHealthDefaults:v2';
+    const PATIENT_HEALTH_SAMPLE_CONTEXT = {
+      allergies: [['Medication', 'Penicillin'], ['Food', 'Peanuts'], ['Environmental', 'Pollen']],
+      conditions: [['Respiratory', 'Asthma'], ['Neurological', 'Migraine']]
+    };
     const PATIENT_PROFILE_STORAGE_KEY = 'onuPatientProfile:v1';
     const PATIENT_PROFILE_DEFAULTS = { name: 'Alif Khan', email: 'shaycormac004700@gmail.com', phone: '+880 1789 946454', age: '26', gender: 'Male', bloodType: 'O-', height: '167.5', weight: '69', bmi: '24.6', photo: '' };
     const PATIENT_SIGNUP_HANDOFF_PREFIX = 'onu-patient-signup:v1:';
@@ -7549,6 +7555,38 @@
       } catch (error) { patientPrescriptionStorageUnavailable = true; }
     }
 
+    function seedPatientHealthContextOnce() {
+      try {
+        if (localStorage.getItem(PATIENT_HEALTH_CONTEXT_SEEDED_KEY) === 'true') return;
+        if (localStorage.getItem(PATIENT_HEALTH_CONTEXT_STORAGE_KEY) === null) {
+          const toEntries = (items, prefix) => items.map(([category, name]) => ({ id: `${prefix}-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, category, name }));
+          savePatientHealthContext({
+            version: 1,
+            allergies: toEntries(PATIENT_HEALTH_SAMPLE_CONTEXT.allergies, 'allergy'),
+            conditions: toEntries(PATIENT_HEALTH_SAMPLE_CONTEXT.conditions, 'condition')
+          });
+        }
+        localStorage.setItem(PATIENT_HEALTH_CONTEXT_SEEDED_KEY, 'true');
+      } catch (error) { patientHealthStorageWarningShown = true; }
+    }
+
+    function limitPatientHealthDefaultsOnce() {
+      try {
+        if (localStorage.getItem(PATIENT_HEALTH_DEFAULTS_MIGRATED_KEY) === 'true') return;
+        const health = loadPatientHealthContext();
+        const prescription = loadPatientPrescriptionData();
+        const changedHealth = health.allergies.length > 3 || health.conditions.length > 2;
+        const changedMeds = prescription.medications.length > 3;
+        if (changedHealth) {
+          savePatientHealthContext({ ...health, allergies: health.allergies.slice(0, 3), conditions: health.conditions.slice(0, 2) });
+        }
+        if (changedMeds) {
+          savePatientPrescriptionData({ ...prescription, medications: prescription.medications.slice(0, 3) });
+        }
+        localStorage.setItem(PATIENT_HEALTH_DEFAULTS_MIGRATED_KEY, 'true');
+      } catch (error) { patientHealthStorageWarningShown = true; }
+    }
+
     const PATIENT_ALLERGY_CATALOG = [
       ['Medication','Penicillin'],['Medication','Amoxicillin'],['Medication','Cephalosporins'],['Medication','Sulfonamide antibiotics'],['Medication','Aspirin'],['Medication','Ibuprofen'],['Medication','NSAIDs'],['Medication','Acetaminophen'],['Medication','Codeine'],['Medication','Morphine'],['Medication','Local anesthetics'],['Medication','Iodinated contrast'],['Medication','Chemotherapy medicines'],['Medication','Other medication'],
       ['Food','Peanuts'],['Food','Tree nuts'],['Food','Milk'],['Food','Eggs'],['Food','Wheat'],['Food','Soy'],['Food','Fish'],['Food','Shellfish'],['Food','Sesame'],['Food','Mustard'],['Food','Sulfites'],['Food','Other food'],
@@ -7719,8 +7757,10 @@
       const medicationPanel = document.getElementById('patientHealthMedicationPanel');
       if (medicationPanel) medicationPanel.hidden = true;
       loadPatientHealthContext();
+      seedPatientHealthContextOnce();
       loadPatientPrescriptionData();
       seedPatientHealthSampleMedicationsOnce();
+      limitPatientHealthDefaultsOnce();
       renderPatientHealthAnalysis();
     }
 
@@ -10477,6 +10517,8 @@
     let currentSimulationState = 'pending'; // 'pending' | 'active' | 'turn'
     let videoCallTimer = null;
     let videoCallSeconds = 0;
+    let patientCallMuted = false;
+    let patientCallCameraOff = false;
     let visitSummaryTimer = null;
     let rxNotificationTimer = null;
     const VISIT_SUMMARY_DELAY_MS = 5000;
@@ -11018,7 +11060,46 @@
     }
 
     function showPatientCallView() {
-      document.getElementById('videoRoomView')?.classList.add('active');
+      const callView = document.getElementById('videoRoomView');
+      callView?.classList.remove('controls-hidden');
+      callView?.classList.add('active');
+    }
+
+    function togglePatientCallMute() {
+      patientCallMuted = !patientCallMuted;
+      const button = document.getElementById('videoCallMuteButton');
+      if (!button) return;
+      button.setAttribute('aria-pressed', String(patientCallMuted));
+      const label = patientCallMuted ? 'Turn microphone on' : 'Mute microphone';
+      button.setAttribute('aria-label', label);
+      button.title = label;
+      button.innerHTML = `<i class="ph ${patientCallMuted ? 'ph-microphone-slash' : 'ph-microphone'}" aria-hidden="true"></i>`;
+    }
+
+    function togglePatientCallCamera() {
+      patientCallCameraOff = !patientCallCameraOff;
+      const button = document.getElementById('videoCallCameraButton');
+      const preview = document.querySelector('.video-call-patient-preview');
+      const offState = document.getElementById('videoCallPatientOff');
+      if (!button) return;
+      button.setAttribute('aria-pressed', String(patientCallCameraOff));
+      const label = patientCallCameraOff ? 'Turn camera on' : 'Turn camera off';
+      button.setAttribute('aria-label', label);
+      button.title = label;
+      button.innerHTML = `<i class="ph ${patientCallCameraOff ? 'ph-video-camera-slash' : 'ph-video-camera'}" aria-hidden="true"></i>`;
+      if (preview) preview.hidden = patientCallCameraOff;
+      if (offState) offState.hidden = !patientCallCameraOff;
+    }
+
+    function togglePatientCallControls(event) {
+      if (event.target.closest('button, a, input, select, textarea')) return;
+      document.getElementById('videoRoomView')?.classList.toggle('controls-hidden');
+    }
+
+    function handlePatientCallControlsKeydown(event) {
+      if (event.target !== event.currentTarget || !['Enter', ' '].includes(event.key)) return;
+      event.preventDefault();
+      document.getElementById('videoRoomView')?.classList.toggle('controls-hidden');
     }
 
     function openIncomingCallSimulation() {
@@ -11076,7 +11157,7 @@
     }
 
     function backToVisitsFromCall() {
-      document.getElementById('videoRoomView')?.classList.remove('active');
+      document.getElementById('videoRoomView')?.classList.remove('active', 'controls-hidden');
       navigateToVisits();
       switchVisitsTab('upcoming');
     }
